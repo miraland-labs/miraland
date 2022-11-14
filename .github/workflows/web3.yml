@@ -2,11 +2,11 @@ name: Web3
 
 on:
   push:
-    branches: [ master ]
+    branches: [main]
     paths:
       - "web3.js/**"
   pull_request:
-    branches: [ master ]
+    branches: [main]
     paths:
       - "web3.js/**"
 

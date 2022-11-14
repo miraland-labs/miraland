@@ -2,9 +2,9 @@ name : minimal
 
 on:
   push:
-    branches:  [master]
+    branches: [main]
   pull_request:
-    branches:  [master]
+    branches: [main]
 
 jobs:
   Export_Github_Repositories:
