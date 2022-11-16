@@ -3,7 +3,7 @@ name: client_targets
 on:
   pull_request:
     branches:
-     - master
+     - main
     paths:
       - "client/**"
       - "sdk/**"

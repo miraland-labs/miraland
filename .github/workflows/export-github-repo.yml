@@ -3,7 +3,7 @@ name: export-github-repo
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "web3.js/**"
 
