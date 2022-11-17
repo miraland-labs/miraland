@@ -5,7 +5,7 @@ usage() {
   cat <<EOF
 usage: $0 branch tag
 
-Checks that the tag matches the branch (unless branch is master) and the Cargo.toml versions match the tag.
+Checks that the tag matches the branch (unless branch is main or master) and the Cargo.toml versions match the tag.
 EOF
   exit 0
 }
@@ -16,11 +16,11 @@ tag="$2"
 [[ -n $tag ]] || usage
 echo "branch: $branch tag: $tag"
 
-# The tag is expected to be the branch name plus a patch number (unless branch is master). eg:
+# The tag is expected to be the branch name plus a patch number (unless branch is main or master). eg:
 #   tag:    v1.2.3
 #   branch: v1.2
- if [[ "$tag" != "$branch"* && $branch != "master" ]]; then
-    >&2 echo "Tag must start with the branch name (unless branch is master). Tag: $tag   Branch: $branch"
+ if [[ "$tag" != "$branch"* && $branch != "main" && $branch != "master" ]]; then
+    >&2 echo "Tag must start with the branch name (unless branch is main or master). Tag: $tag   Branch: $branch"
     exit 1
 fi
 

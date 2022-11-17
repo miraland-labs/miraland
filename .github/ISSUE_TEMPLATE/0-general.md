@@ -8,9 +8,9 @@ assignees: ''
 #### Problem
 <!--
   The GitHub issue tracker exists to track issues 
-  that affect the development of Solana itself.
+  that affect the development of Solana/Miraland itself.
 
-  If you need technical support using Solana, building
+  If you need technical support using Solana/Miraland, building
   an app, or running a validator, don't open an issue here.
 
   Instead, post your question to the Solana Stack Exchange:
