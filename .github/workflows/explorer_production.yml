@@ -1,7 +1,7 @@
 name: Explorer_production_build&test
 on:
   push:
-   branches: [main]
+   branches: [ReplaceThisWithMainBranchToStartWF]
    paths:
       - 'explorer/**'
 jobs:

@@ -3,7 +3,7 @@ name: export-github-repo
 on:
   push:
     branches:
-      - main
+      - ReplaceThisWithMainBranchToStartWF
     paths:
       - "web3.js/**"
 

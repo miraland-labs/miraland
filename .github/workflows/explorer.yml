@@ -2,7 +2,7 @@ name: Explorer_build&test_on_PR
 on:
   pull_request:
     branches:
-     - main
+     - ReplaceThisWithMainBranchToStartWF
     paths:
       - 'explorer/**'
 jobs:
