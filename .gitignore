@@ -16,7 +16,8 @@
 # log files
 *.log
 log-*.txt
-log-*/
+# m17: next line commented out to sync log-analyzer directory
+# log-*/
 
 # intellij files
 /.idea/
