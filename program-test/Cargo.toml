@@ -4,7 +4,7 @@ description = "Solana Program Test Framework"
 edition = "2021"
 license = "Apache-2.0"
 name = "solana-program-test"
-repository = "https://github.com/solana-labs/solana"
+repository = "https://github.com/miraland-labs/miraland"
 version = "1.14.7"
 
 [dependencies]
