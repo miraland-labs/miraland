@@ -122,7 +122,8 @@ for file in "${TARBALL_BASENAME}"-$TARGET.tar.bz2 "${TARBALL_BASENAME}"-$TARGET.
     # $DRYRUN ci/format-url.sh https://release.miraland.top/"$CHANNEL_OR_TAG"/"$file"
 
     echo --- Aliyun OSS Store: "$file"
-    upload-oss-artifact "/miraland/$file" oss://release-miraland-top/"$CHANNEL_OR_TAG"/"$file"
+    # upload-oss-artifact "/miraland/$file" oss://release-miraland-top/"$CHANNEL_OR_TAG"/"$file"
+    upload-oss-artifact "$file" oss://release-miraland-top/"$CHANNEL_OR_TAG"/"$file"
     echo Published to:
     $DRYRUN ci/format-url.sh https://release.miraland.top/"$CHANNEL_OR_TAG"/"$file"
 
