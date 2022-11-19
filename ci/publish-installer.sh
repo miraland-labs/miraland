@@ -39,6 +39,7 @@ cat install/miraland-install-init.sh >>release.miraland.top-install
 # ci/format-url.sh https://release.miraland.top/"$CHANNEL_OR_TAG"/install
 
 echo --- Aliyun OSS Store: "install"
-upload-oss-artifact "/miraland/release.miraland.top-install" "oss://release-miraland-top/$CHANNEL_OR_TAG/install"
+# upload-oss-artifact "/miraland/release.miraland.top-install" "oss://release-miraland-top/$CHANNEL_OR_TAG/install"
+upload-oss-artifact "release.miraland.top-install" "oss://release-miraland-top/$CHANNEL_OR_TAG/install"
 echo Published to:
 ci/format-url.sh https://release.miraland.top/"$CHANNEL_OR_TAG"/install

@@ -3,7 +3,7 @@ name: export-github-repo
 on:
   push:
     branches:
-      - ReplaceThisWithMainBranchToStartWF
+      - main
     paths:
       - "web3.js/**"
 
@@ -23,7 +23,7 @@ jobs:
       - name: cmd
         run: |
           chmod +x ./ci/export-github-repo.sh
-          ./ci/export-github-repo.sh web3.js/ solana-web3.js
+          ./ci/export-github-repo.sh web3.js/ solarti-web3.js
         shell: bash
       - name: Send Slack notifiaction
         if: failure()
