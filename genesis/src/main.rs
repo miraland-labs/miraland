@@ -575,17 +575,8 @@ fn main() -> Result<(), Box<dyn error::Error>> {
         }
     }
 
-    let max_genesis_archive_unpacked_size =
-        value_t_or_exit!(matches, "max_genesis_archive_unpacked_size", u64);
-
-    let issued_lamports = genesis_config
-        .accounts
-        .values()
-        .map(|account| account.lamports)
-        .sum::<u64>();
-
-    add_genesis_accounts(&mut genesis_config, issued_lamports - faucet_lamports);
-
+    // MI: move this part here to keep capitalization(initial genesis accounts total balance) 
+    // consistent with initial issue of 0.5 billion mln
     if let Some(values) = matches.values_of("bpf_program") {
         let values: Vec<&str> = values.collect::<Vec<_>>();
         for address_loader_program in values.chunks(3) {
@@ -623,6 +614,55 @@ fn main() -> Result<(), Box<dyn error::Error>> {
             }
         }
     }
+    
+    let max_genesis_archive_unpacked_size =
+        value_t_or_exit!(matches, "max_genesis_archive_unpacked_size", u64);
+
+    let issued_lamports = genesis_config
+        .accounts
+        .values()
+        .map(|account| account.lamports)
+        .sum::<u64>();
+
+    add_genesis_accounts(&mut genesis_config, issued_lamports - faucet_lamports);
+
+    // if let Some(values) = matches.values_of("bpf_program") {
+    //     let values: Vec<&str> = values.collect::<Vec<_>>();
+    //     for address_loader_program in values.chunks(3) {
+    //         match address_loader_program {
+    //             [address, loader, program] => {
+    //                 let address = address.parse::<Pubkey>().unwrap_or_else(|err| {
+    //                     eprintln!("Error: invalid address {}: {}", address, err);
+    //                     process::exit(1);
+    //                 });
+
+    //                 let loader = loader.parse::<Pubkey>().unwrap_or_else(|err| {
+    //                     eprintln!("Error: invalid loader {}: {}", loader, err);
+    //                     process::exit(1);
+    //                 });
+
+    //                 let mut program_data = vec![];
+    //                 File::open(program)
+    //                     .and_then(|mut file| file.read_to_end(&mut program_data))
+    //                     .unwrap_or_else(|err| {
+    //                         eprintln!("Error: failed to read {}: {}", program, err);
+    //                         process::exit(1);
+    //                     });
+    //                 genesis_config.add_account(
+    //                     address,
+    //                     AccountSharedData::from(Account {
+    //                         lamports: genesis_config.rent.minimum_balance(program_data.len()),
+    //                         data: program_data,
+    //                         executable: true,
+    //                         owner: loader,
+    //                         rent_epoch: 0,
+    //                     }),
+    //                 );
+    //             }
+    //             _ => unreachable!(),
+    //         }
+    //     }
+    // }
 
     solana_logger::setup();
     create_new_ledger(

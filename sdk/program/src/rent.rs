@@ -133,7 +133,7 @@ impl RentDue {
     pub fn lamports(&self) -> u64 {
         match self {
             RentDue::Exempt => 0,
-            RentDue::Paying(x) => *x,
+            RentDue::Paying(x) => *x, // MI: both *x and x work since &self, if self only x works
         }
     }
 
