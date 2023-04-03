@@ -5,6 +5,8 @@
 /solana-metrics.tar.bz2
 /target/
 /test-ledger/
+/multinode-demo/*.so
+/multinode-demo/*.sh
 
 **/*.rs.bk
 .cargo
