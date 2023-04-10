@@ -5,8 +5,6 @@
 /solana-metrics.tar.bz2
 /target/
 /test-ledger/
-/multinode-demo/*.so
-/multinode-demo/*.sh
 
 **/*.rs.bk
 .cargo
@@ -18,8 +16,7 @@
 # log files
 *.log
 log-*.txt
-# m17: next line commented out to sync log-analyzer directory
-# log-*/
+log-*/
 
 # intellij files
 /.idea/
