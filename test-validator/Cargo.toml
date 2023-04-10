@@ -1,0 +1,34 @@
+[package]
+name = "miraland-test-validator"
+description = "Blockchain for community beyond the horizon"
+version = "1.14.17"
+homepage = "https://solana.com/"
+documentation = "https://docs.rs/miraland-test-validator"
+readme = "../README.md"
+repository = "https://github.com/miraland-labs/miraland"
+authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+license = "Apache-2.0"
+edition = "2021"
+
+[dependencies]
+base64 = "0.13.0"
+log = "0.4.17"
+serde_derive = "1.0.103"
+serde_json = "1.0.81"
+miraland-cli-output = { path = "../cli-output", version = "=1.14.17" }
+miraland-client = { path = "../client", version = "=1.14.17" }
+solana-core = { path = "../core", version = "=1.14.17" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17" }
+solana-ledger = { path = "../ledger", version = "=1.14.17" }
+solana-logger = { path = "../logger", version = "=1.14.17" }
+solana-net-utils = { path = "../net-utils", version = "=1.14.17" }
+solana-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
+solana-program-test = { path = "../program-test", version = "=1.14.17" }
+solana-rpc = { path = "../rpc", version = "=1.14.17" }
+solana-runtime = { path = "../runtime", version = "=1.14.17" }
+solana-sdk = { path = "../sdk", version = "=1.14.17" }
+solana-streamer = { path = "../streamer", version = "=1.14.17" }
+tokio = { version = "1", features = ["full"] }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]

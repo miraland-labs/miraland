@@ -1,0 +1,25 @@
+[package]
+name = "solana-send-transaction-service"
+version = "1.14.17"
+description = "Solana send transaction service"
+authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+repository = "https://github.com/miraland-labs/miraland"
+homepage = "https://solana.com/"
+documentation = "https://docs.rs/solana-send-transaction-service"
+license = "Apache-2.0"
+edition = "2021"
+
+[dependencies]
+crossbeam-channel = "0.5"
+log = "0.4.17"
+miraland-client = { path = "../client", version = "=1.14.17" }
+solana-measure = { path = "../measure", version = "=1.14.17" }
+solana-metrics = { path = "../metrics", version = "=1.14.17" }
+solana-runtime = { path = "../runtime", version = "=1.14.17" }
+solana-sdk = { path = "../sdk", version = "=1.14.17" }
+
+[dev-dependencies]
+solana-logger = { path = "../logger", version = "=1.14.17" }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]

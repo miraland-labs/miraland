@@ -1,0 +1,20 @@
+[package]
+authors = ["Solana Maintainers <maintainers@solana.com>"]
+description = "Blockchain for community beyond the horizon"
+edition = "2021"
+homepage = "https://solana.com/"
+license = "Apache-2.0"
+name = "proto"
+publish = false
+repository = "https://github.com/miraland-labs/miraland"
+version = "1.14.17"
+
+[workspace]
+
+[dependencies]
+tonic-build = "0.8.0"
+
+# windows users should install the protobuf compiler manually and set the PROTOC
+# envar to point to the installed binary
+[target."cfg(not(windows))".dependencies]
+protobuf-src = "1.0.5"
