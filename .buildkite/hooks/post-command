@@ -26,7 +26,8 @@ else
 
     # upload to datadog
     cargo2junit > results.xml < sanitized-results.json
-    datadog-ci junit upload --service solana results.xml
+    # datadog-ci junit upload --service solana results.xml
+    datadog-ci junit upload --service miraland results.xml
   fi
 
   point_tags="pipeline=$BUILDKITE_PIPELINE_SLUG,job=$CI_LABEL,pr=$PR,success=$SUCCESS"
