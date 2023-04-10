@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-declare -r SOLANA_LOCK_FILE="/home/solana/.solana.lock"
+declare -r MIRALAND_LOCK_FILE="/home/solana/.solana.lock"
 
 __colo_here="$(dirname "${BASH_SOURCE[0]}")"
 
@@ -123,26 +123,26 @@ colo_whoami() {
         echo "Found conflicting username \"${SOL_USER}\" on ${IP}, expected \"${ME}\"" 1>&2
       fi
     fi
-  done < <(colo_instance_run_foreach "[ -n \"\${SOLANA_USER}\" ] && echo -e \"\${SOLANA_USER}\\x1fEOL\"")
+  done < <(colo_instance_run_foreach "[ -n \"\${MIRALAND_USER}\" ] && echo -e \"\${MIRALAND_USER}\\x1fEOL\"")
   echo "${ME}"
 }
 
-COLO_SOLANA_USER=""
+COLO_MIRALAND_USER=""
 colo_get_solana_user() {
-  if [ -z "${COLO_SOLANA_USER}" ]; then
-    COLO_SOLANA_USER=$(colo_whoami)
+  if [ -z "${COLO_MIRALAND_USER}" ]; then
+    COLO_MIRALAND_USER=$(colo_whoami)
   fi
-  echo "${COLO_SOLANA_USER}"
+  echo "${COLO_MIRALAND_USER}"
 }
 
 __colo_node_status_script() {
   cat <<EOF
   exec 3>&2
   exec 2>/dev/null  # Suppress stderr as the next call to exec fails most of
-                    # the time due to ${SOLANA_LOCK_FILE} not existing and is running from a
+                    # the time due to ${MIRALAND_LOCK_FILE} not existing and is running from a
                     # subshell where normal redirection doesn't work
-  exec 9<"${SOLANA_LOCK_FILE}" && flock -s 9 && . "${SOLANA_LOCK_FILE}" && exec 9>&-
-  echo -e "\${ MIRALAND_LOCK_USER}\\x1f\${MIRALAND_LOCK_INSTANCENAME}\\x1f\${PREEMPTIBLE}\\x1fEOL"
+  exec 9<"${MIRALAND_LOCK_FILE}" && flock -s 9 && . "${MIRALAND_LOCK_FILE}" && exec 9>&-
+  echo -e "\${MIRALAND_LOCK_USER}\\x1f\${MIRALAND_LOCK_INSTANCENAME}\\x1f\${PREEMPTIBLE}\\x1fEOL"
   exec 2>&3 # Restore stderr
 EOF
 }
@@ -195,7 +195,7 @@ colo_node_requisition() {
   declare RC=false
 
   colo_instance_run "${IP}" "$(cat <<EOF
-SOLANA_LOCK_FILE="${SOLANA_LOCK_FILE}"
+MIRALAND_LOCK_FILE="${MIRALAND_LOCK_FILE}"
 INSTANCE_NAME="${INSTANCE_NAME}"
 PREEMPTIBLE="${PREEMPTIBLE}"
 SSH_AUTHORIZED_KEYS='$("${__colo_here}"/add-datacenter-miraland-user-authorized_keys.sh 2> /dev/null)'
@@ -242,7 +242,7 @@ colo_node_free() {
   declare IP=${1}
   declare FORCE_DELETE=${2}
   colo_instance_run "${IP}" "$(cat <<EOF
-SOLANA_LOCK_FILE="${SOLANA_LOCK_FILE}"
+MIRALAND_LOCK_FILE="${MIRALAND_LOCK_FILE}"
 SECONDARY_DISK_MOUNT_POINT="${SECONDARY_DISK_MOUNT_POINT}"
 SSH_AUTHORIZED_KEYS='$("${__colo_here}"/add-datacenter-miraland-user-authorized_keys.sh 2> /dev/null)'
 FORCE_DELETE="${FORCE_DELETE}"
