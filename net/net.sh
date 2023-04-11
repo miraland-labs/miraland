@@ -271,8 +271,8 @@ deployBootstrapValidator() {
   echo "Deploying software to bootstrap validator ($ipAddress)"
   case $deployMethod in
   tar)
-    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/solana-release/bin/* "$ipAddress:$CARGO_BIN/"
-    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/solana-release/version.yml "$ipAddress:~/"
+    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/miraland-release/bin/* "$ipAddress:$CARGO_BIN/"
+    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/miraland-release/version.yml "$ipAddress:~/"
     ;;
   local)
     rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/farf/bin/* "$ipAddress:$CARGO_BIN/"
@@ -535,21 +535,21 @@ prepareDeploy() {
   tar)
     if [[ -n $releaseChannel ]]; then
       echo "Downloading release from channel: $releaseChannel"
-      rm -f "$MIRALAND_ROOT"/solana-release.tar.bz2
-      declare updateDownloadUrl=https://release.solana.com/"$releaseChannel"/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+      rm -f "$MIRALAND_ROOT"/miraland-release.tar.bz2
+      declare updateDownloadUrl=https://release.solana.com/"$releaseChannel"/miraland-release-x86_64-unknown-linux-gnu.tar.bz2
       (
         set -x
         curl -L -I "$updateDownloadUrl"
         curl -L --retry 5 --retry-delay 2 --retry-connrefused \
-          -o "$MIRALAND_ROOT"/solana-release.tar.bz2 "$updateDownloadUrl"
+          -o "$MIRALAND_ROOT"/miraland-release.tar.bz2 "$updateDownloadUrl"
       )
-      tarballFilename="$MIRALAND_ROOT"/solana-release.tar.bz2
+      tarballFilename="$MIRALAND_ROOT"/miraland-release.tar.bz2
     fi
     (
       set -x
-      rm -rf "$MIRALAND_ROOT"/solana-release
+      rm -rf "$MIRALAND_ROOT"/miraland-release
       cd "$MIRALAND_ROOT"; tar jfxv "$tarballFilename"
-      cat "$MIRALAND_ROOT"/solana-release/version.yml
+      cat "$MIRALAND_ROOT"/miraland-release/version.yml
     )
     ;;
   local)
@@ -578,7 +578,7 @@ prepareDeploy() {
       rsync -vPrc -e "ssh ${sshOptions[*]}" "${validatorIpList[0]}":~/version.yml current-version.yml
     )
     cat current-version.yml
-    if ! diff -q current-version.yml "$MIRALAND_ROOT"/solana-release/version.yml; then
+    if ! diff -q current-version.yml "$MIRALAND_ROOT"/miraland-release/version.yml; then
       echo "Cluster software version is old.  Update required"
     else
       echo "Cluster software version is current.  No update required"
@@ -669,7 +669,7 @@ deploy() {
     networkVersion="$(
       (
         set -o pipefail
-        grep "^commit: " "$MIRALAND_ROOT"/solana-release/version.yml | head -n1 | cut -d\  -f2
+        grep "^commit: " "$MIRALAND_ROOT"/miraland-release/version.yml | head -n1 | cut -d\  -f2
       ) || echo "tar-unknown"
     )"
     ;;

@@ -46,7 +46,7 @@ ORIGINAL_PATH=$PATH
 solanaInstallUse() {
   declare version=$1
   echo "--- Now using solana $version"
-  MIRALAND_BIN="$solanaInstallDataDir/releases/$version/solana-release/bin"
+  MIRALAND_BIN="$solanaInstallDataDir/releases/$version/miraland-release/bin"
   export PATH="$MIRALAND_BIN:$ORIGINAL_PATH"
 }
 

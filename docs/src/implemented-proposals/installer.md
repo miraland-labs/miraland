@@ -51,7 +51,7 @@ Given a solana release tarball \(as created by `ci/publish-tarball.sh`\) that ha
 
 ```bash
 $ miraland-keygen new -o update-manifest.json  # <-- only generated once, the public key is shared with users
-$ miraland-install deploy http://example.com/path/to/solana-release.tar.bz2 update-manifest.json
+$ miraland-install deploy http://example.com/path/to/miraland-release.tar.bz2 update-manifest.json
 ```
 
 ### Run a validator node that auto updates itself

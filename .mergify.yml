@@ -30,11 +30,11 @@ pull_request_rules:
     actions:
       request_reviews:
         teams:
-          - "@solana-labs/community-pr-subscribers"
+          - "@miraland-labs/community-pr-subscribers"
   - name: automatic merge (squash) on CI success
     conditions:
       - and:
-        - status-success=buildkite/solana
+        - status-success=buildkite/miraland
         - status-success=ci-gate
         - label=automerge
         - label!=no-automerge
@@ -60,7 +60,7 @@ pull_request_rules:
   - name: automatic merge (rebase) on CI success
     conditions:
       - and:
-        - status-success=buildkite/solana
+        - status-success=buildkite/miraland
         - status-success=ci-gate
         - label=automerge
         - label!=no-automerge
@@ -114,7 +114,7 @@ pull_request_rules:
     actions:
       backport:
         assignees: &BackportAssignee
-          - "{{ merged_by|replace('mergify[bot]', label|select('equalto', 'community')|first|default(author)|replace('community', '@solana-labs/community-pr-subscribers')) }}"
+          - "{{ merged_by|replace('mergify[bot]', label|select('equalto', 'community')|first|default(author)|replace('community', '@miraland-labs/community-pr-subscribers')) }}"
         ignore_conflicts: true
         labels:
           - feature-gate

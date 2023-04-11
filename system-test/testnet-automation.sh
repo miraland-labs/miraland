@@ -121,7 +121,7 @@ function launch_testnet() {
   execution_step "Starting bootstrap node and ${NUMBER_OF_VALIDATOR_NODES} validator nodes"
 
   declare -g version_args
-  get_net_launch_software_version_launch_args "$CHANNEL" "solana-release" version_args
+  get_net_launch_software_version_launch_args "$CHANNEL" "miraland-release" version_args
 
   declare maybeWarpSlot
   if [[ -n "$WARP_SLOT" ]]; then
