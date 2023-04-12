@@ -267,7 +267,10 @@ pub fn make_accounts_hashes_message(
 pub(crate) type Ping = ping_pong::Ping<[u8; GOSSIP_PING_TOKEN_SIZE]>;
 
 // TODO These messages should go through the gpu pipeline for spam filtering
-#[frozen_abi(digest = "32XMrR8yTPMsw7TASQDinrbcB4bdVGyLeTvQrk95hS4i")]
+// MI: vanilla digest
+// #[frozen_abi(digest = "32XMrR8yTPMsw7TASQDinrbcB4bdVGyLeTvQrk95hS4i")]
+// digest change maybe due to crate name change to miraland_gossip from solana_gossip???
+#[frozen_abi(digest = "2gaE37YBozwnVkAs3T1tmoGs7DeYRfuJPd6gtRuCqPMR")]
 #[derive(Serialize, Deserialize, Debug, AbiEnumVisitor, AbiExample)]
 #[allow(clippy::large_enum_variant)]
 pub(crate) enum Protocol {
