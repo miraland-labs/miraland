@@ -2,13 +2,13 @@
 use {
     clap::{crate_description, crate_name, value_t, values_t_or_exit, App, Arg},
     log::*,
+    miraland_client::{rpc_client::RpcClient, transaction_executor::TransactionExecutor},
+    miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
+    miraland_gossip::gossip_service::discover,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
     solana_account_decoder::parse_token::spl_token_pubkey,
     solana_clap_utils::input_parsers::pubkey_of,
-    miraland_client::{rpc_client::RpcClient, transaction_executor::TransactionExecutor},
-    miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
-    miraland_gossip::gossip_service::discover,
     solana_runtime::inline_spl_token,
     solana_sdk::{
         commitment_config::CommitmentConfig,
@@ -655,15 +655,15 @@ fn main() {
 pub mod test {
     use {
         super::*,
-        solana_core::validator::ValidatorConfig,
         miraland_faucet::faucet::run_local_faucet,
+        miraland_test_validator::TestValidator,
+        solana_core::validator::ValidatorConfig,
         solana_local_cluster::{
             local_cluster::{ClusterConfig, LocalCluster},
             validator_configs::make_identical_validator_configs,
         },
         solana_measure::measure::Measure,
         solana_sdk::{native_token::sol_to_lamports, poh_config::PohConfig},
-        miraland_test_validator::TestValidator,
         spl_token::{
             solana_program::program_pack::Pack,
             state::{Account, Mint},

@@ -506,8 +506,8 @@ fn should_use_merkle_variant(_slot: Slot, _cluster_type: ClusterType, _shred_ver
 mod test {
     use {
         super::*,
-        solana_entry::entry::create_ticks,
         miraland_gossip::cluster_info::{ClusterInfo, Node},
+        solana_entry::entry::create_ticks,
         solana_ledger::{
             blockstore::Blockstore, genesis_utils::create_genesis_config, get_tmp_ledger_path,
             shred::max_ticks_per_n_shreds,

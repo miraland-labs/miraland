@@ -6,9 +6,10 @@ extern crate test;
 use {
     crossbeam_channel::{unbounded, Receiver},
     log::*,
+    miraland_client::connection_cache::ConnectionCache,
+    miraland_gossip::cluster_info::{ClusterInfo, Node},
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    miraland_client::connection_cache::ConnectionCache,
     solana_core::{
         banking_stage::{BankingStage, BankingStageStats},
         leader_slot_banking_stage_metrics::LeaderSlotMetricsTracker,
@@ -16,7 +17,6 @@ use {
         unprocessed_packet_batches::*,
     },
     solana_entry::entry::{next_hash, Entry},
-    miraland_gossip::cluster_info::{ClusterInfo, Node},
     solana_ledger::{
         blockstore::Blockstore,
         blockstore_processor::process_entries_for_tests,

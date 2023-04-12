@@ -2,8 +2,6 @@
 use {
     bincode::serialized_size,
     log::*,
-    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
-    serial_test::serial,
     miraland_gossip::{
         cluster_info,
         cluster_info_metrics::GossipStats,
@@ -16,6 +14,8 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         ping_pong::PingCache,
     },
+    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
+    serial_test::serial,
     solana_rayon_threadlimit::get_thread_count,
     solana_sdk::{
         hash::hash,

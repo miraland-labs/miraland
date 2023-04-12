@@ -8,8 +8,8 @@ use {
     console::{style, Emoji},
     crossbeam_channel::unbounded,
     indicatif::{ProgressBar, ProgressStyle},
-    serde::{Deserialize, Serialize},
     miraland_client::rpc_client::RpcClient,
+    serde::{Deserialize, Serialize},
     solana_config_program::{config_instruction, get_config_data, ConfigState},
     solana_sdk::{
         hash::{Hash, Hasher},

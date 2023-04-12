@@ -1,7 +1,6 @@
 #![allow(clippy::integer_arithmetic)]
 
 use {
-    serde_json::Value,
     miraland_cli::{
         cli::{process_command, CliCommand, CliConfig},
         program::{ProgramCliCommand, CLOSE_PROGRAM_WARNING},
@@ -9,6 +8,8 @@ use {
     miraland_cli_output::OutputFormat,
     miraland_client::rpc_client::RpcClient,
     miraland_faucet::faucet::run_local_faucet,
+    miraland_test_validator::TestValidator,
+    serde_json::Value,
     solana_sdk::{
         account_utils::StateMut,
         bpf_loader,
@@ -18,7 +19,6 @@ use {
         signature::{Keypair, Signer},
     },
     solana_streamer::socket::SocketAddrSpace,
-    miraland_test_validator::TestValidator,
     std::{env, fs::File, io::Read, path::PathBuf, str::FromStr},
 };
 

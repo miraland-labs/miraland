@@ -29,8 +29,8 @@ use {
     },
     crossbeam_channel::{unbounded, Receiver},
     miraland_client::connection_cache::ConnectionCache,
-    solana_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierLock,
     miraland_gossip::cluster_info::ClusterInfo,
+    solana_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierLock,
     solana_ledger::{
         blockstore::Blockstore, blockstore_processor::TransactionStatusSender,
         leader_schedule_cache::LeaderScheduleCache,
@@ -342,8 +342,8 @@ impl Tvu {
 pub mod tests {
     use {
         super::*,
-        serial_test::serial,
         miraland_gossip::cluster_info::{ClusterInfo, Node},
+        serial_test::serial,
         solana_ledger::{
             blockstore::BlockstoreSignals,
             blockstore_options::BlockstoreOptions,

@@ -3,9 +3,6 @@ use {
     crossbeam_channel::unbounded,
     futures_util::StreamExt,
     log::*,
-    reqwest::{self, header::CONTENT_TYPE},
-    serde_json::{json, Value},
-    solana_account_decoder::UiAccount,
     miraland_client::{
         client_error::{ClientErrorKind, Result as ClientResult},
         connection_cache::{ConnectionCache, DEFAULT_TPU_CONNECTION_POOL_SIZE},
@@ -16,6 +13,10 @@ use {
         rpc_response::{Response as RpcResponse, RpcSignatureResult, SlotUpdate},
         tpu_client::{TpuClient, TpuClientConfig},
     },
+    miraland_test_validator::TestValidator,
+    reqwest::{self, header::CONTENT_TYPE},
+    serde_json::{json, Value},
+    solana_account_decoder::UiAccount,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -26,7 +27,6 @@ use {
         transaction::Transaction,
     },
     solana_streamer::socket::SocketAddrSpace,
-    miraland_test_validator::TestValidator,
     solana_transaction_status::TransactionStatus,
     std::{
         collections::HashSet,
@@ -119,7 +119,8 @@ fn test_rpc_send_tx() {
     assert!(confirmed_tx);
 
     use {
-        solana_account_decoder::UiAccountEncoding, miraland_client::rpc_config::RpcAccountInfoConfig,
+        miraland_client::rpc_config::RpcAccountInfoConfig,
+        solana_account_decoder::UiAccountEncoding,
     };
     let config = RpcAccountInfoConfig {
         encoding: Some(UiAccountEncoding::Base64),

@@ -1,8 +1,8 @@
 pub use reqwest;
 use {
     crate::{nonblocking::quic_client::QuicError, rpc_request, rpc_response},
-    quinn::ConnectError,
     miraland_faucet::faucet::FaucetError,
+    quinn::ConnectError,
     solana_sdk::{
         signature::SignerError, transaction::TransactionError, transport::TransportError,
     },

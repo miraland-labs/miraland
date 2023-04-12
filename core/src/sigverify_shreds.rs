@@ -1,7 +1,7 @@
 use {
     crossbeam_channel::{Receiver, RecvTimeoutError, SendError, Sender},
-    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
     miraland_gossip::cluster_info::ClusterInfo,
+    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
     solana_ledger::{
         leader_schedule_cache::LeaderScheduleCache, shred, sigverify_shreds::verify_shreds_gpu,
     },

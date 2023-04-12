@@ -5,7 +5,6 @@ use {
     crossbeam_channel::{unbounded, Receiver},
     gag::BufferRedirect,
     log::*,
-    serial_test::serial,
     miraland_client::{
         pubsub_client::PubsubClient,
         rpc_client::RpcClient,
@@ -13,6 +12,8 @@ use {
         rpc_response::RpcSignatureResult,
         thin_client::ThinClient,
     },
+    miraland_gossip::gossip_service::discover_cluster,
+    serial_test::serial,
     solana_core::{
         broadcast_stage::BroadcastStageType,
         consensus::{Tower, SWITCH_FORK_THRESHOLD, VOTE_THRESHOLD_DEPTH},
@@ -22,7 +23,6 @@ use {
         validator::ValidatorConfig,
     },
     solana_download_utils::download_snapshot_archive,
-    miraland_gossip::gossip_service::discover_cluster,
     solana_ledger::{
         ancestor_iterator::AncestorIterator, bank_forks_utils, blockstore::Blockstore,
         blockstore_processor::ProcessOptions,

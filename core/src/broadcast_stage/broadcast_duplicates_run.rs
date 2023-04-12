@@ -2,8 +2,8 @@ use {
     super::*,
     crate::cluster_nodes::ClusterNodesCache,
     itertools::Itertools,
-    solana_entry::entry::Entry,
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
+    solana_entry::entry::Entry,
     solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     solana_sdk::{
         hash::Hash,

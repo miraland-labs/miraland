@@ -43,19 +43,19 @@ use {
     crossbeam_channel::{select, tick, unbounded, Receiver, Sender},
     itertools::Itertools,
     log::*,
-    rand::{thread_rng, Rng},
     miraland_bench_tps::{bench::generate_and_fund_keypairs, bench_tps_client::BenchTpsClient},
     miraland_client::{
         connection_cache::{ConnectionCache, DEFAULT_TPU_CONNECTION_POOL_SIZE},
         rpc_client::RpcClient,
         tpu_connection::TpuConnection,
     },
-    solana_core::serve_repair::{RepairProtocol, RepairRequestHeader, ServeRepair},
     miraland_dos::cli::*,
     miraland_gossip::{
         gossip_service::{discover, get_multi_client},
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    rand::{thread_rng, Rng},
+    solana_core::serve_repair::{RepairProtocol, RepairRequestHeader, ServeRepair},
     solana_measure::measure::Measure,
     solana_sdk::{
         hash::Hash,
@@ -787,8 +787,8 @@ pub mod test {
     use {
         super::*,
         miraland_client::thin_client::ThinClient,
-        solana_core::validator::ValidatorConfig,
         miraland_faucet::faucet::run_local_faucet,
+        solana_core::validator::ValidatorConfig,
         solana_local_cluster::{
             cluster::Cluster,
             local_cluster::{ClusterConfig, LocalCluster},

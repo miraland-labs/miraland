@@ -6,12 +6,12 @@ use {
     crossbeam_channel::{Receiver, RecvTimeoutError},
     itertools::{izip, Itertools},
     lru::LruCache,
-    rand::Rng,
-    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
     miraland_client::rpc_response::SlotUpdate,
     miraland_gossip::{
         cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    rand::Rng,
+    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
     solana_ledger::{
         leader_schedule_cache::LeaderScheduleCache,
         shred::{self, ShredId},

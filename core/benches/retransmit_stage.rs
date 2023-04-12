@@ -6,12 +6,12 @@ extern crate test;
 use {
     crossbeam_channel::unbounded,
     log::*,
-    solana_core::retransmit_stage::retransmitter,
-    solana_entry::entry::Entry,
     miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    solana_core::retransmit_stage::retransmitter,
+    solana_entry::entry::Entry,
     solana_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         leader_schedule_cache::LeaderScheduleCache,

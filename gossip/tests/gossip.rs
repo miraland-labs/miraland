@@ -3,13 +3,13 @@
 extern crate log;
 
 use {
-    rayon::iter::*,
     miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         crds::Cursor,
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    rayon::iter::*,
     solana_perf::packet::Packet,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{

@@ -11,13 +11,13 @@ use {
         rpc_client::RpcClient,
     },
     miraland_faucet::faucet::run_local_faucet,
+    miraland_test_validator::TestValidator,
     solana_sdk::{
         account_utils::StateMut,
         commitment_config::CommitmentConfig,
         signature::{Keypair, NullSigner, Signer},
     },
     solana_streamer::socket::SocketAddrSpace,
-    miraland_test_validator::TestValidator,
     solana_vote_program::vote_state::{VoteAuthorize, VoteState, VoteStateVersions},
 };
 

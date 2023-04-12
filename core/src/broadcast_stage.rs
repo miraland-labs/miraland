@@ -437,8 +437,8 @@ pub mod test {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        solana_entry::entry::create_ticks,
         miraland_gossip::cluster_info::{ClusterInfo, Node},
+        solana_entry::entry::create_ticks,
         solana_ledger::{
             blockstore::Blockstore,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},

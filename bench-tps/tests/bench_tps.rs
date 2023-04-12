@@ -1,6 +1,5 @@
 #![allow(clippy::integer_arithmetic)]
 use {
-    serial_test::serial,
     miraland_bench_tps::{
         bench::{do_bench_tps, generate_and_fund_keypairs},
         cli::Config,
@@ -11,8 +10,10 @@ use {
         thin_client::ThinClient,
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    solana_core::validator::ValidatorConfig,
     miraland_faucet::faucet::run_local_faucet,
+    miraland_test_validator::TestValidator,
+    serial_test::serial,
+    solana_core::validator::ValidatorConfig,
     solana_local_cluster::{
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::make_identical_validator_configs,
@@ -23,7 +24,6 @@ use {
         signature::{Keypair, Signer},
     },
     solana_streamer::socket::SocketAddrSpace,
-    miraland_test_validator::TestValidator,
     std::{sync::Arc, time::Duration},
 };
 

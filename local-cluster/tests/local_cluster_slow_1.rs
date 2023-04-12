@@ -4,6 +4,10 @@
 use {
     common::*,
     log::*,
+    miraland_gossip::{
+        crds::Cursor,
+        gossip_service::{self, discover_cluster},
+    },
     serial_test::serial,
     solana_core::{
         broadcast_stage::{
@@ -12,10 +16,6 @@ use {
         consensus::SWITCH_FORK_THRESHOLD,
         replay_stage::DUPLICATE_THRESHOLD,
         validator::ValidatorConfig,
-    },
-    miraland_gossip::{
-        crds::Cursor,
-        gossip_service::{self, discover_cluster},
     },
     solana_ledger::ancestor_iterator::AncestorIterator,
     solana_local_cluster::{

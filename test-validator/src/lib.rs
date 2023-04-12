@@ -10,14 +10,14 @@ use {
         rpc_client::RpcClient,
         rpc_request::MAX_MULTIPLE_ACCOUNTS,
     },
-    solana_core::{
-        tower_storage::TowerStorage,
-        validator::{Validator, ValidatorConfig, ValidatorStartProgress},
-    },
     miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         gossip_service::discover_cluster,
         socketaddr,
+    },
+    solana_core::{
+        tower_storage::TowerStorage,
+        validator::{Validator, ValidatorConfig, ValidatorStartProgress},
     },
     solana_ledger::{
         blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions,

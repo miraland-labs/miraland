@@ -30,11 +30,11 @@ use {
     },
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     lazy_static::lazy_static,
-    rayon::{prelude::*, ThreadPool},
     miraland_client::rpc_response::SlotUpdate,
+    miraland_gossip::cluster_info::ClusterInfo,
+    rayon::{prelude::*, ThreadPool},
     solana_entry::entry::VerifyRecyclers,
     solana_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierLock,
-    miraland_gossip::cluster_info::ClusterInfo,
     solana_ledger::{
         block_error::BlockError,
         blockstore::Blockstore,
@@ -3623,8 +3623,8 @@ pub(crate) mod tests {
             vote_simulator::{self, VoteSimulator},
         },
         crossbeam_channel::unbounded,
-        solana_entry::entry::{self, Entry},
         miraland_gossip::{cluster_info::Node, crds::Cursor},
+        solana_entry::entry::{self, Entry},
         solana_ledger::{
             blockstore::{entries_to_test_shreds, make_slot_entries, BlockstoreError},
             create_new_tmp_ledger,

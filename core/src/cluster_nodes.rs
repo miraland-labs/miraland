@@ -2,8 +2,6 @@ use {
     crate::{broadcast_stage::BroadcastStage, retransmit_stage::RetransmitStage},
     itertools::Itertools,
     lru::LruCache,
-    rand::{seq::SliceRandom, Rng, SeedableRng},
-    rand_chacha::ChaChaRng,
     miraland_gossip::{
         cluster_info::{compute_retransmit_peers, ClusterInfo, DATA_PLANE_FANOUT},
         crds::GossipRoute,
@@ -12,6 +10,8 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
+    rand::{seq::SliceRandom, Rng, SeedableRng},
+    rand_chacha::ChaChaRng,
     solana_ledger::shred::ShredId,
     solana_runtime::bank::Bank,
     solana_sdk::{

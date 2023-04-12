@@ -2,15 +2,15 @@
 use {
     crossbeam_channel::{unbounded, Receiver, Sender, TryRecvError},
     itertools::Itertools,
-    rand::SeedableRng,
-    rand_chacha::ChaChaRng,
-    rayon::{iter::ParallelIterator, prelude::*},
-    serial_test::serial,
     miraland_gossip::{
         cluster_info::{compute_retransmit_peers, ClusterInfo},
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
+    rand::SeedableRng,
+    rand_chacha::ChaChaRng,
+    rayon::{iter::ParallelIterator, prelude::*},
+    serial_test::serial,
     solana_sdk::{pubkey::Pubkey, signer::keypair::Keypair},
     solana_streamer::socket::SocketAddrSpace,
     std::{

@@ -13,13 +13,13 @@ use {
         },
         thin_client::ThinClient,
     },
-    solana_core::{
-        tower_storage::FileTowerStorage,
-        validator::{Validator, ValidatorConfig, ValidatorStartProgress},
-    },
     miraland_gossip::{
         cluster_info::Node, gossip_service::discover_cluster,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
+    },
+    solana_core::{
+        tower_storage::FileTowerStorage,
+        validator::{Validator, ValidatorConfig, ValidatorStartProgress},
     },
     solana_ledger::create_new_tmp_ledger,
     solana_runtime::{

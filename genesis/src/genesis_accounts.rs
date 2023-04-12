@@ -253,7 +253,8 @@ pub fn add_genesis_accounts(genesis_config: &mut GenesisConfig, mut issued_lampo
     // add_stakes() and add_validators() award tokens for rent exemption and
     //  to cover an initial transfer-free period of the network
 
-    issued_lamports += add_stakes( // extra category for stabilizer, m17
+    issued_lamports += add_stakes(
+        // extra category for stabilizer, m17
         genesis_config,
         STABILIZER_STAKER_INFOS,
         &UNLOCKS_HALF_AT_9_MONTHS,
@@ -269,15 +270,12 @@ pub fn add_genesis_accounts(genesis_config: &mut GenesisConfig, mut issued_lampo
         genesis_config,
         FOUNDATION_STAKER_INFOS,
         &UNLOCKS_ALL_DAY_ZERO,
-    ) + add_stakes(
-        genesis_config,
-        GRANTS_STAKER_INFOS,
-        &UNLOCKS_ALL_DAY_ZERO,
-    ) + add_stakes(
-        genesis_config,
-        COMMUNITY_STAKER_INFOS,
-        &UNLOCKS_ALL_DAY_ZERO,
-    );
+    ) + add_stakes(genesis_config, GRANTS_STAKER_INFOS, &UNLOCKS_ALL_DAY_ZERO)
+        + add_stakes(
+            genesis_config,
+            COMMUNITY_STAKER_INFOS,
+            &UNLOCKS_ALL_DAY_ZERO,
+        );
 
     // "one thanks" (community pool) gets 500_000_000SOL (total) - above distributions
     // MI: investors, top-ups for bootstrapper validators and other built-in accounts, etc.

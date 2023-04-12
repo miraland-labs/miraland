@@ -3,16 +3,16 @@
 extern crate test;
 
 use {
+    miraland_gossip::{
+        cluster_info::{ClusterInfo, Node},
+        legacy_contact_info::LegacyContactInfo as ContactInfo,
+    },
     rand::{thread_rng, Rng},
     solana_core::{
         broadcast_stage::{
             broadcast_metrics::TransmitShredsStats, broadcast_shreds, BroadcastStage,
         },
         cluster_nodes::ClusterNodesCache,
-    },
-    miraland_gossip::{
-        cluster_info::{ClusterInfo, Node},
-        legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     solana_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},

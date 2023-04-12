@@ -9,15 +9,15 @@ use {
     },
     bincode::serialize,
     lru::LruCache,
-    rand::{
-        distributions::{Distribution, WeightedError, WeightedIndex},
-        Rng,
-    },
     miraland_gossip::{
         cluster_info::{ClusterInfo, ClusterInfoError},
         legacy_contact_info::{LegacyContactInfo as ContactInfo, LegacyContactInfo},
         ping_pong::{self, PingCache, Pong},
         weighted_shuffle::WeightedShuffle,
+    },
+    rand::{
+        distributions::{Distribution, WeightedError, WeightedIndex},
+        Rng,
     },
     solana_ledger::{
         ancestor_iterator::{AncestorIterator, AncestorIteratorWithHash},

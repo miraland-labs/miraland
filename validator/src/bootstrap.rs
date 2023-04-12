@@ -1,9 +1,6 @@
 use {
     log::*,
-    rand::{seq::SliceRandom, thread_rng, Rng},
     miraland_client::rpc_client::RpcClient,
-    solana_core::validator::{ValidatorConfig, ValidatorStartProgress},
-    solana_download_utils::{download_snapshot_archive, DownloadProgressRecord},
     miraland_genesis_utils::download_then_check_genesis_hash,
     miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
@@ -11,6 +8,9 @@ use {
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    rand::{seq::SliceRandom, thread_rng, Rng},
+    solana_core::validator::{ValidatorConfig, ValidatorStartProgress},
+    solana_download_utils::{download_snapshot_archive, DownloadProgressRecord},
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_package::SnapshotType,

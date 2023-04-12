@@ -23,10 +23,10 @@ use {
     itertools::Itertools,
     min_max_heap::MinMaxHeap,
     miraland_client::{connection_cache::ConnectionCache, tpu_connection::TpuConnection},
-    solana_entry::entry::hash_transactions,
     miraland_gossip::{
         cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    solana_entry::entry::hash_transactions,
     solana_ledger::{
         blockstore_processor::TransactionStatusSender, token_balances::collect_token_balances,
     },
@@ -2308,9 +2308,9 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::{unbounded, Receiver},
+        miraland_gossip::cluster_info::Node,
         solana_address_lookup_table_program::state::{AddressLookupTable, LookupTableMeta},
         solana_entry::entry::{next_entry, next_versioned_entry, Entry, EntrySlice},
-        miraland_gossip::cluster_info::Node,
         solana_ledger::{
             blockstore::{entries_to_test_shreds, Blockstore},
             genesis_utils::{create_genesis_config, GenesisConfigInfo},

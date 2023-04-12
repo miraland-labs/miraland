@@ -4,11 +4,7 @@
 /// discover the rest of the network.
 use log::*;
 use {
-    rand::{thread_rng, Rng},
-    rayon::prelude::*,
     miraland_client::{connection_cache::ConnectionCache, thin_client::ThinClient},
-    solana_core::consensus::VOTE_THRESHOLD_DEPTH,
-    solana_entry::entry::{Entry, EntrySlice},
     miraland_gossip::{
         cluster_info,
         crds_value::{self, CrdsData, CrdsValue},
@@ -16,6 +12,10 @@ use {
         gossip_service::discover_cluster,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    rand::{thread_rng, Rng},
+    rayon::prelude::*,
+    solana_core::consensus::VOTE_THRESHOLD_DEPTH,
+    solana_entry::entry::{Entry, EntrySlice},
     solana_ledger::blockstore::Blockstore,
     solana_sdk::{
         client::SyncClient,

@@ -2,13 +2,13 @@
 use {
     clap::{crate_description, crate_name, value_t, values_t_or_exit, App, Arg},
     log::*,
-    rand::{thread_rng, Rng},
-    rayon::prelude::*,
-    solana_clap_utils::input_parsers::pubkey_of,
     miraland_cli::{cli::CliConfig, program::process_deploy},
     miraland_client::{rpc_client::RpcClient, transaction_executor::TransactionExecutor},
     miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
     miraland_gossip::gossip_service::discover,
+    rand::{thread_rng, Rng},
+    rayon::prelude::*,
+    solana_clap_utils::input_parsers::pubkey_of,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},

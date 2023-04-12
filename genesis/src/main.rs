@@ -3,6 +3,7 @@
 
 use {
     clap::{crate_description, crate_name, value_t, value_t_or_exit, App, Arg, ArgMatches},
+    miraland_genesis::{genesis_accounts::add_genesis_accounts, Base64Account},
     solana_clap_utils::{
         input_parsers::{
             cluster_type_of, pubkey_of, pubkeys_of, unix_timestamp_from_rfc3339_datetime,
@@ -12,7 +13,6 @@ use {
         },
     },
     solana_entry::poh::compute_hashes_per_tick,
-    miraland_genesis::{genesis_accounts::add_genesis_accounts, Base64Account},
     solana_ledger::{blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions},
     solana_runtime::hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
     solana_sdk::{
@@ -575,7 +575,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
         }
     }
 
-    // MI: move this part here to keep capitalization(initial genesis accounts total balance) 
+    // MI: move this part here to keep capitalization(initial genesis accounts total balance)
     // consistent with initial issue of 0.5 billion mln
     if let Some(values) = matches.values_of("bpf_program") {
         let values: Vec<&str> = values.collect::<Vec<_>>();

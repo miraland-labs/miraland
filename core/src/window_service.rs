@@ -11,8 +11,8 @@ use {
         result::{Error, Result},
     },
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
-    rayon::{prelude::*, ThreadPool},
     miraland_gossip::cluster_info::ClusterInfo,
+    rayon::{prelude::*, ThreadPool},
     solana_ledger::{
         blockstore::{Blockstore, BlockstoreInsertionMetrics},
         leader_schedule_cache::LeaderScheduleCache,
@@ -482,8 +482,8 @@ impl WindowService {
 mod test {
     use {
         super::*,
-        solana_entry::entry::{create_ticks, Entry},
         miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
+        solana_entry::entry::{create_ticks, Entry},
         solana_ledger::{
             blockstore::{make_many_slot_entries, Blockstore},
             get_tmp_ledger_path,
