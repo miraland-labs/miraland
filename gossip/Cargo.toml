@@ -20,6 +20,8 @@ itertools = "0.10.3"
 log = "0.4.17"
 lru = "0.7.7"
 matches = "0.1.9"
+miraland-client = { path = "../client", version = "=1.14.17" }
+miraland-version = { path = "../version", version = "=1.14.17" }
 num-traits = "0.2"
 rand = "0.7.0"
 rand_chacha = "0.2.2"
@@ -29,7 +31,6 @@ serde_bytes = "0.11"
 serde_derive = "1.0.103"
 solana-bloom = { path = "../bloom", version = "=1.14.17" }
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-miraland-client = { path = "../client", version = "=1.14.17" }
 solana-entry = { path = "../entry", version = "=1.14.17" }
 solana-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
 solana-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
@@ -43,7 +44,6 @@ solana-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17"
 solana-runtime = { path = "../runtime", version = "=1.14.17" }
 solana-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-streamer = { path = "../streamer", version = "=1.14.17" }
-miraland-version = { path = "../version", version = "=1.14.17" }
 solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 thiserror = "1.0"
 

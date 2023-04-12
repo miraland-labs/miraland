@@ -12,10 +12,10 @@ publish = false
 [dependencies]
 byte-unit = "4.0.14"
 clap = { version = "3.1.5", features = ["cargo"] }
+miraland-version = { path = "../version", version = "=1.14.17" }
 serde = "1.0.138"
 serde_json = "1.0.81"
 solana-logger = { path = "../logger", version = "=1.14.17" }
-miraland-version = { path = "../version", version = "=1.14.17" }
 
 [[bin]]
 name = "miraland-log-analyzer"

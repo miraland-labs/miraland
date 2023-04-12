@@ -24,19 +24,21 @@ jsonrpc-derive = "18.0.0"
 jsonrpc-ipc-server = "18.0.0"
 jsonrpc-server-utils = "18.0.0"
 log = "0.4.17"
+miraland-cli-config = { path = "../cli-config", version = "=1.14.17" }
+miraland-client = { path = "../client", version = "=1.14.17" }
+miraland-faucet = { path = "../faucet", version = "=1.14.17" }
+miraland-genesis-utils = { path = "../genesis-utils", version = "=1.14.17" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17" }
+miraland-test-validator = { path = "../test-validator", version = "=1.14.17" }
+miraland-version = { path = "../version", version = "=1.14.17" }
 num_cpus = "1.13.1"
 rand = "0.7.0"
 serde = "1.0.138"
 serde_json = "1.0.81"
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-miraland-cli-config = { path = "../cli-config", version = "=1.14.17" }
-miraland-client = { path = "../client", version = "=1.14.17" }
 solana-core = { path = "../core", version = "=1.14.17" }
 solana-download-utils = { path = "../download-utils", version = "=1.14.17" }
 solana-entry = { path = "../entry", version = "=1.14.17" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17" }
-miraland-genesis-utils = { path = "../genesis-utils", version = "=1.14.17" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17" }
 solana-ledger = { path = "../ledger", version = "=1.14.17" }
 solana-logger = { path = "../logger", version = "=1.14.17" }
 solana-metrics = { path = "../metrics", version = "=1.14.17" }
@@ -49,8 +51,6 @@ solana-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17" }
 solana-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17" }
 solana-streamer = { path = "../streamer", version = "=1.14.17" }
-miraland-test-validator = { path = "../test-validator", version = "=1.14.17" }
-miraland-version = { path = "../version", version = "=1.14.17" }
 solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 symlink = "0.1.0"
 

@@ -17,14 +17,14 @@ clap = "2.33.0"
 console = "0.15.0"
 humantime = "2.0.1"
 indicatif = "0.16.2"
+miraland-cli-config = { path = "../cli-config", version = "=1.14.17" }
+miraland-client = { path = "../client", version = "=1.14.17" }
 pretty-hex = "0.3.0"
 semver = "1.0.10"
 serde = "1.0.138"
 serde_json = "1.0.81"
 solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-miraland-cli-config = { path = "../cli-config", version = "=1.14.17" }
-miraland-client = { path = "../client", version = "=1.14.17" }
 solana-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
 solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }

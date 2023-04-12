@@ -19,11 +19,12 @@ dashmap = "4.0.2"
 histogram = "0.6.9"
 itertools = "0.10.3"
 log = { version = "0.4.17" }
+miraland-cli-output = { path = "../cli-output", version = "=1.14.17" }
+miraland-version = { path = "../version", version = "=1.14.17" }
 regex = "1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0.81"
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-miraland-cli-output = { path = "../cli-output", version = "=1.14.17" }
 solana-core = { path = "../core", version = "=1.14.17" }
 solana-entry = { path = "../entry", version = "=1.14.17" }
 solana-ledger = { path = "../ledger", version = "=1.14.17" }
@@ -34,7 +35,6 @@ solana-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-stake-program = { path = "../programs/stake", version = "=1.14.17" }
 solana-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17" }
 solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
-miraland-version = { path = "../version", version = "=1.14.17" }
 solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 tokio = { version = "1", features = ["full"] }
 

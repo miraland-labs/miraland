@@ -21,17 +21,17 @@ ctrlc = { version = "3.2.2", features = ["termination"] }
 dirs-next = "2.0.0"
 indicatif = "0.16.2"
 lazy_static = "1.4.0"
+miraland-client = { path = "../client", version = "=1.14.17" }
+miraland-version = { path = "../version", version = "=1.14.17" }
 nix = "0.24.2"
 reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 semver = "1.0.10"
 serde = { version = "1.0.138", features = ["derive"] }
 serde_yaml = "0.8.26"
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-miraland-client = { path = "../client", version = "=1.14.17" }
 solana-config-program = { path = "../programs/config", version = "=1.14.17" }
 solana-logger = { path = "../logger", version = "=1.14.17" }
 solana-sdk = { path = "../sdk", version = "=1.14.17" }
-miraland-version = { path = "../version", version = "=1.14.17" }
 tar = "0.4.38"
 tempfile = "3.3.0"
 url = "2.2.2"

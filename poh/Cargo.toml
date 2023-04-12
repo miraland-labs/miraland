@@ -13,13 +13,13 @@ edition = "2021"
 core_affinity = "0.5.10"
 crossbeam-channel = "0.5"
 log = "0.4.17"
+miraland-sys-tuner = { path = "../sys-tuner", version = "=1.14.17" }
 solana-entry = { path = "../entry", version = "=1.14.17" }
 solana-ledger = { path = "../ledger", version = "=1.14.17" }
 solana-measure = { path = "../measure", version = "=1.14.17" }
 solana-metrics = { path = "../metrics", version = "=1.14.17" }
 solana-runtime = { path = "../runtime", version = "=1.14.17" }
 solana-sdk = { path = "../sdk", version = "=1.14.17" }
-miraland-sys-tuner = { path = "../sys-tuner", version = "=1.14.17" }
 thiserror = "1.0"
 
 [dev-dependencies]

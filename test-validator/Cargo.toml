@@ -13,12 +13,12 @@ edition = "2021"
 [dependencies]
 base64 = "0.13.0"
 log = "0.4.17"
-serde_derive = "1.0.103"
-serde_json = "1.0.81"
 miraland-cli-output = { path = "../cli-output", version = "=1.14.17" }
 miraland-client = { path = "../client", version = "=1.14.17" }
-solana-core = { path = "../core", version = "=1.14.17" }
 miraland-gossip = { path = "../gossip", version = "=1.14.17" }
+serde_derive = "1.0.103"
+serde_json = "1.0.81"
+solana-core = { path = "../core", version = "=1.14.17" }
 solana-ledger = { path = "../ledger", version = "=1.14.17" }
 solana-logger = { path = "../logger", version = "=1.14.17" }
 solana-net-utils = { path = "../net-utils", version = "=1.14.17" }
