@@ -148,7 +148,7 @@ fn retransmit(
 fn run_simulation(stakes: &[u64], fanout: usize) {
     let num_threads = num_threads();
     // set timeout to 5 minutes
-    let timeout = 60 * 20; // MI: vanilla 60 * 5, 
+    let timeout = 60 * 20; // MI: vanilla 60 * 5,
                            // but for buildkite step stable success on the poor srvr
                            // we change to 60 * 20 to avoid timeout
 
