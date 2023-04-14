@@ -1,13 +1,13 @@
 [package]
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 edition = "2021"
-name = "solana-local-cluster"
+name = "miraland-local-cluster"
 description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-local-cluster"
+documentation = "https://docs.rs/miraland-local-cluster"
 
 [dependencies]
 crossbeam-channel = "0.5"

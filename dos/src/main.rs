@@ -788,12 +788,12 @@ pub mod test {
         super::*,
         miraland_client::thin_client::ThinClient,
         miraland_faucet::faucet::run_local_faucet,
-        solana_core::validator::ValidatorConfig,
-        solana_local_cluster::{
+        miraland_local_cluster::{
             cluster::Cluster,
             local_cluster::{ClusterConfig, LocalCluster},
             validator_configs::make_identical_validator_configs,
         },
+        solana_core::validator::ValidatorConfig,
         solana_rpc::rpc::JsonRpcConfig,
         solana_sdk::timing::timestamp,
     };

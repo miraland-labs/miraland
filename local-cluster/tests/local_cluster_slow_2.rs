@@ -5,15 +5,15 @@ use {
     common::*,
     log::*,
     miraland_gossip::gossip_service::discover_cluster,
-    serial_test::serial,
-    solana_core::validator::ValidatorConfig,
-    solana_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
-    solana_local_cluster::{
+    miraland_local_cluster::{
         cluster::Cluster,
         cluster_tests,
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
     },
+    serial_test::serial,
+    solana_core::validator::ValidatorConfig,
+    solana_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
     solana_sdk::{
         client::SyncClient,
         clock::Slot,

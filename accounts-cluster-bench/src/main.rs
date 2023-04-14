@@ -656,12 +656,12 @@ pub mod test {
     use {
         super::*,
         miraland_faucet::faucet::run_local_faucet,
-        miraland_test_validator::TestValidator,
-        solana_core::validator::ValidatorConfig,
-        solana_local_cluster::{
+        miraland_local_cluster::{
             local_cluster::{ClusterConfig, LocalCluster},
             validator_configs::make_identical_validator_configs,
         },
+        miraland_test_validator::TestValidator,
+        solana_core::validator::ValidatorConfig,
         solana_measure::measure::Measure,
         solana_sdk::{native_token::sol_to_lamports, poh_config::PohConfig},
         spl_token::{

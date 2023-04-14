@@ -152,7 +152,7 @@ all_test_steps() {
   fi
 
   # Full test suite
-  command_step stable ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-stable.sh" 70
+  command_step stable ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-stable.sh" 120
 
   # Docs tests
   if affects \
@@ -160,7 +160,7 @@ all_test_steps() {
              ^ci/rust-version.sh \
              ^ci/test-docs.sh \
       ; then
-    command_step doctest "ci/test-docs.sh" 15
+    command_step doctest "ci/test-docs.sh" 30
   else
     annotate --style info --context test-docs \
       "Docs skipped as no .rs files were modified"

@@ -2650,6 +2650,7 @@ dependencies = [
  "miraland-faucet",
  "miraland-genesis",
  "miraland-gossip",
+ "miraland-local-cluster",
  "miraland-test-validator",
  "miraland-version",
  "rayon",
@@ -2658,7 +2659,6 @@ dependencies = [
  "serial_test",
  "solana-clap-utils",
  "solana-core",
- "solana-local-cluster",
  "solana-logger 1.14.17",
  "solana-measure",
  "solana-metrics",
@@ -2853,12 +2853,12 @@ dependencies = [
  "miraland-client",
  "miraland-faucet",
  "miraland-gossip",
+ "miraland-local-cluster",
  "miraland-version",
  "rand 0.7.3",
  "serde",
  "serial_test",
  "solana-core",
- "solana-local-cluster",
  "solana-logger 1.14.17",
  "solana-measure",
  "solana-net-utils",
@@ -3051,6 +3051,35 @@ dependencies = [
  "solana-vote-program",
  "tikv-jemallocator",
  "tokio",
+]
+
+[[package]]
+name = "miraland-local-cluster"
+version = "1.14.17"
+dependencies = [
+ "assert_matches",
+ "crossbeam-channel",
+ "fs_extra",
+ "gag",
+ "itertools",
+ "log",
+ "miraland-client",
+ "miraland-gossip",
+ "rand 0.7.3",
+ "rayon",
+ "serial_test",
+ "solana-config-program",
+ "solana-core",
+ "solana-download-utils",
+ "solana-entry",
+ "solana-ledger",
+ "solana-logger 1.14.17",
+ "solana-runtime",
+ "solana-sdk 1.14.17",
+ "solana-stake-program",
+ "solana-streamer",
+ "solana-vote-program",
+ "tempfile",
 ]
 
 [[package]]
@@ -5097,6 +5126,7 @@ dependencies = [
  "miraland-client",
  "miraland-faucet",
  "miraland-gossip",
+ "miraland-local-cluster",
  "miraland-test-validator",
  "miraland-version",
  "rand 0.7.3",
@@ -5104,7 +5134,6 @@ dependencies = [
  "solana-account-decoder",
  "solana-clap-utils",
  "solana-core",
- "solana-local-cluster",
  "solana-logger 1.14.17",
  "solana-measure",
  "solana-net-utils",
@@ -5675,35 +5704,6 @@ dependencies = [
  "tokio",
  "tokio-stream",
  "trees",
-]
-
-[[package]]
-name = "solana-local-cluster"
-version = "1.14.17"
-dependencies = [
- "assert_matches",
- "crossbeam-channel",
- "fs_extra",
- "gag",
- "itertools",
- "log",
- "miraland-client",
- "miraland-gossip",
- "rand 0.7.3",
- "rayon",
- "serial_test",
- "solana-config-program",
- "solana-core",
- "solana-download-utils",
- "solana-entry",
- "solana-ledger",
- "solana-logger 1.14.17",
- "solana-runtime",
- "solana-sdk 1.14.17",
- "solana-stake-program",
- "solana-streamer",
- "solana-vote-program",
- "tempfile",
 ]
 
 [[package]]
@@ -6452,12 +6452,12 @@ dependencies = [
  "miraland-client",
  "miraland-faucet",
  "miraland-gossip",
+ "miraland-local-cluster",
  "miraland-version",
  "rand 0.7.3",
  "rayon",
  "solana-clap-utils",
  "solana-core",
- "solana-local-cluster",
  "solana-logger 1.14.17",
  "solana-measure",
  "solana-net-utils",

@@ -3,6 +3,12 @@ use {
     log::*,
     miraland_client::rpc_client::RpcClient,
     miraland_gossip::gossip_service::discover_cluster,
+    miraland_local_cluster::{
+        cluster::{Cluster, ClusterValidatorInfo},
+        cluster_tests,
+        local_cluster::{ClusterConfig, LocalCluster},
+        validator_configs::*,
+    },
     solana_core::{
         broadcast_stage::BroadcastStageType,
         consensus::{Tower, SWITCH_FORK_THRESHOLD},
@@ -14,12 +20,6 @@ use {
         blockstore::{Blockstore, PurgeType},
         blockstore_options::{AccessType, BlockstoreOptions},
         leader_schedule::{FixedSchedule, LeaderSchedule},
-    },
-    solana_local_cluster::{
-        cluster::{Cluster, ClusterValidatorInfo},
-        cluster_tests,
-        local_cluster::{ClusterConfig, LocalCluster},
-        validator_configs::*,
     },
     solana_runtime::snapshot_config::SnapshotConfig,
     solana_sdk::{
@@ -46,7 +46,7 @@ use {
 };
 
 pub const RUST_LOG_FILTER: &str =
-    "error,solana_core::replay_stage=warn,solana_local_cluster=info,local_cluster=info";
+    "error,solana_core::replay_stage=warn,miraland_local_cluster=info,local_cluster=info";
 
 pub const DEFAULT_CLUSTER_LAMPORTS: u64 = 10_000_000 * LAMPORTS_PER_SOL;
 pub const DEFAULT_NODE_STAKE: u64 = 10 * LAMPORTS_PER_SOL;
@@ -386,7 +386,7 @@ pub fn test_faulty_node(
     faulty_node_type: BroadcastStageType,
     node_stakes: Vec<u64>,
 ) -> (LocalCluster, Vec<Arc<Keypair>>) {
-    solana_logger::setup_with_default("solana_local_cluster=info");
+    solana_logger::setup_with_default("miraland_local_cluster=info");
     let num_nodes = node_stakes.len();
 
     let error_validator_config = ValidatorConfig {

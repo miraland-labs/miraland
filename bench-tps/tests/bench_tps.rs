@@ -11,13 +11,13 @@ use {
         tpu_client::{TpuClient, TpuClientConfig},
     },
     miraland_faucet::faucet::run_local_faucet,
-    miraland_test_validator::TestValidator,
-    serial_test::serial,
-    solana_core::validator::ValidatorConfig,
-    solana_local_cluster::{
+    miraland_local_cluster::{
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::make_identical_validator_configs,
     },
+    miraland_test_validator::TestValidator,
+    serial_test::serial,
+    solana_core::validator::ValidatorConfig,
     solana_rpc::rpc::JsonRpcConfig,
     solana_sdk::{
         commitment_config::CommitmentConfig,
