@@ -158,7 +158,7 @@ test-stable-perf)
     rm -rf target/perf-libs
     ./fetch-perf-libs.sh
 
-    # Force CUDA for miraland-core unit tests
+    # Force CUDA for solana-core unit tests
     export TEST_PERF_LIBS_CUDA=1
 
     # Force CUDA in ci/localnet-sanity.sh
@@ -167,10 +167,10 @@ test-stable-perf)
 
   _ "$cargo" stable build --bins ${V:+--verbose}
   if need_to_generate_test_result; then
-    _ "$cargo" stable test --package miraland-perf --package miraland-ledger --package miraland-core --lib ${V:+--verbose} -- -Z unstable-options --format json --report-time | tee results.json
+    _ "$cargo" stable test --package miraland-perf --package miraland-ledger --package solana-core --lib ${V:+--verbose} -- -Z unstable-options --format json --report-time | tee results.json
     exit_if_error "${PIPESTATUS[0]}"
   else
-    _ "$cargo" stable test --package miraland-perf --package miraland-ledger --package miraland-core --lib ${V:+--verbose} -- --nocapture
+    _ "$cargo" stable test --package miraland-perf --package miraland-ledger --package solana-core --lib ${V:+--verbose} -- --nocapture
   fi
   _ "$cargo" stable run --manifest-path poh-bench/Cargo.toml ${V:+--verbose} -- --hashes-per-tick 10
   ;;

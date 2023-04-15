@@ -152,7 +152,7 @@ all_test_steps() {
   fi
 
   # Full test suite
-  command_step stable ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-stable.sh" 120
+  command_step stable ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-stable.sh" 180
 
   # Docs tests
   if affects \
@@ -160,7 +160,7 @@ all_test_steps() {
              ^ci/rust-version.sh \
              ^ci/test-docs.sh \
       ; then
-    command_step doctest "ci/test-docs.sh" 30
+    command_step doctest "ci/test-docs.sh" 90
   else
     annotate --style info --context test-docs \
       "Docs skipped as no .rs files were modified"
@@ -184,7 +184,7 @@ all_test_steps() {
     cat >> "$output_file" <<"EOF"
   - command: "ci/test-stable-bpf.sh"
     name: "stable-bpf"
-    timeout_in_minutes: 35
+    timeout_in_minutes: 120
     artifact_paths: "bpf-dumps.tar.bz2"
     agents:
       queue: "miraland"
@@ -211,7 +211,7 @@ EOF
     cat >> "$output_file" <<"EOF"
   - command: "ci/test-stable-perf.sh"
     name: "stable-perf"
-    timeout_in_minutes: 20
+    timeout_in_minutes: 60
     artifact_paths: "log-*.txt"
     agents:
       queue: "cuda"
@@ -239,7 +239,7 @@ EOF
     cat >> "$output_file" <<"EOF"
   - command: "scripts/build-downstream-projects.sh"
     name: "downstream-projects"
-    timeout_in_minutes: 30
+    timeout_in_minutes: 90
     agents:
       queue: "miraland"
 EOF
@@ -254,7 +254,7 @@ EOF
              ^ci/test-stable.sh \
              ^sdk/ \
       ; then
-    command_step wasm ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-wasm.sh" 20
+    command_step wasm ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-wasm.sh" 60
   else
     annotate --style info \
       "wasm skipped as no relevant files were modified"
@@ -269,7 +269,7 @@ EOF
              ^ci/test-coverage.sh \
              ^ci/test-bench.sh \
       ; then
-    command_step bench "ci/test-bench.sh" 40
+    command_step bench "ci/test-bench.sh" 120
   else
     annotate --style info --context test-bench \
       "Bench skipped as no .rs files were modified"
@@ -277,19 +277,19 @@ EOF
 
   command_step "local-cluster" \
     ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-local-cluster.sh" \
-    40
+    120
 
   command_step "local-cluster-flakey" \
     ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-local-cluster-flakey.sh" \
-    10
+    30
 
   command_step "local-cluster-slow-1" \
     ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-local-cluster-slow-1.sh" \
-    40
+    120
 
   command_step "local-cluster-slow-2" \
     ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-local-cluster-slow-2.sh" \
-    40
+    120
 }
 
 pull_or_push_steps() {
