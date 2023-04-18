@@ -12,11 +12,6 @@ use {
         gossip_service::discover_cluster,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    rand::{thread_rng, Rng},
-    rayon::prelude::*,
-    solana_core::consensus::VOTE_THRESHOLD_DEPTH,
-    solana_entry::entry::{Entry, EntrySlice},
-    solana_ledger::blockstore::Blockstore,
     miraland_sdk::{
         client::SyncClient,
         clock::{self, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
@@ -31,6 +26,11 @@ use {
         timing::{duration_as_ms, timestamp},
         transport::TransportError,
     },
+    rand::{thread_rng, Rng},
+    rayon::prelude::*,
+    solana_core::consensus::VOTE_THRESHOLD_DEPTH,
+    solana_entry::entry::{Entry, EntrySlice},
+    solana_ledger::blockstore::Blockstore,
     solana_streamer::socket::SocketAddrSpace,
     solana_vote_program::vote_transaction,
     std::{

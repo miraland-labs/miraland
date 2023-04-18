@@ -19,6 +19,7 @@ miraland-bench-tps = { path = "../bench-tps", version = "=1.14.17" }
 miraland-client = { path = "../client", version = "=1.14.17" }
 miraland-faucet = { path = "../faucet", version = "=1.14.17" }
 miraland-gossip = { path = "../gossip", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-version = { path = "../version", version = "=1.14.17" }
 rand = "0.7.0"
 serde = "1.0.138"
@@ -28,7 +29,6 @@ solana-measure = { path = "../measure", version = "=1.14.17" }
 solana-net-utils = { path = "../net-utils", version = "=1.14.17" }
 solana-perf = { path = "../perf", version = "=1.14.17" }
 solana-rpc = { path = "../rpc", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-streamer = { path = "../streamer", version = "=1.14.17" }
 
 [package.metadata.docs.rs]

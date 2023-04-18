@@ -4,16 +4,16 @@ use {
     },
     console::Emoji,
     dialoguer::{theme::ColorfulTheme, Select},
-    semver::Version as FirmwareVersion,
     miraland_sdk::derivation_path::DerivationPath,
+    semver::Version as FirmwareVersion,
     std::{fmt, sync::Arc},
 };
 #[cfg(feature = "hidapi")]
 use {
     crate::{ledger_error::LedgerError, locator::Manufacturer},
     log::*,
-    num_traits::FromPrimitive,
     miraland_sdk::{pubkey::Pubkey, signature::Signature},
+    num_traits::FromPrimitive,
     std::{cmp::min, convert::TryFrom},
 };
 

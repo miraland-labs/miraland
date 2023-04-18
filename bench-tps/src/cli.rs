@@ -2,12 +2,12 @@ use {
     clap::{crate_description, crate_name, App, Arg, ArgMatches},
     miraland_cli_config::{ConfigInput, CONFIG_FILE},
     miraland_client::connection_cache::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
-    solana_clap_utils::input_validators::{is_url, is_url_or_moniker},
     miraland_sdk::{
         fee_calculator::FeeRateGovernor,
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair},
     },
+    solana_clap_utils::input_validators::{is_url, is_url_or_moniker},
     std::{net::SocketAddr, process::exit, time::Duration},
 };
 

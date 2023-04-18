@@ -17,12 +17,6 @@ use {
     },
     bip39::{Language, Mnemonic, Seed},
     clap::ArgMatches,
-    rpassword::prompt_password,
-    solana_remote_wallet::{
-        locator::{Locator as RemoteWalletLocator, LocatorError as RemoteWalletLocatorError},
-        remote_keypair::generate_remote_keypair,
-        remote_wallet::{maybe_wallet_manager, RemoteWalletError, RemoteWalletManager},
-    },
     miraland_sdk::{
         derivation_path::{DerivationPath, DerivationPathError},
         hash::Hash,
@@ -33,6 +27,12 @@ use {
             keypair_from_seed_and_derivation_path, keypair_from_seed_phrase_and_passphrase,
             read_keypair, read_keypair_file, Keypair, NullSigner, Presigner, Signature, Signer,
         },
+    },
+    rpassword::prompt_password,
+    solana_remote_wallet::{
+        locator::{Locator as RemoteWalletLocator, LocatorError as RemoteWalletLocatorError},
+        remote_keypair::generate_remote_keypair,
+        remote_wallet::{maybe_wallet_manager, RemoteWalletError, RemoteWalletManager},
     },
     std::{
         cell::RefCell,
@@ -1127,8 +1127,8 @@ mod tests {
         super::*,
         crate::offline::OfflineArgs,
         clap::{Arg, Command},
-        solana_remote_wallet::{locator::Manufacturer, remote_wallet::initialize_wallet_manager},
         miraland_sdk::{signer::keypair::write_keypair_file, system_instruction},
+        solana_remote_wallet::{locator::Manufacturer, remote_wallet::initialize_wallet_manager},
         tempfile::{NamedTempFile, TempDir},
     };
 

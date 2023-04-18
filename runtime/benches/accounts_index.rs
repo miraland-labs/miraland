@@ -3,6 +3,7 @@
 extern crate test;
 
 use {
+    miraland_sdk::{account::AccountSharedData, pubkey},
     rand::{thread_rng, Rng},
     solana_runtime::{
         account_info::AccountInfo,
@@ -11,7 +12,6 @@ use {
             ACCOUNTS_INDEX_CONFIG_FOR_BENCHMARKS,
         },
     },
-    miraland_sdk::{account::AccountSharedData, pubkey},
     test::Bencher,
 };
 

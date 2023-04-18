@@ -4,8 +4,6 @@ use {
         add_lookup_table_account, assert_ix_error, new_address_lookup_table,
         overwrite_slot_hashes_with_slots, setup_test_context,
     },
-    solana_address_lookup_table_program::instruction::close_lookup_table,
-    solana_program_test::*,
     miraland_sdk::{
         clock::Clock,
         instruction::InstructionError,
@@ -13,6 +11,8 @@ use {
         signature::{Keypair, Signer},
         transaction::Transaction,
     },
+    solana_address_lookup_table_program::instruction::close_lookup_table,
+    solana_program_test::*,
 };
 
 mod common;

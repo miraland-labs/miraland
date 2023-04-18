@@ -17,6 +17,7 @@ miraland-client = { path = "../client", version = "=1.14.17" }
 miraland-faucet = { path = "../faucet", version = "=1.14.17" }
 miraland-genesis = { path = "../genesis", version = "=1.14.17" }
 miraland-gossip = { path = "../gossip", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-version = { path = "../version", version = "=1.14.17" }
 rayon = "1.5.3"
 serde_json = "1.0.81"
@@ -29,7 +30,6 @@ solana-metrics = { path = "../metrics", version = "=1.14.17" }
 solana-net-utils = { path = "../net-utils", version = "=1.14.17" }
 solana-rpc = { path = "../rpc", version = "=1.14.17" }
 solana-runtime = { path = "../runtime", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-streamer = { path = "../streamer", version = "=1.14.17" }
 thiserror = "1.0"
 

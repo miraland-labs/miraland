@@ -3,12 +3,12 @@ use {
     miraland_cli::cli::{process_command, CliCommand, CliConfig},
     miraland_client::rpc_client::RpcClient,
     miraland_faucet::faucet::run_local_faucet,
-    miraland_test_validator::TestValidator,
     miraland_sdk::{
         commitment_config::CommitmentConfig,
         native_token::sol_to_lamports,
         signature::{Keypair, Signer},
     },
+    miraland_test_validator::TestValidator,
     solana_streamer::socket::SocketAddrSpace,
 };
 

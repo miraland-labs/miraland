@@ -1,8 +1,8 @@
 use {
     crate::{HEADER_LENGTH, IP_ECHO_SERVER_RESPONSE_LENGTH},
     log::*,
-    serde_derive::{Deserialize, Serialize},
     miraland_sdk::deserialize_utils::default_on_eof,
+    serde_derive::{Deserialize, Serialize},
     std::{
         io,
         net::{IpAddr, SocketAddr},

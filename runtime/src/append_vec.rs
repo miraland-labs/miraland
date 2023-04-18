@@ -7,13 +7,13 @@
 use {
     log::*,
     memmap2::MmapMut,
-    serde::{Deserialize, Serialize},
     miraland_sdk::{
         account::{Account, AccountSharedData, ReadableAccount},
         clock::{Epoch, Slot},
         hash::Hash,
         pubkey::Pubkey,
     },
+    serde::{Deserialize, Serialize},
     std::{
         borrow::Borrow,
         convert::TryFrom,
@@ -570,8 +570,8 @@ pub mod tests {
     use {
         super::{test_utils::*, *},
         assert_matches::assert_matches,
-        rand::{thread_rng, Rng},
         miraland_sdk::{account::WritableAccount, timing::duration_as_ms},
+        rand::{thread_rng, Rng},
         std::time::Instant,
     };
 

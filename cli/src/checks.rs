@@ -170,8 +170,8 @@ mod tests {
             rpc_request::RpcRequest,
             rpc_response::{Response, RpcResponseContext},
         },
-        serde_json::json,
         miraland_sdk::system_instruction,
+        serde_json::json,
         std::collections::HashMap,
     };
 

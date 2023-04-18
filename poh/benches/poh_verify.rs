@@ -2,12 +2,12 @@
 extern crate test;
 
 use {
-    solana_entry::entry::{next_entry_mut, Entry, EntrySlice},
     miraland_sdk::{
         hash::{hash, Hash},
         signature::{Keypair, Signer},
         system_transaction,
     },
+    solana_entry::entry::{next_entry_mut, Entry, EntrySlice},
     test::Bencher,
 };
 

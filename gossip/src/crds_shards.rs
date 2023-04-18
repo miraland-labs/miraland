@@ -138,8 +138,8 @@ mod test {
             crds::{Crds, GossipRoute},
             crds_value::CrdsValue,
         },
-        rand::{thread_rng, Rng},
         miraland_sdk::timing::timestamp,
+        rand::{thread_rng, Rng},
         std::{collections::HashSet, iter::repeat_with, ops::Index},
     };
 

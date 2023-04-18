@@ -1,7 +1,6 @@
 #![allow(deprecated)]
 
 use {
-    serde::{Deserialize, Serialize},
     miraland_sdk::{
         account::Account,
         clock::Slot,
@@ -14,6 +13,7 @@ use {
         transaction::{self, Transaction, TransactionError},
         transaction_context::TransactionReturnData,
     },
+    serde::{Deserialize, Serialize},
 };
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]

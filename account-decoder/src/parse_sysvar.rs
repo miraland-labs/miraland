@@ -224,7 +224,9 @@ mod test {
     use miraland_sdk::sysvar::recent_blockhashes::IterItem;
     use {
         super::*,
-        miraland_sdk::{account::create_account_for_test, fee_calculator::FeeCalculator, hash::Hash},
+        miraland_sdk::{
+            account::create_account_for_test, fee_calculator::FeeCalculator, hash::Hash,
+        },
     };
 
     #[test]

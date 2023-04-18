@@ -9,15 +9,15 @@ use {
     dashmap::DashMap,
     im::HashMap as ImHashMap,
     log::error,
-    num_derive::ToPrimitive,
-    num_traits::ToPrimitive,
-    rayon::{prelude::*, ThreadPool},
     miraland_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::{Epoch, Slot},
         pubkey::Pubkey,
         stake::state::{Delegation, StakeActivationStatus},
     },
+    num_derive::ToPrimitive,
+    num_traits::ToPrimitive,
+    rayon::{prelude::*, ThreadPool},
     solana_vote_program::vote_state::VoteState,
     std::{
         collections::{HashMap, HashSet},
@@ -507,9 +507,9 @@ pub(crate) mod serde_stakes_enum_compat {
 pub(crate) mod tests {
     use {
         super::*,
+        miraland_sdk::{account::WritableAccount, pubkey::Pubkey, rent::Rent, stake},
         rand::Rng,
         rayon::ThreadPoolBuilder,
-        miraland_sdk::{account::WritableAccount, pubkey::Pubkey, rent::Rent, stake},
         solana_stake_program::stake_state,
         solana_vote_program::vote_state::{self, VoteState, VoteStateVersions},
     };
@@ -950,8 +950,8 @@ pub(crate) mod tests {
             let vote_account = vote_state::create_account(
                 &vote_pubkey,
                 &miraland_sdk::pubkey::new_rand(), // node_pubkey
-                rng.gen_range(0, 101),           // commission
-                rng.gen_range(0, 1_000_000),     // lamports
+                rng.gen_range(0, 101),             // commission
+                rng.gen_range(0, 1_000_000),       // lamports
             );
             stakes_cache.check_and_store(&vote_pubkey, &vote_account);
             for _ in 0..rng.gen_range(10usize, 20) {

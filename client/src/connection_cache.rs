@@ -7,11 +7,11 @@ use {
         tpu_connection::{BlockingConnection, ClientStats},
     },
     indexmap::map::{Entry, IndexMap},
-    rand::{thread_rng, Rng},
-    solana_measure::measure::Measure,
     miraland_sdk::{
         pubkey::Pubkey, quic::QUIC_PORT_OFFSET, signature::Keypair, timing::AtomicInterval,
     },
+    rand::{thread_rng, Rng},
+    solana_measure::measure::Measure,
     solana_streamer::{
         nonblocking::quic::{compute_max_allowed_uni_streams, ConnectionPeerType},
         streamer::StakedNodes,
@@ -653,8 +653,6 @@ mod tests {
             connection_cache::{ConnectionCache, MAX_CONNECTIONS},
             tpu_connection::TpuConnection,
         },
-        rand::{Rng, SeedableRng},
-        rand_chacha::ChaChaRng,
         miraland_sdk::{
             pubkey::Pubkey,
             quic::{
@@ -662,6 +660,8 @@ mod tests {
                 QUIC_PORT_OFFSET,
             },
         },
+        rand::{Rng, SeedableRng},
+        rand_chacha::ChaChaRng,
         solana_streamer::streamer::StakedNodes,
         std::{
             net::{IpAddr, Ipv4Addr, SocketAddr},

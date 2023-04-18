@@ -5,6 +5,7 @@ use {
     itertools::Itertools,
     lazy_static::lazy_static,
     lru::LruCache,
+    miraland_sdk::{clock::Slot, signature::Keypair},
     rayon::{prelude::*, ThreadPool},
     reed_solomon_erasure::{
         galois_8::ReedSolomon,
@@ -13,7 +14,6 @@ use {
     solana_entry::entry::Entry,
     solana_measure::measure::Measure,
     solana_rayon_threadlimit::get_thread_count,
-    miraland_sdk::{clock::Slot, signature::Keypair},
     std::{
         borrow::Borrow,
         fmt::Debug,
@@ -474,7 +474,6 @@ mod tests {
         },
         bincode::serialized_size,
         matches::assert_matches,
-        rand::{seq::SliceRandom, Rng},
         miraland_sdk::{
             hash::{self, hash, Hash},
             pubkey::Pubkey,
@@ -482,6 +481,7 @@ mod tests {
             signature::{Signature, Signer},
             system_transaction,
         },
+        rand::{seq::SliceRandom, Rng},
         std::{collections::HashSet, convert::TryInto, iter::repeat_with, sync::Arc},
     };
 

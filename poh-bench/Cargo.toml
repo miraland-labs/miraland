@@ -12,6 +12,7 @@ publish = false
 [dependencies]
 clap = { version = "3.1.5", features = ["cargo"] }
 log = "0.4.17"
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-version = { path = "../version", version = "=1.14.17" }
 rand = "0.7.0"
 rayon = "1.5.3"
@@ -19,7 +20,6 @@ solana-entry = { path = "../entry", version = "=1.14.17" }
 solana-logger = { path = "../logger", version = "=1.14.17" }
 solana-measure = { path = "../measure", version = "=1.14.17" }
 solana-perf = { path = "../perf", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

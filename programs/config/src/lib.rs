@@ -6,13 +6,13 @@ pub mod date_instruction;
 pub use miraland_sdk::config::program::id;
 use {
     bincode::{deserialize, serialize, serialized_size},
-    serde_derive::{Deserialize, Serialize},
     miraland_sdk::{
         account::{Account, AccountSharedData},
         pubkey::Pubkey,
         short_vec,
         stake::config::Config as StakeConfig,
     },
+    serde_derive::{Deserialize, Serialize},
 };
 
 pub trait ConfigState: serde::Serialize + Default {

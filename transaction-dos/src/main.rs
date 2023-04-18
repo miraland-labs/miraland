@@ -6,9 +6,6 @@ use {
     miraland_client::{rpc_client::RpcClient, transaction_executor::TransactionExecutor},
     miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
     miraland_gossip::gossip_service::discover,
-    rand::{thread_rng, Rng},
-    rayon::prelude::*,
-    solana_clap_utils::input_parsers::pubkey_of,
     miraland_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},
@@ -20,6 +17,9 @@ use {
         system_instruction,
         transaction::Transaction,
     },
+    rand::{thread_rng, Rng},
+    rayon::prelude::*,
+    solana_clap_utils::input_parsers::pubkey_of,
     solana_streamer::socket::SocketAddrSpace,
     std::{
         net::SocketAddr,
@@ -634,9 +634,9 @@ pub mod test {
             local_cluster::{ClusterConfig, LocalCluster},
             validator_configs::make_identical_validator_configs,
         },
+        miraland_sdk::poh_config::PohConfig,
         solana_core::validator::ValidatorConfig,
         solana_measure::measure::Measure,
-        miraland_sdk::poh_config::PohConfig,
     };
 
     #[test]

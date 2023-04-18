@@ -5,7 +5,6 @@ use {
     },
     chrono::DateTime,
     clap::ArgMatches,
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
     miraland_sdk::{
         clock::UnixTimestamp,
         commitment_config::CommitmentConfig,
@@ -14,6 +13,7 @@ use {
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair, Signature, Signer},
     },
+    solana_remote_wallet::remote_wallet::RemoteWalletManager,
     std::{str::FromStr, sync::Arc},
 };
 

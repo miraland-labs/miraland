@@ -1,6 +1,6 @@
 use {
-    solana_runtime::bank::RewardInfo,
     miraland_sdk::{clock::UnixTimestamp, pubkey::Pubkey},
+    solana_runtime::bank::RewardInfo,
     std::sync::{Arc, RwLock},
 };
 

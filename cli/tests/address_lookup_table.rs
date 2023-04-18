@@ -8,12 +8,12 @@ use {
     },
     miraland_cli_output::{CliAddressLookupTable, CliAddressLookupTableCreated, OutputFormat},
     miraland_faucet::faucet::run_local_faucet,
-    miraland_test_validator::TestValidator,
     miraland_sdk::{
         native_token::LAMPORTS_PER_SOL,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
+    miraland_test_validator::TestValidator,
     solana_streamer::socket::SocketAddrSpace,
     std::str::FromStr,
 };

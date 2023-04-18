@@ -2,11 +2,11 @@ use {
     crate::result::Result,
     bincode::serialized_size,
     crossbeam_channel::Receiver,
+    miraland_sdk::clock::Slot,
     solana_entry::entry::Entry,
     solana_ledger::shred::ShredData,
     solana_poh::poh_recorder::WorkingBankEntry,
     solana_runtime::bank::Bank,
-    miraland_sdk::clock::Slot,
     std::{
         sync::Arc,
         time::{Duration, Instant},
@@ -102,11 +102,11 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         miraland_sdk::{
             genesis_config::GenesisConfig, pubkey::Pubkey, system_transaction,
             transaction::Transaction,
         },
+        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
     };
 
     fn setup_test() -> (GenesisConfig, Arc<Bank>, Transaction) {

@@ -5,9 +5,9 @@ use solana_entry::entry::{self, create_ticks, init_poh, EntrySlice, VerifyRecycl
 use solana_entry::entry::{create_ticks, init_poh, EntrySlice, VerifyRecyclers};
 use {
     clap::{crate_description, crate_name, Arg, Command},
+    miraland_sdk::hash::hash,
     solana_measure::measure::Measure,
     solana_perf::perf_libs,
-    miraland_sdk::hash::hash,
 };
 
 fn main() {

@@ -14,12 +14,12 @@ console = "0.15.0"
 dialoguer = "0.10.1"
 hidapi = { version = "1.4.1", default-features = false, optional = true }
 log = "0.4.17"
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 num-derive = { version = "0.3" }
 num-traits = { version = "0.2" }
 parking_lot = "0.12"
 qstring = "0.7.2"
 semver = "1.0"
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 thiserror = "1.0"
 uriparse = "0.6.4"
 

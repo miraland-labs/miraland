@@ -4,12 +4,12 @@ use {
         validator_info,
     },
     bincode::deserialize,
-    serde_json::Value,
-    solana_config_program::{get_config_data, ConfigKeys},
     miraland_sdk::{
         pubkey::Pubkey,
         stake::config::{self as stake_config, Config as StakeConfig},
     },
+    serde_json::Value,
+    solana_config_program::{get_config_data, ConfigKeys},
 };
 
 pub fn parse_config(data: &[u8], pubkey: &Pubkey) -> Result<ConfigAccountType, ParseAccountError> {
@@ -92,8 +92,8 @@ pub struct UiConfig<T> {
 #[cfg(test)]
 mod test {
     use {
-        super::*, crate::validator_info::ValidatorInfo, serde_json::json,
-        solana_config_program::create_config_account, miraland_sdk::account::ReadableAccount,
+        super::*, crate::validator_info::ValidatorInfo, miraland_sdk::account::ReadableAccount,
+        serde_json::json, solana_config_program::create_config_account,
     };
 
     #[test]

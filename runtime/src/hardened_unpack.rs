@@ -1,8 +1,8 @@
 use {
     bzip2::bufread::BzDecoder,
     log::*,
-    rand::{thread_rng, Rng},
     miraland_sdk::genesis_config::{GenesisConfig, DEFAULT_GENESIS_ARCHIVE, DEFAULT_GENESIS_FILE},
+    rand::{thread_rng, Rng},
     std::{
         collections::HashMap,
         fs::{self, File},

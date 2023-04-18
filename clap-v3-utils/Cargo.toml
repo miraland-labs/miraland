@@ -12,10 +12,10 @@ edition = "2021"
 [dependencies]
 chrono = "0.4"
 clap = { version = "3.1.5", features = ["cargo"] }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 rpassword = "6.0"
 solana-perf = { path = "../perf", version = "=1.14.17" }
 solana-remote-wallet = { path = "../remote-wallet", version = "=1.14.17", default-features = false }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 thiserror = "1.0.31"
 tiny-bip39 = "0.8.2"
 uriparse = "0.6.4"

@@ -4,9 +4,9 @@
 extern crate test;
 
 use {
+    miraland_sdk::hash::Hash,
     solana_entry::poh::Poh,
     solana_poh::poh_service::DEFAULT_HASHES_PER_BATCH,
-    miraland_sdk::hash::Hash,
     std::sync::{
         atomic::{AtomicBool, Ordering},
         Arc, Mutex,

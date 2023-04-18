@@ -1,7 +1,7 @@
 use {
     crate::{stakes::StakesEnum, vote_account::VoteAccountsHashMap},
-    serde::{Deserialize, Serialize},
     miraland_sdk::{clock::Epoch, pubkey::Pubkey},
+    serde::{Deserialize, Serialize},
     std::{collections::HashMap, sync::Arc},
 };
 

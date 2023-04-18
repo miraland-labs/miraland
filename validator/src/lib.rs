@@ -4,8 +4,8 @@ use {
     console::style,
     fd_lock::{RwLock, RwLockWriteGuard},
     indicatif::{ProgressDrawTarget, ProgressStyle},
-    solana_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
     miraland_sdk::quic::QUIC_PORT_OFFSET,
+    solana_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
     std::{
         borrow::Cow,
         env,

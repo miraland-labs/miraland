@@ -3,13 +3,13 @@ use {
     crate::cluster_nodes::ClusterNodesCache,
     itertools::Itertools,
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-    solana_entry::entry::Entry,
-    solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     miraland_sdk::{
         hash::Hash,
         signature::{Keypair, Signature, Signer},
         system_transaction,
     },
+    solana_entry::entry::Entry,
+    solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     std::collections::HashSet,
 };
 

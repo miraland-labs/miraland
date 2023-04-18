@@ -1,8 +1,6 @@
 #![allow(dead_code)]
 
 use {
-    solana_bpf_loader_program::{process_instruction, upgradeable::id},
-    solana_program_test::*,
     miraland_sdk::{
         account::AccountSharedData,
         account_utils::StateMut,
@@ -12,6 +10,8 @@ use {
         signature::{Keypair, Signer},
         transaction::{Transaction, TransactionError},
     },
+    solana_bpf_loader_program::{process_instruction, upgradeable::id},
+    solana_program_test::*,
 };
 
 pub async fn setup_test_context() -> ProgramTestContext {

@@ -12,11 +12,11 @@ documentation = "https://docs.rs/miraland-cli-config"
 [dependencies]
 dirs-next = "2.0.0"
 lazy_static = "1.4.0"
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 serde = "1.0.138"
 serde_derive = "1.0.103"
 serde_yaml = "0.8.26"
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 url = "2.2.2"
 
 [dev-dependencies]

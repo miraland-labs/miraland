@@ -1,6 +1,4 @@
 use {
-    solana_banks_client::BanksClient,
-    solana_program_test::{processor, ProgramTest},
     miraland_sdk::{
         account_info::AccountInfo,
         entrypoint::ProgramResult,
@@ -13,6 +11,8 @@ use {
         system_instruction,
         transaction::Transaction,
     },
+    solana_banks_client::BanksClient,
+    solana_program_test::{processor, ProgramTest},
 };
 
 #[allow(clippy::unnecessary_wraps)]

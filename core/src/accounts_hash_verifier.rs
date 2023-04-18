@@ -6,6 +6,11 @@
 
 use {
     miraland_gossip::cluster_info::{ClusterInfo, MAX_SNAPSHOT_HASHES},
+    miraland_sdk::{
+        clock::{Slot, SLOT_MS},
+        hash::Hash,
+        pubkey::Pubkey,
+    },
     solana_measure::measure::Measure,
     solana_runtime::{
         accounts_hash::{CalcAccountsHashConfig, HashStats},
@@ -15,11 +20,6 @@ use {
             SnapshotPackage, SnapshotType,
         },
         sorted_storages::SortedStorages,
-    },
-    miraland_sdk::{
-        clock::{Slot, SLOT_MS},
-        hash::Hash,
-        pubkey::Pubkey,
     },
     std::{
         collections::{HashMap, HashSet},
@@ -201,8 +201,8 @@ impl AccountsHashVerifier {
 
     fn generate_fault_hash(original_hash: &Hash) -> Hash {
         use {
-            rand::{thread_rng, Rng},
             miraland_sdk::hash::extend_and_hash,
+            rand::{thread_rng, Rng},
         };
 
         let rand = thread_rng().gen_range(0, 10);
@@ -338,15 +338,15 @@ mod tests {
             cluster_info::make_accounts_hashes_message,
             legacy_contact_info::LegacyContactInfo as ContactInfo,
         },
-        solana_runtime::{
-            rent_collector::RentCollector,
-            snapshot_utils::{ArchiveFormat, SnapshotVersion},
-        },
         miraland_sdk::{
             genesis_config::ClusterType,
             hash::hash,
             signature::{Keypair, Signer},
             sysvar::epoch_schedule::EpochSchedule,
+        },
+        solana_runtime::{
+            rent_collector::RentCollector,
+            snapshot_utils::{ArchiveFormat, SnapshotVersion},
         },
         solana_streamer::socket::SocketAddrSpace,
         std::str::FromStr,

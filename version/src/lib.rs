@@ -2,8 +2,8 @@
 
 extern crate serde_derive;
 use {
-    serde_derive::{Deserialize, Serialize},
     miraland_sdk::sanitize::Sanitize,
+    serde_derive::{Deserialize, Serialize},
     std::{convert::TryInto, fmt},
 };
 #[macro_use]

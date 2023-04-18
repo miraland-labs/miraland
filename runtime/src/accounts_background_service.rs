@@ -14,12 +14,12 @@ use {
     },
     crossbeam_channel::{Receiver, SendError, Sender, TrySendError},
     log::*,
-    rand::{thread_rng, Rng},
-    solana_measure::measure::Measure,
     miraland_sdk::{
         clock::{BankId, Slot},
         hash::Hash,
     },
+    rand::{thread_rng, Rng},
+    solana_measure::measure::Measure,
     stats::StatsManager,
     std::{
         boxed::Box,

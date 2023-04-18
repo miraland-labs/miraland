@@ -17,9 +17,6 @@ use {
     },
     assert_matches::debug_assert_matches,
     itertools::{Either, Itertools},
-    rayon::{prelude::*, ThreadPool},
-    reed_solomon_erasure::Error::{InvalidIndex, TooFewParityShards, TooFewShards},
-    solana_perf::packet::deserialize_from_with_limit,
     miraland_sdk::{
         clock::Slot,
         hash::{hashv, Hash},
@@ -27,6 +24,9 @@ use {
         signature::{Signature, Signer},
         signer::keypair::Keypair,
     },
+    rayon::{prelude::*, ThreadPool},
+    reed_solomon_erasure::Error::{InvalidIndex, TooFewParityShards, TooFewShards},
+    solana_perf::packet::deserialize_from_with_limit,
     static_assertions::const_assert_eq,
     std::{
         io::{Cursor, Write},
@@ -1057,9 +1057,9 @@ mod test {
         crate::shred::{ShredFlags, ShredId, SignedData},
         itertools::Itertools,
         matches::assert_matches,
+        miraland_sdk::signature::{Keypair, Signer},
         rand::{seq::SliceRandom, CryptoRng, Rng},
         rayon::ThreadPoolBuilder,
-        miraland_sdk::signature::{Keypair, Signer},
         std::{cmp::Ordering, iter::repeat_with},
         test_case::test_case,
     };

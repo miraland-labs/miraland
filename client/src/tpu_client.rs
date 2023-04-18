@@ -11,7 +11,6 @@ use {
     },
     bincode::serialize,
     log::*,
-    rayon::iter::{IntoParallelIterator, ParallelIterator},
     miraland_sdk::{
         clock::Slot,
         commitment_config::CommitmentConfig,
@@ -23,6 +22,7 @@ use {
         transaction::{Transaction, TransactionError},
         transport::{Result as TransportResult, TransportError},
     },
+    rayon::iter::{IntoParallelIterator, ParallelIterator},
     std::{
         collections::{HashMap, HashSet, VecDeque},
         net::{SocketAddr, UdpSocket},

@@ -2,6 +2,7 @@
 
 extern crate test;
 use {
+    miraland_sdk::signature::Keypair,
     rayon::ThreadPoolBuilder,
     solana_ledger::{
         shred::{Shred, ShredFlags, LEGACY_SHRED_DATA_CAPACITY},
@@ -12,7 +13,6 @@ use {
         recycler_cache::RecyclerCache,
     },
     solana_rayon_threadlimit::get_thread_count,
-    miraland_sdk::signature::Keypair,
     std::sync::Arc,
     test::Bencher,
 };

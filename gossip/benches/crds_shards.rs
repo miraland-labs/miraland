@@ -8,8 +8,8 @@ use {
         crds_shards::CrdsShards,
         crds_value::CrdsValue,
     },
-    rand::{thread_rng, Rng},
     miraland_sdk::timing::timestamp,
+    rand::{thread_rng, Rng},
     std::iter::repeat_with,
     test::Bencher,
 };

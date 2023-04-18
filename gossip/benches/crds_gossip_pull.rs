@@ -9,9 +9,9 @@ use {
         crds_gossip_pull::{CrdsFilter, CrdsGossipPull},
         crds_value::CrdsValue,
     },
+    miraland_sdk::hash,
     rand::{thread_rng, Rng},
     rayon::ThreadPoolBuilder,
-    miraland_sdk::hash,
     std::sync::RwLock,
     test::Bencher,
 };

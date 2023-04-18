@@ -1,8 +1,8 @@
 use {
     itertools::Itertools,
+    miraland_sdk::pubkey::Pubkey,
     rand::distributions::{Distribution, WeightedIndex},
     rand_chacha::{rand_core::SeedableRng, ChaChaRng},
-    miraland_sdk::pubkey::Pubkey,
     std::{collections::HashMap, convert::identity, ops::Index, sync::Arc},
 };
 

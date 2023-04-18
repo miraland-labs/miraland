@@ -1,5 +1,4 @@
 use {
-    solana_program_test::{processor, ProgramTest},
     miraland_sdk::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::{ProgramResult, MAX_PERMITTED_DATA_INCREASE},
@@ -14,6 +13,7 @@ use {
         sysvar::Sysvar,
         transaction::Transaction,
     },
+    solana_program_test::{processor, ProgramTest},
 };
 
 // Process instruction to invoke into another program

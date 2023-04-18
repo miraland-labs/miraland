@@ -82,8 +82,8 @@ mod tests {
             crds::{Crds, GossipRoute},
             crds_value::new_rand_timestamp,
         },
-        rand::seq::SliceRandom,
         miraland_sdk::signature::Keypair,
+        rand::seq::SliceRandom,
         std::collections::HashMap,
     };
 

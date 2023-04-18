@@ -2,10 +2,10 @@ use {
     crate::cluster_slots::ClusterSlots,
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     miraland_gossip::cluster_info::ClusterInfo,
+    miraland_sdk::clock::Slot,
     solana_ledger::blockstore::Blockstore,
     solana_measure::measure::Measure,
     solana_runtime::bank_forks::BankForks,
-    miraland_sdk::clock::Slot,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},

@@ -8,11 +8,11 @@ use {
     miraland_gossip::{
         gossip_service::discover, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    miraland_sdk::pubkey::Pubkey,
     solana_clap_utils::{
         input_parsers::keypair_of,
         input_validators::{is_keypair_or_ask_keyword, is_port, is_pubkey},
     },
-    miraland_sdk::pubkey::Pubkey,
     solana_streamer::socket::SocketAddrSpace,
     std::{
         error,

@@ -3,9 +3,9 @@ use {
         check_num_accounts, ParsableProgram, ParseInstructionError, ParsedInstructionEnum,
     },
     bincode::deserialize,
+    miraland_sdk::{instruction::CompiledInstruction, message::AccountKeys},
     serde_json::json,
     solana_address_lookup_table_program::instruction::ProgramInstruction,
-    miraland_sdk::{instruction::CompiledInstruction, message::AccountKeys},
 };
 
 pub fn parse_address_lookup_table(
@@ -115,8 +115,8 @@ fn check_num_address_lookup_table_accounts(
 mod test {
     use {
         super::*,
-        solana_address_lookup_table_program::instruction,
         miraland_sdk::{message::Message, pubkey::Pubkey, system_program},
+        solana_address_lookup_table_program::instruction,
         std::str::FromStr,
     };
 

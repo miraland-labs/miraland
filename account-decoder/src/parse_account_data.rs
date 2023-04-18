@@ -10,15 +10,16 @@ use {
         parse_vote::parse_vote,
     },
     inflector::Inflector,
-    serde_json::Value,
     miraland_sdk::{instruction::InstructionError, pubkey::Pubkey, stake, system_program, sysvar},
+    serde_json::Value,
     std::collections::HashMap,
     thiserror::Error,
 };
 
 lazy_static! {
     static ref ADDRESS_LOOKUP_PROGRAM_ID: Pubkey = solana_address_lookup_table_program::id();
-    static ref BPF_UPGRADEABLE_LOADER_PROGRAM_ID: Pubkey = miraland_sdk::bpf_loader_upgradeable::id();
+    static ref BPF_UPGRADEABLE_LOADER_PROGRAM_ID: Pubkey =
+        miraland_sdk::bpf_loader_upgradeable::id();
     static ref CONFIG_PROGRAM_ID: Pubkey = solana_config_program::id();
     static ref STAKE_PROGRAM_ID: Pubkey = stake::program::id();
     static ref SYSTEM_PROGRAM_ID: Pubkey = system_program::id();

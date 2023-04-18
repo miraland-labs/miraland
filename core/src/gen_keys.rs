@@ -1,10 +1,10 @@
 //! The `gen_keys` module makes lots of keypairs
 
 use {
+    miraland_sdk::signature::Keypair,
     rand::{Rng, SeedableRng},
     rand_chacha::ChaChaRng,
     rayon::prelude::*,
-    miraland_sdk::signature::Keypair,
 };
 
 pub struct GenKeys {

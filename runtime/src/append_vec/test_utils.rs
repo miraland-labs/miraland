@@ -1,8 +1,8 @@
 //! Helpers for AppendVec tests and benches
 use {
     super::StoredMeta,
-    rand::{distributions::Alphanumeric, Rng},
     miraland_sdk::{account::AccountSharedData, pubkey::Pubkey},
+    rand::{distributions::Alphanumeric, Rng},
     std::path::PathBuf,
 };
 

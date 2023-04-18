@@ -25,9 +25,6 @@ use {
     flate2::read::GzDecoder,
     lazy_static::lazy_static,
     log::*,
-    rayon::prelude::*,
-    regex::Regex,
-    solana_measure::measure::Measure,
     miraland_sdk::{
         clock::Slot,
         genesis_config::GenesisConfig,
@@ -35,6 +32,9 @@ use {
         pubkey::Pubkey,
         slot_history::{Check, SlotHistory},
     },
+    rayon::prelude::*,
+    regex::Regex,
+    solana_measure::measure::Measure,
     std::{
         cmp::Ordering,
         collections::{HashMap, HashSet},

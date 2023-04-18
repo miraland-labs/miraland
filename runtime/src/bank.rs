@@ -75,21 +75,6 @@ use {
     dashmap::{DashMap, DashSet},
     itertools::Itertools,
     log::*,
-    rayon::{
-        iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
-        ThreadPool, ThreadPoolBuilder,
-    },
-    solana_measure::{measure, measure::Measure},
-    solana_metrics::{inc_new_counter_debug, inc_new_counter_info},
-    solana_program_runtime::{
-        accounts_data_meter::MAX_ACCOUNTS_DATA_LEN,
-        compute_budget::{self, ComputeBudget},
-        executor_cache::{CachedExecutors, Executors, TransactionExecutor, MAX_CACHED_EXECUTORS},
-        invoke_context::{BuiltinProgram, ProcessInstructionWithContext},
-        log_collector::LogCollector,
-        sysvar_cache::SysvarCache,
-        timings::{ExecuteTimingType, ExecuteTimings},
-    },
     miraland_sdk::{
         account::{
             create_account_shared_data_with_fields as create_account, from_account, Account,
@@ -143,6 +128,21 @@ use {
             ExecutionRecord, InstructionTrace, TransactionAccount, TransactionContext,
             TransactionReturnData,
         },
+    },
+    rayon::{
+        iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
+        ThreadPool, ThreadPoolBuilder,
+    },
+    solana_measure::{measure, measure::Measure},
+    solana_metrics::{inc_new_counter_debug, inc_new_counter_info},
+    solana_program_runtime::{
+        accounts_data_meter::MAX_ACCOUNTS_DATA_LEN,
+        compute_budget::{self, ComputeBudget},
+        executor_cache::{CachedExecutors, Executors, TransactionExecutor, MAX_CACHED_EXECUTORS},
+        invoke_context::{BuiltinProgram, ProcessInstructionWithContext},
+        log_collector::LogCollector,
+        sysvar_cache::SysvarCache,
+        timings::{ExecuteTimingType, ExecuteTimings},
     },
     solana_stake_program::stake_state::{
         self, InflationPointCalculationEvent, PointValue, StakeState,
@@ -5951,7 +5951,8 @@ impl Bank {
     fn use_multi_epoch_collection_cycle(&self, epoch: Epoch) -> bool {
         // Force normal behavior, disabling multi epoch collection cycle for manual local testing
         #[cfg(not(test))]
-        if self.slot_count_per_normal_epoch() == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
+        if self.slot_count_per_normal_epoch()
+            == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
         {
             return false;
         }
@@ -5963,7 +5964,8 @@ impl Bank {
     pub(crate) fn use_fixed_collection_cycle(&self) -> bool {
         // Force normal behavior, disabling fixed collection cycle for manual local testing
         #[cfg(not(test))]
-        if self.slot_count_per_normal_epoch() == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
+        if self.slot_count_per_normal_epoch()
+            == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
         {
             return false;
         }
@@ -7846,13 +7848,6 @@ pub(crate) mod tests {
             status_cache::MAX_CACHE_ENTRIES,
         },
         crossbeam_channel::{bounded, unbounded},
-        rand::Rng,
-        solana_program_runtime::{
-            compute_budget::MAX_COMPUTE_UNIT_LIMIT,
-            executor_cache::Executor,
-            invoke_context::InvokeContext,
-            prioritization_fee::{PrioritizationFeeDetails, PrioritizationFeeType},
-        },
         miraland_sdk::{
             account::Account,
             bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable,
@@ -7878,6 +7873,13 @@ pub(crate) mod tests {
             system_program,
             timing::duration_as_s,
             transaction_context::InstructionContext,
+        },
+        rand::Rng,
+        solana_program_runtime::{
+            compute_budget::MAX_COMPUTE_UNIT_LIMIT,
+            executor_cache::Executor,
+            invoke_context::InvokeContext,
+            prioritization_fee::{PrioritizationFeeDetails, PrioritizationFeeType},
         },
         solana_vote_program::{
             vote_instruction,
@@ -14000,7 +14002,9 @@ pub(crate) mod tests {
             bank.last_blockhash(),
         );
 
-        tx.message.account_keys.push(miraland_sdk::pubkey::new_rand());
+        tx.message
+            .account_keys
+            .push(miraland_sdk::pubkey::new_rand());
 
         bank.add_builtin(
             "mock_vote",
@@ -14107,7 +14111,9 @@ pub(crate) mod tests {
 
         let transaction_account_lock_limit = bank.get_transaction_account_lock_limit();
         while tx.message.account_keys.len() <= transaction_account_lock_limit {
-            tx.message.account_keys.push(miraland_sdk::pubkey::new_rand());
+            tx.message
+                .account_keys
+                .push(miraland_sdk::pubkey::new_rand());
         }
 
         let result = bank.process_transaction(&tx);
@@ -14199,7 +14205,9 @@ pub(crate) mod tests {
             bank.last_blockhash(),
         );
 
-        tx.message.account_keys.push(miraland_sdk::pubkey::new_rand());
+        tx.message
+            .account_keys
+            .push(miraland_sdk::pubkey::new_rand());
         assert_eq!(tx.message.account_keys.len(), 5);
         tx.message.instructions[0].accounts.remove(0);
         tx.message.instructions[0].accounts.push(4);
@@ -14977,7 +14985,8 @@ pub(crate) mod tests {
         solana_logger::setup();
 
         let mut genesis_config =
-            create_genesis_config_with_leader(5, &miraland_sdk::pubkey::new_rand(), 0).genesis_config;
+            create_genesis_config_with_leader(5, &miraland_sdk::pubkey::new_rand(), 0)
+                .genesis_config;
 
         // ClusterType::Development - Native mint exists immediately
         assert_eq!(genesis_config.cluster_type, ClusterType::Development);
@@ -15039,7 +15048,8 @@ pub(crate) mod tests {
         solana_logger::setup();
 
         let mut genesis_config =
-            create_genesis_config_with_leader(5, &miraland_sdk::pubkey::new_rand(), 0).genesis_config;
+            create_genesis_config_with_leader(5, &miraland_sdk::pubkey::new_rand(), 0)
+                .genesis_config;
 
         // Testnet - Storage rewards pool is purged at epoch 93
         // Also this is with bad capitalization

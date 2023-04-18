@@ -8,8 +8,6 @@ use {
     miraland_cli_output::OutputFormat,
     miraland_client::rpc_client::RpcClient,
     miraland_faucet::faucet::run_local_faucet,
-    miraland_test_validator::TestValidator,
-    serde_json::Value,
     miraland_sdk::{
         account_utils::StateMut,
         bpf_loader,
@@ -18,6 +16,8 @@ use {
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
+    miraland_test_validator::TestValidator,
+    serde_json::Value,
     solana_streamer::socket::SocketAddrSpace,
     std::{env, fs::File, io::Read, path::PathBuf, str::FromStr},
 };

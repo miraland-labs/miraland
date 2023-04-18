@@ -1,5 +1,4 @@
 use {
-    rand::{CryptoRng, Rng, RngCore},
     miraland_sdk::{
         clock::Slot,
         hash::Hash,
@@ -10,6 +9,7 @@ use {
         system_program, system_transaction,
         transaction::Transaction,
     },
+    rand::{CryptoRng, Rng, RngCore},
     solana_vote_program::vote_transaction,
 };
 
@@ -64,9 +64,9 @@ where
         slots,
         miraland_sdk::hash::new_rand(rng), // bank_hash
         miraland_sdk::hash::new_rand(rng), // blockhash
-        &Keypair::generate(rng),         // node_keypair
-        &Keypair::generate(rng),         // vote_keypair
-        &Keypair::generate(rng),         // authorized_voter_keypair
+        &Keypair::generate(rng),           // node_keypair
+        &Keypair::generate(rng),           // vote_keypair
+        &Keypair::generate(rng),           // authorized_voter_keypair
         switch_proof_hash,
     )
 }

@@ -1,6 +1,6 @@
 use {
-    solana_core::validator::ValidatorConfig,
     miraland_sdk::exit::Exit,
+    solana_core::validator::ValidatorConfig,
     std::sync::{Arc, RwLock},
 };
 

@@ -283,7 +283,6 @@ pub(crate) fn move_stake_accounts(
 mod tests {
     use {
         super::*,
-        solana_runtime::{bank::Bank, bank_client::BankClient},
         miraland_sdk::{
             account::{AccountSharedData, ReadableAccount},
             client::SyncClient,
@@ -291,6 +290,7 @@ mod tests {
             signature::{Keypair, Signer},
             stake::state::StakeState,
         },
+        solana_runtime::{bank::Bank, bank_client::BankClient},
         solana_stake_program::stake_state,
     };
 

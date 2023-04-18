@@ -12,21 +12,6 @@ pub use self::{
 #[allow(deprecated)]
 use {
     crate::{allocator_bump::BpfAllocator, BpfError},
-    solana_program_runtime::{
-        ic_logger_msg, ic_msg,
-        invoke_context::{ComputeMeter, InvokeContext},
-        stable_log,
-        timings::ExecuteTimings,
-    },
-    solana_rbpf::{
-        aligned_memory::AlignedMemory,
-        ebpf,
-        error::EbpfError,
-        memory_region::{AccessType, MemoryMapping},
-        question_mark,
-        verifier::RequisiteVerifier,
-        vm::{EbpfVm, SyscallObject, SyscallRegistry},
-    },
     miraland_sdk::{
         account::{ReadableAccount, WritableAccount},
         account_info::AccountInfo,
@@ -54,6 +39,21 @@ use {
         },
         sysvar::{Sysvar, SysvarId},
         transaction_context::InstructionAccount,
+    },
+    solana_program_runtime::{
+        ic_logger_msg, ic_msg,
+        invoke_context::{ComputeMeter, InvokeContext},
+        stable_log,
+        timings::ExecuteTimings,
+    },
+    solana_rbpf::{
+        aligned_memory::AlignedMemory,
+        ebpf,
+        error::EbpfError,
+        memory_region::{AccessType, MemoryMapping},
+        question_mark,
+        verifier::RequisiteVerifier,
+        vm::{EbpfVm, SyscallObject, SyscallRegistry},
     },
     std::{
         alloc::Layout,
@@ -1927,10 +1927,6 @@ mod tests {
     use miraland_sdk::sysvar::fees::Fees;
     use {
         super::*,
-        solana_program_runtime::{invoke_context::InvokeContext, sysvar_cache::SysvarCache},
-        solana_rbpf::{
-            ebpf::HOST_ALIGN, memory_region::MemoryRegion, user_error::UserError, vm::Config,
-        },
         miraland_sdk::{
             account::AccountSharedData,
             bpf_loader,
@@ -1939,6 +1935,10 @@ mod tests {
             program::check_type_assumptions,
             sysvar::{clock::Clock, epoch_schedule::EpochSchedule, rent::Rent},
             transaction_context::TransactionContext,
+        },
+        solana_program_runtime::{invoke_context::InvokeContext, sysvar_cache::SysvarCache},
+        solana_rbpf::{
+            ebpf::HOST_ALIGN, memory_region::MemoryRegion, user_error::UserError, vm::Config,
         },
         std::{borrow::Cow, str::FromStr},
     };

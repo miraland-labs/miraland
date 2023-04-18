@@ -1,10 +1,10 @@
 use {
     crate::leader_schedule::LeaderSchedule,
-    solana_runtime::bank::Bank,
     miraland_sdk::{
         clock::{Epoch, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
         pubkey::Pubkey,
     },
+    solana_runtime::bank::Bank,
     std::collections::HashMap,
 };
 

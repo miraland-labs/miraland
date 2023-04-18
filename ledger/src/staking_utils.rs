@@ -1,11 +1,6 @@
 #[cfg(test)]
 pub(crate) mod tests {
     use {
-        rand::Rng,
-        solana_runtime::{
-            bank::Bank,
-            vote_account::{VoteAccount, VoteAccounts},
-        },
         miraland_sdk::{
             account::AccountSharedData,
             clock::Clock,
@@ -18,6 +13,11 @@ pub(crate) mod tests {
                 state::{Authorized, Lockup},
             },
             transaction::Transaction,
+        },
+        rand::Rng,
+        solana_runtime::{
+            bank::Bank,
+            vote_account::{VoteAccount, VoteAccounts},
         },
         solana_vote_program::{
             vote_instruction,

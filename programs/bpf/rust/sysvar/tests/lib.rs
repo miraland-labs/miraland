@@ -1,6 +1,4 @@
 use {
-    solana_bpf_rust_sysvar::process_instruction,
-    solana_program_test::*,
     miraland_sdk::{
         feature_set::disable_fees_sysvar,
         instruction::{AccountMeta, Instruction},
@@ -12,6 +10,8 @@ use {
         },
         transaction::Transaction,
     },
+    solana_bpf_rust_sysvar::process_instruction,
+    solana_program_test::*,
 };
 
 #[tokio::test]

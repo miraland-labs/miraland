@@ -1,6 +1,6 @@
 use {
-    solana_runtime::bank::Bank,
     miraland_sdk::{genesis_config::create_genesis_config, hash::hash},
+    solana_runtime::bank::Bank,
     std::{sync::Arc, thread::Builder},
 };
 

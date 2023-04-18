@@ -1,9 +1,9 @@
 use {
+    miraland_sdk::{clock::Slot, packet::Packet},
     solana_ledger::{
         blockstore::Blockstore,
         shred::{Nonce, SIZE_OF_NONCE},
     },
-    miraland_sdk::{clock::Slot, packet::Packet},
     std::{io, net::SocketAddr},
 };
 
@@ -53,13 +53,13 @@ pub(crate) fn nonce(packet: &Packet) -> Option<Nonce> {
 mod test {
     use {
         super::*,
-        solana_ledger::{
-            shred::{Shred, ShredFlags},
-            sigverify_shreds::verify_shred_cpu,
-        },
         miraland_sdk::{
             packet::PacketFlags,
             signature::{Keypair, Signer},
+        },
+        solana_ledger::{
+            shred::{Shred, ShredFlags},
+            sigverify_shreds::verify_shred_cpu,
         },
         std::{
             collections::HashMap,

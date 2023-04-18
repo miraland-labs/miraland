@@ -4,14 +4,14 @@ extern crate solana_core;
 extern crate test;
 
 use {
-    solana_core::{
-        consensus::Tower, tower_storage::FileTowerStorage, vote_simulator::VoteSimulator,
-    },
-    solana_runtime::{bank::Bank, bank_forks::BankForks},
     miraland_sdk::{
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
+    solana_core::{
+        consensus::Tower, tower_storage::FileTowerStorage, vote_simulator::VoteSimulator,
+    },
+    solana_runtime::{bank::Bank, bank_forks::BankForks},
     std::{
         collections::{HashMap, HashSet},
         sync::Arc,

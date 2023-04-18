@@ -2,7 +2,6 @@
 
 use {
     byteorder::{ByteOrder, LittleEndian, WriteBytesExt},
-    solana_rbpf::{aligned_memory::AlignedMemory, ebpf::HOST_ALIGN},
     miraland_sdk::{
         bpf_loader_deprecated,
         entrypoint::{BPF_ALIGN_OF_U128, MAX_PERMITTED_DATA_INCREASE, NON_DUP_MARKER},
@@ -11,6 +10,7 @@ use {
         system_instruction::MAX_PERMITTED_DATA_LENGTH,
         transaction_context::{InstructionContext, TransactionContext},
     },
+    solana_rbpf::{aligned_memory::AlignedMemory, ebpf::HOST_ALIGN},
     std::{io::prelude::*, mem::size_of},
 };
 
@@ -375,7 +375,6 @@ pub fn deserialize_parameters_aligned(
 mod tests {
     use {
         super::*,
-        solana_program_runtime::invoke_context::{prepare_mock_invoke_context, InvokeContext},
         miraland_sdk::{
             account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
             account_info::AccountInfo,
@@ -384,6 +383,7 @@ mod tests {
             instruction::AccountMeta,
             sysvar::rent::Rent,
         },
+        solana_program_runtime::invoke_context::{prepare_mock_invoke_context, InvokeContext},
         std::{
             cell::RefCell,
             rc::Rc,
