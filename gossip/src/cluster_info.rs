@@ -270,7 +270,9 @@ pub(crate) type Ping = ping_pong::Ping<[u8; GOSSIP_PING_TOKEN_SIZE]>;
 // MI: vanilla digest
 // #[frozen_abi(digest = "32XMrR8yTPMsw7TASQDinrbcB4bdVGyLeTvQrk95hS4i")]
 // digest change maybe due to crate name change to miraland_gossip from solana_gossip???
-#[frozen_abi(digest = "2gaE37YBozwnVkAs3T1tmoGs7DeYRfuJPd6gtRuCqPMR")]
+// #[frozen_abi(digest = "2gaE37YBozwnVkAs3T1tmoGs7DeYRfuJPd6gtRuCqPMR")]
+// solana_sdk ==> miraland_sdk
+#[frozen_abi(digest = "HbvXgSnAW9ysCA9rax6qZPqmJoRDNnfizPGD9PfdDYUc")]
 #[derive(Serialize, Deserialize, Debug, AbiEnumVisitor, AbiExample)]
 #[allow(clippy::large_enum_variant)]
 pub(crate) enum Protocol {
