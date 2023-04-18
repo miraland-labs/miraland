@@ -5,7 +5,7 @@ use {
     console::Emoji,
     dialoguer::{theme::ColorfulTheme, Select},
     semver::Version as FirmwareVersion,
-    solana_sdk::derivation_path::DerivationPath,
+    miraland_sdk::derivation_path::DerivationPath,
     std::{fmt, sync::Arc},
 };
 #[cfg(feature = "hidapi")]
@@ -13,7 +13,7 @@ use {
     crate::{ledger_error::LedgerError, locator::Manufacturer},
     log::*,
     num_traits::FromPrimitive,
-    solana_sdk::{pubkey::Pubkey, signature::Signature},
+    miraland_sdk::{pubkey::Pubkey, signature::Signature},
     std::{cmp::min, convert::TryFrom},
 };
 

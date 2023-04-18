@@ -21,7 +21,7 @@ use {
     serde_json::{Map, Value},
     solana_account_decoder::parse_token::UiTokenAccount,
     solana_clap_utils::keypair::SignOnly,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Epoch, Slot, UnixTimestamp},
         epoch_info::EpochInfo,
         hash::Hash,
@@ -2826,7 +2826,7 @@ mod tests {
     use {
         super::*,
         clap::{App, Arg},
-        solana_sdk::{
+        miraland_sdk::{
             message::Message,
             pubkey::Pubkey,
             signature::{keypair_from_seed, NullSigner, Signature, Signer, SignerError},

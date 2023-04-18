@@ -37,7 +37,7 @@ use {
         offline::{blockhash_arg, BLOCKHASH_ARG},
     },
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         account::from_account,
         account_utils::StateMut,
         clock::{self, Clock, Slot},
@@ -2200,7 +2200,7 @@ mod tests {
     use {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
-        solana_sdk::signature::{write_keypair, Keypair},
+        miraland_sdk::signature::{write_keypair, Keypair},
         std::str::FromStr,
         tempfile::NamedTempFile,
     };

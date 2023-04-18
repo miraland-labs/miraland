@@ -18,7 +18,7 @@ use {
             dedup_packets_and_count_discards, shrink_batches, Deduper,
         },
     },
-    solana_sdk::timing,
+    miraland_sdk::timing,
     solana_streamer::streamer::{self, StreamerError},
     std::{
         thread::{self, Builder, JoinHandle},
@@ -473,7 +473,7 @@ mod tests {
             packet::{to_packet_batches, Packet},
             test_tx::test_tx,
         },
-        solana_sdk::packet::PacketFlags,
+        miraland_sdk::packet::PacketFlags,
     };
 
     fn count_non_discard(packet_batches: &[PacketBatch]) -> usize {

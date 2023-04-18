@@ -1,6 +1,6 @@
 #![allow(clippy::integer_arithmetic)]
 
-pub use {crate::extract_memos::extract_and_fmt_memos, solana_sdk::reward_type::RewardType};
+pub use {crate::extract_memos::extract_and_fmt_memos, miraland_sdk::reward_type::RewardType};
 use {
     crate::{
         option_serializer::OptionSerializer,
@@ -8,7 +8,7 @@ use {
         parse_instruction::{parse, ParsedInstruction},
     },
     solana_account_decoder::parse_token::UiTokenAmount,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, UnixTimestamp},
         commitment_config::CommitmentConfig,
         instruction::CompiledInstruction,

@@ -6,7 +6,7 @@ use {
         block_cost_limits,
         cost_tracker::{CostTracker, CostTrackerError},
     },
-    solana_sdk::pubkey::Pubkey,
+    miraland_sdk::pubkey::Pubkey,
     std::{rc::Rc, sync::Arc},
 };
 
@@ -194,7 +194,7 @@ mod tests {
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             transaction_priority_details::TransactionPriorityDetails,
         },
-        solana_sdk::{hash::Hash, signature::Keypair, system_transaction},
+        miraland_sdk::{hash::Hash, signature::Keypair, system_transaction},
         std::sync::RwLock,
     };
 
@@ -211,7 +211,7 @@ mod tests {
     ) -> DeserializedPacket {
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );
@@ -282,8 +282,8 @@ mod tests {
             assert!(batches.next().is_none());
         }
 
-        let hot_account = solana_sdk::pubkey::new_rand();
-        let other_account = solana_sdk::pubkey::new_rand();
+        let hot_account = miraland_sdk::pubkey::new_rand();
+        let other_account = miraland_sdk::pubkey::new_rand();
         let packet_high_priority = build_deserialized_packet_for_test(10, requested_cu);
         let packet_low_priority = build_deserialized_packet_for_test(0, requested_cu);
         // with 4 packets, first 3 write to same hot_account with higher priority,

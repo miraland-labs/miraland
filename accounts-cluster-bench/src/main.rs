@@ -10,7 +10,7 @@ use {
     solana_account_decoder::parse_token::spl_token_pubkey,
     solana_clap_utils::input_parsers::pubkey_of,
     solana_runtime::inline_spl_token,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},
         message::Message,
@@ -663,7 +663,7 @@ pub mod test {
         miraland_test_validator::TestValidator,
         solana_core::validator::ValidatorConfig,
         solana_measure::measure::Measure,
-        solana_sdk::{native_token::sol_to_lamports, poh_config::PohConfig},
+        miraland_sdk::{native_token::sol_to_lamports, poh_config::PohConfig},
         spl_token::{
             solana_program::program_pack::Pack,
             state::{Account, Mint},

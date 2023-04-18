@@ -12,7 +12,7 @@ use {
         recycler_cache::RecyclerCache,
         sigverify::{self, count_packets_in_batches, TxOffset},
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::Hash,
         pubkey::Pubkey,
@@ -202,7 +202,7 @@ fn elems_from_buffer(buffer: &PinnedVec<u8>) -> perf_libs::Elems {
     let num_packets = buffer.len() / std::mem::size_of::<Packet>();
     perf_libs::Elems {
         #[allow(clippy::cast_ptr_alignment)]
-        elems: buffer.as_ptr() as *const solana_sdk::packet::Packet,
+        elems: buffer.as_ptr() as *const miraland_sdk::packet::Packet,
         num: num_packets as u32,
     }
 }
@@ -483,7 +483,7 @@ mod tests {
         rand::{seq::SliceRandom, Rng},
         rayon::ThreadPoolBuilder,
         solana_entry::entry::Entry,
-        solana_sdk::{
+        miraland_sdk::{
             hash,
             hash::Hash,
             signature::{Keypair, Signer},

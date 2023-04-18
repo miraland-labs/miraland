@@ -59,7 +59,7 @@ spl() {
     git clone https://github.com/solana-labs/solana-program-library.git spl
     cd spl
 
-    project_used_miraland_version=$(sed -nE 's/solana-sdk = \"[>=<~]*(.*)\"/\1/p' <"token/program/Cargo.toml")
+    project_used_miraland_version=$(sed -nE 's/miraland-sdk = \"[>=<~]*(.*)\"/\1/p' <"token/program/Cargo.toml")
     echo "used solana version: $project_used_miraland_version"
     if semverGT "$project_used_miraland_version" "$miraland_ver"; then
       echo "skip"

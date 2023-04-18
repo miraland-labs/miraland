@@ -20,7 +20,7 @@ mod test {
     use {
         super::*,
         crate::parse_token::test::*,
-        solana_sdk::pubkey::Pubkey,
+        miraland_sdk::pubkey::Pubkey,
         spl_token_2022::{instruction::*, solana_program::message::Message},
     };
 

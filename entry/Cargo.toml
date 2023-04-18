@@ -24,7 +24,7 @@ solana-merkle-tree = { path = "../merkle-tree", version = "=1.14.17" }
 solana-metrics = { path = "../metrics", version = "=1.14.17" }
 solana-perf = { path = "../perf", version = "=1.14.17" }
 solana-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
-solana-sdk = { path = "../sdk", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 
 [dev-dependencies]
 matches = "0.1.9"

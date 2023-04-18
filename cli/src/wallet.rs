@@ -31,7 +31,7 @@ use {
         offline::*,
     },
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         message::Message,
         pubkey::Pubkey,

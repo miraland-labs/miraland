@@ -50,7 +50,7 @@ solana-measure = { path = "../measure", version = "=1.14.17" }
 solana-metrics = { path = "../metrics", version = "=1.14.17" }
 solana-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
 solana-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
-solana-sdk = { path = "../sdk", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-stake-program = { path = "../programs/stake", version = "=1.14.17" }
 solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 solana-zk-token-proof-program = { path = "../programs/zk-token-proof", version = "=1.14.17" }

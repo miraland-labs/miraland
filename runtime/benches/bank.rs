@@ -11,7 +11,7 @@ use {
         bank_client::BankClient,
         loader_utils::create_invoke_instruction,
     },
-    solana_sdk::{
+    miraland_sdk::{
         client::{AsyncClient, SyncClient},
         clock::MAX_RECENT_BLOCKHASHES,
         genesis_config::create_genesis_config,

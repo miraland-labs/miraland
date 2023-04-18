@@ -17,7 +17,7 @@ use {
     solana_core::consensus::VOTE_THRESHOLD_DEPTH,
     solana_entry::entry::{Entry, EntrySlice},
     solana_ledger::blockstore::Blockstore,
-    solana_sdk::{
+    miraland_sdk::{
         client::SyncClient,
         clock::{self, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
         commitment_config::CommitmentConfig,

@@ -12,7 +12,7 @@ use {
     },
     miraland_cli_config::Config,
     miraland_client::{client_error::ClientError, rpc_client::RpcClient},
-    solana_sdk::{
+    miraland_sdk::{
         message::Message,
         native_token::lamports_to_sol,
         pubkey::Pubkey,

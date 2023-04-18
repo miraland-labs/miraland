@@ -12,7 +12,7 @@ use {
         input_parsers::keypair_of,
         input_validators::{is_keypair_or_ask_keyword, is_port, is_pubkey},
     },
-    solana_sdk::pubkey::Pubkey,
+    miraland_sdk::pubkey::Pubkey,
     solana_streamer::socket::SocketAddrSpace,
     std::{
         error,

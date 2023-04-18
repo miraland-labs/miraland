@@ -6,7 +6,7 @@ use {
     },
     solana_address_lookup_table_program::instruction::close_lookup_table,
     solana_program_test::*,
-    solana_sdk::{
+    miraland_sdk::{
         clock::Clock,
         instruction::InstructionError,
         pubkey::Pubkey,

@@ -1,6 +1,6 @@
 use {
     solana_program_runtime::compute_budget::ComputeBudget,
-    solana_sdk::{
+    miraland_sdk::{
         instruction::CompiledInstruction,
         pubkey::Pubkey,
         transaction::{SanitizedTransaction, SanitizedVersionedTransaction},
@@ -51,7 +51,7 @@ impl GetTransactionPriorityDetails for SanitizedTransaction {
 mod tests {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             compute_budget::ComputeBudgetInstruction,
             message::Message,
             pubkey::Pubkey,

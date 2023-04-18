@@ -2458,7 +2458,7 @@ dependencies = [
  "serde_derive",
  "serde_yaml",
  "solana-clap-utils",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "url 2.2.2",
 ]
 
@@ -2481,7 +2481,7 @@ dependencies = [
  "serde_json",
  "solana-account-decoder",
  "solana-clap-utils",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-transaction-status",
  "solana-vote-program",
  "spl-memo",
@@ -2526,7 +2526,7 @@ dependencies = [
  "solana-measure",
  "solana-metrics",
  "solana-net-utils",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-streamer",
  "solana-transaction-status",
  "solana-vote-program",
@@ -2555,7 +2555,7 @@ dependencies = [
  "solana-clap-utils",
  "solana-logger 1.14.17",
  "solana-metrics",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "spl-memo",
  "thiserror",
  "tokio",
@@ -2567,7 +2567,7 @@ version = "1.14.17"
 dependencies = [
  "solana-download-utils",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -2607,7 +2607,7 @@ dependencies = [
  "solana-perf",
  "solana-rayon-threadlimit",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-streamer",
  "solana-vote-program",
  "thiserror",
@@ -2647,7 +2647,7 @@ dependencies = [
  "solana-program-test",
  "solana-rpc",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-streamer",
  "tokio",
 ]
@@ -2694,7 +2694,7 @@ dependencies = [
  "solana-poh",
  "solana-rpc",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-send-transaction-service",
  "solana-storage-bigtable",
  "solana-streamer",
@@ -2714,7 +2714,7 @@ dependencies = [
  "serde_derive",
  "solana-frozen-abi 1.14.17",
  "solana-frozen-abi-macro 1.14.17",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4336,7 +4336,7 @@ dependencies = [
  "serde_json",
  "solana-address-lookup-table-program",
  "solana-config-program",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-vote-program",
  "spl-token",
  "spl-token-2022 0.6.0",
@@ -4359,7 +4359,7 @@ dependencies = [
  "solana-frozen-abi-macro 1.14.17",
  "solana-program 1.14.17",
  "solana-program-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "thiserror",
 ]
 
@@ -4371,7 +4371,7 @@ dependencies = [
  "futures 0.3.21",
  "solana-banks-interface",
  "solana-program 1.14.17",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "tarpc",
  "thiserror",
  "tokio",
@@ -4383,7 +4383,7 @@ name = "solana-banks-interface"
 version = "1.14.17"
 dependencies = [
  "serde",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "tarpc",
 ]
 
@@ -4397,7 +4397,7 @@ dependencies = [
  "miraland-client",
  "solana-banks-interface",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-send-transaction-service",
  "tarpc",
  "tokio",
@@ -4419,7 +4419,7 @@ dependencies = [
  "serde_derive",
  "solana-frozen-abi 1.14.17",
  "solana-frozen-abi-macro 1.14.17",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4433,7 +4433,7 @@ dependencies = [
  "solana-measure",
  "solana-metrics",
  "solana-program-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-zk-token-sdk 1.14.17",
  "solana_rbpf",
  "thiserror",
@@ -4461,7 +4461,7 @@ dependencies = [
  "solana-measure",
  "solana-program-runtime",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-transaction-status",
  "solana_rbpf",
  "walkdir",
@@ -4658,7 +4658,7 @@ dependencies = [
  "solana-program 1.14.17",
  "solana-program-runtime",
  "solana-program-test",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4743,7 +4743,7 @@ dependencies = [
  "solana-program 1.14.17",
  "solana-program-runtime",
  "solana-program-test",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4784,7 +4784,7 @@ dependencies = [
  "solana-logger 1.14.17",
  "solana-program 1.14.17",
  "solana-program-test",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4808,7 +4808,7 @@ dependencies = [
  "solana-program 1.14.17",
  "solana-program-runtime",
  "solana-program-test",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4834,7 +4834,7 @@ dependencies = [
  "modular-bitfield",
  "rand 0.7.3",
  "solana-measure",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "tempfile",
 ]
 
@@ -4847,7 +4847,7 @@ dependencies = [
  "rpassword",
  "solana-perf",
  "solana-remote-wallet",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "thiserror",
  "tiny-bip39",
  "uriparse",
@@ -4859,7 +4859,7 @@ name = "solana-compute-budget-program"
 version = "1.14.17"
 dependencies = [
  "solana-program-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4871,7 +4871,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "solana-program-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4920,7 +4920,7 @@ dependencies = [
  "solana-rayon-threadlimit",
  "solana-rpc",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-send-transaction-service",
  "solana-streamer",
  "solana-transaction-status",
@@ -4942,7 +4942,7 @@ dependencies = [
  "log",
  "reqwest",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -4963,7 +4963,7 @@ dependencies = [
  "solana-metrics",
  "solana-perf",
  "solana-rayon-threadlimit",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -5059,7 +5059,7 @@ name = "solana-geyser-plugin-interface"
 version = "1.14.17"
 dependencies = [
  "log",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-transaction-status",
  "thiserror",
 ]
@@ -5079,7 +5079,7 @@ dependencies = [
  "solana-metrics",
  "solana-rpc",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-transaction-status",
  "thiserror",
 ]
@@ -5126,7 +5126,7 @@ dependencies = [
  "solana-program-runtime",
  "solana-rayon-threadlimit",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-stake-program",
  "solana-storage-bigtable",
  "solana-storage-proto",
@@ -5167,7 +5167,7 @@ name = "solana-measure"
 version = "1.14.17"
 dependencies = [
  "log",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -5188,7 +5188,7 @@ dependencies = [
  "lazy_static",
  "log",
  "reqwest",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -5206,7 +5206,7 @@ dependencies = [
  "serde_derive",
  "socket2",
  "solana-logger 1.14.17",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "tokio",
  "url 2.2.2",
 ]
@@ -5232,7 +5232,7 @@ dependencies = [
  "serde",
  "solana-metrics",
  "solana-rayon-threadlimit",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-vote-program",
 ]
 
@@ -5249,7 +5249,7 @@ dependencies = [
  "solana-measure",
  "solana-metrics",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "thiserror",
 ]
 
@@ -5295,7 +5295,7 @@ dependencies = [
  "sha3 0.10.1",
  "solana-frozen-abi 1.14.16",
  "solana-frozen-abi-macro 1.14.16",
- "solana-sdk-macro 1.14.16",
+ "miraland-sdk-macro 1.14.16",
  "thiserror",
  "tiny-bip39",
  "wasm-bindgen",
@@ -5342,7 +5342,7 @@ dependencies = [
  "sha3 0.10.1",
  "solana-frozen-abi 1.14.17",
  "solana-frozen-abi-macro 1.14.17",
- "solana-sdk-macro 1.14.17",
+ "miraland-sdk-macro 1.14.17",
  "thiserror",
  "tiny-bip39",
  "wasm-bindgen",
@@ -5370,7 +5370,7 @@ dependencies = [
  "solana-frozen-abi-macro 1.14.17",
  "solana-measure",
  "solana-metrics",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "thiserror",
 ]
 
@@ -5391,7 +5391,7 @@ dependencies = [
  "solana-logger 1.14.17",
  "solana-program-runtime",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-vote-program",
  "thiserror",
  "tokio",
@@ -5417,7 +5417,7 @@ dependencies = [
  "parking_lot 0.12.1",
  "qstring",
  "semver",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "thiserror",
  "uriparse",
 ]
@@ -5458,7 +5458,7 @@ dependencies = [
  "solana-poh",
  "solana-rayon-threadlimit",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-send-transaction-service",
  "solana-stake-program",
  "solana-storage-bigtable",
@@ -5518,7 +5518,7 @@ dependencies = [
  "solana-metrics",
  "solana-program-runtime",
  "solana-rayon-threadlimit",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-stake-program",
  "solana-vote-program",
  "solana-zk-token-proof-program",
@@ -5533,7 +5533,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-sdk"
+name = "miraland-sdk"
 version = "1.14.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "edb47da3e18cb669f6ace0b40cee0610e278903783e0c9f7fce1e1beb881a1b7"
@@ -5577,14 +5577,14 @@ dependencies = [
  "solana-frozen-abi-macro 1.14.16",
  "solana-logger 1.14.16",
  "solana-program 1.14.16",
- "solana-sdk-macro 1.14.16",
+ "miraland-sdk-macro 1.14.16",
  "thiserror",
  "uriparse",
  "wasm-bindgen",
 ]
 
 [[package]]
-name = "solana-sdk"
+name = "miraland-sdk"
 version = "1.14.17"
 dependencies = [
  "assert_matches",
@@ -5626,14 +5626,14 @@ dependencies = [
  "solana-frozen-abi-macro 1.14.17",
  "solana-logger 1.14.17",
  "solana-program 1.14.17",
- "solana-sdk-macro 1.14.17",
+ "miraland-sdk-macro 1.14.17",
  "thiserror",
  "uriparse",
  "wasm-bindgen",
 ]
 
 [[package]]
-name = "solana-sdk-macro"
+name = "miraland-sdk-macro"
 version = "1.14.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7d41a09b9cecd0a4df63c78a192adee99ebf2d3757c19713a68246e1d9789c7c"
@@ -5646,7 +5646,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-sdk-macro"
+name = "miraland-sdk-macro"
 version = "1.14.17"
 dependencies = [
  "bs58",
@@ -5666,7 +5666,7 @@ dependencies = [
  "solana-measure",
  "solana-metrics",
  "solana-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
 ]
 
 [[package]]
@@ -5685,7 +5685,7 @@ dependencies = [
  "solana-frozen-abi-macro 1.14.17",
  "solana-metrics",
  "solana-program-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-vote-program",
  "thiserror",
 ]
@@ -5713,7 +5713,7 @@ dependencies = [
  "serde_derive",
  "smpl_jwt",
  "solana-metrics",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-storage-proto",
  "solana-transaction-status",
  "thiserror",
@@ -5732,7 +5732,7 @@ dependencies = [
  "protobuf-src",
  "serde",
  "solana-account-decoder",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-transaction-status",
  "tonic-build 0.8.0",
 ]
@@ -5758,7 +5758,7 @@ dependencies = [
  "rustls 0.20.6",
  "solana-metrics",
  "solana-perf",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "thiserror",
  "tokio",
  "x509-parser",
@@ -5782,7 +5782,7 @@ dependencies = [
  "solana-address-lookup-table-program",
  "solana-measure",
  "solana-metrics",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-vote-program",
  "spl-associated-token-account",
  "spl-memo",
@@ -5806,7 +5806,7 @@ dependencies = [
  "solana-frozen-abi-macro 1.14.17",
  "solana-metrics",
  "solana-program-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "thiserror",
 ]
 
@@ -5819,7 +5819,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "solana-program-runtime",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "solana-zk-token-sdk 1.14.17",
 ]
 
@@ -5848,7 +5848,7 @@ dependencies = [
  "serde_json",
  "sha3 0.9.1",
  "solana-program 1.14.16",
- "solana-sdk 1.14.16",
+ "miraland-sdk 1.14.16",
  "subtle",
  "thiserror",
  "zeroize",
@@ -5877,7 +5877,7 @@ dependencies = [
  "serde_json",
  "sha3 0.9.1",
  "solana-program 1.14.17",
- "solana-sdk 1.14.17",
+ "miraland-sdk 1.14.17",
  "subtle",
  "thiserror",
  "zeroize",

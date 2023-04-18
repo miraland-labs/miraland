@@ -519,7 +519,7 @@ pub fn create_nonce_account_with_seed(
 /// This function produces a vector of [`Instruction`]s which must be submitted
 /// in a [`Transaction`] or [invoked] to take effect.
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// A [durable transaction nonce][dtn] is a special account that enables
@@ -580,10 +580,10 @@ pub fn create_nonce_account_with_seed(
 /// Create a nonce account from an off-chain client:
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
+/// # use solana_program::example_mocks::miraland_sdk;
 /// # use solana_program::example_mocks::miraland_client;
 /// use miraland_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 /// #   pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -655,7 +655,7 @@ pub fn create_nonce_account(
 /// This function produces an [`Instruction`] which must be submitted in a
 /// [`Transaction`] or [invoked] to take effect.
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Every transaction that relies on a durable transaction nonce must contain a
@@ -690,20 +690,20 @@ pub fn create_nonce_account(
 /// Create and sign a transaction with a durable nonce:
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
+/// # use solana_program::example_mocks::miraland_sdk;
 /// # use solana_program::example_mocks::miraland_client;
 /// use miraland_client::{
 ///     rpc_client::RpcClient,
 ///     nonce_utils,
 /// };
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     message::Message,
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
 ///     transaction::Transaction,
 /// };
-/// # use solana_sdk::account::Account;
+/// # use miraland_sdk::account::Account;
 /// use std::path::Path;
 /// use anyhow::Result;
 /// # use anyhow::anyhow;
@@ -746,7 +746,7 @@ pub fn create_nonce_account(
 ///     # client.set_get_account_response(*nonce_account_pubkey, Account {
 ///     #   lamports: 1,
 ///     #   data: vec![0],
-///     #   owner: solana_sdk::system_program::ID,
+///     #   owner: miraland_sdk::system_program::ID,
 ///     #   executable: false,
 ///     #   rent_epoch: 1,
 ///     # });
@@ -793,7 +793,7 @@ pub fn advance_nonce_account(nonce_pubkey: &Pubkey, authorized_pubkey: &Pubkey) 
 /// This function produces an [`Instruction`] which must be submitted in a
 /// [`Transaction`] or [invoked] to take effect.
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Withdrawing the entire balance of a nonce account will cause the runtime to
@@ -816,10 +816,10 @@ pub fn advance_nonce_account(nonce_pubkey: &Pubkey, authorized_pubkey: &Pubkey) 
 /// # Examples
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
+/// # use solana_program::example_mocks::miraland_sdk;
 /// # use solana_program::example_mocks::miraland_client;
 /// use miraland_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -885,7 +885,7 @@ pub fn withdraw_nonce_account(
 /// This function produces an [`Instruction`] which must be submitted in a
 /// [`Transaction`] or [invoked] to take effect.
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// This constructor creates a [`SystemInstruction::AuthorizeNonceAccount`]
@@ -898,10 +898,10 @@ pub fn withdraw_nonce_account(
 /// # Examples
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
+/// # use solana_program::example_mocks::miraland_sdk;
 /// # use solana_program::example_mocks::miraland_client;
 /// use miraland_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,

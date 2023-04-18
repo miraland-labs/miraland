@@ -16,7 +16,7 @@ use {
         },
         sorted_storages::SortedStorages,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, SLOT_MS},
         hash::Hash,
         pubkey::Pubkey,
@@ -202,7 +202,7 @@ impl AccountsHashVerifier {
     fn generate_fault_hash(original_hash: &Hash) -> Hash {
         use {
             rand::{thread_rng, Rng},
-            solana_sdk::hash::extend_and_hash,
+            miraland_sdk::hash::extend_and_hash,
         };
 
         let rand = thread_rng().gen_range(0, 10);
@@ -342,7 +342,7 @@ mod tests {
             rent_collector::RentCollector,
             snapshot_utils::{ArchiveFormat, SnapshotVersion},
         },
-        solana_sdk::{
+        miraland_sdk::{
             genesis_config::ClusterType,
             hash::hash,
             signature::{Keypair, Signer},

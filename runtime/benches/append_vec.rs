@@ -7,7 +7,7 @@ use {
         test_utils::{create_test_account, get_append_vec_path},
         AppendVec,
     },
-    solana_sdk::{account::ReadableAccount, hash::Hash},
+    miraland_sdk::{account::ReadableAccount, hash::Hash},
     std::{
         sync::{Arc, Mutex},
         thread::{sleep, spawn},

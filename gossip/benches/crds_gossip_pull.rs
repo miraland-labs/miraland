@@ -11,7 +11,7 @@ use {
     },
     rand::{thread_rng, Rng},
     rayon::ThreadPoolBuilder,
-    solana_sdk::hash,
+    miraland_sdk::hash,
     std::sync::RwLock,
     test::Bencher,
 };

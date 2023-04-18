@@ -3,7 +3,7 @@ use {
     crate::rpc_config::{
         EncodingConfig, RpcBlockConfig, RpcEncodingConfigWrapper, RpcTransactionConfig,
     },
-    solana_sdk::{clock::Slot, commitment_config::CommitmentConfig},
+    miraland_sdk::{clock::Slot, commitment_config::CommitmentConfig},
     solana_transaction_status::{TransactionDetails, UiTransactionEncoding},
 };
 

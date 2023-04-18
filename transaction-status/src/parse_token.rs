@@ -10,7 +10,7 @@ use {
     solana_account_decoder::parse_token::{
         pubkey_from_spl_token, token_amount_to_ui_amount, UiAccountState,
     },
-    solana_sdk::{
+    miraland_sdk::{
         instruction::{AccountMeta, CompiledInstruction, Instruction},
         message::AccountKeys,
     },
@@ -723,7 +723,7 @@ fn map_coption_pubkey(pubkey: COption<Pubkey>) -> Option<String> {
 mod test {
     use {
         super::*,
-        solana_sdk::{instruction::CompiledInstruction, pubkey::Pubkey},
+        miraland_sdk::{instruction::CompiledInstruction, pubkey::Pubkey},
         spl_token_2022::{
             instruction::*,
             solana_program::{
@@ -760,7 +760,7 @@ mod test {
         let mint_pubkey = Pubkey::new_unique();
         let mint_authority = Pubkey::new_unique();
         let freeze_authority = Pubkey::new_unique();
-        let rent_sysvar = solana_sdk::sysvar::rent::id();
+        let rent_sysvar = miraland_sdk::sysvar::rent::id();
 
         // Test InitializeMint variations
         let initialize_mint_ix = initialize_mint(
@@ -1742,7 +1742,7 @@ mod test {
                 info: json!({
                    "payer": payer.to_string(),
                    "nativeMint": spl_token_2022::native_mint::id().to_string(),
-                   "systemProgram": solana_sdk::system_program::id().to_string(),
+                   "systemProgram": miraland_sdk::system_program::id().to_string(),
                 })
             }
         );
@@ -1751,7 +1751,7 @@ mod test {
     fn test_token_ix_not_enough_keys(program_id: &SplTokenPubkey) {
         let mut keys: Vec<Pubkey> = vec![];
         for _ in 0..10 {
-            keys.push(solana_sdk::pubkey::new_rand());
+            keys.push(miraland_sdk::pubkey::new_rand());
         }
 
         // Test InitializeMint variations

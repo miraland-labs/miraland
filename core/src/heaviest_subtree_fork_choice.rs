@@ -8,7 +8,7 @@ use {
     },
     solana_measure::measure::Measure,
     solana_runtime::{bank::Bank, bank_forks::BankForks, epoch_stakes::EpochStakes},
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Epoch, Slot},
         epoch_schedule::EpochSchedule,
         hash::Hash,
@@ -1073,7 +1073,7 @@ mod test {
         super::*,
         crate::vote_simulator::VoteSimulator,
         solana_runtime::{bank::Bank, bank_utils},
-        solana_sdk::{hash::Hash, slot_history::SlotHistory},
+        miraland_sdk::{hash::Hash, slot_history::SlotHistory},
         std::{collections::HashSet, ops::Range},
         trees::tr,
     };

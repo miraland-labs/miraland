@@ -6,7 +6,7 @@ use {
         nonce::*,
         offline::*,
     },
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig, fee_calculator::FeeCalculator, hash::Hash,
         pubkey::Pubkey,
     },
@@ -193,7 +193,7 @@ mod tests {
         clap::App,
         serde_json::{self, json},
         solana_account_decoder::{UiAccount, UiAccountEncoding},
-        solana_sdk::{
+        miraland_sdk::{
             account::Account,
             hash::hash,
             nonce::{self, state::DurableNonce},

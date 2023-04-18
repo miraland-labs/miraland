@@ -2,7 +2,7 @@ use {
     crate::leader_slot_banking_stage_timing_metrics::*,
     solana_poh::poh_recorder::BankStart,
     solana_runtime::transaction_error_metrics::*,
-    solana_sdk::{clock::Slot, saturating_add_assign},
+    miraland_sdk::{clock::Slot, saturating_add_assign},
     std::time::Instant,
 };
 
@@ -787,7 +787,7 @@ mod tests {
     use {
         super::*,
         solana_runtime::{bank::Bank, genesis_utils::create_genesis_config},
-        solana_sdk::pubkey::Pubkey,
+        miraland_sdk::pubkey::Pubkey,
         std::{mem, sync::Arc},
     };
 

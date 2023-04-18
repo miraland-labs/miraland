@@ -3,7 +3,7 @@
 use {
     byteorder::{ByteOrder, LittleEndian, WriteBytesExt},
     solana_rbpf::{aligned_memory::AlignedMemory, ebpf::HOST_ALIGN},
-    solana_sdk::{
+    miraland_sdk::{
         bpf_loader_deprecated,
         entrypoint::{BPF_ALIGN_OF_U128, MAX_PERMITTED_DATA_INCREASE, NON_DUP_MARKER},
         instruction::InstructionError,
@@ -376,7 +376,7 @@ mod tests {
     use {
         super::*,
         solana_program_runtime::invoke_context::{prepare_mock_invoke_context, InvokeContext},
-        solana_sdk::{
+        miraland_sdk::{
             account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
             account_info::AccountInfo,
             bpf_loader,
@@ -454,7 +454,7 @@ mod tests {
             //     expected_err: None,
             // },
         ] {
-            let program_id = solana_sdk::pubkey::new_rand();
+            let program_id = miraland_sdk::pubkey::new_rand();
             let mut transaction_accounts = vec![(
                 program_id,
                 AccountSharedData::from(Account {
@@ -548,7 +548,7 @@ mod tests {
 
     #[test]
     fn test_serialize_parameters() {
-        let program_id = solana_sdk::pubkey::new_rand();
+        let program_id = miraland_sdk::pubkey::new_rand();
         let transaction_accounts = vec![
             (
                 program_id,
@@ -561,7 +561,7 @@ mod tests {
                 }),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::from(Account {
                     lamports: 1,
                     data: vec![1u8, 2, 3, 4, 5],
@@ -571,7 +571,7 @@ mod tests {
                 }),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::from(Account {
                     lamports: 2,
                     data: vec![11u8, 12, 13, 14, 15, 16, 17, 18, 19],
@@ -581,7 +581,7 @@ mod tests {
                 }),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::from(Account {
                     lamports: 3,
                     data: vec![],
@@ -591,7 +591,7 @@ mod tests {
                 }),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::from(Account {
                     lamports: 4,
                     data: vec![1u8, 2, 3, 4, 5],
@@ -601,7 +601,7 @@ mod tests {
                 }),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::from(Account {
                     lamports: 5,
                     data: vec![11u8, 12, 13, 14, 15, 16, 17, 18, 19],
@@ -611,7 +611,7 @@ mod tests {
                 }),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::from(Account {
                     lamports: 6,
                     data: vec![],

@@ -6,7 +6,7 @@ use {
         nonce::*,
         offline::*,
     },
-    solana_sdk::{commitment_config::CommitmentConfig, hash::Hash, pubkey::Pubkey},
+    miraland_sdk::{commitment_config::CommitmentConfig, hash::Hash, pubkey::Pubkey},
 };
 
 #[derive(Debug, PartialEq, Eq)]
@@ -123,7 +123,7 @@ mod tests {
         clap::App,
         serde_json::{self, json},
         solana_account_decoder::{UiAccount, UiAccountEncoding},
-        solana_sdk::{
+        miraland_sdk::{
             account::Account,
             fee_calculator::FeeCalculator,
             hash::hash,

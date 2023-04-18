@@ -8,7 +8,7 @@ use {
     },
     log::*,
     solana_measure::measure::Measure,
-    solana_sdk::{clock::Slot, hash::Hash, timing},
+    miraland_sdk::{clock::Slot, hash::Hash, timing},
     std::{
         collections::{hash_map::Entry, HashMap, HashSet},
         ops::Index,
@@ -545,7 +545,7 @@ mod tests {
                 create_genesis_config, create_genesis_config_with_leader, GenesisConfigInfo,
             },
         },
-        solana_sdk::{
+        miraland_sdk::{
             clock::UnixTimestamp,
             hash::Hash,
             pubkey::Pubkey,

@@ -37,7 +37,7 @@ use {
         verifier::{RequisiteVerifier, VerifierError},
         vm::{Config, EbpfVm, InstructionMeter, VerifiedExecutable},
     },
-    solana_sdk::{
+    miraland_sdk::{
         bpf_loader, bpf_loader_deprecated,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         entrypoint::{HEAP_LENGTH, SUCCESS},
@@ -62,8 +62,8 @@ use {
     thiserror::Error,
 };
 
-solana_sdk::declare_builtin!(
-    solana_sdk::bpf_loader::ID,
+miraland_sdk::declare_builtin!(
+    miraland_sdk::bpf_loader::ID,
     solana_bpf_loader_program,
     solana_bpf_loader_program::process_instruction
 );
@@ -651,7 +651,7 @@ fn process_loader_upgradeable_instruction(
             let signers = [&[new_program_id.as_ref(), &[bump_seed]]]
                 .iter()
                 .map(|seeds| Pubkey::create_program_address(*seeds, caller_program_id))
-                .collect::<Result<Vec<Pubkey>, solana_sdk::pubkey::PubkeyError>>()?;
+                .collect::<Result<Vec<Pubkey>, miraland_sdk::pubkey::PubkeyError>>()?;
             invoke_context.native_invoke(instruction, signers.as_slice())?;
 
             // Load and verify the program bits
@@ -1436,7 +1436,7 @@ mod tests {
         solana_program_runtime::invoke_context::mock_process_instruction,
         solana_rbpf::{verifier::Verifier, vm::SyscallRegistry},
         solana_runtime::{bank::Bank, bank_client::BankClient},
-        solana_sdk::{
+        miraland_sdk::{
             account::{
                 create_account_shared_data_for_test as create_account_for_test, AccountSharedData,
                 ReadableAccount, WritableAccount,

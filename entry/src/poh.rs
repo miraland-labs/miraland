@@ -1,7 +1,7 @@
 //! The `Poh` module provides an object for generating a Proof of History.
 use {
     log::*,
-    solana_sdk::hash::{hash, hashv, Hash},
+    miraland_sdk::hash::{hash, hashv, Hash},
     std::time::{Duration, Instant},
 };
 
@@ -130,7 +130,7 @@ mod tests {
     use {
         crate::poh::{Poh, PohEntry},
         matches::assert_matches,
-        solana_sdk::hash::{hash, hashv, Hash},
+        miraland_sdk::hash::{hash, hashv, Hash},
         std::time::Duration,
     };
 

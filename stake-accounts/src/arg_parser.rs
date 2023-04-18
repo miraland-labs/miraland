@@ -9,7 +9,7 @@ use {
         input_parsers::unix_timestamp_from_rfc3339_datetime,
         input_validators::{is_amount, is_rfc3339_datetime, is_valid_pubkey, is_valid_signer},
     },
-    solana_sdk::native_token::sol_to_lamports,
+    miraland_sdk::native_token::sol_to_lamports,
     std::{ffi::OsString, process::exit},
 };
 

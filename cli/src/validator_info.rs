@@ -19,7 +19,7 @@ use {
     },
     solana_config_program::{config_instruction, get_config_data, ConfigKeys, ConfigState},
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         message::Message,
         pubkey::Pubkey,
@@ -454,7 +454,7 @@ mod tests {
 
     #[test]
     fn test_verify_keybase_username_not_string() {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let value = Value::Bool(true);
 
         assert_eq!(
@@ -516,7 +516,7 @@ mod tests {
 
     #[test]
     fn test_parse_validator_info() {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let keys = vec![(validator_info::id(), false), (pubkey, true)];
         let config = ConfigKeys { keys };
 
@@ -545,7 +545,7 @@ mod tests {
         assert!(parse_validator_info(
             &Pubkey::default(),
             &Account {
-                owner: solana_sdk::pubkey::new_rand(),
+                owner: miraland_sdk::pubkey::new_rand(),
                 ..Account::default()
             }
         )

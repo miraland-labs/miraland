@@ -67,7 +67,7 @@ use {
             DEFAULT_MAX_INCREMENTAL_SNAPSHOT_ARCHIVES_TO_RETAIN, SUPPORTED_ARCHIVE_COMPRESSION,
         },
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, DEFAULT_S_PER_SLOT},
         commitment_config::CommitmentConfig,
         hash::Hash,

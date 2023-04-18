@@ -4,7 +4,7 @@ use {
     crate::ConfigKeys,
     bincode::deserialize,
     solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
-    solana_sdk::{
+    miraland_sdk::{
         feature_set, instruction::InstructionError, program_utils::limited_deserialize,
         pubkey::Pubkey,
     },
@@ -144,7 +144,7 @@ mod tests {
         bincode::serialized_size,
         serde_derive::{Deserialize, Serialize},
         solana_program_runtime::invoke_context::mock_process_instruction,
-        solana_sdk::{
+        miraland_sdk::{
             account::{AccountSharedData, ReadableAccount},
             instruction::AccountMeta,
             pubkey::Pubkey,

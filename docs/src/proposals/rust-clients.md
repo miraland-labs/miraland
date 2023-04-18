@@ -20,7 +20,7 @@ for needing to extend the trait and its implementations.
 Instead of implementing the `Client` trait, `ThinClient` should be constructed
 with an implementation of it. That way, all utility functions currently in the
 `Client` trait can move into `ThinClient`. `ThinClient` could then move into
-`solana-sdk` since all its network dependencies would be in the implementation
+`miraland-sdk` since all its network dependencies would be in the implementation
 of `Client`. We would then add a new implementation of `Client`, called
 `ClusterClient`, and that would live in the `miraland-client` crate, where
 `ThinClient` currently resides.
@@ -41,10 +41,10 @@ that the `Custom(String)` field should be changed to `Custom(Box<dyn Error>)`.
 
 ### Implementation Strategy
 
-1. Add new object to `solana-sdk`, `RpcClientTng`, where the `Tng` suffix is
+1. Add new object to `miraland-sdk`, `RpcClientTng`, where the `Tng` suffix is
    temporary and stands for "The Next Generation"
 2. Initialize `RpcClientTng` with a `SyncClient` implementation.
-3. Add new object to `solana-sdk`, `ThinClientTng`; initialize it with
+3. Add new object to `miraland-sdk`, `ThinClientTng`; initialize it with
    `RpcClientTng` and an `AsyncClient` implementation
 4. Move all unit-tests from `BankClient` to `ThinClientTng<BankClient>`
 5. Add `ClusterClient`

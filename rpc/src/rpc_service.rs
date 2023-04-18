@@ -34,7 +34,7 @@ use {
         snapshot_archive_info::SnapshotArchiveInfoGetter, snapshot_config::SnapshotConfig,
         snapshot_utils,
     },
-    solana_sdk::{
+    miraland_sdk::{
         exit::Exit, genesis_config::DEFAULT_GENESIS_DOWNLOAD_PATH, hash::Hash,
         native_token::lamports_to_sol, pubkey::Pubkey,
     },
@@ -584,7 +584,7 @@ mod tests {
             get_tmp_ledger_path,
         },
         solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_sdk::{
             genesis_config::{ClusterType, DEFAULT_GENESIS_ARCHIVE},
             signature::Signer,
             signer::keypair::Keypair,
@@ -898,9 +898,9 @@ mod tests {
         let override_health_check = Arc::new(AtomicBool::new(false));
         let startup_verification_complete = Arc::new(AtomicBool::new(true));
         let known_validators = vec![
-            solana_sdk::pubkey::new_rand(),
-            solana_sdk::pubkey::new_rand(),
-            solana_sdk::pubkey::new_rand(),
+            miraland_sdk::pubkey::new_rand(),
+            miraland_sdk::pubkey::new_rand(),
+            miraland_sdk::pubkey::new_rand(),
         ];
 
         let health = Arc::new(RpcHealth::new(

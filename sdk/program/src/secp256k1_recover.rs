@@ -336,10 +336,10 @@ impl Secp256k1Pubkey {
 ///
 /// ```no_run
 /// # use solana_program::example_mocks::miraland_client;
-/// # use solana_program::example_mocks::solana_sdk;
+/// # use solana_program::example_mocks::miraland_sdk;
 /// use anyhow::Result;
 /// use miraland_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     instruction::Instruction,
 ///     keccak,
 ///     pubkey::Pubkey,

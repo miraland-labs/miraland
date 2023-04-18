@@ -12,7 +12,7 @@ use {
     serde::{Deserialize, Serialize},
     solana_clap_utils::{input_parsers::*, input_validators::*, keypair::*},
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         clock::Slot,
         epoch_schedule::EpochSchedule,

@@ -11,14 +11,14 @@ use {
     },
     inflector::Inflector,
     serde_json::Value,
-    solana_sdk::{instruction::InstructionError, pubkey::Pubkey, stake, system_program, sysvar},
+    miraland_sdk::{instruction::InstructionError, pubkey::Pubkey, stake, system_program, sysvar},
     std::collections::HashMap,
     thiserror::Error,
 };
 
 lazy_static! {
     static ref ADDRESS_LOOKUP_PROGRAM_ID: Pubkey = solana_address_lookup_table_program::id();
-    static ref BPF_UPGRADEABLE_LOADER_PROGRAM_ID: Pubkey = solana_sdk::bpf_loader_upgradeable::id();
+    static ref BPF_UPGRADEABLE_LOADER_PROGRAM_ID: Pubkey = miraland_sdk::bpf_loader_upgradeable::id();
     static ref CONFIG_PROGRAM_ID: Pubkey = solana_config_program::id();
     static ref STAKE_PROGRAM_ID: Pubkey = stake::program::id();
     static ref SYSTEM_PROGRAM_ID: Pubkey = system_program::id();
@@ -127,7 +127,7 @@ pub fn parse_account_data(
 mod test {
     use {
         super::*,
-        solana_sdk::nonce::{
+        miraland_sdk::nonce::{
             state::{Data, Versions},
             State,
         },
@@ -136,8 +136,8 @@ mod test {
 
     #[test]
     fn test_parse_account_data() {
-        let account_pubkey = solana_sdk::pubkey::new_rand();
-        let other_program = solana_sdk::pubkey::new_rand();
+        let account_pubkey = miraland_sdk::pubkey::new_rand();
+        let other_program = miraland_sdk::pubkey::new_rand();
         let data = vec![0; 4];
         assert!(parse_account_data(&account_pubkey, &other_program, &data, None).is_err());
 

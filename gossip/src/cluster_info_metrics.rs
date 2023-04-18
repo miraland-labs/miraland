@@ -2,7 +2,7 @@ use {
     crate::crds_gossip::CrdsGossip,
     itertools::Itertools,
     solana_measure::measure::Measure,
-    solana_sdk::{clock::Slot, pubkey::Pubkey},
+    miraland_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         cmp::Reverse,
         collections::HashMap,

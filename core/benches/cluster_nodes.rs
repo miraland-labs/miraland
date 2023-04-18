@@ -14,7 +14,7 @@ use {
         shred::{Shred, ShredFlags},
     },
     solana_runtime::bank::Bank,
-    solana_sdk::{clock::Slot, pubkey::Pubkey},
+    miraland_sdk::{clock::Slot, pubkey::Pubkey},
     test::Bencher,
 };
 

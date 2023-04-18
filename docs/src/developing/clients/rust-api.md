@@ -12,9 +12,9 @@ Some important crates:
 
 - [`solana-program`] &mdash; Imported by programs running on Solana, compiled
   to BPF. This crate contains many fundamental data types and is re-exported from
-  [`solana-sdk`], which cannot be imported from a Solana program.
+  [`miraland-sdk`], which cannot be imported from a Solana program.
 
-- [`solana-sdk`] &mdash; The basic off-chain SDK, it re-exports
+- [`miraland-sdk`] &mdash; The basic off-chain SDK, it re-exports
   [`solana-program`] and adds more APIs on top of that. Most Solana programs
   that do not run on-chain will import this.
 
@@ -29,7 +29,7 @@ Some important crates:
   signers supported by the CLI.
 
 [`solana-program`]: https://docs.rs/solana-program
-[`solana-sdk`]: https://docs.rs/solana-sdk
+[`miraland-sdk`]: https://docs.rs/miraland-sdk
 [`miraland-client`]: https://docs.rs/miraland-client
 [`miraland-cli-config`]: https://docs.rs/miraland-cli-config
 [`solana-clap-utils`]: https://docs.rs/solana-clap-utils

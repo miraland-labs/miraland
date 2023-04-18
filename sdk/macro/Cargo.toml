@@ -1,11 +1,11 @@
 [package]
-name = "solana-sdk-macro"
+name = "miraland-sdk-macro"
 version = "1.14.17"
 description = "Solana SDK Macro"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-sdk-macro"
+documentation = "https://docs.rs/miraland-sdk-macro"
 license = "Apache-2.0"
 edition = "2021"
 

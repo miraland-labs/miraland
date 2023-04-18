@@ -8,7 +8,7 @@ use {
     solana_perf::{self, packet::PacketBatch, recycler_cache::RecyclerCache, sigverify::Deduper},
     solana_rayon_threadlimit::get_thread_count,
     solana_runtime::{bank::Bank, bank_forks::BankForks},
-    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signer},
+    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Signer},
     std::{
         collections::HashMap,
         sync::{Arc, RwLock},
@@ -277,7 +277,7 @@ mod tests {
         },
         solana_perf::packet::Packet,
         solana_runtime::bank::Bank,
-        solana_sdk::signature::{Keypair, Signer},
+        miraland_sdk::signature::{Keypair, Signer},
     };
 
     #[test]

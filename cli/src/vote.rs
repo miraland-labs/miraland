@@ -31,7 +31,7 @@ use {
         offline::*,
     },
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         account::Account, commitment_config::CommitmentConfig, message::Message,
         native_token::lamports_to_sol, pubkey::Pubkey, system_instruction::SystemError,
         transaction::Transaction,
@@ -1429,7 +1429,7 @@ mod tests {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
         miraland_client::blockhash_query,
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{read_keypair_file, write_keypair, Keypair, Signer},
             signer::presigner::Presigner,
@@ -1867,7 +1867,7 @@ mod tests {
         );
 
         // test init with an authed voter
-        let authed = solana_sdk::pubkey::new_rand();
+        let authed = miraland_sdk::pubkey::new_rand();
         let (keypair_file, mut tmp_file) = make_tmp_file();
         let keypair = Keypair::new();
         write_keypair(&keypair, tmp_file.as_file_mut()).unwrap();

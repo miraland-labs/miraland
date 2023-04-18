@@ -32,7 +32,7 @@ use {
         hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE, runtime_config::RuntimeConfig,
         snapshot_config::SnapshotConfig,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, AccountSharedData},
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         commitment_config::CommitmentConfig,
@@ -445,7 +445,7 @@ impl TestValidatorGenesis {
 
         self.programs.push(ProgramInfo {
             program_id,
-            loader: solana_sdk::bpf_loader::id(),
+            loader: miraland_sdk::bpf_loader::id(),
             program_path,
         });
         self
@@ -655,7 +655,7 @@ impl TestValidator {
             validator_identity_lamports,
             config.fee_rate_governor.clone(),
             config.rent,
-            solana_sdk::genesis_config::ClusterType::Development,
+            miraland_sdk::genesis_config::ClusterType::Development,
             accounts.into_iter().collect(),
         );
         genesis_config.epoch_schedule = config

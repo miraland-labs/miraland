@@ -23,7 +23,7 @@ use {
     solana_metrics::{inc_new_counter_error, inc_new_counter_info},
     solana_poh::poh_recorder::WorkingBankEntry,
     solana_runtime::bank_forks::BankForks,
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         pubkey::Pubkey,
         signature::Keypair,
@@ -446,7 +446,7 @@ pub mod test {
             shred::{max_ticks_per_n_shreds, ProcessShredsStats, ReedSolomonCache, Shredder},
         },
         solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             pubkey::Pubkey,
             signature::{Keypair, Signer},

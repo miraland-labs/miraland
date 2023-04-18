@@ -21,7 +21,7 @@ use {
         accounts_background_service::AbsRequestSender, bank::Bank, bank_forks::BankForks,
         cost_model::CostModel,
     },
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         signature::{Keypair, Signature},
         system_transaction,
@@ -97,7 +97,7 @@ fn make_accounts_txs(
     hash: Hash,
     contention: WriteLockContention,
 ) -> Vec<Transaction> {
-    use solana_sdk::pubkey;
+    use miraland_sdk::pubkey;
     let to_pubkey = pubkey::new_rand();
     let chunk_pubkeys: Vec<pubkey::Pubkey> = (0..total_num_transactions / packets_per_batch)
         .map(|_| pubkey::new_rand())
@@ -371,7 +371,7 @@ fn main() {
         let base_tx_count = bank.transaction_count();
         let mut txs_processed = 0;
         let mut root = 1;
-        let collector = solana_sdk::pubkey::new_rand();
+        let collector = miraland_sdk::pubkey::new_rand();
         let mut total_sent = 0;
         for current_iteration_index in 0..iterations {
             trace!("RUNNING ITERATION {}", current_iteration_index);

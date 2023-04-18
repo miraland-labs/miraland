@@ -45,7 +45,7 @@ use {
         commitment::BlockCommitmentCache, cost_model::CostModel,
         prioritization_fee_cache::PrioritizationFeeCache, vote_sender_types::ReplayVoteSender,
     },
-    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Keypair},
+    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Keypair},
     std::{
         collections::HashSet,
         net::UdpSocket,
@@ -353,7 +353,7 @@ pub mod tests {
         solana_poh::poh_recorder::create_test_recorder,
         solana_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         solana_runtime::bank::Bank,
-        solana_sdk::signature::{Keypair, Signer},
+        miraland_sdk::signature::{Keypair, Signer},
         solana_streamer::socket::SocketAddrSpace,
         std::sync::atomic::{AtomicU64, Ordering},
     };

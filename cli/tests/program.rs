@@ -10,7 +10,7 @@ use {
     miraland_faucet::faucet::run_local_faucet,
     miraland_test_validator::TestValidator,
     serde_json::Value,
-    solana_sdk::{
+    miraland_sdk::{
         account_utils::StateMut,
         bpf_loader,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},

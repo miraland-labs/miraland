@@ -24,7 +24,7 @@ use {
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         loader_utils::{create_deprecated_program, load_program_from_file},
     },
-    solana_sdk::{
+    miraland_sdk::{
         bpf_loader,
         client::SyncClient,
         entrypoint::SUCCESS,

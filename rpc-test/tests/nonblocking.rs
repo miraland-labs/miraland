@@ -4,7 +4,7 @@ use {
         tpu_client::TpuClientConfig,
     },
     miraland_test_validator::TestValidatorGenesis,
-    solana_sdk::{clock::DEFAULT_MS_PER_SLOT, pubkey::Pubkey, system_transaction},
+    miraland_sdk::{clock::DEFAULT_MS_PER_SLOT, pubkey::Pubkey, system_transaction},
     std::sync::{
         atomic::{AtomicBool, Ordering},
         Arc,

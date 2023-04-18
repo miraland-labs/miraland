@@ -4,7 +4,7 @@ use {
         serve_repair::ShredRepairType, tree_diff::TreeDiff,
     },
     solana_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
-    solana_sdk::{clock::Slot, hash::Hash},
+    miraland_sdk::{clock::Slot, hash::Hash},
     std::collections::{HashMap, HashSet},
 };
 
@@ -199,7 +199,7 @@ pub mod test {
             blockstore::{Blockstore, MAX_TURBINE_PROPAGATION_IN_MS},
             get_tmp_ledger_path,
         },
-        solana_sdk::hash::Hash,
+        miraland_sdk::hash::Hash,
         std::{thread::sleep, time::Duration},
         trees::{tr, Tree, TreeWalk},
     };

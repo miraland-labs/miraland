@@ -11,7 +11,7 @@ use {
         cost_model::{CostModel, TransactionCost},
         cost_tracker::CostTrackerError,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         transaction::{self, SanitizedTransaction, TransactionError},
     },
@@ -552,7 +552,7 @@ mod tests {
         super::*,
         itertools::Itertools,
         solana_runtime::genesis_utils::{create_genesis_config, GenesisConfigInfo},
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             system_transaction,

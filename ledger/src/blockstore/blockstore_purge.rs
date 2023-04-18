@@ -1,4 +1,4 @@
-use {super::*, solana_sdk::message::AccountKeys, std::time::Instant};
+use {super::*, miraland_sdk::message::AccountKeys, std::time::Instant};
 
 #[derive(Default)]
 pub struct PurgeStats {
@@ -533,7 +533,7 @@ pub mod tests {
         },
         bincode::serialize,
         solana_entry::entry::next_entry_mut,
-        solana_sdk::{
+        miraland_sdk::{
             hash::{hash, Hash},
             message::Message,
             transaction::Transaction,

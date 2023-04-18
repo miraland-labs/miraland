@@ -61,7 +61,7 @@ use {
     serde::{Deserialize, Serialize},
     solana_entry::entry::{create_ticks, Entry},
     solana_perf::packet::Packet,
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::{hashv, Hash},
         pubkey::Pubkey,
@@ -1051,7 +1051,7 @@ mod tests {
         matches::assert_matches,
         rand::Rng,
         rand_chacha::{rand_core::SeedableRng, ChaChaRng},
-        solana_sdk::{shred_version, signature::Signer},
+        miraland_sdk::{shred_version, signature::Signer},
     };
 
     const SIZE_OF_SHRED_INDEX: usize = 4;

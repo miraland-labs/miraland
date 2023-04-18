@@ -4,7 +4,7 @@ use {
     solana_runtime::transaction_priority_details::{
         GetTransactionPriorityDetails, TransactionPriorityDetails,
     },
-    solana_sdk::{
+    miraland_sdk::{
         feature_set,
         hash::Hash,
         message::Message,
@@ -449,7 +449,7 @@ mod tests {
     use {
         super::*,
         solana_perf::packet::PacketFlags,
-        solana_sdk::{
+        miraland_sdk::{
             signature::{Keypair, Signer},
             system_transaction,
             transaction::{SimpleAddressLoader, Transaction},
@@ -460,7 +460,7 @@ mod tests {
     fn simmple_deserialized_packet() -> DeserializedPacket {
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );
@@ -471,7 +471,7 @@ mod tests {
     fn packet_with_priority_details(priority: u64, compute_unit_limit: u64) -> DeserializedPacket {
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );
@@ -605,7 +605,7 @@ mod tests {
 
     #[test]
     fn test_transaction_from_deserialized_packet() {
-        use solana_sdk::feature_set::FeatureSet;
+        use miraland_sdk::feature_set::FeatureSet;
         let keypair = Keypair::new();
         let transfer_tx =
             system_transaction::transfer(&keypair, &keypair.pubkey(), 1, Hash::default());

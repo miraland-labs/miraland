@@ -3,7 +3,7 @@ use {
     miraland_cli_config::{ConfigInput, CONFIG_FILE},
     miraland_client::connection_cache::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
     solana_clap_utils::input_validators::{is_url, is_url_or_moniker},
-    solana_sdk::{
+    miraland_sdk::{
         fee_calculator::FeeRateGovernor,
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair},
@@ -11,7 +11,7 @@ use {
     std::{net::SocketAddr, process::exit, time::Duration},
 };
 
-const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = solana_sdk::native_token::LAMPORTS_PER_SOL;
+const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = miraland_sdk::native_token::LAMPORTS_PER_SOL;
 
 pub enum ExternalClientType {
     // Submits transactions to an Rpc node using an RpcClient

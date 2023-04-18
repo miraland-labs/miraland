@@ -14,4 +14,4 @@ extern crate solana_metrics;
 #[macro_use]
 extern crate solana_frozen_abi_macro;
 
-pub use solana_sdk::vote::program::{check_id, id};
+pub use miraland_sdk::vote::program::{check_id, id};

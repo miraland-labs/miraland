@@ -1,7 +1,7 @@
 use {
     solana_banks_client::BanksClient,
     solana_program_test::{processor, ProgramTest},
-    solana_sdk::{
+    miraland_sdk::{
         account_info::AccountInfo,
         entrypoint::ProgramResult,
         hash::Hash,

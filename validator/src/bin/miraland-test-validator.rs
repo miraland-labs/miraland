@@ -21,7 +21,7 @@ use {
         rpc::{JsonRpcConfig, RpcBigtableConfig},
         rpc_pubsub_service::PubSubConfig,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData,
         clock::Slot,
         epoch_schedule::{EpochSchedule, MINIMUM_SLOTS_PER_EPOCH},
@@ -555,7 +555,7 @@ fn main() {
 
                     programs_to_load.push(ProgramInfo {
                         program_id: address,
-                        loader: solana_sdk::bpf_loader::id(),
+                        loader: miraland_sdk::bpf_loader::id(),
                         program_path,
                     });
                 }

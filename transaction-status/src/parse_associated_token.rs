@@ -4,12 +4,12 @@ use {
     },
     borsh::BorshDeserialize,
     serde_json::json,
-    solana_sdk::{instruction::CompiledInstruction, message::AccountKeys, pubkey::Pubkey},
+    miraland_sdk::{instruction::CompiledInstruction, message::AccountKeys, pubkey::Pubkey},
     spl_associated_token_account::instruction::AssociatedTokenAccountInstruction,
 };
 
 // A helper function to convert spl_associated_token_account::id() as spl_sdk::pubkey::Pubkey
-// to solana_sdk::pubkey::Pubkey
+// to miraland_sdk::pubkey::Pubkey
 pub fn spl_associated_token_id() -> Pubkey {
     Pubkey::new_from_array(spl_associated_token_account::id().to_bytes())
 }
@@ -152,7 +152,7 @@ mod test {
                 "account": associated_account_address.to_string(),
                 "wallet": wallet_address.to_string(),
                 "mint": mint.to_string(),
-                "systemProgram": solana_sdk::system_program::id().to_string(),
+                "systemProgram": miraland_sdk::system_program::id().to_string(),
                 "tokenProgram": spl_token::id().to_string(),
             }),
         };
@@ -222,7 +222,7 @@ mod test {
                     "account": associated_account_address.to_string(),
                     "wallet": wallet_address.to_string(),
                     "mint": mint.to_string(),
-                    "systemProgram": solana_sdk::system_program::id().to_string(),
+                    "systemProgram": miraland_sdk::system_program::id().to_string(),
                     "tokenProgram": token_program_id.to_string(),
                 })
             }
@@ -267,7 +267,7 @@ mod test {
                     "account": associated_account_address.to_string(),
                     "wallet": wallet_address.to_string(),
                     "mint": mint.to_string(),
-                    "systemProgram": solana_sdk::system_program::id().to_string(),
+                    "systemProgram": miraland_sdk::system_program::id().to_string(),
                     "tokenProgram": token_program_id.to_string(),
                 })
             }

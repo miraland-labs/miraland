@@ -1,7 +1,7 @@
 //! The accounts data space has a maximum size it is permitted to grow to.  This module contains
 //! the constants and types for tracking and metering the accounts data space during program
 //! runtime.
-use solana_sdk::instruction::InstructionError;
+use miraland_sdk::instruction::InstructionError;
 
 /// The maximum allowed size, in bytes, of the accounts data
 /// 128 GB was chosen because it is the RAM amount listed under Hardware Recommendations on

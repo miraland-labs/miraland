@@ -21,7 +21,7 @@ use {
         commitment::BlockCommitmentCache,
         genesis_utils::{create_genesis_config_with_leader_ex, GenesisConfigInfo},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, AccountSharedData, ReadableAccount},
         account_info::AccountInfo,
         clock::Slot,
@@ -92,7 +92,7 @@ fn get_invoke_context<'a, 'b>() -> &'a mut InvokeContext<'b> {
 }
 
 pub fn builtin_process_instruction(
-    process_instruction: solana_sdk::entrypoint::ProcessInstruction,
+    process_instruction: miraland_sdk::entrypoint::ProcessInstruction,
     _first_instruction_account: usize,
     invoke_context: &mut InvokeContext,
 ) -> Result<(), InstructionError> {
@@ -214,7 +214,7 @@ fn get_sysvar<T: Default + Sysvar + Sized + serde::de::DeserializeOwned + Clone>
 }
 
 struct SyscallStubs {}
-impl solana_sdk::program_stubs::SyscallStubs for SyscallStubs {
+impl miraland_sdk::program_stubs::SyscallStubs for SyscallStubs {
     fn sol_log(&self, message: &str) {
         let invoke_context = get_invoke_context();
         ic_msg!(invoke_context, "Program log: {}", message);
@@ -614,7 +614,7 @@ impl ProgramTest {
                 Account {
                     lamports: Rent::default().minimum_balance(data.len()).min(1),
                     data,
-                    owner: solana_sdk::bpf_loader::id(),
+                    owner: miraland_sdk::bpf_loader::id(),
                     executable: true,
                     rent_epoch: 0,
                 },
@@ -727,7 +727,7 @@ impl ProgramTest {
             static ONCE: Once = Once::new();
 
             ONCE.call_once(|| {
-                solana_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
+                miraland_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
             });
         }
 

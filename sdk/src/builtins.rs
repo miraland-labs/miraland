@@ -31,13 +31,13 @@ macro_rules! declare_builtin_name {
                 // This should use `crate::respan!` once
                 // https://github.com/rust-lang/rust/pull/72121 is merged:
                 // see https://github.com/solana-labs/solana/issues/10933.
-                // For now, we need to use `::solana_sdk`
+                // For now, we need to use `::miraland_sdk`
                 //
                 // `respan!` respans the path `$crate::id`, which we then call (hence the extra
                 // parens)
                 (
                     stringify!($name).to_string(),
-                    ::solana_sdk::respan!($crate::$id, $name)(),
+                    ::miraland_sdk::respan!($crate::$id, $name)(),
                     $entrypoint,
                 )
             };
@@ -73,10 +73,10 @@ macro_rules! declare_builtin_name {
 /// // wrapper is used so that the macro invocation occurs in the item position
 /// // rather than in the statement position which isn't allowed.
 /// mod item_wrapper {
-/// use solana_sdk::keyed_account::KeyedAccount;
-/// use solana_sdk::instruction::InstructionError;
-/// use solana_sdk::pubkey::Pubkey;
-/// use solana_sdk::declare_builtin;
+/// use miraland_sdk::keyed_account::KeyedAccount;
+/// use miraland_sdk::instruction::InstructionError;
+/// use miraland_sdk::pubkey::Pubkey;
+/// use miraland_sdk::declare_builtin;
 ///
 /// fn my_process_instruction(
 ///     first_instruction_account: usize,
@@ -93,7 +93,7 @@ macro_rules! declare_builtin_name {
 /// );
 ///
 /// # }
-/// # use solana_sdk::pubkey::Pubkey;
+/// # use miraland_sdk::pubkey::Pubkey;
 /// # use item_wrapper::id;
 /// let my_id = Pubkey::from_str("My11111111111111111111111111111111111111111").unwrap();
 /// assert_eq!(id(), my_id);
@@ -103,10 +103,10 @@ macro_rules! declare_builtin_name {
 /// # // wrapper is used so that the macro invocation occurs in the item position
 /// # // rather than in the statement position which isn't allowed.
 /// # mod item_wrapper {
-/// use solana_sdk::keyed_account::KeyedAccount;
-/// use solana_sdk::instruction::InstructionError;
-/// use solana_sdk::pubkey::Pubkey;
-/// use solana_sdk::declare_builtin;
+/// use miraland_sdk::keyed_account::KeyedAccount;
+/// use miraland_sdk::instruction::InstructionError;
+/// use miraland_sdk::pubkey::Pubkey;
+/// use miraland_sdk::declare_builtin;
 ///
 /// fn my_process_instruction(
 ///     first_instruction_account: usize,
@@ -117,14 +117,14 @@ macro_rules! declare_builtin_name {
 /// }
 ///
 /// declare_builtin!(
-///     solana_sdk::system_program::ID,
+///     miraland_sdk::system_program::ID,
 ///     solana_my_program,
 ///     my_process_instruction
 /// );
 /// }
 ///
 /// # use item_wrapper::id;
-/// assert_eq!(id(), solana_sdk::system_program::ID);
+/// assert_eq!(id(), miraland_sdk::system_program::ID);
 /// ```
 #[macro_export]
 macro_rules! declare_builtin {

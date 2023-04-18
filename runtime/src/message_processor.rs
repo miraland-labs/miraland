@@ -9,7 +9,7 @@ use {
         sysvar_cache::SysvarCache,
         timings::{ExecuteDetailsTimings, ExecuteTimings},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::WritableAccount,
         feature_set::{prevent_calling_precompiles_as_programs, FeatureSet},
         hash::Hash,
@@ -179,7 +179,7 @@ mod tests {
     use {
         super::*,
         crate::rent_collector::RentCollector,
-        solana_sdk::{
+        miraland_sdk::{
             account::{AccountSharedData, ReadableAccount},
             instruction::{AccountMeta, Instruction, InstructionError},
             message::{AccountKeys, LegacyMessage, Message},
@@ -475,11 +475,11 @@ mod tests {
 
         let accounts = vec![
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::new(100, 1, &mock_program_id),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::new(0, 1, &mock_program_id),
             ),
             (

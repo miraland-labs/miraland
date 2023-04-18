@@ -7,7 +7,7 @@ use {
         pubkey::Pubkey,
         sysvar,
     },
-    solana_sdk::{signature::Signer, transaction::Transaction},
+    miraland_sdk::{signature::Signer, transaction::Transaction},
 };
 
 #[test]

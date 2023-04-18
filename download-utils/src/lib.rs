@@ -7,7 +7,7 @@ use {
         snapshot_package::SnapshotType,
         snapshot_utils::{self, ArchiveFormat},
     },
-    solana_sdk::{clock::Slot, genesis_config::DEFAULT_GENESIS_ARCHIVE, hash::Hash},
+    miraland_sdk::{clock::Slot, genesis_config::DEFAULT_GENESIS_ARCHIVE, hash::Hash},
     std::{
         fs::{self, File},
         io::{self, Read},

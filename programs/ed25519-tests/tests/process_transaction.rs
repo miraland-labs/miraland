@@ -2,7 +2,7 @@ use {
     assert_matches::assert_matches,
     rand::thread_rng,
     solana_program_test::*,
-    solana_sdk::{
+    miraland_sdk::{
         ed25519_instruction::new_ed25519_instruction,
         feature_set,
         signature::Signer,

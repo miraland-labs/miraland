@@ -1,7 +1,7 @@
 use {
     solana_bpf_rust_mem::entrypoint::process_instruction,
     solana_program_test::*,
-    solana_sdk::{
+    miraland_sdk::{
         instruction::Instruction, pubkey::Pubkey, signature::Signer, transaction::Transaction,
     },
 };

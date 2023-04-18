@@ -45,7 +45,7 @@ solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
 solana-measure = { path = "../measure", version = "=1.14.17" }
 solana-metrics = { path = "../metrics", version = "=1.14.17" }
 solana-net-utils = { path = "../net-utils", version = "=1.14.17" }
-solana-sdk = { path = "../sdk", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-streamer = { path = "../streamer", version = "=1.14.17" }
 solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
 solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }

@@ -3,7 +3,7 @@
 use {
     log::*,
     num_derive::{FromPrimitive, ToPrimitive},
-    solana_sdk::decode_error::DecodeError,
+    miraland_sdk::decode_error::DecodeError,
     thiserror::Error,
 };
 
@@ -80,7 +80,7 @@ impl<E> DecodeError<E> for VoteError {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, solana_sdk::instruction::InstructionError};
+    use {super::*, miraland_sdk::instruction::InstructionError};
 
     #[test]
     fn test_custom_error_decode() {

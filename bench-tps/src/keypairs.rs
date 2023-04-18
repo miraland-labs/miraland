@@ -5,7 +5,7 @@ use {
     },
     log::*,
     miraland_genesis::Base64Account,
-    solana_sdk::signature::{Keypair, Signer},
+    miraland_sdk::signature::{Keypair, Signer},
     std::{collections::HashMap, fs::File, path::Path, process::exit, sync::Arc},
 };
 

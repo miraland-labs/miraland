@@ -1,6 +1,6 @@
 use {
     solana_program_test::{programs::spl_programs, ProgramTest},
-    solana_sdk::{
+    miraland_sdk::{
         bpf_loader, bpf_loader_upgradeable,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,

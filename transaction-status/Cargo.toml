@@ -24,7 +24,7 @@ solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
 solana-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
 solana-measure = { path = "../measure", version = "=1.14.17" }
 solana-metrics = { path = "../metrics", version = "=1.14.17" }
-solana-sdk = { path = "../sdk", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 spl-associated-token-account = { version = "=1.1.2", features = ["no-entrypoint"] }
 spl-memo = { version = "=3.0.1", features = ["no-entrypoint"] }

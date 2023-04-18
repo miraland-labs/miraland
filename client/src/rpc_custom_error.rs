@@ -2,7 +2,7 @@
 use {
     crate::rpc_response::RpcSimulateTransactionResult,
     jsonrpc_core::{Error, ErrorCode},
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     solana_transaction_status::EncodeError,
     thiserror::Error,
 };
@@ -44,7 +44,7 @@ pub enum RpcCustomError {
     #[error("NodeUnhealthy")]
     NodeUnhealthy { num_slots_behind: Option<Slot> },
     #[error("TransactionPrecompileVerificationFailure")]
-    TransactionPrecompileVerificationFailure(solana_sdk::transaction::TransactionError),
+    TransactionPrecompileVerificationFailure(miraland_sdk::transaction::TransactionError),
     #[error("SlotSkipped")]
     SlotSkipped { slot: Slot },
     #[error("NoSnapshot")]

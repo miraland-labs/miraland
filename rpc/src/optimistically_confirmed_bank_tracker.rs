@@ -7,7 +7,7 @@ use {
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     miraland_client::rpc_response::{SlotTransactionStats, SlotUpdate},
     solana_runtime::{bank::Bank, bank_forks::BankForks},
-    solana_sdk::{clock::Slot, timing::timestamp},
+    miraland_sdk::{clock::Slot, timing::timestamp},
     std::{
         collections::HashSet,
         sync::{
@@ -321,7 +321,7 @@ mod tests {
         solana_runtime::{
             accounts_background_service::AbsRequestSender, commitment::BlockCommitmentCache,
         },
-        solana_sdk::pubkey::Pubkey,
+        miraland_sdk::pubkey::Pubkey,
         std::sync::atomic::AtomicU64,
     };
 

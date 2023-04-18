@@ -11,7 +11,7 @@ use {
     miraland_client::rpc_client::RpcClient,
     serde::{Deserialize, Serialize},
     solana_config_program::{config_instruction, get_config_data, ConfigState},
-    solana_sdk::{
+    miraland_sdk::{
         hash::{Hash, Hasher},
         message::Message,
         pubkey::Pubkey,

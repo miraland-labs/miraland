@@ -60,7 +60,7 @@ use {
         prioritization_fee_cache::PrioritizationFeeCache,
         vote_sender_types::ReplayVoteSender,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::{BankId, Slot, MAX_PROCESSING_AGE, NUM_CONSECUTIVE_LEADER_SLOTS},
         feature_set,
         genesis_config::ClusterType,
@@ -3641,7 +3641,7 @@ pub(crate) mod tests {
             commitment::BlockCommitment,
             genesis_utils::{GenesisConfigInfo, ValidatorVoteKeypairs},
         },
-        solana_sdk::{
+        miraland_sdk::{
             clock::NUM_CONSECUTIVE_LEADER_SLOTS,
             genesis_config,
             hash::{hash, Hash},
@@ -4390,7 +4390,7 @@ pub(crate) mod tests {
             bank.store_account(pubkey, &leader_vote_account);
         }
 
-        let leader_pubkey = solana_sdk::pubkey::new_rand();
+        let leader_pubkey = miraland_sdk::pubkey::new_rand();
         let leader_lamports = 3;
         let genesis_config_info =
             create_genesis_config_with_leader(50, &leader_pubkey, leader_lamports);
@@ -4441,7 +4441,7 @@ pub(crate) mod tests {
             let _res = bank.transfer(
                 10,
                 &genesis_config_info.mint_keypair,
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
             );
             for _ in 0..genesis_config.ticks_per_slot {
                 bank.register_tick(&Hash::default());
@@ -4510,7 +4510,7 @@ pub(crate) mod tests {
             mut genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config(solana_sdk::native_token::sol_to_lamports(1000.0));
+        } = create_genesis_config(miraland_sdk::native_token::sol_to_lamports(1000.0));
         genesis_config.rent.lamports_per_byte_year = 50;
         genesis_config.rent.exemption_threshold = 2.0;
         let (ledger_path, _) = create_new_tmp_ledger!(&genesis_config);

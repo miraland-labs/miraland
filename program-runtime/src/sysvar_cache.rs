@@ -1,8 +1,8 @@
 #[allow(deprecated)]
-use solana_sdk::sysvar::{fees::Fees, recent_blockhashes::RecentBlockhashes};
+use miraland_sdk::sysvar::{fees::Fees, recent_blockhashes::RecentBlockhashes};
 use {
     crate::invoke_context::InvokeContext,
-    solana_sdk::{
+    miraland_sdk::{
         instruction::InstructionError,
         pubkey::Pubkey,
         sysvar::{
@@ -175,7 +175,7 @@ impl SysvarCache {
 /// These methods facilitate a transition from fetching sysvars from keyed
 /// accounts to fetching from the sysvar cache without breaking consensus. In
 /// order to keep consistent behavior, they continue to enforce the same checks
-/// as `solana_sdk::keyed_account::from_keyed_account` despite dynamically
+/// as `miraland_sdk::keyed_account::from_keyed_account` despite dynamically
 /// loading them instead of deserializing from account data.
 pub mod get_sysvar_with_account_check {
     use super::*;

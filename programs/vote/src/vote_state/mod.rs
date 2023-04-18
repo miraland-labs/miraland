@@ -1,14 +1,14 @@
 //! Vote state, vote program
 //! Receive and processes votes from validators
 #[cfg(test)]
-use solana_sdk::epoch_schedule::MAX_LEADER_SCHEDULE_EPOCH_OFFSET;
+use miraland_sdk::epoch_schedule::MAX_LEADER_SCHEDULE_EPOCH_OFFSET;
 use {
     crate::{authorized_voters::AuthorizedVoters, id, vote_error::VoteError},
     bincode::{deserialize, serialize_into, ErrorKind},
     log::*,
     serde_derive::{Deserialize, Serialize},
     solana_metrics::datapoint_debug,
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         clock::{Epoch, Slot, UnixTimestamp},
         epoch_schedule::EpochSchedule,
@@ -453,7 +453,7 @@ impl VoteState {
     fn get_max_sized_vote_state() -> VoteState {
         let mut authorized_voters = AuthorizedVoters::default();
         for i in 0..=MAX_LEADER_SCHEDULE_EPOCH_OFFSET {
-            authorized_voters.insert(i, solana_sdk::pubkey::new_rand());
+            authorized_voters.insert(i, miraland_sdk::pubkey::new_rand());
         }
 
         VoteState {
@@ -1257,7 +1257,7 @@ pub mod serde_compact_vote_state_update {
     use {
         super::*,
         serde::{Deserialize, Deserializer, Serialize, Serializer},
-        solana_sdk::{serde_varint, short_vec},
+        miraland_sdk::{serde_varint, short_vec},
     };
 
     #[derive(Deserialize, Serialize, AbiExample)]
@@ -1670,7 +1670,7 @@ mod tests {
         crate::vote_state,
         itertools::Itertools,
         rand::Rng,
-        solana_sdk::{
+        miraland_sdk::{
             account::AccountSharedData, account_utils::StateMut, clock::DEFAULT_SLOTS_PER_EPOCH,
             hash::hash,
         },
@@ -1684,7 +1684,7 @@ mod tests {
         pub fn new_for_test(auth_pubkey: &Pubkey) -> Self {
             Self::new(
                 &VoteInit {
-                    node_pubkey: solana_sdk::pubkey::new_rand(),
+                    node_pubkey: miraland_sdk::pubkey::new_rand(),
                     authorized_voter: *auth_pubkey,
                     authorized_withdrawer: *auth_pubkey,
                     commission: 0,
@@ -1697,12 +1697,12 @@ mod tests {
     fn create_test_account() -> (Pubkey, RefCell<AccountSharedData>) {
         let rent = Rent::default();
         let balance = VoteState::get_rent_exempt_reserve(&rent);
-        let vote_pubkey = solana_sdk::pubkey::new_rand();
+        let vote_pubkey = miraland_sdk::pubkey::new_rand();
         (
             vote_pubkey,
             RefCell::new(vote_state::create_account(
                 &vote_pubkey,
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
                 0,
                 balance,
             )),
@@ -1776,7 +1776,7 @@ mod tests {
 
     #[test]
     fn test_vote_double_lockout_after_expiration() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new_for_test(&voter_pubkey);
 
         for i in 0..3 {
@@ -1804,7 +1804,7 @@ mod tests {
 
     #[test]
     fn test_expire_multiple_votes() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new_for_test(&voter_pubkey);
 
         for i in 0..3 {
@@ -1835,7 +1835,7 @@ mod tests {
 
     #[test]
     fn test_vote_credits() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new_for_test(&voter_pubkey);
 
         for i in 0..MAX_LOCKOUT_HISTORY {
@@ -1854,7 +1854,7 @@ mod tests {
 
     #[test]
     fn test_duplicate_vote() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new_for_test(&voter_pubkey);
         vote_state.process_slot_vote_unchecked(0);
         vote_state.process_slot_vote_unchecked(1);
@@ -1866,7 +1866,7 @@ mod tests {
 
     #[test]
     fn test_nth_recent_vote() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new_for_test(&voter_pubkey);
         for i in 0..MAX_LOCKOUT_HISTORY {
             vote_state.process_slot_vote_unchecked(i as u64);
@@ -1897,9 +1897,9 @@ mod tests {
     /// check that two accounts with different data can be brought to the same state with one vote submission
     #[test]
     fn test_process_missed_votes() {
-        let account_a = solana_sdk::pubkey::new_rand();
+        let account_a = miraland_sdk::pubkey::new_rand();
         let mut vote_state_a = VoteState::new_for_test(&account_a);
-        let account_b = solana_sdk::pubkey::new_rand();
+        let account_b = miraland_sdk::pubkey::new_rand();
         let mut vote_state_b = VoteState::new_for_test(&account_b);
 
         // process some votes on account a
@@ -2258,7 +2258,7 @@ mod tests {
 
     #[test]
     fn test_get_and_update_authorized_voter() {
-        let original_voter = solana_sdk::pubkey::new_rand();
+        let original_voter = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new(
             &VoteInit {
                 node_pubkey: original_voter,
@@ -2294,7 +2294,7 @@ mod tests {
         }
 
         // Set an authorized voter change at slot 7
-        let new_authorized_voter = solana_sdk::pubkey::new_rand();
+        let new_authorized_voter = miraland_sdk::pubkey::new_rand();
         vote_state
             .set_new_authorized_voter(&new_authorized_voter, 5, 7, |_| Ok(()))
             .unwrap();
@@ -2318,7 +2318,7 @@ mod tests {
 
     #[test]
     fn test_set_new_authorized_voter() {
-        let original_voter = solana_sdk::pubkey::new_rand();
+        let original_voter = miraland_sdk::pubkey::new_rand();
         let epoch_offset = 15;
         let mut vote_state = VoteState::new(
             &VoteInit {
@@ -2332,7 +2332,7 @@ mod tests {
 
         assert!(vote_state.prior_voters.last().is_none());
 
-        let new_voter = solana_sdk::pubkey::new_rand();
+        let new_voter = miraland_sdk::pubkey::new_rand();
         // Set a new authorized voter
         vote_state
             .set_new_authorized_voter(&new_voter, 0, epoch_offset, |_| Ok(()))
@@ -2356,7 +2356,7 @@ mod tests {
             .unwrap();
 
         // Set a third and fourth authorized voter
-        let new_voter2 = solana_sdk::pubkey::new_rand();
+        let new_voter2 = miraland_sdk::pubkey::new_rand();
         vote_state
             .set_new_authorized_voter(&new_voter2, 3, 3 + epoch_offset, |_| Ok(()))
             .unwrap();
@@ -2366,7 +2366,7 @@ mod tests {
             Some(&(new_voter, epoch_offset, 3 + epoch_offset))
         );
 
-        let new_voter3 = solana_sdk::pubkey::new_rand();
+        let new_voter3 = miraland_sdk::pubkey::new_rand();
         vote_state
             .set_new_authorized_voter(&new_voter3, 6, 6 + epoch_offset, |_| Ok(()))
             .unwrap();
@@ -2417,7 +2417,7 @@ mod tests {
 
     #[test]
     fn test_authorized_voter_is_locked_within_epoch() {
-        let original_voter = solana_sdk::pubkey::new_rand();
+        let original_voter = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new(
             &VoteInit {
                 node_pubkey: original_voter,
@@ -2431,7 +2431,7 @@ mod tests {
         // Test that it's not possible to set a new authorized
         // voter within the same epoch, even if none has been
         // explicitly set before
-        let new_voter = solana_sdk::pubkey::new_rand();
+        let new_voter = miraland_sdk::pubkey::new_rand();
         assert_eq!(
             vote_state.set_new_authorized_voter(&new_voter, 1, 1, |_| Ok(())),
             Err(VoteError::TooSoonToReauthorize.into())
@@ -2476,7 +2476,7 @@ mod tests {
         for i in start_current_epoch..start_current_epoch + 2 * MAX_LEADER_SCHEDULE_EPOCH_OFFSET {
             vote_state.as_mut().map(|vote_state| {
                 vote_state.set_new_authorized_voter(
-                    &solana_sdk::pubkey::new_rand(),
+                    &miraland_sdk::pubkey::new_rand(),
                     i,
                     i + MAX_LEADER_SCHEDULE_EPOCH_OFFSET,
                     |_| Ok(()),
@@ -3655,7 +3655,7 @@ mod tests {
 
     #[test]
     fn test_minimum_balance() {
-        let rent = solana_sdk::rent::Rent::default();
+        let rent = miraland_sdk::rent::Rent::default();
         let minimum_balance = rent.minimum_balance(VoteState::size_of());
         // golden, may need updating when vote_state grows
         assert!(minimum_balance as f64 / 10f64.powf(9.0) < 0.04)

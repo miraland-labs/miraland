@@ -11,7 +11,7 @@ use {
         keypair::*,
     },
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{clock::Epoch, pubkey::Pubkey},
+    miraland_sdk::{clock::Epoch, pubkey::Pubkey},
     std::sync::Arc,
 };
 

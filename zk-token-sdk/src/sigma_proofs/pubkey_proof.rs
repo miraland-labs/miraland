@@ -144,7 +144,7 @@ impl PubkeySigmaProof {
 mod test {
     use {
         super::*,
-        solana_sdk::{pubkey::Pubkey, signature::Keypair},
+        miraland_sdk::{pubkey::Pubkey, signature::Keypair},
     };
 
     #[test]

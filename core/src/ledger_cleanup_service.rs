@@ -12,7 +12,7 @@ use {
         blockstore_db::Result as BlockstoreResult,
     },
     solana_measure::measure::Measure,
-    solana_sdk::clock::{Slot, DEFAULT_TICKS_PER_SLOT, TICKS_PER_DAY},
+    miraland_sdk::clock::{Slot, DEFAULT_TICKS_PER_SLOT, TICKS_PER_DAY},
     std::{
         string::ToString,
         sync::{

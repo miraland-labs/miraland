@@ -9,7 +9,7 @@ use {
     indexmap::map::{Entry, IndexMap},
     rand::{thread_rng, Rng},
     solana_measure::measure::Measure,
-    solana_sdk::{
+    miraland_sdk::{
         pubkey::Pubkey, quic::QUIC_PORT_OFFSET, signature::Keypair, timing::AtomicInterval,
     },
     solana_streamer::{
@@ -655,7 +655,7 @@ mod tests {
         },
         rand::{Rng, SeedableRng},
         rand_chacha::ChaChaRng,
-        solana_sdk::{
+        miraland_sdk::{
             pubkey::Pubkey,
             quic::{
                 QUIC_MAX_UNSTAKED_CONCURRENT_STREAMS, QUIC_MIN_STAKED_CONCURRENT_STREAMS,

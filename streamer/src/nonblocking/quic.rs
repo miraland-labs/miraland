@@ -14,7 +14,7 @@ use {
     },
     rand::{thread_rng, Rng},
     solana_perf::packet::PacketBatch,
-    solana_sdk::{
+    miraland_sdk::{
         packet::{Packet, PACKET_DATA_SIZE},
         pubkey::Pubkey,
         quic::{
@@ -723,7 +723,7 @@ pub mod test {
         },
         crossbeam_channel::{unbounded, Receiver},
         quinn::{ClientConfig, IdleTimeout, VarInt},
-        solana_sdk::{
+        miraland_sdk::{
             quic::{QUIC_KEEP_ALIVE_MS, QUIC_MAX_TIMEOUT_MS},
             signature::Keypair,
             signer::Signer,

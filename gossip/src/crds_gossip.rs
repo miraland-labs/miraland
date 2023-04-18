@@ -20,7 +20,7 @@ use {
     itertools::Itertools,
     rayon::ThreadPool,
     solana_ledger::shred::Shred,
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
@@ -380,7 +380,7 @@ mod test {
     use {
         super::*,
         crate::crds_value::CrdsData,
-        solana_sdk::{hash::hash, timing::timestamp},
+        miraland_sdk::{hash::hash, timing::timestamp},
     };
 
     #[test]

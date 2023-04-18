@@ -3038,7 +3038,7 @@ Returns transaction details for a confirmed transaction
   - `transaction: <object|[string,encoding]>` - [Transaction](#transaction-structure) object, either in JSON format or encoded binary data, depending on encoding parameter
   - `blockTime: <i64|null>` - estimated production time, as Unix timestamp (seconds since the Unix epoch) of when the transaction was processed. null if not available
   - `meta: <object|null>` - transaction status metadata object:
-    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/solana-sdk/VERSION_FOR_DOCS_RS/solana_sdk/transaction/enum.TransactionError.html)
+    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/miraland-sdk/VERSION_FOR_DOCS_RS/miraland_sdk/transaction/enum.TransactionError.html)
     - `fee: <u64>` - fee this transaction was charged, as u64 integer
     - `preBalances: <array>` - array of u64 account balances from before the transaction was processed
     - `postBalances: <array>` - array of u64 account balances after the transaction was processed
@@ -5106,7 +5106,7 @@ Returns transaction details for a confirmed transaction
   - `transaction: <object|[string,encoding]>` - [Transaction](#transaction-structure) object, either in JSON format or encoded binary data, depending on encoding parameter
   - `blockTime: <i64|null>` - estimated production time, as Unix timestamp (seconds since the Unix epoch) of when the transaction was processed. null if not available
   - `meta: <object|null>` - transaction status metadata object:
-    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/solana-sdk/VERSION_FOR_DOCS_RS/solana_sdk/transaction/enum.TransactionError.html)
+    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/miraland-sdk/VERSION_FOR_DOCS_RS/miraland_sdk/transaction/enum.TransactionError.html)
     - `fee: <u64>` - fee this transaction was charged, as u64 integer
     - `preBalances: <array>` - array of u64 account balances from before the transaction was processed
     - `postBalances: <array>` - array of u64 account balances after the transaction was processed

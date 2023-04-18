@@ -1,7 +1,7 @@
 /**
  * @brief Example C-based BPF program uses sol_log_data
  */
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 
 static const uint8_t return_data[] = { 0x08, 0x01, 0x44 };
 

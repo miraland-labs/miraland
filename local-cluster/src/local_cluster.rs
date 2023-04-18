@@ -29,7 +29,7 @@ use {
         },
         snapshot_config::SnapshotConfig,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, AccountSharedData},
         client::SyncClient,
         clock::{Slot, DEFAULT_DEV_SLOTS_PER_EPOCH, DEFAULT_TICKS_PER_SLOT},

@@ -23,7 +23,7 @@ thiserror = "1.0"
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
 solana-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
-solana-sdk = { path = "../../sdk", version = "=1.14.17" }
+miraland-sdk = { path = "../../sdk", version = "=1.14.17" }
 
 [build-dependencies]
 rustc_version = "0.4"

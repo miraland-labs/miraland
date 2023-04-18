@@ -8,8 +8,8 @@ update_solana_dependencies() {
 
   sed -i -e "s#\(solana-program = \"\)[^\"]*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
   sed -i -e "s#\(solana-program-test = \"\)[^\"]*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
-  sed -i -e "s#\(solana-sdk = \"\).*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
-  sed -i -e "s#\(solana-sdk = { version = \"\)[^\"]*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
+  sed -i -e "s#\(miraland-sdk = \"\).*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
+  sed -i -e "s#\(miraland-sdk = { version = \"\)[^\"]*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
   sed -i -e "s#\(miraland-client = \"\)[^\"]*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
   sed -i -e "s#\(miraland-client = { version = \"\)[^\"]*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
   sed -i -e "s#\(solana-clap-utils = \"\)[^\"]*\(\"\)#\1=$miraland_ver\2#g" "${tomls[@]}" || return $?
@@ -32,7 +32,7 @@ solana-clap-utils = { path = "$miraland_dir/clap-utils" }
 miraland-client = { path = "$miraland_dir/client" }
 solana-program = { path = "$miraland_dir/sdk/program" }
 solana-program-test = { path = "$miraland_dir/program-test" }
-solana-sdk = { path = "$miraland_dir/sdk" }
+miraland-sdk = { path = "$miraland_dir/sdk" }
 miraland-faucet = { path = "$miraland_dir/faucet" }
 solana-zk-token-sdk = { path = "$miraland_dir/zk-token-sdk" }
 EOF

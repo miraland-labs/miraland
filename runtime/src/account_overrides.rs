@@ -1,5 +1,5 @@
 use {
-    solana_sdk::{account::AccountSharedData, pubkey::Pubkey, sysvar},
+    miraland_sdk::{account::AccountSharedData, pubkey::Pubkey, sysvar},
     std::collections::HashMap,
 };
 

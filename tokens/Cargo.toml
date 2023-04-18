@@ -25,7 +25,7 @@ serde = { version = "1.0", features = ["derive"] }
 solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
 solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
 solana-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
-solana-sdk = { path = "../sdk", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
 spl-associated-token-account = { version = "=1.1.2" }
 spl-token = { version = "=3.5.0", features = ["no-entrypoint"] }

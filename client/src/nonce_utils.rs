@@ -5,7 +5,7 @@ pub use crate::nonblocking::nonce_utils::{
 };
 use {
     crate::rpc_client::RpcClient,
-    solana_sdk::{account::Account, commitment_config::CommitmentConfig, pubkey::Pubkey},
+    miraland_sdk::{account::Account, commitment_config::CommitmentConfig, pubkey::Pubkey},
 };
 
 /// Get a nonce account from the network.

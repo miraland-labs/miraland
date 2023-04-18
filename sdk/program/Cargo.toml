@@ -33,7 +33,7 @@ sha2 = "0.10.0"
 sha3 = "0.10.0"
 solana-frozen-abi = { path = "../../frozen-abi", version = "=1.14.17" }
 solana-frozen-abi-macro = { path = "../../frozen-abi/macro", version = "=1.14.17" }
-solana-sdk-macro = { path = "../macro", version = "=1.14.17" }
+miraland-sdk-macro = { path = "../macro", version = "=1.14.17" }
 thiserror = "1.0"
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]

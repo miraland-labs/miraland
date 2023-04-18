@@ -27,7 +27,7 @@ use {
         verifier::RequisiteVerifier,
         vm::{EbpfVm, SyscallObject, SyscallRegistry},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{ReadableAccount, WritableAccount},
         account_info::AccountInfo,
         blake3, bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable,
@@ -1924,14 +1924,14 @@ declare_syscall!(
 #[cfg(test)]
 mod tests {
     #[allow(deprecated)]
-    use solana_sdk::sysvar::fees::Fees;
+    use miraland_sdk::sysvar::fees::Fees;
     use {
         super::*,
         solana_program_runtime::{invoke_context::InvokeContext, sysvar_cache::SysvarCache},
         solana_rbpf::{
             ebpf::HOST_ALIGN, memory_region::MemoryRegion, user_error::UserError, vm::Config,
         },
-        solana_sdk::{
+        miraland_sdk::{
             account::AccountSharedData,
             bpf_loader,
             fee_calculator::FeeCalculator,
@@ -2027,7 +2027,7 @@ mod tests {
     #[test]
     fn test_translate_type() {
         // Pubkey
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let addr = &pubkey as *const _ as u64;
         let config = Config::default();
         let memory_mapping = MemoryMapping::new::<UserError>(
@@ -2050,9 +2050,9 @@ mod tests {
 
         // Instruction
         let instruction = Instruction::new_with_bincode(
-            solana_sdk::pubkey::new_rand(),
+            miraland_sdk::pubkey::new_rand(),
             &"foobar",
-            vec![AccountMeta::new(solana_sdk::pubkey::new_rand(), false)],
+            vec![AccountMeta::new(miraland_sdk::pubkey::new_rand(), false)],
         );
         let addr = &instruction as *const _ as u64;
         let mut memory_region = MemoryRegion {
@@ -2169,7 +2169,7 @@ mod tests {
         );
 
         // Pubkeys
-        let mut data = vec![solana_sdk::pubkey::new_rand(); 5];
+        let mut data = vec![miraland_sdk::pubkey::new_rand(); 5];
         let addr = data.as_ptr() as *const _ as u64;
         let memory_mapping = MemoryMapping::new::<UserError>(
             vec![
@@ -2189,7 +2189,7 @@ mod tests {
             translate_slice::<Pubkey>(&memory_mapping, 0x100000000, data.len() as u64, true, true)
                 .unwrap();
         assert_eq!(data, translated_data);
-        *data.first_mut().unwrap() = solana_sdk::pubkey::new_rand(); // Both should point to same place
+        *data.first_mut().unwrap() = miraland_sdk::pubkey::new_rand(); // Both should point to same place
         assert_eq!(data, translated_data);
     }
 

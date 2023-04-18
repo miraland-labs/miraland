@@ -21,7 +21,7 @@ use {
         recycler::Recycler,
     },
     solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, SLOT_MS},
         pubkey::Pubkey,
         signature::Signable,
@@ -775,7 +775,7 @@ mod test {
         },
         solana_ledger::{blockstore::make_many_slot_entries, get_tmp_ledger_path, shred::Nonce},
         solana_runtime::{accounts_background_service::AbsRequestSender, bank_forks::BankForks},
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
         },

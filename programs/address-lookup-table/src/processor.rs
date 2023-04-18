@@ -7,7 +7,7 @@ use {
         },
     },
     solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         instruction::InstructionError,
         program_utils::limited_deserialize,

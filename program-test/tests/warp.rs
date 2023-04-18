@@ -6,7 +6,7 @@ use {
     solana_program_test::{
         processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestContext, ProgramTestError,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         account_info::{next_account_info, AccountInfo},
         clock::Clock,

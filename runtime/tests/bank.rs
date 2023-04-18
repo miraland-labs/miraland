@@ -1,6 +1,6 @@
 use {
     solana_runtime::bank::Bank,
-    solana_sdk::{genesis_config::create_genesis_config, hash::hash},
+    miraland_sdk::{genesis_config::create_genesis_config, hash::hash},
     std::{sync::Arc, thread::Builder},
 };
 
@@ -10,7 +10,7 @@ fn test_race_register_tick_freeze() {
 
     let (mut genesis_config, _) = create_genesis_config(50);
     genesis_config.ticks_per_slot = 1;
-    let p = solana_sdk::pubkey::new_rand();
+    let p = miraland_sdk::pubkey::new_rand();
     let hash = hash(p.as_ref());
 
     for _ in 0..1000 {

@@ -7,7 +7,7 @@ use {
         state::{AddressLookupTable, LOOKUP_TABLE_META_SIZE},
     },
     solana_program_test::*,
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot, instruction::InstructionError, pubkey::Pubkey, rent::Rent, signature::Signer,
         signer::keypair::Keypair, transaction::Transaction,
     },

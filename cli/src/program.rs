@@ -32,7 +32,7 @@ use {
         vm::{Config, VerifiedExecutable},
     },
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         account_utils::StateMut,
         bpf_loader, bpf_loader_deprecated,
@@ -2319,7 +2319,7 @@ mod tests {
         },
         miraland_cli_output::OutputFormat,
         serde_json::Value,
-        solana_sdk::signature::write_keypair_file,
+        miraland_sdk::signature::write_keypair_file,
     };
 
     fn make_tmp_path(name: &str) -> String {

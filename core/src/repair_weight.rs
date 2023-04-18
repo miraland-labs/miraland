@@ -12,7 +12,7 @@ use {
     },
     solana_measure::measure::Measure,
     solana_runtime::{contains::Contains, epoch_stakes::EpochStakes},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         epoch_schedule::{Epoch, EpochSchedule},
         hash::Hash,
@@ -653,7 +653,7 @@ mod test {
         super::*,
         solana_ledger::{blockstore::Blockstore, get_tmp_ledger_path},
         solana_runtime::{bank::Bank, bank_utils},
-        solana_sdk::hash::Hash,
+        miraland_sdk::hash::Hash,
         trees::tr,
     };
 

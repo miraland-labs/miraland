@@ -4,7 +4,7 @@ use {
     log::*,
     regex::Regex,
     solana_download_utils::download_file,
-    solana_sdk::signature::{write_keypair_file, Keypair},
+    miraland_sdk::signature::{write_keypair_file, Keypair},
     std::{
         borrow::Cow,
         collections::{HashMap, HashSet},
@@ -453,7 +453,7 @@ fn build_sbf_package(config: &Config, target_directory: &Path, package: &cargo_m
         }
     };
 
-    let legacy_program_feature_present = package.name == "solana-sdk";
+    let legacy_program_feature_present = package.name == "miraland-sdk";
     let root_package_dir = &package.manifest_path.parent().unwrap_or_else(|| {
         error!("Unable to get directory of {}", package.manifest_path);
         exit(1);

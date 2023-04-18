@@ -14,7 +14,7 @@ use {
         verifier::RequisiteVerifier,
         vm::{Config, DynamicAnalysis, VerifiedExecutable},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData, bpf_loader, instruction::AccountMeta, pubkey::Pubkey,
         sysvar::rent::Rent, transaction_context::TransactionContext,
     },
@@ -172,7 +172,7 @@ native machine code before execting it in the virtual machine.",
     let mut transaction_accounts = vec![
         (
             loader_id,
-            AccountSharedData::new(0, 0, &solana_sdk::native_loader::id()),
+            AccountSharedData::new(0, 0, &miraland_sdk::native_loader::id()),
         ),
         (
             Pubkey::new_unique(),

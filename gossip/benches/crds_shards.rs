@@ -9,7 +9,7 @@ use {
         crds_value::CrdsValue,
     },
     rand::{thread_rng, Rng},
-    solana_sdk::timing::timestamp,
+    miraland_sdk::timing::timestamp,
     std::iter::repeat_with,
     test::Bencher,
 };

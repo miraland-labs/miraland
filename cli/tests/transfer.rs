@@ -15,7 +15,7 @@ use {
     },
     miraland_faucet::faucet::run_local_faucet,
     miraland_test_validator::TestValidator,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         fee::FeeStructure,
         native_token::sol_to_lamports,

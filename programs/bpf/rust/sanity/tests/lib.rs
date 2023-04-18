@@ -3,7 +3,7 @@
 use {
     solana_bpf_rust_sanity::process_instruction,
     solana_program_test::*,
-    solana_sdk::{
+    miraland_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         signature::{Keypair, Signer},

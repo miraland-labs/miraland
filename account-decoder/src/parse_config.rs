@@ -6,7 +6,7 @@ use {
     bincode::deserialize,
     serde_json::Value,
     solana_config_program::{get_config_data, ConfigKeys},
-    solana_sdk::{
+    miraland_sdk::{
         pubkey::Pubkey,
         stake::config::{self as stake_config, Config as StakeConfig},
     },
@@ -93,7 +93,7 @@ pub struct UiConfig<T> {
 mod test {
     use {
         super::*, crate::validator_info::ValidatorInfo, serde_json::json,
-        solana_config_program::create_config_account, solana_sdk::account::ReadableAccount,
+        solana_config_program::create_config_account, miraland_sdk::account::ReadableAccount,
     };
 
     #[test]
@@ -117,7 +117,7 @@ mod test {
             }))
             .unwrap(),
         };
-        let info_pubkey = solana_sdk::pubkey::new_rand();
+        let info_pubkey = miraland_sdk::pubkey::new_rand();
         let validator_info_config_account = create_config_account(
             vec![(validator_info::id(), false), (info_pubkey, true)],
             &validator_info,

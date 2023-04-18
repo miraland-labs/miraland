@@ -13,7 +13,7 @@ use {
         snapshot_package::{retain_max_n_elements, PendingSnapshotPackage, SnapshotType},
         snapshot_utils,
     },
-    solana_sdk::{clock::Slot, hash::Hash},
+    miraland_sdk::{clock::Slot, hash::Hash},
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -230,7 +230,7 @@ mod tests {
                 self, ArchiveFormat, SnapshotVersion, SNAPSHOT_STATUS_CACHE_FILENAME,
             },
         },
-        solana_sdk::hash::Hash,
+        miraland_sdk::hash::Hash,
         std::{
             fs::{self, remove_dir_all, OpenOptions},
             io::Write,

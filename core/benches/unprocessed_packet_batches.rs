@@ -16,7 +16,7 @@ use {
         bank_forks::BankForks,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
     },
-    solana_sdk::{hash::Hash, signature::Keypair, system_transaction},
+    miraland_sdk::{hash::Hash, signature::Keypair, system_transaction},
     std::sync::{Arc, RwLock},
     test::Bencher,
 };
@@ -27,7 +27,7 @@ fn build_packet_batch(packet_per_batch_count: usize) -> (PacketBatch, Vec<usize>
             .map(|sender_stake| {
                 let tx = system_transaction::transfer(
                     &Keypair::new(),
-                    &solana_sdk::pubkey::new_rand(),
+                    &miraland_sdk::pubkey::new_rand(),
                     1,
                     Hash::new_unique(),
                 );
@@ -51,7 +51,7 @@ fn build_randomized_packet_batch(packet_per_batch_count: usize) -> (PacketBatch,
             .map(|_| {
                 let tx = system_transaction::transfer(
                     &Keypair::new(),
-                    &solana_sdk::pubkey::new_rand(),
+                    &miraland_sdk::pubkey::new_rand(),
                     1,
                     Hash::new_unique(),
                 );

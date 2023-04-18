@@ -24,7 +24,7 @@ mod test {
         super::*,
         crate::parse_token::test::*,
         serde_json::Value,
-        solana_sdk::pubkey::Pubkey,
+        miraland_sdk::pubkey::Pubkey,
         spl_token_2022::{instruction::*, solana_program::message::Message},
     };
 

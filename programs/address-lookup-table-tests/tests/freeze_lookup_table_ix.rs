@@ -7,7 +7,7 @@ use {
         instruction::freeze_lookup_table, state::AddressLookupTable,
     },
     solana_program_test::*,
-    solana_sdk::{
+    miraland_sdk::{
         instruction::InstructionError,
         pubkey::Pubkey,
         signature::{Keypair, Signer},

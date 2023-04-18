@@ -15,7 +15,7 @@ use {
         bank::*,
         rent_collector::RentCollector,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount},
         genesis_config::{create_genesis_config, ClusterType},
         hash::Hash,
@@ -34,7 +34,7 @@ use {
 
 fn deposit_many(bank: &Bank, pubkeys: &mut Vec<Pubkey>, num: usize) -> Result<(), LamportsError> {
     for t in 0..num {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let account =
             AccountSharedData::new((t + 1) as u64, 0, AccountSharedData::default().owner());
         pubkeys.push(pubkey);
@@ -185,7 +185,7 @@ fn bench_delete_dependencies(bencher: &mut Bencher) {
     let mut old_pubkey = Pubkey::default();
     let zero_account = AccountSharedData::new(0, 0, AccountSharedData::default().owner());
     for i in 0..1000 {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let account =
             AccountSharedData::new((i + 1) as u64, 0, AccountSharedData::default().owner());
         accounts.store_slow_uncached(i, &pubkey, &account);
@@ -222,7 +222,7 @@ fn store_accounts_with_possible_contention<F: 'static>(
     let pubkeys: Arc<Vec<_>> = Arc::new(
         (0..num_keys)
             .map(|_| {
-                let pubkey = solana_sdk::pubkey::new_rand();
+                let pubkey = miraland_sdk::pubkey::new_rand();
                 let account = AccountSharedData::new(1, 0, AccountSharedData::default().owner());
                 accounts.store_slow_uncached(slot, &pubkey, &account);
                 pubkey
@@ -250,7 +250,7 @@ fn store_accounts_with_possible_contention<F: 'static>(
             // Write to a different slot than the one being read from. Because
             // there's a new account pubkey being written to every time, will
             // compete for the accounts index lock on every store
-            accounts.store_slow_uncached(slot + 1, &solana_sdk::pubkey::new_rand(), account);
+            accounts.store_slow_uncached(slot + 1, &miraland_sdk::pubkey::new_rand(), account);
         }
     })
 }

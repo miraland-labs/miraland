@@ -3,7 +3,7 @@ use {
     solana_runtime::transaction_priority_details::{
         GetTransactionPriorityDetails, TransactionPriorityDetails,
     },
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         message::Message,
         sanitize::SanitizeError,
@@ -118,14 +118,14 @@ fn packet_message(packet: &Packet) -> Result<&[u8], DeserializedPacketError> {
 mod tests {
     use {
         super::*,
-        solana_sdk::{signature::Keypair, system_transaction},
+        miraland_sdk::{signature::Keypair, system_transaction},
     };
 
     #[test]
     fn simple_deserialized_packet() {
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );

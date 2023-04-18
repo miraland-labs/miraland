@@ -57,7 +57,7 @@ use {
     rand::{thread_rng, Rng},
     solana_core::serve_repair::{RepairProtocol, RepairRequestHeader, ServeRepair},
     solana_measure::measure::Measure,
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         instruction::CompiledInstruction,
         message::Message,
@@ -418,7 +418,7 @@ fn get_target(
     let mut target = None;
     if nodes.is_empty() {
         // skip-gossip case
-        target = Some((solana_sdk::pubkey::new_rand(), entrypoint_addr));
+        target = Some((miraland_sdk::pubkey::new_rand(), entrypoint_addr));
     } else {
         info!("************ NODE ***********");
         for node in nodes {
@@ -795,7 +795,7 @@ pub mod test {
         },
         solana_core::validator::ValidatorConfig,
         solana_rpc::rpc::JsonRpcConfig,
-        solana_sdk::timing::timestamp,
+        miraland_sdk::timing::timestamp,
     };
 
     const TEST_SEND_BATCH_SIZE: usize = 1;
@@ -809,7 +809,7 @@ pub mod test {
     #[test]
     fn test_dos() {
         let nodes = [ContactInfo::new_localhost(
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             timestamp(),
         )];
         let entrypoint_addr = nodes[0].gossip;

@@ -39,7 +39,7 @@ use {
     lru::LruCache,
     matches::debug_assert_matches,
     rayon::{prelude::*, ThreadPool},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::{hash, Hash},
         pubkey::Pubkey,
@@ -723,7 +723,7 @@ mod tests {
         rand::{thread_rng, Rng, SeedableRng},
         rand_chacha::ChaChaRng,
         rayon::ThreadPoolBuilder,
-        solana_sdk::{
+        miraland_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
@@ -1438,7 +1438,7 @@ mod tests {
     fn test_label_order() {
         let v1 = VersionedCrdsValue::new(
             CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ContactInfo::new_localhost(
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
                 0,
             ))),
             Cursor::default(),
@@ -1446,7 +1446,7 @@ mod tests {
         );
         let v2 = VersionedCrdsValue::new(
             CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ContactInfo::new_localhost(
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
                 0,
             ))),
             Cursor::default(),

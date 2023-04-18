@@ -5,7 +5,7 @@
 //! In Solana, programs execute instructions, and clients submit sequences
 //! of instructions to the network to be atomically executed as [`Transaction`]s.
 //!
-//! [`Transaction`]: https://docs.rs/solana-sdk/latest/solana-sdk/transaction/struct.Transaction.html
+//! [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland-sdk/transaction/struct.Transaction.html
 //!
 //! A [`Message`] is the compact internal encoding of a transaction, as
 //! transmitted across the network and stored in, and operated on, by the

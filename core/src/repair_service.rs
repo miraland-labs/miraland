@@ -17,7 +17,7 @@ use {
     solana_ledger::blockstore::{Blockstore, SlotMeta},
     solana_measure::measure::Measure,
     solana_runtime::{bank_forks::BankForks, contains::Contains},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot, epoch_schedule::EpochSchedule, hash::Hash, pubkey::Pubkey,
         signer::keypair::Keypair,
     },
@@ -35,7 +35,7 @@ use {
     },
 };
 #[cfg(test)]
-use {solana_ledger::shred::Nonce, solana_sdk::timing::timestamp};
+use {solana_ledger::shred::Nonce, miraland_sdk::timing::timestamp};
 
 pub type DuplicateSlotsResetSender = CrossbeamSender<Vec<(Slot, Hash)>>;
 pub type DuplicateSlotsResetReceiver = CrossbeamReceiver<Vec<(Slot, Hash)>>;
@@ -739,7 +739,7 @@ mod test {
             shred::max_ticks_per_n_shreds,
         },
         solana_runtime::bank::Bank,
-        solana_sdk::signature::Keypair,
+        miraland_sdk::signature::Keypair,
         solana_streamer::socket::SocketAddrSpace,
         std::collections::HashSet,
     };

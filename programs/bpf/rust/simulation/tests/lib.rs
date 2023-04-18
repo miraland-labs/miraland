@@ -3,7 +3,7 @@
 use {
     solana_bpf_rust_simulation::process_instruction,
     solana_program_test::{processor, tokio, ProgramTest},
-    solana_sdk::{
+    miraland_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         signature::Signer,

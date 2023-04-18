@@ -19,7 +19,7 @@ use {
     serial_test::serial,
     solana_core::validator::ValidatorConfig,
     solana_rpc::rpc::JsonRpcConfig,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         signature::{Keypair, Signer},
     },

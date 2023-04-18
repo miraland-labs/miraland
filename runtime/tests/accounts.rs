@@ -6,7 +6,7 @@ use {
         accounts_db::{AccountsDb, LoadHint},
         ancestors::Ancestors,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         clock::Slot,
         genesis_config::ClusterType,
@@ -49,7 +49,7 @@ fn test_shrink_and_clean() {
         for current_slot in 0..100 {
             while alive_accounts.len() <= 10 {
                 alive_accounts.push((
-                    solana_sdk::pubkey::new_rand(),
+                    miraland_sdk::pubkey::new_rand(),
                     AccountSharedData::new(thread_rng().gen_range(0, 50), 0, &owner),
                 ));
             }
@@ -78,7 +78,7 @@ fn test_shrink_and_clean() {
 #[test]
 fn test_bad_bank_hash() {
     solana_logger::setup();
-    use solana_sdk::signature::{Keypair, Signer};
+    use miraland_sdk::signature::{Keypair, Signer};
     let db = AccountsDb::new_for_tests(Vec::new(), &ClusterType::Development);
 
     let some_slot: Slot = 0;

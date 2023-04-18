@@ -8,7 +8,7 @@ use {
         state::{AddressLookupTable, LookupTableMeta},
     },
     solana_program_test::*,
-    solana_sdk::{
+    miraland_sdk::{
         account::{ReadableAccount, WritableAccount},
         clock::Clock,
         instruction::{Instruction, InstructionError},

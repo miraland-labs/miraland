@@ -1,5 +1,5 @@
 //! Helper types and functions for handling and dealing with snapshot hashes.
-use solana_sdk::{clock::Slot, hash::Hash};
+use miraland_sdk::{clock::Slot, hash::Hash};
 
 /// At startup, when loading from snapshots, the starting snapshot hashes need to be passed to
 /// SnapshotPackagerService, which is in charge of pushing the hashes to CRDS.  This struct wraps
