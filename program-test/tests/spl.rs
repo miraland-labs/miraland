@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         bpf_loader, bpf_loader_upgradeable,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,

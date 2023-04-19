@@ -1,7 +1,7 @@
 //! A poh_timing_reporter module implement poh timing point and timing reporter
 //! structs.
 use {
-    miraland_sdk::clock::Slot,
+    solana_sdk::clock::Slot,
     solana_metrics::{datapoint_info, poh_timing_point::PohTimingPoint},
     std::{collections::HashMap, fmt},
 };

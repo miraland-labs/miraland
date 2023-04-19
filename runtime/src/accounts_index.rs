@@ -13,7 +13,7 @@ use {
         secondary_index::*,
     },
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         account::ReadableAccount,
         clock::{BankId, Slot},
         pubkey::Pubkey,
@@ -25,7 +25,7 @@ use {
         iter::{IntoParallelIterator, ParallelIterator},
         ThreadPool,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     std::{
         collections::{btree_map::BTreeMap, HashSet},
         fmt::Debug,
@@ -1994,7 +1994,7 @@ pub mod tests {
     use {
         super::*,
         crate::inline_spl_token::*,
-        miraland_sdk::{
+        solana_sdk::{
             account::{AccountSharedData, WritableAccount},
             pubkey::PUBKEY_BYTES,
             signature::{Keypair, Signer},
@@ -2901,7 +2901,7 @@ pub mod tests {
         let root_slot = 0;
 
         let mut pubkeys: Vec<Pubkey> = std::iter::repeat_with(|| {
-            let new_pubkey = miraland_sdk::pubkey::new_rand();
+            let new_pubkey = solana_sdk::pubkey::new_rand();
             index.upsert(
                 root_slot,
                 root_slot,
@@ -3065,7 +3065,7 @@ pub mod tests {
         index.upsert(
             0,
             0,
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             &AccountSharedData::default(),
             &AccountSecondaryIndexes::default(),
             true,
@@ -4062,8 +4062,8 @@ pub mod tests {
     fn test_clean_rooted_entries_return() {
         solana_logger::setup();
         let value = true;
-        let key = miraland_sdk::pubkey::new_rand();
-        let key_unknown = miraland_sdk::pubkey::new_rand();
+        let key = solana_sdk::pubkey::new_rand();
+        let key_unknown = solana_sdk::pubkey::new_rand();
         let index = AccountsIndex::<bool>::default_for_tests();
         let slot1 = 1;
 
@@ -4164,7 +4164,7 @@ pub mod tests {
 
     #[test]
     fn test_handle_dead_keys_return() {
-        let key = miraland_sdk::pubkey::new_rand();
+        let key = solana_sdk::pubkey::new_rand();
         let index = AccountsIndex::<bool>::default_for_tests();
 
         assert_eq!(

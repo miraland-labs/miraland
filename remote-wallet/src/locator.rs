@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::pubkey::{ParsePubkeyError, Pubkey},
+    solana_sdk::pubkey::{ParsePubkeyError, Pubkey},
     std::{
         convert::{Infallible, TryFrom, TryInto},
         str::FromStr,

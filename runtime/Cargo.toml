@@ -1,12 +1,12 @@
 [package]
-name = "solana-runtime"
+name = "miraland-runtime"
 version = "1.14.17"
-description = "Solana runtime"
+description = "Miraland runtime"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-runtime"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-runtime"
 edition = "2021"
 
 [dependencies]
@@ -41,20 +41,20 @@ rayon = "1.5.3"
 regex = "1.5.6"
 serde = { version = "1.0.138", features = ["rc"] }
 serde_derive = "1.0.103"
-solana-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
-solana-bucket-map = { path = "../bucket_map", version = "=1.14.17" }
-solana-compute-budget-program = { path = "../programs/compute-budget", version = "=1.14.17" }
-solana-config-program = { path = "../programs/config", version = "=1.14.17" }
-solana-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
-solana-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
-solana-measure = { path = "../measure", version = "=1.14.17" }
-solana-metrics = { path = "../metrics", version = "=1.14.17" }
-solana-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
-solana-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
-solana-stake-program = { path = "../programs/stake", version = "=1.14.17" }
-solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
-solana-zk-token-proof-program = { path = "../programs/zk-token-proof", version = "=1.14.17" }
-solana-zk-token-sdk = { path = "../zk-token-sdk", version = "=1.14.17" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
+miraland-bucket-map = { path = "../bucket_map", version = "=1.14.17" }
+miraland-compute-budget-program = { path = "../programs/compute-budget", version = "=1.14.17" }
+miraland-config-program = { path = "../programs/config", version = "=1.14.17" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
+miraland-measure = { path = "../measure", version = "=1.14.17" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17" }
+miraland-zk-token-proof-program = { path = "../programs/zk-token-proof", version = "=1.14.17" }
+miraland-zk-token-sdk = { path = "../zk-token-sdk", version = "=1.14.17" }
 strum = { version = "0.24", features = ["derive"] }
 strum_macros = "0.24"
 symlink = "0.1.0"
@@ -72,7 +72,7 @@ assert_matches = "1.5.0"
 ed25519-dalek = "=1.0.1"
 libsecp256k1 = "0.6.0"
 rand_chacha = "0.2.2"
-solana-logger = { path = "../logger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

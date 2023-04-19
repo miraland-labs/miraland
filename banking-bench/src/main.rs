@@ -5,7 +5,7 @@ use {
     log::*,
     miraland_client::connection_cache::{ConnectionCache, DEFAULT_TPU_CONNECTION_POOL_SIZE},
     miraland_gossip::cluster_info::{ClusterInfo, Node},
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         signature::{Keypair, Signature},
         system_transaction,
@@ -21,9 +21,9 @@ use {
         get_tmp_ledger_path,
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_perf::packet::{to_packet_batches, PacketBatch},
-    solana_poh::poh_recorder::{create_test_recorder, PohRecorder, WorkingBankEntry},
+    miraland_poh::poh_recorder::{create_test_recorder, PohRecorder, WorkingBankEntry},
     solana_runtime::{
         accounts_background_service::AbsRequestSender, bank::Bank, bank_forks::BankForks,
         cost_model::CostModel,
@@ -97,7 +97,7 @@ fn make_accounts_txs(
     hash: Hash,
     contention: WriteLockContention,
 ) -> Vec<Transaction> {
-    use miraland_sdk::pubkey;
+    use solana_sdk::pubkey;
     let to_pubkey = pubkey::new_rand();
     let chunk_pubkeys: Vec<pubkey::Pubkey> = (0..total_num_transactions / packets_per_batch)
         .map(|_| pubkey::new_rand())
@@ -371,7 +371,7 @@ fn main() {
         let base_tx_count = bank.transaction_count();
         let mut txs_processed = 0;
         let mut root = 1;
-        let collector = miraland_sdk::pubkey::new_rand();
+        let collector = solana_sdk::pubkey::new_rand();
         let mut total_sent = 0;
         for current_iteration_index in 0..iterations {
             trace!("RUNNING ITERATION {}", current_iteration_index);

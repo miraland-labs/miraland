@@ -5,11 +5,11 @@
 use {
     crate::banking_stage::{BatchedTransactionDetails, CommitTransactionDetails},
     crossbeam_channel::{unbounded, Receiver, Sender},
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         transaction::{self, SanitizedTransaction, TransactionError},
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::{
         bank::Bank,
         cost_model::{CostModel, TransactionCost},
@@ -551,7 +551,7 @@ mod tests {
     use {
         super::*,
         itertools::Itertools,
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             system_transaction,

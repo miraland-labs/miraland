@@ -1,6 +1,6 @@
 use {
     super::*,
-    solana_account_decoder::parse_token_extension::UiConfidentialTransferMint,
+    miraland_account_decoder::parse_token_extension::UiConfidentialTransferMint,
     spl_token_2022::{
         extension::confidential_transfer::{instruction::*, ConfidentialTransferMint},
         instruction::{decode_instruction_data, decode_instruction_type},

@@ -2,7 +2,7 @@
  * @brief Example C-based BPF program that exercises duplicate keyed ka
  * passed to it
  */
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 /**
  * Custom error for when input serialization fails

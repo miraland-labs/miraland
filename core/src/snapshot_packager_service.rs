@@ -2,7 +2,7 @@ use {
     miraland_gossip::cluster_info::{
         ClusterInfo, MAX_INCREMENTAL_SNAPSHOT_HASHES, MAX_SNAPSHOT_HASHES,
     },
-    miraland_sdk::{clock::Slot, hash::Hash},
+    solana_sdk::{clock::Slot, hash::Hash},
     solana_perf::thread::renice_this_thread,
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
@@ -221,7 +221,7 @@ mod tests {
     use {
         super::*,
         bincode::serialize_into,
-        miraland_sdk::hash::Hash,
+        solana_sdk::hash::Hash,
         solana_runtime::{
             accounts_db::AccountStorageEntry,
             bank::BankSlotDelta,

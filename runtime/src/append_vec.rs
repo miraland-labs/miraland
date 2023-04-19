@@ -7,7 +7,7 @@
 use {
     log::*,
     memmap2::MmapMut,
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, AccountSharedData, ReadableAccount},
         clock::{Epoch, Slot},
         hash::Hash,
@@ -570,7 +570,7 @@ pub mod tests {
     use {
         super::{test_utils::*, *},
         assert_matches::assert_matches,
-        miraland_sdk::{account::WritableAccount, timing::duration_as_ms},
+        solana_sdk::{account::WritableAccount, timing::duration_as_ms},
         rand::{thread_rng, Rng},
         std::time::Instant,
     };
@@ -789,7 +789,7 @@ pub mod tests {
         let mut av = AppendVec::new(path, true, 1024 * 1024);
         av.set_no_remove_on_drop();
 
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let owner = Pubkey::default();
         let data_len = 3_u64;
         let mut account = AccountSharedData::new(0, data_len as usize, &owner);

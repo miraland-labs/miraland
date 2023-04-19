@@ -3,10 +3,10 @@ pub mod config_instruction;
 pub mod config_processor;
 pub mod date_instruction;
 
-pub use miraland_sdk::config::program::id;
+pub use solana_sdk::config::program::id;
 use {
     bincode::{deserialize, serialize, serialized_size},
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, AccountSharedData},
         pubkey::Pubkey,
         short_vec,

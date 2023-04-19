@@ -13,7 +13,7 @@ edition = "2021"
 [features]
 # "program" feature is a legacy feature retained to support v1.3 and older
 # programs.  New development should not use this feature.  Instead use the
-# solana-program crate
+# miraland-program crate
 program = []
 
 default = [
@@ -30,7 +30,7 @@ full = [
     "serde_json",
     "ed25519-dalek",
     "ed25519-dalek-bip32",
-    "solana-logger",
+    "miraland-logger",
     "libsecp256k1",
     "sha3",
     "digest",
@@ -72,10 +72,10 @@ serde_derive = "1.0.103"
 serde_json = { version = "1.0.81", optional = true }
 sha2 = "0.10.2"
 sha3 = { version = "0.10.1", optional = true }
-solana-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
-solana-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17", optional = true }
-solana-program = { path = "program", version = "=1.14.17" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17", optional = true }
+miraland-program = { path = "program", version = "=1.14.17" }
 thiserror = "1.0"
 uriparse = "0.6.4"
 wasm-bindgen = "0.2"
@@ -98,3 +98,4 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
+name = "solana_sdk"

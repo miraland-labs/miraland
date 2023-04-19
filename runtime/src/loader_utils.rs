@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         client::Client,
         instruction::{AccountMeta, Instruction},

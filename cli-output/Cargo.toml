@@ -6,7 +6,7 @@ description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-cli-output"
 
 [dependencies]
@@ -24,10 +24,10 @@ pretty-hex = "0.3.0"
 semver = "1.0.10"
 serde = "1.0.138"
 serde_json = "1.0.81"
-solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
-solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
-solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 spl-memo = { version = "=3.0.1", features = ["no-entrypoint"] }
 
 [dev-dependencies]

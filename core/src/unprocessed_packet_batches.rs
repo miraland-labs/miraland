@@ -1,6 +1,6 @@
 use {
     min_max_heap::MinMaxHeap,
-    miraland_sdk::{
+    solana_sdk::{
         feature_set,
         hash::Hash,
         message::Message,
@@ -448,7 +448,7 @@ pub fn transaction_from_deserialized_packet(
 mod tests {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             signature::{Keypair, Signer},
             system_transaction,
             transaction::{SimpleAddressLoader, Transaction},
@@ -460,7 +460,7 @@ mod tests {
     fn simmple_deserialized_packet() -> DeserializedPacket {
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );
@@ -471,7 +471,7 @@ mod tests {
     fn packet_with_priority_details(priority: u64, compute_unit_limit: u64) -> DeserializedPacket {
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );
@@ -605,7 +605,7 @@ mod tests {
 
     #[test]
     fn test_transaction_from_deserialized_packet() {
-        use miraland_sdk::feature_set::FeatureSet;
+        use solana_sdk::feature_set::FeatureSet;
         let keypair = Keypair::new();
         let transfer_tx =
             system_transaction::transfer(&keypair, &keypair.pubkey(), 1, Hash::default());

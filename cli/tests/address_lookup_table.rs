@@ -8,7 +8,7 @@ use {
     },
     miraland_cli_output::{CliAddressLookupTable, CliAddressLookupTableCreated, OutputFormat},
     miraland_faucet::faucet::run_local_faucet,
-    miraland_sdk::{
+    solana_sdk::{
         native_token::LAMPORTS_PER_SOL,
         pubkey::Pubkey,
         signature::{Keypair, Signer},

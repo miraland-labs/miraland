@@ -17,7 +17,7 @@ use {
     },
     bip39::{Language, Mnemonic, Seed},
     clap::ArgMatches,
-    miraland_sdk::{
+    solana_sdk::{
         derivation_path::{DerivationPath, DerivationPathError},
         hash::Hash,
         message::Message,
@@ -135,8 +135,8 @@ impl DefaultSigner {
     ///
     /// ```no_run
     /// use clap::{App, Arg, value_t_or_exit};
-    /// use solana_clap_utils::keypair::DefaultSigner;
-    /// use solana_clap_utils::offline::OfflineArgs;
+    /// use miraland_clap_utils::keypair::DefaultSigner;
+    /// use miraland_clap_utils::offline::OfflineArgs;
     ///
     /// let clap_app = App::new("my-program")
     ///     // The argument we'll parse as a signer "path"
@@ -205,9 +205,9 @@ impl DefaultSigner {
     ///
     /// ```no_run
     /// use clap::{App, Arg, value_t_or_exit};
-    /// use solana_clap_utils::keypair::{DefaultSigner, signer_from_path};
-    /// use solana_clap_utils::offline::OfflineArgs;
-    /// use miraland_sdk::signer::Signer;
+    /// use miraland_clap_utils::keypair::{DefaultSigner, signer_from_path};
+    /// use miraland_clap_utils::offline::OfflineArgs;
+    /// use solana_sdk::signer::Signer;
     ///
     /// let clap_app = App::new("my-program")
     ///     // The argument we'll parse as a signer "path"
@@ -280,8 +280,8 @@ impl DefaultSigner {
     ///
     /// ```no_run
     /// use clap::{App, Arg, value_t_or_exit};
-    /// use solana_clap_utils::keypair::DefaultSigner;
-    /// use solana_clap_utils::offline::OfflineArgs;
+    /// use miraland_clap_utils::keypair::DefaultSigner;
+    /// use miraland_clap_utils::offline::OfflineArgs;
     ///
     /// let clap_app = App::new("my-program")
     ///     // The argument we'll parse as a signer "path"
@@ -327,8 +327,8 @@ impl DefaultSigner {
     ///
     /// ```no_run
     /// use clap::{App, Arg, value_t_or_exit};
-    /// use solana_clap_utils::keypair::{SignerFromPathConfig, DefaultSigner};
-    /// use solana_clap_utils::offline::OfflineArgs;
+    /// use miraland_clap_utils::keypair::{SignerFromPathConfig, DefaultSigner};
+    /// use miraland_clap_utils::offline::OfflineArgs;
     ///
     /// let clap_app = App::new("my-program")
     ///     // The argument we'll parse as a signer "path"
@@ -661,8 +661,8 @@ pub struct SignerFromPathConfig {
 ///
 /// ```no_run
 /// use clap::{App, Arg, value_t_or_exit};
-/// use solana_clap_utils::keypair::signer_from_path;
-/// use solana_clap_utils::offline::OfflineArgs;
+/// use miraland_clap_utils::keypair::signer_from_path;
+/// use miraland_clap_utils::offline::OfflineArgs;
 ///
 /// let clap_app = App::new("my-program")
 ///     // The argument we'll parse as a signer "path"
@@ -721,8 +721,8 @@ pub fn signer_from_path(
 ///
 /// ```no_run
 /// use clap::{App, Arg, value_t_or_exit};
-/// use solana_clap_utils::keypair::{signer_from_path_with_config, SignerFromPathConfig};
-/// use solana_clap_utils::offline::OfflineArgs;
+/// use miraland_clap_utils::keypair::{signer_from_path_with_config, SignerFromPathConfig};
+/// use miraland_clap_utils::offline::OfflineArgs;
 ///
 /// let clap_app = App::new("my-program")
 ///     // The argument we'll parse as a signer "path"
@@ -837,7 +837,7 @@ pub fn signer_from_path_with_config(
 ///
 /// ```no_run
 /// use clap::{App, Arg, value_t_or_exit};
-/// use solana_clap_utils::keypair::pubkey_from_path;
+/// use miraland_clap_utils::keypair::pubkey_from_path;
 ///
 /// let clap_app = App::new("my-program")
 ///     // The argument we'll parse as a signer "path"
@@ -976,7 +976,7 @@ pub fn prompt_passphrase(prompt: &str) -> Result<String, Box<dyn error::Error>> 
 ///
 /// ```no_run
 /// use clap::{App, Arg, value_t_or_exit};
-/// use solana_clap_utils::keypair::keypair_from_path;
+/// use miraland_clap_utils::keypair::keypair_from_path;
 ///
 /// let clap_app = App::new("my-program")
 ///     // The argument we'll parse as a signer "path"
@@ -1127,7 +1127,7 @@ mod tests {
         super::*,
         crate::offline::OfflineArgs,
         clap::{value_t_or_exit, App, Arg},
-        miraland_sdk::{signer::keypair::write_keypair_file, system_instruction},
+        solana_sdk::{signer::keypair::write_keypair_file, system_instruction},
         solana_remote_wallet::{locator::Manufacturer, remote_wallet::initialize_wallet_manager},
         tempfile::{NamedTempFile, TempDir},
     };

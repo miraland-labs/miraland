@@ -2,7 +2,7 @@
 use {
     bincode::deserialize,
     log::debug,
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         account_info::{next_account_info, AccountInfo},
         clock::Clock,

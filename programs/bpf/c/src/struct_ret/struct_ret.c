@@ -1,4 +1,4 @@
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 /**
  * Custom error for when struct doesn't add to 12

@@ -6,7 +6,7 @@ edition = "2021"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-tokens"
 
 [dependencies]
@@ -23,10 +23,10 @@ miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-version = { path = "../version", version = "=1.14.17" }
 pickledb = { version = "0.5.1", default-features = false, features = ["yaml"] }
 serde = { version = "1.0", features = ["derive"] }
-solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
-solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-solana-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
-solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
 spl-associated-token-account = { version = "=1.1.2" }
 spl-token = { version = "=3.5.0", features = ["no-entrypoint"] }
 tempfile = "3.3.0"
@@ -35,5 +35,5 @@ thiserror = "1.0"
 [dev-dependencies]
 bincode = "1.3.3"
 miraland-test-validator = { path = "../test-validator", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17" }
-solana-streamer = { path = "../streamer", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17" }

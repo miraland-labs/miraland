@@ -18,16 +18,16 @@ use {
         cluster_info::{ClusterInfo, ClusterInfoError},
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         pubkey::Pubkey,
         signature::Keypair,
         timing::{timestamp, AtomicInterval},
     },
     solana_ledger::{blockstore::Blockstore, shred::Shred},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_metrics::{inc_new_counter_error, inc_new_counter_info},
-    solana_poh::poh_recorder::WorkingBankEntry,
+    miraland_poh::poh_recorder::WorkingBankEntry,
     solana_runtime::bank_forks::BankForks,
     solana_streamer::{
         sendmmsg::{batch_send, SendPktsError},
@@ -438,12 +438,12 @@ pub mod test {
         super::*,
         crossbeam_channel::unbounded,
         miraland_gossip::cluster_info::{ClusterInfo, Node},
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash,
             pubkey::Pubkey,
             signature::{Keypair, Signer},
         },
-        solana_entry::entry::create_ticks,
+        miraland_entry::entry::create_ticks,
         solana_ledger::{
             blockstore::Blockstore,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},

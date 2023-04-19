@@ -9,7 +9,7 @@ use {
     byteorder::{ByteOrder, LittleEndian},
     crossbeam_channel::{unbounded, Sender},
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         instruction::Instruction,
         message::Message,
@@ -493,7 +493,7 @@ impl LimitByTime for Pubkey {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, miraland_sdk::system_instruction::SystemInstruction, std::time::Duration};
+    use {super::*, solana_sdk::system_instruction::SystemInstruction, std::time::Duration};
 
     #[test]
     fn test_check_time_request_limit() {
@@ -650,7 +650,7 @@ mod tests {
 
     #[test]
     fn test_process_faucet_request() {
-        let to = miraland_sdk::pubkey::new_rand();
+        let to = solana_sdk::pubkey::new_rand();
         let blockhash = Hash::new(to.as_ref());
         let lamports = 50;
         let req = FaucetRequest::GetAirdrop {

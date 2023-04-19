@@ -7,7 +7,7 @@ use {
     crossbeam_channel::Sender,
     futures_util::stream::StreamExt,
     indexmap::map::{Entry, IndexMap},
-    miraland_sdk::{
+    solana_sdk::{
         packet::{Packet, PACKET_DATA_SIZE},
         pubkey::Pubkey,
         quic::{
@@ -722,7 +722,7 @@ pub mod test {
             tls_certificates::new_self_signed_tls_certificate_chain,
         },
         crossbeam_channel::{unbounded, Receiver},
-        miraland_sdk::{
+        solana_sdk::{
             quic::{QUIC_KEEP_ALIVE_MS, QUIC_MAX_TIMEOUT_MS},
             signature::Keypair,
             signer::Signer,

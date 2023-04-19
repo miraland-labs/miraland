@@ -1,12 +1,12 @@
 [package]
-name = "solana-net-utils"
+name = "miraland-net-utils"
 version = "1.14.17"
-description = "Solana Network Utilities"
+description = "Miraland Network Utilities"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-net-utils"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-net-utils"
 edition = "2021"
 
 [dependencies]
@@ -21,19 +21,19 @@ rand = "0.7.0"
 serde = "1.0.138"
 serde_derive = "1.0.103"
 socket2 = "0.4.4"
-solana-logger = { path = "../logger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
 tokio = { version = "1", features = ["full"] }
 url = "2.2.2"
 
 [lib]
-name = "solana_net_utils"
+name = "miraland_net_utils"
 
 [[bin]]
-name = "solana-ip-address"
+name = "miraland-ip-address"
 path = "src/bin/ip_address.rs"
 
 [[bin]]
-name = "solana-ip-address-server"
+name = "miraland-ip-address-server"
 path = "src/bin/ip_address_server.rs"
 
 [package.metadata.docs.rs]

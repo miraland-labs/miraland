@@ -12,7 +12,7 @@
 //!      through these steps, the PR process will facilitate a keypair holder being picked. That
 //!      person will generate the keypair, provide pubkey for PR, and ultimately enable the feature.
 //! 2. Add a public module for the feature, specifying keypair pubkey as the id with
-//!    `miraland_sdk::declare_id!()` within the module.
+//!    `solana_sdk::declare_id!()` within the module.
 //!    Additionally, add an entry to `FEATURE_NAMES` map.
 //! 3. Add desired logic to check for and switch on feature availability.
 //!
@@ -20,7 +20,7 @@
 
 use {
     lazy_static::lazy_static,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         hash::{Hash, Hasher},
         pubkey::Pubkey,
@@ -29,519 +29,519 @@ use {
 };
 
 pub mod deprecate_rewards_sysvar {
-    miraland_sdk::declare_id!("2c1LfwhtrnYYUTADd7jNfw2v25C9wdD7TxaNNeBL26Uo");
+    solana_sdk::declare_id!("2c1LfwhtrnYYUTADd7jNfw2v25C9wdD7TxaNNeBL26Uo");
 }
 
 pub mod pico_inflation {
-    miraland_sdk::declare_id!("79Rx9u8bp61qVXfgU77ConTZusQrJAVCLHKX12fXQFLM");
+    solana_sdk::declare_id!("79Rx9u8bp61qVXfgU77ConTZusQrJAVCLHKX12fXQFLM");
 }
 
 pub mod full_inflation {
     pub mod devnet_and_testnet {
-        miraland_sdk::declare_id!("4SLokfWfRfEdgc9LTQPeqVSTKp1yT9EGxkvunw2kyRYk");
+        solana_sdk::declare_id!("4SLokfWfRfEdgc9LTQPeqVSTKp1yT9EGxkvunw2kyRYk");
     }
 
     pub mod mainnet {
         pub mod certusone {
             pub mod vote {
-                miraland_sdk::declare_id!("6LAz8hDNfU2wZQNvU5A486aLb4uMqMP71VJuLeqa8VH1");
+                solana_sdk::declare_id!("6LAz8hDNfU2wZQNvU5A486aLb4uMqMP71VJuLeqa8VH1");
             }
             pub mod enable {
-                miraland_sdk::declare_id!("APxJq5bJDVHvXvxgnSzynG4fcrnjBftgiHqryr8HGzeZ");
+                solana_sdk::declare_id!("APxJq5bJDVHvXvxgnSzynG4fcrnjBftgiHqryr8HGzeZ");
             }
         }
     }
 }
 
 pub mod secp256k1_program_enabled {
-    miraland_sdk::declare_id!("7jUAsmg1aiq7KUFJmgTbonwB7o1UkcPwhaxyvtoK6aLv");
+    solana_sdk::declare_id!("7jUAsmg1aiq7KUFJmgTbonwB7o1UkcPwhaxyvtoK6aLv");
 }
 
 pub mod spl_token_v2_multisig_fix {
-    miraland_sdk::declare_id!("9UeP8WVfxerQVsvS7CKPocQb3SicYhzeJdfPxbbw3Xba");
+    solana_sdk::declare_id!("9UeP8WVfxerQVsvS7CKPocQb3SicYhzeJdfPxbbw3Xba");
 }
 
 pub mod no_overflow_rent_distribution {
-    miraland_sdk::declare_id!("28yzxUrgESLBv8MLCq7HHWt69PqQm8qEFfdN9niqLx1n");
+    solana_sdk::declare_id!("28yzxUrgESLBv8MLCq7HHWt69PqQm8qEFfdN9niqLx1n");
 }
 
 pub mod filter_stake_delegation_accounts {
-    miraland_sdk::declare_id!("2pjiimKVUKEgnc79asiV1SQLQ4jtHziCw8RzXtjHgfz5");
+    solana_sdk::declare_id!("2pjiimKVUKEgnc79asiV1SQLQ4jtHziCw8RzXtjHgfz5");
 }
 
 pub mod require_custodian_for_locked_stake_authorize {
-    miraland_sdk::declare_id!("BoSRYC39THTKeiGzUAfBJUJTUBpmvprqMdqbSaPmKf79");
+    solana_sdk::declare_id!("BoSRYC39THTKeiGzUAfBJUJTUBpmvprqMdqbSaPmKf79");
 }
 
 pub mod spl_token_v2_self_transfer_fix {
-    miraland_sdk::declare_id!("BXTRt14DE2ogunj5E3KTU3Gp5aYJVNJAiswq8ocSbDnc");
+    solana_sdk::declare_id!("BXTRt14DE2ogunj5E3KTU3Gp5aYJVNJAiswq8ocSbDnc");
 }
 
 pub mod warp_timestamp_again {
-    miraland_sdk::declare_id!("7jj4R75Y3zUvdfLSDcx4FXnWSPauxA3e5ajdxwGSq9HM");
+    solana_sdk::declare_id!("7jj4R75Y3zUvdfLSDcx4FXnWSPauxA3e5ajdxwGSq9HM");
 }
 
 pub mod check_init_vote_data {
-    miraland_sdk::declare_id!("8uSS6mrHnYcFF9xdLEuJBQ2zvePVtHmeoPnewXy6EzH1");
+    solana_sdk::declare_id!("8uSS6mrHnYcFF9xdLEuJBQ2zvePVtHmeoPnewXy6EzH1");
 }
 
 pub mod secp256k1_recover_syscall_enabled {
-    miraland_sdk::declare_id!("8bsFk18mhd2R81MkdXaWYNQGiDcDWDHcXxEnc3wmaPJ9");
+    solana_sdk::declare_id!("8bsFk18mhd2R81MkdXaWYNQGiDcDWDHcXxEnc3wmaPJ9");
 }
 
 pub mod system_transfer_zero_check {
-    miraland_sdk::declare_id!("F2VaF6pkmUnPUE92Pv6sephEWBkoUUi5evPUtNtxEDo9");
+    solana_sdk::declare_id!("F2VaF6pkmUnPUE92Pv6sephEWBkoUUi5evPUtNtxEDo9");
 }
 
 pub mod blake3_syscall_enabled {
-    miraland_sdk::declare_id!("4jNWNYf2uHsZ7DmP6RizeC9m5WiffkyGTtj6BehjBsbJ");
+    solana_sdk::declare_id!("4jNWNYf2uHsZ7DmP6RizeC9m5WiffkyGTtj6BehjBsbJ");
 }
 
 pub mod dedupe_config_program_signers {
-    miraland_sdk::declare_id!("7oQw7GQWdsUSbVqMqP42nTntnDkKJPPSM3ydrMSLCWAY");
+    solana_sdk::declare_id!("7oQw7GQWdsUSbVqMqP42nTntnDkKJPPSM3ydrMSLCWAY");
 }
 
 pub mod verify_tx_signatures_len {
-    miraland_sdk::declare_id!("2V95BUaoS7mUgd4e6LCXtAd5WLuDyYFP5u9AuXfSZFHQ");
+    solana_sdk::declare_id!("2V95BUaoS7mUgd4e6LCXtAd5WLuDyYFP5u9AuXfSZFHQ");
 }
 
 pub mod vote_stake_checked_instructions {
-    miraland_sdk::declare_id!("FBgh8jqxHJWJG9Rrc59gWb1bQq6PHFg675QVVitZtXMt");
+    solana_sdk::declare_id!("FBgh8jqxHJWJG9Rrc59gWb1bQq6PHFg675QVVitZtXMt");
 }
 
 pub mod rent_for_sysvars {
-    miraland_sdk::declare_id!("D2UrJpLDUzjSC7F7U3ZZpAw4UvZkSLybteeyL2Soa6AL");
+    solana_sdk::declare_id!("D2UrJpLDUzjSC7F7U3ZZpAw4UvZkSLybteeyL2Soa6AL");
 }
 
 pub mod libsecp256k1_0_5_upgrade_enabled {
-    miraland_sdk::declare_id!("2Tf8EAMRjo8Z9kEmSL5JLbf33Q2tjCSieP4FBZGrdHQZ");
+    solana_sdk::declare_id!("2Tf8EAMRjo8Z9kEmSL5JLbf33Q2tjCSieP4FBZGrdHQZ");
 }
 
 pub mod tx_wide_compute_cap {
-    miraland_sdk::declare_id!("4AdEYJECdV8Zve71m7xLimhgdL3qi2tvqEy6r1VZm4ih");
+    solana_sdk::declare_id!("4AdEYJECdV8Zve71m7xLimhgdL3qi2tvqEy6r1VZm4ih");
 }
 
 pub mod spl_token_v2_set_authority_fix {
-    miraland_sdk::declare_id!("N2UX7hfPmEUQrmTKUqUqX3fspnsehrbAqyDzY5JFkcc");
+    solana_sdk::declare_id!("N2UX7hfPmEUQrmTKUqUqX3fspnsehrbAqyDzY5JFkcc");
 }
 
 pub mod merge_nonce_error_into_system_error {
-    miraland_sdk::declare_id!("5rgeSmE17s1tbUSDmmcqXL26A9SqaLNUmgDzKbDKY3af");
+    solana_sdk::declare_id!("5rgeSmE17s1tbUSDmmcqXL26A9SqaLNUmgDzKbDKY3af");
 }
 
 pub mod disable_fees_sysvar {
-    miraland_sdk::declare_id!("28GpzueRzsKyPd2vmkwhXKdr174viqEaMPoUaFBRXXRo");
+    solana_sdk::declare_id!("28GpzueRzsKyPd2vmkwhXKdr174viqEaMPoUaFBRXXRo");
 }
 
 pub mod stake_merge_with_unmatched_credits_observed {
-    miraland_sdk::declare_id!("5Y4VcaQSoUj4j9ZeLjq3fH2WRc8mbk3H5BH6Vf578wfF");
+    solana_sdk::declare_id!("5Y4VcaQSoUj4j9ZeLjq3fH2WRc8mbk3H5BH6Vf578wfF");
 }
 
 pub mod zk_token_sdk_enabled {
-    miraland_sdk::declare_id!("FNEsWEdUNGbyWVxiJrSmf1SbmypFJPtPURAGgcUiE7Xf");
+    solana_sdk::declare_id!("FNEsWEdUNGbyWVxiJrSmf1SbmypFJPtPURAGgcUiE7Xf");
 }
 
 pub mod curve25519_syscall_enabled {
-    miraland_sdk::declare_id!("8rd1cN2QwtAMR5BV4fEZGxyUfWJtSB2AihHhctPGc4Ya");
+    solana_sdk::declare_id!("8rd1cN2QwtAMR5BV4fEZGxyUfWJtSB2AihHhctPGc4Ya");
 }
 
 pub mod versioned_tx_message_enabled {
-    miraland_sdk::declare_id!("4R9FuBD4tN3rzYnGL6VLtehzuVXSbxgUSor4sRqYfxQD");
+    solana_sdk::declare_id!("4R9FuBD4tN3rzYnGL6VLtehzuVXSbxgUSor4sRqYfxQD");
 }
 
 pub mod libsecp256k1_fail_on_bad_count {
-    miraland_sdk::declare_id!("ADf1p7q3ZHsmNuCn5SHh2AFdhrvP6UVBphsnURGy94eJ");
+    solana_sdk::declare_id!("ADf1p7q3ZHsmNuCn5SHh2AFdhrvP6UVBphsnURGy94eJ");
 }
 
 pub mod libsecp256k1_fail_on_bad_count2 {
-    miraland_sdk::declare_id!("4EBpJoi9YamhAY9hgPxFL3N2xk7GbiRWpfEcXgJZCzVx");
+    solana_sdk::declare_id!("4EBpJoi9YamhAY9hgPxFL3N2xk7GbiRWpfEcXgJZCzVx");
 }
 
 pub mod instructions_sysvar_owned_by_sysvar {
-    miraland_sdk::declare_id!("83x8QZSPCDqiCrfVhTPn4j6ML4iTSG6DgD1THk8rDnHJ");
+    solana_sdk::declare_id!("83x8QZSPCDqiCrfVhTPn4j6ML4iTSG6DgD1THk8rDnHJ");
 }
 
 pub mod stake_program_advance_activating_credits_observed {
-    miraland_sdk::declare_id!("ExSUs7m2qv6d4TYb72EuaKEBqcA8TktnRNm2GEeWWFP3");
+    solana_sdk::declare_id!("ExSUs7m2qv6d4TYb72EuaKEBqcA8TktnRNm2GEeWWFP3");
 }
 
 pub mod credits_auto_rewind {
-    miraland_sdk::declare_id!("7iCvJnUS8kmC2gXARop5SV4TWgEu9VW3HCjPCX3aH6ap");
+    solana_sdk::declare_id!("7iCvJnUS8kmC2gXARop5SV4TWgEu9VW3HCjPCX3aH6ap");
 }
 
 pub mod demote_program_write_locks {
-    miraland_sdk::declare_id!("EzXHe4N1ezMU1mAXkEbTxz6bT7NT8nZrD3yWaTdm5nKi");
+    solana_sdk::declare_id!("EzXHe4N1ezMU1mAXkEbTxz6bT7NT8nZrD3yWaTdm5nKi");
 }
 
 pub mod ed25519_program_enabled {
-    miraland_sdk::declare_id!("8N6nBvvMTnC5FFNgBnFagpLo1ecNoCpvfkgFJVhVRHFY");
+    solana_sdk::declare_id!("8N6nBvvMTnC5FFNgBnFagpLo1ecNoCpvfkgFJVhVRHFY");
 }
 
 pub mod return_data_syscall_enabled {
-    miraland_sdk::declare_id!("6WTDFppf83DMNejYPQpFfniJSUocgNfyF6KDeriGy8be");
+    solana_sdk::declare_id!("6WTDFppf83DMNejYPQpFfniJSUocgNfyF6KDeriGy8be");
 }
 
 pub mod reduce_required_deploy_balance {
-    miraland_sdk::declare_id!("6V5vr414z1BXCJo9MXXArJNVKbkqtAH7HE32U6rcZESx");
+    solana_sdk::declare_id!("6V5vr414z1BXCJo9MXXArJNVKbkqtAH7HE32U6rcZESx");
 }
 
 pub mod sol_log_data_syscall_enabled {
-    miraland_sdk::declare_id!("3nsrptKRNefv1f7yHUAg9hbnf28GAkVGajaR42XEDV9Q");
+    solana_sdk::declare_id!("3nsrptKRNefv1f7yHUAg9hbnf28GAkVGajaR42XEDV9Q");
 }
 
 pub mod stakes_remove_delegation_if_inactive {
-    miraland_sdk::declare_id!("9ryFTNZjt9eiGxPxZP9vmu1o7MTP432F4Deu3CBr8Fuf");
+    solana_sdk::declare_id!("9ryFTNZjt9eiGxPxZP9vmu1o7MTP432F4Deu3CBr8Fuf");
 }
 
 pub mod do_support_realloc {
-    miraland_sdk::declare_id!("DM4TyMJkUYN6YXVaeFpWTDGBdWo5sbhk82RDScK7ptjU");
+    solana_sdk::declare_id!("DM4TyMJkUYN6YXVaeFpWTDGBdWo5sbhk82RDScK7ptjU");
 }
 
 // Note: when this feature is cleaned up, also remove the secp256k1 program from
 // the list of builtins and remove its files from /programs
 pub mod prevent_calling_precompiles_as_programs {
-    miraland_sdk::declare_id!("9EmqPEbM54LjSwHwNFBvF5G5ePmyc9vtYDdeafAXcUAB");
+    solana_sdk::declare_id!("9EmqPEbM54LjSwHwNFBvF5G5ePmyc9vtYDdeafAXcUAB");
 }
 
 pub mod optimize_epoch_boundary_updates {
-    miraland_sdk::declare_id!("DkLJm8F8bXJJt4PjrXYRTrdvqJfrV9nKRWbLvKqBpTVV");
+    solana_sdk::declare_id!("DkLJm8F8bXJJt4PjrXYRTrdvqJfrV9nKRWbLvKqBpTVV");
 }
 
 pub mod remove_native_loader {
-    miraland_sdk::declare_id!("7RtzXKHPtYjVLxG4Si7P28rB5eFtFA96ruZFCbSRMZjW");
+    solana_sdk::declare_id!("7RtzXKHPtYjVLxG4Si7P28rB5eFtFA96ruZFCbSRMZjW");
 }
 
 pub mod send_to_tpu_vote_port {
-    miraland_sdk::declare_id!("EfZQW1z4UugTsjpL4q7kXEhM2cuokXAyx3xNimAX96hh");
+    solana_sdk::declare_id!("EfZQW1z4UugTsjpL4q7kXEhM2cuokXAyx3xNimAX96hh");
 }
 
 pub mod requestable_heap_size {
-    miraland_sdk::declare_id!("2uWChP7zecD9mCWRN671u9RQBppxaJUvey1tbS5gEGJh");
+    solana_sdk::declare_id!("2uWChP7zecD9mCWRN671u9RQBppxaJUvey1tbS5gEGJh");
 }
 
 pub mod disable_fee_calculator {
-    miraland_sdk::declare_id!("G7qQS6VDvdrGX2t9n8WGLKEXorCEFjdepyTWVc5FNPBp");
+    solana_sdk::declare_id!("G7qQS6VDvdrGX2t9n8WGLKEXorCEFjdepyTWVc5FNPBp");
 }
 
 pub mod add_compute_budget_program {
-    miraland_sdk::declare_id!("35BUe4UVLer2dwHQyBn6EgRSwc2yfbvy9TQxD7vYRExU");
+    solana_sdk::declare_id!("35BUe4UVLer2dwHQyBn6EgRSwc2yfbvy9TQxD7vYRExU");
 }
 
 pub mod nonce_must_be_writable {
-    miraland_sdk::declare_id!("6z5xsisAAiauaE9cHiHrZAxajJyxFMkwTtaPsLGhCfNg");
+    solana_sdk::declare_id!("6z5xsisAAiauaE9cHiHrZAxajJyxFMkwTtaPsLGhCfNg");
 }
 
 pub mod spl_token_v3_3_0_release {
-    miraland_sdk::declare_id!("A3VfsyhcwZKkfTXN1a4Z1dSMQxWiaqjymPMBky2Lh5Mq");
+    solana_sdk::declare_id!("A3VfsyhcwZKkfTXN1a4Z1dSMQxWiaqjymPMBky2Lh5Mq");
 }
 
 pub mod leave_nonce_on_success {
-    miraland_sdk::declare_id!("CFtA7BGeyWgqh3y5EmgGsdHBCVqDrfAxC8Tm2mBuYox");
+    solana_sdk::declare_id!("CFtA7BGeyWgqh3y5EmgGsdHBCVqDrfAxC8Tm2mBuYox");
 }
 
 pub mod reject_empty_instruction_without_program {
-    miraland_sdk::declare_id!("CVnCWV9rZrdK9gawJ5DPXUggLufqzkiYpe7V8ewHv2gX");
+    solana_sdk::declare_id!("CVnCWV9rZrdK9gawJ5DPXUggLufqzkiYpe7V8ewHv2gX");
 }
 
 pub mod fixed_memcpy_nonoverlapping_check {
-    miraland_sdk::declare_id!("3SxofBxWgtdYHEKnVEfcuCfmFqmFLiMeD7j4aE7NGJLg");
+    solana_sdk::declare_id!("3SxofBxWgtdYHEKnVEfcuCfmFqmFLiMeD7j4aE7NGJLg");
 }
 
 pub mod reject_non_rent_exempt_vote_withdraws {
-    miraland_sdk::declare_id!("5at3F6XAWJRSdURRrhcPKMsWUu7jpErffQvhbudAG91p");
+    solana_sdk::declare_id!("5at3F6XAWJRSdURRrhcPKMsWUu7jpErffQvhbudAG91p");
 }
 
 pub mod evict_invalid_stakes_cache_entries {
-    miraland_sdk::declare_id!("Dj5KYGDEE6XNZ2uuQxH1c9pDwhRS9X3kC7uTvXJnUtbC");
+    solana_sdk::declare_id!("Dj5KYGDEE6XNZ2uuQxH1c9pDwhRS9X3kC7uTvXJnUtbC");
 }
 
 pub mod allow_votes_to_directly_update_vote_state {
-    miraland_sdk::declare_id!("9NQbXmRjHa4LnJVcmCYCQxTAEmgWASZB6dyR8ujmPift");
+    solana_sdk::declare_id!("9NQbXmRjHa4LnJVcmCYCQxTAEmgWASZB6dyR8ujmPift");
 }
 
 pub mod cap_accounts_data_len {
-    miraland_sdk::declare_id!("7qx6TcurUwSt6mRkwLjDrJDSxsMnNXsqcrCNzZeNq236");
+    solana_sdk::declare_id!("7qx6TcurUwSt6mRkwLjDrJDSxsMnNXsqcrCNzZeNq236");
 }
 
 pub mod max_tx_account_locks {
-    miraland_sdk::declare_id!("56EYkVzpWjvvrVjdmCXSTxFSSK3HUVFKavLyB3H9HvpK");
+    solana_sdk::declare_id!("56EYkVzpWjvvrVjdmCXSTxFSSK3HUVFKavLyB3H9HvpK");
 }
 
 pub mod require_rent_exempt_accounts {
-    miraland_sdk::declare_id!("FRJstrV5EAhseibFSAXm5ZmPnHdBNAqaT1sDyy9jsoma");
+    solana_sdk::declare_id!("FRJstrV5EAhseibFSAXm5ZmPnHdBNAqaT1sDyy9jsoma");
 }
 
 pub mod filter_votes_outside_slot_hashes {
-    miraland_sdk::declare_id!("5izPfs14BkNSkjBBuuQxHbEZomzzF8tvXcbnfqX2Exwn");
+    solana_sdk::declare_id!("5izPfs14BkNSkjBBuuQxHbEZomzzF8tvXcbnfqX2Exwn");
 }
 
 pub mod update_syscall_base_costs {
-    miraland_sdk::declare_id!("HmoYBViLHHKw9tqxjGq7Vy8kXzTxzw7RmbBkvcnJfxR8");
+    solana_sdk::declare_id!("HmoYBViLHHKw9tqxjGq7Vy8kXzTxzw7RmbBkvcnJfxR8");
 }
 
 pub mod stake_deactivate_delinquent_instruction {
-    miraland_sdk::declare_id!("5NU3DmTjfbtGZ7gsUWFE8TzxZ7PRF5EvbHCuGJhqUh4B");
+    solana_sdk::declare_id!("5NU3DmTjfbtGZ7gsUWFE8TzxZ7PRF5EvbHCuGJhqUh4B");
 }
 
 pub mod stake_redelegate_instruction {
-    miraland_sdk::declare_id!("HD2vR1ZZzjqTXzUyWoUjL5ZAVBpe4wNo1ToR2ogEbbgc");
+    solana_sdk::declare_id!("HD2vR1ZZzjqTXzUyWoUjL5ZAVBpe4wNo1ToR2ogEbbgc");
 }
 
 pub mod vote_withdraw_authority_may_change_authorized_voter {
-    miraland_sdk::declare_id!("97DV3qAzqqPpiqQuZjf3GvKcwgTZwsSLjWnP5naoYhkF");
+    solana_sdk::declare_id!("97DV3qAzqqPpiqQuZjf3GvKcwgTZwsSLjWnP5naoYhkF");
 }
 
 pub mod spl_associated_token_account_v1_0_4 {
-    miraland_sdk::declare_id!("J3V6Rmm8dFmcZBadzGLLdU7Rrg2rNKWkfmYsTdkeBvmu");
+    solana_sdk::declare_id!("J3V6Rmm8dFmcZBadzGLLdU7Rrg2rNKWkfmYsTdkeBvmu");
 }
 
 pub mod reject_vote_account_close_unless_zero_credit_epoch {
-    miraland_sdk::declare_id!("9Xn27E7PdcE8rHwkB79MknuoydhVNkEbZFvQMVDchjwq");
+    solana_sdk::declare_id!("9Xn27E7PdcE8rHwkB79MknuoydhVNkEbZFvQMVDchjwq");
 }
 
 pub mod add_get_processed_sibling_instruction_syscall {
-    miraland_sdk::declare_id!("1XCfEQcYXoakjx6ULrMeidyvSozjT3gu1ee38u8ofEu");
+    solana_sdk::declare_id!("1XCfEQcYXoakjx6ULrMeidyvSozjT3gu1ee38u8ofEu");
 }
 
 pub mod bank_tranaction_count_fix {
-    miraland_sdk::declare_id!("9nFiWjLxyKFRTidASf7pgMFCYPHiXQ2oLmD4h6hpRWCA");
+    solana_sdk::declare_id!("9nFiWjLxyKFRTidASf7pgMFCYPHiXQ2oLmD4h6hpRWCA");
 }
 
 pub mod disable_bpf_deprecated_load_instructions {
-    miraland_sdk::declare_id!("CvqsVybTcwM9yi99UGALDtyQ3FxkmsiSzRGLTwwoiow9");
+    solana_sdk::declare_id!("CvqsVybTcwM9yi99UGALDtyQ3FxkmsiSzRGLTwwoiow9");
 }
 
 pub mod disable_bpf_unresolved_symbols_at_runtime {
-    miraland_sdk::declare_id!("FmksuagiZ2tXDWoa8o6Cjs3bTFU7vmqhyaYdRbuJdgwM");
+    solana_sdk::declare_id!("FmksuagiZ2tXDWoa8o6Cjs3bTFU7vmqhyaYdRbuJdgwM");
 }
 
 pub mod record_instruction_in_transaction_context_push {
-    miraland_sdk::declare_id!("Eg3fSoHWFweKmwpbJnrdMmbebHZ5QpYrprcYtAhNpjmt");
+    solana_sdk::declare_id!("Eg3fSoHWFweKmwpbJnrdMmbebHZ5QpYrprcYtAhNpjmt");
 }
 
 pub mod syscall_saturated_math {
-    miraland_sdk::declare_id!("HHPC2xVx7S1Lxf2pMK3JySKJZurt5CLpNj6c9LRSyuwz");
+    solana_sdk::declare_id!("HHPC2xVx7S1Lxf2pMK3JySKJZurt5CLpNj6c9LRSyuwz");
 }
 
 pub mod check_physical_overlapping {
-    miraland_sdk::declare_id!("Cyx9FW417wQbNC3GLE9jDuqtUiHVysfUP2siU9cXkFLn");
+    solana_sdk::declare_id!("Cyx9FW417wQbNC3GLE9jDuqtUiHVysfUP2siU9cXkFLn");
 }
 
 pub mod limit_secp256k1_recovery_id {
-    miraland_sdk::declare_id!("Dt84qqvdFBVppTdxwTLFtRSBLMfBgbHbxbxEYeX5bpBC");
+    solana_sdk::declare_id!("Dt84qqvdFBVppTdxwTLFtRSBLMfBgbHbxbxEYeX5bpBC");
 }
 
 pub mod disable_deprecated_loader {
-    miraland_sdk::declare_id!("768MU43todZ97n7PnYVmJr8ygUnpHhygaXgWbGmHxFTR");
+    solana_sdk::declare_id!("768MU43todZ97n7PnYVmJr8ygUnpHhygaXgWbGmHxFTR");
 }
 
 pub mod check_slice_translation_size {
-    miraland_sdk::declare_id!("FPVk8r4grQQkiwMfcMM2PUjccDWTQCMKKM4cE1ndQsfZ");
+    solana_sdk::declare_id!("FPVk8r4grQQkiwMfcMM2PUjccDWTQCMKKM4cE1ndQsfZ");
 }
 
 pub mod stake_split_uses_rent_sysvar {
-    miraland_sdk::declare_id!("3Fq7Z2QBbuwhQGjeTuN2dNSzRKv38rjQaoVjpZZ9CW62");
+    solana_sdk::declare_id!("3Fq7Z2QBbuwhQGjeTuN2dNSzRKv38rjQaoVjpZZ9CW62");
 }
 
 pub mod add_get_minimum_delegation_instruction_to_stake_program {
-    miraland_sdk::declare_id!("2JeJcFD1ZNriXcwZegot6ACsbZYqWLKpTYdsLwNEhAkX");
+    solana_sdk::declare_id!("2JeJcFD1ZNriXcwZegot6ACsbZYqWLKpTYdsLwNEhAkX");
 }
 
 pub mod error_on_syscall_bpf_function_hash_collisions {
-    miraland_sdk::declare_id!("9vJtwctZZ1Cd7rdQcLYV8ogxz2KeA4bBkoAf1Yr6kcLE");
+    solana_sdk::declare_id!("9vJtwctZZ1Cd7rdQcLYV8ogxz2KeA4bBkoAf1Yr6kcLE");
 }
 
 pub mod reject_callx_r10 {
-    miraland_sdk::declare_id!("2rDQ1Vm1SSaRmtHThDobnZy79e76br63UUN8Cp6NXZne");
+    solana_sdk::declare_id!("2rDQ1Vm1SSaRmtHThDobnZy79e76br63UUN8Cp6NXZne");
 }
 
 pub mod drop_redundant_turbine_path {
-    miraland_sdk::declare_id!("9EWKPkuSrpx4XXc2UEQrXqHpwmCEjSa3iUkT4GDTAorz");
+    solana_sdk::declare_id!("9EWKPkuSrpx4XXc2UEQrXqHpwmCEjSa3iUkT4GDTAorz");
 }
 
 pub mod executables_incur_cpi_data_cost {
-    miraland_sdk::declare_id!("7utHb3vm2xqUQwEKGF8Kq3CRov8CaPp68hurBNJDFb7C");
+    solana_sdk::declare_id!("7utHb3vm2xqUQwEKGF8Kq3CRov8CaPp68hurBNJDFb7C");
 }
 
 pub mod fix_recent_blockhashes {
-    miraland_sdk::declare_id!("CGwzrUUcPSo72h2QViC6UcCNXFv2iM1DkudKW7M3JsM5");
+    solana_sdk::declare_id!("CGwzrUUcPSo72h2QViC6UcCNXFv2iM1DkudKW7M3JsM5");
 }
 
 pub mod update_rewards_from_cached_accounts {
-    miraland_sdk::declare_id!("2kdPn3Ey5ECDh3VqpM7EGugJqLDxBoJx6SKPCcoCsEJr");
+    solana_sdk::declare_id!("2kdPn3Ey5ECDh3VqpM7EGugJqLDxBoJx6SKPCcoCsEJr");
 }
 
 pub mod spl_token_v3_4_0 {
-    miraland_sdk::declare_id!("3fMW2T88f8HGUyknyyNWYCVTo95pEvZQTmRMvLFujfBK");
+    solana_sdk::declare_id!("3fMW2T88f8HGUyknyyNWYCVTo95pEvZQTmRMvLFujfBK");
 }
 
 pub mod spl_associated_token_account_v1_1_0 {
-    miraland_sdk::declare_id!("oBYHRgUwkLQM9eZCXzBRTpazWgGJAx1WtHysQaxcQ84");
+    solana_sdk::declare_id!("oBYHRgUwkLQM9eZCXzBRTpazWgGJAx1WtHysQaxcQ84");
 }
 
 pub mod default_units_per_instruction {
-    miraland_sdk::declare_id!("79ZUd4LQuuMSWS1Tg84E1RJV9Dd3C2zjqiAsmVrZ94uu");
+    solana_sdk::declare_id!("79ZUd4LQuuMSWS1Tg84E1RJV9Dd3C2zjqiAsmVrZ94uu");
 }
 
 pub mod stake_allow_zero_undelegated_amount {
-    miraland_sdk::declare_id!("oar3YgmoDYExbEBWEZEjw753eo2NfskRkBcFG5yAuEA");
+    solana_sdk::declare_id!("oar3YgmoDYExbEBWEZEjw753eo2NfskRkBcFG5yAuEA");
 }
 
 pub mod require_static_program_ids_in_transaction {
-    miraland_sdk::declare_id!("oGKc7zccts79GHrWwf3ndumuC6FxxCBaoHM3BbqQgBs");
+    solana_sdk::declare_id!("oGKc7zccts79GHrWwf3ndumuC6FxxCBaoHM3BbqQgBs");
 }
 
 pub mod stake_raise_minimum_delegation_to_1_sol {
     // This is a feature-proposal *feature id*.  The feature keypair address is `3YHAo6wWw5rDbQxb59BmJkQ3XwVhX3m8tdBVbtxnJmma`.
-    miraland_sdk::declare_id!("GDUQPY5WH24nccKtcHtpNMPQp6cP1SSnjePsMHCjEEcs");
+    solana_sdk::declare_id!("GDUQPY5WH24nccKtcHtpNMPQp6cP1SSnjePsMHCjEEcs");
 }
 
 pub mod stake_minimum_delegation_for_rewards {
-    miraland_sdk::declare_id!("YcGYaDrMhbhPMoAt5gj4zKGkRYgNndFSXksoyJx8dUR");
+    solana_sdk::declare_id!("YcGYaDrMhbhPMoAt5gj4zKGkRYgNndFSXksoyJx8dUR");
 }
 
 pub mod add_set_compute_unit_price_ix {
-    miraland_sdk::declare_id!("4EVwLByjgirSfFFfEFboeK17YGrUBxRXTw3jwdxpDhah");
+    solana_sdk::declare_id!("4EVwLByjgirSfFFfEFboeK17YGrUBxRXTw3jwdxpDhah");
 }
 
 pub mod disable_deploy_of_alloc_free_syscall {
-    miraland_sdk::declare_id!("5og3u9Vg5sLtUiVC5cdP9PJfrZeRgazzw1zpxGvePLfh");
+    solana_sdk::declare_id!("5og3u9Vg5sLtUiVC5cdP9PJfrZeRgazzw1zpxGvePLfh");
 }
 
 pub mod include_account_index_in_rent_error {
-    miraland_sdk::declare_id!("5NhMbTH7XQssZHEAJergVacuTnUws6A5ntt524uFpBWx");
+    solana_sdk::declare_id!("5NhMbTH7XQssZHEAJergVacuTnUws6A5ntt524uFpBWx");
 }
 
 pub mod add_shred_type_to_shred_seed {
-    miraland_sdk::declare_id!("AXD9UhsXbQAsAXtBQYJYfrdpQyhZWEtvAAvnm8twWjeg");
+    solana_sdk::declare_id!("AXD9UhsXbQAsAXtBQYJYfrdpQyhZWEtvAAvnm8twWjeg");
 }
 
 pub mod warp_timestamp_with_a_vengeance {
-    miraland_sdk::declare_id!("48WKpfA7e9x2L6o5NkteqvaJs1njoFZHZtH3YL3Avh1X");
+    solana_sdk::declare_id!("48WKpfA7e9x2L6o5NkteqvaJs1njoFZHZtH3YL3Avh1X");
 }
 
 pub mod separate_nonce_from_blockhash {
-    miraland_sdk::declare_id!("9xsusmw7MBtYSEkL8essFbQrvr5GdxLSbj1YoqYUKo5J");
+    solana_sdk::declare_id!("9xsusmw7MBtYSEkL8essFbQrvr5GdxLSbj1YoqYUKo5J");
 }
 
 pub mod enable_durable_nonce {
-    miraland_sdk::declare_id!("B18WzS8UncGJQzEm772JLbJfYfJ2DfLCqiVgdbYERzCz");
+    solana_sdk::declare_id!("B18WzS8UncGJQzEm772JLbJfYfJ2DfLCqiVgdbYERzCz");
 }
 
 pub mod vote_state_update_credit_per_dequeue {
-    miraland_sdk::declare_id!("3AoE6v4MSmMsBHX7ukSC8xuw4vGccrqpMxbHDEmcmYBD");
+    solana_sdk::declare_id!("3AoE6v4MSmMsBHX7ukSC8xuw4vGccrqpMxbHDEmcmYBD");
 }
 
 pub mod quick_bail_on_panic {
-    miraland_sdk::declare_id!("6Ns8qHyGbv4udAqvhboD9Hn5QLfuT4rXqGE7pU5m28tH");
+    solana_sdk::declare_id!("6Ns8qHyGbv4udAqvhboD9Hn5QLfuT4rXqGE7pU5m28tH");
 }
 
 pub mod nonce_must_be_authorized {
-    miraland_sdk::declare_id!("24kYbqnGtXiyGj23cdWML1gn37SbyQwsi1fmoo8uCExU");
+    solana_sdk::declare_id!("24kYbqnGtXiyGj23cdWML1gn37SbyQwsi1fmoo8uCExU");
 }
 
 pub mod nonce_must_be_advanceable {
-    miraland_sdk::declare_id!("4fvFevcmNCFH6iivotrNDvCXzLwSNZEnHXNNCZDJBbgu");
+    solana_sdk::declare_id!("4fvFevcmNCFH6iivotrNDvCXzLwSNZEnHXNNCZDJBbgu");
 }
 
 pub mod vote_authorize_with_seed {
-    miraland_sdk::declare_id!("GS1diGxAwxQdZxt5WroA6DGc3QgLZzsc2r7Lwd4HTk8H");
+    solana_sdk::declare_id!("GS1diGxAwxQdZxt5WroA6DGc3QgLZzsc2r7Lwd4HTk8H");
 }
 
 pub mod cap_accounts_data_size_per_block {
-    miraland_sdk::declare_id!("FiHSf24BgV6screxfQ8JDNJorfayyTE1WULfWQa5zeEB");
+    solana_sdk::declare_id!("FiHSf24BgV6screxfQ8JDNJorfayyTE1WULfWQa5zeEB");
 }
 
 pub mod preserve_rent_epoch_for_rent_exempt_accounts {
-    miraland_sdk::declare_id!("2gTPWYyesH2ReNq3d637Ug49UAV4toUU1Rqz3uXcLze5");
+    solana_sdk::declare_id!("2gTPWYyesH2ReNq3d637Ug49UAV4toUU1Rqz3uXcLze5");
 }
 
 pub mod enable_bpf_loader_extend_program_ix {
-    miraland_sdk::declare_id!("CM3tFB8SCkq6b4Y2wpWwoxu7qnW9B5dRT7chof69FYUM");
+    solana_sdk::declare_id!("CM3tFB8SCkq6b4Y2wpWwoxu7qnW9B5dRT7chof69FYUM");
 }
 
 pub mod enable_early_verification_of_account_modifications {
-    miraland_sdk::declare_id!("BkKuJQrZUByC2TCrC3b4GBnsCDN468w1e8FkMxe9SEZE");
+    solana_sdk::declare_id!("BkKuJQrZUByC2TCrC3b4GBnsCDN468w1e8FkMxe9SEZE");
 }
 
 pub mod prevent_crediting_accounts_that_end_rent_paying {
-    miraland_sdk::declare_id!("7JFYPcNdT1AkfDJu9j5uX5toJE1wVvVF3EjopTDRrxM1");
+    solana_sdk::declare_id!("7JFYPcNdT1AkfDJu9j5uX5toJE1wVvVF3EjopTDRrxM1");
 }
 
 pub mod cap_bpf_program_instruction_accounts {
-    miraland_sdk::declare_id!("E5PVPzbMMBRTVheoCnsfDHdhVt65ByjKwpc6qWjqsgEP");
+    solana_sdk::declare_id!("E5PVPzbMMBRTVheoCnsfDHdhVt65ByjKwpc6qWjqsgEP");
 }
 
 pub mod loosen_cpi_size_restriction {
-    miraland_sdk::declare_id!("HeMgEi3umaAii72TP2Vd7Q9cjLYihzMs99ZMMVm1Hetc");
+    solana_sdk::declare_id!("HeMgEi3umaAii72TP2Vd7Q9cjLYihzMs99ZMMVm1Hetc");
 }
 
 pub mod use_default_units_in_fee_calculation {
-    miraland_sdk::declare_id!("FxxuxT6Qa6qGwUhnCJJ9vBYHXa8v8oFbcVMKd7tR92fH");
+    solana_sdk::declare_id!("FxxuxT6Qa6qGwUhnCJJ9vBYHXa8v8oFbcVMKd7tR92fH");
 }
 
 pub mod compact_vote_state_updates {
-    miraland_sdk::declare_id!("D81C628sHgkTy8bFoSaTFKR8rtFpBgAZpXrwWvjGN2B1");
+    solana_sdk::declare_id!("D81C628sHgkTy8bFoSaTFKR8rtFpBgAZpXrwWvjGN2B1");
 }
 
 pub mod concurrent_replay_of_forks {
-    miraland_sdk::declare_id!("HKTb558dxjV1pHiUoHY6WiXDW1SPAdR2pp1kqRC74eKy");
+    solana_sdk::declare_id!("HKTb558dxjV1pHiUoHY6WiXDW1SPAdR2pp1kqRC74eKy");
 }
 
 pub mod incremental_snapshot_only_incremental_hash_calculation {
-    miraland_sdk::declare_id!("2ot2vmSkdBsHZzx7192NwSk9vkTdKwU9WudDR8yHXLR4");
+    solana_sdk::declare_id!("2ot2vmSkdBsHZzx7192NwSk9vkTdKwU9WudDR8yHXLR4");
 }
 
 pub mod vote_state_update_root_fix {
-    miraland_sdk::declare_id!("2NmVW5eyqpz2rk9sJbtpEV9NhQgXPYVWJ5yVo4jp74ai");
+    solana_sdk::declare_id!("2NmVW5eyqpz2rk9sJbtpEV9NhQgXPYVWJ5yVo4jp74ai");
 }
 
 pub mod return_none_for_zero_lamport_accounts {
-    miraland_sdk::declare_id!("GpdtZ46oewuJTJooRvKQWWWfvmf9SjhfA6kr4BhTTTL6");
+    solana_sdk::declare_id!("GpdtZ46oewuJTJooRvKQWWWfvmf9SjhfA6kr4BhTTTL6");
 }
 
 pub mod disable_rehash_for_rent_epoch {
-    miraland_sdk::declare_id!("4ZRYdjX3o3EvWQAftrqCRM3AG3hMvo5Z6TjzMMXJNmLX");
+    solana_sdk::declare_id!("4ZRYdjX3o3EvWQAftrqCRM3AG3hMvo5Z6TjzMMXJNmLX");
 }
 
 pub mod on_load_preserve_rent_epoch_for_rent_exempt_accounts {
-    miraland_sdk::declare_id!("5PxkpSkieoAFGaN8NuVXGQnHmVxe27DS5Q42wewroM1w");
+    solana_sdk::declare_id!("5PxkpSkieoAFGaN8NuVXGQnHmVxe27DS5Q42wewroM1w");
 }
 
 pub mod increase_tx_account_lock_limit {
-    miraland_sdk::declare_id!("5THgob3FTSEkyt2N3qBX2Q8wGMGAmzfpbBhLZoSZKVkK");
+    solana_sdk::declare_id!("5THgob3FTSEkyt2N3qBX2Q8wGMGAmzfpbBhLZoSZKVkK");
 }
 
 pub mod check_syscall_outputs_do_not_overlap {
-    miraland_sdk::declare_id!("2Jdyr1T8MLHJo11g1R6x31hQubbiTLTB2PkdWhYpXzVY");
+    solana_sdk::declare_id!("2Jdyr1T8MLHJo11g1R6x31hQubbiTLTB2PkdWhYpXzVY");
 }
 
 pub mod commission_updates_only_allowed_in_first_half_of_epoch {
-    miraland_sdk::declare_id!("7PU1XcsEtKJ3mDEyuEKXhSUapLGM3HMveM97Ghjr6V4u");
+    solana_sdk::declare_id!("7PU1XcsEtKJ3mDEyuEKXhSUapLGM3HMveM97Ghjr6V4u");
 }
 
 pub mod enable_turbine_fanout_experiments {
-    miraland_sdk::declare_id!("9Fi5xXv7RiiKQhrbvwrrM5Q3hEB7VtytegM4U1hWd2ac");
+    solana_sdk::declare_id!("9Fi5xXv7RiiKQhrbvwrrM5Q3hEB7VtytegM4U1hWd2ac");
 }
 
 pub mod disable_turbine_fanout_experiments {
-    miraland_sdk::declare_id!("2NowhDaiW3CbPfjzuAdZgyK5fgBpxZyBaQJXHgEmwMbp");
+    solana_sdk::declare_id!("2NowhDaiW3CbPfjzuAdZgyK5fgBpxZyBaQJXHgEmwMbp");
 }
 
 pub mod drop_merkle_shreds {
-    miraland_sdk::declare_id!("AAtYRhtYe8RpaVmDYekreCekGaMrd5KycsBTMs28BFbL");
+    solana_sdk::declare_id!("AAtYRhtYe8RpaVmDYekreCekGaMrd5KycsBTMs28BFbL");
 }
 
 pub mod keep_merkle_shreds {
-    miraland_sdk::declare_id!("3JzPqxHr9evdDxuUfCBB8C9aP5s4X8idQkhoFn3mj5zC");
+    solana_sdk::declare_id!("3JzPqxHr9evdDxuUfCBB8C9aP5s4X8idQkhoFn3mj5zC");
 }
 
 pub mod move_serialized_len_ptr_in_cpi {
-    miraland_sdk::declare_id!("D8Uyu9cPJUs4hq3A671SZVb1a245YbdX73H6dmSiyDXe");
+    solana_sdk::declare_id!("D8Uyu9cPJUs4hq3A671SZVb1a245YbdX73H6dmSiyDXe");
 }
 
 pub mod enable_request_heap_frame_ix {
-    miraland_sdk::declare_id!("jGgt7owpUVRmtbbxh4MG6oJTeTVdn8sru7gWrgJWh2W");
+    solana_sdk::declare_id!("jGgt7owpUVRmtbbxh4MG6oJTeTVdn8sru7gWrgJWh2W");
 }
 
 lazy_static! {

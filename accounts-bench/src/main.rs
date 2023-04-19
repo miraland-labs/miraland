@@ -3,11 +3,11 @@
 extern crate log;
 use {
     clap::{crate_description, crate_name, value_t, App, Arg},
-    miraland_sdk::{
+    solana_sdk::{
         genesis_config::ClusterType, pubkey::Pubkey, sysvar::epoch_schedule::EpochSchedule,
     },
     rayon::prelude::*,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::{
         accounts::{
             test_utils::{create_test_accounts, update_accounts_bench},
@@ -131,7 +131,7 @@ fn main() {
             let results_store = accounts.accounts_db.update_accounts_hash_with_index_option(
                 false,
                 false,
-                miraland_sdk::clock::Slot::default(),
+                solana_sdk::clock::Slot::default(),
                 &ancestors,
                 None,
                 false,

@@ -11,7 +11,7 @@ use {
     futures::future::join_all,
     itertools::Itertools,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         quic::{
             QUIC_CONNECTION_HANDSHAKE_TIMEOUT_MS, QUIC_KEEP_ALIVE_MS, QUIC_MAX_TIMEOUT_MS,
             QUIC_MAX_UNSTAKED_CONCURRENT_STREAMS,
@@ -23,8 +23,8 @@ use {
         ClientConfig, ConnectError, ConnectionError, Endpoint, EndpointConfig, IdleTimeout,
         NewConnection, VarInt, WriteError,
     },
-    solana_measure::measure::Measure,
-    solana_net_utils::VALIDATOR_PORT_RANGE,
+    miraland_measure::measure::Measure,
+    miraland_net_utils::VALIDATOR_PORT_RANGE,
     solana_streamer::{
         nonblocking::quic::ALPN_TPU_PROTOCOL_ID,
         tls_certificates::new_self_signed_tls_certificate_chain,
@@ -91,7 +91,7 @@ impl QuicLazyInitializedEndpoint {
     }
 
     fn create_endpoint(&self) -> Endpoint {
-        let (_, client_socket) = solana_net_utils::bind_in_range(
+        let (_, client_socket) = miraland_net_utils::bind_in_range(
             IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)),
             VALIDATOR_PORT_RANGE,
         )

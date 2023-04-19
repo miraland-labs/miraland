@@ -1,6 +1,6 @@
 use {
     clap::{crate_description, crate_name, crate_version, ArgEnum, Args, Parser},
-    miraland_sdk::pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
     serde::{Deserialize, Serialize},
     std::{net::SocketAddr, process::exit, str::FromStr},
 };
@@ -143,7 +143,7 @@ pub enum TransactionType {
 }
 
 fn addr_parser(addr: &str) -> Result<SocketAddr, &'static str> {
-    match solana_net_utils::parse_host_port(addr) {
+    match miraland_net_utils::parse_host_port(addr) {
         Ok(v) => Ok(v),
         Err(_) => Err("failed to parse address"),
     }
@@ -183,7 +183,7 @@ pub fn build_cli_parameters() -> DosClientParameters {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, clap::Parser, miraland_sdk::pubkey::Pubkey};
+    use {super::*, clap::Parser, solana_sdk::pubkey::Pubkey};
 
     #[test]
     fn test_cli_parse_rpc_no_data_input() {

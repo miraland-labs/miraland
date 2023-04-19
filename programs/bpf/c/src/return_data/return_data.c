@@ -1,7 +1,7 @@
 /**
  * @brief return data Syscall test
  */
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 #define DATA "the quick brown fox jumps over the lazy dog"
 

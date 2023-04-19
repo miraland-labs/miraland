@@ -5,11 +5,11 @@
 //! the [Rust standard library][std], though it is [modified][sstd] for the
 //! Solana runtime environment. While off-chain programs that interact with the
 //! Solana network _can_ link to this crate, they typically instead use the
-//! [`miraland-sdk`] crate, which reexports all modules from `solana-program`.
+//! [`miraland-sdk`] crate, which reexports all modules from `miraland-program`.
 //!
 //! [std]: https://doc.rust-lang.org/stable/std/
 //! [sstd]: https://docs.solana.com/developing/on-chain-programs/developing-rust#restrictions
-//! [`miraland-sdk`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/
+//! [`miraland-sdk`]: https://docs.rs/miraland-sdk/latest/solana_sdk/
 //!
 //! This library defines
 //!
@@ -22,7 +22,7 @@
 //!   [native programs][np],
 //! - [sysvar] accessors.
 //!
-//! [pe]: #defining-a-solana-program
+//! [pe]: #defining-a-miraland-program
 //! [cdt]: #core-data-types
 //! [logging]: crate::log
 //! [serialization]: #serialization
@@ -30,10 +30,10 @@
 //! [cpi]: #cross-program-instruction-execution
 //! [sysvar]: #sysvars
 //!
-//! Idiomatic examples of `solana-program` usage can be found in
+//! Idiomatic examples of `miraland-program` usage can be found in
 //! [the Solana Program Library][spl].
 //!
-//! [spl]: https://github.com/solana-labs/solana-program-library
+//! [spl]: https://github.com/solana-labs/miraland-program-library
 //!
 //! # Defining a solana program
 //!
@@ -113,7 +113,7 @@
 //! different, it extensively uses [conditional compilation][cc] to tailor its
 //! implementation to the environment. The `cfg` predicate used for identifying
 //! compilation for on-chain programs is `target_os = "solana"`, as in this
-//! example from the `solana-program` codebase that logs a message via a
+//! example from the `miraland-program` codebase that logs a message via a
 //! syscall when run on-chain, and via a library call when offchain:
 //!
 //! [rbpf]: https://github.com/solana-labs/rbpf
@@ -138,8 +138,8 @@
 //! This `cfg` pattern is suitable as well for user code that needs to work both
 //! on-chain and off-chain.
 //!
-//! `solana-program` and `miraland-sdk` were previously a single crate. Because of
-//! this history, and because of the dual-usage of `solana-program` for two
+//! `miraland-program` and `miraland-sdk` were previously a single crate. Because of
+//! this history, and because of the dual-usage of `miraland-program` for two
 //! different environments, it contains some features that are not available to
 //! on-chain programs at compile-time. It also contains some on-chain features
 //! that will fail in off-chain scenarios at runtime. This distinction is not
@@ -159,7 +159,7 @@
 //!   addresses_][pdas] &mdash; or the secret key is not relevant to the
 //!   operation of a program, and may have even been disposed of. As running
 //!   Solana programs can not safely create or manage secret keys, the full
-//!   [`Keypair`] is not defined in `solana-program` but in `miraland-sdk`.
+//!   [`Keypair`] is not defined in `miraland-program` but in `miraland-sdk`.
 //! - [`Hash`] &mdash; A cryptographic hash. Used to uniquely identify blocks,
 //!   and also for general purpose hashing.
 //! - [`AccountInfo`] &mdash; A description of a single Solana account. All accounts
@@ -181,7 +181,7 @@
 //! [`ProgramError`]: program_error::ProgramError
 //! [`ProgramResult`]: entrypoint::ProgramResult
 //! [ed25519]: https://ed25519.cr.yp.to/
-//! [`Keypair`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/signer/keypair/struct.Keypair.html
+//! [`Keypair`]: https://docs.rs/miraland-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html
 //! [SHA-256]: https://en.wikipedia.org/wiki/SHA-2
 //! [`Sol`]: native_token::Sol
 //! [_lamports_]: https://docs.solana.com/introduction#what-are-sols
@@ -189,7 +189,7 @@
 //! # Serialization
 //!
 //! Within the Solana runtime, programs, and network, at least three different
-//! serialization formats are used, and `solana-program` provides access to
+//! serialization formats are used, and `miraland-program` provides access to
 //! those needed by programs.
 //!
 //! In user-written Solana program code, serialization is primarily used for
@@ -210,7 +210,7 @@
 //!   and is recommended for all purposes.
 //!
 //!   Users need to import the [`borsh`] crate themselves &mdash; it is not
-//!   re-exported by `solana-program`, though this crate provides several useful
+//!   re-exported by `miraland-program`, though this crate provides several useful
 //!   utilities in its [`borsh` module][borshmod] that are not available in the
 //!   `borsh` library.
 //!
@@ -401,7 +401,7 @@
 //! only be executed as "top-level" instructions included by off-chain clients
 //! in a [`Transaction`].
 //!
-//! [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
+//! [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 //!
 //! This crate defines the program IDs for most native programs. Even though
 //! some native programs cannot be invoked by other programs, a Solana program
@@ -434,18 +434,18 @@
 //! - __Compute Budget Program__: Requests additional CPU or memory resources
 //!   for a transaction. This program does nothing when called from another
 //!   program.
-//!   - ID: [`miraland_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/miraland_sdk/compute_budget/index.html)
-//!   - Instruction: [`miraland_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/miraland_sdk/compute_budget/index.html)
+//!   - ID: [`solana_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/index.html)
+//!   - Instruction: [`solana_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __ed25519 Program__: Verifies an ed25519 signature.
 //!   - ID: [`solana_program::ed25519_program`]
-//!   - Instruction: [`miraland_sdk::ed25519_instruction`](https://docs.rs/miraland-sdk/latest/miraland_sdk/ed25519_instruction/index.html)
+//!   - Instruction: [`solana_sdk::ed25519_instruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/ed25519_instruction/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __secp256k1 Program__: Verifies secp256k1 public key recovery operations.
 //!   - ID: [`solana_program::secp256k1_program`]
-//!   - Instruction: [`miraland_sdk::secp256k1_instruction`](https://docs.rs/miraland-sdk/latest/miraland_sdk/secp256k1_instruction/index.html)
+//!   - Instruction: [`solana_sdk::secp256k1_instruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/secp256k1_instruction/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __BPF Loader__: Deploys, and executes immutable programs on the chain.
@@ -611,7 +611,7 @@ pub mod sysvar;
 pub mod wasm;
 
 #[cfg(target_os = "solana")]
-pub use miraland_sdk_macro::wasm_bindgen_stub as wasm_bindgen;
+pub use solana_sdk_macro::wasm_bindgen_stub as wasm_bindgen;
 /// Re-export of [wasm-bindgen].
 ///
 /// [wasm-bindgen]: https://rustwasm.github.io/docs/wasm-bindgen/
@@ -670,7 +670,7 @@ pub mod sdk_ids {
 }
 
 /// Same as [`declare_id`] except that it reports that this ID has been deprecated.
-pub use miraland_sdk_macro::program_declare_deprecated_id as declare_deprecated_id;
+pub use solana_sdk_macro::program_declare_deprecated_id as declare_deprecated_id;
 /// Convenience macro to declare a static public key and functions to interact with it.
 ///
 /// Input: a single literal base58 string representation of a program's ID.
@@ -692,7 +692,7 @@ pub use miraland_sdk_macro::program_declare_deprecated_id as declare_deprecated_
 /// let my_id = Pubkey::from_str("My11111111111111111111111111111111111111111").unwrap();
 /// assert_eq!(id(), my_id);
 /// ```
-pub use miraland_sdk_macro::program_declare_id as declare_id;
+pub use solana_sdk_macro::program_declare_id as declare_id;
 /// Convenience macro to define a static public key.
 ///
 /// Input: a single literal base58 string representation of a Pubkey.
@@ -708,13 +708,13 @@ pub use miraland_sdk_macro::program_declare_id as declare_id;
 /// let my_id = Pubkey::from_str("My11111111111111111111111111111111111111111").unwrap();
 /// assert_eq!(ID, my_id);
 /// ```
-pub use miraland_sdk_macro::program_pubkey as pubkey;
+pub use solana_sdk_macro::program_pubkey as pubkey;
 
 #[macro_use]
 extern crate serde_derive;
 
 #[macro_use]
-extern crate solana_frozen_abi_macro;
+extern crate miraland_frozen_abi_macro;
 
 /// Convenience macro for doing integer division where the operation's safety
 /// can be checked at compile-time.
@@ -854,10 +854,10 @@ where
 
 // This module is purposefully listed after all other exports: because of an
 // interaction within rustdoc between the reexports inside this module of
-// `solana_program`'s top-level modules, and `miraland_sdk`'s glob re-export of
+// `solana_program`'s top-level modules, and `solana_sdk`'s glob re-export of
 // `solana_program`'s top-level modules, if this module is not lexically last
 // rustdoc fails to generate documentation for the re-exports within
-// `miraland_sdk`.
+// `solana_sdk`.
 #[cfg(not(target_os = "solana"))]
 pub mod example_mocks;
 

@@ -1,8 +1,8 @@
 use {
     crate::nonblocking::{nonce_utils, rpc_client::RpcClient},
     clap::ArgMatches,
-    miraland_sdk::{commitment_config::CommitmentConfig, hash::Hash, pubkey::Pubkey},
-    solana_clap_utils::{
+    solana_sdk::{commitment_config::CommitmentConfig, hash::Hash, pubkey::Pubkey},
+    miraland_clap_utils::{
         input_parsers::{pubkey_of, value_of},
         nonce::*,
         offline::*,
@@ -121,7 +121,7 @@ mod tests {
             rpc_response::{Response, RpcBlockhash, RpcResponseContext},
         },
         clap::App,
-        miraland_sdk::{
+        solana_sdk::{
             account::Account,
             fee_calculator::FeeCalculator,
             hash::hash,
@@ -129,7 +129,7 @@ mod tests {
             system_program,
         },
         serde_json::{self, json},
-        solana_account_decoder::{UiAccount, UiAccountEncoding},
+        miraland_account_decoder::{UiAccount, UiAccountEncoding},
         std::collections::HashMap,
     };
 

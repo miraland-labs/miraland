@@ -8,7 +8,7 @@ use {
     miraland_cli_output::OutputFormat,
     miraland_client::rpc_client::RpcClient,
     miraland_faucet::faucet::run_local_faucet,
-    miraland_sdk::{
+    solana_sdk::{
         account_utils::StateMut,
         bpf_loader,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},

@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         instruction::Instruction, pubkey::Pubkey, signature::Signer, transaction::Transaction,
     },
     solana_bpf_rust_mem::entrypoint::process_instruction,

@@ -4,7 +4,7 @@ use {
     },
     console::Emoji,
     dialoguer::{theme::ColorfulTheme, Select},
-    miraland_sdk::derivation_path::DerivationPath,
+    solana_sdk::derivation_path::DerivationPath,
     semver::Version as FirmwareVersion,
     std::{fmt, sync::Arc},
 };
@@ -12,7 +12,7 @@ use {
 use {
     crate::{ledger_error::LedgerError, locator::Manufacturer},
     log::*,
-    miraland_sdk::{pubkey::Pubkey, signature::Signature},
+    solana_sdk::{pubkey::Pubkey, signature::Signature},
     num_traits::FromPrimitive,
     std::{cmp::min, convert::TryFrom},
 };

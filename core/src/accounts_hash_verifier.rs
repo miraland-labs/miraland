@@ -6,12 +6,12 @@
 
 use {
     miraland_gossip::cluster_info::{ClusterInfo, MAX_SNAPSHOT_HASHES},
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, SLOT_MS},
         hash::Hash,
         pubkey::Pubkey,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::{
         accounts_hash::{CalcAccountsHashConfig, HashStats},
         snapshot_config::SnapshotConfig,
@@ -201,7 +201,7 @@ impl AccountsHashVerifier {
 
     fn generate_fault_hash(original_hash: &Hash) -> Hash {
         use {
-            miraland_sdk::hash::extend_and_hash,
+            solana_sdk::hash::extend_and_hash,
             rand::{thread_rng, Rng},
         };
 
@@ -338,7 +338,7 @@ mod tests {
             cluster_info::make_accounts_hashes_message,
             legacy_contact_info::LegacyContactInfo as ContactInfo,
         },
-        miraland_sdk::{
+        solana_sdk::{
             genesis_config::ClusterType,
             hash::hash,
             signature::{Keypair, Signer},

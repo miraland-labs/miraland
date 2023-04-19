@@ -32,7 +32,7 @@
 //!
 //! [future message format]: https://docs.solana.com/proposals/transactions-v2
 //!
-//! Despite living in the `solana-program` crate, there is no way to access the
+//! Despite living in the `miraland-program` crate, there is no way to access the
 //! runtime's messages from within a Solana program, and only the legacy message
 //! types continue to be exposed to Solana programs, for backwards compatibility
 //! reasons.

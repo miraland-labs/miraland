@@ -1,10 +1,10 @@
 [package]
-name = "solana-cargo-build-bpf"
+name = "miraland-cargo-build-bpf"
 version = "1.14.17"
-description = "Compile a local package and all of its dependencies using the Solana SBF SDK"
+description = "Compile a local package and all of its dependencies using the Miraland SBF SDK"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 license = "Apache-2.0"
 edition = "2021"
 publish = false

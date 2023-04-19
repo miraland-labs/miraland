@@ -9,7 +9,7 @@ use {
     miraland_gossip::{
         cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         genesis_config::{
             ClusterType::{self, Development, Devnet, MainnetBeta, Testnet},
@@ -90,7 +90,7 @@ impl SnapshotTestConfig {
         // snapshots.
         let mut genesis_config_info = create_genesis_config_with_leader(
             10_000,                            // mint_lamports
-            &miraland_sdk::pubkey::new_rand(), // validator_pubkey
+            &solana_sdk::pubkey::new_rand(), // validator_pubkey
             1,                                 // validator_stake_lamports
         );
         genesis_config_info.genesis_config.cluster_type = cluster_type;

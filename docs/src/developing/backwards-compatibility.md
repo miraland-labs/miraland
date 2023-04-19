@@ -73,10 +73,10 @@ Major releases:
 ### Rust Crates
 
 - [`miraland-sdk`](https://docs.rs/miraland-sdk/) - Rust SDK for creating transactions and parsing account state
-- [`solana-program`](https://docs.rs/solana-program/) - Rust SDK for writing programs
+- [`miraland-program`](https://docs.rs/miraland-program/) - Rust SDK for writing programs
 - [`miraland-client`](https://docs.rs/miraland-client/) - Rust client for connecting to RPC API
 - [`miraland-cli-config`](https://docs.rs/miraland-cli-config/) - Rust client for managing Solana CLI config files
-- [`solana-geyser-plugin-interface`](https://docs.rs/solana-geyser-plugin-interface/) - Rust interface for developing Solana Geyser plugins.
+- [`miraland-geyser-plugin-interface`](https://docs.rs/miraland-geyser-plugin-interface/) - Rust interface for developing Solana Geyser plugins.
 
 Patch releases:
 

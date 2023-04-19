@@ -2,6 +2,6 @@
  * @brief Example C-based BPF program that prints out the parameters
  * passed to it
  */
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 void helper_function(void);

@@ -3,7 +3,7 @@ extern crate test;
 
 use {
     bincode::serialize,
-    miraland_sdk::{
+    solana_sdk::{
         hash::{hash, Hash},
         signature::Signature,
     },

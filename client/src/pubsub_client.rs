@@ -13,14 +13,14 @@ use {
     },
     crossbeam_channel::{unbounded, Receiver, Sender},
     log::*,
-    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
+    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
     serde::de::DeserializeOwned,
     serde_json::{
         json,
         value::Value::{Number, Object},
         Map, Value,
     },
-    solana_account_decoder::UiAccount,
+    miraland_account_decoder::UiAccount,
     std::{
         marker::PhantomData,
         net::TcpStream,
@@ -144,7 +144,7 @@ where
         let json_msg: Map<String, Value> = serde_json::from_str(message_text)?;
 
         if let Some(Object(version_map)) = json_msg.get("result") {
-            if let Some(node_version) = version_map.get("solana-core") {
+            if let Some(node_version) = version_map.get("miraland-core") {
                 let node_version = semver::Version::parse(
                     node_version.as_str().unwrap_or_default(),
                 )

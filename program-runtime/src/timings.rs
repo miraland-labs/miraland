@@ -1,7 +1,7 @@
 use {
     core::fmt,
     enum_iterator::IntoEnumIterator,
-    miraland_sdk::{clock::Slot, pubkey::Pubkey, saturating_add_assign},
+    solana_sdk::{clock::Slot, pubkey::Pubkey, saturating_add_assign},
     std::{
         collections::HashMap,
         ops::{Index, IndexMut},

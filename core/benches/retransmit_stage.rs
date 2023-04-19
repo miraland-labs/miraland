@@ -10,7 +10,7 @@ use {
         cluster_info::{ClusterInfo, Node},
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
@@ -18,13 +18,13 @@ use {
         timing::timestamp,
     },
     solana_core::retransmit_stage::retransmitter,
-    solana_entry::entry::Entry,
+    miraland_entry::entry::Entry,
     solana_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         leader_schedule_cache::LeaderScheduleCache,
         shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_streamer::socket::SocketAddrSpace,
     std::{
@@ -119,7 +119,7 @@ fn bench_retransmitter(bencher: &mut Bencher) {
         leader_schedule_cache,
         cluster_info,
         shreds_receiver,
-        Arc::default(), // solana_rpc::max_slots::MaxSlots
+        Arc::default(), // miraland_rpc::max_slots::MaxSlots
         None,
     );
 

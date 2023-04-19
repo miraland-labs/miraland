@@ -717,13 +717,13 @@ const SignatureReceivedResult = literal('receivedSignature');
  * Version info for a node
  */
 export type Version = {
-  /** Version of solana-core */
-  'solana-core': string;
+  /** Version of miraland-core */
+  'miraland-core': string;
   'feature-set'?: number;
 };
 
 const VersionResult = pick({
-  'solana-core': string(),
+  'miraland-core': string(),
   'feature-set': optional(number()),
 });
 

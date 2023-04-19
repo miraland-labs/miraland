@@ -14,12 +14,12 @@ use {
     crossbeam_channel::{Receiver as CrossbeamReceiver, Sender as CrossbeamSender},
     lru::LruCache,
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot, epoch_schedule::EpochSchedule, hash::Hash, pubkey::Pubkey,
         signer::keypair::Keypair,
     },
     solana_ledger::blockstore::{Blockstore, SlotMeta},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::{bank_forks::BankForks, contains::Contains},
     solana_streamer::sendmmsg::{batch_send, SendPktsError},
     std::{
@@ -35,7 +35,7 @@ use {
     },
 };
 #[cfg(test)]
-use {miraland_sdk::timing::timestamp, solana_ledger::shred::Nonce};
+use {solana_sdk::timing::timestamp, solana_ledger::shred::Nonce};
 
 pub type DuplicateSlotsResetSender = CrossbeamSender<Vec<(Slot, Hash)>>;
 pub type DuplicateSlotsResetReceiver = CrossbeamReceiver<Vec<(Slot, Hash)>>;
@@ -730,7 +730,7 @@ mod test {
         miraland_gossip::{
             cluster_info::Node, legacy_contact_info::LegacyContactInfo as ContactInfo,
         },
-        miraland_sdk::signature::Keypair,
+        solana_sdk::signature::Keypair,
         solana_ledger::{
             blockstore::{
                 make_chaining_slot_entries, make_many_slot_entries, make_slot_entries, Blockstore,

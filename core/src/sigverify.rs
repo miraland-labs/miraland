@@ -13,7 +13,7 @@ use {
         sigverify_stage::{SigVerifier, SigVerifyServiceError},
     },
     crossbeam_channel::Sender,
-    miraland_sdk::{packet::Packet, saturating_add_assign},
+    solana_sdk::{packet::Packet, saturating_add_assign},
     solana_perf::{cuda_runtime::PinnedVec, packet::PacketBatch, recycler::Recycler, sigverify},
 };
 

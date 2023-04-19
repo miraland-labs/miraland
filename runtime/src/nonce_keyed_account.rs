@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         feature_set,
         instruction::{checked_add, InstructionError},
         nonce::{
@@ -270,7 +270,7 @@ mod test {
     use {
         super::*,
         assert_matches::assert_matches,
-        miraland_sdk::{
+        solana_sdk::{
             account::AccountSharedData,
             hash::{hash, Hash},
             nonce::{self, State},

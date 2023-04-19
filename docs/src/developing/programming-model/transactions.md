@@ -163,7 +163,7 @@ been observed that some common encodings (Rust's bincode for example) are very
 inefficient.
 
 The [Solana Program Library's Token
-program](https://github.com/solana-labs/solana-program-library/tree/master/token)
+program](https://github.com/solana-labs/miraland-program-library/tree/master/token)
 gives one example of how instruction data can be encoded efficiently, but note
 that this method only supports fixed sized types. Token utilizes the
 [Pack](https://github.com/solana-labs/solana/blob/master/sdk/program/src/program_pack.rs)

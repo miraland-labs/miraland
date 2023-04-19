@@ -4,7 +4,7 @@
 use {
     crate::{connection_cache::ConnectionCacheStats, tpu_connection::TpuConnection},
     core::iter::repeat,
-    miraland_sdk::transport::Result as TransportResult,
+    solana_sdk::transport::Result as TransportResult,
     solana_streamer::sendmmsg::batch_send,
     std::{
         net::{SocketAddr, UdpSocket},

@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, UnixTimestamp},
         hash::Hash,
     },

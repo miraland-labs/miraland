@@ -1,6 +1,6 @@
 use {
     miraland_client::rpc_client::RpcClient,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Epoch, DEFAULT_MS_PER_SLOT},
         commitment_config::CommitmentConfig,
     },

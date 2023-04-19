@@ -1,7 +1,7 @@
 use {
     crate::invoke_context::InvokeContext,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         instruction::InstructionError, pubkey::Pubkey, saturating_add_assign, slot_history::Slot,
         stake_history::Epoch,
     },
@@ -133,7 +133,7 @@ impl Default for CachedExecutors {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl solana_frozen_abi::abi_example::AbiExample for CachedExecutors {
+impl miraland_frozen_abi::abi_example::AbiExample for CachedExecutors {
     fn example() -> Self {
         // Delegate AbiExample impl to Default before going deep and stuck with
         // not easily impl-able Arc<dyn Executor> due to rust's coherence issue
@@ -362,7 +362,7 @@ impl Stats {
 #[cfg(test)]
 mod tests {
     use {
-        super::*, crate::invoke_context::InvokeContext, miraland_sdk::instruction::InstructionError,
+        super::*, crate::invoke_context::InvokeContext, solana_sdk::instruction::InstructionError,
     };
 
     #[derive(Debug)]
@@ -379,10 +379,10 @@ mod tests {
 
     #[test]
     fn test_cached_executors() {
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
-        let key3 = miraland_sdk::pubkey::new_rand();
-        let key4 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
+        let key3 = solana_sdk::pubkey::new_rand();
+        let key4 = solana_sdk::pubkey::new_rand();
         let executor: Arc<dyn Executor> = Arc::new(TestExecutor {});
         let mut cache = CachedExecutors::new(3, 0);
 
@@ -418,10 +418,10 @@ mod tests {
 
     #[test]
     fn test_cached_executor_eviction() {
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
-        let key3 = miraland_sdk::pubkey::new_rand();
-        let key4 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
+        let key3 = solana_sdk::pubkey::new_rand();
+        let key4 = solana_sdk::pubkey::new_rand();
         let executor: Arc<dyn Executor> = Arc::new(TestExecutor {});
         let mut cache = CachedExecutors::new(3, 0);
         assert!(cache.current_epoch == 0);
@@ -467,9 +467,9 @@ mod tests {
 
     #[test]
     fn test_cached_executors_evicts_smallest() {
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
-        let key3 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
+        let key3 = solana_sdk::pubkey::new_rand();
         let executor: Arc<dyn Executor> = Arc::new(TestExecutor {});
         let mut cache = CachedExecutors::new(2, 0);
 

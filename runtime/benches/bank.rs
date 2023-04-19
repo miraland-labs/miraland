@@ -5,7 +5,7 @@ extern crate test;
 
 use {
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         client::{AsyncClient, SyncClient},
         clock::MAX_RECENT_BLOCKHASHES,
         genesis_config::create_genesis_config,

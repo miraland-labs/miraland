@@ -125,7 +125,7 @@ else
   fi
 
   #XXX: Ensure `miraland-genesis` is built LAST!
-  # See https://github.com/solana-labs/solana/issues/5826
+  # See https://github.com/miraland-labs/solana/issues/5826
   BINS+=(miraland-genesis)
 fi
 

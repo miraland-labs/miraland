@@ -20,7 +20,7 @@ use {
     },
     bincode::{self, config::Options, Error},
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Epoch, Slot, UnixTimestamp},
         deserialize_utils::default_on_eof,
         epoch_schedule::EpochSchedule,
@@ -33,7 +33,7 @@ use {
     },
     rayon::prelude::*,
     serde::{de::DeserializeOwned, Deserialize, Serialize},
-    solana_measure::{measure, measure::Measure},
+    miraland_measure::{measure, measure::Measure},
     std::{
         collections::{HashMap, HashSet},
         io::{self, BufReader, BufWriter, Read, Write},
@@ -486,7 +486,7 @@ impl<'a, C: TypeContext<'a>> Serialize for SerializableAccountsDb<'a, C> {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl<'a, C> solana_frozen_abi::abi_example::IgnoreAsHelper for SerializableAccountsDb<'a, C> {}
+impl<'a, C> miraland_frozen_abi::abi_example::IgnoreAsHelper for SerializableAccountsDb<'a, C> {}
 
 #[allow(clippy::too_many_arguments)]
 fn reconstruct_bank_from_fields<E>(

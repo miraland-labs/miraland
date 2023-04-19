@@ -1,7 +1,7 @@
 use {
     crate::bench_tps_client::{BenchTpsClient, Result},
     miraland_client::tpu_client::TpuClient,
-    miraland_sdk::{
+    solana_sdk::{
         account::Account, commitment_config::CommitmentConfig, epoch_info::EpochInfo, hash::Hash,
         message::Message, pubkey::Pubkey, signature::Signature, transaction::Transaction,
     },

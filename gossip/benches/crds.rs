@@ -8,7 +8,7 @@ use {
         crds_gossip_pull::CRDS_GOSSIP_PULL_CRDS_TIMEOUT_MS,
         crds_value::CrdsValue,
     },
-    miraland_sdk::pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
     rand::{thread_rng, Rng},
     rayon::ThreadPoolBuilder,
     std::collections::HashMap,

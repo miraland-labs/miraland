@@ -1,7 +1,7 @@
 use {
     super::*,
     crate::declare_syscall,
-    miraland_sdk::syscalls::{
+    solana_sdk::syscalls::{
         MAX_CPI_ACCOUNT_INFOS, MAX_CPI_INSTRUCTION_ACCOUNTS, MAX_CPI_INSTRUCTION_DATA_LEN,
     },
 };

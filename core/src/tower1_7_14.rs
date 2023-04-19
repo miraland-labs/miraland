@@ -1,6 +1,6 @@
 use {
     crate::consensus::{SwitchForkDecision, TowerError},
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         hash::Hash,
         pubkey::Pubkey,

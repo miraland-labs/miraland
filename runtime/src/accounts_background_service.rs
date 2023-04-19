@@ -14,12 +14,12 @@ use {
     },
     crossbeam_channel::{Receiver, SendError, Sender, TrySendError},
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{BankId, Slot},
         hash::Hash,
     },
     rand::{thread_rng, Rng},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     stats::StatsManager,
     std::{
         boxed::Box,
@@ -94,7 +94,7 @@ impl BankDropQueueStats {
             BankDropQueueEvent::Disconnected => "disconnected",
         };
 
-        let ts = miraland_sdk::timing::timestamp();
+        let ts = solana_sdk::timing::timestamp();
         let last_report_time = self.report_time.load(Ordering::Acquire);
         if ts.saturating_sub(last_report_time) > BANK_DROP_SIGNAL_CHANNEL_REPORT_INTERVAL {
             let val = counter.load(Ordering::Relaxed);
@@ -641,7 +641,7 @@ mod test {
         super::*,
         crate::genesis_utils::create_genesis_config,
         crossbeam_channel::unbounded,
-        miraland_sdk::{account::AccountSharedData, pubkey::Pubkey},
+        solana_sdk::{account::AccountSharedData, pubkey::Pubkey},
     };
 
     #[test]

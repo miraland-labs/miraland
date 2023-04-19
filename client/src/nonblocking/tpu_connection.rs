@@ -4,7 +4,7 @@ use {
     crate::nonblocking::{quic_client::QuicTpuConnection, udp_client::UdpTpuConnection},
     async_trait::async_trait,
     enum_dispatch::enum_dispatch,
-    miraland_sdk::{transaction::VersionedTransaction, transport::Result as TransportResult},
+    solana_sdk::{transaction::VersionedTransaction, transport::Result as TransportResult},
     std::net::SocketAddr,
 };
 

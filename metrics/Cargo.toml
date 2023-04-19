@@ -1,12 +1,12 @@
 [package]
-name = "solana-metrics"
+name = "miraland-metrics"
 version = "1.14.17"
-description = "Solana Metrics"
+description = "Miraland Metrics"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-metrics"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-metrics"
 edition = "2021"
 
 [dependencies]

@@ -12,7 +12,7 @@ use {
         gossip_service::discover_cluster,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         client::SyncClient,
         clock::{self, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
         commitment_config::CommitmentConfig,
@@ -29,7 +29,7 @@ use {
     rand::{thread_rng, Rng},
     rayon::prelude::*,
     solana_core::consensus::VOTE_THRESHOLD_DEPTH,
-    solana_entry::entry::{Entry, EntrySlice},
+    miraland_entry::entry::{Entry, EntrySlice},
     solana_ledger::blockstore::Blockstore,
     solana_streamer::socket::SocketAddrSpace,
     solana_vote_program::vote_transaction,

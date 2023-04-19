@@ -22,20 +22,20 @@ implementation for the PostgreSQL database.
 
 ### Important Crates:
 
-- [`solana-geyser-plugin-interface`] &mdash; This crate defines the plugin
+- [`miraland-geyser-plugin-interface`] &mdash; This crate defines the plugin
 interfaces.
 
 - [`solana-accountsdb-plugin-postgres`] &mdash; The crate for the referential
 plugin implementation for the PostgreSQL database.
 
-[`solana-geyser-plugin-interface`]: https://docs.rs/solana-geyser-plugin-interface
+[`miraland-geyser-plugin-interface`]: https://docs.rs/miraland-geyser-plugin-interface
 [`solana-accountsdb-plugin-postgres`]: https://docs.rs/solana-accountsdb-plugin-postgres
 [`miraland-sdk`]: https://docs.rs/miraland-sdk
-[`solana-transaction-status`]: https://docs.rs/solana-transaction-status
+[`miraland-transaction-status`]: https://docs.rs/miraland-transaction-status
 
 ## The Plugin Interface
 
-The Plugin interface is declared in [`solana-geyser-plugin-interface`]. It
+The Plugin interface is declared in [`miraland-geyser-plugin-interface`]. It
 is defined by the trait `GeyserPlugin`. The plugin should implement the
 trait and expose a "C" function `_create_plugin` to return the pointer to this
 trait. For example, in the referential implementation, the following code
@@ -160,11 +160,11 @@ pub struct ReplicaTransactionInfo<'a> {
 }
 ```
 For details of `SanitizedTransaction` and `TransactionStatusMeta `,
-please refer to [`miraland-sdk`] and [`solana-transaction-status`]
+please refer to [`miraland-sdk`] and [`miraland-transaction-status`]
 
 The `slot` points to the slot the transaction is executed at.
 For more details, please refer to the Rust documentation in
-[`solana-geyser-plugin-interface`].
+[`miraland-geyser-plugin-interface`].
 
 ## Example PostgreSQL Plugin
 

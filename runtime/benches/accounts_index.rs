@@ -3,7 +3,7 @@
 extern crate test;
 
 use {
-    miraland_sdk::{account::AccountSharedData, pubkey},
+    solana_sdk::{account::AccountSharedData, pubkey},
     rand::{thread_rng, Rng},
     solana_runtime::{
         account_info::AccountInfo,

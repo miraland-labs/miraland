@@ -8,7 +8,7 @@ use {
         prelude::{Date, DateTime, TimeZone, Utc},
         serde::ts_seconds,
     },
-    miraland_sdk::{instruction::Instruction, pubkey::Pubkey},
+    solana_sdk::{instruction::Instruction, pubkey::Pubkey},
     serde_derive::{Deserialize, Serialize},
 };
 

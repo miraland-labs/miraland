@@ -24,7 +24,7 @@ use {
         scalar::Scalar,
         traits::Identity,
     },
-    miraland_sdk::{
+    solana_sdk::{
         instruction::Instruction,
         message::Message,
         pubkey::Pubkey,
@@ -625,7 +625,7 @@ mod tests {
     use {
         super::*,
         crate::encryption::pedersen::Pedersen,
-        miraland_sdk::{signature::Keypair, signer::null_signer::NullSigner},
+        solana_sdk::{signature::Keypair, signer::null_signer::NullSigner},
     };
 
     #[test]

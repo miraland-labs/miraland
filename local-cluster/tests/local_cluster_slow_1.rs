@@ -14,7 +14,7 @@ use {
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, MAX_PROCESSING_AGE},
         hash::Hash,
         pubkey::Pubkey,

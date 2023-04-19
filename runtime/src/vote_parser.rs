@@ -1,6 +1,6 @@
 use {
     crate::vote_transaction::VoteTransaction,
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         program_utils::limited_deserialize,
         pubkey::Pubkey,
@@ -103,7 +103,7 @@ fn parse_vote_instruction_data(
 mod test {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             hash::hash,
             signature::{Keypair, Signer},
         },

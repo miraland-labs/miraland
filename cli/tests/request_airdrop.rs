@@ -3,7 +3,7 @@ use {
     miraland_cli::cli::{process_command, CliCommand, CliConfig},
     miraland_client::rpc_client::RpcClient,
     miraland_faucet::faucet::run_local_faucet,
-    miraland_sdk::{
+    solana_sdk::{
         commitment_config::CommitmentConfig,
         native_token::sol_to_lamports,
         signature::{Keypair, Signer},

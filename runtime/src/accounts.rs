@@ -27,7 +27,7 @@ use {
         DashMap,
     },
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
         account_utils::StateMut,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
@@ -284,7 +284,7 @@ impl Accounts {
                     AccountSharedData::default()
                 } else {
                     #[allow(clippy::collapsible_else_if)]
-                    if miraland_sdk::sysvar::instructions::check_id(key) {
+                    if solana_sdk::sysvar::instructions::check_id(key) {
                         Self::construct_instructions_account(
                             message,
                             feature_set
@@ -1414,7 +1414,7 @@ pub mod test_utils {
         slot: Slot,
     ) {
         for t in 0..num {
-            let pubkey = miraland_sdk::pubkey::new_rand();
+            let pubkey = solana_sdk::pubkey::new_rand();
             let account =
                 AccountSharedData::new((t + 1) as u64, 0, AccountSharedData::default().owner());
             accounts.store_slow_uncached(slot, &pubkey, &account);
@@ -1442,7 +1442,7 @@ mod tests {
             rent_collector::RentCollector,
         },
         assert_matches::assert_matches,
-        miraland_sdk::{
+        solana_sdk::{
             account::{AccountSharedData, WritableAccount},
             epoch_schedule::EpochSchedule,
             genesis_config::ClusterType,
@@ -1724,7 +1724,7 @@ mod tests {
         let keypair = Keypair::new();
         let key0 = keypair.pubkey();
 
-        let account = AccountSharedData::new(1, 1, &miraland_sdk::pubkey::new_rand()); // <-- owner is not the system program
+        let account = AccountSharedData::new(1, 1, &solana_sdk::pubkey::new_rand()); // <-- owner is not the system program
         accounts.push((key0, account));
 
         let instructions = vec![CompiledInstruction::new(1, &(), vec![0])];
@@ -2224,13 +2224,13 @@ mod tests {
         );
 
         // Load accounts owned by various programs into AccountsDb
-        let pubkey0 = miraland_sdk::pubkey::new_rand();
+        let pubkey0 = solana_sdk::pubkey::new_rand();
         let account0 = AccountSharedData::new(1, 0, &Pubkey::from([2; 32]));
         accounts.store_slow_uncached(0, &pubkey0, &account0);
-        let pubkey1 = miraland_sdk::pubkey::new_rand();
+        let pubkey1 = solana_sdk::pubkey::new_rand();
         let account1 = AccountSharedData::new(1, 0, &Pubkey::from([2; 32]));
         accounts.store_slow_uncached(0, &pubkey1, &account1);
-        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let pubkey2 = solana_sdk::pubkey::new_rand();
         let account2 = AccountSharedData::new(1, 0, &Pubkey::from([3; 32]));
         accounts.store_slow_uncached(0, &pubkey2, &account2);
 
@@ -2974,7 +2974,7 @@ mod tests {
     fn test_collect_accounts_to_store() {
         let keypair0 = Keypair::new();
         let keypair1 = Keypair::new();
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let account0 = AccountSharedData::new(1, 0, &Pubkey::default());
         let account1 = AccountSharedData::new(2, 0, &Pubkey::default());
         let account2 = AccountSharedData::new(3, 0, &Pubkey::default());
@@ -3103,7 +3103,7 @@ mod tests {
         let zero_account = AccountSharedData::new(0, 0, AccountSharedData::default().owner());
         info!("storing..");
         for i in 0..2_000 {
-            let pubkey = miraland_sdk::pubkey::new_rand();
+            let pubkey = solana_sdk::pubkey::new_rand();
             let account =
                 AccountSharedData::new((i + 1) as u64, 0, AccountSharedData::default().owner());
             accounts.store_slow_uncached(i, &pubkey, &account);
@@ -3154,12 +3154,12 @@ mod tests {
             AccountShrinkThreshold::default(),
         );
 
-        let instructions_key = miraland_sdk::sysvar::instructions::id();
+        let instructions_key = solana_sdk::sysvar::instructions::id();
         let keypair = Keypair::new();
         let instructions = vec![CompiledInstruction::new(1, &(), vec![0, 1])];
         let tx = Transaction::new_with_compiled_instructions(
             &[&keypair],
-            &[miraland_sdk::pubkey::new_rand(), instructions_key],
+            &[solana_sdk::pubkey::new_rand(), instructions_key],
             Hash::default(),
             vec![native_loader::id()],
             instructions,

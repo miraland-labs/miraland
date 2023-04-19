@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{clock::UnixTimestamp, pubkey::Pubkey},
+    solana_sdk::{clock::UnixTimestamp, pubkey::Pubkey},
     solana_runtime::bank::RewardInfo,
     std::sync::{Arc, RwLock},
 };

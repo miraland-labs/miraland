@@ -1,6 +1,6 @@
 use {
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
     solana_runtime::bank_forks::BankForks,
     solana_streamer::streamer::StakedNodes,
     std::{

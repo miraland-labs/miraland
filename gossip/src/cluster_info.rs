@@ -15,10 +15,10 @@
 
 #[deprecated(
     since = "1.10.6",
-    note = "Please use `solana_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE}` instead"
+    note = "Please use `miraland_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE}` instead"
 )]
 #[allow(deprecated)]
-pub use solana_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE};
+pub use miraland_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE};
 use {
     crate::{
         cluster_info_metrics::{
@@ -43,7 +43,7 @@ use {
     bincode::{serialize, serialized_size},
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     itertools::Itertools,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT, DEFAULT_SLOTS_PER_EPOCH},
         feature_set::FeatureSet,
         hash::Hash,
@@ -58,8 +58,8 @@ use {
     rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
     serde::ser::Serialize,
     solana_ledger::shred::Shred,
-    solana_measure::measure::Measure,
-    solana_net_utils::{
+    miraland_measure::measure::Measure,
+    miraland_net_utils::{
         bind_common, bind_common_in_range, bind_in_range, bind_two_in_range_with_offset,
         find_available_port_in_range, multi_bind_in_range, PortRange,
     },
@@ -67,7 +67,7 @@ use {
         data_budget::DataBudget,
         packet::{Packet, PacketBatch, PacketBatchRecycler, PACKET_DATA_SIZE},
     },
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_rayon_threadlimit::get_thread_count,
     solana_runtime::{bank_forks::BankForks, vote_parser},
     solana_streamer::{
         packet,
@@ -137,7 +137,7 @@ const PULL_RESPONSE_MIN_SERIALIZED_SIZE: usize = 161;
 pub(crate) const CRDS_UNIQUE_PUBKEY_CAPACITY: usize = 8192;
 /// Minimum stake that a node should have so that its CRDS values are
 /// propagated through gossip (few types are exempted).
-const MIN_STAKE_FOR_GOSSIP: u64 = miraland_sdk::native_token::LAMPORTS_PER_SOL;
+const MIN_STAKE_FOR_GOSSIP: u64 = solana_sdk::native_token::LAMPORTS_PER_SOL;
 /// Minimum number of staked nodes for enforcing stakes in gossip.
 const MIN_NUM_STAKED_NODES: usize = 500;
 
@@ -269,10 +269,7 @@ pub(crate) type Ping = ping_pong::Ping<[u8; GOSSIP_PING_TOKEN_SIZE]>;
 // TODO These messages should go through the gpu pipeline for spam filtering
 // MI: vanilla digest
 // #[frozen_abi(digest = "32XMrR8yTPMsw7TASQDinrbcB4bdVGyLeTvQrk95hS4i")]
-// digest change maybe due to crate name change to miraland_gossip from solana_gossip???
-// #[frozen_abi(digest = "2gaE37YBozwnVkAs3T1tmoGs7DeYRfuJPd6gtRuCqPMR")]
-// solana_sdk ==> miraland_sdk
-#[frozen_abi(digest = "HbvXgSnAW9ysCA9rax6qZPqmJoRDNnfizPGD9PfdDYUc")]
+#[frozen_abi(digest = "2gaE37YBozwnVkAs3T1tmoGs7DeYRfuJPd6gtRuCqPMR")]
 #[derive(Serialize, Deserialize, Debug, AbiEnumVisitor, AbiExample)]
 #[allow(clippy::large_enum_variant)]
 pub(crate) enum Protocol {
@@ -2818,7 +2815,7 @@ pub struct Node {
 
 impl Node {
     pub fn new_localhost() -> Self {
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         Self::new_localhost_with_pubkey(&pubkey)
     }
     pub fn new_localhost_with_pubkey(pubkey: &Pubkey) -> Self {
@@ -3151,12 +3148,12 @@ mod tests {
             duplicate_shred::{self, tests::new_rand_shred, MAX_DUPLICATE_SHREDS},
         },
         itertools::izip,
-        miraland_sdk::signature::{Keypair, Signer},
+        solana_sdk::signature::{Keypair, Signer},
         rand::{seq::SliceRandom, SeedableRng},
         rand_chacha::ChaChaRng,
         regex::Regex,
         solana_ledger::shred::Shredder,
-        solana_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
+        miraland_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
         solana_vote_program::{vote_instruction, vote_state::Vote},
         std::{
             iter::repeat_with,
@@ -3168,13 +3165,13 @@ mod tests {
     #[test]
     fn test_gossip_node() {
         //check that a gossip nodes always show up as spies
-        let (node, _, _) = ClusterInfo::spy_node(miraland_sdk::pubkey::new_rand(), 0);
+        let (node, _, _) = ClusterInfo::spy_node(solana_sdk::pubkey::new_rand(), 0);
         assert!(ClusterInfo::is_spy_node(
             &node,
             &SocketAddrSpace::Unspecified
         ));
         let (node, _, _) = ClusterInfo::gossip_node(
-            miraland_sdk::pubkey::new_rand(),
+            solana_sdk::pubkey::new_rand(),
             &"1.1.1.1:1111".parse().unwrap(),
             0,
         );
@@ -3279,7 +3276,7 @@ RPC Enabled Nodes: 1"#;
             SocketAddrSpace::Unspecified,
         ));
 
-        let entrypoint_pubkey = miraland_sdk::pubkey::new_rand();
+        let entrypoint_pubkey = solana_sdk::pubkey::new_rand();
         let data = test_crds_values(entrypoint_pubkey);
         let timeouts = HashMap::new();
         assert_eq!(
@@ -3292,7 +3289,7 @@ RPC Enabled Nodes: 1"#;
             )
         );
 
-        let entrypoint_pubkey2 = miraland_sdk::pubkey::new_rand();
+        let entrypoint_pubkey2 = solana_sdk::pubkey::new_rand();
         assert_eq!(
             (1, 0, 0),
             ClusterInfo::handle_pull_response(&cluster_info, &entrypoint_pubkey2, data, &timeouts)
@@ -3586,7 +3583,7 @@ RPC Enabled Nodes: 1"#;
         let thread_pool = ThreadPoolBuilder::new().build().unwrap();
         //check that gossip doesn't try to push to invalid addresses
         let node = Node::new_localhost();
-        let (spy, _, _) = ClusterInfo::spy_node(miraland_sdk::pubkey::new_rand(), 0);
+        let (spy, _, _) = ClusterInfo::spy_node(solana_sdk::pubkey::new_rand(), 0);
         let cluster_info = Arc::new(ClusterInfo::new(
             node.info,
             Arc::new(Keypair::new()),
@@ -3618,7 +3615,7 @@ RPC Enabled Nodes: 1"#;
 
     #[test]
     fn test_cluster_info_new() {
-        let d = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
+        let d = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
         let cluster_info = ClusterInfo::new(
             d.clone(),
             Arc::new(Keypair::new()),
@@ -3629,10 +3626,10 @@ RPC Enabled Nodes: 1"#;
 
     #[test]
     fn insert_info_test() {
-        let d = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
+        let d = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
         let cluster_info =
             ClusterInfo::new(d, Arc::new(Keypair::new()), SocketAddrSpace::Unspecified);
-        let d = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
+        let d = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
         let label = CrdsValueLabel::LegacyContactInfo(d.id);
         cluster_info.insert_info(d);
         let gossip_crds = cluster_info.gossip.crds.read().unwrap();
@@ -3671,7 +3668,7 @@ RPC Enabled Nodes: 1"#;
     fn new_with_external_ip_test_random() {
         let ip = Ipv4Addr::from(0);
         let node = Node::new_with_external_ip(
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             &socketaddr!(ip, 0),
             VALIDATOR_PORT_RANGE,
             IpAddr::V4(ip),
@@ -3693,7 +3690,7 @@ RPC Enabled Nodes: 1"#;
         let ip = IpAddr::V4(Ipv4Addr::from(0));
         let port = bind_in_range(ip, port_range).expect("Failed to bind").0;
         let node = Node::new_with_external_ip(
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             &socketaddr!(0, port),
             port_range,
             ip,
@@ -3873,7 +3870,7 @@ RPC Enabled Nodes: 1"#;
         // add a vote
         let vote = Vote::new(
             vec![1, 3, 7], // slots
-            miraland_sdk::hash::new_rand(&mut rng),
+            solana_sdk::hash::new_rand(&mut rng),
         );
         let ix = vote_instruction::vote(
             &Pubkey::new_unique(), // vote_pubkey
@@ -3903,7 +3900,7 @@ RPC Enabled Nodes: 1"#;
     }
 
     fn new_vote_transaction<R: Rng>(rng: &mut R, slots: Vec<Slot>) -> Transaction {
-        let vote = Vote::new(slots, miraland_sdk::hash::new_rand(rng));
+        let vote = Vote::new(slots, solana_sdk::hash::new_rand(rng));
         let ix = vote_instruction::vote(
             &Pubkey::new_unique(), // vote_pubkey
             &Pubkey::new_unique(), // authorized_voter_pubkey
@@ -4049,7 +4046,7 @@ RPC Enabled Nodes: 1"#;
             node_keypair,
             SocketAddrSpace::Unspecified,
         );
-        let entrypoint_pubkey = miraland_sdk::pubkey::new_rand();
+        let entrypoint_pubkey = solana_sdk::pubkey::new_rand();
         let entrypoint = ContactInfo::new_localhost(&entrypoint_pubkey, timestamp());
         cluster_info.set_entrypoint(entrypoint.clone());
         let (pings, pulls) = cluster_info.new_pull_requests(&thread_pool, None, &HashMap::new());
@@ -4111,7 +4108,7 @@ RPC Enabled Nodes: 1"#;
         let splits: Vec<_> =
             ClusterInfo::split_gossip_messages(PUSH_MESSAGE_MAX_PAYLOAD_SIZE, values.clone())
                 .collect();
-        let self_pubkey = miraland_sdk::pubkey::new_rand();
+        let self_pubkey = solana_sdk::pubkey::new_rand();
         assert!(splits.len() * 3 < NUM_CRDS_VALUES);
         // Assert that all messages are included in the splits.
         assert_eq!(NUM_CRDS_VALUES, splits.iter().map(Vec::len).sum::<usize>());
@@ -4245,14 +4242,14 @@ RPC Enabled Nodes: 1"#;
             node_keypair,
             SocketAddrSpace::Unspecified,
         );
-        let entrypoint_pubkey = miraland_sdk::pubkey::new_rand();
+        let entrypoint_pubkey = solana_sdk::pubkey::new_rand();
         let mut entrypoint = ContactInfo::new_localhost(&entrypoint_pubkey, timestamp());
         entrypoint.gossip = socketaddr!("127.0.0.2:1234");
         cluster_info.set_entrypoint(entrypoint.clone());
 
         let mut stakes = HashMap::new();
 
-        let other_node_pubkey = miraland_sdk::pubkey::new_rand();
+        let other_node_pubkey = solana_sdk::pubkey::new_rand();
         let other_node = ContactInfo::new_localhost(&other_node_pubkey, timestamp());
         assert_ne!(other_node.gossip, entrypoint.gossip);
         cluster_info.ping_cache.lock().unwrap().mock_pong(
@@ -4304,7 +4301,7 @@ RPC Enabled Nodes: 1"#;
         for i in 0..10 {
             // make these invalid for the upcoming repair request
             let peer_lowest = if i >= 5 { 10 } else { 0 };
-            let other_node_pubkey = miraland_sdk::pubkey::new_rand();
+            let other_node_pubkey = solana_sdk::pubkey::new_rand();
             let other_node = ContactInfo::new_localhost(&other_node_pubkey, timestamp());
             cluster_info.insert_info(other_node.clone());
             let value = CrdsValue::new_unsigned(CrdsData::LowestSlot(
@@ -4440,7 +4437,7 @@ RPC Enabled Nodes: 1"#;
         // Simulate getting entrypoint ContactInfo from gossip with an entrypoint1 shred version of
         // 0
         let mut gossiped_entrypoint1_info =
-            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
+            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
         gossiped_entrypoint1_info.gossip = entrypoint1_gossip_addr;
         gossiped_entrypoint1_info.shred_version = 0;
         cluster_info.insert_info(gossiped_entrypoint1_info.clone());
@@ -4467,7 +4464,7 @@ RPC Enabled Nodes: 1"#;
         // Simulate getting entrypoint ContactInfo from gossip with an entrypoint2 shred version of
         // !0
         let mut gossiped_entrypoint2_info =
-            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
+            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
         gossiped_entrypoint2_info.gossip = entrypoint2_gossip_addr;
         gossiped_entrypoint2_info.shred_version = 1;
         cluster_info.insert_info(gossiped_entrypoint2_info.clone());
@@ -4518,7 +4515,7 @@ RPC Enabled Nodes: 1"#;
 
         // Simulate getting entrypoint ContactInfo from gossip
         let mut gossiped_entrypoint_info =
-            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
+            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
         gossiped_entrypoint_info.gossip = entrypoint_gossip_addr;
         gossiped_entrypoint_info.shred_version = 1;
         cluster_info.insert_info(gossiped_entrypoint_info.clone());
@@ -4681,7 +4678,7 @@ RPC Enabled Nodes: 1"#;
             Arc::new(Keypair::new()),
             SocketAddrSpace::Unspecified,
         ));
-        let entrypoint_pubkey = miraland_sdk::pubkey::new_rand();
+        let entrypoint_pubkey = solana_sdk::pubkey::new_rand();
         let entrypoint = ContactInfo::new_localhost(&entrypoint_pubkey, timestamp());
         cluster_info.set_entrypoint(entrypoint);
 

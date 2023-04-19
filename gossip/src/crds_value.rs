@@ -7,7 +7,7 @@ use {
         legacy_contact_info::LegacyContactInfo,
     },
     bincode::{serialize, serialized_size},
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         hash::Hash,
         pubkey::{self, Pubkey},
@@ -195,7 +195,7 @@ impl SnapshotHashes {
         let num_hashes = rng.gen_range(0, MAX_SNAPSHOT_HASHES) + 1;
         let hashes = std::iter::repeat_with(|| {
             let slot = 47825632 + rng.gen_range(0, 512);
-            let hash = miraland_sdk::hash::new_rand(rng);
+            let hash = solana_sdk::hash::new_rand(rng);
             (slot, hash)
         })
         .take(num_hashes)
@@ -686,7 +686,7 @@ mod test {
     use {
         super::*,
         bincode::{deserialize, Options},
-        miraland_sdk::{
+        solana_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
@@ -785,7 +785,7 @@ mod test {
         let mut rng = rand::thread_rng();
         let vote = vote_state::Vote::new(
             vec![1, 3, 7], // slots
-            miraland_sdk::hash::new_rand(&mut rng),
+            solana_sdk::hash::new_rand(&mut rng),
         );
         let ix = vote_instruction::vote(
             &Pubkey::new_unique(), // vote_pubkey

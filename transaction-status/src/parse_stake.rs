@@ -3,7 +3,7 @@ use {
         check_num_accounts, ParsableProgram, ParseInstructionError, ParsedInstructionEnum,
     },
     bincode::deserialize,
-    miraland_sdk::{
+    solana_sdk::{
         instruction::CompiledInstruction, message::AccountKeys,
         stake::instruction::StakeInstruction,
     },
@@ -308,7 +308,7 @@ fn check_num_stake_accounts(accounts: &[u8], num: usize) -> Result<(), ParseInst
 mod test {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             message::Message,
             pubkey::Pubkey,
             stake::{

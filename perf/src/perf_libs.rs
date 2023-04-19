@@ -3,7 +3,7 @@ use {
     dlopen::symbor::{Container, SymBorApi, Symbol},
     dlopen_derive::SymBorApi,
     log::*,
-    miraland_sdk::packet::Packet,
+    solana_sdk::packet::Packet,
     std::{
         env,
         ffi::OsStr,

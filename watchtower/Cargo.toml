@@ -6,7 +6,7 @@ description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-watchtower"
 
 [dependencies]
@@ -18,10 +18,10 @@ miraland-cli-output = { path = "../cli-output", version = "=1.14.17" }
 miraland-client = { path = "../client", version = "=1.14.17" }
 miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-version = { path = "../version", version = "=1.14.17" }
-solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17" }
-solana-metrics = { path = "../metrics", version = "=1.14.17" }
-solana-notifier = { path = "../notifier", version = "=1.14.17" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+miraland-notifier = { path = "../notifier", version = "=1.14.17" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

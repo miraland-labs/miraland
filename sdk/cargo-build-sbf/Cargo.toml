@@ -1,10 +1,10 @@
 [package]
-name = "solana-cargo-build-sbf"
+name = "miraland-cargo-build-sbf"
 version = "1.14.17"
 description = "Compile a local package and all of its dependencies using the Solana SBF SDK"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 license = "Apache-2.0"
 edition = "2021"
 publish = false
@@ -16,8 +16,8 @@ clap = { version = "3.1.5", features = ["cargo", "env"] }
 log = { version = "0.4.14", features = ["std"] }
 miraland-sdk = { path = "..", version = "=1.14.17" }
 regex = "1.5.6"
-solana-download-utils = { path = "../../download-utils", version = "=1.14.17" }
-solana-logger = { path = "../../logger", version = "=1.14.17" }
+miraland-download-utils = { path = "../../download-utils", version = "=1.14.17" }
+miraland-logger = { path = "../../logger", version = "=1.14.17" }
 tar = "0.4.38"
 
 [dev-dependencies]

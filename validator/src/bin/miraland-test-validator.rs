@@ -4,7 +4,7 @@ use {
     log::*,
     miraland_client::rpc_client::RpcClient,
     miraland_faucet::faucet::{run_local_faucet_with_port, FAUCET_PORT},
-    miraland_sdk::{
+    solana_sdk::{
         account::AccountSharedData,
         clock::Slot,
         epoch_schedule::{EpochSchedule, MINIMUM_SLOTS_PER_EPOCH},
@@ -20,7 +20,7 @@ use {
         admin_rpc_service, dashboard::Dashboard, ledger_lockfile, lock_ledger, println_name_value,
         redirect_stderr_to_file,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::{pubkey_of, pubkeys_of, value_of},
         input_validators::{
             is_parsable, is_pubkey, is_pubkey_or_keypair, is_slot, is_url_or_moniker,
@@ -28,7 +28,7 @@ use {
         },
     },
     solana_core::tower_storage::FileTowerStorage,
-    solana_rpc::{
+    miraland_rpc::{
         rpc::{JsonRpcConfig, RpcBigtableConfig},
         rpc_pubsub_service::PubSubConfig,
     },
@@ -290,7 +290,7 @@ fn main() {
                 .long("gossip-host")
                 .value_name("HOST")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host)
+                .validator(miraland_net_utils::is_host)
                 .help(
                     "Gossip DNS name or IP address for the validator to advertise in gossip \
                        [default: 127.0.0.1]",
@@ -312,7 +312,7 @@ fn main() {
                 .long("bind-address")
                 .value_name("HOST")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host)
+                .validator(miraland_net_utils::is_host)
                 .default_value("0.0.0.0")
                 .help("IP address to bind the validator ports [default: 0.0.0.0]"),
         )
@@ -505,20 +505,20 @@ fn main() {
     let ticks_per_slot = value_t!(matches, "ticks_per_slot", u64).ok();
     let slots_per_epoch = value_t!(matches, "slots_per_epoch", Slot).ok();
     let gossip_host = matches.value_of("gossip_host").map(|gossip_host| {
-        solana_net_utils::parse_host(gossip_host).unwrap_or_else(|err| {
+        miraland_net_utils::parse_host(gossip_host).unwrap_or_else(|err| {
             eprintln!("Failed to parse --gossip-host: {}", err);
             exit(1);
         })
     });
     let gossip_port = value_t!(matches, "gossip_port", u16).ok();
     let dynamic_port_range = matches.value_of("dynamic_port_range").map(|port_range| {
-        solana_net_utils::parse_port_range(port_range).unwrap_or_else(|| {
+        miraland_net_utils::parse_port_range(port_range).unwrap_or_else(|| {
             eprintln!("Failed to parse --dynamic-port-range");
             exit(1);
         })
     });
     let bind_address = matches.value_of("bind_address").map(|bind_address| {
-        solana_net_utils::parse_host(bind_address).unwrap_or_else(|err| {
+        miraland_net_utils::parse_host(bind_address).unwrap_or_else(|err| {
             eprintln!("Failed to parse --bind-address: {}", err);
             exit(1);
         })
@@ -555,7 +555,7 @@ fn main() {
 
                     programs_to_load.push(ProgramInfo {
                         program_id: address,
-                        loader: miraland_sdk::bpf_loader::id(),
+                        loader: solana_sdk::bpf_loader::id(),
                         program_path,
                     });
                 }

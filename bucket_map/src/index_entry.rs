@@ -6,7 +6,7 @@ use {
         bucket_storage::{BucketStorage, Uid},
         RefCount,
     },
-    miraland_sdk::{clock::Slot, pubkey::Pubkey},
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     modular_bitfield::prelude::*,
     std::{
         collections::hash_map::DefaultHasher,
@@ -137,7 +137,7 @@ mod tests {
     #[test]
     fn test_api() {
         for offset in [0, 1, u32::MAX as u64] {
-            let mut index = IndexEntry::new(miraland_sdk::pubkey::new_rand());
+            let mut index = IndexEntry::new(solana_sdk::pubkey::new_rand());
             if offset != 0 {
                 index.set_storage_offset(offset);
             }

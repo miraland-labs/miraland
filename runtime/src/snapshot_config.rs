@@ -1,6 +1,6 @@
 use {
     crate::snapshot_utils::{self, ArchiveFormat, SnapshotVersion},
-    miraland_sdk::clock::Slot,
+    solana_sdk::clock::Slot,
     std::path::PathBuf,
 };
 

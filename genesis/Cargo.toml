@@ -6,7 +6,7 @@ description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-genesis"
 
 [dependencies]
@@ -18,13 +18,13 @@ miraland-version = { path = "../version", version = "=1.14.17" }
 serde = "1.0.138"
 serde_json = "1.0.81"
 serde_yaml = "0.8.26"
-solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-solana-entry = { path = "../entry", version = "=1.14.17" }
-solana-ledger = { path = "../ledger", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17" }
-solana-runtime = { path = "../runtime", version = "=1.14.17" }
-solana-stake-program = { path = "../programs/stake", version = "=1.14.17" }
-solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
+miraland-entry = { path = "../entry", version = "=1.14.17" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 tempfile = "3.3.0"
 
 [[bin]]

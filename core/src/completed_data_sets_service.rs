@@ -1,9 +1,9 @@
 use {
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
-    miraland_sdk::signature::Signature,
-    solana_entry::entry::Entry,
+    solana_sdk::signature::Signature,
+    miraland_entry::entry::Entry,
     solana_ledger::blockstore::{Blockstore, CompletedDataSetInfo},
-    solana_rpc::{max_slots::MaxSlots, rpc_subscriptions::RpcSubscriptions},
+    miraland_rpc::{max_slots::MaxSlots, rpc_subscriptions::RpcSubscriptions},
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -104,7 +104,7 @@ impl CompletedDataSetsService {
 pub mod test {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             transaction::Transaction,

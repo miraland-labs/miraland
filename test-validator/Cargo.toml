@@ -2,7 +2,7 @@
 name = "miraland-test-validator"
 description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-test-validator"
 readme = "../README.md"
 repository = "https://github.com/miraland-labs/miraland"
@@ -19,15 +19,15 @@ miraland-gossip = { path = "../gossip", version = "=1.14.17" }
 miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 serde_derive = "1.0.103"
 serde_json = "1.0.81"
-solana-core = { path = "../core", version = "=1.14.17" }
-solana-ledger = { path = "../ledger", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17" }
-solana-net-utils = { path = "../net-utils", version = "=1.14.17" }
-solana-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
-solana-program-test = { path = "../program-test", version = "=1.14.17" }
-solana-rpc = { path = "../rpc", version = "=1.14.17" }
-solana-runtime = { path = "../runtime", version = "=1.14.17" }
-solana-streamer = { path = "../streamer", version = "=1.14.17" }
+miraland-core = { path = "../core", version = "=1.14.17" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17" }
+miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
+miraland-program-test = { path = "../program-test", version = "=1.14.17" }
+miraland-rpc = { path = "../rpc", version = "=1.14.17" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17" }
 tokio = { version = "1", features = ["full"] }
 
 [package.metadata.docs.rs]

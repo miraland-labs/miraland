@@ -41,7 +41,7 @@ mod test {
     use {
         super::*,
         crate::parse_token::test::*,
-        miraland_sdk::pubkey::Pubkey,
+        solana_sdk::pubkey::Pubkey,
         spl_token_2022::{
             extension::cpi_guard::instruction::{disable_cpi_guard, enable_cpi_guard},
             solana_program::message::Message,

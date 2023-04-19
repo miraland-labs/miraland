@@ -4,7 +4,7 @@ use {
         fork_choice::ForkChoice,
         heaviest_subtree_fork_choice::HeaviestSubtreeForkChoice,
     },
-    miraland_sdk::{clock::Slot, hash::Hash},
+    solana_sdk::{clock::Slot, hash::Hash},
     solana_ledger::blockstore::Blockstore,
     std::collections::{BTreeMap, BTreeSet, HashMap},
 };

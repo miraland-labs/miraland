@@ -17,7 +17,7 @@ use {
         RpcAccountBalance, RpcContactInfo, RpcInflationGovernor, RpcInflationRate, RpcKeyedAccount,
         RpcSupply, RpcVoteAccountInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Epoch, Slot, UnixTimestamp},
         epoch_info::EpochInfo,
         hash::Hash,
@@ -30,9 +30,9 @@ use {
     },
     serde::{Deserialize, Serialize},
     serde_json::{Map, Value},
-    solana_account_decoder::parse_token::UiTokenAccount,
-    solana_clap_utils::keypair::SignOnly,
-    solana_transaction_status::{
+    miraland_account_decoder::parse_token::UiTokenAccount,
+    miraland_clap_utils::keypair::SignOnly,
+    miraland_transaction_status::{
         EncodedConfirmedBlock, EncodedTransaction, TransactionConfirmationStatus,
         UiTransactionStatusMeta,
     },
@@ -2826,7 +2826,7 @@ mod tests {
     use {
         super::*,
         clap::{App, Arg},
-        miraland_sdk::{
+        solana_sdk::{
             message::Message,
             pubkey::Pubkey,
             signature::{keypair_from_seed, NullSigner, Signature, Signer, SignerError},

@@ -12,17 +12,17 @@ use {
     },
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::clock::Slot,
+    solana_sdk::clock::Slot,
     rayon::{prelude::*, ThreadPool},
     solana_ledger::{
         blockstore::{Blockstore, BlockstoreInsertionMetrics},
         leader_schedule_cache::LeaderScheduleCache,
         shred::{self, Nonce, ReedSolomonCache, Shred},
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_metrics::inc_new_counter_error,
     solana_perf::packet::{Packet, PacketBatch},
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_rayon_threadlimit::get_thread_count,
     std::{
         cmp::Reverse,
         collections::{HashMap, HashSet},
@@ -173,7 +173,7 @@ fn verify_repair(
                 .register_response(
                     repair_meta.nonce,
                     shred,
-                    miraland_sdk::timing::timestamp(),
+                    solana_sdk::timing::timestamp(),
                     |_| (),
                 )
                 .is_some()
@@ -483,12 +483,12 @@ mod test {
     use {
         super::*,
         miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_entry::entry::{create_ticks, Entry},
+        miraland_entry::entry::{create_ticks, Entry},
         solana_ledger::{
             blockstore::{make_many_slot_entries, Blockstore},
             get_tmp_ledger_path,

@@ -13,7 +13,7 @@ use {
     clap::{App, Arg, ArgMatches, SubCommand},
     miraland_cli_output::CliNonceAccount,
     miraland_client::{nonce_utils::*, rpc_client::RpcClient},
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         feature_set::merge_nonce_error_into_system_error,
         hash::Hash,
@@ -29,7 +29,7 @@ use {
         system_program,
         transaction::{Transaction, TransactionError},
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         compute_unit_price::{compute_unit_price_arg, COMPUTE_UNIT_PRICE_ARG},
         input_parsers::*,
         input_validators::*,
@@ -750,7 +750,7 @@ mod tests {
     use {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
-        miraland_sdk::{
+        solana_sdk::{
             account::Account,
             account_utils::StateMut,
             hash::hash,
@@ -1074,7 +1074,7 @@ mod tests {
     fn test_check_nonce_account() {
         let durable_nonce = DurableNonce::from_blockhash(&Hash::default());
         let blockhash = *durable_nonce.as_hash();
-        let nonce_pubkey = miraland_sdk::pubkey::new_rand();
+        let nonce_pubkey = solana_sdk::pubkey::new_rand();
         let data = Versions::new(State::Initialized(nonce::state::Data::new(
             nonce_pubkey,
             durable_nonce,
@@ -1116,7 +1116,7 @@ mod tests {
             );
         }
 
-        let new_nonce_authority = miraland_sdk::pubkey::new_rand();
+        let new_nonce_authority = solana_sdk::pubkey::new_rand();
         let data = Versions::new(State::Initialized(nonce::state::Data::new(
             new_nonce_authority,
             durable_nonce,

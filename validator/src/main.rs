@@ -15,7 +15,7 @@ use {
         rpc_request::MAX_MULTIPLE_ACCOUNTS,
     },
     miraland_gossip::{cluster_info::Node, legacy_contact_info::LegacyContactInfo as ContactInfo},
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, DEFAULT_S_PER_SLOT},
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -27,7 +27,7 @@ use {
         new_spinner_progress_bar, println_name_value, redirect_stderr_to_file,
     },
     rand::{seq::SliceRandom, thread_rng},
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::{keypair_of, keypairs_of, pubkey_of, value_of},
         input_validators::{
             is_keypair, is_keypair_or_ask_keyword, is_niceness_adjustment_valid, is_parsable,
@@ -47,10 +47,10 @@ use {
         BlockstoreCompressionType, BlockstoreRecoveryMode, LedgerColumnOptions, ShredStorageType,
         DEFAULT_ROCKS_FIFO_SHRED_STORAGE_SIZE_BYTES,
     },
-    solana_net_utils::VALIDATOR_PORT_RANGE,
+    miraland_net_utils::VALIDATOR_PORT_RANGE,
     solana_perf::recycler::enable_recycler_warming,
-    solana_poh::poh_service,
-    solana_rpc::{
+    miraland_poh::poh_service,
+    miraland_rpc::{
         rpc::{JsonRpcConfig, RpcBigtableConfig},
         rpc_pubsub_service::PubSubConfig,
     },
@@ -74,7 +74,7 @@ use {
             DEFAULT_MAX_INCREMENTAL_SNAPSHOT_ARCHIVES_TO_RETAIN, SUPPORTED_ARCHIVE_COMPRESSION,
         },
     },
-    solana_send_transaction_service::send_transaction_service::{
+    miraland_send_transaction_service::send_transaction_service::{
         self, MAX_BATCH_SEND_RATE_MS, MAX_TRANSACTION_BATCH_SIZE,
     },
     solana_streamer::socket::SocketAddrSpace,
@@ -428,7 +428,7 @@ fn get_cluster_shred_version(entrypoints: &[SocketAddr]) -> Option<u16> {
         index.into_iter().map(|i| &entrypoints[i])
     };
     for entrypoint in entrypoints {
-        match solana_net_utils::get_cluster_shred_version(entrypoint) {
+        match miraland_net_utils::get_cluster_shred_version(entrypoint) {
             Err(err) => eprintln!("get_cluster_shred_version failed: {}, {}", entrypoint, err),
             Ok(0) => eprintln!("zero shred-version from entrypoint: {}", entrypoint),
             Ok(shred_version) => {
@@ -557,7 +557,7 @@ pub fn main() {
                 .value_name("HOST:PORT")
                 .takes_value(true)
                 .multiple(true)
-                .validator(solana_net_utils::is_host_port)
+                .validator(miraland_net_utils::is_host_port)
                 .help("Rendezvous with the cluster at this gossip entrypoint"),
         )
         .arg(
@@ -724,7 +724,7 @@ pub fn main() {
                 .long("rpc-faucet-address")
                 .value_name("HOST:PORT")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host_port)
+                .validator(miraland_net_utils::is_host_port)
                 .help("Enable the JSON RPC 'requestAirdrop' API with this faucet address."),
         )
         .arg(
@@ -780,7 +780,7 @@ pub fn main() {
                 .value_name("HOST:PORT")
                 .takes_value(true)
                 .multiple(true)
-                .validator(solana_net_utils::is_host_port)
+                .validator(miraland_net_utils::is_host_port)
                 .help("etcd gRPC endpoint to connect with")
         )
         .arg(
@@ -828,7 +828,7 @@ pub fn main() {
                 .long("gossip-host")
                 .value_name("HOST")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host)
+                .validator(miraland_net_utils::is_host)
                 .help("Gossip DNS name or IP address for the validator to advertise in gossip \
                        [default: ask --entrypoint, or 127.0.0.1 when --entrypoint is not provided]"),
         )
@@ -837,7 +837,7 @@ pub fn main() {
                 .long("tpu-host-addr")
                 .value_name("HOST:PORT")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host_port)
+                .validator(miraland_net_utils::is_host_port)
                 .help("Specify TPU address to advertise in gossip [default: ask --entrypoint or localhost\
                     when --entrypoint is not provided]"),
 
@@ -848,7 +848,7 @@ pub fn main() {
                 .value_name("HOST:PORT")
                 .takes_value(true)
                 .conflicts_with("private_rpc")
-                .validator(solana_net_utils::is_host_port)
+                .validator(miraland_net_utils::is_host_port)
                 .help("RPC address for the validator to advertise publicly in gossip. \
                       Useful for validators running behind a load balancer or proxy \
                       [default: use --rpc-bind-address / --rpc-port]"),
@@ -1286,7 +1286,7 @@ pub fn main() {
                 .long("bind-address")
                 .value_name("HOST")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host)
+                .validator(miraland_net_utils::is_host)
                 .default_value("0.0.0.0")
                 .help("IP address to bind the validator ports"),
         )
@@ -1295,7 +1295,7 @@ pub fn main() {
                 .long("rpc-bind-address")
                 .value_name("HOST")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host)
+                .validator(miraland_net_utils::is_host)
                 .help("IP address to bind the RPC port [default: 127.0.0.1 if --private-rpc is present, otherwise use --bind-address]"),
         )
         .arg(
@@ -1519,7 +1519,7 @@ pub fn main() {
                 .long("accountsdb-repl-bind-address")
                 .value_name("HOST")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host)
+                .validator(miraland_net_utils::is_host)
                 .hidden(true)
                 .help("IP address to bind the AccountsDb Replication port [default: use --bind-address]"),
         )
@@ -2336,13 +2336,13 @@ pub fn main() {
         "--gossip-validator",
     );
 
-    let bind_address = solana_net_utils::parse_host(matches.value_of("bind_address").unwrap())
+    let bind_address = miraland_net_utils::parse_host(matches.value_of("bind_address").unwrap())
         .expect("invalid bind_address");
     let rpc_bind_address = if matches.is_present("rpc_bind_address") {
-        solana_net_utils::parse_host(matches.value_of("rpc_bind_address").unwrap())
+        miraland_net_utils::parse_host(matches.value_of("rpc_bind_address").unwrap())
             .expect("invalid rpc_bind_address")
     } else if private_rpc {
-        solana_net_utils::parse_host("127.0.0.1").unwrap()
+        miraland_net_utils::parse_host("127.0.0.1").unwrap()
     } else {
         bind_address
     };
@@ -2381,7 +2381,7 @@ pub fn main() {
         .unwrap_or_default()
         .into_iter()
         .map(|entrypoint| {
-            solana_net_utils::parse_host_port(&entrypoint).unwrap_or_else(|e| {
+            miraland_net_utils::parse_host_port(&entrypoint).unwrap_or_else(|e| {
                 eprintln!("failed to parse entrypoint address: {}", e);
                 exit(1);
             })
@@ -2610,7 +2610,7 @@ pub fn main() {
                 || matches.is_present("enable_extended_tx_metadata_storage"),
             rpc_bigtable_config,
             faucet_addr: matches.value_of("rpc_faucet_addr").map(|address| {
-                solana_net_utils::parse_host_port(address).expect("failed to parse faucet address")
+                miraland_net_utils::parse_host_port(address).expect("failed to parse faucet address")
             }),
             full_api,
             obsolete_v1_7_api: matches.is_present("obsolete_v1_7_rpc_api"),
@@ -2732,7 +2732,7 @@ pub fn main() {
     });
 
     let dynamic_port_range =
-        solana_net_utils::parse_port_range(matches.value_of("dynamic_port_range").unwrap())
+        miraland_net_utils::parse_port_range(matches.value_of("dynamic_port_range").unwrap())
             .expect("invalid dynamic_port_range");
 
     let account_paths: Vec<PathBuf> =
@@ -2960,7 +2960,7 @@ pub fn main() {
     }
 
     let public_rpc_addr = matches.value_of("public_rpc_addr").map(|addr| {
-        solana_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
+        miraland_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
             eprintln!("failed to parse public rpc address: {}", e);
             exit(1);
         })
@@ -2996,7 +2996,7 @@ pub fn main() {
     let gossip_host: IpAddr = matches
         .value_of("gossip_host")
         .map(|gossip_host| {
-            solana_net_utils::parse_host(gossip_host).unwrap_or_else(|err| {
+            miraland_net_utils::parse_host(gossip_host).unwrap_or_else(|err| {
                 eprintln!("Failed to parse --gossip-host: {}", err);
                 exit(1);
             })
@@ -3012,7 +3012,7 @@ pub fn main() {
                         "Contacting {} to determine the validator's public IP address",
                         entrypoint_addr
                     );
-                    solana_net_utils::get_public_ip_addr(entrypoint_addr).map_or_else(
+                    miraland_net_utils::get_public_ip_addr(entrypoint_addr).map_or_else(
                         |err| {
                             eprintln!(
                                 "Failed to contact cluster entrypoint {}: {}",
@@ -3036,7 +3036,7 @@ pub fn main() {
     let gossip_addr = SocketAddr::new(
         gossip_host,
         value_t!(matches, "gossip_port", u16).unwrap_or_else(|_| {
-            solana_net_utils::find_available_port_in_range(bind_address, (0, 1)).unwrap_or_else(
+            miraland_net_utils::find_available_port_in_range(bind_address, (0, 1)).unwrap_or_else(
                 |err| {
                     eprintln!("Unable to find an available gossip port: {}", err);
                     exit(1);
@@ -3046,7 +3046,7 @@ pub fn main() {
     );
 
     let overwrite_tpu_addr = matches.value_of("tpu_host_addr").map(|tpu_addr| {
-        solana_net_utils::parse_host_port(tpu_addr).unwrap_or_else(|err| {
+        miraland_net_utils::parse_host_port(tpu_addr).unwrap_or_else(|err| {
             eprintln!("Failed to parse --overwrite-tpu-addr: {}", err);
             exit(1);
         })
@@ -3095,7 +3095,7 @@ pub fn main() {
         let version = format!("{:?}", miraland_version::version!());
         Some(version)
     });
-    solana_entry::entry::init_poh();
+    miraland_entry::entry::init_poh();
     snapshot_utils::remove_tmp_snapshot_archives(&full_snapshot_archives_dir);
     snapshot_utils::remove_tmp_snapshot_archives(&incremental_snapshot_archives_dir);
 

@@ -19,7 +19,7 @@ use {
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
     },
-    miraland_sdk::{
+    solana_sdk::{
         account::AccountSharedData,
         client::{AsyncClient, SyncClient},
         clock::{self, Slot, DEFAULT_TICKS_PER_SLOT, MAX_PROCESSING_AGE},
@@ -41,7 +41,7 @@ use {
         tower_storage::FileTowerStorage,
         validator::ValidatorConfig,
     },
-    solana_download_utils::download_snapshot_archive,
+    miraland_download_utils::download_snapshot_archive,
     solana_ledger::{
         ancestor_iterator::AncestorIterator, bank_forks_utils, blockstore::Blockstore,
         blockstore_processor::ProcessOptions,
@@ -201,7 +201,7 @@ fn test_local_cluster_signature_subscribe() {
 
     let mut transaction = system_transaction::transfer(
         &cluster.funding_keypair,
-        &miraland_sdk::pubkey::new_rand(),
+        &solana_sdk::pubkey::new_rand(),
         10,
         blockhash,
     );
@@ -425,12 +425,12 @@ fn test_mainnet_beta_cluster_type() {
     // Programs that are available at epoch 0
     for program_id in [
         &solana_config_program::id(),
-        &miraland_sdk::system_program::id(),
-        &miraland_sdk::stake::program::id(),
+        &solana_sdk::system_program::id(),
+        &solana_sdk::stake::program::id(),
         &solana_vote_program::id(),
-        &miraland_sdk::bpf_loader_deprecated::id(),
-        &miraland_sdk::bpf_loader::id(),
-        &miraland_sdk::bpf_loader_upgradeable::id(),
+        &solana_sdk::bpf_loader_deprecated::id(),
+        &solana_sdk::bpf_loader::id(),
+        &solana_sdk::bpf_loader_upgradeable::id(),
     ]
     .iter()
     {
@@ -2103,10 +2103,10 @@ fn test_hard_fork_invalidates_tower() {
     // persistent tower's lockout behavior...
     let hard_fork_slot = min_root - 5;
     let hard_fork_slots = Some(vec![hard_fork_slot]);
-    let mut hard_forks = miraland_sdk::hard_forks::HardForks::default();
+    let mut hard_forks = solana_sdk::hard_forks::HardForks::default();
     hard_forks.register(hard_fork_slot);
 
-    let expected_shred_version = miraland_sdk::shred_version::compute_shred_version(
+    let expected_shred_version = solana_sdk::shred_version::compute_shred_version(
         &cluster.lock().unwrap().genesis_config.hash(),
         Some(&hard_forks),
     );
@@ -2277,7 +2277,7 @@ fn test_hard_fork_with_gap_in_roots() {
     let mut hard_forks = HardForks::default();
     hard_forks.register(hard_fork_slot);
 
-    let expected_shred_version = miraland_sdk::shred_version::compute_shred_version(
+    let expected_shred_version = solana_sdk::shred_version::compute_shred_version(
         &cluster.lock().unwrap().genesis_config.hash(),
         Some(&hard_forks),
     );

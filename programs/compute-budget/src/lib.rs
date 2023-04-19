@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::instruction::InstructionError,
+    solana_sdk::instruction::InstructionError,
     solana_program_runtime::invoke_context::InvokeContext,
 };
 

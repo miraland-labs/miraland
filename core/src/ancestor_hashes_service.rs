@@ -15,7 +15,7 @@ use {
     crossbeam_channel::{unbounded, Receiver, Sender},
     dashmap::{mapref::entry::Entry::Occupied, DashMap},
     miraland_gossip::{cluster_info::ClusterInfo, ping_pong::Pong},
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, SLOT_MS},
         pubkey::Pubkey,
         signature::Signable,
@@ -773,7 +773,7 @@ mod test {
             cluster_info::{ClusterInfo, Node},
             legacy_contact_info::LegacyContactInfo as ContactInfo,
         },
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
         },

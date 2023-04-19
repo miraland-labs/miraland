@@ -1,6 +1,6 @@
 use {
     itertools::Itertools,
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         instruction::InstructionError,
         pubkey::Pubkey,
@@ -322,7 +322,7 @@ mod tests {
     use {
         super::*,
         bincode::Options,
-        miraland_sdk::{pubkey::Pubkey, sysvar::clock::Clock},
+        solana_sdk::{pubkey::Pubkey, sysvar::clock::Clock},
         rand::Rng,
         solana_vote_program::vote_state::{VoteInit, VoteStateVersions},
         std::iter::repeat_with,

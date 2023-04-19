@@ -24,20 +24,20 @@ programs should define an `no-entrypoint` feature in `Cargo.toml` and use
 to exclude the entrypoint.
 
 - [Define the
-  feature](https://github.com/solana-labs/solana-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token/program/Cargo.toml#L12)
+  feature](https://github.com/solana-labs/miraland-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token/program/Cargo.toml#L12)
 - [Exclude the
-  entrypoint](https://github.com/solana-labs/solana-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token/program/src/lib.rs#L12)
+  entrypoint](https://github.com/solana-labs/miraland-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token/program/src/lib.rs#L12)
 
 Then when other programs include this program as a dependency, they should do so
 using the `no-entrypoint` feature.
 
 - [Include without
-  entrypoint](https://github.com/solana-labs/solana-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token-swap/program/Cargo.toml#L22)
+  entrypoint](https://github.com/solana-labs/miraland-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token-swap/program/Cargo.toml#L22)
 
 ## Project Dependencies
 
 At a minimum, Solana Rust programs must pull in the
-[solana-program](https://crates.io/crates/solana-program) crate.
+[miraland-program](https://crates.io/crates/miraland-program) crate.
 
 Solana BPF programs have some [restrictions](#restrictions) that may prevent the
 inclusion of some crates as dependencies or require special handling.
@@ -83,12 +83,12 @@ exercising program functions directly.
 
 To help facilitate testing in an environment that more closely matches a live
 cluster, developers can use the
-[`program-test`](https://crates.io/crates/solana-program-test) crate. The
+[`program-test`](https://crates.io/crates/miraland-program-test) crate. The
 `program-test` crate starts up a local instance of the runtime and allows tests
 to send multiple transactions while keeping state for the duration of the test.
 
 For more information the [test in sysvar
-example](https://github.com/solana-labs/solana-program-library/blob/master/examples/rust/sysvar/tests/functional.rs)
+example](https://github.com/solana-labs/miraland-program-library/blob/master/examples/rust/sysvar/tests/functional.rs)
 shows how an instruction containing sysvar account is sent and processed by the
 program.
 
@@ -387,5 +387,5 @@ $ cargo build-bpf --dump
 ## Examples
 
 The [Solana Program Library
-github](https://github.com/solana-labs/solana-program-library/tree/master/examples/rust)
+github](https://github.com/solana-labs/miraland-program-library/tree/master/examples/rust)
 repo contains a collection of Rust examples.

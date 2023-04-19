@@ -4,7 +4,7 @@ use {
         address_generator::AddressGenerator,
         unlocks::{UnlockInfo, Unlocks},
     },
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         clock::Slot,
         genesis_config::GenesisConfig,
@@ -165,7 +165,7 @@ pub fn create_and_add_stakes(
 
 #[cfg(test)]
 mod tests {
-    use {super::*, miraland_sdk::rent::Rent};
+    use {super::*, solana_sdk::rent::Rent};
 
     fn create_and_check_stakes(
         genesis_config: &mut GenesisConfig,

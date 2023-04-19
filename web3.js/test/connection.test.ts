@@ -117,7 +117,7 @@ describe('Connection', function () {
       await mockRpcResponse({
         method: 'getVersion',
         params: [],
-        value: {'solana-core': '0.20.4'},
+        value: {'miraland-core': '0.20.4'},
         withHeaders: headers,
       });
 
@@ -137,7 +137,7 @@ describe('Connection', function () {
       await mockRpcResponse({
         method: 'getVersion',
         params: [],
-        value: {'solana-core': '0.20.4'},
+        value: {'miraland-core': '0.20.4'},
         withHeaders: {
           Authorization: 'Bearer 123',
         },
@@ -3600,11 +3600,11 @@ describe('Connection', function () {
     await mockRpcResponse({
       method: 'getVersion',
       params: [],
-      value: {'solana-core': '0.20.4'},
+      value: {'miraland-core': '0.20.4'},
     });
 
     const version = await connection.getVersion();
-    expect(version['solana-core']).to.be.ok;
+    expect(version['miraland-core']).to.be.ok;
   });
 
   it('getGenesisHash', async () => {
@@ -4240,7 +4240,7 @@ describe('Connection', function () {
     it('https request', async () => {
       const connection = new Connection('https://api.mainnet-mln.miraland.top');
       const version = await connection.getVersion();
-      expect(version['solana-core']).to.be.ok;
+      expect(version['miraland-core']).to.be.ok;
     }).timeout(20 * 1000);
   }
 });

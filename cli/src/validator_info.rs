@@ -7,7 +7,7 @@ use {
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand},
     miraland_cli_output::{CliValidatorInfo, CliValidatorInfoVec},
     miraland_client::rpc_client::RpcClient,
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         message::Message,
         pubkey::Pubkey,
@@ -16,10 +16,10 @@ use {
     },
     reqwest::blocking::Client,
     serde_json::{Map, Value},
-    solana_account_decoder::validator_info::{
+    miraland_account_decoder::validator_info::{
         self, ValidatorInfo, MAX_LONG_FIELD_LENGTH, MAX_SHORT_FIELD_LENGTH,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::pubkey_of,
         input_validators::{is_pubkey, is_url},
         keypair::DefaultSigner,
@@ -454,7 +454,7 @@ mod tests {
 
     #[test]
     fn test_verify_keybase_username_not_string() {
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let value = Value::Bool(true);
 
         assert_eq!(
@@ -516,7 +516,7 @@ mod tests {
 
     #[test]
     fn test_parse_validator_info() {
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let keys = vec![(validator_info::id(), false), (pubkey, true)];
         let config = ConfigKeys { keys };
 
@@ -545,7 +545,7 @@ mod tests {
         assert!(parse_validator_info(
             &Pubkey::default(),
             &Account {
-                owner: miraland_sdk::pubkey::new_rand(),
+                owner: solana_sdk::pubkey::new_rand(),
                 ..Account::default()
             }
         )

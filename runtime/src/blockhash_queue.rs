@@ -1,7 +1,7 @@
 #[allow(deprecated)]
-use miraland_sdk::sysvar::recent_blockhashes;
+use solana_sdk::sysvar::recent_blockhashes;
 use {
-    miraland_sdk::{
+    solana_sdk::{
         clock::MAX_RECENT_BLOCKHASHES, fee_calculator::FeeCalculator, hash::Hash, timing::timestamp,
     },
     serde::{Deserialize, Serialize},
@@ -131,11 +131,11 @@ impl BlockhashQueue {
 #[cfg(test)]
 mod tests {
     #[allow(deprecated)]
-    use miraland_sdk::sysvar::recent_blockhashes::IterItem;
+    use solana_sdk::sysvar::recent_blockhashes::IterItem;
     use {
         super::*,
         bincode::serialize,
-        miraland_sdk::{clock::MAX_RECENT_BLOCKHASHES, hash::hash},
+        solana_sdk::{clock::MAX_RECENT_BLOCKHASHES, hash::hash},
     };
 
     #[test]

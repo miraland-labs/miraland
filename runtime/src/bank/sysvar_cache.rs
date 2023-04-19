@@ -1,5 +1,5 @@
 use {
-    super::Bank, miraland_sdk::account::ReadableAccount,
+    super::Bank, solana_sdk::account::ReadableAccount,
     solana_program_runtime::sysvar_cache::SysvarCache,
 };
 
@@ -27,7 +27,7 @@ impl Bank {
 mod tests {
     use {
         super::*,
-        miraland_sdk::{genesis_config::create_genesis_config, pubkey::Pubkey},
+        solana_sdk::{genesis_config::create_genesis_config, pubkey::Pubkey},
         std::sync::Arc,
     };
 

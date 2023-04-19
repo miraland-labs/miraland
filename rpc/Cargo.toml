@@ -1,12 +1,12 @@
 [package]
-name = "solana-rpc"
+name = "miraland-rpc"
 version = "1.14.17"
 description = "Solana RPC"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-rpc"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-rpc"
 edition = "2021"
 
 [dependencies]
@@ -34,21 +34,21 @@ serde = "1.0.138"
 serde_derive = "1.0.103"
 serde_json = "1.0.81"
 soketto = "0.7"
-solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
-solana-entry = { path = "../entry", version = "=1.14.17" }
-solana-ledger = { path = "../ledger", version = "=1.14.17" }
-solana-measure = { path = "../measure", version = "=1.14.17" }
-solana-metrics = { path = "../metrics", version = "=1.14.17" }
-solana-perf = { path = "../perf", version = "=1.14.17" }
-solana-poh = { path = "../poh", version = "=1.14.17" }
-solana-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
-solana-runtime = { path = "../runtime", version = "=1.14.17" }
-solana-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17" }
-solana-stake-program = { path = "../programs/stake", version = "=1.14.17" }
-solana-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17" }
-solana-streamer = { path = "../streamer", version = "=1.14.17" }
-solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
-solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
+miraland-entry = { path = "../entry", version = "=1.14.17" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17" }
+miraland-measure = { path = "../measure", version = "=1.14.17" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+miraland-perf = { path = "../perf", version = "=1.14.17" }
+miraland-poh = { path = "../poh", version = "=1.14.17" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17" }
+miraland-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 spl-token = { version = "=3.5.0", features = ["no-entrypoint"] }
 spl-token-2022 = { version = "=0.6.0", features = ["no-entrypoint"] }
 stream-cancel = "0.8.1"
@@ -58,14 +58,14 @@ tokio-util = { version = "0.6", features = ["codec", "compat"] }
 
 [dev-dependencies]
 serial_test = "0.8.0"
-solana-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
-solana-net-utils = { path = "../net-utils", version = "=1.14.17" }
-solana-stake-program = { path = "../programs/stake", version = "=1.14.17" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17" }
 symlink = "0.1.0"
 
 [lib]
 crate-type = ["lib"]
-name = "solana_rpc"
+name = "miraland_rpc"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

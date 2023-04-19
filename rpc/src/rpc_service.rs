@@ -19,7 +19,7 @@ use {
     },
     miraland_client::{connection_cache::ConnectionCache, rpc_cache::LargestAccountsCache},
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::{
+    solana_sdk::{
         exit::Exit, genesis_config::DEFAULT_GENESIS_DOWNLOAD_PATH, hash::Hash,
         native_token::lamports_to_sol, pubkey::Pubkey,
     },
@@ -31,14 +31,14 @@ use {
     },
     solana_metrics::inc_new_counter_info,
     solana_perf::thread::renice_this_thread,
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_poh::poh_recorder::PohRecorder,
     solana_runtime::{
         bank_forks::BankForks, commitment::BlockCommitmentCache,
         prioritization_fee_cache::PrioritizationFeeCache,
         snapshot_archive_info::SnapshotArchiveInfoGetter, snapshot_config::SnapshotConfig,
         snapshot_utils,
     },
-    solana_send_transaction_service::send_transaction_service::{self, SendTransactionService},
+    miraland_send_transaction_service::send_transaction_service::{self, SendTransactionService},
     solana_storage_bigtable::CredentialType,
     std::{
         collections::HashSet,
@@ -579,7 +579,7 @@ mod tests {
             crds_value::{CrdsData, CrdsValue, SnapshotHashes},
             legacy_contact_info::LegacyContactInfo as ContactInfo,
         },
-        miraland_sdk::{
+        solana_sdk::{
             genesis_config::{ClusterType, DEFAULT_GENESIS_ARCHIVE},
             signature::Signer,
             signer::keypair::Keypair,
@@ -615,7 +615,7 @@ mod tests {
         let ip_addr = IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0));
         let rpc_addr = SocketAddr::new(
             ip_addr,
-            solana_net_utils::find_available_port_in_range(ip_addr, (10000, 65535)).unwrap(),
+            miraland_net_utils::find_available_port_in_range(ip_addr, (10000, 65535)).unwrap(),
         );
         let bank_forks = Arc::new(RwLock::new(BankForks::new(bank)));
         let ledger_path = get_tmp_ledger_path!();
@@ -898,9 +898,9 @@ mod tests {
         let override_health_check = Arc::new(AtomicBool::new(false));
         let startup_verification_complete = Arc::new(AtomicBool::new(true));
         let known_validators = vec![
-            miraland_sdk::pubkey::new_rand(),
-            miraland_sdk::pubkey::new_rand(),
-            miraland_sdk::pubkey::new_rand(),
+            solana_sdk::pubkey::new_rand(),
+            solana_sdk::pubkey::new_rand(),
+            solana_sdk::pubkey::new_rand(),
         ];
 
         let health = Arc::new(RpcHealth::new(

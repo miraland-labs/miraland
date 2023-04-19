@@ -6,7 +6,7 @@ extern crate solana_bpf_loader_program;
 use {
     itertools::izip,
     log::{log_enabled, trace, Level::Trace},
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         account_utils::StateMut,
         bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable,
@@ -29,7 +29,7 @@ use {
         sysvar::{self, clock, rent},
         transaction::{SanitizedTransaction, Transaction, TransactionError, VersionedTransaction},
     },
-    solana_account_decoder::parse_bpf_loader::{
+    miraland_account_decoder::parse_bpf_loader::{
         parse_bpf_upgradeable_loader, BpfUpgradeableLoaderAccountType,
     },
     solana_bpf_loader_program::{
@@ -65,7 +65,7 @@ use {
             set_upgrade_authority, upgrade_program,
         },
     },
-    solana_transaction_status::{
+    miraland_transaction_status::{
         ConfirmedTransactionWithStatusMeta, InnerInstructions, TransactionStatusMeta,
         TransactionWithStatusMeta, VersionedTransactionWithStatusMeta,
     },
@@ -478,11 +478,11 @@ fn test_program_bpf_loader_deprecated() {
         } = create_genesis_config(50);
         genesis_config
             .accounts
-            .remove(&miraland_sdk::feature_set::disable_deprecated_loader::id())
+            .remove(&solana_sdk::feature_set::disable_deprecated_loader::id())
             .unwrap();
         genesis_config
             .accounts
-            .remove(&miraland_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id())
+            .remove(&solana_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id())
             .unwrap();
         let mut bank = Bank::new_for_tests(&genesis_config);
         let (name, id, entrypoint) = solana_bpf_loader_deprecated_program!();
@@ -517,7 +517,7 @@ fn test_sol_alloc_free_no_longer_deployable() {
     } = create_genesis_config(50);
     let mut bank = Bank::new_for_tests(&genesis_config);
 
-    bank.deactivate_feature(&miraland_sdk::feature_set::disable_deprecated_loader::id());
+    bank.deactivate_feature(&solana_sdk::feature_set::disable_deprecated_loader::id());
     let (name, id, entrypoint) = solana_bpf_loader_deprecated_program!();
     bank.add_builtin(&name, &id, entrypoint);
 
@@ -563,7 +563,7 @@ fn test_sol_alloc_free_no_longer_deployable() {
     );
 
     // Enable _sol_alloc_free syscall
-    bank.deactivate_feature(&miraland_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id());
+    bank.deactivate_feature(&solana_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id());
     bank.clear_signatures();
     bank.clear_executors();
 
@@ -574,7 +574,7 @@ fn test_sol_alloc_free_no_longer_deployable() {
     assert!(bank.process_transaction(&invoke_tx).is_ok());
 
     // disable _sol_alloc_free
-    bank.activate_feature(&miraland_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id());
+    bank.activate_feature(&solana_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id());
     bank.clear_signatures();
 
     // invoke should still succeed because cached
@@ -923,7 +923,7 @@ fn test_program_bpf_invoke_sanity() {
             AccountMeta::new_readonly(derived_key3, false),
             AccountMeta::new_readonly(system_program::id(), false),
             AccountMeta::new(from_keypair.pubkey(), true),
-            AccountMeta::new_readonly(miraland_sdk::ed25519_program::id(), false),
+            AccountMeta::new_readonly(solana_sdk::ed25519_program::id(), false),
             AccountMeta::new_readonly(invoke_program_id, false),
         ];
 
@@ -2864,7 +2864,7 @@ fn test_program_bpf_realloc() {
         )
         .unwrap();
     let account = bank.get_account(&pubkey).unwrap();
-    assert_eq!(&miraland_sdk::system_program::id(), account.owner());
+    assert_eq!(&solana_sdk::system_program::id(), account.owner());
     let data = bank_client.get_account_data(&pubkey).unwrap().unwrap();
     assert_eq!(MAX_PERMITTED_DATA_INCREASE, data.len());
 
@@ -2894,7 +2894,7 @@ fn test_program_bpf_realloc() {
                         &[REALLOC_AND_ASSIGN_TO_SELF_VIA_SYSTEM_PROGRAM],
                         vec![
                             AccountMeta::new(pubkey, true),
-                            AccountMeta::new(miraland_sdk::system_program::id(), false),
+                            AccountMeta::new(solana_sdk::system_program::id(), false),
                         ],
                     )],
                     Some(&mint_pubkey),
@@ -2915,7 +2915,7 @@ fn test_program_bpf_realloc() {
                     &[ASSIGN_TO_SELF_VIA_SYSTEM_PROGRAM_AND_REALLOC],
                     vec![
                         AccountMeta::new(pubkey, true),
-                        AccountMeta::new(miraland_sdk::system_program::id(), false),
+                        AccountMeta::new(solana_sdk::system_program::id(), false),
                     ],
                 )],
                 Some(&mint_pubkey),
@@ -3116,7 +3116,7 @@ fn test_program_bpf_realloc_invoke() {
         )
         .unwrap();
     let account = bank.get_account(&pubkey).unwrap();
-    assert_eq!(&miraland_sdk::system_program::id(), account.owner());
+    assert_eq!(&solana_sdk::system_program::id(), account.owner());
     let data = bank_client.get_account_data(&pubkey).unwrap().unwrap();
     assert_eq!(MAX_PERMITTED_DATA_INCREASE, data.len());
 
@@ -3147,7 +3147,7 @@ fn test_program_bpf_realloc_invoke() {
                         vec![
                             AccountMeta::new(pubkey, true),
                             AccountMeta::new_readonly(realloc_program_id, false),
-                            AccountMeta::new_readonly(miraland_sdk::system_program::id(), false),
+                            AccountMeta::new_readonly(solana_sdk::system_program::id(), false),
                         ],
                     )],
                     Some(&mint_pubkey),
@@ -3169,7 +3169,7 @@ fn test_program_bpf_realloc_invoke() {
                     vec![
                         AccountMeta::new(pubkey, true),
                         AccountMeta::new_readonly(realloc_program_id, false),
-                        AccountMeta::new_readonly(miraland_sdk::system_program::id(), false),
+                        AccountMeta::new_readonly(solana_sdk::system_program::id(), false),
                     ],
                 )],
                 Some(&mint_pubkey),
@@ -3241,7 +3241,7 @@ fn test_program_bpf_realloc_invoke() {
                     vec![
                         AccountMeta::new(mint_pubkey, true),
                         AccountMeta::new(new_pubkey, true),
-                        AccountMeta::new(miraland_sdk::system_program::id(), false),
+                        AccountMeta::new(solana_sdk::system_program::id(), false),
                         AccountMeta::new_readonly(realloc_invoke_program_id, false),
                     ],
                 )],
@@ -3674,7 +3674,7 @@ fn test_program_bpf_inner_instruction_alignment_checks() {
     } = create_genesis_config(50);
     genesis_config
         .accounts
-        .remove(&miraland_sdk::feature_set::disable_deprecated_loader::id())
+        .remove(&solana_sdk::feature_set::disable_deprecated_loader::id())
         .unwrap();
     let mut bank = Bank::new_for_tests(&genesis_config);
     let (name, id, entrypoint) = solana_bpf_loader_program!();

@@ -2,11 +2,11 @@
 authors = ["Solana Maintainers <maintainers@solana.com>"]
 edition = "2021"
 name = "miraland-log-analyzer"
-description = "The solana cluster network analysis tool"
+description = "The miraland cluster network analysis tool"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 publish = false
 
 [dependencies]
@@ -15,7 +15,7 @@ clap = { version = "3.1.5", features = ["cargo"] }
 miraland-version = { path = "../version", version = "=1.14.17" }
 serde = "1.0.138"
 serde_json = "1.0.81"
-solana-logger = { path = "../logger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
 
 [[bin]]
 name = "miraland-log-analyzer"

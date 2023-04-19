@@ -1,14 +1,14 @@
 #![feature(test)]
 extern crate test;
 use {
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         transaction::{
             Result, SanitizedTransaction, SimpleAddressLoader, TransactionVerificationMode,
             VersionedTransaction,
         },
     },
-    solana_entry::entry::{self, VerifyRecyclers},
+    miraland_entry::entry::{self, VerifyRecyclers},
     solana_perf::test_tx::test_tx,
     std::sync::Arc,
     test::Bencher,

@@ -1,12 +1,12 @@
 [package]
-name = "solana-streamer"
+name = "miraland-streamer"
 version = "1.14.17"
-description = "Solana Streamer"
+description = "Miraland Streamer"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-streamer"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-streamer"
 edition = "2021"
 
 [dependencies]
@@ -26,14 +26,14 @@ quinn = "0.8.3"
 rand = "0.7.0"
 rcgen = "0.9.2"
 rustls = { version = "0.20.6", features = ["dangerous_configuration"] }
-solana-metrics = { path = "../metrics", version = "=1.14.17" }
-solana-perf = { path = "../perf", version = "=1.14.17" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+miraland-perf = { path = "../perf", version = "=1.14.17" }
 thiserror = "1.0"
 tokio = { version = "1", features = ["full"] }
 x509-parser = "0.14.0"
 
 [dev-dependencies]
-solana-logger = { path = "../logger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]

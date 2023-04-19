@@ -8,7 +8,7 @@ use {
         crds_shards::CrdsShards,
         crds_value::CrdsValue,
     },
-    miraland_sdk::timing::timestamp,
+    solana_sdk::timing::timestamp,
     rand::{thread_rng, Rng},
     std::iter::repeat_with,
     test::Bencher,

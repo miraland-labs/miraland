@@ -10,7 +10,7 @@ use {
         },
         rpc_response::SlotInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         commitment_config::{CommitmentConfig, CommitmentLevel},
         native_token::sol_to_lamports,
@@ -23,7 +23,7 @@ use {
     serde_json::{json, Value},
     serial_test::serial,
     solana_ledger::{blockstore::Blockstore, get_tmp_ledger_path},
-    solana_rpc::{
+    miraland_rpc::{
         optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         rpc::{create_test_transaction_entries, populate_blockstore_for_tests},
         rpc_pubsub_service::{PubSubConfig, PubSubService},
@@ -36,7 +36,7 @@ use {
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
     },
     solana_streamer::socket::SocketAddrSpace,
-    solana_transaction_status::{
+    miraland_transaction_status::{
         BlockEncodingOptions, ConfirmedBlock, TransactionDetails, UiTransactionEncoding,
     },
     std::{
@@ -60,7 +60,7 @@ fn test_rpc_client() {
     let test_validator =
         TestValidator::with_no_fees(alice.pubkey(), None, SocketAddrSpace::Unspecified);
 
-    let bob_pubkey = miraland_sdk::pubkey::new_rand();
+    let bob_pubkey = solana_sdk::pubkey::new_rand();
 
     let client = RpcClient::new(test_validator.rpc_url());
 

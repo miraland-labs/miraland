@@ -1,9 +1,9 @@
 use {
     crate::geyser_plugin_manager::GeyserPluginManager,
     log::*,
-    miraland_sdk::clock::Slot,
-    solana_geyser_plugin_interface::geyser_plugin_interface::SlotStatus,
-    solana_measure::measure::Measure,
+    solana_sdk::clock::Slot,
+    miraland_geyser_plugin_interface::geyser_plugin_interface::SlotStatus,
+    miraland_measure::measure::Measure,
     solana_metrics::*,
     std::sync::{Arc, RwLock},
 };

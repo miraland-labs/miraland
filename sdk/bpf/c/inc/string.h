@@ -1,5 +1,5 @@
 #pragma once
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 #define memcpy sol_memcpy
 #define memset sol_memset

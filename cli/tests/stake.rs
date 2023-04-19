@@ -16,7 +16,7 @@ use {
         rpc_response::{RpcStakeActivation, StakeActivationState},
     },
     miraland_faucet::faucet::run_local_faucet,
-    miraland_sdk::{
+    solana_sdk::{
         account_utils::StateMut,
         commitment_config::CommitmentConfig,
         epoch_schedule::EpochSchedule,

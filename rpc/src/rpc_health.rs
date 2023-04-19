@@ -1,6 +1,6 @@
 use {
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::{clock::Slot, pubkey::Pubkey},
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         collections::HashSet,
         sync::{
@@ -130,7 +130,7 @@ impl RpcHealth {
     pub(crate) fn stub() -> Arc<Self> {
         use {
             miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-            miraland_sdk::signer::keypair::Keypair, solana_streamer::socket::SocketAddrSpace,
+            solana_sdk::signer::keypair::Keypair, solana_streamer::socket::SocketAddrSpace,
         };
         Arc::new(Self::new(
             Arc::new(ClusterInfo::new(

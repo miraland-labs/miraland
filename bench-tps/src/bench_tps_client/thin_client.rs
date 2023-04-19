@@ -1,7 +1,7 @@
 use {
     crate::bench_tps_client::{BenchTpsClient, Result},
     miraland_client::thin_client::ThinClient,
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         client::{AsyncClient, Client, SyncClient},
         commitment_config::CommitmentConfig,

@@ -90,7 +90,7 @@ Each loader provides a helper function that deserializes the program's input
 parameters into C types:
 
 - [BPF Loader
-  deserialization](https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/miraland_sdk.h#L304)
+  deserialization](https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/solana_sdk.h#L304)
 - [BPF Loader deprecated
   deserialization](https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/deserialize_deprecated.h#L25)
 
@@ -109,7 +109,7 @@ Details on how the loader serializes the program inputs can be found in the
 ## Data Types
 
 The loader's deserialization helper function populates the
-[SolParameters](https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/miraland_sdk.h#L276)
+[SolParameters](https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/solana_sdk.h#L276)
 structure:
 
 ```c
@@ -128,7 +128,7 @@ typedef struct {
 
 'ka' is an ordered array of the accounts referenced by the instruction and
 represented as a
-[SolAccountInfo](https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/miraland_sdk.h#L173)
+[SolAccountInfo](https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/solana_sdk.h#L173)
 structures. An account's place in the array signifies its meaning, for example,
 when transferring lamports an instruction may define the first account as the
 source and the second as the destination.
@@ -153,7 +153,7 @@ processed.
 ## Heap
 
 C programs can allocate memory via the system call
-[`calloc`](https://github.com/solana-labs/solana/blob/c3d2d2134c93001566e1e56f691582f379b5ae55/sdk/bpf/c/inc/miraland_sdk.h#L245)
+[`calloc`](https://github.com/solana-labs/solana/blob/c3d2d2134c93001566e1e56f691582f379b5ae55/sdk/bpf/c/inc/solana_sdk.h#L245)
 or implement their own heap on top of the 32KB heap region starting at virtual
 address x300000000. The heap region is also used by `calloc` so if a program
 implements their own heap it should not also call `calloc`.
@@ -163,8 +163,8 @@ implements their own heap it should not also call `calloc`.
 The runtime provides two system calls that take data and log it to the program
 logs.
 
-- [`sol_log(const char*)`](https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/miraland_sdk.h#L128)
-- [`sol_log_64(uint64_t, uint64_t, uint64_t, uint64_t, uint64_t)`](https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/miraland_sdk.h#L134)
+- [`sol_log(const char*)`](https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/solana_sdk.h#L128)
+- [`sol_log_64(uint64_t, uint64_t, uint64_t, uint64_t, uint64_t)`](https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/solana_sdk.h#L134)
 
 The [debugging](debugging.md#logging) section has more information about working
 with program logs.
@@ -172,7 +172,7 @@ with program logs.
 ## Compute Budget
 
 Use the system call
-[`sol_log_compute_units()`](https://github.com/solana-labs/solana/blob/d3a3a7548c857f26ec2cb10e270da72d373020ec/sdk/bpf/c/inc/miraland_sdk.h#L140)
+[`sol_log_compute_units()`](https://github.com/solana-labs/solana/blob/d3a3a7548c857f26ec2cb10e270da72d373020ec/sdk/bpf/c/inc/solana_sdk.h#L140)
 to log a message containing the remaining number of compute units the program
 may consume before execution is halted
 
@@ -198,4 +198,4 @@ $ make dump_<program name>
 
 ## Examples
 
-The [Solana Program Library github](https://github.com/solana-labs/solana-program-library/tree/master/examples/c) repo contains a collection of C examples
+The [Solana Program Library github](https://github.com/solana-labs/miraland-program-library/tree/master/examples/c) repo contains a collection of C examples

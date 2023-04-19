@@ -2,16 +2,16 @@ use {
     clap::{crate_description, crate_name, App, Arg, ArgMatches},
     miraland_cli_config::{ConfigInput, CONFIG_FILE},
     miraland_client::connection_cache::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
-    miraland_sdk::{
+    solana_sdk::{
         fee_calculator::FeeRateGovernor,
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair},
     },
-    solana_clap_utils::input_validators::{is_url, is_url_or_moniker},
+    miraland_clap_utils::input_validators::{is_url, is_url_or_moniker},
     std::{net::SocketAddr, process::exit, time::Duration},
 };
 
-const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = miraland_sdk::native_token::LAMPORTS_PER_SOL;
+const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = solana_sdk::native_token::LAMPORTS_PER_SOL;
 
 pub enum ExternalClientType {
     // Submits transactions to an Rpc node using an RpcClient
@@ -360,7 +360,7 @@ pub fn extract_args(matches: &ArgMatches) -> Config {
     }
 
     if let Some(addr) = matches.value_of("entrypoint") {
-        args.entrypoint_addr = solana_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
+        args.entrypoint_addr = miraland_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
             eprintln!("failed to parse entrypoint address: {}", e);
             exit(1)
         });

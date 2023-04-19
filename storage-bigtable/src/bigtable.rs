@@ -848,13 +848,13 @@ mod tests {
     use {
         super::*,
         crate::StoredConfirmedBlock,
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash, message::v0::LoadedAddresses, signature::Keypair, system_transaction,
             transaction::VersionedTransaction, transaction_context::TransactionReturnData,
         },
         prost::Message,
         solana_storage_proto::convert::generated,
-        solana_transaction_status::{
+        miraland_transaction_status::{
             ConfirmedBlock, TransactionStatusMeta, TransactionWithStatusMeta,
             VersionedTransactionWithStatusMeta,
         },
@@ -886,7 +886,7 @@ mod tests {
     #[test]
     fn test_deserialize_protobuf_or_bincode_cell_data() {
         let from = Keypair::new();
-        let recipient = miraland_sdk::pubkey::new_rand();
+        let recipient = solana_sdk::pubkey::new_rand();
         let transaction = system_transaction::transfer(&from, &recipient, 42, Hash::default());
         let with_meta = TransactionWithStatusMeta::Complete(VersionedTransactionWithStatusMeta {
             transaction: VersionedTransaction::from(transaction),

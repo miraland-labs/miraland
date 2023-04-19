@@ -17,7 +17,7 @@ use {
     },
     assert_matches::debug_assert_matches,
     itertools::{Either, Itertools},
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         hash::{hashv, Hash},
         pubkey::Pubkey,
@@ -1057,7 +1057,7 @@ mod test {
         crate::shred::{ShredFlags, ShredId, SignedData},
         itertools::Itertools,
         matches::assert_matches,
-        miraland_sdk::signature::{Keypair, Signer},
+        solana_sdk::signature::{Keypair, Signer},
         rand::{seq::SliceRandom, CryptoRng, Rng},
         rayon::ThreadPoolBuilder,
         std::{cmp::Ordering, iter::repeat_with},

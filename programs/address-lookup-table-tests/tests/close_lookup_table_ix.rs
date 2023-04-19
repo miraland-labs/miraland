@@ -4,7 +4,7 @@ use {
         add_lookup_table_account, assert_ix_error, new_address_lookup_table,
         overwrite_slot_hashes_with_slots, setup_test_context,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::Clock,
         instruction::InstructionError,
         pubkey::Pubkey,

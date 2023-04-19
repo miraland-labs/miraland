@@ -10,8 +10,8 @@ use {
     core::time::Duration,
     crossbeam_channel::{RecvTimeoutError, SendError},
     itertools::Itertools,
-    miraland_sdk::timing,
-    solana_measure::measure::Measure,
+    solana_sdk::timing,
+    miraland_measure::measure::Measure,
     solana_perf::{
         packet::{Packet, PacketBatch},
         sigverify::{
@@ -469,7 +469,7 @@ mod tests {
         super::*,
         crate::{sigverify::TransactionSigVerifier, sigverify_stage::timing::duration_as_ms},
         crossbeam_channel::unbounded,
-        miraland_sdk::packet::PacketFlags,
+        solana_sdk::packet::PacketFlags,
         solana_perf::{
             packet::{to_packet_batches, Packet},
             test_tx::test_tx,

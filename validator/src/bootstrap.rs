@@ -8,7 +8,7 @@ use {
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -17,7 +17,7 @@ use {
     },
     rand::{seq::SliceRandom, thread_rng, Rng},
     solana_core::validator::{ValidatorConfig, ValidatorStartProgress},
-    solana_download_utils::{download_snapshot_archive, DownloadProgressRecord},
+    miraland_download_utils::{download_snapshot_archive, DownloadProgressRecord},
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_package::SnapshotType,
@@ -112,7 +112,7 @@ fn verify_reachable_ports(
         tcp_listeners.push((ip_echo.local_addr().unwrap().port(), ip_echo));
     }
 
-    solana_net_utils::verify_reachable_ports(
+    miraland_net_utils::verify_reachable_ports(
         &cluster_entrypoint.gossip,
         tcp_listeners,
         &udp_sockets,

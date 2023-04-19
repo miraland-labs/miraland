@@ -1,7 +1,7 @@
 //! calculate and collect rent from Accounts
 use {
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         clock::Epoch,
         epoch_schedule::EpochSchedule,
@@ -255,7 +255,7 @@ impl std::ops::AddAssign for CollectedInfo {
 mod tests {
     use {
         super::*,
-        miraland_sdk::{account::Account, sysvar},
+        solana_sdk::{account::Account, sysvar},
     };
 
     fn default_rent_collector_clone_with_epoch(epoch: Epoch) -> RentCollector {
@@ -282,7 +282,7 @@ mod tests {
 
         // collect rent on a newly-created account
         let collected = rent_collector.collect_from_created_account(
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             &mut created_account,
             true, // preserve_rent_epoch_for_rent_exempt_accounts
         );
@@ -296,7 +296,7 @@ mod tests {
 
         // collect rent on a already-existing account
         let collected = rent_collector.collect_from_existing_account(
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             &mut existing_account,
             None, // filler_account_suffix
             true, // preserve_rent_epoch_for_rent_exempt_accounts
@@ -320,7 +320,7 @@ mod tests {
         let epoch = 3;
         let huge_lamports = 123_456_789_012;
         let tiny_lamports = 789_012;
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
 
         account.set_lamports(huge_lamports);
         assert_eq!(account.rent_epoch(), 0);
@@ -359,7 +359,7 @@ mod tests {
         account.set_owner(sysvar::id());
         account.set_lamports(tiny_lamports);
 
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
 
         assert_eq!(account.rent_epoch(), 0);
 

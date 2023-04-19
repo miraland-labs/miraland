@@ -1,11 +1,14 @@
 [package]
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
-description = "Solana Program Test Framework"
+description = "Miraland Program Test Framework"
 edition = "2021"
 license = "Apache-2.0"
-name = "solana-program-test"
+name = "miraland-program-test"
 repository = "https://github.com/miraland-labs/miraland"
 version = "1.14.17"
+
+[lib]
+name = "solana_program_test"
 
 [dependencies]
 assert_matches = "1.5.0"
@@ -16,15 +19,15 @@ chrono-humanize = "0.2.1"
 log = "0.4.17"
 miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 serde = "1.0.138"
-solana-banks-client = { path = "../banks-client", version = "=1.14.17" }
-solana-banks-server = { path = "../banks-server", version = "=1.14.17" }
-solana-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17" }
-solana-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
-solana-runtime = { path = "../runtime", version = "=1.14.17" }
-solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
+miraland-banks-client = { path = "../banks-client", version = "=1.14.17" }
+miraland-banks-server = { path = "../banks-server", version = "=1.14.17" }
+miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 thiserror = "1.0"
 tokio = { version = "1", features = ["full"] }
 
 [dev-dependencies]
-solana-stake-program = { path = "../programs/stake", version = "=1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17" }

@@ -1,7 +1,7 @@
 /**
  * @brief Secp256k1Recover Syscall test
  */
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 extern uint64_t entrypoint(const uint8_t *input) {
 

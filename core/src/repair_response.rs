@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{clock::Slot, packet::Packet},
+    solana_sdk::{clock::Slot, packet::Packet},
     solana_ledger::{
         blockstore::Blockstore,
         shred::{Nonce, SIZE_OF_NONCE},
@@ -53,7 +53,7 @@ pub(crate) fn nonce(packet: &Packet) -> Option<Nonce> {
 mod test {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             packet::PacketFlags,
             signature::{Keypair, Signer},
         },

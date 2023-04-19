@@ -7,7 +7,7 @@ use {
         DataShredHeader, Error, ShredCommonHeader, ShredFlags, ShredType, ShredVariant, SignedData,
         MAX_DATA_SHREDS_PER_SLOT,
     },
-    miraland_sdk::{clock::Slot, signature::Signature},
+    solana_sdk::{clock::Slot, signature::Signature},
 };
 
 #[derive(Clone, Debug, Eq, PartialEq)]

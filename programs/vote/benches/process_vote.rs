@@ -3,7 +3,7 @@
 extern crate test;
 
 use {
-    miraland_sdk::{
+    solana_sdk::{
         account::{create_account_for_test, Account, AccountSharedData},
         clock::{Clock, Slot},
         hash::Hash,

@@ -6,7 +6,7 @@ use {
             LOOKUP_TABLE_MAX_ADDRESSES, LOOKUP_TABLE_META_SIZE,
         },
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         instruction::InstructionError,
         program_utils::limited_deserialize,

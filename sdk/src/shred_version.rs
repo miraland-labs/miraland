@@ -1,6 +1,6 @@
 #![cfg(feature = "full")]
 
-use miraland_sdk::{
+use solana_sdk::{
     hard_forks::HardForks,
     hash::{extend_and_hash, Hash},
 };

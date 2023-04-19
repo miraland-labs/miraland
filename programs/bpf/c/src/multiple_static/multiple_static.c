@@ -1,4 +1,4 @@
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 static const char msg[] = "This is a message";
 static const char msg2[] = "This is a different message";

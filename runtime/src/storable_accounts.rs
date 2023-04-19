@@ -1,5 +1,5 @@
 //! trait for abstracting underlying storage of pubkey and account pairs to be written
-use miraland_sdk::{account::ReadableAccount, clock::Slot, pubkey::Pubkey};
+use solana_sdk::{account::ReadableAccount, clock::Slot, pubkey::Pubkey};
 
 /// abstract access to pubkey, account, slot, target_slot of either:
 /// a. (slot, &[&Pubkey, &ReadableAccount])
@@ -118,7 +118,7 @@ impl<'a, T: ReadableAccount + Sync> StorableAccounts<'a, T>
 pub mod tests {
     use {
         super::*,
-        miraland_sdk::account::{AccountSharedData, WritableAccount},
+        solana_sdk::account::{AccountSharedData, WritableAccount},
     };
 
     fn compare<'a, T: ReadableAccount + Sync + PartialEq + std::fmt::Debug>(

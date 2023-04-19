@@ -1,8 +1,8 @@
 use {
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::{clock::NUM_CONSECUTIVE_LEADER_SLOTS, pubkey::Pubkey},
-    solana_poh::poh_recorder::PohRecorder,
-    solana_send_transaction_service::tpu_info::TpuInfo,
+    solana_sdk::{clock::NUM_CONSECUTIVE_LEADER_SLOTS, pubkey::Pubkey},
+    miraland_poh::poh_recorder::PohRecorder,
+    miraland_send_transaction_service::tpu_info::TpuInfo,
     std::{
         collections::HashMap,
         net::SocketAddr,
@@ -60,7 +60,7 @@ mod test {
     use {
         super::*,
         miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-        miraland_sdk::{
+        solana_sdk::{
             poh_config::PohConfig,
             signature::{Keypair, Signer},
             timing::timestamp,

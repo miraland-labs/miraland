@@ -1,12 +1,12 @@
 [package]
-name = "solana-entry"
+name = "miraland-entry"
 version = "1.14.17"
 description = "Solana Entry"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-poh"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-poh"
 edition = "2021"
 
 [dependencies]
@@ -20,19 +20,19 @@ miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 rand = "0.7.0"
 rayon = "1.5.3"
 serde = "1.0.138"
-solana-measure = { path = "../measure", version = "=1.14.17" }
-solana-merkle-tree = { path = "../merkle-tree", version = "=1.14.17" }
-solana-metrics = { path = "../metrics", version = "=1.14.17" }
-solana-perf = { path = "../perf", version = "=1.14.17" }
-solana-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
+miraland-measure = { path = "../measure", version = "=1.14.17" }
+miraland-merkle-tree = { path = "../merkle-tree", version = "=1.14.17" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+miraland-perf = { path = "../perf", version = "=1.14.17" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17" }
 
 [dev-dependencies]
 matches = "0.1.9"
-solana-logger = { path = "../logger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_entry"
+name = "miraland_entry"
 
 [[bench]]
 name = "entry_sigverify"

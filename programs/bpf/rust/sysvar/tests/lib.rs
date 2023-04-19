@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         feature_set::disable_fees_sysvar,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,

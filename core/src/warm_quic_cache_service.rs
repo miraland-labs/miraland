@@ -5,7 +5,7 @@ use {
     miraland_client::{connection_cache::ConnectionCache, tpu_connection::TpuConnection},
     miraland_gossip::cluster_info::ClusterInfo,
     rand::{thread_rng, Rng},
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_poh::poh_recorder::PohRecorder,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},

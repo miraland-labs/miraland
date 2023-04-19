@@ -14,7 +14,7 @@ use {
         rpc_client::RpcClient,
     },
     miraland_faucet::faucet::run_local_faucet,
-    miraland_sdk::{
+    solana_sdk::{
         commitment_config::CommitmentConfig,
         fee::FeeStructure,
         native_token::sol_to_lamports,

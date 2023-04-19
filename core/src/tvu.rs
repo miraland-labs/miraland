@@ -30,14 +30,14 @@ use {
     crossbeam_channel::{unbounded, Receiver},
     miraland_client::connection_cache::ConnectionCache,
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Keypair},
-    solana_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierLock,
+    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Keypair},
+    miraland_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierLock,
     solana_ledger::{
         blockstore::Blockstore, blockstore_processor::TransactionStatusSender,
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_poh::poh_recorder::PohRecorder,
-    solana_rpc::{
+    miraland_poh::poh_recorder::PohRecorder,
+    miraland_rpc::{
         max_slots::MaxSlots, optimistically_confirmed_bank_tracker::BankNotificationSender,
         rpc_subscriptions::RpcSubscriptions,
     },
@@ -343,7 +343,7 @@ pub mod tests {
     use {
         super::*,
         miraland_gossip::cluster_info::{ClusterInfo, Node},
-        miraland_sdk::signature::{Keypair, Signer},
+        solana_sdk::signature::{Keypair, Signer},
         serial_test::serial,
         solana_ledger::{
             blockstore::BlockstoreSignals,
@@ -351,8 +351,8 @@ pub mod tests {
             create_new_tmp_ledger,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
         },
-        solana_poh::poh_recorder::create_test_recorder,
-        solana_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
+        miraland_poh::poh_recorder::create_test_recorder,
+        miraland_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         solana_runtime::bank::Bank,
         solana_streamer::socket::SocketAddrSpace,
         std::sync::atomic::{AtomicU64, Ordering},

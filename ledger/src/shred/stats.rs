@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::clock::Slot,
+    solana_sdk::clock::Slot,
     std::{
         ops::AddAssign,
         time::{Duration, Instant},

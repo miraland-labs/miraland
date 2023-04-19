@@ -1,7 +1,7 @@
 //! Helpers for AppendVec tests and benches
 use {
     super::StoredMeta,
-    miraland_sdk::{account::AccountSharedData, pubkey::Pubkey},
+    solana_sdk::{account::AccountSharedData, pubkey::Pubkey},
     rand::{distributions::Alphanumeric, Rng},
     std::path::PathBuf,
 };

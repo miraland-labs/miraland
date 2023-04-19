@@ -25,7 +25,7 @@ if [[ $(uname) != Linux ]]; then
 fi
 
 if [[ -n $USE_INSTALL || ! -f "$MIRALAND_ROOT"/Cargo.toml ]]; then
-  miraland_program() {
+  solana_program() {
     declare program="$1"
     if [[ -z $program ]]; then
       printf "miraland"
@@ -34,7 +34,7 @@ if [[ -n $USE_INSTALL || ! -f "$MIRALAND_ROOT"/Cargo.toml ]]; then
     fi
   }
 else
-  miraland_program() {
+  solana_program() {
     declare program="$1"
     declare crate="$program"
     if [[ -z $program ]]; then
@@ -61,15 +61,15 @@ else
   }
 fi
 
-miraland_bench_tps=$(miraland_program bench-tps)
-miraland_faucet=$(miraland_program faucet)
-miraland_validator=$(miraland_program validator)
+miraland_bench_tps=$(solana_program bench-tps)
+miraland_faucet=$(solana_program faucet)
+miraland_validator=$(solana_program validator)
 miraland_validator_cuda="$miraland_validator --cuda"
-miraland_genesis=$(miraland_program genesis)
-miraland_gossip=$(miraland_program gossip)
-miraland_keygen=$(miraland_program keygen)
-miraland_ledger_tool=$(miraland_program ledger-tool)
-miraland_cli=$(miraland_program)
+miraland_genesis=$(solana_program genesis)
+miraland_gossip=$(solana_program gossip)
+miraland_keygen=$(solana_program keygen)
+miraland_ledger_tool=$(solana_program ledger-tool)
+miraland_cli=$(solana_program)
 
 export RUST_BACKTRACE=1
 

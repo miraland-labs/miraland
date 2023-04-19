@@ -3,7 +3,7 @@
 use {
     dashmap::{mapref::entry::Entry, DashMap},
     index_list::{Index, IndexList},
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::Slot,
         pubkey::Pubkey,
@@ -153,7 +153,7 @@ impl ReadOnlyAccountsCache {
 mod tests {
     use {
         super::*,
-        miraland_sdk::account::{accounts_equal, Account, WritableAccount},
+        solana_sdk::account::{accounts_equal, Account, WritableAccount},
         rand::{
             seq::{IteratorRandom, SliceRandom},
             Rng, SeedableRng,

@@ -9,7 +9,7 @@ use {
     crossbeam_channel::unbounded,
     indicatif::{ProgressBar, ProgressStyle},
     miraland_client::rpc_client::RpcClient,
-    miraland_sdk::{
+    solana_sdk::{
         hash::{Hash, Hasher},
         message::Message,
         pubkey::Pubkey,

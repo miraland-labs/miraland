@@ -1,7 +1,7 @@
 use {
     super::*,
-    miraland_sdk::{hash::Hash, signature::Keypair},
-    solana_entry::entry::Entry,
+    solana_sdk::{hash::Hash, signature::Keypair},
+    miraland_entry::entry::Entry,
     solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
 };
 
@@ -167,7 +167,7 @@ mod tests {
     #[test]
     fn test_tvu_peers_ordering() {
         let cluster = ClusterInfo::new(
-            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0),
+            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0),
             Arc::new(Keypair::new()),
             SocketAddrSpace::Unspecified,
         );

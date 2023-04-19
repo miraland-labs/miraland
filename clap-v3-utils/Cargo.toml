@@ -1,12 +1,12 @@
 [package]
-name = "solana-clap-v3-utils"
+name = "miraland-clap-v3-utils"
 version = "1.14.17"
 description = "Solana utilities for the clap v3"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-clap-utils"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-clap-utils"
 edition = "2021"
 
 [dependencies]
@@ -14,8 +14,8 @@ chrono = "0.4"
 clap = { version = "3.1.5", features = ["cargo"] }
 miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 rpassword = "6.0"
-solana-perf = { path = "../perf", version = "=1.14.17" }
-solana-remote-wallet = { path = "../remote-wallet", version = "=1.14.17", default-features = false }
+miraland-perf = { path = "../perf", version = "=1.14.17" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17", default-features = false }
 thiserror = "1.0.31"
 tiny-bip39 = "0.8.2"
 uriparse = "0.6.4"
@@ -25,7 +25,7 @@ url = "2.2.2"
 tempfile = "3.3.0"
 
 [lib]
-name = "solana_clap_v3_utils"
+name = "miraland_clap_v3_utils"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

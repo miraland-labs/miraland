@@ -1,5 +1,5 @@
 #[allow(deprecated)]
-use miraland_sdk::sysvar::{fees::Fees, recent_blockhashes::RecentBlockhashes};
+use solana_sdk::sysvar::{fees::Fees, recent_blockhashes::RecentBlockhashes};
 use {
     crate::{
         parse_account_data::{ParsableAccount, ParseAccountError},
@@ -7,7 +7,7 @@ use {
     },
     bincode::deserialize,
     bv::BitVec,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Clock, Epoch, Slot, UnixTimestamp},
         epoch_schedule::EpochSchedule,
         pubkey::Pubkey,
@@ -221,10 +221,10 @@ pub struct UiStakeHistoryEntry {
 #[cfg(test)]
 mod test {
     #[allow(deprecated)]
-    use miraland_sdk::sysvar::recent_blockhashes::IterItem;
+    use solana_sdk::sysvar::recent_blockhashes::IterItem;
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             account::create_account_for_test, fee_calculator::FeeCalculator, hash::Hash,
         },
     };
@@ -331,7 +331,7 @@ mod test {
             }]),
         );
 
-        let bad_pubkey = miraland_sdk::pubkey::new_rand();
+        let bad_pubkey = solana_sdk::pubkey::new_rand();
         assert!(parse_sysvar(&stake_history_sysvar.data, &bad_pubkey).is_err());
 
         let bad_data = vec![0; 4];

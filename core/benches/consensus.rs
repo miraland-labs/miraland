@@ -4,7 +4,7 @@ extern crate solana_core;
 extern crate test;
 
 use {
-    miraland_sdk::{
+    solana_sdk::{
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },

@@ -2,9 +2,9 @@ use {
     bzip2::bufread::BzDecoder,
     clap::{crate_description, crate_name, crate_version, Arg},
     log::*,
-    miraland_sdk::signature::{write_keypair_file, Keypair},
+    solana_sdk::signature::{write_keypair_file, Keypair},
     regex::Regex,
-    solana_download_utils::download_file,
+    miraland_download_utils::download_file,
     std::{
         borrow::Cow,
         collections::{HashMap, HashSet},

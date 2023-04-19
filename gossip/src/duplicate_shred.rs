@@ -1,7 +1,7 @@
 use {
     crate::crds_value::sanitize_wallclock,
     itertools::Itertools,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         pubkey::Pubkey,
         sanitize::{Sanitize, SanitizeError},
@@ -282,13 +282,13 @@ impl Sanitize for DuplicateShred {
 pub(crate) mod tests {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             hash,
             signature::{Keypair, Signer},
             system_transaction,
         },
         rand::Rng,
-        solana_entry::entry::Entry,
+        miraland_entry::entry::Entry,
         solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
         std::sync::Arc,
     };

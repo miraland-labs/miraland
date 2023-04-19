@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         account_info::AccountInfo, clock::Clock, entrypoint::ProgramResult,
         epoch_schedule::EpochSchedule, instruction::Instruction, msg, pubkey::Pubkey, rent::Rent,
         signature::Signer, sysvar::Sysvar, transaction::Transaction,

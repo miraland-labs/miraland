@@ -1,7 +1,7 @@
 use {
     bzip2::bufread::BzDecoder,
     log::*,
-    miraland_sdk::genesis_config::{GenesisConfig, DEFAULT_GENESIS_ARCHIVE, DEFAULT_GENESIS_FILE},
+    solana_sdk::genesis_config::{GenesisConfig, DEFAULT_GENESIS_ARCHIVE, DEFAULT_GENESIS_FILE},
     rand::{thread_rng, Rng},
     std::{
         collections::HashMap,

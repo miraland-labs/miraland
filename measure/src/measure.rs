@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::timing::duration_as_ns,
+    solana_sdk::timing::duration_as_ns,
     std::{
         fmt,
         time::{Duration, Instant},

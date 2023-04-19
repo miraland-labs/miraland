@@ -2,7 +2,7 @@
 
 use {
     crate::snapshot_utils::{self, ArchiveFormat, Result},
-    miraland_sdk::{clock::Slot, hash::Hash},
+    solana_sdk::{clock::Slot, hash::Hash},
     std::{cmp::Ordering, path::PathBuf},
 };
 

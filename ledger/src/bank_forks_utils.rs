@@ -8,7 +8,7 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
     },
     log::*,
-    miraland_sdk::genesis_config::GenesisConfig,
+    solana_sdk::genesis_config::GenesisConfig,
     solana_runtime::{
         accounts_background_service::AbsRequestSender,
         accounts_update_notifier_interface::AccountsUpdateNotifier,

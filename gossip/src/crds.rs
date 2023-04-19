@@ -38,7 +38,7 @@ use {
     },
     lru::LruCache,
     matches::debug_assert_matches,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         hash::{hash, Hash},
         pubkey::Pubkey,
@@ -720,7 +720,7 @@ mod tests {
             crds_value::{new_rand_timestamp, NodeInstance, SnapshotHashes},
             socketaddr,
         },
-        miraland_sdk::{
+        solana_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
@@ -1438,7 +1438,7 @@ mod tests {
     fn test_label_order() {
         let v1 = VersionedCrdsValue::new(
             CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ContactInfo::new_localhost(
-                &miraland_sdk::pubkey::new_rand(),
+                &solana_sdk::pubkey::new_rand(),
                 0,
             ))),
             Cursor::default(),
@@ -1446,7 +1446,7 @@ mod tests {
         );
         let v2 = VersionedCrdsValue::new(
             CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ContactInfo::new_localhost(
-                &miraland_sdk::pubkey::new_rand(),
+                &solana_sdk::pubkey::new_rand(),
                 0,
             ))),
             Cursor::default(),

@@ -2,7 +2,7 @@ use {
     crate::rpc_subscriptions::RpcSubscriptions,
     crossbeam_channel::RecvTimeoutError,
     miraland_client::rpc_response::SlotUpdate,
-    miraland_sdk::timing::timestamp,
+    solana_sdk::timing::timestamp,
     solana_ledger::blockstore::CompletedSlotsReceiver,
     std::{
         sync::{

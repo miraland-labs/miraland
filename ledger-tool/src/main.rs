@@ -9,7 +9,7 @@ use {
     dashmap::DashMap,
     itertools::Itertools,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         account_utils::StateMut,
         clock::{Epoch, Slot},
@@ -31,14 +31,14 @@ use {
     regex::Regex,
     serde::Serialize,
     serde_json::json,
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::{cluster_type_of, pubkey_of, pubkeys_of},
         input_validators::{
             is_parsable, is_pow2, is_pubkey, is_pubkey_or_keypair, is_slot, is_valid_percentage,
         },
     },
     solana_core::system_monitor_service::SystemMonitorService,
-    solana_entry::entry::Entry,
+    miraland_entry::entry::Entry,
     solana_ledger::{
         ancestor_iterator::AncestorIterator,
         bank_forks_utils,
@@ -51,7 +51,7 @@ use {
         blockstore_processor::{self, BlockstoreProcessorError, ProcessOptions},
         shred::Shred,
     },
-    solana_measure::{measure, measure::Measure},
+    miraland_measure::{measure, measure::Measure},
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandler, AbsRequestSender, AccountsBackgroundService,
@@ -3111,7 +3111,7 @@ fn main() {
                     .unwrap()
                     .into_iter()
                     .filter(|(pubkey, _account, _slot)| {
-                        include_sysvars || !miraland_sdk::sysvar::is_sysvar_id(pubkey)
+                        include_sysvars || !solana_sdk::sysvar::is_sysvar_id(pubkey)
                     })
                     .map(|(pubkey, account, slot)| (pubkey, (account, slot)))
                     .collect();
@@ -3484,7 +3484,7 @@ fn main() {
                             for (pubkey, warped_account) in all_accounts {
                                 // Don't output sysvars; it's always updated but not related to
                                 // inflation.
-                                if miraland_sdk::sysvar::is_sysvar_id(&pubkey) {
+                                if solana_sdk::sysvar::is_sysvar_id(&pubkey) {
                                     continue;
                                 }
 

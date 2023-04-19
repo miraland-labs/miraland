@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         account_info::AccountInfo,
         entrypoint::ProgramResult,
         hash::Hash,

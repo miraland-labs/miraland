@@ -4,8 +4,8 @@ use {
     console::style,
     fd_lock::{RwLock, RwLockWriteGuard},
     indicatif::{ProgressDrawTarget, ProgressStyle},
-    miraland_sdk::quic::QUIC_PORT_OFFSET,
-    solana_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
+    solana_sdk::quic::QUIC_PORT_OFFSET,
+    miraland_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
     std::{
         borrow::Cow,
         env,
@@ -97,7 +97,7 @@ pub fn port_validator(port: String) -> Result<(), String> {
 }
 
 pub fn port_range_validator(port_range: String) -> Result<(), String> {
-    if let Some((start, end)) = solana_net_utils::parse_port_range(&port_range) {
+    if let Some((start, end)) = miraland_net_utils::parse_port_range(&port_range) {
         if end - start < MINIMUM_VALIDATOR_PORT_RANGE_WIDTH {
             Err(format!(
                 "Port range is too small.  Try --dynamic-port-range {}-{}",

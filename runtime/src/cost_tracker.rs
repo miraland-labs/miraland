@@ -5,7 +5,7 @@
 //!
 use {
     crate::{block_cost_limits::*, cost_model::TransactionCost},
-    miraland_sdk::{clock::Slot, pubkey::Pubkey, saturating_add_assign},
+    solana_sdk::{clock::Slot, pubkey::Pubkey, saturating_add_assign},
     std::{cmp::Ordering, collections::HashMap},
 };
 
@@ -324,7 +324,7 @@ mod tests {
             bank::Bank,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
         },
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             system_transaction,

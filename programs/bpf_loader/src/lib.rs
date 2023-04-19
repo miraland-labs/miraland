@@ -18,7 +18,7 @@ use {
         syscalls::SyscallError,
     },
     log::{log_enabled, trace, Level::Trace},
-    miraland_sdk::{
+    solana_sdk::{
         bpf_loader, bpf_loader_deprecated,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         entrypoint::{HEAP_LENGTH, SUCCESS},
@@ -39,7 +39,7 @@ use {
         system_instruction::{self, MAX_PERMITTED_DATA_LENGTH},
         transaction_context::{BorrowedAccount, InstructionContext, TransactionContext},
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_program_runtime::{
         executor_cache::Executor,
         ic_logger_msg, ic_msg,
@@ -62,8 +62,8 @@ use {
     thiserror::Error,
 };
 
-miraland_sdk::declare_builtin!(
-    miraland_sdk::bpf_loader::ID,
+solana_sdk::declare_builtin!(
+    solana_sdk::bpf_loader::ID,
     solana_bpf_loader_program,
     solana_bpf_loader_program::process_instruction
 );
@@ -651,7 +651,7 @@ fn process_loader_upgradeable_instruction(
             let signers = [&[new_program_id.as_ref(), &[bump_seed]]]
                 .iter()
                 .map(|seeds| Pubkey::create_program_address(*seeds, caller_program_id))
-                .collect::<Result<Vec<Pubkey>, miraland_sdk::pubkey::PubkeyError>>()?;
+                .collect::<Result<Vec<Pubkey>, solana_sdk::pubkey::PubkeyError>>()?;
             invoke_context.native_invoke(instruction, signers.as_slice())?;
 
             // Load and verify the program bits
@@ -1432,7 +1432,7 @@ impl Executor for BpfExecutor {
 mod tests {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             account::{
                 create_account_shared_data_for_test as create_account_for_test, AccountSharedData,
                 ReadableAccount, WritableAccount,

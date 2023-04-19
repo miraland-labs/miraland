@@ -6,7 +6,7 @@ use {
     miraland_client::{rpc_client::RpcClient, transaction_executor::TransactionExecutor},
     miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
     miraland_gossip::gossip_service::discover,
-    miraland_sdk::{
+    solana_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},
         message::Message,
@@ -19,7 +19,7 @@ use {
     },
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_clap_utils::input_parsers::pubkey_of,
+    miraland_clap_utils::input_parsers::pubkey_of,
     solana_streamer::socket::SocketAddrSpace,
     std::{
         net::SocketAddr,
@@ -535,14 +535,14 @@ fn main() {
     let port = if skip_gossip { DEFAULT_RPC_PORT } else { 8001 };
     let mut entrypoint_addr = SocketAddr::from(([127, 0, 0, 1], port));
     if let Some(addr) = matches.value_of("entrypoint") {
-        entrypoint_addr = solana_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
+        entrypoint_addr = miraland_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
             eprintln!("failed to parse entrypoint address: {}", e);
             exit(1)
         });
     }
     let mut faucet_addr = SocketAddr::from(([127, 0, 0, 1], FAUCET_PORT));
     if let Some(addr) = matches.value_of("faucet_addr") {
-        faucet_addr = solana_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
+        faucet_addr = miraland_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
             eprintln!("failed to parse entrypoint address: {}", e);
             exit(1)
         });
@@ -634,9 +634,9 @@ pub mod test {
             local_cluster::{ClusterConfig, LocalCluster},
             validator_configs::make_identical_validator_configs,
         },
-        miraland_sdk::poh_config::PohConfig,
+        solana_sdk::poh_config::PohConfig,
         solana_core::validator::ValidatorConfig,
-        solana_measure::measure::Measure,
+        miraland_measure::measure::Measure,
     };
 
     #[test]
@@ -660,7 +660,7 @@ pub mod test {
             &account_metas,
         );
         let signers: Vec<&Keypair> = vec![&keypair];
-        let blockhash = miraland_sdk::hash::Hash::default();
+        let blockhash = solana_sdk::hash::Hash::default();
         let tx = Transaction::new(&signers, message, blockhash);
         let size = bincode::serialized_size(&tx).unwrap();
         info!("size:{}", size);

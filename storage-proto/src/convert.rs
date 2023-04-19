@@ -1,6 +1,6 @@
 use {
     crate::{StoredExtendedRewards, StoredTransactionStatusMeta},
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         instruction::{CompiledInstruction, InstructionError},
         message::{
@@ -13,8 +13,8 @@ use {
         transaction::{Transaction, TransactionError, VersionedTransaction},
         transaction_context::TransactionReturnData,
     },
-    solana_account_decoder::parse_token::{real_number_string_trimmed, UiTokenAmount},
-    solana_transaction_status::{
+    miraland_account_decoder::parse_token::{real_number_string_trimmed, UiTokenAmount},
+    miraland_transaction_status::{
         ConfirmedBlock, InnerInstructions, Reward, RewardType, TransactionByAddrInfo,
         TransactionStatusMeta, TransactionTokenBalance, TransactionWithStatusMeta,
         VersionedConfirmedBlock, VersionedTransactionWithStatusMeta,

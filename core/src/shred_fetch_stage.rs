@@ -4,7 +4,7 @@ use {
     crate::{cluster_nodes::check_feature_activation, serve_repair::ServeRepair},
     crossbeam_channel::{unbounded, Sender},
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         feature_set,
     },
@@ -249,7 +249,7 @@ fn should_drop_merkle_shreds(shred_slot: Slot, root_bank: &Bank) -> bool {
 mod tests {
     use {
         super::*,
-        miraland_sdk::packet::Packet,
+        solana_sdk::packet::Packet,
         solana_ledger::{
             blockstore::MAX_DATA_SHREDS_PER_SLOT,
             shred::{ReedSolomonCache, Shred, ShredFlags},

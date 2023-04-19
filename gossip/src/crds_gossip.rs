@@ -18,7 +18,7 @@ use {
         ping_pong::PingCache,
     },
     itertools::Itertools,
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
@@ -380,7 +380,7 @@ mod test {
     use {
         super::*,
         crate::crds_value::CrdsData,
-        miraland_sdk::{hash::hash, timing::timestamp},
+        solana_sdk::{hash::hash, timing::timestamp},
     };
 
     #[test]

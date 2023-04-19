@@ -105,7 +105,7 @@ function launch_testnet() {
 
   execution_step "Fetch reusable testnet keypairs"
   if [[ ! -d "${REPO_ROOT}"/net/keypairs ]]; then
-#     git clone https://github.com/solana-labs/testnet-keypairs.git "${REPO_ROOT}"/net/keypairs
+#     git clone https://github.com/miraland-labs/testnet-keypairs.git "${REPO_ROOT}"/net/keypairs
     git clone git@github.com:solana-labs/testnet-keypairs.git "${REPO_ROOT}"/net/keypairs
     # If we have provider-specific keys (CoLo*, GCE*, etc) use them instead of generic val*
     if [[ -d "${REPO_ROOT}"/net/keypairs/"${CLOUD_PROVIDER}" ]]; then

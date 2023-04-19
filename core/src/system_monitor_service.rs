@@ -7,7 +7,7 @@ use num_enum::{IntoPrimitive, TryFromPrimitive};
 #[cfg(target_os = "linux")]
 use std::{fs::File, io::BufReader};
 use {
-    miraland_sdk::timing::AtomicInterval,
+    solana_sdk::timing::AtomicInterval,
     std::{
         collections::HashMap,
         io::BufRead,

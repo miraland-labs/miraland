@@ -100,7 +100,7 @@ possible.
 
 The Solana Program Library math tests will report the performance of some math
 operations:
-https://github.com/solana-labs/solana-program-library/tree/master/libraries/math
+https://github.com/solana-labs/miraland-program-library/tree/master/libraries/math
 
 To run the test, sync the repo, and run:
 

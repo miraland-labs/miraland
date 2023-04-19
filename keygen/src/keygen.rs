@@ -3,13 +3,13 @@ use {
     bip39::{Language, Mnemonic, MnemonicType, Seed},
     clap::{crate_description, crate_name, Arg, ArgMatches, Command},
     miraland_cli_config::{Config, CONFIG_FILE},
-    miraland_sdk::{
+    solana_sdk::{
         instruction::{AccountMeta, Instruction},
         message::Message,
         pubkey::{write_pubkey_file, Pubkey},
         signature::{keypair_from_seed, write_keypair, write_keypair_file, Keypair, Signer},
     },
-    solana_clap_v3_utils::{
+    miraland_clap_v3_utils::{
         input_parsers::STDOUT_OUTFILE_TOKEN,
         input_validators::{is_parsable, is_prompt_signer_source},
         keypair::{

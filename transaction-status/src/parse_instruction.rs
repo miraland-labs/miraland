@@ -10,12 +10,12 @@ use {
         parse_vote::parse_vote,
     },
     inflector::Inflector,
-    miraland_sdk::{
+    solana_sdk::{
         instruction::CompiledInstruction, message::AccountKeys, pubkey::Pubkey, stake,
         system_program,
     },
     serde_json::Value,
-    solana_account_decoder::parse_token::spl_token_ids,
+    miraland_account_decoder::parse_token::spl_token_ids,
     std::{
         collections::HashMap,
         str::{from_utf8, Utf8Error},
@@ -26,9 +26,9 @@ use {
 lazy_static! {
     static ref ADDRESS_LOOKUP_PROGRAM_ID: Pubkey = solana_address_lookup_table_program::id();
     static ref ASSOCIATED_TOKEN_PROGRAM_ID: Pubkey = spl_associated_token_id();
-    static ref BPF_LOADER_PROGRAM_ID: Pubkey = miraland_sdk::bpf_loader::id();
+    static ref BPF_LOADER_PROGRAM_ID: Pubkey = solana_sdk::bpf_loader::id();
     static ref BPF_UPGRADEABLE_LOADER_PROGRAM_ID: Pubkey =
-        miraland_sdk::bpf_loader_upgradeable::id();
+        solana_sdk::bpf_loader_upgradeable::id();
     static ref MEMO_V1_PROGRAM_ID: Pubkey = spl_memo_id_v1();
     static ref MEMO_V3_PROGRAM_ID: Pubkey = spl_memo_id_v3();
     static ref STAKE_PROGRAM_ID: Pubkey = stake::program::id();

@@ -6,12 +6,12 @@ use {
     log::*,
     miraland_cli_output::display::format_labeled_address,
     miraland_client::{client_error, rpc_client::RpcClient, rpc_response::RpcVoteAccountStatus},
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         native_token::{sol_to_lamports, Sol},
         pubkey::Pubkey,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::pubkeys_of,
         input_validators::{is_parsable, is_pubkey_or_keypair, is_url},
     },

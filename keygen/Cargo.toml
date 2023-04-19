@@ -5,7 +5,7 @@ description = "Miraland key generation utility"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-keygen"
 edition = "2021"
 
@@ -17,8 +17,8 @@ miraland-cli-config = { path = "../cli-config", version = "=1.14.17" }
 miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-version = { path = "../version", version = "=1.14.17" }
 num_cpus = "1.13.1"
-solana-clap-v3-utils = { path = "../clap-v3-utils", version = "=1.14.17" }
-solana-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
+miraland-clap-v3-utils = { path = "../clap-v3-utils", version = "=1.14.17" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
 tiny-bip39 = "0.8.2"
 
 [[bin]]

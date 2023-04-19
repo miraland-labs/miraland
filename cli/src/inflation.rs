@@ -5,8 +5,8 @@ use {
         CliEpochRewardshMetadata, CliInflation, CliKeyedEpochReward, CliKeyedEpochRewards,
     },
     miraland_client::rpc_client::RpcClient,
-    miraland_sdk::{clock::Epoch, pubkey::Pubkey},
-    solana_clap_utils::{
+    solana_sdk::{clock::Epoch, pubkey::Pubkey},
+    miraland_clap_utils::{
         input_parsers::{pubkeys_of, value_of},
         input_validators::is_valid_pubkey,
         keypair::*,

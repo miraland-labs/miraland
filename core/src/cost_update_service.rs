@@ -5,9 +5,9 @@
 
 use {
     crossbeam_channel::Receiver,
-    miraland_sdk::timing::timestamp,
+    solana_sdk::timing::timestamp,
     solana_ledger::blockstore::Blockstore,
-    solana_measure::measure,
+    miraland_measure::measure,
     solana_program_runtime::timings::ExecuteTimings,
     solana_runtime::{bank::Bank, cost_model::CostModel},
     std::{
@@ -139,7 +139,7 @@ impl CostUpdateService {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, miraland_sdk::pubkey::Pubkey, solana_program_runtime::timings::ProgramTiming};
+    use {super::*, solana_sdk::pubkey::Pubkey, solana_program_runtime::timings::ProgramTiming};
 
     #[test]
     fn test_update_cost_model_with_empty_execute_timings() {

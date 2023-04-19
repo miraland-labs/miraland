@@ -1,6 +1,6 @@
 use {
     crate::bench_tps_client::{BenchTpsClient, BenchTpsError, Result},
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         client::{AsyncClient, SyncClient},
         commitment_config::CommitmentConfig,

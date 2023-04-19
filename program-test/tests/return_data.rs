@@ -1,6 +1,6 @@
 use {
     assert_matches::assert_matches,
-    miraland_sdk::{
+    solana_sdk::{
         account_info::{next_account_info, AccountInfo},
         commitment_config::CommitmentLevel,
         entrypoint::ProgramResult,

@@ -1,4 +1,4 @@
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 struct foo {const uint8_t *input;};
 void foo(const uint8_t *input, struct foo foo) ;

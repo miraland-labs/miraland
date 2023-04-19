@@ -93,7 +93,7 @@
 //! signature, message, and Ethereum address data. This is the technique used by
 //! `new_secp256k1_instruction` for simple signature verification.
 //!
-//! The `miraland_sdk` crate provides few APIs for building the instructions and
+//! The `solana_sdk` crate provides few APIs for building the instructions and
 //! transactions necessary for properly using the secp256k1 native program.
 //! Many steps must be done manually.
 //!
@@ -417,10 +417,10 @@
 //! The client program:
 //!
 //! ```no_run
-//! # use miraland_sdk::example_mocks::miraland_client;
+//! # use solana_sdk::example_mocks::miraland_client;
 //! use anyhow::Result;
 //! use miraland_client::rpc_client::RpcClient;
-//! use miraland_sdk::{
+//! use solana_sdk::{
 //!     instruction::{AccountMeta, Instruction},
 //!     secp256k1_instruction,
 //!     signature::{Keypair, Signer},
@@ -633,10 +633,10 @@
 //! The client program:
 //!
 //! ```no_run
-//! # use miraland_sdk::example_mocks::miraland_client;
+//! # use solana_sdk::example_mocks::miraland_client;
 //! use anyhow::Result;
 //! use miraland_client::rpc_client::RpcClient;
-//! use miraland_sdk::{
+//! use solana_sdk::{
 //!     instruction::{AccountMeta, Instruction},
 //!     keccak,
 //!     secp256k1_instruction::{
@@ -758,7 +758,7 @@
 //!
 //!     let secp256k1_instr_data = make_secp256k1_instruction_data(&signatures, 0)?;
 //!     let secp256k1_instr = Instruction::new_with_bytes(
-//!         miraland_sdk::secp256k1_program::ID,
+//!         solana_sdk::secp256k1_program::ID,
 //!         &secp256k1_instr_data,
 //!         vec![],
 //!     );
@@ -901,7 +901,7 @@ pub fn new_secp256k1_instruction(
     bincode::serialize_into(writer, &offsets).unwrap();
 
     Instruction {
-        program_id: miraland_sdk::secp256k1_program::id(),
+        program_id: solana_sdk::secp256k1_program::id(),
         accounts: vec![],
         data: instruction_data,
     }

@@ -7,7 +7,7 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
-    miraland_sdk::{pubkey::Pubkey, signer::keypair::Keypair},
+    solana_sdk::{pubkey::Pubkey, signer::keypair::Keypair},
     rand::SeedableRng,
     rand_chacha::ChaChaRng,
     rayon::{iter::ParallelIterator, prelude::*},
@@ -153,7 +153,7 @@ fn run_simulation(stakes: &[u64], fanout: usize) {
                            // we change to 60 * 20 to avoid timeout
 
     // describe the leader
-    let leader_info = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
+    let leader_info = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
     let cluster_info = ClusterInfo::new(
         leader_info.clone(),
         Arc::new(Keypair::new()),
@@ -180,7 +180,7 @@ fn run_simulation(stakes: &[u64], fanout: usize) {
         chunk.iter().for_each(|i| {
             //distribute neighbors across threads to maximize parallel compute
             let batch_ix = *i as usize % batches.len();
-            let node = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
+            let node = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
             staked_nodes.insert(node.id, stakes[*i - 1]);
             cluster_info.insert_info(node.clone());
             let (s, r) = unbounded();

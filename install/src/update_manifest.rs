@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Signable, Signature},

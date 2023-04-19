@@ -25,7 +25,7 @@ use {
     flate2::read::GzDecoder,
     lazy_static::lazy_static,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         genesis_config::GenesisConfig,
         hash::Hash,
@@ -34,7 +34,7 @@ use {
     },
     rayon::prelude::*,
     regex::Regex,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     std::{
         cmp::Ordering,
         collections::{HashMap, HashSet},
@@ -2298,7 +2298,7 @@ mod tests {
         crate::{accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING, status_cache::Status},
         assert_matches::assert_matches,
         bincode::{deserialize_from, serialize_into},
-        miraland_sdk::{
+        solana_sdk::{
             genesis_config::create_genesis_config,
             native_token::sol_to_lamports,
             signature::{Keypair, Signer},
@@ -3909,10 +3909,10 @@ mod tests {
                 incremental_snapshot_archives_dir: PathBuf::default(),
                 expected_capitalization: u64::default(),
                 accounts_hash_for_testing: None,
-                cluster_type: miraland_sdk::genesis_config::ClusterType::Development,
+                cluster_type: solana_sdk::genesis_config::ClusterType::Development,
                 snapshot_type,
                 accounts: Arc::new(crate::accounts::Accounts::default_for_tests()),
-                epoch_schedule: miraland_sdk::epoch_schedule::EpochSchedule::default(),
+                epoch_schedule: solana_sdk::epoch_schedule::EpochSchedule::default(),
                 rent_collector: crate::rent_collector::RentCollector::default(),
             }
         }

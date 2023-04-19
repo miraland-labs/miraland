@@ -3,7 +3,7 @@
 use {
     crate::ConfigKeys,
     bincode::deserialize,
-    miraland_sdk::{
+    solana_sdk::{
         feature_set, instruction::InstructionError, program_utils::limited_deserialize,
         pubkey::Pubkey,
     },
@@ -142,7 +142,7 @@ mod tests {
         super::*,
         crate::{config_instruction, get_config_data, id, ConfigKeys, ConfigState},
         bincode::serialized_size,
-        miraland_sdk::{
+        solana_sdk::{
             account::{AccountSharedData, ReadableAccount},
             instruction::AccountMeta,
             pubkey::Pubkey,

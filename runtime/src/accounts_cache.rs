@@ -1,6 +1,6 @@
 use {
     dashmap::DashMap,
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::Slot,
         hash::Hash,

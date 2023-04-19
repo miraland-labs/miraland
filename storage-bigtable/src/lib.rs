@@ -3,7 +3,7 @@
 use {
     crate::bigtable::RowKey,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, UnixTimestamp},
         deserialize_utils::default_on_eof,
         message::v0::LoadedAddresses,
@@ -15,7 +15,7 @@ use {
     serde::{Deserialize, Serialize},
     solana_metrics::{datapoint_info, inc_new_counter_debug},
     solana_storage_proto::convert::{generated, tx_by_addr},
-    solana_transaction_status::{
+    miraland_transaction_status::{
         extract_and_fmt_memos, ConfirmedBlock, ConfirmedTransactionStatusWithSignature,
         ConfirmedTransactionWithStatusMeta, Reward, TransactionByAddrInfo,
         TransactionConfirmationStatus, TransactionStatus, TransactionStatusMeta,
@@ -368,7 +368,7 @@ impl From<LegacyTransactionByAddrInfo> for TransactionByAddrInfo {
     }
 }
 
-pub const DEFAULT_INSTANCE_NAME: &str = "solana-ledger";
+pub const DEFAULT_INSTANCE_NAME: &str = "miraland-ledger";
 pub const DEFAULT_APP_PROFILE_ID: &str = "default";
 
 #[derive(Debug)]

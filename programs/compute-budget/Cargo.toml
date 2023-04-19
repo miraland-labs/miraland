@@ -1,9 +1,9 @@
 [package]
-name = "solana-compute-budget-program"
-description = "Solana Compute Budget program"
+name = "miraland-compute-budget-program"
+description = "Miraland Compute Budget program"
 version = "1.14.17"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-compute-budget-program"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-compute-budget-program"
 repository = "https://github.com/miraland-labs/miraland"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 license = "Apache-2.0"
@@ -11,7 +11,7 @@ edition = "2021"
 
 [dependencies]
 miraland-sdk = { path = "../../sdk", version = "=1.14.17" }
-solana-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
+miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]

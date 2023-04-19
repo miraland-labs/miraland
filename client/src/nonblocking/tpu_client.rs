@@ -18,7 +18,7 @@ use {
     bincode::serialize,
     futures_util::{future::join_all, stream::StreamExt},
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         commitment_config::CommitmentConfig,
         message::Message,

@@ -29,7 +29,7 @@ fetch_program() {
       set -x
       curl -L --retry 5 --retry-delay 2 --retry-connrefused \
         -o "$so" \
-        "https://github.com/solana-labs/solana-program-library/releases/download/$name-v$version/$so_name"
+        "https://github.com/miraland-labs/miraland-program-library/releases/download/$name-v$version/$so_name"
     )
 
     mkdir -p ~/.cache/solana-spl

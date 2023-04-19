@@ -10,7 +10,7 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Epoch, Slot},
         feature_set,
         pubkey::Pubkey,

@@ -3,7 +3,7 @@ title: Troubleshooting
 ---
 
 There is a **\#validator-support** Discord channel available to reach other
-testnet participants, [https://solana.com/discord](https://solana.com/discord)
+testnet participants, [https://miraland.top/discord](https://miraland.top/discord)
 
 ## Useful Links & Discussion
 

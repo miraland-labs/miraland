@@ -3,7 +3,7 @@ use {
         heaviest_subtree_fork_choice::HeaviestSubtreeForkChoice, repair_service::RepairService,
         serve_repair::ShredRepairType, tree_diff::TreeDiff,
     },
-    miraland_sdk::{clock::Slot, hash::Hash},
+    solana_sdk::{clock::Slot, hash::Hash},
     solana_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
     std::collections::{HashMap, HashSet},
 };
@@ -195,7 +195,7 @@ pub fn get_closest_completion(
 pub mod test {
     use {
         super::*,
-        miraland_sdk::hash::Hash,
+        solana_sdk::hash::Hash,
         solana_ledger::{
             blockstore::{Blockstore, MAX_TURBINE_PROPAGATION_IN_MS},
             get_tmp_ledger_path,
@@ -294,7 +294,7 @@ pub mod test {
                     // `is_orphan == true`
                     .and_then(|parent| blockhashes.get(&parent))
                     .unwrap_or(&starting_hash);
-                let entries = solana_entry::entry::create_ticks(
+                let entries = miraland_entry::entry::create_ticks(
                     num_ticks * (std::cmp::max(1, slot - parent.unwrap_or(slot))),
                     0,
                     *parent_hash,

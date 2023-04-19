@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 use {
-    miraland_sdk::{
+    solana_sdk::{
         account::AccountSharedData,
         clock::Slot,
         hash::Hash,

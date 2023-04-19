@@ -1,6 +1,6 @@
 use {
     crate::update_manifest::UpdateManifest,
-    miraland_sdk::pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
     serde::{Deserialize, Serialize},
     std::{
         fs::{create_dir_all, File},

@@ -19,7 +19,7 @@ use {
         blockhash_query::BlockhashQuery, nonce_utils, rpc_client::RpcClient,
         rpc_config::RpcTransactionConfig, rpc_response::RpcKeyedAccount,
     },
-    miraland_sdk::{
+    solana_sdk::{
         commitment_config::CommitmentConfig,
         message::Message,
         pubkey::Pubkey,
@@ -29,8 +29,8 @@ use {
         system_program,
         transaction::{Transaction, VersionedTransaction},
     },
-    solana_account_decoder::{UiAccount, UiAccountEncoding},
-    solana_clap_utils::{
+    miraland_account_decoder::{UiAccount, UiAccountEncoding},
+    miraland_clap_utils::{
         compute_unit_price::{compute_unit_price_arg, COMPUTE_UNIT_PRICE_ARG},
         fee_payer::*,
         input_parsers::*,
@@ -41,7 +41,7 @@ use {
         offline::*,
     },
     solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_transaction_status::{
+    miraland_transaction_status::{
         EncodableWithMeta, EncodedConfirmedTransactionWithStatusMeta, EncodedTransaction,
         TransactionBinaryEncoding, UiTransactionEncoding,
     },

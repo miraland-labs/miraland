@@ -2,10 +2,10 @@ use {
     crate::result::Result,
     bincode::serialized_size,
     crossbeam_channel::Receiver,
-    miraland_sdk::clock::Slot,
-    solana_entry::entry::Entry,
+    solana_sdk::clock::Slot,
+    miraland_entry::entry::Entry,
     solana_ledger::shred::ShredData,
-    solana_poh::poh_recorder::WorkingBankEntry,
+    miraland_poh::poh_recorder::WorkingBankEntry,
     solana_runtime::bank::Bank,
     std::{
         sync::Arc,
@@ -102,7 +102,7 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        miraland_sdk::{
+        solana_sdk::{
             genesis_config::GenesisConfig, pubkey::Pubkey, system_transaction,
             transaction::Transaction,
         },
@@ -118,7 +118,7 @@ mod tests {
         let bank0 = Arc::new(Bank::new_for_tests(&genesis_config));
         let tx = system_transaction::transfer(
             &mint_keypair,
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             1,
             genesis_config.hash(),
         );

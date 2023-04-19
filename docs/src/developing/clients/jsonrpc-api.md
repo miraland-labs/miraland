@@ -1051,8 +1051,8 @@ Result:
 
 ### getFeeForMessage
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getFees](jsonrpc-api.md#getfees) for solana-core v1.8**
+**NEW: This method is only available in miraland-core v1.9 or newer. Please use
+[getFees](jsonrpc-api.md#getfees) for miraland-core v1.8**
 
 Get the fee the network will charge for a particular Message
 
@@ -1225,8 +1225,8 @@ Unhealthy Result (if additional information is available)
 
 ### getHighestSnapshotSlot
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getSnapshotSlot](jsonrpc-api.md#getsnapshotslot) for solana-core v1.8**
+**NEW: This method is only available in miraland-core v1.9 or newer. Please use
+[getSnapshotSlot](jsonrpc-api.md#getsnapshotslot) for miraland-core v1.8**
 
 Returns the highest slot information that the node has snapshots for.
 
@@ -1566,8 +1566,8 @@ Result:
 
 ### getLatestBlockhash
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getRecentBlockhash](jsonrpc-api.md#getrecentblockhash) for solana-core v1.8**
+**NEW: This method is only available in miraland-core v1.9 or newer. Please use
+[getRecentBlockhash](jsonrpc-api.md#getrecentblockhash) for miraland-core v1.8**
 
 Returns the latest blockhash
 
@@ -1950,7 +1950,7 @@ Returns all accounts owned by the provided program Pubkey
   - `offset: <usize>` - offset into program account data to start comparison
   - `bytes: <string>` - data to match, as encoded string
   - `encoding: <string>` - encoding for filter `bytes` data, either "base58" or "base64". Data is limited in size to 128 or fewer decoded bytes.
-    **NEW: This field, and base64 support generally, is only available in solana-core v1.14.0 or newer. Please omit when querying nodes on earlier versions**
+    **NEW: This field, and base64 support generally, is only available in miraland-core v1.14.0 or newer. Please omit when querying nodes on earlier versions**
 
 - `dataSize: <u64>` - compares the program account data length with the provided data size
 
@@ -3038,7 +3038,7 @@ Returns transaction details for a confirmed transaction
   - `transaction: <object|[string,encoding]>` - [Transaction](#transaction-structure) object, either in JSON format or encoded binary data, depending on encoding parameter
   - `blockTime: <i64|null>` - estimated production time, as Unix timestamp (seconds since the Unix epoch) of when the transaction was processed. null if not available
   - `meta: <object|null>` - transaction status metadata object:
-    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/miraland-sdk/VERSION_FOR_DOCS_RS/miraland_sdk/transaction/enum.TransactionError.html)
+    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/miraland-sdk/VERSION_FOR_DOCS_RS/solana_sdk/transaction/enum.TransactionError.html)
     - `fee: <u64>` - fee this transaction was charged, as u64 integer
     - `preBalances: <array>` - array of u64 account balances from before the transaction was processed
     - `postBalances: <array>` - array of u64 account balances after the transaction was processed
@@ -3223,7 +3223,7 @@ None
 
 The result field will be a JSON object with the following fields:
 
-- `solana-core`, software version of solana-core
+- `miraland-core`, software version of miraland-core
 - `feature-set`, unique identifier of the current software's feature set
 
 #### Example:
@@ -3239,7 +3239,7 @@ curl http://localhost:8899 -X POST -H "Content-Type: application/json" -d '
 Result:
 
 ```json
-{ "jsonrpc": "2.0", "result": { "solana-core": "1.14.3" }, "id": 1 }
+{ "jsonrpc": "2.0", "result": { "miraland-core": "1.14.3" }, "id": 1 }
 ```
 
 ### getVoteAccounts
@@ -3360,8 +3360,8 @@ Result:
 
 ### isBlockhashValid
 
-**NEW: This method is only available in solana-core v1.9 or newer. Please use
-[getFeeCalculatorForBlockhash](jsonrpc-api.md#getfeecalculatorforblockhash) for solana-core v1.8**
+**NEW: This method is only available in miraland-core v1.9 or newer. Please use
+[getFeeCalculatorForBlockhash](jsonrpc-api.md#getfeecalculatorforblockhash) for miraland-core v1.8**
 
 Returns whether a blockhash is still valid or not
 
@@ -4776,7 +4776,7 @@ Response:
 ### getConfirmedBlock
 
 **DEPRECATED: Please use [getBlock](jsonrpc-api.md#getblock) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns identity and transaction information about a confirmed block in the ledger
 
@@ -4946,7 +4946,7 @@ For more details on returned data:
 ### getConfirmedBlocks
 
 **DEPRECATED: Please use [getBlocks](jsonrpc-api.md#getblocks) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns a list of confirmed blocks between two slots
 
@@ -4982,7 +4982,7 @@ Result:
 ### getConfirmedBlocksWithLimit
 
 **DEPRECATED: Please use [getBlocksWithLimit](jsonrpc-api.md#getblockswithlimit) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns a list of confirmed blocks starting at the given slot
 
@@ -5017,7 +5017,7 @@ Result:
 ### getConfirmedSignaturesForAddress2
 
 **DEPRECATED: Please use [getSignaturesForAddress](jsonrpc-api.md#getsignaturesforaddress) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns signatures for confirmed transactions that include the given address in
 their `accountKeys` list. Returns signatures backwards in time from the
@@ -5086,7 +5086,7 @@ Result:
 ### getConfirmedTransaction
 
 **DEPRECATED: Please use [getTransaction](jsonrpc-api.md#gettransaction) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns transaction details for a confirmed transaction
 
@@ -5106,7 +5106,7 @@ Returns transaction details for a confirmed transaction
   - `transaction: <object|[string,encoding]>` - [Transaction](#transaction-structure) object, either in JSON format or encoded binary data, depending on encoding parameter
   - `blockTime: <i64|null>` - estimated production time, as Unix timestamp (seconds since the Unix epoch) of when the transaction was processed. null if not available
   - `meta: <object|null>` - transaction status metadata object:
-    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/miraland-sdk/VERSION_FOR_DOCS_RS/miraland_sdk/transaction/enum.TransactionError.html)
+    - `err: <object|null>` - Error if transaction failed, null if transaction succeeded. [TransactionError definitions](https://docs.rs/miraland-sdk/VERSION_FOR_DOCS_RS/solana_sdk/transaction/enum.TransactionError.html)
     - `fee: <u64>` - fee this transaction was charged, as u64 integer
     - `preBalances: <array>` - array of u64 account balances from before the transaction was processed
     - `postBalances: <array>` - array of u64 account balances after the transaction was processed
@@ -5237,7 +5237,7 @@ Result:
 ### getFeeCalculatorForBlockhash
 
 **DEPRECATED: Please use [isBlockhashValid](jsonrpc-api.md#isblockhashvalid) or [getFeeForMessage](jsonrpc-api.md#getfeeformessage) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns the fee calculator associated with the query blockhash, or `null` if the blockhash has expired
 
@@ -5346,7 +5346,7 @@ Result:
 ### getFees
 
 **DEPRECATED: Please use [getFeeForMessage](jsonrpc-api.md#getfeeformessage) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns a recent block hash from the ledger, a fee schedule that can be used to
 compute the cost of submitting a transaction using it, and the last slot in
@@ -5401,7 +5401,7 @@ Result:
 ### getRecentBlockhash
 
 **DEPRECATED: Please use [getLatestBlockhash](jsonrpc-api.md#getlatestblockhash) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns a recent block hash from the ledger, and a fee schedule that can be used to compute the cost of submitting a transaction using it.
 
@@ -5451,7 +5451,7 @@ Result:
 ### getSnapshotSlot
 
 **DEPRECATED: Please use [getHighestSnapshotSlot](jsonrpc-api.md#gethighestsnapshotslot) instead**
-This method is expected to be removed in solana-core v2.0
+This method is expected to be removed in miraland-core v2.0
 
 Returns the highest slot that the node has a snapshot for
 

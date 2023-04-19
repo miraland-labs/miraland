@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         account::WritableAccount,
         feature_set::{prevent_calling_precompiles_as_programs, FeatureSet},
         hash::Hash,
@@ -12,7 +12,7 @@ use {
         transaction_context::{InstructionAccount, TransactionContext},
     },
     serde::{Deserialize, Serialize},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_program_runtime::{
         compute_budget::ComputeBudget,
         executor_cache::Executors,
@@ -28,7 +28,7 @@ use {
 pub struct MessageProcessor {}
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl ::solana_frozen_abi::abi_example::AbiExample for MessageProcessor {
+impl ::miraland_frozen_abi::abi_example::AbiExample for MessageProcessor {
     fn example() -> Self {
         // MessageProcessor's fields are #[serde(skip)]-ed and not Serialize
         // so, just rely on Default anyway.
@@ -179,7 +179,7 @@ mod tests {
     use {
         super::*,
         crate::rent_collector::RentCollector,
-        miraland_sdk::{
+        solana_sdk::{
             account::{AccountSharedData, ReadableAccount},
             instruction::{AccountMeta, Instruction, InstructionError},
             message::{AccountKeys, LegacyMessage, Message},
@@ -475,11 +475,11 @@ mod tests {
 
         let accounts = vec![
             (
-                miraland_sdk::pubkey::new_rand(),
+                solana_sdk::pubkey::new_rand(),
                 AccountSharedData::new(100, 1, &mock_program_id),
             ),
             (
-                miraland_sdk::pubkey::new_rand(),
+                solana_sdk::pubkey::new_rand(),
                 AccountSharedData::new(0, 1, &mock_program_id),
             ),
             (

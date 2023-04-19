@@ -2,9 +2,9 @@ use {
     crate::cluster_slots::ClusterSlots,
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     miraland_gossip::cluster_info::ClusterInfo,
-    miraland_sdk::clock::Slot,
+    solana_sdk::clock::Slot,
     solana_ledger::blockstore::Blockstore,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::bank_forks::BankForks,
     std::{
         sync::{
@@ -182,7 +182,7 @@ mod test {
     use {
         super::*,
         miraland_gossip::{cluster_info::Node, crds_value::LowestSlot},
-        miraland_sdk::{pubkey::Pubkey, signature::Keypair},
+        solana_sdk::{pubkey::Pubkey, signature::Keypair},
         solana_streamer::socket::SocketAddrSpace,
     };
 

@@ -11,7 +11,7 @@ use {
         recycler::Recycler,
     },
     ahash::AHasher,
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         message::{MESSAGE_HEADER_LENGTH, MESSAGE_VERSION_PREFIX},
         pubkey::Pubkey,
@@ -21,7 +21,7 @@ use {
     rand::Rng,
     rayon::{prelude::*, ThreadPool},
     solana_metrics::inc_new_counter_debug,
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_rayon_threadlimit::get_thread_count,
     std::{
         convert::TryFrom,
         hash::Hasher,
@@ -433,7 +433,7 @@ fn check_for_simple_vote_transaction(
     if packet
         .data(instruction_program_id_start..instruction_program_id_end)
         .ok_or(PacketError::InvalidLen)?
-        == miraland_sdk::vote::program::id().as_ref()
+        == solana_sdk::vote::program::id().as_ref()
     {
         packet.meta.flags |= PacketFlags::SIMPLE_VOTE_TX;
     }
@@ -821,7 +821,7 @@ mod tests {
         },
         bincode::{deserialize, serialize},
         curve25519_dalek::{edwards::CompressedEdwardsY, scalar::Scalar},
-        miraland_sdk::{
+        solana_sdk::{
             instruction::CompiledInstruction,
             message::{Message, MessageHeader},
             packet::Meta,

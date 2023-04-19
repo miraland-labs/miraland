@@ -11,7 +11,7 @@ use {
     },
     bincode::serialize,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         commitment_config::CommitmentConfig,
         epoch_info::EpochInfo,

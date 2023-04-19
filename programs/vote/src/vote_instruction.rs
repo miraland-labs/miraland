@@ -8,7 +8,7 @@ use {
             VoteAuthorizeWithSeedArgs, VoteInit, VoteState, VoteStateUpdate,
         },
     },
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,

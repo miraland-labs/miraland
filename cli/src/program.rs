@@ -22,7 +22,7 @@ use {
         rpc_filter::{Memcmp, RpcFilterType},
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         account_utils::StateMut,
         bpf_loader, bpf_loader_deprecated,
@@ -40,9 +40,9 @@ use {
         transaction::{Transaction, TransactionError},
         transaction_context::TransactionContext,
     },
-    solana_account_decoder::{UiAccountEncoding, UiDataSliceConfig},
+    miraland_account_decoder::{UiAccountEncoding, UiDataSliceConfig},
     solana_bpf_loader_program::{syscalls::register_syscalls, BpfError, ThisInstructionMeter},
-    solana_clap_utils::{self, input_parsers::*, input_validators::*, keypair::*},
+    miraland_clap_utils::{self, input_parsers::*, input_validators::*, keypair::*},
     solana_program_runtime::invoke_context::InvokeContext,
     solana_rbpf::{
         elf::Executable,
@@ -2318,7 +2318,7 @@ mod tests {
             cli::{parse_command, process_command},
         },
         miraland_cli_output::OutputFormat,
-        miraland_sdk::signature::write_keypair_file,
+        solana_sdk::signature::write_keypair_file,
         serde_json::Value,
     };
 

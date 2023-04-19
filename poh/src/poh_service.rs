@@ -4,9 +4,9 @@ use {
     crate::poh_recorder::{PohRecorder, Record},
     crossbeam_channel::Receiver,
     log::*,
-    miraland_sdk::poh_config::PohConfig,
-    solana_entry::poh::Poh,
-    solana_measure::{measure, measure::Measure},
+    solana_sdk::poh_config::PohConfig,
+    miraland_entry::poh::Poh,
+    miraland_measure::{measure, measure::Measure},
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -383,7 +383,7 @@ impl PohService {
 mod tests {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             clock, hash::hash, pubkey::Pubkey, timing, transaction::VersionedTransaction,
         },
         rand::{thread_rng, Rng},
@@ -393,7 +393,7 @@ mod tests {
             get_tmp_ledger_path,
             leader_schedule_cache::LeaderScheduleCache,
         },
-        solana_measure::measure::Measure,
+        miraland_measure::measure::Measure,
         solana_perf::test_tx::test_tx,
         solana_runtime::bank::Bank,
         std::{thread::sleep, time::Duration},

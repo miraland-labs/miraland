@@ -17,7 +17,7 @@ use {
         cluster_info::Node, gossip_service::discover_cluster,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, AccountSharedData},
         client::SyncClient,
         clock::{Slot, DEFAULT_DEV_SLOTS_PER_EPOCH, DEFAULT_TICKS_PER_SLOT},

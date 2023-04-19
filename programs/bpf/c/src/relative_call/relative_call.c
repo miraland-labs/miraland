@@ -1,7 +1,7 @@
 /**
  * @brief test program that generates BPF PC relative call instructions
  */
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 void __attribute__ ((noinline)) helper() {
   sol_log(__func__);

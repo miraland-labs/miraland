@@ -7,7 +7,7 @@ use {
         SIZE_OF_CODING_SHRED_HEADERS, SIZE_OF_COMMON_SHRED_HEADER, SIZE_OF_DATA_SHRED_HEADERS,
         SIZE_OF_SIGNATURE,
     },
-    miraland_sdk::{clock::Slot, signature::Signature},
+    solana_sdk::{clock::Slot, signature::Signature},
     solana_perf::packet::deserialize_from_with_limit,
     static_assertions::const_assert_eq,
     std::{io::Cursor, ops::Range},

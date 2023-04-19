@@ -1,7 +1,7 @@
 use {
     crate::{HEADER_LENGTH, IP_ECHO_SERVER_RESPONSE_LENGTH},
     log::*,
-    miraland_sdk::deserialize_utils::default_on_eof,
+    solana_sdk::deserialize_utils::default_on_eof,
     serde_derive::{Deserialize, Serialize},
     std::{
         io,

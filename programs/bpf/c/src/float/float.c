@@ -3,7 +3,7 @@
  * on floating point values.  The test fails if floating point
  * emulation functions were not linked to the module.
  */
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 
 extern double log2(double arg);
 

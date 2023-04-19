@@ -1,6 +1,6 @@
 use {
     crate::client_error,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Epoch, Slot, UnixTimestamp},
         fee_calculator::{FeeCalculator, FeeRateGovernor},
         hash::Hash,
@@ -8,8 +8,8 @@ use {
         transaction::{Result, TransactionError},
     },
     serde::{Deserialize, Deserializer, Serialize, Serializer},
-    solana_account_decoder::{parse_token::UiTokenAmount, UiAccount},
-    solana_transaction_status::{
+    miraland_account_decoder::{parse_token::UiTokenAmount, UiAccount},
+    miraland_transaction_status::{
         ConfirmedTransactionStatusWithSignature, TransactionConfirmationStatus, UiConfirmedBlock,
         UiTransactionReturnData,
     },
@@ -327,7 +327,7 @@ pub struct RpcBlockProduction {
 #[derive(Serialize, Deserialize, Clone)]
 #[serde(rename_all = "kebab-case")]
 pub struct RpcVersionInfo {
-    /// The current version of solana-core
+    /// The current version of miraland-core
     pub solana_core: String,
     /// first 4 bytes of the FeatureSet identifier
     pub feature_set: Option<u32>,

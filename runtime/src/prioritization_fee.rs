@@ -1,6 +1,6 @@
 use {
-    miraland_sdk::{clock::Slot, pubkey::Pubkey, saturating_add_assign},
-    solana_measure::measure,
+    solana_sdk::{clock::Slot, pubkey::Pubkey, saturating_add_assign},
+    miraland_measure::measure,
     std::collections::HashMap,
 };
 
@@ -202,7 +202,7 @@ impl PrioritizationFee {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, miraland_sdk::pubkey::Pubkey};
+    use {super::*, solana_sdk::pubkey::Pubkey};
 
     #[test]
     fn test_update_prioritization_fee() {

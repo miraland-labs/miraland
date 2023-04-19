@@ -7,11 +7,11 @@ use {
         tpu_connection::{BlockingConnection, ClientStats},
     },
     indexmap::map::{Entry, IndexMap},
-    miraland_sdk::{
+    solana_sdk::{
         pubkey::Pubkey, quic::QUIC_PORT_OFFSET, signature::Keypair, timing::AtomicInterval,
     },
     rand::{thread_rng, Rng},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_streamer::{
         nonblocking::quic::{compute_max_allowed_uni_streams, ConnectionPeerType},
         streamer::StakedNodes,
@@ -575,7 +575,7 @@ impl Default for ConnectionCache {
             last_stats: AtomicInterval::default(),
             connection_pool_size: DEFAULT_TPU_CONNECTION_POOL_SIZE,
             tpu_udp_socket: Arc::new(
-                solana_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)))
+                miraland_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)))
                     .expect("Unable to bind to UDP socket"),
             ),
             client_certificate: Arc::new(QuicClientCertificate {
@@ -653,7 +653,7 @@ mod tests {
             connection_cache::{ConnectionCache, MAX_CONNECTIONS},
             tpu_connection::TpuConnection,
         },
-        miraland_sdk::{
+        solana_sdk::{
             pubkey::Pubkey,
             quic::{
                 QUIC_MAX_UNSTAKED_CONCURRENT_STREAMS, QUIC_MIN_STAKED_CONCURRENT_STREAMS,

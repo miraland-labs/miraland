@@ -2,7 +2,7 @@
 
 use {
     crate::nonblocking::rpc_client::RpcClient,
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, ReadableAccount},
         account_utils::StateMut,
         commitment_config::CommitmentConfig,
@@ -101,7 +101,7 @@ pub fn account_identity_ok<T: ReadableAccount>(account: &T) -> Result<(), Error>
 ///     rpc_client::RpcClient,
 ///     nonce_utils,
 /// };
-/// use miraland_sdk::{
+/// use solana_sdk::{
 ///     nonce::State,
 ///     pubkey::Pubkey,
 /// };
@@ -153,7 +153,7 @@ pub fn state_from_account<T: ReadableAccount + StateMut<Versions>>(
 ///     rpc_client::RpcClient,
 ///     nonce_utils,
 /// };
-/// use miraland_sdk::{
+/// use solana_sdk::{
 ///     message::Message,
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},

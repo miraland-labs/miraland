@@ -15,7 +15,7 @@ use {
         gossip_service::discover_cluster,
         socketaddr,
     },
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, AccountSharedData},
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         commitment_config::CommitmentConfig,
@@ -39,9 +39,9 @@ use {
         blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions,
         create_new_tmp_ledger,
     },
-    solana_net_utils::PortRange,
+    miraland_net_utils::PortRange,
     solana_program_runtime::compute_budget::ComputeBudget,
-    solana_rpc::{rpc::JsonRpcConfig, rpc_pubsub_service::PubSubConfig},
+    miraland_rpc::{rpc::JsonRpcConfig, rpc_pubsub_service::PubSubConfig},
     solana_runtime::{
         accounts_db::AccountsDbConfig, accounts_index::AccountsIndexConfig, bank_forks::BankForks,
         genesis_utils::create_genesis_config_with_leader_ex,
@@ -445,7 +445,7 @@ impl TestValidatorGenesis {
 
         self.programs.push(ProgramInfo {
             program_id,
-            loader: miraland_sdk::bpf_loader::id(),
+            loader: solana_sdk::bpf_loader::id(),
             program_path,
         });
         self
@@ -655,7 +655,7 @@ impl TestValidator {
             validator_identity_lamports,
             config.fee_rate_governor.clone(),
             config.rent,
-            miraland_sdk::genesis_config::ClusterType::Development,
+            solana_sdk::genesis_config::ClusterType::Development,
             accounts.into_iter().collect(),
         );
         genesis_config.epoch_schedule = config

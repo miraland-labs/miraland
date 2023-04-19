@@ -8,10 +8,10 @@ use {
         bucket_map_holder_stats::BucketMapHolderStats,
         waitable_condvar::WaitableCondvar,
     },
-    miraland_sdk::{clock::Slot, pubkey::Pubkey},
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     rand::{thread_rng, Rng},
     solana_bucket_map::bucket_api::BucketApi,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     std::{
         collections::{
             hash_map::{Entry, VacantEntry},
@@ -1954,8 +1954,8 @@ mod tests {
 
     #[test]
     fn test_remove_if_slot_list_empty_entry() {
-        let key = miraland_sdk::pubkey::new_rand();
-        let unknown_key = miraland_sdk::pubkey::new_rand();
+        let key = solana_sdk::pubkey::new_rand();
+        let unknown_key = solana_sdk::pubkey::new_rand();
 
         let test = new_for_test::<u64>();
 

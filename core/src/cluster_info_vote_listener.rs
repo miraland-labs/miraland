@@ -16,7 +16,7 @@ use {
         cluster_info::{ClusterInfo, GOSSIP_SLEEP_MILLIS},
         crds::Cursor,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT, DEFAULT_TICKS_PER_SLOT},
         hash::Hash,
         pubkey::Pubkey,
@@ -26,11 +26,11 @@ use {
         transaction::Transaction,
     },
     solana_ledger::blockstore::Blockstore,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_metrics::inc_new_counter_debug,
     solana_perf::packet,
-    solana_poh::poh_recorder::PohRecorder,
-    solana_rpc::{
+    miraland_poh::poh_recorder::PohRecorder,
+    miraland_rpc::{
         optimistically_confirmed_bank_tracker::{BankNotification, BankNotificationSender},
         rpc_subscriptions::RpcSubscriptions,
     },
@@ -871,13 +871,13 @@ impl ClusterInfoVoteListener {
 mod tests {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             hash::Hash,
             pubkey::Pubkey,
             signature::{Keypair, Signature, Signer},
         },
         solana_perf::packet,
-        solana_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
+        miraland_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         solana_runtime::{
             bank::Bank,
             commitment::BlockCommitmentCache,
@@ -924,7 +924,7 @@ mod tests {
         let (vote_tracker, bank, _, _) = setup();
 
         // Check outdated slots are purged with new root
-        let new_voter = miraland_sdk::pubkey::new_rand();
+        let new_voter = solana_sdk::pubkey::new_rand();
         // Make separate copy so the original doesn't count toward
         // the ref count, which would prevent cleanup
         let new_voter_ = new_voter;

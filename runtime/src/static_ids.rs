@@ -1,6 +1,6 @@
 use {
     crate::{inline_spl_associated_token_account, inline_spl_token, inline_spl_token_2022},
-    miraland_sdk::pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
 };
 
 lazy_static! {

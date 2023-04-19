@@ -3,7 +3,7 @@ use {
     common::{
         add_lookup_table_account, assert_ix_error, new_address_lookup_table, setup_test_context,
     },
-    miraland_sdk::{
+    solana_sdk::{
         account::{ReadableAccount, WritableAccount},
         clock::Clock,
         instruction::{Instruction, InstructionError},

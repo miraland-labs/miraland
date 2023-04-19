@@ -1,6 +1,6 @@
 //! lockups generator
 use {
-    miraland_sdk::{clock::Epoch, epoch_schedule::EpochSchedule, timing::years_as_slots},
+    solana_sdk::{clock::Epoch, epoch_schedule::EpochSchedule, timing::years_as_slots},
     std::time::Duration,
 };
 

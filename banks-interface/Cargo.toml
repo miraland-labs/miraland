@@ -1,12 +1,12 @@
 [package]
-name = "solana-banks-interface"
+name = "miraland-banks-interface"
 version = "1.14.17"
 description = "Solana banks RPC interface"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-banks-interface"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-banks-interface"
 edition = "2021"
 
 [dependencies]

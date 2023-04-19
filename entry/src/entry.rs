@@ -9,7 +9,7 @@ use {
     dlopen_derive::SymBorApi,
     lazy_static::lazy_static,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         hash::Hash,
         packet::Meta,
         timing,
@@ -21,7 +21,7 @@ use {
     rand::{thread_rng, Rng},
     rayon::{prelude::*, ThreadPool},
     serde::{Deserialize, Serialize},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_merkle_tree::MerkleTree,
     solana_metrics::*,
     solana_perf::{
@@ -31,7 +31,7 @@ use {
         recycler::Recycler,
         sigverify,
     },
-    solana_rayon_threadlimit::get_max_thread_count,
+    miraland_rayon_threadlimit::get_max_thread_count,
     std::{
         cmp,
         ffi::OsStr,
@@ -628,7 +628,7 @@ impl EntrySlice for [Entry] {
     }
 
     fn verify_cpu_x86_simd(&self, start_hash: &Hash, simd_len: usize) -> EntryVerificationState {
-        use miraland_sdk::hash::HASH_BYTES;
+        use solana_sdk::hash::HASH_BYTES;
         let now = Instant::now();
         let genesis = [Entry {
             num_hashes: 0,
@@ -906,7 +906,7 @@ pub fn next_versioned_entry(
 mod tests {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             hash::{hash, Hash},
             pubkey::Pubkey,
             signature::{Keypair, Signer},
@@ -1061,7 +1061,7 @@ mod tests {
 
     #[test]
     fn test_transaction_signing() {
-        use miraland_sdk::signature::Signature;
+        use solana_sdk::signature::Signature;
         let zero = Hash::default();
 
         let keypair = Keypair::new();

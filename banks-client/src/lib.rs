@@ -12,7 +12,7 @@ pub use {
 use {
     borsh::BorshDeserialize,
     futures::{future::join_all, Future, FutureExt, TryFutureExt},
-    miraland_sdk::{
+    solana_sdk::{
         account::{from_account, Account},
         commitment_config::CommitmentLevel,
         message::Message,
@@ -507,8 +507,8 @@ pub async fn start_tcp_client<T: ToSocketAddrs>(addr: T) -> Result<BanksClient, 
 mod tests {
     use {
         super::*,
-        miraland_sdk::{message::Message, signature::Signer, system_instruction},
-        solana_banks_server::banks_server::start_local_server,
+        solana_sdk::{message::Message, signature::Signer, system_instruction},
+        miraland_banks_server::banks_server::start_local_server,
         solana_runtime::{
             bank::Bank, bank_forks::BankForks, commitment::BlockCommitmentCache,
             genesis_utils::create_genesis_config,
@@ -538,7 +538,7 @@ mod tests {
         ));
         let bank_forks = Arc::new(RwLock::new(BankForks::new(bank)));
 
-        let bob_pubkey = miraland_sdk::pubkey::new_rand();
+        let bob_pubkey = solana_sdk::pubkey::new_rand();
         let mint_pubkey = genesis.mint_keypair.pubkey();
         let instruction = system_instruction::transfer(&mint_pubkey, &bob_pubkey, 1);
         let message = Message::new(&[instruction], Some(&mint_pubkey));
@@ -577,7 +577,7 @@ mod tests {
         let bank_forks = Arc::new(RwLock::new(BankForks::new(bank)));
 
         let mint_pubkey = &genesis.mint_keypair.pubkey();
-        let bob_pubkey = miraland_sdk::pubkey::new_rand();
+        let bob_pubkey = solana_sdk::pubkey::new_rand();
         let instruction = system_instruction::transfer(mint_pubkey, &bob_pubkey, 1);
         let message = Message::new(&[instruction], Some(mint_pubkey));
 

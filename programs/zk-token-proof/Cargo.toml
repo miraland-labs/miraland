@@ -1,6 +1,6 @@
 [package]
-name = "solana-zk-token-proof-program"
-description = "Solana Zk Token Proof Program"
+name = "miraland-zk-token-proof-program"
+description = "Miraland Zk Token Proof Program"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 version = "1.14.17"
@@ -13,5 +13,5 @@ getrandom = { version = "0.1", features = ["dummy"] }
 miraland-sdk = { path = "../../sdk", version = "=1.14.17" }
 num-derive = "0.3"
 num-traits = "0.2"
-solana-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
-solana-zk-token-sdk = { path = "../../zk-token-sdk", version = "=1.14.17" }
+miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
+miraland-zk-token-sdk = { path = "../../zk-token-sdk", version = "=1.14.17" }

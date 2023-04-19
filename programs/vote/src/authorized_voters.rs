@@ -1,6 +1,6 @@
 use {
     log::*,
-    miraland_sdk::{clock::Epoch, pubkey::Pubkey},
+    solana_sdk::{clock::Epoch, pubkey::Pubkey},
     serde_derive::{Deserialize, Serialize},
     std::collections::BTreeMap,
 };

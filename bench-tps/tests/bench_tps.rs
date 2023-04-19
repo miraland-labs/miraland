@@ -15,14 +15,14 @@ use {
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::make_identical_validator_configs,
     },
-    miraland_sdk::{
+    solana_sdk::{
         commitment_config::CommitmentConfig,
         signature::{Keypair, Signer},
     },
     miraland_test_validator::TestValidator,
     serial_test::serial,
     solana_core::validator::ValidatorConfig,
-    solana_rpc::rpc::JsonRpcConfig,
+    miraland_rpc::rpc::JsonRpcConfig,
     solana_streamer::socket::SocketAddrSpace,
     std::{sync::Arc, time::Duration},
 };

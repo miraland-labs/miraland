@@ -14,7 +14,7 @@ use {
     bincode::{deserialize, serialize},
     byteorder::{BigEndian, ByteOrder},
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, UnixTimestamp},
         pubkey::Pubkey,
         signature::Signature,

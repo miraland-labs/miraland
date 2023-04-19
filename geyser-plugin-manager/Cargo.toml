@@ -1,13 +1,13 @@
 [package]
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 edition = "2021"
-name = "solana-geyser-plugin-manager"
+name = "miraland-geyser-plugin-manager"
 description = "The Solana Geyser plugin manager."
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-geyser-plugin-manager"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-geyser-plugin-manager"
 
 [dependencies]
 bs58 = "0.4.0"
@@ -17,12 +17,12 @@ libloading = "0.7.3"
 log = "0.4.17"
 miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 serde_json = "1.0.81"
-solana-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "=1.14.17" }
-solana-measure = { path = "../measure", version = "=1.14.17" }
-solana-metrics = { path = "../metrics", version = "=1.14.17" }
-solana-rpc = { path = "../rpc", version = "=1.14.17" }
-solana-runtime = { path = "../runtime", version = "=1.14.17" }
-solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
+miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "=1.14.17" }
+miraland-measure = { path = "../measure", version = "=1.14.17" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+miraland-rpc = { path = "../rpc", version = "=1.14.17" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
 thiserror = "1.0.31"
 
 [package.metadata.docs.rs]

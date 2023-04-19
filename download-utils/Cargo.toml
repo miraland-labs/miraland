@@ -1,12 +1,12 @@
 [package]
-name = "solana-download-utils"
+name = "miraland-download-utils"
 version = "1.14.17"
 description = "Solana Download Utils"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-download-utils"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-download-utils"
 edition = "2021"
 
 [dependencies]
@@ -15,11 +15,11 @@ indicatif = "0.16.2"
 log = "0.4.17"
 miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
-solana-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_download_utils"
+name = "miraland_download_utils"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

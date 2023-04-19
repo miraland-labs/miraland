@@ -9,9 +9,9 @@ use {
         display::println_transaction, CliBlock, CliTransaction, CliTransactionConfirmation,
         OutputFormat,
     },
-    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
+    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
     serde_json::json,
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::pubkey_of,
         input_validators::{is_slot, is_valid_pubkey},
     },
@@ -21,7 +21,7 @@ use {
         blockstore_options::{AccessType, ShredStorageType},
     },
     solana_storage_bigtable::CredentialType,
-    solana_transaction_status::{
+    miraland_transaction_status::{
         BlockEncodingOptions, ConfirmedBlock, EncodeError, TransactionDetails,
         UiTransactionEncoding,
     },

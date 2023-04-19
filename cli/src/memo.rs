@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{instruction::Instruction, pubkey::Pubkey},
+    solana_sdk::{instruction::Instruction, pubkey::Pubkey},
     spl_memo::id,
 };
 

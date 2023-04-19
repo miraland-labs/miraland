@@ -4,13 +4,13 @@
 extern crate test;
 
 use {
-    miraland_sdk::{hash::Hash, signature::Keypair, system_transaction},
+    solana_sdk::{hash::Hash, signature::Keypair, system_transaction},
     rand::distributions::{Distribution, Uniform},
     solana_core::{
         banking_stage::*, forward_packet_batches_by_accounts::ForwardPacketBatchesByAccounts,
         unprocessed_packet_batches::*,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_perf::packet::{Packet, PacketBatch},
     solana_runtime::{
         bank::Bank,
@@ -27,7 +27,7 @@ fn build_packet_batch(packet_per_batch_count: usize) -> (PacketBatch, Vec<usize>
             .map(|sender_stake| {
                 let tx = system_transaction::transfer(
                     &Keypair::new(),
-                    &miraland_sdk::pubkey::new_rand(),
+                    &solana_sdk::pubkey::new_rand(),
                     1,
                     Hash::new_unique(),
                 );
@@ -51,7 +51,7 @@ fn build_randomized_packet_batch(packet_per_batch_count: usize) -> (PacketBatch,
             .map(|_| {
                 let tx = system_transaction::transfer(
                     &Keypair::new(),
-                    &miraland_sdk::pubkey::new_rand(),
+                    &solana_sdk::pubkey::new_rand(),
                     1,
                     Hash::new_unique(),
                 );

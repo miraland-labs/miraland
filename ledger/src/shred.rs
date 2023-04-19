@@ -55,7 +55,7 @@ use {
     self::{shred_code::ShredCode, traits::Shred as _},
     crate::blockstore::{self, MAX_DATA_SHREDS_PER_SLOT},
     bitflags::bitflags,
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot,
         hash::{hashv, Hash},
         pubkey::Pubkey,
@@ -65,7 +65,7 @@ use {
     rayon::ThreadPool,
     reed_solomon_erasure::Error::TooFewShardsPresent,
     serde::{Deserialize, Serialize},
-    solana_entry::entry::{create_ticks, Entry},
+    miraland_entry::entry::{create_ticks, Entry},
     solana_perf::packet::Packet,
     static_assertions::const_assert_eq,
     std::{fmt::Debug, time::Instant},
@@ -1049,7 +1049,7 @@ mod tests {
         super::*,
         bincode::serialized_size,
         matches::assert_matches,
-        miraland_sdk::{shred_version, signature::Signer},
+        solana_sdk::{shred_version, signature::Signer},
         rand::Rng,
         rand_chacha::{rand_core::SeedableRng, ChaChaRng},
     };

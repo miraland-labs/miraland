@@ -1,5 +1,5 @@
 #[allow(deprecated)]
-use miraland_sdk::keyed_account::{create_keyed_accounts_unified, KeyedAccount};
+use solana_sdk::keyed_account::{create_keyed_accounts_unified, KeyedAccount};
 use {
     crate::{
         accounts_data_meter::AccountsDataMeter,
@@ -12,7 +12,7 @@ use {
         sysvar_cache::SysvarCache,
         timings::{ExecuteDetailsTimings, ExecuteTimings},
     },
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         feature_set::{
@@ -26,7 +26,7 @@ use {
         saturating_add_assign,
         transaction_context::{InstructionAccount, TransactionAccount, TransactionContext},
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     std::{
         alloc::Layout,
         borrow::Cow,
@@ -361,7 +361,7 @@ impl<'a> InvokeContext<'a> {
     }
 
     /// Current height of the invocation stack, top level instructions are height
-    /// `miraland_sdk::instruction::TRANSACTION_LEVEL_STACK_HEIGHT`
+    /// `solana_sdk::instruction::TRANSACTION_LEVEL_STACK_HEIGHT`
     pub fn get_stack_height(&self) -> usize {
         self.transaction_context
             .get_instruction_context_stack_height()
@@ -1110,7 +1110,7 @@ mod tests {
     use {
         super::*,
         crate::compute_budget,
-        miraland_sdk::account::WritableAccount,
+        solana_sdk::account::WritableAccount,
         serde::{Deserialize, Serialize},
     };
 
@@ -1150,11 +1150,11 @@ mod tests {
         }
         let builtin_programs = &[
             BuiltinProgram {
-                program_id: miraland_sdk::pubkey::new_rand(),
+                program_id: solana_sdk::pubkey::new_rand(),
                 process_instruction: mock_process_instruction,
             },
             BuiltinProgram {
-                program_id: miraland_sdk::pubkey::new_rand(),
+                program_id: solana_sdk::pubkey::new_rand(),
                 process_instruction: mock_ix_processor,
             },
         ];
@@ -1264,9 +1264,9 @@ mod tests {
         let mut accounts = vec![];
         let mut instruction_accounts = vec![];
         for index in 0..MAX_DEPTH {
-            invoke_stack.push(miraland_sdk::pubkey::new_rand());
+            invoke_stack.push(solana_sdk::pubkey::new_rand());
             accounts.push((
-                miraland_sdk::pubkey::new_rand(),
+                solana_sdk::pubkey::new_rand(),
                 AccountSharedData::new(index as u64, 1, invoke_stack.get(index).unwrap()),
             ));
             instruction_accounts.push(InstructionAccount {
@@ -1280,7 +1280,7 @@ mod tests {
         for (index, program_id) in invoke_stack.iter().enumerate() {
             accounts.push((
                 *program_id,
-                AccountSharedData::new(1, 1, &miraland_sdk::pubkey::Pubkey::default()),
+                AccountSharedData::new(1, 1, &solana_sdk::pubkey::Pubkey::default()),
             ));
             instruction_accounts.push(InstructionAccount {
                 index_in_transaction: index,
@@ -1314,24 +1314,24 @@ mod tests {
 
     #[test]
     fn test_process_instruction() {
-        let callee_program_id = miraland_sdk::pubkey::new_rand();
+        let callee_program_id = solana_sdk::pubkey::new_rand();
         let builtin_programs = &[BuiltinProgram {
             program_id: callee_program_id,
             process_instruction: mock_process_instruction,
         }];
 
         let owned_account = AccountSharedData::new(42, 1, &callee_program_id);
-        let not_owned_account = AccountSharedData::new(84, 1, &miraland_sdk::pubkey::new_rand());
-        let readonly_account = AccountSharedData::new(168, 1, &miraland_sdk::pubkey::new_rand());
+        let not_owned_account = AccountSharedData::new(84, 1, &solana_sdk::pubkey::new_rand());
+        let readonly_account = AccountSharedData::new(168, 1, &solana_sdk::pubkey::new_rand());
         let loader_account = AccountSharedData::new(0, 0, &native_loader::id());
         let mut program_account = AccountSharedData::new(1, 0, &native_loader::id());
         program_account.set_executable(true);
         let accounts = vec![
-            (miraland_sdk::pubkey::new_rand(), owned_account),
-            (miraland_sdk::pubkey::new_rand(), not_owned_account),
-            (miraland_sdk::pubkey::new_rand(), readonly_account),
+            (solana_sdk::pubkey::new_rand(), owned_account),
+            (solana_sdk::pubkey::new_rand(), not_owned_account),
+            (solana_sdk::pubkey::new_rand(), readonly_account),
             (callee_program_id, program_account),
-            (miraland_sdk::pubkey::new_rand(), loader_account),
+            (solana_sdk::pubkey::new_rand(), loader_account),
         ];
         let metas = vec![
             AccountMeta::new(accounts.get(0).unwrap().0, false),
@@ -1431,7 +1431,7 @@ mod tests {
     #[test]
     fn test_invoke_context_compute_budget() {
         let accounts = vec![(
-            miraland_sdk::pubkey::new_rand(),
+            solana_sdk::pubkey::new_rand(),
             AccountSharedData::default(),
         )];
 

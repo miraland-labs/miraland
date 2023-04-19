@@ -23,7 +23,7 @@ example_helloworld() {
   (
     set -x
     rm -rf example-helloworld
-    git clone https://github.com/solana-labs/example-helloworld.git
+    git clone https://github.com/miraland-labs/example-helloworld.git
     cd example-helloworld
 
     update_solana_dependencies src/program-rust "$miraland_ver"
@@ -56,7 +56,7 @@ spl() {
     )
     set -x
     rm -rf spl
-    git clone https://github.com/solana-labs/solana-program-library.git spl
+    git clone https://github.com/miraland-labs/miraland-program-library.git spl
     cd spl
 
     project_used_miraland_version=$(sed -nE 's/miraland-sdk = \"[>=<~]*(.*)\"/\1/p' <"token/program/Cargo.toml")

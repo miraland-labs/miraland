@@ -93,7 +93,7 @@ extern crate serde_derive;
 extern crate solana_metrics;
 
 #[macro_use]
-extern crate solana_frozen_abi_macro;
+extern crate miraland_frozen_abi_macro;
 
 #[cfg(test)]
 #[macro_use]

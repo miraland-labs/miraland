@@ -8,7 +8,7 @@ use {
         vote_state::{self, VoteAuthorize},
     },
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         feature_set,
         instruction::InstructionError,
         program_utils::limited_deserialize,
@@ -280,7 +280,7 @@ mod tests {
             },
         },
         bincode::serialize,
-        miraland_sdk::{
+        solana_sdk::{
             account::{self, Account, AccountSharedData, ReadableAccount},
             account_utils::StateMut,
             feature_set::FeatureSet,
@@ -414,24 +414,24 @@ mod tests {
     fn create_test_account() -> (Pubkey, AccountSharedData) {
         let rent = Rent::default();
         let balance = VoteState::get_rent_exempt_reserve(&rent);
-        let vote_pubkey = miraland_sdk::pubkey::new_rand();
+        let vote_pubkey = solana_sdk::pubkey::new_rand();
         (
             vote_pubkey,
-            vote_state::create_account(&vote_pubkey, &miraland_sdk::pubkey::new_rand(), 0, balance),
+            vote_state::create_account(&vote_pubkey, &solana_sdk::pubkey::new_rand(), 0, balance),
         )
     }
 
     fn create_test_account_with_authorized() -> (Pubkey, Pubkey, Pubkey, AccountSharedData) {
-        let vote_pubkey = miraland_sdk::pubkey::new_rand();
-        let authorized_voter = miraland_sdk::pubkey::new_rand();
-        let authorized_withdrawer = miraland_sdk::pubkey::new_rand();
+        let vote_pubkey = solana_sdk::pubkey::new_rand();
+        let authorized_voter = solana_sdk::pubkey::new_rand();
+        let authorized_withdrawer = solana_sdk::pubkey::new_rand();
 
         (
             vote_pubkey,
             authorized_voter,
             authorized_withdrawer,
             vote_state::create_account_with_authorized(
-                &miraland_sdk::pubkey::new_rand(),
+                &solana_sdk::pubkey::new_rand(),
                 &authorized_voter,
                 &authorized_withdrawer,
                 0,
@@ -518,9 +518,9 @@ mod tests {
 
     #[test]
     fn test_initialize_vote_account() {
-        let vote_pubkey = miraland_sdk::pubkey::new_rand();
+        let vote_pubkey = solana_sdk::pubkey::new_rand();
         let vote_account = AccountSharedData::new(100, VoteState::size_of(), &id());
-        let node_pubkey = miraland_sdk::pubkey::new_rand();
+        let node_pubkey = solana_sdk::pubkey::new_rand();
         let node_account = AccountSharedData::default();
         let instruction_data = serialize(&VoteInstruction::InitializeAccount(VoteInit {
             node_pubkey,
@@ -613,7 +613,7 @@ mod tests {
     fn test_vote_update_validator_identity() {
         let (vote_pubkey, _authorized_voter, authorized_withdrawer, vote_account) =
             create_test_account_with_authorized();
-        let node_pubkey = miraland_sdk::pubkey::new_rand();
+        let node_pubkey = solana_sdk::pubkey::new_rand();
         let instruction_data = serialize(&VoteInstruction::UpdateValidatorIdentity).unwrap();
         let transaction_accounts = vec![
             (vote_pubkey, vote_account),
@@ -809,7 +809,7 @@ mod tests {
             sysvar::slot_hashes::id(),
             account::create_account_shared_data_for_test(&SlotHashes::new(&[(
                 *vote.slots.last().unwrap(),
-                miraland_sdk::hash::hash(&[0u8]),
+                solana_sdk::hash::hash(&[0u8]),
             )])),
         );
         process_instruction(
@@ -858,7 +858,7 @@ mod tests {
     #[test]
     fn test_authorize_voter() {
         let (vote_pubkey, vote_account) = create_test_account();
-        let authorized_voter_pubkey = miraland_sdk::pubkey::new_rand();
+        let authorized_voter_pubkey = solana_sdk::pubkey::new_rand();
         let clock = Clock {
             epoch: 1,
             leader_schedule_epoch: 2,
@@ -978,7 +978,7 @@ mod tests {
     #[test]
     fn test_authorize_withdrawer() {
         let (vote_pubkey, vote_account) = create_test_account();
-        let authorized_withdrawer_pubkey = miraland_sdk::pubkey::new_rand();
+        let authorized_withdrawer_pubkey = solana_sdk::pubkey::new_rand();
         let instruction_data = serialize(&VoteInstruction::Authorize(
             authorized_withdrawer_pubkey,
             VoteAuthorize::Withdrawer,
@@ -1036,7 +1036,7 @@ mod tests {
         );
 
         // should pass, verify authorized_withdrawer can authorize a new authorized_voter
-        let authorized_voter_pubkey = miraland_sdk::pubkey::new_rand();
+        let authorized_voter_pubkey = solana_sdk::pubkey::new_rand();
         transaction_accounts.push((authorized_voter_pubkey, AccountSharedData::default()));
         let instruction_data = serialize(&VoteInstruction::Authorize(
             authorized_voter_pubkey,
@@ -1063,7 +1063,7 @@ mod tests {
     fn test_vote_withdraw() {
         let (vote_pubkey, vote_account) = create_test_account();
         let lamports = vote_account.lamports();
-        let authorized_withdrawer_pubkey = miraland_sdk::pubkey::new_rand();
+        let authorized_withdrawer_pubkey = solana_sdk::pubkey::new_rand();
         let mut transaction_accounts = vec![
             (vote_pubkey, vote_account.clone()),
             (sysvar::clock::id(), create_default_clock_account()),
@@ -1153,7 +1153,7 @@ mod tests {
 
     #[test]
     fn test_vote_state_withdraw() {
-        let authorized_withdrawer_pubkey = miraland_sdk::pubkey::new_rand();
+        let authorized_withdrawer_pubkey = solana_sdk::pubkey::new_rand();
         let (vote_pubkey_1, vote_account_with_epoch_credits_1) =
             create_test_account_with_epoch_credits(&[2, 1]);
         let (vote_pubkey_2, vote_account_with_epoch_credits_2) =

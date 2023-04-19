@@ -140,7 +140,7 @@ fn test_sbf_package(config: &Config, target_directory: &Path, package: &cargo_me
         config.generate_child_script_on_failure,
     );
 
-    // Pass --sbf-out-dir along to the solana-program-test crate
+    // Pass --sbf-out-dir along to the miraland-program-test crate
     env::set_var("SBF_OUT_DIR", sbf_out_dir);
 
     cargo_args.insert(0, "test");

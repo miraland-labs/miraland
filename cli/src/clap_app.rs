@@ -5,7 +5,7 @@ use {
     },
     clap::{App, AppSettings, Arg, ArgGroup, SubCommand},
     miraland_cli_config::CONFIG_FILE,
-    solana_clap_utils::{self, input_validators::*, keypair::*},
+    miraland_clap_utils::{self, input_validators::*, keypair::*},
 };
 
 pub fn get_clap_app<'ab, 'v>(name: &str, about: &'ab str, version: &'v str) -> App<'ab, 'v> {

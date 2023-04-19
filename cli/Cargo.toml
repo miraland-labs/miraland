@@ -6,7 +6,7 @@ description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-cli"
 
 [dependencies]
@@ -33,16 +33,16 @@ semver = "1.0.10"
 serde = "1.0.138"
 serde_derive = "1.0.103"
 serde_json = "1.0.81"
-solana-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
-solana-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
-solana-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17" }
-solana-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-solana-config-program = { path = "../programs/config", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17" }
-solana-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
-solana-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
-solana-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
-solana-vote-program = { path = "../programs/vote", version = "=1.14.17" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
+miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
+miraland-config-program = { path = "../programs/config", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17" }
 solana_rbpf = "=0.2.31"
 spl-memo = { version = "=3.0.1", features = ["no-entrypoint"] }
 thiserror = "1.0.31"
@@ -50,7 +50,7 @@ tiny-bip39 = "0.8.2"
 
 [dev-dependencies]
 miraland-test-validator = { path = "../test-validator", version = "=1.14.17" }
-solana-streamer = { path = "../streamer", version = "=1.14.17" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17" }
 tempfile = "3.3.0"
 
 [[bin]]

@@ -7,7 +7,7 @@ use {
         cluster_info::{ClusterInfo, Node},
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    miraland_sdk::{
+    solana_sdk::{
         pubkey,
         signature::Keypair,
         timing::{timestamp, AtomicInterval},

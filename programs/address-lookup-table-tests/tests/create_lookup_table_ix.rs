@@ -1,7 +1,7 @@
 use {
     assert_matches::assert_matches,
     common::{assert_ix_error, overwrite_slot_hashes_with_slots, setup_test_context},
-    miraland_sdk::{
+    solana_sdk::{
         clock::Slot, instruction::InstructionError, pubkey::Pubkey, rent::Rent, signature::Signer,
         signer::keypair::Keypair, transaction::Transaction,
     },

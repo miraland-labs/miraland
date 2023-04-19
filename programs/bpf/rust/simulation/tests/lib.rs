@@ -1,7 +1,7 @@
 #![cfg(feature = "test-bpf")]
 
 use {
-    miraland_sdk::{
+    solana_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         signature::Signer,

@@ -23,7 +23,7 @@ pub mod miraland_client {
 
     pub mod nonce_utils {
         use {
-            super::super::miraland_sdk::{
+            super::super::solana_sdk::{
                 account::ReadableAccount, account_utils::StateMut, pubkey::Pubkey,
             },
             crate::nonce::state::{Data, DurableNonce, Versions},
@@ -47,7 +47,7 @@ pub mod miraland_client {
     pub mod rpc_client {
         use {
             super::{
-                super::miraland_sdk::{
+                super::solana_sdk::{
                     account::Account, hash::Hash, pubkey::Pubkey, signature::Signature,
                     transaction::Transaction,
                 },
@@ -106,12 +106,12 @@ pub mod miraland_client {
     }
 }
 
-/// Re-exports and mocks of solana-program modules that mirror those from
-/// solana-program.
+/// Re-exports and mocks of miraland-program modules that mirror those from
+/// miraland-program.
 ///
-/// This lets examples in solana-program appear to be written as client
+/// This lets examples in miraland-program appear to be written as client
 /// programs.
-pub mod miraland_sdk {
+pub mod solana_sdk {
     pub use crate::{
         address_lookup_table_account, hash, instruction, keccak, message, nonce,
         pubkey::{self, Pubkey},

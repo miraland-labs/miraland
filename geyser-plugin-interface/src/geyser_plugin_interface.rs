@@ -3,8 +3,8 @@
 /// In addition, the dynamic library must export a "C" function _create_plugin which
 /// creates the implementation of the plugin.
 use {
-    miraland_sdk::{clock::UnixTimestamp, signature::Signature, transaction::SanitizedTransaction},
-    solana_transaction_status::{Reward, TransactionStatusMeta},
+    solana_sdk::{clock::UnixTimestamp, signature::Signature, transaction::SanitizedTransaction},
+    miraland_transaction_status::{Reward, TransactionStatusMeta},
     std::{any::Any, error, io},
     thiserror::Error,
 };

@@ -8,7 +8,7 @@ use {
     log::*,
     miraland_client::connection_cache::ConnectionCache,
     miraland_gossip::cluster_info::{ClusterInfo, Node},
-    miraland_sdk::{
+    solana_sdk::{
         genesis_config::GenesisConfig,
         hash::Hash,
         message::Message,
@@ -26,7 +26,7 @@ use {
         qos_service::QosService,
         unprocessed_packet_batches::*,
     },
-    solana_entry::entry::{next_hash, Entry},
+    miraland_entry::entry::{next_hash, Entry},
     solana_ledger::{
         blockstore::Blockstore,
         blockstore_processor::process_entries_for_tests,
@@ -34,7 +34,7 @@ use {
         get_tmp_ledger_path,
     },
     solana_perf::{packet::to_packet_batches, test_tx::test_tx},
-    solana_poh::poh_recorder::{create_test_recorder, WorkingBankEntry},
+    miraland_poh::poh_recorder::{create_test_recorder, WorkingBankEntry},
     solana_runtime::{bank::Bank, bank_forks::BankForks, cost_model::CostModel},
     solana_streamer::socket::SocketAddrSpace,
     std::{

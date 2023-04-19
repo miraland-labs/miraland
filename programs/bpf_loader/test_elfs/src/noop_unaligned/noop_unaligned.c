@@ -3,7 +3,7 @@
  * passed to it
  */
 
-#include <miraland_sdk.h>
+#include <solana_sdk.h>
 #include <sol/deserialize_deprecated.h>
 
 extern uint64_t entrypoint(const uint8_t *input) {

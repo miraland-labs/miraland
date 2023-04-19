@@ -1,6 +1,6 @@
 use {
     crate::crds_value::MAX_WALLCLOCK,
-    miraland_sdk::{
+    solana_sdk::{
         pubkey::Pubkey,
         rpc_port,
         sanitize::{Sanitize, SanitizeError},
@@ -111,7 +111,7 @@ impl LegacyContactInfo {
     pub fn new_rand<R: rand::Rng>(rng: &mut R, pubkey: Option<Pubkey>) -> Self {
         let delay = 10 * 60 * 1000; // 10 minutes
         let now = timestamp() - delay + rng.gen_range(0, 2 * delay);
-        let pubkey = pubkey.unwrap_or_else(miraland_sdk::pubkey::new_rand);
+        let pubkey = pubkey.unwrap_or_else(solana_sdk::pubkey::new_rand);
         let mut node = LegacyContactInfo::new_localhost(&pubkey, now);
         node.gossip.set_port(rng.gen_range(1024, u16::MAX));
         node
@@ -123,7 +123,7 @@ impl LegacyContactInfo {
         let addr = socketaddr!("224.0.1.255:1000");
         assert!(addr.ip().is_multicast());
         Self {
-            id: miraland_sdk::pubkey::new_rand(),
+            id: solana_sdk::pubkey::new_rand(),
             gossip: addr,
             tvu: addr,
             tvu_forwards: addr,

@@ -1,13 +1,13 @@
 #![allow(clippy::integer_arithmetic)]
 
-pub use {crate::extract_memos::extract_and_fmt_memos, miraland_sdk::reward_type::RewardType};
+pub use {crate::extract_memos::extract_and_fmt_memos, solana_sdk::reward_type::RewardType};
 use {
     crate::{
         option_serializer::OptionSerializer,
         parse_accounts::{parse_legacy_message_accounts, parse_v0_message_accounts, ParsedAccount},
         parse_instruction::{parse, ParsedInstruction},
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Slot, UnixTimestamp},
         commitment_config::CommitmentConfig,
         instruction::CompiledInstruction,
@@ -23,7 +23,7 @@ use {
         },
         transaction_context::TransactionReturnData,
     },
-    solana_account_decoder::parse_token::UiTokenAmount,
+    miraland_account_decoder::parse_token::UiTokenAmount,
     std::fmt,
     thiserror::Error,
 };

@@ -11,7 +11,7 @@ use {
         OutputFormat,
     },
     miraland_client::rpc_config::RpcSendTransactionConfig,
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_validators::normalize_to_url_if_moniker,
         keypair::{CliSigners, DefaultSigner},
         DisplayError,

@@ -41,7 +41,7 @@ fn tune_poh_service_priority(uid: u32) {
     if let Some(pid) = find_pid("solana-validato", "/proc", uid, |dir| {
         let mut path = dir.path();
         path.push("task");
-        find_pid("solana-poh-serv", path, uid, |dir1| {
+        find_pid("miraland-poh-serv", path, uid, |dir1| {
             if let Ok(pid) = dir1.file_name().into_string() {
                 pid.parse::<u64>().ok()
             } else {

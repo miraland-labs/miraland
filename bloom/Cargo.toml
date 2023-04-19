@@ -1,12 +1,12 @@
 [package]
-name = "solana-bloom"
+name = "miraland-bloom"
 version = "1.14.17"
 description = "Solana bloom filter"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-bloom"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-bloom"
 edition = "2021"
 
 [dependencies]
@@ -18,8 +18,8 @@ rand = "0.7.0"
 rayon = "1.5.3"
 serde = { version = "1.0.138", features = ["rc"] }
 serde_derive = "1.0.103"
-solana-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
-solana-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]

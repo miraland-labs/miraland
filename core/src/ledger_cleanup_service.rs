@@ -6,13 +6,13 @@
 
 use {
     crossbeam_channel::{Receiver, RecvTimeoutError},
-    miraland_sdk::clock::{Slot, DEFAULT_TICKS_PER_SLOT, TICKS_PER_DAY},
+    solana_sdk::clock::{Slot, DEFAULT_TICKS_PER_SLOT, TICKS_PER_DAY},
     rand::{thread_rng, Rng},
     solana_ledger::{
         blockstore::{Blockstore, PurgeType},
         blockstore_db::Result as BlockstoreResult,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     std::{
         string::ToString,
         sync::{

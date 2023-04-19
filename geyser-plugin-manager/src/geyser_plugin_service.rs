@@ -8,7 +8,7 @@ use {
     },
     crossbeam_channel::Receiver,
     log::*,
-    solana_rpc::{
+    miraland_rpc::{
         optimistically_confirmed_bank_tracker::BankNotification,
         transaction_notifier_interface::TransactionNotifierLock,
     },

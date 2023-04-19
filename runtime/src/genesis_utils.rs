@@ -1,5 +1,5 @@
 use {
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, AccountSharedData},
         feature::{self, Feature},
         feature_set::FeatureSet,
@@ -81,7 +81,7 @@ pub fn create_genesis_config(mint_lamports: u64) -> GenesisConfigInfo {
     // accounts-db which in particular will break snapshots test.
     create_genesis_config_with_leader(
         mint_lamports,
-        &miraland_sdk::pubkey::new_rand(), // validator_pubkey
+        &solana_sdk::pubkey::new_rand(), // validator_pubkey
         0,                                 // validator_stake_lamports
     )
 }
@@ -176,7 +176,7 @@ pub fn create_genesis_config_with_leader(
         &mint_keypair.pubkey(),
         validator_pubkey,
         &voting_keypair.pubkey(),
-        &miraland_sdk::pubkey::new_rand(),
+        &solana_sdk::pubkey::new_rand(),
         validator_stake_lamports,
         VALIDATOR_LAMPORTS,
         FeeRateGovernor::new(0, 0), // most tests can't handle transaction fees

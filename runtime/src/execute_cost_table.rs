@@ -4,7 +4,7 @@
 /// When its capacity limit is reached, it prunes old and less-used programs
 /// to make room for new ones.
 use {
-    log::*, miraland_sdk::pubkey::Pubkey,
+    log::*, solana_sdk::pubkey::Pubkey,
     solana_program_runtime::compute_budget::DEFAULT_INSTRUCTION_COMPUTE_UNIT_LIMIT,
     std::collections::HashMap,
 };

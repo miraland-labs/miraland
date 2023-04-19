@@ -57,7 +57,7 @@ The code for your Rust based Solana program will live in your `src/lib.rs` file.
 
 ### Import the `solana_program` crate
 
-At the top of `lib.rs`, we import the `solana-program` crate and bring our needed items into the local namespace:
+At the top of `lib.rs`, we import the `miraland-program` crate and bring our needed items into the local namespace:
 
 ```rust
 use solana_program::{

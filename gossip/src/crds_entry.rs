@@ -8,7 +8,7 @@ use {
         legacy_contact_info::LegacyContactInfo,
     },
     indexmap::IndexMap,
-    miraland_sdk::pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
 };
 
 type CrdsTable = IndexMap<CrdsValueLabel, VersionedCrdsValue>;
@@ -82,7 +82,7 @@ mod tests {
             crds::{Crds, GossipRoute},
             crds_value::new_rand_timestamp,
         },
-        miraland_sdk::signature::Keypair,
+        solana_sdk::signature::Keypair,
         rand::seq::SliceRandom,
         std::collections::HashMap,
     };

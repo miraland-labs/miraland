@@ -26,7 +26,7 @@
 //!   `miraland_client::rpc_client::RpcClient`.
 //! - [`keypair_path`], a signing source, which may be a keypair file, but
 //!   may also represent several other types of signers, as described in
-//!   the documentation for `solana_clap_utils::keypair::signer_from_path`.
+//!   the documentation for `miraland_clap_utils::keypair::signer_from_path`.
 //!
 //! [`json_rpc_url`]: Config::json_rpc_url
 //! [`keypair_path`]: Config::keypair_path

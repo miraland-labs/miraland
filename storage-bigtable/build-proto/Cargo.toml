@@ -2,7 +2,7 @@
 authors = ["Solana Maintainers <maintainers@solana.com>"]
 description = "Blockchain for community beyond the horizon"
 edition = "2021"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 license = "Apache-2.0"
 name = "proto"
 publish = false

@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 
 use {
-    miraland_sdk::{
+    solana_sdk::{
         account::AccountSharedData,
         account_utils::StateMut,
         bpf_loader_upgradeable::UpgradeableLoaderState,

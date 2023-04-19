@@ -1,6 +1,6 @@
 use {
     crate::unprocessed_packet_batches::{self, ImmutableDeserializedPacket},
-    miraland_sdk::pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
     solana_perf::packet::Packet,
     solana_runtime::{
         bank::Bank,
@@ -188,7 +188,7 @@ mod tests {
     use {
         super::*,
         crate::unprocessed_packet_batches::DeserializedPacket,
-        miraland_sdk::{hash::Hash, signature::Keypair, system_transaction},
+        solana_sdk::{hash::Hash, signature::Keypair, system_transaction},
         solana_runtime::{
             bank::Bank,
             bank_forks::BankForks,
@@ -211,7 +211,7 @@ mod tests {
     ) -> DeserializedPacket {
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );
@@ -282,8 +282,8 @@ mod tests {
             assert!(batches.next().is_none());
         }
 
-        let hot_account = miraland_sdk::pubkey::new_rand();
-        let other_account = miraland_sdk::pubkey::new_rand();
+        let hot_account = solana_sdk::pubkey::new_rand();
+        let other_account = solana_sdk::pubkey::new_rand();
         let packet_high_priority = build_deserialized_packet_for_test(10, requested_cu);
         let packet_low_priority = build_deserialized_packet_for_test(0, requested_cu);
         // with 4 packets, first 3 write to same hot_account with higher priority,

@@ -4,7 +4,7 @@ use {
     console::style,
     indicatif::{ProgressBar, ProgressStyle},
     miraland_cli_config::SettingType,
-    miraland_sdk::{
+    solana_sdk::{
         clock::UnixTimestamp,
         hash::Hash,
         instruction::CompiledInstruction,
@@ -16,7 +16,7 @@ use {
         stake,
         transaction::{TransactionError, TransactionVersion, VersionedTransaction},
     },
-    solana_transaction_status::{
+    miraland_transaction_status::{
         Rewards, UiReturnDataEncoding, UiTransactionReturnData, UiTransactionStatusMeta,
     },
     spl_memo::{id as spl_memo_id, v1::id as spl_memo_v1_id},
@@ -461,9 +461,9 @@ fn write_instruction<'a, W: io::Write>(
                 writeln!(w, "{}  {:?}", prefix, stake_instruction)?;
                 raw = false;
             }
-        } else if program_pubkey == &miraland_sdk::system_program::id() {
+        } else if program_pubkey == &solana_sdk::system_program::id() {
             if let Ok(system_instruction) = limited_deserialize::<
-                miraland_sdk::system_instruction::SystemInstruction,
+                solana_sdk::system_instruction::SystemInstruction,
             >(&instruction.data)
             {
                 writeln!(w, "{}  {:?}", prefix, system_instruction)?;
@@ -727,7 +727,7 @@ pub fn unix_timestamp_to_string(unix_timestamp: UnixTimestamp) -> String {
 mod test {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             message::{
                 v0::{self, LoadedAddresses},
                 Message as LegacyMessage, MessageHeader, VersionedMessage,
@@ -737,7 +737,7 @@ mod test {
             transaction::Transaction,
             transaction_context::TransactionReturnData,
         },
-        solana_transaction_status::{Reward, RewardType, TransactionStatusMeta},
+        miraland_transaction_status::{Reward, RewardType, TransactionStatusMeta},
         std::io::BufWriter,
     };
 

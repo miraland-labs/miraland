@@ -7,7 +7,7 @@ use {
     },
     log::*,
     miraland_client::nonce_utils,
-    miraland_sdk::{
+    solana_sdk::{
         clock::{DEFAULT_MS_PER_SLOT, DEFAULT_S_PER_SLOT, MAX_PROCESSING_AGE},
         hash::Hash,
         instruction::{AccountMeta, Instruction},
@@ -832,7 +832,7 @@ pub fn fund_keypairs<T: 'static + BenchTpsClient + Send + Sync>(
 mod tests {
     use {
         super::*,
-        miraland_sdk::{
+        solana_sdk::{
             commitment_config::CommitmentConfig, fee_calculator::FeeRateGovernor,
             genesis_config::create_genesis_config, native_token::sol_to_lamports, nonce::State,
         },

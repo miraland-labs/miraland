@@ -6,13 +6,13 @@ use {
         latest_validator_votes_for_frozen_banks::LatestValidatorVotesForFrozenBanks,
         progress_map::ProgressMap, tree_diff::TreeDiff,
     },
-    miraland_sdk::{
+    solana_sdk::{
         clock::{Epoch, Slot},
         epoch_schedule::EpochSchedule,
         hash::Hash,
         pubkey::Pubkey,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::{bank::Bank, bank_forks::BankForks, epoch_stakes::EpochStakes},
     std::{
         borrow::Borrow,
@@ -1072,7 +1072,7 @@ mod test {
     use {
         super::*,
         crate::vote_simulator::VoteSimulator,
-        miraland_sdk::{hash::Hash, slot_history::SlotHistory},
+        solana_sdk::{hash::Hash, slot_history::SlotHistory},
         solana_runtime::{bank::Bank, bank_utils},
         std::{collections::HashSet, ops::Range},
         trees::tr,

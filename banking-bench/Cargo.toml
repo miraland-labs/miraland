@@ -1,11 +1,11 @@
 [package]
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 edition = "2021"
-name = "solana-banking-bench"
+name = "miraland-banking-bench"
 version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 publish = false
 
 [dependencies]
@@ -18,14 +18,14 @@ miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-version = { path = "../version", version = "=1.14.17" }
 rand = "0.7.0"
 rayon = "1.5.3"
-solana-core = { path = "../core", version = "=1.14.17" }
-solana-ledger = { path = "../ledger", version = "=1.14.17" }
-solana-logger = { path = "../logger", version = "=1.14.17" }
-solana-measure = { path = "../measure", version = "=1.14.17" }
-solana-perf = { path = "../perf", version = "=1.14.17" }
-solana-poh = { path = "../poh", version = "=1.14.17" }
-solana-runtime = { path = "../runtime", version = "=1.14.17" }
-solana-streamer = { path = "../streamer", version = "=1.14.17" }
+miraland-core = { path = "../core", version = "=1.14.17" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-measure = { path = "../measure", version = "=1.14.17" }
+miraland-perf = { path = "../perf", version = "=1.14.17" }
+miraland-poh = { path = "../poh", version = "=1.14.17" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

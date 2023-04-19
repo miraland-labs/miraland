@@ -13,7 +13,7 @@ use {
         rpc_response::{Response as RpcResponse, RpcSignatureResult, SlotUpdate},
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    miraland_sdk::{
+    solana_sdk::{
         commitment_config::CommitmentConfig,
         hash::Hash,
         pubkey::Pubkey,
@@ -25,9 +25,9 @@ use {
     miraland_test_validator::TestValidator,
     reqwest::{self, header::CONTENT_TYPE},
     serde_json::{json, Value},
-    solana_account_decoder::UiAccount,
+    miraland_account_decoder::UiAccount,
     solana_streamer::socket::SocketAddrSpace,
-    solana_transaction_status::TransactionStatus,
+    miraland_transaction_status::TransactionStatus,
     std::{
         collections::HashSet,
         net::UdpSocket,
@@ -72,7 +72,7 @@ fn test_rpc_send_tx() {
         TestValidator::with_no_fees(alice.pubkey(), None, SocketAddrSpace::Unspecified);
     let rpc_url = test_validator.rpc_url();
 
-    let bob_pubkey = miraland_sdk::pubkey::new_rand();
+    let bob_pubkey = solana_sdk::pubkey::new_rand();
 
     let req = json_req!("getRecentBlockhash", json!([]));
     let json = post_rpc(req, &rpc_url);
@@ -101,7 +101,7 @@ fn test_rpc_send_tx() {
 
     let request = json_req!("getSignatureStatuses", [[signature]]);
 
-    for _ in 0..miraland_sdk::clock::DEFAULT_TICKS_PER_SLOT {
+    for _ in 0..solana_sdk::clock::DEFAULT_TICKS_PER_SLOT {
         let json = post_rpc(request.clone(), &rpc_url);
 
         let result: Option<TransactionStatus> =
@@ -120,7 +120,7 @@ fn test_rpc_send_tx() {
 
     use {
         miraland_client::rpc_config::RpcAccountInfoConfig,
-        solana_account_decoder::UiAccountEncoding,
+        miraland_account_decoder::UiAccountEncoding,
     };
     let config = RpcAccountInfoConfig {
         encoding: Some(UiAccountEncoding::Base64),
@@ -145,7 +145,7 @@ fn test_rpc_invalid_requests() {
         TestValidator::with_no_fees(alice.pubkey(), None, SocketAddrSpace::Unspecified);
     let rpc_url = test_validator.rpc_url();
 
-    let bob_pubkey = miraland_sdk::pubkey::new_rand();
+    let bob_pubkey = solana_sdk::pubkey::new_rand();
 
     // test invalid get_balance request
     let req = json_req!("getBalance", json!(["invalid9999"]));
@@ -257,7 +257,7 @@ fn test_rpc_subscriptions() {
         .map(|_| {
             system_transaction::transfer(
                 &alice,
-                &miraland_sdk::pubkey::new_rand(),
+                &solana_sdk::pubkey::new_rand(),
                 transfer_amount,
                 recent_blockhash,
             )

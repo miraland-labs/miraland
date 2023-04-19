@@ -4,7 +4,7 @@ use {
         tls_certificates::new_self_signed_tls_certificate_chain,
     },
     crossbeam_channel::Sender,
-    miraland_sdk::{
+    solana_sdk::{
         packet::PACKET_DATA_SIZE,
         quic::{QUIC_MAX_TIMEOUT_MS, QUIC_MAX_UNSTAKED_CONCURRENT_STREAMS},
         signature::Keypair,

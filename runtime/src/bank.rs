@@ -34,8 +34,8 @@
 //! on behalf of the caller, and a low-level API for when they have
 //! already been signed and verified.
 #[allow(deprecated)]
-use miraland_sdk::recent_blockhashes_account;
-pub use miraland_sdk::reward_type::RewardType;
+use solana_sdk::recent_blockhashes_account;
+pub use solana_sdk::reward_type::RewardType;
 use {
     crate::{
         account_overrides::AccountOverrides,
@@ -75,7 +75,7 @@ use {
     dashmap::{DashMap, DashSet},
     itertools::Itertools,
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         account::{
             create_account_shared_data_with_fields as create_account, from_account, Account,
             AccountSharedData, InheritableAccountFields, ReadableAccount, WritableAccount,
@@ -133,7 +133,7 @@ use {
         iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
         ThreadPool, ThreadPoolBuilder,
     },
-    solana_measure::{measure, measure::Measure},
+    miraland_measure::{measure, measure::Measure},
     solana_metrics::{inc_new_counter_debug, inc_new_counter_info},
     solana_program_runtime::{
         accounts_data_meter::MAX_ACCOUNTS_DATA_LEN,
@@ -326,7 +326,7 @@ pub struct BankRc {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-use solana_frozen_abi::abi_example::AbiExample;
+use miraland_frozen_abi::abi_example::AbiExample;
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
 impl AbiExample for BankRc {
@@ -5952,7 +5952,7 @@ impl Bank {
         // Force normal behavior, disabling multi epoch collection cycle for manual local testing
         #[cfg(not(test))]
         if self.slot_count_per_normal_epoch()
-            == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
+            == solana_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
         {
             return false;
         }
@@ -5965,7 +5965,7 @@ impl Bank {
         // Force normal behavior, disabling fixed collection cycle for manual local testing
         #[cfg(not(test))]
         if self.slot_count_per_normal_epoch()
-            == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
+            == solana_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
         {
             return false;
         }
@@ -7562,7 +7562,7 @@ impl Bank {
         };
 
         if reconfigure_token2_native_mint {
-            let mut native_mint_account = miraland_sdk::account::AccountSharedData::from(Account {
+            let mut native_mint_account = solana_sdk::account::AccountSharedData::from(Account {
                 owner: inline_spl_token::id(),
                 data: inline_spl_token::native_mint::ACCOUNT_DATA.to_vec(),
                 lamports: sol_to_lamports(1.),
@@ -7571,14 +7571,14 @@ impl Bank {
             });
 
             // As a workaround for
-            // https://github.com/solana-labs/solana-program-library/issues/374, ensure that the
+            // https://github.com/solana-labs/miraland-program-library/issues/374, ensure that the
             // spl-token 2 native mint account is owned by the spl-token 2 program.
             let old_account_data_size;
             let store = if let Some(existing_native_mint_account) =
                 self.get_account_with_fixed_root(&inline_spl_token::native_mint::id())
             {
                 old_account_data_size = existing_native_mint_account.data().len();
-                if existing_native_mint_account.owner() == &miraland_sdk::system_program::id() {
+                if existing_native_mint_account.owner() == &solana_sdk::system_program::id() {
                     native_mint_account.set_lamports(existing_native_mint_account.lamports());
                     true
                 } else {
@@ -7813,7 +7813,7 @@ impl Drop for Bank {
 
 /// utility function used for testing and benchmarking.
 pub mod test_utils {
-    use {super::Bank, miraland_sdk::hash::hashv};
+    use {super::Bank, solana_sdk::hash::hashv};
     pub fn goto_end_of_slot(bank: &mut Bank) {
         let mut tick_hash = bank.last_blockhash();
         loop {
@@ -7830,7 +7830,7 @@ pub mod test_utils {
 #[cfg(test)]
 pub(crate) mod tests {
     #[allow(deprecated)]
-    use miraland_sdk::sysvar::fees::Fees;
+    use solana_sdk::sysvar::fees::Fees;
     use {
         super::*,
         crate::{
@@ -7848,7 +7848,7 @@ pub(crate) mod tests {
             status_cache::MAX_CACHE_ENTRIES,
         },
         crossbeam_channel::{bounded, unbounded},
-        miraland_sdk::{
+        solana_sdk::{
             account::Account,
             bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable,
             clock::{DEFAULT_SLOTS_PER_EPOCH, DEFAULT_TICKS_PER_SLOT, MAX_RECENT_BLOCKHASHES},
@@ -8076,7 +8076,7 @@ pub(crate) mod tests {
     #[test]
     #[allow(clippy::float_cmp)]
     fn test_bank_new() {
-        let dummy_leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let dummy_leader_pubkey = solana_sdk::pubkey::new_rand();
         let dummy_leader_stake_lamports = bootstrap_validator_stake_lamports();
         let mint_lamports = 10_000;
         let GenesisConfigInfo {
@@ -8205,7 +8205,7 @@ pub(crate) mod tests {
             accounts: (0..42)
                 .map(|_| {
                     (
-                        miraland_sdk::pubkey::new_rand(),
+                        solana_sdk::pubkey::new_rand(),
                         Account::new(42, 0, &Pubkey::default()),
                     )
                 })
@@ -8481,7 +8481,7 @@ pub(crate) mod tests {
     #[test]
     fn test_store_account_and_update_capitalization_missing() {
         let bank = create_simple_test_bank(0);
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
 
         let some_lamports = 400;
         let account = AccountSharedData::new(some_lamports, 0, &system_program::id());
@@ -8552,7 +8552,7 @@ pub(crate) mod tests {
     fn test_rent_distribution() {
         solana_logger::setup();
 
-        let bootstrap_validator_pubkey = miraland_sdk::pubkey::new_rand();
+        let bootstrap_validator_pubkey = solana_sdk::pubkey::new_rand();
         let bootstrap_validator_stake_lamports = 30;
         let mut genesis_config = create_genesis_config_with_leader(
             10,
@@ -8577,7 +8577,7 @@ pub(crate) mod tests {
 
         let rent = Rent::free();
 
-        let validator_1_pubkey = miraland_sdk::pubkey::new_rand();
+        let validator_1_pubkey = solana_sdk::pubkey::new_rand();
         let validator_1_stake_lamports = 20;
         let validator_1_staking_keypair = Keypair::new();
         let validator_1_voting_keypair = Keypair::new();
@@ -8610,7 +8610,7 @@ pub(crate) mod tests {
             Account::from(validator_1_vote_account),
         );
 
-        let validator_2_pubkey = miraland_sdk::pubkey::new_rand();
+        let validator_2_pubkey = solana_sdk::pubkey::new_rand();
         let validator_2_stake_lamports = 20;
         let validator_2_staking_keypair = Keypair::new();
         let validator_2_voting_keypair = Keypair::new();
@@ -8643,7 +8643,7 @@ pub(crate) mod tests {
             Account::from(validator_2_vote_account),
         );
 
-        let validator_3_pubkey = miraland_sdk::pubkey::new_rand();
+        let validator_3_pubkey = solana_sdk::pubkey::new_rand();
         let validator_3_stake_lamports = 30;
         let validator_3_staking_keypair = Keypair::new();
         let validator_3_voting_keypair = Keypair::new();
@@ -8796,7 +8796,7 @@ pub(crate) mod tests {
         const RENT_TO_BE_DISTRIBUTED: u64 = 120_525;
         const VALIDATOR_STAKE: u64 = 374_999_998_287_840;
 
-        let validator_pubkey = miraland_sdk::pubkey::new_rand();
+        let validator_pubkey = solana_sdk::pubkey::new_rand();
         let mut genesis_config =
             create_genesis_config_with_leader(10, &validator_pubkey, VALIDATOR_STAKE)
                 .genesis_config;
@@ -8840,10 +8840,10 @@ pub(crate) mod tests {
         let root_bank = Arc::new(Bank::new_for_tests(&genesis_config));
         let bank = create_child_bank_for_rent_test(&root_bank, &genesis_config);
 
-        let account_pubkey = miraland_sdk::pubkey::new_rand();
+        let account_pubkey = solana_sdk::pubkey::new_rand();
         let account_balance = 1;
         let mut account =
-            AccountSharedData::new(account_balance, 0, &miraland_sdk::pubkey::new_rand());
+            AccountSharedData::new(account_balance, 0, &solana_sdk::pubkey::new_rand());
         account.set_executable(true);
         bank.store_account(&account_pubkey, &account);
 
@@ -9179,7 +9179,7 @@ pub(crate) mod tests {
     #[test]
     #[allow(clippy::cognitive_complexity)]
     fn test_rent_eager_across_epoch_without_gap_under_multi_epoch_cycle() {
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let leader_lamports = 3;
         let mut genesis_config =
             create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
@@ -9249,7 +9249,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_rent_eager_across_epoch_with_gap_under_multi_epoch_cycle() {
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let leader_lamports = 3;
         let mut genesis_config =
             create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
@@ -9307,7 +9307,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_rent_eager_with_warmup_epochs_under_multi_epoch_cycle() {
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let leader_lamports = 3;
         let mut genesis_config =
             create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
@@ -9364,7 +9364,7 @@ pub(crate) mod tests {
     #[test]
     fn test_rent_eager_under_fixed_cycle_for_development() {
         solana_logger::setup();
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let leader_lamports = 3;
         let mut genesis_config =
             create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
@@ -9518,7 +9518,7 @@ pub(crate) mod tests {
     fn map_to_test_bad_range() -> std::collections::BTreeMap<Pubkey, i8> {
         let mut map = std::collections::BTreeMap::new();
         // when empty, std::collections::BTreeMap doesn't sanitize given range...
-        map.insert(miraland_sdk::pubkey::new_rand(), 1);
+        map.insert(solana_sdk::pubkey::new_rand(), 1);
         map
     }
 
@@ -9733,9 +9733,9 @@ pub(crate) mod tests {
         let (mut genesis_config, _mint_keypair) = create_genesis_config(1_000_000);
         activate_all_features(&mut genesis_config);
 
-        let zero_lamport_pubkey = miraland_sdk::pubkey::new_rand();
-        let rent_due_pubkey = miraland_sdk::pubkey::new_rand();
-        let rent_exempt_pubkey = miraland_sdk::pubkey::new_rand();
+        let zero_lamport_pubkey = solana_sdk::pubkey::new_rand();
+        let rent_due_pubkey = solana_sdk::pubkey::new_rand();
+        let rent_exempt_pubkey = solana_sdk::pubkey::new_rand();
 
         let mut bank = Arc::new(Bank::new_for_tests(&genesis_config));
         let zero_lamports = 0;
@@ -9901,7 +9901,7 @@ pub(crate) mod tests {
 
         let (genesis_config, _mint_keypair) = create_genesis_config(1);
 
-        let zero_lamport_pubkey = miraland_sdk::pubkey::new_rand();
+        let zero_lamport_pubkey = solana_sdk::pubkey::new_rand();
 
         let genesis_bank1 = Arc::new(Bank::new_for_tests(&genesis_config));
         let genesis_bank2 = Arc::new(Bank::new_for_tests(&genesis_config));
@@ -9979,7 +9979,7 @@ pub(crate) mod tests {
             accounts: (0..42)
                 .map(|_| {
                     (
-                        miraland_sdk::pubkey::new_rand(),
+                        solana_sdk::pubkey::new_rand(),
                         Account::new(1_000_000_000, 0, &Pubkey::default()),
                     )
                 })
@@ -10108,7 +10108,7 @@ pub(crate) mod tests {
             accounts: (0..42)
                 .map(|_| {
                     (
-                        miraland_sdk::pubkey::new_rand(),
+                        solana_sdk::pubkey::new_rand(),
                         Account::new(1_000_000_000, 0, &Pubkey::default()),
                     )
                 })
@@ -10137,9 +10137,9 @@ pub(crate) mod tests {
             42 * 1_000_000_000 + genesis_sysvar_and_builtin_program_lamports()
         );
 
-        let vote_id = miraland_sdk::pubkey::new_rand();
+        let vote_id = solana_sdk::pubkey::new_rand();
         let mut vote_account =
-            vote_state::create_account(&vote_id, &miraland_sdk::pubkey::new_rand(), 0, 100);
+            vote_state::create_account(&vote_id, &solana_sdk::pubkey::new_rand(), 0, 100);
         let (stake_id1, stake_account1) = crate::stakes::tests::create_stake_account(123, &vote_id);
         let (stake_id2, stake_account2) = crate::stakes::tests::create_stake_account(456, &vote_id);
 
@@ -10228,7 +10228,7 @@ pub(crate) mod tests {
         let mut bank = parent;
         for _ in 0..10 {
             let blockhash = bank.last_blockhash();
-            let pubkey = miraland_sdk::pubkey::new_rand();
+            let pubkey = solana_sdk::pubkey::new_rand();
             let tx = system_transaction::transfer(&mint_keypair, &pubkey, 0, blockhash);
             bank.process_transaction(&tx).unwrap();
             bank.freeze();
@@ -10250,7 +10250,7 @@ pub(crate) mod tests {
         bank0.process_transaction(&tx).unwrap();
 
         let bank1 = Arc::new(new_from_parent(&bank0));
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let blockhash = bank.last_blockhash();
         let tx = system_transaction::transfer(&keypair, &pubkey, amount, blockhash);
         bank1.process_transaction(&tx).unwrap();
@@ -10305,7 +10305,7 @@ pub(crate) mod tests {
     #[test]
     fn test_two_payments_to_one_party() {
         let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.));
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let bank = Bank::new_for_tests(&genesis_config);
         let amount = genesis_config.rent.minimum_balance(0);
         assert_eq!(bank.last_blockhash(), genesis_config.hash());
@@ -10321,8 +10321,8 @@ pub(crate) mod tests {
     #[test]
     fn test_one_source_two_tx_one_batch() {
         let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.));
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
         let bank = Bank::new_for_tests(&genesis_config);
         let amount = genesis_config.rent.minimum_balance(0);
         assert_eq!(bank.last_blockhash(), genesis_config.hash());
@@ -10351,8 +10351,8 @@ pub(crate) mod tests {
     fn test_one_tx_two_out_atomic_fail() {
         let amount = sol_to_lamports(1.);
         let (genesis_config, mint_keypair) = create_genesis_config(amount);
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
         let bank = Bank::new_for_tests(&genesis_config);
         let instructions = system_instruction::transfer_many(
             &mint_keypair.pubkey(),
@@ -10372,8 +10372,8 @@ pub(crate) mod tests {
     #[test]
     fn test_one_tx_two_out_atomic_pass() {
         let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.));
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
         let bank = Bank::new_for_tests(&genesis_config);
         let amount = genesis_config.rent.minimum_balance(0);
         let instructions = system_instruction::transfer_many(
@@ -10447,7 +10447,7 @@ pub(crate) mod tests {
         let mint_amount = sol_to_lamports(1.);
         let (genesis_config, mint_keypair) = create_genesis_config(mint_amount);
         let bank = Bank::new_for_tests(&genesis_config);
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let amount = genesis_config.rent.minimum_balance(0);
         bank.transfer(amount, &mint_keypair, &pubkey).unwrap();
         assert_eq!(bank.transaction_count(), 1);
@@ -10472,7 +10472,7 @@ pub(crate) mod tests {
         let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.));
         let bank = Bank::new_for_tests(&genesis_config);
         let amount = genesis_config.rent.minimum_balance(0);
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         bank.transfer(amount, &mint_keypair, &pubkey).unwrap();
         assert_eq!(bank.get_balance(&pubkey), amount);
     }
@@ -10484,7 +10484,7 @@ pub(crate) mod tests {
         let bank = Arc::new(Bank::new_for_tests(&genesis_config));
         let amount = genesis_config.rent.minimum_balance(0);
 
-        let normal_pubkey = miraland_sdk::pubkey::new_rand();
+        let normal_pubkey = solana_sdk::pubkey::new_rand();
         let sysvar_pubkey = sysvar::clock::id();
         assert_eq!(bank.get_balance(&normal_pubkey), 0);
         assert_eq!(bank.get_balance(&sysvar_pubkey), 1_169_280);
@@ -10583,7 +10583,7 @@ pub(crate) mod tests {
 
         let arbitrary_transfer_amount = 42_000;
         let mint = arbitrary_transfer_amount * 100;
-        let leader = miraland_sdk::pubkey::new_rand();
+        let leader = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
@@ -10690,7 +10690,7 @@ pub(crate) mod tests {
         let key = Keypair::new();
         let arbitrary_transfer_amount = 42;
         let mint = arbitrary_transfer_amount * 10_000_000;
-        let leader = miraland_sdk::pubkey::new_rand();
+        let leader = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
@@ -10801,7 +10801,7 @@ pub(crate) mod tests {
     fn test_bank_blockhash_fee_structure() {
         //solana_logger::setup();
 
-        let leader = miraland_sdk::pubkey::new_rand();
+        let leader = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
@@ -10853,7 +10853,7 @@ pub(crate) mod tests {
     fn test_bank_blockhash_compute_unit_fee_structure() {
         //solana_logger::setup();
 
-        let leader = miraland_sdk::pubkey::new_rand();
+        let leader = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
@@ -10919,7 +10919,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_filter_program_errors_and_collect_fee() {
-        let leader = miraland_sdk::pubkey::new_rand();
+        let leader = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
@@ -10970,7 +10970,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_filter_program_errors_and_collect_compute_unit_fee() {
-        let leader = miraland_sdk::pubkey::new_rand();
+        let leader = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
@@ -11066,12 +11066,12 @@ pub(crate) mod tests {
             genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config_with_leader(500, &miraland_sdk::pubkey::new_rand(), 0);
+        } = create_genesis_config_with_leader(500, &solana_sdk::pubkey::new_rand(), 0);
         let bank = Bank::new_for_tests(&genesis_config);
 
-        let vote_pubkey0 = miraland_sdk::pubkey::new_rand();
-        let vote_pubkey1 = miraland_sdk::pubkey::new_rand();
-        let vote_pubkey2 = miraland_sdk::pubkey::new_rand();
+        let vote_pubkey0 = solana_sdk::pubkey::new_rand();
+        let vote_pubkey1 = solana_sdk::pubkey::new_rand();
+        let vote_pubkey2 = solana_sdk::pubkey::new_rand();
         let authorized_voter = Keypair::new();
         let payer0 = Keypair::new();
         let payer1 = Keypair::new();
@@ -11125,7 +11125,7 @@ pub(crate) mod tests {
         );
         let tx1 = system_transaction::transfer(
             &authorized_voter,
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             1,
             bank.last_blockhash(),
         );
@@ -11194,7 +11194,7 @@ pub(crate) mod tests {
         let key0 = Keypair::new();
         let key1 = Keypair::new();
         let key2 = Keypair::new();
-        let key3 = miraland_sdk::pubkey::new_rand();
+        let key3 = solana_sdk::pubkey::new_rand();
 
         let message = Message {
             header: MessageHeader {
@@ -11396,7 +11396,7 @@ pub(crate) mod tests {
         let initial_state = bank0.hash_internal_state();
         assert_eq!(bank1.hash_internal_state(), initial_state);
 
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         bank0.transfer(amount, &mint_keypair, &pubkey).unwrap();
         assert_ne!(bank0.hash_internal_state(), initial_state);
         bank1.transfer(amount, &mint_keypair, &pubkey).unwrap();
@@ -11406,7 +11406,7 @@ pub(crate) mod tests {
         let bank2 = new_from_parent(&Arc::new(bank1));
         assert_ne!(bank0.hash_internal_state(), bank2.hash_internal_state());
 
-        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let pubkey2 = solana_sdk::pubkey::new_rand();
         info!("transfer 2 {}", pubkey2);
         bank2.transfer(amount, &mint_keypair, &pubkey2).unwrap();
         bank2.update_accounts_hash();
@@ -11420,14 +11420,14 @@ pub(crate) mod tests {
         let bank0 = Bank::new_for_tests(&genesis_config);
         let amount = genesis_config.rent.minimum_balance(0);
 
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         info!("transfer 0 {} mint: {}", pubkey, mint_keypair.pubkey());
         bank0.transfer(amount, &mint_keypair, &pubkey).unwrap();
 
         let bank0_state = bank0.hash_internal_state();
         let bank0 = Arc::new(bank0);
         // Checkpointing should result in a new state while freezing the parent
-        let bank2 = Bank::new_from_parent(&bank0, &miraland_sdk::pubkey::new_rand(), 1);
+        let bank2 = Bank::new_from_parent(&bank0, &solana_sdk::pubkey::new_rand(), 1);
         assert_ne!(bank0_state, bank2.hash_internal_state());
         // Checkpointing should modify the checkpoint's state when freezed
         assert_ne!(bank0_state, bank0.hash_internal_state());
@@ -11436,13 +11436,13 @@ pub(crate) mod tests {
         let bank0_state = bank0.hash_internal_state();
         bank2.update_accounts_hash();
         assert!(bank2.verify_bank_hash(VerifyBankHash::default_for_test()));
-        let bank3 = Bank::new_from_parent(&bank0, &miraland_sdk::pubkey::new_rand(), 2);
+        let bank3 = Bank::new_from_parent(&bank0, &solana_sdk::pubkey::new_rand(), 2);
         assert_eq!(bank0_state, bank0.hash_internal_state());
         assert!(bank2.verify_bank_hash(VerifyBankHash::default_for_test()));
         bank3.update_accounts_hash();
         assert!(bank3.verify_bank_hash(VerifyBankHash::default_for_test()));
 
-        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let pubkey2 = solana_sdk::pubkey::new_rand();
         info!("transfer 2 {}", pubkey2);
         bank2.transfer(amount, &mint_keypair, &pubkey2).unwrap();
         bank2.update_accounts_hash();
@@ -11460,7 +11460,7 @@ pub(crate) mod tests {
     #[test]
     fn test_verify_snapshot_bank() {
         solana_logger::setup();
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.));
         let bank = Bank::new_for_tests(&genesis_config);
         bank.transfer(
@@ -11490,7 +11490,7 @@ pub(crate) mod tests {
         assert_ne!(bank1.hash_internal_state(), initial_state);
 
         info!("transfer bank1");
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
         bank1.transfer(amount, &mint_keypair, &pubkey).unwrap();
         assert_ne!(bank1.hash_internal_state(), initial_state);
 
@@ -11518,8 +11518,8 @@ pub(crate) mod tests {
         let bank0 = Bank::new_for_tests(&genesis_config);
         let bank1 = Bank::new_for_tests(&genesis_config);
         assert_eq!(bank0.hash_internal_state(), bank1.hash_internal_state());
-        let key0 = miraland_sdk::pubkey::new_rand();
-        let key1 = miraland_sdk::pubkey::new_rand();
+        let key0 = solana_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
         bank0.transfer(amount, &mint_keypair, &key0).unwrap();
         bank0.transfer(amount * 2, &mint_keypair, &key1).unwrap();
 
@@ -11535,7 +11535,7 @@ pub(crate) mod tests {
         let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.));
         let amount = genesis_config.rent.minimum_balance(0);
         let bank = Bank::new_for_tests(&genesis_config);
-        let key0 = miraland_sdk::pubkey::new_rand();
+        let key0 = solana_sdk::pubkey::new_rand();
         bank.transfer(amount, &mint_keypair, &key0).unwrap();
         let orig = bank.hash_internal_state();
 
@@ -11711,7 +11711,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_bank_get_account_modified_since_parent_with_fixed_root() {
-        let pubkey = miraland_sdk::pubkey::new_rand();
+        let pubkey = solana_sdk::pubkey::new_rand();
 
         let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.));
         let amount = genesis_config.rent.minimum_balance(0);
@@ -11752,7 +11752,7 @@ pub(crate) mod tests {
     fn test_bank_update_sysvar_account() {
         use sysvar::clock::Clock;
 
-        let dummy_clock_id = miraland_sdk::pubkey::new_rand();
+        let dummy_clock_id = solana_sdk::pubkey::new_rand();
         let dummy_rent_epoch = 44;
         let (mut genesis_config, _mint_keypair) = create_genesis_config(500);
 
@@ -11883,7 +11883,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_bank_epoch_vote_accounts() {
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let leader_lamports = 3;
         let mut genesis_config =
             create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
@@ -12074,11 +12074,11 @@ pub(crate) mod tests {
         // Bank 1
         let bank1 = Arc::new(Bank::new_from_parent(
             &bank0,
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             1,
         ));
         // Bank 2
-        let bank2 = Bank::new_from_parent(&bank0, &miraland_sdk::pubkey::new_rand(), 2);
+        let bank2 = Bank::new_from_parent(&bank0, &solana_sdk::pubkey::new_rand(), 2);
 
         // transfer a token
         assert_eq!(
@@ -12101,7 +12101,7 @@ pub(crate) mod tests {
         assert_eq!(bank2.transaction_count(), 0);
         assert_eq!(bank1.transaction_count(), 1);
 
-        let bank6 = Bank::new_from_parent(&bank1, &miraland_sdk::pubkey::new_rand(), 3);
+        let bank6 = Bank::new_from_parent(&bank1, &solana_sdk::pubkey::new_rand(), 3);
         assert_eq!(bank1.transaction_count(), 1);
         assert_eq!(bank6.transaction_count(), 1);
 
@@ -12133,7 +12133,7 @@ pub(crate) mod tests {
             genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config_with_leader(500, &miraland_sdk::pubkey::new_rand(), 1);
+        } = create_genesis_config_with_leader(500, &solana_sdk::pubkey::new_rand(), 1);
         let bank = Arc::new(Bank::new_for_tests(&genesis_config));
 
         let vote_accounts = bank.vote_accounts();
@@ -12183,7 +12183,7 @@ pub(crate) mod tests {
             ..
         } = create_genesis_config_with_leader(
             123_456_000_000_000,
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             123_000_000_000,
         );
         genesis_config.rent = Rent::default();
@@ -12283,7 +12283,7 @@ pub(crate) mod tests {
         // Should fail with InstructionError, but InstructionErrors are committable,
         // so is_delta should be true
         assert_eq!(
-            bank.transfer(10_001, &mint_keypair, &miraland_sdk::pubkey::new_rand()),
+            bank.transfer(10_001, &mint_keypair, &solana_sdk::pubkey::new_rand()),
             Err(TransactionError::InstructionError(
                 0,
                 SystemError::ResultWithNegativeLamports.into(),
@@ -12309,12 +12309,12 @@ pub(crate) mod tests {
         assert!(
             genesis_accounts
                 .iter()
-                .any(|(pubkey, _, _)| miraland_sdk::sysvar::is_sysvar_id(pubkey)),
+                .any(|(pubkey, _, _)| solana_sdk::sysvar::is_sysvar_id(pubkey)),
             "no sysvars found"
         );
 
         let bank0 = Arc::new(new_from_parent(&parent));
-        let pubkey0 = miraland_sdk::pubkey::new_rand();
+        let pubkey0 = solana_sdk::pubkey::new_rand();
         let program_id = Pubkey::from([2; 32]);
         let account0 = AccountSharedData::new(1, 0, &program_id);
         bank0.store_account(&pubkey0, &account0);
@@ -12344,11 +12344,11 @@ pub(crate) mod tests {
         );
 
         let bank2 = Arc::new(new_from_parent(&bank1));
-        let pubkey1 = miraland_sdk::pubkey::new_rand();
+        let pubkey1 = solana_sdk::pubkey::new_rand();
         let account1 = AccountSharedData::new(3, 0, &program_id);
         bank2.store_account(&pubkey1, &account1);
         // Accounts with 0 lamports should be filtered out by Accounts::load_by_program()
-        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let pubkey2 = solana_sdk::pubkey::new_rand();
         let account2 = AccountSharedData::new(0, 0, &program_id);
         bank2.store_account(&pubkey2, &account2);
 
@@ -12558,7 +12558,7 @@ pub(crate) mod tests {
             genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config_with_leader(500, &miraland_sdk::pubkey::new_rand(), 0);
+        } = create_genesis_config_with_leader(500, &solana_sdk::pubkey::new_rand(), 0);
         let mut bank = Bank::new_for_tests(&genesis_config);
 
         fn mock_vote_processor(
@@ -12746,7 +12746,7 @@ pub(crate) mod tests {
             const LOTSA: usize = 4_096;
 
             (0..LOTSA).for_each(|_| {
-                let pubkey = miraland_sdk::pubkey::new_rand();
+                let pubkey = solana_sdk::pubkey::new_rand();
                 genesis_config.add_account(
                     pubkey,
                     stake_state::create_lockup_stake_account(
@@ -13595,7 +13595,7 @@ pub(crate) mod tests {
                 system_instruction::advance_nonce_account(&nonce_pubkey, &nonce_pubkey),
                 system_instruction::transfer(
                     &custodian_pubkey,
-                    &miraland_sdk::pubkey::new_rand(),
+                    &solana_sdk::pubkey::new_rand(),
                     100_000,
                 ),
             ],
@@ -13663,7 +13663,7 @@ pub(crate) mod tests {
                 system_instruction::advance_nonce_account(&nonce_pubkey, &nonce_pubkey),
                 system_instruction::transfer(
                     &custodian_pubkey,
-                    &miraland_sdk::pubkey::new_rand(),
+                    &solana_sdk::pubkey::new_rand(),
                     100_000,
                 ),
             ],
@@ -13756,8 +13756,8 @@ pub(crate) mod tests {
         let bank0 = Arc::new(new_from_parent(&parent));
 
         let keypair = Keypair::new();
-        let pubkey0 = miraland_sdk::pubkey::new_rand();
-        let pubkey1 = miraland_sdk::pubkey::new_rand();
+        let pubkey0 = solana_sdk::pubkey::new_rand();
+        let pubkey1 = solana_sdk::pubkey::new_rand();
         let program_id = Pubkey::from([2; 32]);
         let keypair_account = AccountSharedData::new(8, 0, &program_id);
         let account0 = AccountSharedData::new(11, 0, &program_id);
@@ -13807,9 +13807,9 @@ pub(crate) mod tests {
 
         let keypair0 = Keypair::new();
         let keypair1 = Keypair::new();
-        let pubkey0 = miraland_sdk::pubkey::new_rand();
-        let pubkey1 = miraland_sdk::pubkey::new_rand();
-        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let pubkey0 = solana_sdk::pubkey::new_rand();
+        let pubkey1 = solana_sdk::pubkey::new_rand();
+        let pubkey2 = solana_sdk::pubkey::new_rand();
         let keypair0_account = AccountSharedData::new(8_000, 0, &Pubkey::default());
         let keypair1_account = AccountSharedData::new(9_000, 0, &Pubkey::default());
         let account0 = AccountSharedData::new(11_000, 0, &Pubkey::default());
@@ -13909,8 +13909,8 @@ pub(crate) mod tests {
         let mock_program_id = Pubkey::from([2u8; 32]);
         bank.add_builtin("mock_program", &mock_program_id, mock_process_instruction);
 
-        let from_pubkey = miraland_sdk::pubkey::new_rand();
-        let to_pubkey = miraland_sdk::pubkey::new_rand();
+        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let to_pubkey = solana_sdk::pubkey::new_rand();
         let dup_pubkey = from_pubkey;
         let from_account = AccountSharedData::new(sol_to_lamports(100.), 1, &mock_program_id);
         let to_account = AccountSharedData::new(0, 1, &mock_program_id);
@@ -13953,8 +13953,8 @@ pub(crate) mod tests {
         let mock_program_id = Pubkey::from([2u8; 32]);
         bank.add_builtin("mock_program", &mock_program_id, mock_process_instruction);
 
-        let from_pubkey = miraland_sdk::pubkey::new_rand();
-        let to_pubkey = miraland_sdk::pubkey::new_rand();
+        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let to_pubkey = solana_sdk::pubkey::new_rand();
         let dup_pubkey = from_pubkey;
         let from_account = AccountSharedData::new(100, 1, &mock_program_id);
         let to_account = AccountSharedData::new(0, 1, &mock_program_id);
@@ -13985,8 +13985,8 @@ pub(crate) mod tests {
         let (genesis_config, mint_keypair) = create_genesis_config(500);
         let mut bank = Bank::new_for_tests(&genesis_config);
 
-        let from_pubkey = miraland_sdk::pubkey::new_rand();
-        let to_pubkey = miraland_sdk::pubkey::new_rand();
+        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let to_pubkey = solana_sdk::pubkey::new_rand();
 
         let account_metas = vec![
             AccountMeta::new(from_pubkey, false),
@@ -14004,7 +14004,7 @@ pub(crate) mod tests {
 
         tx.message
             .account_keys
-            .push(miraland_sdk::pubkey::new_rand());
+            .push(solana_sdk::pubkey::new_rand());
 
         bank.add_builtin(
             "mock_vote",
@@ -14052,8 +14052,8 @@ pub(crate) mod tests {
         let (genesis_config, mint_keypair) = create_genesis_config(500);
         let mut bank = Bank::new_for_tests(&genesis_config);
 
-        let from_pubkey = miraland_sdk::pubkey::new_rand();
-        let to_pubkey = miraland_sdk::pubkey::new_rand();
+        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let to_pubkey = solana_sdk::pubkey::new_rand();
 
         let account_metas = vec![
             AccountMeta::new(from_pubkey, false),
@@ -14086,8 +14086,8 @@ pub(crate) mod tests {
         let (genesis_config, mint_keypair) = create_genesis_config(500);
         let mut bank = Bank::new_for_tests(&genesis_config);
 
-        let from_pubkey = miraland_sdk::pubkey::new_rand();
-        let to_pubkey = miraland_sdk::pubkey::new_rand();
+        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let to_pubkey = solana_sdk::pubkey::new_rand();
 
         let account_metas = vec![
             AccountMeta::new(from_pubkey, false),
@@ -14113,7 +14113,7 @@ pub(crate) mod tests {
         while tx.message.account_keys.len() <= transaction_account_lock_limit {
             tx.message
                 .account_keys
-                .push(miraland_sdk::pubkey::new_rand());
+                .push(solana_sdk::pubkey::new_rand());
         }
 
         let result = bank.process_transaction(&tx);
@@ -14126,8 +14126,8 @@ pub(crate) mod tests {
         let (genesis_config, mint_keypair) = create_genesis_config(500);
         let mut bank = Bank::new_for_tests(&genesis_config);
 
-        let from_pubkey = miraland_sdk::pubkey::new_rand();
-        let to_pubkey = miraland_sdk::pubkey::new_rand();
+        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let to_pubkey = solana_sdk::pubkey::new_rand();
 
         let account_metas = vec![
             AccountMeta::new(from_pubkey, false),
@@ -14182,8 +14182,8 @@ pub(crate) mod tests {
         let (genesis_config, mint_keypair) = create_genesis_config(500);
         let mut bank = Bank::new_for_tests(&genesis_config);
 
-        let from_pubkey = miraland_sdk::pubkey::new_rand();
-        let to_pubkey = miraland_sdk::pubkey::new_rand();
+        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let to_pubkey = solana_sdk::pubkey::new_rand();
 
         let account_metas = vec![
             AccountMeta::new(from_pubkey, false),
@@ -14207,7 +14207,7 @@ pub(crate) mod tests {
 
         tx.message
             .account_keys
-            .push(miraland_sdk::pubkey::new_rand());
+            .push(solana_sdk::pubkey::new_rand());
         assert_eq!(tx.message.account_keys.len(), 5);
         tx.message.instructions[0].accounts.remove(0);
         tx.message.instructions[0].accounts.push(4);
@@ -14226,7 +14226,7 @@ pub(crate) mod tests {
         let program_keys: Vec<_> = (0..max_programs)
             .enumerate()
             .map(|i| {
-                let key = miraland_sdk::pubkey::new_rand();
+                let key = solana_sdk::pubkey::new_rand();
                 let name = format!("program{:?}", i);
                 bank.add_builtin(&name, &key, mock_ok_vote_processor);
                 (key, name.as_bytes().to_vec())
@@ -14236,7 +14236,7 @@ pub(crate) mod tests {
         let keys: Vec<_> = (0..max_keys)
             .enumerate()
             .map(|_| {
-                let key = miraland_sdk::pubkey::new_rand();
+                let key = solana_sdk::pubkey::new_rand();
                 let balance = if thread_rng().gen_ratio(9, 10) {
                     let lamports = if thread_rng().gen_ratio(1, 5) {
                         thread_rng().gen_range(0, 10)
@@ -14436,11 +14436,11 @@ pub(crate) mod tests {
         let mut bank = Bank::new_for_tests(&genesis_config);
 
         // Add a new program
-        let program1_pubkey = miraland_sdk::pubkey::new_rand();
+        let program1_pubkey = solana_sdk::pubkey::new_rand();
         bank.add_builtin("program", &program1_pubkey, nested_processor);
 
         // Add a new program owned by the first
-        let program2_pubkey = miraland_sdk::pubkey::new_rand();
+        let program2_pubkey = solana_sdk::pubkey::new_rand();
         let mut program2_account = AccountSharedData::new(42, 1, &program1_pubkey);
         program2_account.set_executable(true);
         bank.store_account(&program2_pubkey, &program2_account);
@@ -14571,9 +14571,9 @@ pub(crate) mod tests {
         solana_logger::setup();
 
         let (genesis_config, _mint_keypair) = create_genesis_config(1_000_000_000);
-        let pubkey0 = miraland_sdk::pubkey::new_rand();
-        let pubkey1 = miraland_sdk::pubkey::new_rand();
-        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let pubkey0 = solana_sdk::pubkey::new_rand();
+        let pubkey1 = solana_sdk::pubkey::new_rand();
+        let pubkey2 = solana_sdk::pubkey::new_rand();
 
         // Set root for bank 0, with caching enabled
         let mut bank0 = Arc::new(Bank::new_with_config_for_tests(
@@ -14644,8 +14644,8 @@ pub(crate) mod tests {
     #[test]
     fn test_process_stale_slot_with_budget() {
         solana_logger::setup();
-        let pubkey1 = miraland_sdk::pubkey::new_rand();
-        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let pubkey1 = solana_sdk::pubkey::new_rand();
+        let pubkey2 = solana_sdk::pubkey::new_rand();
 
         let mut bank = create_simple_test_arc_bank(1_000_000_000);
         bank.restore_old_behavior_for_fragile_tests();
@@ -14698,7 +14698,7 @@ pub(crate) mod tests {
         }
 
         let slot = 123;
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
 
         let mut bank = Arc::new(Bank::new_from_parent(
             &create_simple_test_arc_bank(100_000),
@@ -14734,7 +14734,7 @@ pub(crate) mod tests {
         }
 
         let slot = 123;
-        let loader_id = miraland_sdk::pubkey::new_rand();
+        let loader_id = solana_sdk::pubkey::new_rand();
 
         let mut bank = Arc::new(Bank::new_from_parent(
             &create_simple_test_arc_bank(100_000),
@@ -14761,7 +14761,7 @@ pub(crate) mod tests {
         activate_all_features(&mut genesis_config);
 
         let slot = 123;
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
 
         let bank = Arc::new(Bank::new_from_parent(
             &Arc::new(Bank::new_for_tests(&genesis_config)),
@@ -14821,7 +14821,7 @@ pub(crate) mod tests {
     fn test_add_builtin_account_inherited_cap_while_replacing() {
         let (genesis_config, mint_keypair) = create_genesis_config(100_000);
         let bank = Bank::new_for_tests(&genesis_config);
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
 
         bank.add_builtin_account("mock_program", &program_id, false);
         assert_eq!(bank.capitalization(), bank.calculate_capitalization(true));
@@ -14840,7 +14840,7 @@ pub(crate) mod tests {
     fn test_add_builtin_account_squatted_while_not_replacing() {
         let (genesis_config, mint_keypair) = create_genesis_config(100_000);
         let bank = Bank::new_for_tests(&genesis_config);
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
 
         // someone managed to squat at program_id!
         bank.withdraw(&mint_keypair.pubkey(), 10).unwrap();
@@ -14896,7 +14896,7 @@ pub(crate) mod tests {
         activate_all_features(&mut genesis_config);
 
         let slot = 123;
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
 
         let bank = Arc::new(Bank::new_from_parent(
             &Arc::new(Bank::new_for_tests(&genesis_config)),
@@ -14929,7 +14929,7 @@ pub(crate) mod tests {
     fn test_add_precompiled_account_inherited_cap_while_replacing() {
         let (genesis_config, mint_keypair) = create_genesis_config(100_000);
         let bank = Bank::new_for_tests(&genesis_config);
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
 
         bank.add_precompiled_account(&program_id);
         assert_eq!(bank.capitalization(), bank.calculate_capitalization(true));
@@ -14948,7 +14948,7 @@ pub(crate) mod tests {
     fn test_add_precompiled_account_squatted_while_not_replacing() {
         let (genesis_config, mint_keypair) = create_genesis_config(100_000);
         let bank = Bank::new_for_tests(&genesis_config);
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
 
         // someone managed to squat at program_id!
         bank.withdraw(&mint_keypair.pubkey(), 10).unwrap();
@@ -14985,7 +14985,7 @@ pub(crate) mod tests {
         solana_logger::setup();
 
         let mut genesis_config =
-            create_genesis_config_with_leader(5, &miraland_sdk::pubkey::new_rand(), 0)
+            create_genesis_config_with_leader(5, &solana_sdk::pubkey::new_rand(), 0)
                 .genesis_config;
 
         // ClusterType::Development - Native mint exists immediately
@@ -15048,17 +15048,17 @@ pub(crate) mod tests {
         solana_logger::setup();
 
         let mut genesis_config =
-            create_genesis_config_with_leader(5, &miraland_sdk::pubkey::new_rand(), 0)
+            create_genesis_config_with_leader(5, &solana_sdk::pubkey::new_rand(), 0)
                 .genesis_config;
 
         // Testnet - Storage rewards pool is purged at epoch 93
         // Also this is with bad capitalization
         genesis_config.cluster_type = ClusterType::Testnet;
         genesis_config.inflation = Inflation::default();
-        let reward_pubkey = miraland_sdk::pubkey::new_rand();
+        let reward_pubkey = solana_sdk::pubkey::new_rand();
         genesis_config.rewards_pools.insert(
             reward_pubkey,
-            Account::new(u64::MAX, 0, &miraland_sdk::pubkey::new_rand()),
+            Account::new(u64::MAX, 0, &solana_sdk::pubkey::new_rand()),
         );
         let bank0 = Bank::new_for_tests(&genesis_config);
         // because capitalization has been reset with bogus capitalization calculation allowing overflows,
@@ -15114,11 +15114,11 @@ pub(crate) mod tests {
         let (genesis_config, _) = create_genesis_config(1);
         let bank = Bank::new_for_tests(&genesis_config);
 
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
-        let key3 = miraland_sdk::pubkey::new_rand();
-        let key4 = miraland_sdk::pubkey::new_rand();
-        let key5 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
+        let key3 = solana_sdk::pubkey::new_rand();
+        let key4 = solana_sdk::pubkey::new_rand();
+        let key5 = solana_sdk::pubkey::new_rand();
         let executor: Arc<dyn Executor> = Arc::new(TestExecutor {});
 
         fn new_executable_account(owner: Pubkey) -> AccountSharedData {
@@ -15173,7 +15173,7 @@ pub(crate) mod tests {
         assert!(stored_executors.borrow().contains_key(&key3));
 
         // Check inheritance
-        let bank = Bank::new_from_parent(&Arc::new(bank), &miraland_sdk::pubkey::new_rand(), 1);
+        let bank = Bank::new_from_parent(&Arc::new(bank), &solana_sdk::pubkey::new_rand(), 1);
         let executors = bank.get_executors(accounts);
         assert_eq!(executors.borrow().len(), 3);
         assert!(executors.borrow().contains_key(&key1));
@@ -15196,8 +15196,8 @@ pub(crate) mod tests {
         let (genesis_config, _) = create_genesis_config(1);
         let root = Arc::new(Bank::new_for_tests(&genesis_config));
 
-        let key1 = miraland_sdk::pubkey::new_rand();
-        let key2 = miraland_sdk::pubkey::new_rand();
+        let key1 = solana_sdk::pubkey::new_rand();
+        let key2 = solana_sdk::pubkey::new_rand();
         let executor: Arc<dyn Executor> = Arc::new(TestExecutor {});
         let executable_account = AccountSharedData::from(Account {
             owner: bpf_loader_upgradeable::id(),
@@ -15389,7 +15389,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_update_clock_timestamp() {
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             genesis_config,
             voting_keypair,
@@ -15488,7 +15488,7 @@ pub(crate) mod tests {
                 + (poh_estimate_offset * max_allowable_drift / 100).as_secs()) as i64
         }
 
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             voting_keypair,
@@ -15536,7 +15536,7 @@ pub(crate) mod tests {
                 - (poh_estimate_offset * max_allowable_drift / 100).as_secs()) as i64
         }
 
-        let leader_pubkey = miraland_sdk::pubkey::new_rand();
+        let leader_pubkey = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             mut genesis_config,
             voting_keypair,
@@ -15629,7 +15629,7 @@ pub(crate) mod tests {
         // Set up initial bank
         let mut genesis_config = create_genesis_config_with_leader(
             10,
-            &miraland_sdk::pubkey::new_rand(),
+            &solana_sdk::pubkey::new_rand(),
             374_999_998_287_840,
         )
         .genesis_config;
@@ -15645,7 +15645,7 @@ pub(crate) mod tests {
         // Set up pubkeys to write to
         let total_pubkeys = ITER_BATCH_SIZE * 10;
         let total_pubkeys_to_modify = 10;
-        let all_pubkeys: Vec<Pubkey> = std::iter::repeat_with(miraland_sdk::pubkey::new_rand)
+        let all_pubkeys: Vec<Pubkey> = std::iter::repeat_with(solana_sdk::pubkey::new_rand)
             .take(total_pubkeys)
             .collect();
         let program_id = system_program::id();
@@ -15815,7 +15815,7 @@ pub(crate) mod tests {
                         {
                             current_minor_fork_bank = Arc::new(Bank::new_from_parent(
                                 &current_minor_fork_bank,
-                                &miraland_sdk::pubkey::new_rand(),
+                                &solana_sdk::pubkey::new_rand(),
                                 current_minor_fork_bank.slot() + 2,
                             ));
                             let account = AccountSharedData::new(lamports, 0, &program_id);
@@ -15840,7 +15840,7 @@ pub(crate) mod tests {
                         // *partial* clean of the banks < `next_major_bank`.
                         current_major_fork_bank = Arc::new(Bank::new_from_parent(
                             &current_major_fork_bank,
-                            &miraland_sdk::pubkey::new_rand(),
+                            &solana_sdk::pubkey::new_rand(),
                             current_minor_fork_bank.slot() - 1,
                         ));
                         let lamports = current_major_fork_bank.slot() + starting_lamports + 1;
@@ -15926,7 +15926,7 @@ pub(crate) mod tests {
                         prev_bank = current_bank.clone();
                         current_bank = Arc::new(Bank::new_from_parent(
                             &current_bank,
-                            &miraland_sdk::pubkey::new_rand(),
+                            &solana_sdk::pubkey::new_rand(),
                             current_bank.slot() + 1,
                         ));
                     }
@@ -15968,7 +15968,7 @@ pub(crate) mod tests {
             for i in 0..step_size {
                 bank_at_fork_tip = Arc::new(Bank::new_from_parent(
                     &bank_at_fork_tip,
-                    &miraland_sdk::pubkey::new_rand(),
+                    &solana_sdk::pubkey::new_rand(),
                     bank_at_fork_tip.slot() + 1,
                 ));
                 if lamports_this_round == 0 {
@@ -16176,7 +16176,7 @@ pub(crate) mod tests {
     fn test_get_inflation_start_slot_devnet_testnet() {
         let GenesisConfigInfo {
             mut genesis_config, ..
-        } = create_genesis_config_with_leader(42, &miraland_sdk::pubkey::new_rand(), 42);
+        } = create_genesis_config_with_leader(42, &solana_sdk::pubkey::new_rand(), 42);
         genesis_config
             .accounts
             .remove(&feature_set::pico_inflation::id())
@@ -16257,7 +16257,7 @@ pub(crate) mod tests {
     fn test_get_inflation_start_slot_mainnet() {
         let GenesisConfigInfo {
             mut genesis_config, ..
-        } = create_genesis_config_with_leader(42, &miraland_sdk::pubkey::new_rand(), 42);
+        } = create_genesis_config_with_leader(42, &solana_sdk::pubkey::new_rand(), 42);
         genesis_config
             .accounts
             .remove(&feature_set::pico_inflation::id())
@@ -16342,7 +16342,7 @@ pub(crate) mod tests {
     fn test_get_inflation_num_slots_with_activations() {
         let GenesisConfigInfo {
             mut genesis_config, ..
-        } = create_genesis_config_with_leader(42, &miraland_sdk::pubkey::new_rand(), 42);
+        } = create_genesis_config_with_leader(42, &solana_sdk::pubkey::new_rand(), 42);
         let slots_per_epoch = 32;
         genesis_config.epoch_schedule = EpochSchedule::new(slots_per_epoch);
         genesis_config
@@ -16406,7 +16406,7 @@ pub(crate) mod tests {
     fn test_get_inflation_num_slots_already_activated() {
         let GenesisConfigInfo {
             mut genesis_config, ..
-        } = create_genesis_config_with_leader(42, &miraland_sdk::pubkey::new_rand(), 42);
+        } = create_genesis_config_with_leader(42, &solana_sdk::pubkey::new_rand(), 42);
         let slots_per_epoch = 32;
         genesis_config.epoch_schedule = EpochSchedule::new(slots_per_epoch);
         let mut bank = Bank::new_for_tests(&genesis_config);
@@ -16746,7 +16746,7 @@ pub(crate) mod tests {
     #[test]
     fn test_get_largest_accounts() {
         let GenesisConfigInfo { genesis_config, .. } =
-            create_genesis_config_with_leader(42, &miraland_sdk::pubkey::new_rand(), 42);
+            create_genesis_config_with_leader(42, &solana_sdk::pubkey::new_rand(), 42);
         let bank = Bank::new_for_tests(&genesis_config);
 
         let pubkeys: Vec<_> = (0..5).map(|_| Pubkey::new_unique()).collect();
@@ -16881,7 +16881,7 @@ pub(crate) mod tests {
             Ok(())
         }
 
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
         bank.add_builtin("mock_program1", &program_id, mock_ix_processor);
 
         let blockhash = bank.last_blockhash();
@@ -17094,7 +17094,7 @@ pub(crate) mod tests {
             );
             Ok(())
         }
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
         bank.add_builtin("mock_program", &program_id, mock_ix_processor);
 
         let message = Message::new(
@@ -17138,7 +17138,7 @@ pub(crate) mod tests {
             );
             Ok(())
         }
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
         bank.add_builtin("mock_program", &program_id, mock_ix_processor);
 
         let message = Message::new(
@@ -17189,7 +17189,7 @@ pub(crate) mod tests {
             );
             Ok(())
         }
-        let program_id = miraland_sdk::pubkey::new_rand();
+        let program_id = solana_sdk::pubkey::new_rand();
         bank.add_builtin("mock_program", &program_id, mock_ix_processor);
 
         // This message will not be executed because the compute budget request is invalid
@@ -17231,7 +17231,7 @@ pub(crate) mod tests {
     fn test_verify_and_hash_transaction_sig_len() {
         let GenesisConfigInfo {
             mut genesis_config, ..
-        } = create_genesis_config_with_leader(42, &miraland_sdk::pubkey::new_rand(), 42);
+        } = create_genesis_config_with_leader(42, &solana_sdk::pubkey::new_rand(), 42);
 
         // activate all features but verify_tx_signatures_len
         activate_all_features(&mut genesis_config);
@@ -17294,7 +17294,7 @@ pub(crate) mod tests {
     #[test]
     fn test_verify_transactions_packet_data_size() {
         let GenesisConfigInfo { genesis_config, .. } =
-            create_genesis_config_with_leader(42, &miraland_sdk::pubkey::new_rand(), 42);
+            create_genesis_config_with_leader(42, &solana_sdk::pubkey::new_rand(), 42);
         let bank = Bank::new_for_tests(&genesis_config);
 
         let mut rng = rand::thread_rng();
@@ -17353,7 +17353,7 @@ pub(crate) mod tests {
         // libsecp256k1
         let secp_privkey = libsecp256k1::SecretKey::random(&mut rand::thread_rng());
         let message_arr = b"hello";
-        let instruction = miraland_sdk::secp256k1_instruction::new_secp256k1_instruction(
+        let instruction = solana_sdk::secp256k1_instruction::new_secp256k1_instruction(
             &secp_privkey,
             message_arr,
         );
@@ -17371,7 +17371,7 @@ pub(crate) mod tests {
         let privkey = ed25519_dalek::Keypair::generate(&mut rand::thread_rng());
         let message_arr = b"hello";
         let instruction =
-            miraland_sdk::ed25519_instruction::new_ed25519_instruction(&privkey, message_arr);
+            solana_sdk::ed25519_instruction::new_ed25519_instruction(&privkey, message_arr);
         let tx = Transaction::new_signed_with_payer(
             &[instruction],
             Some(&mint_keypair.pubkey()),
@@ -17559,7 +17559,7 @@ pub(crate) mod tests {
     #[test]
     fn test_an_empty_instruction_without_program() {
         let (genesis_config, mint_keypair) = create_genesis_config(1);
-        let destination = miraland_sdk::pubkey::new_rand();
+        let destination = solana_sdk::pubkey::new_rand();
         let mut ix = system_instruction::transfer(&mint_keypair.pubkey(), &destination, 0);
         ix.program_id = native_loader::id(); // Empty executable account chain
         let message = Message::new(&[ix], Some(&mint_keypair.pubkey()));
@@ -17611,7 +17611,7 @@ pub(crate) mod tests {
                     .rent
                     .minimum_balance(ACCOUNT_SIZE.try_into().unwrap()),
                 ACCOUNT_SIZE,
-                &miraland_sdk::system_program::id(),
+                &solana_sdk::system_program::id(),
             );
 
             let accounts_data_size_before = bank.load_accounts_data_size();
@@ -17638,7 +17638,7 @@ pub(crate) mod tests {
             result,
             Err(TransactionError::InstructionError(
                 _,
-                miraland_sdk::instruction::InstructionError::MaxAccountsDataSizeExceeded,
+                solana_sdk::instruction::InstructionError::MaxAccountsDataSizeExceeded,
             ))
         ));
     }
@@ -17658,7 +17658,7 @@ pub(crate) mod tests {
                 .rent
                 .minimum_balance(ACCOUNT_SIZE.try_into().unwrap()),
             ACCOUNT_SIZE,
-            &miraland_sdk::system_program::id(),
+            &solana_sdk::system_program::id(),
         );
 
         let accounts_data_size_before = bank.load_accounts_data_size();
@@ -17697,7 +17697,7 @@ pub(crate) mod tests {
             bank.last_blockhash(),
             LAMPORTS_PER_SOL,
             ACCOUNT_SIZE,
-            &miraland_sdk::system_program::id(),
+            &solana_sdk::system_program::id(),
         );
 
         let accounts_data_size_before = bank.load_accounts_data_size();
@@ -18040,7 +18040,7 @@ pub(crate) mod tests {
         } = create_genesis_config_with_leader(sol_to_lamports(100.), &Pubkey::new_unique(), 42);
         genesis_config.rent = Rent::default();
 
-        let validator_pubkey = miraland_sdk::pubkey::new_rand();
+        let validator_pubkey = solana_sdk::pubkey::new_rand();
         let validator_stake_lamports = sol_to_lamports(1.);
         let validator_staking_keypair = Keypair::new();
         let validator_voting_keypair = Keypair::new();
@@ -18102,8 +18102,8 @@ pub(crate) mod tests {
         } = create_genesis_config_with_leader(sol_to_lamports(100.), &Pubkey::new_unique(), 42);
         genesis_config.rent = Rent::default();
         genesis_config.fee_rate_governor = FeeRateGovernor::new(
-            miraland_sdk::fee_calculator::DEFAULT_TARGET_LAMPORTS_PER_SIGNATURE,
-            miraland_sdk::fee_calculator::DEFAULT_TARGET_SIGNATURES_PER_SLOT,
+            solana_sdk::fee_calculator::DEFAULT_TARGET_LAMPORTS_PER_SIGNATURE,
+            solana_sdk::fee_calculator::DEFAULT_TARGET_SIGNATURES_PER_SLOT,
         );
         let rent_exempt_minimum = genesis_config.rent.minimum_balance(0);
 
@@ -18353,7 +18353,7 @@ pub(crate) mod tests {
         let bank = Bank::new_for_tests(&genesis_config);
 
         for amount in [rent_exempt_minimum - 1, rent_exempt_minimum] {
-            bank.transfer(amount, &mint_keypair, &miraland_sdk::incinerator::id())
+            bank.transfer(amount, &mint_keypair, &solana_sdk::incinerator::id())
                 .unwrap();
         }
     }
@@ -18684,7 +18684,7 @@ pub(crate) mod tests {
             &AccountSharedData::new(1_000_000_000, 0, &mock_program_id),
         );
 
-        let rent_paying_pubkey = miraland_sdk::pubkey::new_rand();
+        let rent_paying_pubkey = solana_sdk::pubkey::new_rand();
         let mut rent_paying_account = AccountSharedData::new(
             rent_exempt_minimum_small - 1,
             account_data_size_small,
@@ -19184,7 +19184,7 @@ pub(crate) mod tests {
                 bank.last_blockhash(),
                 genesis_config.rent.minimum_balance(data_size),
                 data_size as u64,
-                &miraland_sdk::system_program::id(),
+                &solana_sdk::system_program::id(),
             );
             bank.process_transaction(&transaction).unwrap();
             bank.fill_bank_with_ticks_for_tests();

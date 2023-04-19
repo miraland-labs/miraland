@@ -1,9 +1,9 @@
 [package]
-name = "solana-measure"
+name = "miraland-measure"
 description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-measure"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-measure"
 readme = "../README.md"
 repository = "https://github.com/miraland-labs/miraland"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]

@@ -26,9 +26,9 @@ use {
             RpcSignatureResult, RpcVersionInfo, RpcVote, SlotInfo, SlotUpdate,
         },
     },
-    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
-    solana_account_decoder::{UiAccount, UiAccountEncoding},
-    solana_transaction_status::UiTransactionEncoding,
+    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
+    miraland_account_decoder::{UiAccount, UiAccountEncoding},
+    miraland_transaction_status::UiTransactionEncoding,
     std::{str::FromStr, sync::Arc},
 };
 
@@ -602,7 +602,7 @@ mod tests {
         miraland_client::rpc_response::{
             ProcessedSignatureResult, ReceivedSignatureResult, RpcSignatureResult, SlotInfo,
         },
-        miraland_sdk::{
+        solana_sdk::{
             account::ReadableAccount,
             clock::Slot,
             commitment_config::CommitmentConfig,
@@ -619,7 +619,7 @@ mod tests {
             transaction::{self, Transaction},
         },
         serial_test::serial,
-        solana_account_decoder::{parse_account_data::parse_account_data, UiAccountEncoding},
+        miraland_account_decoder::{parse_account_data::parse_account_data, UiAccountEncoding},
         solana_runtime::{
             bank::Bank,
             bank_forks::BankForks,
@@ -800,7 +800,7 @@ mod tests {
             mint_keypair: alice,
             ..
         } = create_genesis_config(10_000);
-        let bob_pubkey = miraland_sdk::pubkey::new_rand();
+        let bob_pubkey = solana_sdk::pubkey::new_rand();
         let bank = Bank::new_for_tests(&genesis_config);
         let blockhash = bank.last_blockhash();
         let bank_forks = Arc::new(RwLock::new(BankForks::new(bank)));
@@ -854,7 +854,7 @@ mod tests {
         genesis_config.rent = Rent::default();
         activate_all_features(&mut genesis_config);
 
-        let new_stake_authority = miraland_sdk::pubkey::new_rand();
+        let new_stake_authority = solana_sdk::pubkey::new_rand();
         let stake_authority = Keypair::new();
         let from = Keypair::new();
         let stake_account = Keypair::new();
@@ -1083,7 +1083,7 @@ mod tests {
     #[test]
     #[serial]
     fn test_account_unsubscribe() {
-        let bob_pubkey = miraland_sdk::pubkey::new_rand();
+        let bob_pubkey = solana_sdk::pubkey::new_rand();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let bank_forks = Arc::new(RwLock::new(BankForks::new(Bank::new_for_tests(

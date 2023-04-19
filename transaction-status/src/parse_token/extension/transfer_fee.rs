@@ -159,7 +159,7 @@ mod test {
     use {
         super::*,
         crate::parse_token::test::*,
-        miraland_sdk::pubkey::Pubkey,
+        solana_sdk::pubkey::Pubkey,
         spl_token_2022::{
             extension::transfer_fee::instruction::*, solana_program::message::Message,
         },

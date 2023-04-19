@@ -15,7 +15,7 @@ mod tests {
             },
             get_tmp_ledger_path,
         },
-        solana_measure::measure::Measure,
+        miraland_measure::measure::Measure,
         std::{
             collections::VecDeque,
             str::FromStr,

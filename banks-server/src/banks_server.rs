@@ -3,7 +3,7 @@ use {
     crossbeam_channel::{unbounded, Receiver, Sender},
     futures::{future, prelude::stream::StreamExt},
     miraland_client::connection_cache::ConnectionCache,
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         clock::Slot,
         commitment_config::CommitmentLevel,
@@ -24,7 +24,7 @@ use {
         bank_forks::BankForks,
         commitment::BlockCommitmentCache,
     },
-    solana_send_transaction_service::{
+    miraland_send_transaction_service::{
         send_transaction_service::{SendTransactionService, TransactionInfo},
         tpu_info::NullTpuInfo,
     },

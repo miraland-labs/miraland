@@ -1,7 +1,7 @@
 use {
     assert_matches::assert_matches,
     common::{add_upgradeable_loader_account, assert_ix_error, setup_test_context},
-    miraland_sdk::{
+    solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         account_utils::StateMut,
         bpf_loader_upgradeable::{extend_program, id, UpgradeableLoaderState},

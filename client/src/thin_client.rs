@@ -10,7 +10,7 @@ use {
         tpu_connection::TpuConnection,
     },
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         account::Account,
         client::{AsyncClient, Client, SyncClient},
         clock::{Slot, MAX_PROCESSING_AGE},

@@ -54,7 +54,7 @@ mod test {
     use {
         super::*,
         crate::parse_token::test::*,
-        miraland_sdk::pubkey::Pubkey,
+        solana_sdk::pubkey::Pubkey,
         spl_token_2022::{
             extension::default_account_state::instruction::{
                 initialize_default_account_state, update_default_account_state,

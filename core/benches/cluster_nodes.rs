@@ -4,7 +4,7 @@ extern crate test;
 
 use {
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-    miraland_sdk::{clock::Slot, pubkey::Pubkey},
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     rand::{seq::SliceRandom, Rng},
     solana_core::{
         cluster_nodes::{make_test_cluster, new_cluster_nodes, ClusterNodes},

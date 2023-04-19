@@ -1,7 +1,7 @@
 use {
     crate::bench_tps_client::BenchTpsClient,
     log::*,
-    miraland_sdk::{commitment_config::CommitmentConfig, timing::duration_as_s},
+    solana_sdk::{commitment_config::CommitmentConfig, timing::duration_as_s},
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},

@@ -61,10 +61,10 @@ cargo init hello_world --lib
 cd hello_world
 ```
 
-Add the `solana-program` crate to your new Rust library:
+Add the `miraland-program` crate to your new Rust library:
 
 ```bash
-cargo add solana-program
+cargo add miraland-program
 ```
 
 Open your `Cargo.toml` file and add these required Rust library configuration settings, updating your project name as appropriate:
@@ -79,7 +79,7 @@ crate-type = ["cdylib", "lib"]
 
 The code for your Rust based Solana program will live in your `src/lib.rs` file. Inside `src/lib.rs` you will be able to import your Rust crates and define your logic. Open your `src/lib.rs` file in your favorite editor.
 
-At the top of `lib.rs`, import the `solana-program` crate and bring our needed items into the local namespace:
+At the top of `lib.rs`, import the `miraland-program` crate and bring our needed items into the local namespace:
 
 ```rust
 use solana_program::{

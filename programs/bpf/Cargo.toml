@@ -1,9 +1,9 @@
 [package]
-name = "solana-bpf-programs"
+name = "miraland-bpf-programs"
 description = "Blockchain for community beyond the horizon"
 version = "1.14.17"
 documentation = "https://docs.rs/solana"
-homepage = "https://solana.com/"
+homepage = "https://miraland.top/"
 readme = "README.md"
 repository = "https://github.com/miraland-labs/miraland"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
@@ -28,20 +28,20 @@ miow = "0.3.6"
 miraland-cli-output = { path = "../../cli-output", version = "=1.14.17" }
 miraland-sdk = { path = "../../sdk", version = "=1.14.17" }
 net2 = "0.2.37"
-solana-account-decoder = { path = "../../account-decoder", version = "=1.14.17" }
-solana-bpf-loader-program = { path = "../bpf_loader", version = "=1.14.17" }
+miraland-account-decoder = { path = "../../account-decoder", version = "=1.14.17" }
+miraland-bpf-loader-program = { path = "../bpf_loader", version = "=1.14.17" }
 solana-bpf-rust-invoke = { path = "rust/invoke", version = "=1.14.17" }
 solana-bpf-rust-realloc = { path = "rust/realloc", version = "=1.14.17" }
 solana-bpf-rust-realloc-invoke = { path = "rust/realloc_invoke", version = "=1.14.17" }
-solana-logger = { path = "../../logger", version = "=1.14.17" }
-solana-measure = { path = "../../measure", version = "=1.14.17" }
-solana-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
-solana-runtime = { path = "../../runtime", version = "=1.14.17" }
-solana-transaction-status = { path = "../../transaction-status", version = "=1.14.17" }
+miraland-logger = { path = "../../logger", version = "=1.14.17" }
+miraland-measure = { path = "../../measure", version = "=1.14.17" }
+miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
+miraland-runtime = { path = "../../runtime", version = "=1.14.17" }
+miraland-transaction-status = { path = "../../transaction-status", version = "=1.14.17" }
 solana_rbpf = "=0.2.31"
 
 [dev-dependencies]
-solana-ledger = { path = "../../ledger", version = "=1.14.17" }
+miraland-ledger = { path = "../../ledger", version = "=1.14.17" }
 
 [[bench]]
 name = "bpf_loader"

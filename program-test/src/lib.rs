@@ -1,4 +1,4 @@
-//! The solana-program-test provides a BanksClient-based test framework BPF programs
+//! The miraland-program-test provides a BanksClient-based test framework BPF programs
 #![allow(clippy::integer_arithmetic)]
 
 // Export tokio for test clients
@@ -7,7 +7,7 @@ use {
     async_trait::async_trait,
     chrono_humanize::{Accuracy, HumanTime, Tense},
     log::*,
-    miraland_sdk::{
+    solana_sdk::{
         account::{Account, AccountSharedData, ReadableAccount},
         account_info::AccountInfo,
         clock::Slot,
@@ -26,7 +26,7 @@ use {
         sysvar::{Sysvar, SysvarId},
     },
     solana_banks_client::start_client,
-    solana_banks_server::banks_server::start_local_server,
+    miraland_banks_server::banks_server::start_local_server,
     solana_bpf_loader_program::serialization::serialize_parameters,
     solana_program_runtime::{
         compute_budget::ComputeBudget, ic_msg, invoke_context::ProcessInstructionWithContext,
@@ -92,7 +92,7 @@ fn get_invoke_context<'a, 'b>() -> &'a mut InvokeContext<'b> {
 }
 
 pub fn builtin_process_instruction(
-    process_instruction: miraland_sdk::entrypoint::ProcessInstruction,
+    process_instruction: solana_sdk::entrypoint::ProcessInstruction,
     _first_instruction_account: usize,
     invoke_context: &mut InvokeContext,
 ) -> Result<(), InstructionError> {
@@ -170,7 +170,7 @@ pub fn builtin_process_instruction(
     Ok(())
 }
 
-/// Converts a `solana-program`-style entrypoint into the runtime's entrypoint style, for
+/// Converts a `miraland-program`-style entrypoint into the runtime's entrypoint style, for
 /// use with `ProgramTest::add_program`
 #[macro_export]
 macro_rules! processor {
@@ -214,7 +214,7 @@ fn get_sysvar<T: Default + Sysvar + Sized + serde::de::DeserializeOwned + Clone>
 }
 
 struct SyscallStubs {}
-impl miraland_sdk::program_stubs::SyscallStubs for SyscallStubs {
+impl solana_sdk::program_stubs::SyscallStubs for SyscallStubs {
     fn sol_log(&self, message: &str) {
         let invoke_context = get_invoke_context();
         ic_msg!(invoke_context, "Program log: {}", message);
@@ -614,7 +614,7 @@ impl ProgramTest {
                 Account {
                     lamports: Rent::default().minimum_balance(data.len()).min(1),
                     data,
-                    owner: miraland_sdk::bpf_loader::id(),
+                    owner: solana_sdk::bpf_loader::id(),
                     executable: true,
                     rent_epoch: 0,
                 },
@@ -727,7 +727,7 @@ impl ProgramTest {
             static ONCE: Once = Once::new();
 
             ONCE.call_once(|| {
-                miraland_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
+                solana_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
             });
         }
 

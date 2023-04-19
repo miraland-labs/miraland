@@ -58,12 +58,12 @@ impl From<u64> for PubkeyError {
 /// addresses_][pdas] &mdash; or the secret key is not relevant to the operation
 /// of a program, and may have even been disposed of. As running Solana programs
 /// can not safely create or manage secret keys, the full [`Keypair`] is not
-/// defined in `solana-program` but in `miraland-sdk`.
+/// defined in `miraland-program` but in `miraland-sdk`.
 ///
 /// [acc]: https://docs.solana.com/developing/programming-model/accounts
 /// [ed25519]: https://ed25519.cr.yp.to/
 /// [pdas]: https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses
-/// [`Keypair`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/signer/keypair/struct.Keypair.html
+/// [`Keypair`]: https://docs.rs/miraland-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html
 #[wasm_bindgen]
 #[repr(transparent)]
 #[derive(
@@ -390,7 +390,7 @@ impl Pubkey {
     ///
     /// ```
     /// # use borsh::{BorshSerialize, BorshDeserialize};
-    /// # use solana_program::example_mocks::{miraland_sdk, miraland_client};
+    /// # use solana_program::example_mocks::{solana_sdk, miraland_client};
     /// # use solana_program::{
     /// #     pubkey::Pubkey,
     /// #     instruction::Instruction,
@@ -398,7 +398,7 @@ impl Pubkey {
     /// #     instruction::AccountMeta,
     /// #     system_program,
     /// # };
-    /// # use miraland_sdk::{
+    /// # use solana_sdk::{
     /// #     signature::Keypair,
     /// #     signature::{Signer, Signature},
     /// #     transaction::Transaction,

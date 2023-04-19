@@ -1,4 +1,4 @@
-//! Implementations of syscalls used when `solana-program` is built for non-BPF targets.
+//! Implementations of syscalls used when `miraland-program` is built for non-BPF targets.
 
 #![cfg(not(target_os = "solana"))]
 

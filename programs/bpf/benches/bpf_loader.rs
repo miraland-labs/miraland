@@ -7,7 +7,7 @@ extern crate solana_bpf_loader_program;
 
 use {
     byteorder::{ByteOrder, LittleEndian, WriteBytesExt},
-    miraland_sdk::{
+    solana_sdk::{
         bpf_loader,
         client::SyncClient,
         entrypoint::SUCCESS,
@@ -19,7 +19,7 @@ use {
         create_vm, serialization::serialize_parameters, syscalls::register_syscalls, BpfError,
         ThisInstructionMeter,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_program_runtime::invoke_context::with_mock_invoke_context,
     solana_rbpf::{
         elf::Executable,
