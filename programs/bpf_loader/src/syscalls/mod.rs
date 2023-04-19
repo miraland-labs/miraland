@@ -12,6 +12,21 @@ pub use self::{
 #[allow(deprecated)]
 use {
     crate::{allocator_bump::BpfAllocator, BpfError},
+    solana_program_runtime::{
+        ic_logger_msg, ic_msg,
+        invoke_context::{ComputeMeter, InvokeContext},
+        stable_log,
+        timings::ExecuteTimings,
+    },
+    solana_rbpf::{
+        aligned_memory::AlignedMemory,
+        ebpf,
+        error::EbpfError,
+        memory_region::{AccessType, MemoryMapping},
+        question_mark,
+        verifier::RequisiteVerifier,
+        vm::{EbpfVm, SyscallObject, SyscallRegistry},
+    },
     solana_sdk::{
         account::{ReadableAccount, WritableAccount},
         account_info::AccountInfo,
@@ -39,21 +54,6 @@ use {
         },
         sysvar::{Sysvar, SysvarId},
         transaction_context::InstructionAccount,
-    },
-    solana_program_runtime::{
-        ic_logger_msg, ic_msg,
-        invoke_context::{ComputeMeter, InvokeContext},
-        stable_log,
-        timings::ExecuteTimings,
-    },
-    solana_rbpf::{
-        aligned_memory::AlignedMemory,
-        ebpf,
-        error::EbpfError,
-        memory_region::{AccessType, MemoryMapping},
-        question_mark,
-        verifier::RequisiteVerifier,
-        vm::{EbpfVm, SyscallObject, SyscallRegistry},
     },
     std::{
         alloc::Layout,
@@ -1132,7 +1132,7 @@ declare_syscall!(
         memory_mapping: &mut MemoryMapping,
         result: &mut Result<u64, EbpfError<BpfError>>,
     ) {
-        use miraland_zk_token_sdk::curve25519::{curve_syscall_traits::*, edwards, ristretto};
+        use solana_zk_token_sdk::curve25519::{curve_syscall_traits::*, edwards, ristretto};
 
         let invoke_context = question_mark!(
             self.invoke_context
@@ -1206,7 +1206,7 @@ declare_syscall!(
         memory_mapping: &mut MemoryMapping,
         result: &mut Result<u64, EbpfError<BpfError>>,
     ) {
-        use miraland_zk_token_sdk::curve25519::{
+        use solana_zk_token_sdk::curve25519::{
             curve_syscall_traits::*, edwards, ristretto, scalar,
         };
 
@@ -1927,6 +1927,10 @@ mod tests {
     use solana_sdk::sysvar::fees::Fees;
     use {
         super::*,
+        solana_program_runtime::{invoke_context::InvokeContext, sysvar_cache::SysvarCache},
+        solana_rbpf::{
+            ebpf::HOST_ALIGN, memory_region::MemoryRegion, user_error::UserError, vm::Config,
+        },
         solana_sdk::{
             account::AccountSharedData,
             bpf_loader,
@@ -1935,10 +1939,6 @@ mod tests {
             program::check_type_assumptions,
             sysvar::{clock::Clock, epoch_schedule::EpochSchedule, rent::Rent},
             transaction_context::TransactionContext,
-        },
-        solana_program_runtime::{invoke_context::InvokeContext, sysvar_cache::SysvarCache},
-        solana_rbpf::{
-            ebpf::HOST_ALIGN, memory_region::MemoryRegion, user_error::UserError, vm::Config,
         },
         std::{borrow::Cow, str::FromStr},
     };
@@ -2861,7 +2861,7 @@ mod tests {
 
     #[test]
     fn test_syscall_edwards_curve_point_validation() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_EDWARDS;
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_EDWARDS;
 
         let config = Config::default();
         prepare_mockup!(
@@ -2962,7 +2962,7 @@ mod tests {
 
     #[test]
     fn test_syscall_ristretto_curve_point_validation() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_RISTRETTO;
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_RISTRETTO;
 
         let config = Config::default();
         prepare_mockup!(
@@ -3063,7 +3063,7 @@ mod tests {
 
     #[test]
     fn test_syscall_edwards_curve_group_ops() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
             ADD, CURVE25519_EDWARDS, MUL, SUB,
         };
 
@@ -3270,7 +3270,7 @@ mod tests {
 
     #[test]
     fn test_syscall_ristretto_curve_group_ops() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
             ADD, CURVE25519_RISTRETTO, MUL, SUB,
         };
 

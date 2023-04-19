@@ -1,8 +1,8 @@
 use {
     crate::{bucket_stats::BucketStats, MaxSearch},
     memmap2::MmapMut,
-    rand::{thread_rng, Rng},
     miraland_measure::measure::Measure,
+    rand::{thread_rng, Rng},
     std::{
         fs::{remove_file, OpenOptions},
         io::{Seek, SeekFrom, Write},

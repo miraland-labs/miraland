@@ -12,17 +12,17 @@ use {
     },
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
     miraland_gossip::cluster_info::ClusterInfo,
-    solana_sdk::clock::Slot,
+    miraland_measure::measure::Measure,
+    miraland_rayon_threadlimit::get_thread_count,
     rayon::{prelude::*, ThreadPool},
     solana_ledger::{
         blockstore::{Blockstore, BlockstoreInsertionMetrics},
         leader_schedule_cache::LeaderScheduleCache,
         shred::{self, Nonce, ReedSolomonCache, Shred},
     },
-    miraland_measure::measure::Measure,
     solana_metrics::inc_new_counter_error,
     solana_perf::packet::{Packet, PacketBatch},
-    miraland_rayon_threadlimit::get_thread_count,
+    solana_sdk::clock::Slot,
     std::{
         cmp::Reverse,
         collections::{HashMap, HashSet},
@@ -482,17 +482,17 @@ impl WindowService {
 mod test {
     use {
         super::*,
-        miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-        solana_sdk::{
-            hash::Hash,
-            signature::{Keypair, Signer},
-            timing::timestamp,
-        },
         miraland_entry::entry::{create_ticks, Entry},
+        miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
         solana_ledger::{
             blockstore::{make_many_slot_entries, Blockstore},
             get_tmp_ledger_path,
             shred::{ProcessShredsStats, Shredder},
+        },
+        solana_sdk::{
+            hash::Hash,
+            signature::{Keypair, Signer},
+            timing::timestamp,
         },
         solana_streamer::socket::SocketAddrSpace,
     };

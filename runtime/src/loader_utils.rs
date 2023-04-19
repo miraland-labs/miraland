@@ -1,4 +1,5 @@
 use {
+    serde::Serialize,
     solana_sdk::{
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         client::Client,
@@ -9,7 +10,6 @@ use {
         signature::{Keypair, Signer},
         system_instruction,
     },
-    serde::Serialize,
     std::{env, fs::File, io::Read, path::PathBuf},
 };
 

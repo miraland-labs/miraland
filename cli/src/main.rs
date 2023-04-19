@@ -1,6 +1,11 @@
 use {
     clap::{crate_description, crate_name, value_t_or_exit, ArgMatches},
     console::style,
+    miraland_clap_utils::{
+        input_validators::normalize_to_url_if_moniker,
+        keypair::{CliSigners, DefaultSigner},
+        DisplayError,
+    },
     miraland_cli::{
         clap_app::get_clap_app,
         cli::{parse_command, process_command, CliCommandInfo, CliConfig},
@@ -11,12 +16,7 @@ use {
         OutputFormat,
     },
     miraland_client::rpc_config::RpcSendTransactionConfig,
-    miraland_clap_utils::{
-        input_validators::normalize_to_url_if_moniker,
-        keypair::{CliSigners, DefaultSigner},
-        DisplayError,
-    },
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     std::{collections::HashMap, error, path::PathBuf, sync::Arc, time::Duration},
 };
 

@@ -9,6 +9,8 @@ use {
     crossbeam_channel::unbounded,
     indicatif::{ProgressBar, ProgressStyle},
     miraland_client::rpc_client::RpcClient,
+    serde::{Deserialize, Serialize},
+    solana_config_program::{config_instruction, get_config_data, ConfigState},
     solana_sdk::{
         hash::{Hash, Hasher},
         message::Message,
@@ -16,8 +18,6 @@ use {
         signature::{read_keypair_file, Keypair, Signable, Signer},
         transaction::Transaction,
     },
-    serde::{Deserialize, Serialize},
-    solana_config_program::{config_instruction, get_config_data, ConfigState},
     std::{
         fs::{self, File},
         io::{self, BufReader, Read},

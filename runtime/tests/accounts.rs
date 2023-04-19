@@ -1,16 +1,16 @@
 use {
     log::*,
-    solana_sdk::{
-        account::{AccountSharedData, ReadableAccount, WritableAccount},
-        clock::Slot,
-        genesis_config::ClusterType,
-        pubkey::Pubkey,
-    },
     rand::{thread_rng, Rng},
     rayon::prelude::*,
     solana_runtime::{
         accounts_db::{AccountsDb, LoadHint},
         ancestors::Ancestors,
+    },
+    solana_sdk::{
+        account::{AccountSharedData, ReadableAccount, WritableAccount},
+        clock::Slot,
+        genesis_config::ClusterType,
+        pubkey::Pubkey,
     },
     std::{
         collections::HashSet,

@@ -4,7 +4,6 @@ extern crate test;
 
 use {
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-    solana_sdk::{clock::Slot, pubkey::Pubkey},
     rand::{seq::SliceRandom, Rng},
     solana_core::{
         cluster_nodes::{make_test_cluster, new_cluster_nodes, ClusterNodes},
@@ -15,6 +14,7 @@ use {
         shred::{Shred, ShredFlags},
     },
     solana_runtime::bank::Bank,
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     test::Bencher,
 };
 

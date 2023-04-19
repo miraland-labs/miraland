@@ -4,14 +4,14 @@ extern crate solana_core;
 extern crate test;
 
 use {
-    solana_sdk::{
-        pubkey::Pubkey,
-        signature::{Keypair, Signer},
-    },
     solana_core::{
         consensus::Tower, tower_storage::FileTowerStorage, vote_simulator::VoteSimulator,
     },
     solana_runtime::{bank::Bank, bank_forks::BankForks},
+    solana_sdk::{
+        pubkey::Pubkey,
+        signature::{Keypair, Signer},
+    },
     std::{
         collections::{HashMap, HashSet},
         sync::Arc,

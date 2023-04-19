@@ -1,10 +1,10 @@
 use {
+    solana_program_runtime::compute_budget::ComputeBudget,
     solana_sdk::{
         instruction::CompiledInstruction,
         pubkey::Pubkey,
         transaction::{SanitizedTransaction, SanitizedVersionedTransaction},
     },
-    solana_program_runtime::compute_budget::ComputeBudget,
 };
 
 #[derive(Debug, PartialEq, Eq)]

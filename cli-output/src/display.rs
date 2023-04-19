@@ -4,6 +4,9 @@ use {
     console::style,
     indicatif::{ProgressBar, ProgressStyle},
     miraland_cli_config::SettingType,
+    miraland_transaction_status::{
+        Rewards, UiReturnDataEncoding, UiTransactionReturnData, UiTransactionStatusMeta,
+    },
     solana_sdk::{
         clock::UnixTimestamp,
         hash::Hash,
@@ -15,9 +18,6 @@ use {
         signature::Signature,
         stake,
         transaction::{TransactionError, TransactionVersion, VersionedTransaction},
-    },
-    miraland_transaction_status::{
-        Rewards, UiReturnDataEncoding, UiTransactionReturnData, UiTransactionStatusMeta,
     },
     spl_memo::{id as spl_memo_id, v1::id as spl_memo_v1_id},
     std::{collections::HashMap, fmt, io},
@@ -727,6 +727,7 @@ pub fn unix_timestamp_to_string(unix_timestamp: UnixTimestamp) -> String {
 mod test {
     use {
         super::*,
+        miraland_transaction_status::{Reward, RewardType, TransactionStatusMeta},
         solana_sdk::{
             message::{
                 v0::{self, LoadedAddresses},
@@ -737,7 +738,6 @@ mod test {
             transaction::Transaction,
             transaction_context::TransactionReturnData,
         },
-        miraland_transaction_status::{Reward, RewardType, TransactionStatusMeta},
         std::io::BufWriter,
     };
 

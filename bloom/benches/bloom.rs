@@ -4,12 +4,12 @@ extern crate test;
 use {
     bv::BitVec,
     fnv::FnvHasher,
+    rand::Rng,
+    solana_bloom::bloom::{AtomicBloom, Bloom, BloomHashIndex},
     solana_sdk::{
         hash::{hash, Hash},
         signature::Signature,
     },
-    rand::Rng,
-    solana_bloom::bloom::{AtomicBloom, Bloom, BloomHashIndex},
     std::{collections::HashSet, hash::Hasher},
     test::Bencher,
 };

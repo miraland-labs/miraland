@@ -2,9 +2,9 @@
 use {
     bv::BitVec,
     fnv::FnvHasher,
-    solana_sdk::sanitize::{Sanitize, SanitizeError},
     rand::{self, Rng},
     serde::{Deserialize, Serialize},
+    solana_sdk::sanitize::{Sanitize, SanitizeError},
     std::{
         cmp, fmt,
         hash::Hasher,
@@ -237,8 +237,8 @@ impl<T: BloomHashIndex> From<AtomicBloom<T>> for Bloom<T> {
 mod test {
     use {
         super::*,
-        solana_sdk::hash::{hash, Hash},
         rayon::prelude::*,
+        solana_sdk::hash::{hash, Hash},
     };
 
     #[test]

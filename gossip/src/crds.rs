@@ -38,12 +38,12 @@ use {
     },
     lru::LruCache,
     matches::debug_assert_matches,
+    rayon::{prelude::*, ThreadPool},
     solana_sdk::{
         clock::Slot,
         hash::{hash, Hash},
         pubkey::Pubkey,
     },
-    rayon::{prelude::*, ThreadPool},
     std::{
         cmp::Ordering,
         collections::{hash_map, BTreeMap, HashMap, VecDeque},
@@ -720,13 +720,13 @@ mod tests {
             crds_value::{new_rand_timestamp, NodeInstance, SnapshotHashes},
             socketaddr,
         },
+        rand::{thread_rng, Rng, SeedableRng},
+        rand_chacha::ChaChaRng,
+        rayon::ThreadPoolBuilder,
         solana_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        rand::{thread_rng, Rng, SeedableRng},
-        rand_chacha::ChaChaRng,
-        rayon::ThreadPoolBuilder,
         std::{collections::HashSet, iter::repeat_with},
     };
 

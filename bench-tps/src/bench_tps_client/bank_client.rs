@@ -1,5 +1,6 @@
 use {
     crate::bench_tps_client::{BenchTpsClient, BenchTpsError, Result},
+    solana_runtime::bank_client::BankClient,
     solana_sdk::{
         account::Account,
         client::{AsyncClient, SyncClient},
@@ -11,7 +12,6 @@ use {
         signature::Signature,
         transaction::Transaction,
     },
-    solana_runtime::bank_client::BankClient,
 };
 
 impl BenchTpsClient for BankClient {

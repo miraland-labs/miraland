@@ -2,7 +2,6 @@ use {
     miraland_gossip::cluster_info::{
         ClusterInfo, MAX_INCREMENTAL_SNAPSHOT_HASHES, MAX_SNAPSHOT_HASHES,
     },
-    solana_sdk::{clock::Slot, hash::Hash},
     solana_perf::thread::renice_this_thread,
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
@@ -14,6 +13,7 @@ use {
         snapshot_package::{retain_max_n_elements, PendingSnapshotPackage, SnapshotType},
         snapshot_utils,
     },
+    solana_sdk::{clock::Slot, hash::Hash},
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -221,7 +221,6 @@ mod tests {
     use {
         super::*,
         bincode::serialize_into,
-        solana_sdk::hash::Hash,
         solana_runtime::{
             accounts_db::AccountStorageEntry,
             bank::BankSlotDelta,
@@ -231,6 +230,7 @@ mod tests {
                 self, ArchiveFormat, SnapshotVersion, SNAPSHOT_STATUS_CACHE_FILENAME,
             },
         },
+        solana_sdk::hash::Hash,
         std::{
             fs::{self, remove_dir_all, OpenOptions},
             io::Write,

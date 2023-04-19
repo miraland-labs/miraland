@@ -9,6 +9,9 @@ use {
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    rayon::iter::*,
+    solana_perf::packet::Packet,
+    solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         hash::Hash,
         pubkey::Pubkey,
@@ -16,9 +19,6 @@ use {
         timing::timestamp,
         transaction::Transaction,
     },
-    rayon::iter::*,
-    solana_perf::packet::Packet,
-    solana_runtime::bank_forks::BankForks,
     solana_streamer::{
         sendmmsg::{multi_target_send, SendPktsError},
         socket::SocketAddrSpace,

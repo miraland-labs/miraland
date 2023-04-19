@@ -14,15 +14,15 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         ping_pong::PingCache,
     },
+    miraland_rayon_threadlimit::get_thread_count,
+    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
+    serial_test::serial,
     solana_sdk::{
         hash::hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
-    serial_test::serial,
-    miraland_rayon_threadlimit::get_thread_count,
     solana_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},

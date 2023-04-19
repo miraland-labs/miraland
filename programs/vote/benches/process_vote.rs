@@ -3,6 +3,7 @@
 extern crate test;
 
 use {
+    solana_program_runtime::invoke_context::InvokeContext,
     solana_sdk::{
         account::{create_account_for_test, Account, AccountSharedData},
         clock::{Clock, Slot},
@@ -12,7 +13,6 @@ use {
         sysvar,
         transaction_context::{InstructionAccount, TransactionAccount, TransactionContext},
     },
-    solana_program_runtime::invoke_context::InvokeContext,
     solana_vote_program::{
         vote_instruction::VoteInstruction,
         vote_state::{

@@ -1,6 +1,9 @@
 use {
     crate::bench_tps_client::*,
     log::*,
+    miraland_measure::measure::Measure,
+    rayon::prelude::*,
+    solana_core::gen_keys::GenKeys,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -12,9 +15,6 @@ use {
         system_instruction,
         transaction::Transaction,
     },
-    rayon::prelude::*,
-    solana_core::gen_keys::GenKeys,
-    miraland_measure::measure::Measure,
     std::{
         collections::HashSet,
         marker::Send,

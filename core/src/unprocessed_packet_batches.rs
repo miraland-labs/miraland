@@ -1,5 +1,9 @@
 use {
     min_max_heap::MinMaxHeap,
+    solana_perf::packet::{Packet, PacketBatch},
+    solana_runtime::transaction_priority_details::{
+        GetTransactionPriorityDetails, TransactionPriorityDetails,
+    },
     solana_sdk::{
         feature_set,
         hash::Hash,
@@ -11,10 +15,6 @@ use {
             AddressLoader, SanitizedTransaction, SanitizedVersionedTransaction, Transaction,
             VersionedTransaction,
         },
-    },
-    solana_perf::packet::{Packet, PacketBatch},
-    solana_runtime::transaction_priority_details::{
-        GetTransactionPriorityDetails, TransactionPriorityDetails,
     },
     std::{
         cmp::Ordering,
@@ -448,12 +448,12 @@ pub fn transaction_from_deserialized_packet(
 mod tests {
     use {
         super::*,
+        solana_perf::packet::PacketFlags,
         solana_sdk::{
             signature::{Keypair, Signer},
             system_transaction,
             transaction::{SimpleAddressLoader, Transaction},
         },
-        solana_perf::packet::PacketFlags,
         solana_vote_program::vote_transaction,
     };
 

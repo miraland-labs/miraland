@@ -6,12 +6,12 @@ use {
     },
     itertools::Itertools,
     log::*,
+    solana_runtime::bank::Bank,
     solana_sdk::{
         clock::{Epoch, Slot},
         epoch_schedule::EpochSchedule,
         pubkey::Pubkey,
     },
-    solana_runtime::bank::Bank,
     std::{
         collections::{hash_map::Entry, HashMap, VecDeque},
         sync::{Arc, RwLock},
@@ -258,6 +258,7 @@ mod tests {
             staking_utils::tests::setup_vote_and_stake_accounts,
         },
         crossbeam_channel::unbounded,
+        solana_runtime::bank::Bank,
         solana_sdk::{
             clock::NUM_CONSECUTIVE_LEADER_SLOTS,
             epoch_schedule::{
@@ -266,7 +267,6 @@ mod tests {
             },
             signature::{Keypair, Signer},
         },
-        solana_runtime::bank::Bank,
         std::{sync::Arc, thread::Builder},
     };
 

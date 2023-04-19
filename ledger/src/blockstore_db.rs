@@ -14,11 +14,6 @@ use {
     bincode::{deserialize, serialize},
     byteorder::{BigEndian, ByteOrder},
     log::*,
-    solana_sdk::{
-        clock::{Slot, UnixTimestamp},
-        pubkey::Pubkey,
-        signature::Signature,
-    },
     prost::Message,
     rocksdb::{
         self,
@@ -30,6 +25,11 @@ use {
     },
     serde::{de::DeserializeOwned, Serialize},
     solana_runtime::hardened_unpack::UnpackError,
+    solana_sdk::{
+        clock::{Slot, UnixTimestamp},
+        pubkey::Pubkey,
+        signature::Signature,
+    },
     solana_storage_proto::convert::generated,
     std::{
         collections::{HashMap, HashSet},

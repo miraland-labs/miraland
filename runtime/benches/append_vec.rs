@@ -2,12 +2,12 @@
 extern crate test;
 
 use {
-    solana_sdk::{account::ReadableAccount, hash::Hash},
     rand::{thread_rng, Rng},
     solana_runtime::append_vec::{
         test_utils::{create_test_account, get_append_vec_path},
         AppendVec,
     },
+    solana_sdk::{account::ReadableAccount, hash::Hash},
     std::{
         sync::{Arc, Mutex},
         thread::{sleep, spawn},

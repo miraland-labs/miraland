@@ -3,6 +3,11 @@ use {
     common::{
         add_lookup_table_account, assert_ix_error, new_address_lookup_table, setup_test_context,
     },
+    solana_address_lookup_table_program::{
+        instruction::extend_lookup_table,
+        state::{AddressLookupTable, LookupTableMeta},
+    },
+    solana_program_test::*,
     solana_sdk::{
         account::{ReadableAccount, WritableAccount},
         clock::Clock,
@@ -11,11 +16,6 @@ use {
         signature::{Keypair, Signer},
         transaction::{Transaction, TransactionError},
     },
-    solana_address_lookup_table_program::{
-        instruction::extend_lookup_table,
-        state::{AddressLookupTable, LookupTableMeta},
-    },
-    solana_program_test::*,
     std::{borrow::Cow, result::Result},
 };
 

@@ -1,12 +1,10 @@
 use {
     crate::cli::{CliCommand, CliCommandInfo, CliConfig, CliError, ProcessResult},
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand},
+    miraland_clap_utils::{self, input_parsers::*, input_validators::*, keypair::*},
     miraland_cli_output::{CliAddressLookupTable, CliAddressLookupTableCreated, CliSignature},
     miraland_client::{rpc_client::RpcClient, rpc_config::RpcSendTransactionConfig},
-    solana_sdk::{
-        account::from_account, clock::Clock, commitment_config::CommitmentConfig, message::Message,
-        pubkey::Pubkey, sysvar, transaction::Transaction,
-    },
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_address_lookup_table_program::{
         instruction::{
             close_lookup_table, create_lookup_table, deactivate_lookup_table, extend_lookup_table,
@@ -14,8 +12,10 @@ use {
         },
         state::AddressLookupTable,
     },
-    miraland_clap_utils::{self, input_parsers::*, input_validators::*, keypair::*},
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    solana_sdk::{
+        account::from_account, clock::Clock, commitment_config::CommitmentConfig, message::Message,
+        pubkey::Pubkey, sysvar, transaction::Transaction,
+    },
     std::sync::Arc,
 };
 

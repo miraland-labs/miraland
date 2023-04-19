@@ -1,4 +1,5 @@
 use {
+    solana_program_test::{programs::spl_programs, ProgramTest},
     solana_sdk::{
         bpf_loader, bpf_loader_upgradeable,
         instruction::{AccountMeta, Instruction},
@@ -9,7 +10,6 @@ use {
         sysvar::rent,
         transaction::Transaction,
     },
-    solana_program_test::{programs::spl_programs, ProgramTest},
 };
 
 #[tokio::test]

@@ -4,7 +4,7 @@ use {
     spl_token_2022::{
         extension::{self, BaseState, BaseStateWithExtensions, ExtensionType, StateWithExtensions},
         solana_program::pubkey::Pubkey,
-        miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+        solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
     },
 };
 

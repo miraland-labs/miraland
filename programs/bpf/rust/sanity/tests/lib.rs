@@ -1,14 +1,14 @@
 #![cfg(feature = "test-bpf")]
 
 use {
+    solana_bpf_rust_sanity::process_instruction,
+    solana_program_test::*,
     solana_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         transaction::Transaction,
     },
-    solana_bpf_rust_sanity::process_instruction,
-    solana_program_test::*,
 };
 
 #[tokio::test]

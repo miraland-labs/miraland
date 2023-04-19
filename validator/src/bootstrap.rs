@@ -1,6 +1,7 @@
 use {
     log::*,
     miraland_client::rpc_client::RpcClient,
+    miraland_download_utils::{download_snapshot_archive, DownloadProgressRecord},
     miraland_genesis_utils::download_then_check_genesis_hash,
     miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
@@ -8,16 +9,8 @@ use {
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_sdk::{
-        clock::Slot,
-        commitment_config::CommitmentConfig,
-        hash::Hash,
-        pubkey::Pubkey,
-        signature::{Keypair, Signer},
-    },
     rand::{seq::SliceRandom, thread_rng, Rng},
     solana_core::validator::{ValidatorConfig, ValidatorStartProgress},
-    miraland_download_utils::{download_snapshot_archive, DownloadProgressRecord},
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_package::SnapshotType,
@@ -25,6 +18,13 @@ use {
             self, DEFAULT_MAX_FULL_SNAPSHOT_ARCHIVES_TO_RETAIN,
             DEFAULT_MAX_INCREMENTAL_SNAPSHOT_ARCHIVES_TO_RETAIN,
         },
+    },
+    solana_sdk::{
+        clock::Slot,
+        commitment_config::CommitmentConfig,
+        hash::Hash,
+        pubkey::Pubkey,
+        signature::{Keypair, Signer},
     },
     solana_streamer::socket::SocketAddrSpace,
     std::{

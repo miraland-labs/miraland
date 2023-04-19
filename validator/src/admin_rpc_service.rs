@@ -8,16 +8,16 @@ use {
     miraland_gossip::{
         cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_sdk::{
-        exit::Exit,
-        pubkey::Pubkey,
-        signature::{read_keypair_file, Keypair, Signer},
-    },
     serde::{Deserialize, Serialize},
     solana_core::{
         consensus::Tower, tower_storage::TowerStorage, validator::ValidatorStartProgress,
     },
     solana_runtime::bank_forks::BankForks,
+    solana_sdk::{
+        exit::Exit,
+        pubkey::Pubkey,
+        signature::{read_keypair_file, Keypair, Signer},
+    },
     std::{
         fmt::{self, Display},
         net::SocketAddr,

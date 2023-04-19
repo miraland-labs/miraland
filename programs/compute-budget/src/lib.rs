@@ -1,6 +1,6 @@
 use {
-    solana_sdk::instruction::InstructionError,
     solana_program_runtime::invoke_context::InvokeContext,
+    solana_sdk::instruction::InstructionError,
 };
 
 pub fn process_instruction(

@@ -2,12 +2,6 @@
 use {
     crate::shred,
     itertools::{izip, Itertools},
-    solana_sdk::{
-        clock::Slot,
-        hash::Hash,
-        pubkey::Pubkey,
-        signature::{Keypair, Signature, Signer},
-    },
     rayon::{prelude::*, ThreadPool},
     sha2::{Digest, Sha512},
     solana_metrics::inc_new_counter_debug,
@@ -17,6 +11,12 @@ use {
         perf_libs,
         recycler_cache::RecyclerCache,
         sigverify::{self, count_packets_in_batches, TxOffset},
+    },
+    solana_sdk::{
+        clock::Slot,
+        hash::Hash,
+        pubkey::Pubkey,
+        signature::{Keypair, Signature, Signer},
     },
     static_assertions::const_assert_eq,
     std::{collections::HashMap, fmt::Debug, iter::repeat, mem::size_of, ops::Range, sync::Arc},
@@ -480,6 +480,9 @@ mod tests {
             shredder::{ReedSolomonCache, Shredder},
         },
         matches::assert_matches,
+        miraland_entry::entry::Entry,
+        rand::{seq::SliceRandom, Rng},
+        rayon::ThreadPoolBuilder,
         solana_sdk::{
             hash,
             hash::Hash,
@@ -487,9 +490,6 @@ mod tests {
             system_transaction,
             transaction::Transaction,
         },
-        rand::{seq::SliceRandom, Rng},
-        rayon::ThreadPoolBuilder,
-        miraland_entry::entry::Entry,
         std::iter::{once, repeat_with},
     };
 

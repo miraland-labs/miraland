@@ -11,8 +11,8 @@ edition = "2021"
 
 [dependencies]
 getrandom = { version = "0.1.14", features = ["dummy"] }
-rand = "0.7"
 miraland-program = { path = "../../../../sdk/program", version = "=1.14.17" }
+rand = "0.7"
 
 [lib]
 crate-type = ["cdylib"]

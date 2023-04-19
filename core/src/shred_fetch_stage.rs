@@ -4,13 +4,13 @@ use {
     crate::{cluster_nodes::check_feature_activation, serve_repair::ServeRepair},
     crossbeam_channel::{unbounded, Sender},
     miraland_gossip::cluster_info::ClusterInfo,
+    solana_ledger::shred::{should_discard_shred, ShredFetchStats},
+    solana_perf::packet::{PacketBatch, PacketBatchRecycler, PacketFlags},
+    solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         feature_set,
     },
-    solana_ledger::shred::{should_discard_shred, ShredFetchStats},
-    solana_perf::packet::{PacketBatch, PacketBatchRecycler, PacketFlags},
-    solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_streamer::streamer::{self, PacketBatchReceiver, StreamerReceiveStats},
     std::{
         net::UdpSocket,
@@ -249,11 +249,11 @@ fn should_drop_merkle_shreds(shred_slot: Slot, root_bank: &Bank) -> bool {
 mod tests {
     use {
         super::*,
-        solana_sdk::packet::Packet,
         solana_ledger::{
             blockstore::MAX_DATA_SHREDS_PER_SLOT,
             shred::{ReedSolomonCache, Shred, ShredFlags},
         },
+        solana_sdk::packet::Packet,
     };
 
     #[test]

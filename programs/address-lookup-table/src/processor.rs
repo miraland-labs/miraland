@@ -6,6 +6,7 @@ use {
             LOOKUP_TABLE_MAX_ADDRESSES, LOOKUP_TABLE_META_SIZE,
         },
     },
+    solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
     solana_sdk::{
         clock::Slot,
         instruction::InstructionError,
@@ -13,7 +14,6 @@ use {
         pubkey::{Pubkey, PUBKEY_BYTES},
         system_instruction,
     },
-    solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
     std::convert::TryFrom,
 };
 

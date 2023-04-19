@@ -13,6 +13,7 @@ use {
         rpc_client::RpcClient,
     },
     miraland_faucet::faucet::run_local_faucet,
+    miraland_test_validator::TestValidator,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -21,7 +22,6 @@ use {
         signature::{keypair_from_seed, Keypair, Signer},
         system_program,
     },
-    miraland_test_validator::TestValidator,
     solana_streamer::socket::SocketAddrSpace,
 };
 

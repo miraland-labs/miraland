@@ -8,13 +8,13 @@ use {
             VoteAuthorizeWithSeedArgs, VoteInit, VoteState, VoteStateUpdate,
         },
     },
+    serde_derive::{Deserialize, Serialize},
     solana_sdk::{
         hash::Hash,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         system_instruction, sysvar,
     },
-    serde_derive::{Deserialize, Serialize},
 };
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone)]

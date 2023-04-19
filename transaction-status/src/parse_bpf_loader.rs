@@ -3,11 +3,11 @@ use {
         check_num_accounts, ParsableProgram, ParseInstructionError, ParsedInstructionEnum,
     },
     bincode::deserialize,
+    serde_json::json,
     solana_sdk::{
         instruction::CompiledInstruction, loader_instruction::LoaderInstruction,
         loader_upgradeable_instruction::UpgradeableLoaderInstruction, message::AccountKeys,
     },
-    serde_json::json,
 };
 
 pub fn parse_bpf_loader(
@@ -189,13 +189,13 @@ fn check_num_bpf_upgradeable_loader_accounts(
 mod test {
     use {
         super::*,
+        serde_json::Value,
         solana_sdk::{
             bpf_loader_upgradeable,
             message::Message,
             pubkey::{self, Pubkey},
             system_program, sysvar,
         },
-        serde_json::Value,
     };
 
     #[test]

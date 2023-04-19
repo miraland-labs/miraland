@@ -14,8 +14,8 @@ default = ["program"]
 program = []
 
 [dependencies]
-solana-bpf-rust-realloc = { path = "../realloc", version = "=1.14.17", default-features = false }
 miraland-program = { path = "../../../../sdk/program", version = "=1.14.17" }
+solana-bpf-rust-realloc = { path = "../realloc", version = "=1.14.17", default-features = false }
 
 [lib]
 crate-type = ["lib", "cdylib"]

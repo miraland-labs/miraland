@@ -2,8 +2,8 @@
 
 use {
     log::*,
-    solana_sdk::decode_error::DecodeError,
     num_derive::{FromPrimitive, ToPrimitive},
+    solana_sdk::decode_error::DecodeError,
     thiserror::Error,
 };
 

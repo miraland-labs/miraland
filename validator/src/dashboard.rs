@@ -7,11 +7,11 @@ use {
     miraland_client::{
         client_error, rpc_client::RpcClient, rpc_request, rpc_response::RpcContactInfo,
     },
+    solana_core::validator::ValidatorStartProgress,
     solana_sdk::{
         clock::Slot, commitment_config::CommitmentConfig, exit::Exit, native_token::Sol,
         pubkey::Pubkey,
     },
-    solana_core::validator::ValidatorStartProgress,
     std::{
         io,
         net::SocketAddr,

@@ -10,8 +10,8 @@ homepage = "https://miraland.top/"
 publish = false
 
 [dependencies]
-serde_json = "1.0.81"
 miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+serde_json = "1.0.81"
 
 [[bin]]
 name = "miraland-upload-perf"

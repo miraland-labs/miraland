@@ -8,15 +8,15 @@ use {
     crate::{
         broadcast_stage::broadcast_utils::UnfinishedSlotInfo, cluster_nodes::ClusterNodesCache,
     },
-    solana_sdk::{
-        genesis_config::ClusterType,
-        signature::Keypair,
-        timing::{duration_as_us, AtomicInterval},
-    },
     miraland_entry::entry::Entry,
     solana_ledger::{
         blockstore,
         shred::{shred_code, ProcessShredsStats, ReedSolomonCache, Shred, ShredFlags, Shredder},
+    },
+    solana_sdk::{
+        genesis_config::ClusterType,
+        signature::Keypair,
+        timing::{duration_as_us, AtomicInterval},
     },
     std::{sync::RwLock, time::Duration},
 };
@@ -506,17 +506,17 @@ fn should_use_merkle_variant(_slot: Slot, _cluster_type: ClusterType, _shred_ver
 mod test {
     use {
         super::*,
-        miraland_gossip::cluster_info::{ClusterInfo, Node},
-        solana_sdk::{
-            genesis_config::GenesisConfig,
-            signature::{Keypair, Signer},
-        },
         miraland_entry::entry::create_ticks,
+        miraland_gossip::cluster_info::{ClusterInfo, Node},
         solana_ledger::{
             blockstore::Blockstore, genesis_utils::create_genesis_config, get_tmp_ledger_path,
             shred::max_ticks_per_n_shreds,
         },
         solana_runtime::bank::Bank,
+        solana_sdk::{
+            genesis_config::GenesisConfig,
+            signature::{Keypair, Signer},
+        },
         solana_streamer::socket::SocketAddrSpace,
         std::{ops::Deref, sync::Arc, time::Duration},
     };

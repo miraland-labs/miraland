@@ -10,6 +10,10 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
+    rand::{seq::SliceRandom, Rng, SeedableRng},
+    rand_chacha::ChaChaRng,
+    solana_ledger::shred::ShredId,
+    solana_runtime::bank::Bank,
     solana_sdk::{
         clock::{Epoch, Slot},
         feature_set,
@@ -17,10 +21,6 @@ use {
         signature::Keypair,
         timing::timestamp,
     },
-    rand::{seq::SliceRandom, Rng, SeedableRng},
-    rand_chacha::ChaChaRng,
-    solana_ledger::shred::ShredId,
-    solana_runtime::bank::Bank,
     solana_streamer::socket::SocketAddrSpace,
     std::{
         any::TypeId,

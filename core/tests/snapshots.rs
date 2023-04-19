@@ -9,18 +9,6 @@ use {
     miraland_gossip::{
         cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_sdk::{
-        clock::Slot,
-        genesis_config::{
-            ClusterType::{self, Development, Devnet, MainnetBeta, Testnet},
-            GenesisConfig,
-        },
-        hash::{hashv, Hash},
-        pubkey::Pubkey,
-        signature::{Keypair, Signer},
-        system_transaction,
-        timing::timestamp,
-    },
     solana_core::{
         accounts_hash_verifier::AccountsHashVerifier,
         snapshot_packager_service::SnapshotPackagerService,
@@ -45,6 +33,18 @@ use {
             SnapshotVersion::{self, V1_2_0},
         },
         status_cache::MAX_CACHE_ENTRIES,
+    },
+    solana_sdk::{
+        clock::Slot,
+        genesis_config::{
+            ClusterType::{self, Development, Devnet, MainnetBeta, Testnet},
+            GenesisConfig,
+        },
+        hash::{hashv, Hash},
+        pubkey::Pubkey,
+        signature::{Keypair, Signer},
+        system_transaction,
+        timing::timestamp,
     },
     solana_streamer::socket::SocketAddrSpace,
     std::{
@@ -89,9 +89,9 @@ impl SnapshotTestConfig {
         // bank stakes which results in mismatch when banks are loaded from
         // snapshots.
         let mut genesis_config_info = create_genesis_config_with_leader(
-            10_000,                            // mint_lamports
+            10_000,                          // mint_lamports
             &solana_sdk::pubkey::new_rand(), // validator_pubkey
-            1,                                 // validator_stake_lamports
+            1,                               // validator_stake_lamports
         );
         genesis_config_info.genesis_config.cluster_type = cluster_type;
         let bank0 = Bank::new_with_paths_for_tests(

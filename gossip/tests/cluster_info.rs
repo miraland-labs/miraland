@@ -7,11 +7,11 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
-    solana_sdk::{pubkey::Pubkey, signer::keypair::Keypair},
     rand::SeedableRng,
     rand_chacha::ChaChaRng,
     rayon::{iter::ParallelIterator, prelude::*},
     serial_test::serial,
+    solana_sdk::{pubkey::Pubkey, signer::keypair::Keypair},
     solana_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},

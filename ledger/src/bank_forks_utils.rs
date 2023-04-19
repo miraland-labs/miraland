@@ -8,7 +8,6 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
     },
     log::*,
-    solana_sdk::genesis_config::GenesisConfig,
     solana_runtime::{
         accounts_background_service::AbsRequestSender,
         accounts_update_notifier_interface::AccountsUpdateNotifier,
@@ -18,6 +17,7 @@ use {
         snapshot_hash::{FullSnapshotHash, IncrementalSnapshotHash, StartingSnapshotHashes},
         snapshot_utils,
     },
+    solana_sdk::genesis_config::GenesisConfig,
     std::{
         fs,
         path::PathBuf,

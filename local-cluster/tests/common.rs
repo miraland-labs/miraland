@@ -9,14 +9,6 @@ use {
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
     },
-    solana_sdk::{
-        account::AccountSharedData,
-        clock::{self, Slot, DEFAULT_MS_PER_SLOT, DEFAULT_TICKS_PER_SLOT},
-        hash::Hash,
-        native_token::LAMPORTS_PER_SOL,
-        pubkey::Pubkey,
-        signature::{Keypair, Signer},
-    },
     solana_core::{
         broadcast_stage::BroadcastStageType,
         consensus::{Tower, SWITCH_FORK_THRESHOLD},
@@ -30,6 +22,14 @@ use {
         leader_schedule::{FixedSchedule, LeaderSchedule},
     },
     solana_runtime::snapshot_config::SnapshotConfig,
+    solana_sdk::{
+        account::AccountSharedData,
+        clock::{self, Slot, DEFAULT_MS_PER_SLOT, DEFAULT_TICKS_PER_SLOT},
+        hash::Hash,
+        native_token::LAMPORTS_PER_SOL,
+        pubkey::Pubkey,
+        signature::{Keypair, Signer},
+    },
     solana_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashSet,

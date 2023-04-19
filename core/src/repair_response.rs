@@ -1,9 +1,9 @@
 use {
-    solana_sdk::{clock::Slot, packet::Packet},
     solana_ledger::{
         blockstore::Blockstore,
         shred::{Nonce, SIZE_OF_NONCE},
     },
+    solana_sdk::{clock::Slot, packet::Packet},
     std::{io, net::SocketAddr},
 };
 
@@ -53,13 +53,13 @@ pub(crate) fn nonce(packet: &Packet) -> Option<Nonce> {
 mod test {
     use {
         super::*,
-        solana_sdk::{
-            packet::PacketFlags,
-            signature::{Keypair, Signer},
-        },
         solana_ledger::{
             shred::{Shred, ShredFlags},
             sigverify_shreds::verify_shred_cpu,
+        },
+        solana_sdk::{
+            packet::PacketFlags,
+            signature::{Keypair, Signer},
         },
         std::{
             collections::HashMap,

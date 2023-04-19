@@ -2,6 +2,10 @@
 use {
     bincode::deserialize,
     log::debug,
+    solana_banks_client::BanksClient,
+    solana_program_test::{
+        processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestContext, ProgramTestError,
+    },
     solana_sdk::{
         account::Account,
         account_info::{next_account_info, AccountInfo},
@@ -23,10 +27,6 @@ use {
             Sysvar,
         },
         transaction::{Transaction, TransactionError},
-    },
-    solana_banks_client::BanksClient,
-    solana_program_test::{
-        processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestContext, ProgramTestError,
     },
     solana_stake_program::stake_state,
     solana_vote_program::{

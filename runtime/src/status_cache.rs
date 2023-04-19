@@ -1,12 +1,12 @@
 use {
     crate::ancestors::Ancestors,
     log::*,
+    rand::{thread_rng, Rng},
+    serde::Serialize,
     solana_sdk::{
         clock::{Slot, MAX_RECENT_BLOCKHASHES},
         hash::Hash,
     },
-    rand::{thread_rng, Rng},
-    serde::Serialize,
     std::{
         collections::{hash_map::Entry, HashMap, HashSet},
         sync::{Arc, Mutex},

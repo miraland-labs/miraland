@@ -1,8 +1,8 @@
 use {
-    solana_sdk::pubkey::Pubkey,
+    miraland_measure::measure::Measure,
     rayon::prelude::*,
     solana_bucket_map::bucket_map::{BucketMap, BucketMapConfig},
-    miraland_measure::measure::Measure,
+    solana_sdk::pubkey::Pubkey,
     std::path::PathBuf,
 };
 #[test]

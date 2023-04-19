@@ -10,9 +10,9 @@ edition = "2021"
 [dependencies]
 base64 = "0.13"
 bytemuck = { version = "1.11.0", features = ["derive"] }
+miraland-program = { path = "../sdk/program", version = "=1.14.17" }
 num-derive = "0.3"
 num-traits = "0.2"
-miraland-program = { path = "../sdk/program", version = "=1.14.17" }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
 aes-gcm-siv = "0.10.3"
@@ -36,3 +36,4 @@ zeroize = { version = "1.3", default-features = false, features = ["zeroize_deri
 
 [lib]
 crate-type = ["cdylib", "rlib"]
+name = "solana_zk_token_sdk"

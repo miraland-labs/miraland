@@ -1,7 +1,7 @@
 use {
     crate::update_manifest::UpdateManifest,
-    solana_sdk::pubkey::Pubkey,
     serde::{Deserialize, Serialize},
+    solana_sdk::pubkey::Pubkey,
     std::{
         fs::{create_dir_all, File},
         io::{self, Write},

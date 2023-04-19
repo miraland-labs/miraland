@@ -1,14 +1,14 @@
 use {
     crate::consensus::Stake,
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
-    solana_sdk::clock::Slot,
     miraland_measure::measure::Measure,
-    solana_metrics::datapoint_info,
     miraland_rpc::rpc_subscriptions::RpcSubscriptions,
+    solana_metrics::datapoint_info,
     solana_runtime::{
         bank::Bank,
         commitment::{BlockCommitment, BlockCommitmentCache, CommitmentSlots, VOTE_THRESHOLD_SIZE},
     },
+    solana_sdk::clock::Slot,
     solana_vote_program::vote_state::VoteState,
     std::{
         cmp::max,
@@ -250,13 +250,13 @@ impl AggregateCommitmentService {
 mod tests {
     use {
         super::*,
-        solana_sdk::{account::Account, pubkey::Pubkey, signature::Signer},
         solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_runtime::{
             accounts_background_service::AbsRequestSender,
             bank_forks::BankForks,
             genesis_utils::{create_genesis_config_with_vote_accounts, ValidatorVoteKeypairs},
         },
+        solana_sdk::{account::Account, pubkey::Pubkey, signature::Signer},
         solana_stake_program::stake_state,
         solana_vote_program::{
             vote_state::{self, VoteStateVersions},

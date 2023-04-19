@@ -23,7 +23,7 @@
 //! [`Signer`]: crate::signer::Signer
 //! [`Keypair`]: crate::signer::keypair::Keypair
 //! [`miraland-remote-wallet`]: https://docs.rs/miraland-remote-wallet/latest/
-//! [`RemoteKeypair`]: https://docs.rs/miraland-remote-wallet/latest/solana_remote_wallet/remote_keypair/struct.RemoteKeypair.html
+//! [`RemoteKeypair`]: https://docs.rs/miraland-remote-wallet/latest/miraland_remote_wallet/remote_keypair/struct.RemoteKeypair.html
 //!
 //! Every transaction must be signed by a fee-paying account, the account from
 //! which the cost of executing the transaction is withdrawn. Other required
@@ -126,9 +126,9 @@ use {
         signers::Signers,
         wasm_bindgen,
     },
-    solana_sdk::feature_set,
     serde::Serialize,
     solana_program::{system_instruction::SystemInstruction, system_program},
+    solana_sdk::feature_set,
     std::{result, sync::Arc},
 };
 
@@ -908,7 +908,7 @@ impl Transaction {
     /// [`PresignerError`]: crate::signer::presigner::PresignerError
     /// [`PresignerError::VerificationFailure`]: crate::signer::presigner::PresignerError::VerificationFailure
     /// [`miraland-remote-wallet`]: https://docs.rs/miraland-remote-wallet/latest/
-    /// [`RemoteKeypair`]: https://docs.rs/miraland-remote-wallet/latest/solana_remote_wallet/remote_keypair/struct.RemoteKeypair.html
+    /// [`RemoteKeypair`]: https://docs.rs/miraland-remote-wallet/latest/miraland_remote_wallet/remote_keypair/struct.RemoteKeypair.html
     pub fn try_partial_sign<T: Signers>(
         &mut self,
         keypairs: &T,

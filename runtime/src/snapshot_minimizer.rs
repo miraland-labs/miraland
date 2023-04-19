@@ -10,6 +10,11 @@ use {
     },
     dashmap::DashSet,
     log::info,
+    miraland_measure::measure,
+    rayon::{
+        iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
+        prelude::ParallelSlice,
+    },
     solana_sdk::{
         account::ReadableAccount,
         account_utils::StateMut,
@@ -18,11 +23,6 @@ use {
         pubkey::Pubkey,
         sdk_ids,
     },
-    rayon::{
-        iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
-        prelude::ParallelSlice,
-    },
-    miraland_measure::measure,
     std::{
         collections::HashSet,
         sync::{

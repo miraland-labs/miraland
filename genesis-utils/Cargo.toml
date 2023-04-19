@@ -10,9 +10,9 @@ documentation = "https://docs.rs/miraland-genesis-utils"
 edition = "2021"
 
 [dependencies]
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 miraland-download-utils = { path = "../download-utils", version = "=1.14.17" }
 miraland-runtime = { path = "../runtime", version = "=1.14.17" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]

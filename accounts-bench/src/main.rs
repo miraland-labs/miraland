@@ -3,11 +3,8 @@
 extern crate log;
 use {
     clap::{crate_description, crate_name, value_t, App, Arg},
-    solana_sdk::{
-        genesis_config::ClusterType, pubkey::Pubkey, sysvar::epoch_schedule::EpochSchedule,
-    },
-    rayon::prelude::*,
     miraland_measure::measure::Measure,
+    rayon::prelude::*,
     solana_runtime::{
         accounts::{
             test_utils::{create_test_accounts, update_accounts_bench},
@@ -17,6 +14,9 @@ use {
         accounts_index::AccountSecondaryIndexes,
         ancestors::Ancestors,
         rent_collector::RentCollector,
+    },
+    solana_sdk::{
+        genesis_config::ClusterType, pubkey::Pubkey, sysvar::epoch_schedule::EpochSchedule,
     },
     std::{env, fs, path::PathBuf},
 };

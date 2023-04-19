@@ -1,6 +1,6 @@
 use {
-    super::Bank, solana_sdk::account::ReadableAccount,
-    solana_program_runtime::sysvar_cache::SysvarCache,
+    super::Bank, solana_program_runtime::sysvar_cache::SysvarCache,
+    solana_sdk::account::ReadableAccount,
 };
 
 impl Bank {

@@ -1,6 +1,8 @@
 #![cfg(feature = "test-bpf")]
 
 use {
+    solana_bpf_rust_simulation::process_instruction,
+    solana_program_test::{processor, tokio, ProgramTest},
     solana_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
@@ -8,8 +10,6 @@ use {
         sysvar,
         transaction::Transaction,
     },
-    solana_bpf_rust_simulation::process_instruction,
-    solana_program_test::{processor, tokio, ProgramTest},
 };
 
 #[tokio::test]

@@ -1,8 +1,8 @@
 use {
     miraland_gossip::cluster_info::ClusterInfo,
-    solana_sdk::{clock::NUM_CONSECUTIVE_LEADER_SLOTS, pubkey::Pubkey},
     miraland_poh::poh_recorder::PohRecorder,
     miraland_send_transaction_service::tpu_info::TpuInfo,
+    solana_sdk::{clock::NUM_CONSECUTIVE_LEADER_SLOTS, pubkey::Pubkey},
     std::{
         collections::HashMap,
         net::SocketAddr,
@@ -60,11 +60,6 @@ mod test {
     use {
         super::*,
         miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-        solana_sdk::{
-            poh_config::PohConfig,
-            signature::{Keypair, Signer},
-            timing::timestamp,
-        },
         solana_ledger::{
             blockstore::Blockstore, get_tmp_ledger_path, leader_schedule_cache::LeaderScheduleCache,
         },
@@ -73,6 +68,11 @@ mod test {
             genesis_utils::{
                 create_genesis_config_with_vote_accounts, GenesisConfigInfo, ValidatorVoteKeypairs,
             },
+        },
+        solana_sdk::{
+            poh_config::PohConfig,
+            signature::{Keypair, Signer},
+            timing::timestamp,
         },
         solana_streamer::socket::SocketAddrSpace,
         std::sync::atomic::AtomicBool,

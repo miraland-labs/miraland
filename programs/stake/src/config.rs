@@ -7,13 +7,13 @@
 pub use solana_sdk::stake::config::*;
 use {
     bincode::deserialize,
+    solana_config_program::{create_config_account, get_config_data},
     solana_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         genesis_config::GenesisConfig,
         stake::config::{self, Config},
         transaction_context::BorrowedAccount,
     },
-    solana_config_program::{create_config_account, get_config_data},
 };
 
 pub fn from(account: &BorrowedAccount) -> Option<Config> {

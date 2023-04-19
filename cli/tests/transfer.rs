@@ -14,6 +14,7 @@ use {
         rpc_client::RpcClient,
     },
     miraland_faucet::faucet::run_local_faucet,
+    miraland_test_validator::TestValidator,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         fee::FeeStructure,
@@ -23,7 +24,6 @@ use {
         signature::{keypair_from_seed, Keypair, NullSigner, Signer},
         stake,
     },
-    miraland_test_validator::TestValidator,
     solana_streamer::socket::SocketAddrSpace,
 };
 

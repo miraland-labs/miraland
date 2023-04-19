@@ -10,8 +10,8 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-miraland-sdk = { path = "../../sdk", version = "=1.14.17" }
 miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17" }
+miraland-sdk = { path = "../../sdk", version = "=1.14.17" }
 
 [lib]
 crate-type = ["lib"]

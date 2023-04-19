@@ -1,14 +1,14 @@
 use {
     crate::crds_value::sanitize_wallclock,
     itertools::Itertools,
+    solana_ledger::{
+        blockstore_meta::DuplicateSlotProof,
+        shred::{self, Shred, ShredType},
+    },
     solana_sdk::{
         clock::Slot,
         pubkey::Pubkey,
         sanitize::{Sanitize, SanitizeError},
-    },
-    solana_ledger::{
-        blockstore_meta::DuplicateSlotProof,
-        shred::{self, Shred, ShredType},
     },
     std::{
         collections::{hash_map::Entry, HashMap},
@@ -282,14 +282,14 @@ impl Sanitize for DuplicateShred {
 pub(crate) mod tests {
     use {
         super::*,
+        miraland_entry::entry::Entry,
+        rand::Rng,
+        solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
         solana_sdk::{
             hash,
             signature::{Keypair, Signer},
             system_transaction,
         },
-        rand::Rng,
-        miraland_entry::entry::Entry,
-        solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
         std::sync::Arc,
     };
 

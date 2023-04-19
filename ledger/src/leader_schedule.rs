@@ -1,8 +1,8 @@
 use {
     itertools::Itertools,
-    solana_sdk::pubkey::Pubkey,
     rand::distributions::{Distribution, WeightedIndex},
     rand_chacha::{rand_core::SeedableRng, ChaChaRng},
+    solana_sdk::pubkey::Pubkey,
     std::{collections::HashMap, convert::identity, ops::Index, sync::Arc},
 };
 

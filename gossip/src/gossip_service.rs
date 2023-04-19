@@ -4,13 +4,13 @@ use {
     crate::{cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo},
     crossbeam_channel::{unbounded, Sender},
     miraland_client::{connection_cache::ConnectionCache, thin_client::ThinClient},
+    rand::{thread_rng, Rng},
+    solana_perf::recycler::Recycler,
+    solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    rand::{thread_rng, Rng},
-    solana_perf::recycler::Recycler,
-    solana_runtime::bank_forks::BankForks,
     solana_streamer::{
         socket::SocketAddrSpace,
         streamer::{self, StreamerReceiveStats},
@@ -157,8 +157,9 @@ pub fn discover(
     if let Some(my_gossip_addr) = my_gossip_addr {
         info!("Gossip Address: {:?}", my_gossip_addr);
     }
-    let _ip_echo_server = ip_echo
-        .map(|tcp_listener| miraland_net_utils::ip_echo_server(tcp_listener, Some(my_shred_version)));
+    let _ip_echo_server = ip_echo.map(|tcp_listener| {
+        miraland_net_utils::ip_echo_server(tcp_listener, Some(my_shred_version))
+    });
     let (met_criteria, elapsed, all_peers, tvu_peers) = spy(
         spy_ref.clone(),
         num_nodes,

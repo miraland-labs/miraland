@@ -7,12 +7,12 @@ use {
         locator::{Locator, LocatorError, Manufacturer},
     },
     log::*,
+    parking_lot::RwLock,
     solana_sdk::{
         derivation_path::{DerivationPath, DerivationPathError},
         pubkey::Pubkey,
         signature::{Signature, SignerError},
     },
-    parking_lot::RwLock,
     std::{
         sync::Arc,
         time::{Duration, Instant},

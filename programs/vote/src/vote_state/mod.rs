@@ -6,6 +6,8 @@ use {
     crate::{authorized_voters::AuthorizedVoters, id, vote_error::VoteError},
     bincode::{deserialize, serialize_into, ErrorKind},
     log::*,
+    serde_derive::{Deserialize, Serialize},
+    solana_metrics::datapoint_debug,
     solana_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         clock::{Epoch, Slot, UnixTimestamp},
@@ -19,8 +21,6 @@ use {
         sysvar::clock::Clock,
         transaction_context::{BorrowedAccount, InstructionContext, TransactionContext},
     },
-    serde_derive::{Deserialize, Serialize},
-    solana_metrics::datapoint_debug,
     std::{
         cmp::Ordering,
         collections::{HashSet, VecDeque},
@@ -1256,8 +1256,8 @@ impl VoteState {
 pub mod serde_compact_vote_state_update {
     use {
         super::*,
-        solana_sdk::{serde_varint, short_vec},
         serde::{Deserialize, Deserializer, Serialize, Serializer},
+        solana_sdk::{serde_varint, short_vec},
     };
 
     #[derive(Deserialize, Serialize, AbiExample)]
@@ -1669,11 +1669,11 @@ mod tests {
         super::*,
         crate::vote_state,
         itertools::Itertools,
+        rand::Rng,
         solana_sdk::{
             account::AccountSharedData, account_utils::StateMut, clock::DEFAULT_SLOTS_PER_EPOCH,
             hash::hash,
         },
-        rand::Rng,
         std::cell::RefCell,
         test_case::test_case,
     };

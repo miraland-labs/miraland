@@ -2,10 +2,10 @@
 use miraland_frozen_abi::abi_example::AbiExample;
 use {
     crate::system_instruction_processor,
+    solana_program_runtime::invoke_context::{InvokeContext, ProcessInstructionWithContext},
     solana_sdk::{
         feature_set, instruction::InstructionError, pubkey::Pubkey, stake, system_program,
     },
-    solana_program_runtime::invoke_context::{InvokeContext, ProcessInstructionWithContext},
     std::fmt,
 };
 
@@ -189,7 +189,7 @@ fn builtin_feature_transitions() -> Vec<BuiltinFeatureTransition> {
         BuiltinFeatureTransition::Add {
             builtin: Builtin::new(
                 "zk_token_proof_program",
-                miraland_zk_token_sdk::zk_token_proof_program::id(),
+                solana_zk_token_sdk::zk_token_proof_program::id(),
                 miraland_zk_token_proof_program::process_instruction,
             ),
             feature_id: feature_set::zk_token_sdk_enabled::id(),

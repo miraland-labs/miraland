@@ -7,12 +7,7 @@ extern crate test;
 use {
     crossbeam_channel::unbounded,
     log::*,
-    solana_sdk::{
-        hash::Hash,
-        signature::{Keypair, Signer},
-        system_transaction,
-        timing::duration_as_ms,
-    },
+    miraland_measure::measure::Measure,
     rand::{
         distributions::{Distribution, Uniform},
         thread_rng, Rng,
@@ -21,10 +16,15 @@ use {
         sigverify::TransactionSigVerifier,
         sigverify_stage::{SigVerifier, SigVerifyStage},
     },
-    miraland_measure::measure::Measure,
     solana_perf::{
         packet::{to_packet_batches, PacketBatch},
         test_tx::test_tx,
+    },
+    solana_sdk::{
+        hash::Hash,
+        signature::{Keypair, Signer},
+        system_transaction,
+        timing::duration_as_ms,
     },
     std::time::{Duration, Instant},
     test::Bencher,

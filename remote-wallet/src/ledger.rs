@@ -4,16 +4,16 @@ use {
     },
     console::Emoji,
     dialoguer::{theme::ColorfulTheme, Select},
-    solana_sdk::derivation_path::DerivationPath,
     semver::Version as FirmwareVersion,
+    solana_sdk::derivation_path::DerivationPath,
     std::{fmt, sync::Arc},
 };
 #[cfg(feature = "hidapi")]
 use {
     crate::{ledger_error::LedgerError, locator::Manufacturer},
     log::*,
-    solana_sdk::{pubkey::Pubkey, signature::Signature},
     num_traits::FromPrimitive,
+    solana_sdk::{pubkey::Pubkey, signature::Signature},
     std::{cmp::min, convert::TryFrom},
 };
 

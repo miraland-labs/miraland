@@ -2,11 +2,6 @@
 use {
     crate::geyser_plugin_manager::GeyserPluginManager,
     log::*,
-    solana_sdk::{
-        account::{AccountSharedData, ReadableAccount},
-        clock::Slot,
-        signature::Signature,
-    },
     miraland_geyser_plugin_interface::geyser_plugin_interface::{
         ReplicaAccountInfoV2, ReplicaAccountInfoVersions,
     },
@@ -15,6 +10,11 @@ use {
     solana_runtime::{
         accounts_update_notifier_interface::AccountsUpdateNotifierInterface,
         append_vec::{StoredAccountMeta, StoredMeta},
+    },
+    solana_sdk::{
+        account::{AccountSharedData, ReadableAccount},
+        clock::Slot,
+        signature::Signature,
     },
     std::sync::{Arc, RwLock},
 };

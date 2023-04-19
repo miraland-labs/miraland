@@ -10,7 +10,6 @@ use {
     core::time::Duration,
     crossbeam_channel::{RecvTimeoutError, SendError},
     itertools::Itertools,
-    solana_sdk::timing,
     miraland_measure::measure::Measure,
     solana_perf::{
         packet::{Packet, PacketBatch},
@@ -19,6 +18,7 @@ use {
             dedup_packets_and_count_discards, shrink_batches, Deduper,
         },
     },
+    solana_sdk::timing,
     solana_streamer::streamer::{self, StreamerError},
     std::{
         thread::{self, Builder, JoinHandle},
@@ -469,11 +469,11 @@ mod tests {
         super::*,
         crate::{sigverify::TransactionSigVerifier, sigverify_stage::timing::duration_as_ms},
         crossbeam_channel::unbounded,
-        solana_sdk::packet::PacketFlags,
         solana_perf::{
             packet::{to_packet_batches, Packet},
             test_tx::test_tx,
         },
+        solana_sdk::packet::PacketFlags,
     };
 
     fn count_non_discard(packet_batches: &[PacketBatch]) -> usize {

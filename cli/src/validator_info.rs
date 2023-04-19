@@ -5,17 +5,6 @@ use {
     },
     bincode::deserialize,
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand},
-    miraland_cli_output::{CliValidatorInfo, CliValidatorInfoVec},
-    miraland_client::rpc_client::RpcClient,
-    solana_sdk::{
-        account::Account,
-        message::Message,
-        pubkey::Pubkey,
-        signature::{Keypair, Signer},
-        transaction::Transaction,
-    },
-    reqwest::blocking::Client,
-    serde_json::{Map, Value},
     miraland_account_decoder::validator_info::{
         self, ValidatorInfo, MAX_LONG_FIELD_LENGTH, MAX_SHORT_FIELD_LENGTH,
     },
@@ -24,8 +13,19 @@ use {
         input_validators::{is_pubkey, is_url},
         keypair::DefaultSigner,
     },
+    miraland_cli_output::{CliValidatorInfo, CliValidatorInfoVec},
+    miraland_client::rpc_client::RpcClient,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    reqwest::blocking::Client,
+    serde_json::{Map, Value},
     solana_config_program::{config_instruction, get_config_data, ConfigKeys, ConfigState},
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    solana_sdk::{
+        account::Account,
+        message::Message,
+        pubkey::Pubkey,
+        signature::{Keypair, Signer},
+        transaction::Transaction,
+    },
     std::{error, sync::Arc},
 };
 

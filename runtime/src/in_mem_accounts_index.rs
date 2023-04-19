@@ -8,10 +8,10 @@ use {
         bucket_map_holder_stats::BucketMapHolderStats,
         waitable_condvar::WaitableCondvar,
     },
-    solana_sdk::{clock::Slot, pubkey::Pubkey},
+    miraland_measure::measure::Measure,
     rand::{thread_rng, Rng},
     solana_bucket_map::bucket_api::BucketApi,
-    miraland_measure::measure::Measure,
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         collections::{
             hash_map::{Entry, VacantEntry},

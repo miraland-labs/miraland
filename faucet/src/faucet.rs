@@ -9,6 +9,8 @@ use {
     byteorder::{ByteOrder, LittleEndian},
     crossbeam_channel::{unbounded, Sender},
     log::*,
+    serde_derive::{Deserialize, Serialize},
+    solana_metrics::datapoint_info,
     solana_sdk::{
         hash::Hash,
         instruction::Instruction,
@@ -20,8 +22,6 @@ use {
         system_instruction,
         transaction::Transaction,
     },
-    serde_derive::{Deserialize, Serialize},
-    solana_metrics::datapoint_info,
     std::{
         collections::{HashMap, HashSet},
         io::{Read, Write},

@@ -9,6 +9,7 @@
 )]
 pub use solana_sdk::stake::state::*;
 use {
+    solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
     solana_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         account_utils::StateMut,
@@ -29,7 +30,6 @@ use {
         stake_history::{StakeHistory, StakeHistoryEntry},
         transaction_context::{BorrowedAccount, InstructionContext, TransactionContext},
     },
-    solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
     solana_vote_program::vote_state::{VoteState, VoteStateVersions},
     std::{collections::HashSet, convert::TryFrom},
 };
@@ -1778,6 +1778,8 @@ fn do_create_account(
 mod tests {
     use {
         super::*,
+        proptest::prelude::*,
+        solana_program_runtime::invoke_context::InvokeContext,
         solana_sdk::{
             account::{create_account_shared_data_for_test, AccountSharedData},
             native_token,
@@ -1785,8 +1787,6 @@ mod tests {
             sysvar::SysvarId,
             transaction_context::TransactionContext,
         },
-        proptest::prelude::*,
-        solana_program_runtime::invoke_context::InvokeContext,
     };
 
     #[test]

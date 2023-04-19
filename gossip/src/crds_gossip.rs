@@ -18,14 +18,14 @@ use {
         ping_pong::PingCache,
     },
     itertools::Itertools,
+    rayon::ThreadPool,
+    solana_ledger::shred::Shred,
     solana_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    rayon::ThreadPool,
-    solana_ledger::shred::Shred,
     solana_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},

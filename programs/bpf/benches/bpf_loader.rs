@@ -7,19 +7,11 @@ extern crate solana_bpf_loader_program;
 
 use {
     byteorder::{ByteOrder, LittleEndian, WriteBytesExt},
-    solana_sdk::{
-        bpf_loader,
-        client::SyncClient,
-        entrypoint::SUCCESS,
-        instruction::{AccountMeta, Instruction},
-        message::Message,
-        signature::Signer,
-    },
+    miraland_measure::measure::Measure,
     solana_bpf_loader_program::{
         create_vm, serialization::serialize_parameters, syscalls::register_syscalls, BpfError,
         ThisInstructionMeter,
     },
-    miraland_measure::measure::Measure,
     solana_program_runtime::invoke_context::with_mock_invoke_context,
     solana_rbpf::{
         elf::Executable,
@@ -31,6 +23,14 @@ use {
         bank_client::BankClient,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         loader_utils::{create_deprecated_program, load_program_from_file},
+    },
+    solana_sdk::{
+        bpf_loader,
+        client::SyncClient,
+        entrypoint::SUCCESS,
+        instruction::{AccountMeta, Instruction},
+        message::Message,
+        signature::Signer,
     },
     std::{mem, sync::Arc},
     test::Bencher,

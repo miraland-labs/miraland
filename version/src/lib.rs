@@ -2,8 +2,8 @@
 
 extern crate serde_derive;
 use {
-    solana_sdk::sanitize::Sanitize,
     serde_derive::{Deserialize, Serialize},
+    solana_sdk::sanitize::Sanitize,
     std::{convert::TryInto, fmt},
 };
 #[macro_use]

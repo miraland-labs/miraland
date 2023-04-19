@@ -1,6 +1,7 @@
 use {
     super::Bank,
     crate::accounts_db::LoadZeroLamports,
+    solana_address_lookup_table_program::error::AddressLookupError,
     solana_sdk::{
         feature_set::return_none_for_zero_lamport_accounts,
         message::{
@@ -9,7 +10,6 @@ use {
         },
         transaction::AddressLoader,
     },
-    solana_address_lookup_table_program::error::AddressLookupError,
 };
 
 impl AddressLoader for &Bank {

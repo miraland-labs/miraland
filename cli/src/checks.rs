@@ -170,8 +170,8 @@ mod tests {
             rpc_request::RpcRequest,
             rpc_response::{Response, RpcResponseContext},
         },
-        solana_sdk::system_instruction,
         serde_json::json,
+        solana_sdk::system_instruction,
         std::collections::HashMap,
     };
 

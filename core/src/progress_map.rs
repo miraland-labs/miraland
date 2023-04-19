@@ -5,10 +5,10 @@ use {
         consensus::{Stake, VotedStakes},
         replay_stage::SUPERMINORITY_THRESHOLD,
     },
-    solana_sdk::{clock::Slot, hash::Hash, pubkey::Pubkey},
     solana_ledger::blockstore_processor::{ConfirmationProgress, ConfirmationTiming},
     solana_program_runtime::{report_execute_timings, timings::ExecuteTimingType},
     solana_runtime::{bank::Bank, bank_forks::BankForks, vote_account::VoteAccountsHashMap},
+    solana_sdk::{clock::Slot, hash::Hash, pubkey::Pubkey},
     std::{
         collections::{BTreeMap, HashMap, HashSet},
         ops::Index,
@@ -527,8 +527,8 @@ impl ProgressMap {
 mod test {
     use {
         super::*,
-        solana_sdk::account::{Account, AccountSharedData},
         solana_runtime::vote_account::VoteAccount,
+        solana_sdk::account::{Account, AccountSharedData},
     };
 
     fn new_test_vote_account() -> VoteAccount {

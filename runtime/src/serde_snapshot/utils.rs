@@ -1,9 +1,9 @@
+#[cfg(all(test, RUSTC_WITH_SPECIALIZATION))]
+use miraland_frozen_abi::abi_example::IgnoreAsHelper;
 use serde::{
     ser::{SerializeSeq, SerializeTuple},
     Serialize, Serializer,
 };
-#[cfg(all(test, RUSTC_WITH_SPECIALIZATION))]
-use miraland_frozen_abi::abi_example::IgnoreAsHelper;
 
 // consumes an iterator and returns an object that will serialize as a serde seq
 #[allow(dead_code)]

@@ -3,11 +3,11 @@ use {
         check_num_accounts, ParsableProgram, ParseInstructionError, ParsedInstructionEnum,
     },
     bincode::deserialize,
+    serde_json::{json, Map, Value},
     solana_sdk::{
         instruction::CompiledInstruction, message::AccountKeys,
         stake::instruction::StakeInstruction,
     },
-    serde_json::{json, Map, Value},
 };
 
 pub fn parse_stake(

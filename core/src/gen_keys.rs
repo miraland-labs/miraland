@@ -1,10 +1,10 @@
 //! The `gen_keys` module makes lots of keypairs
 
 use {
-    solana_sdk::signature::Keypair,
     rand::{Rng, SeedableRng},
     rand_chacha::ChaChaRng,
     rayon::prelude::*,
+    solana_sdk::signature::Keypair,
 };
 
 pub struct GenKeys {

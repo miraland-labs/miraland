@@ -1,5 +1,10 @@
 #![allow(clippy::integer_arithmetic)]
 use {
+    solana_runtime::{
+        bank::Bank,
+        bank_client::BankClient,
+        genesis_utils::{create_genesis_config_with_leader, GenesisConfigInfo},
+    },
     solana_sdk::{
         account::from_account,
         account_utils::StateMut,
@@ -13,11 +18,6 @@ use {
             state::{Authorized, Lockup, StakeState},
         },
         sysvar::{self, stake_history::StakeHistory},
-    },
-    solana_runtime::{
-        bank::Bank,
-        bank_client::BankClient,
-        genesis_utils::{create_genesis_config_with_leader, GenesisConfigInfo},
     },
     solana_stake_program::stake_state,
     solana_vote_program::{

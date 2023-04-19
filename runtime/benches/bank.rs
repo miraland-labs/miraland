@@ -5,6 +5,12 @@ extern crate test;
 
 use {
     log::*,
+    solana_program_runtime::invoke_context::InvokeContext,
+    solana_runtime::{
+        bank::{test_utils::goto_end_of_slot, *},
+        bank_client::BankClient,
+        loader_utils::create_invoke_instruction,
+    },
     solana_sdk::{
         client::{AsyncClient, SyncClient},
         clock::MAX_RECENT_BLOCKHASHES,
@@ -14,12 +20,6 @@ use {
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         transaction::Transaction,
-    },
-    solana_program_runtime::invoke_context::InvokeContext,
-    solana_runtime::{
-        bank::{test_utils::goto_end_of_slot, *},
-        bank_client::BankClient,
-        loader_utils::create_invoke_instruction,
     },
     std::{sync::Arc, thread::sleep, time::Duration},
     test::Bencher,

@@ -1,6 +1,6 @@
 use {
-    solana_sdk::{clock::Slot, saturating_add_assign},
     solana_program_runtime::timings::ExecuteTimings,
+    solana_sdk::{clock::Slot, saturating_add_assign},
     std::time::Instant,
 };
 

@@ -1,6 +1,6 @@
 use {
-    solana_sdk::{clock::UnixTimestamp, pubkey::Pubkey},
     solana_runtime::bank::RewardInfo,
+    solana_sdk::{clock::UnixTimestamp, pubkey::Pubkey},
     std::sync::{Arc, RwLock},
 };
 

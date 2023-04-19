@@ -1,12 +1,12 @@
 use {
     clap::{crate_description, crate_name, values_t, App, Arg},
     log::*,
+    miraland_clap_utils::input_parsers::{lamports_of_sol, value_of},
     miraland_faucet::{
         faucet::{run_faucet, Faucet, FAUCET_PORT},
         socketaddr,
     },
     solana_sdk::signature::read_keypair_file,
-    miraland_clap_utils::input_parsers::{lamports_of_sol, value_of},
     std::{
         collections::HashSet,
         net::{IpAddr, Ipv4Addr, SocketAddr},

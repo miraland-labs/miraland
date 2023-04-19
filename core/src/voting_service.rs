@@ -2,10 +2,10 @@ use {
     crate::tower_storage::{SavedTowerVersions, TowerStorage},
     crossbeam_channel::Receiver,
     miraland_gossip::cluster_info::ClusterInfo,
-    solana_sdk::{clock::Slot, transaction::Transaction},
     miraland_measure::measure::Measure,
     miraland_poh::poh_recorder::PohRecorder,
     solana_runtime::bank_forks::BankForks,
+    solana_sdk::{clock::Slot, transaction::Transaction},
     std::{
         sync::{Arc, RwLock},
         thread::{self, Builder, JoinHandle},

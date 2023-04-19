@@ -9,9 +9,9 @@ use {
         crds_gossip_pull::{CrdsFilter, CrdsGossipPull},
         crds_value::CrdsValue,
     },
-    solana_sdk::hash,
     rand::{thread_rng, Rng},
     rayon::ThreadPoolBuilder,
+    solana_sdk::hash,
     std::sync::RwLock,
     test::Bencher,
 };

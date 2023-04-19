@@ -11,9 +11,9 @@ publish = false
 [dev-dependencies]
 assert_matches = "1.5.0"
 ed25519-dalek = "=1.0.1"
+miraland-program-test = { path = "../../program-test", version = "=1.14.17" }
 miraland-sdk = { path = "../../sdk", version = "=1.14.17" }
 rand = "0.7.0"
-miraland-program-test = { path = "../../program-test", version = "=1.14.17" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

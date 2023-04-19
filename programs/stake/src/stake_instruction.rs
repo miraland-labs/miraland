@@ -7,6 +7,9 @@ use {
         },
     },
     log::*,
+    solana_program_runtime::{
+        invoke_context::InvokeContext, sysvar_cache::get_sysvar_with_account_check,
+    },
     solana_sdk::{
         feature_set,
         instruction::InstructionError,
@@ -19,9 +22,6 @@ use {
         },
         sysvar::clock::Clock,
         transaction_context::{InstructionContext, TransactionContext},
-    },
-    solana_program_runtime::{
-        invoke_context::InvokeContext, sysvar_cache::get_sysvar_with_account_check,
     },
 };
 
@@ -490,6 +490,9 @@ mod tests {
         },
         assert_matches::assert_matches,
         bincode::serialize,
+        solana_program_runtime::{
+            invoke_context::mock_process_instruction, sysvar_cache::SysvarCache,
+        },
         solana_sdk::{
             account::{self, AccountSharedData, ReadableAccount, WritableAccount},
             account_utils::StateMut,
@@ -510,9 +513,6 @@ mod tests {
             },
             stake_history::{StakeHistory, StakeHistoryEntry},
             system_program, sysvar,
-        },
-        solana_program_runtime::{
-            invoke_context::mock_process_instruction, sysvar_cache::SysvarCache,
         },
         solana_vote_program::vote_state::{self, VoteState, VoteStateVersions},
         std::{

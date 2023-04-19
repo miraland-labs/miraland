@@ -5,15 +5,15 @@ use {
     itertools::Itertools,
     lazy_static::lazy_static,
     lru::LruCache,
-    solana_sdk::{clock::Slot, signature::Keypair},
+    miraland_entry::entry::Entry,
+    miraland_measure::measure::Measure,
+    miraland_rayon_threadlimit::get_thread_count,
     rayon::{prelude::*, ThreadPool},
     reed_solomon_erasure::{
         galois_8::ReedSolomon,
         Error::{InvalidIndex, TooFewDataShards, TooFewShardsPresent},
     },
-    miraland_entry::entry::Entry,
-    miraland_measure::measure::Measure,
-    miraland_rayon_threadlimit::get_thread_count,
+    solana_sdk::{clock::Slot, signature::Keypair},
     std::{
         borrow::Borrow,
         fmt::Debug,
@@ -474,6 +474,7 @@ mod tests {
         },
         bincode::serialized_size,
         matches::assert_matches,
+        rand::{seq::SliceRandom, Rng},
         solana_sdk::{
             hash::{self, hash, Hash},
             pubkey::Pubkey,
@@ -481,7 +482,6 @@ mod tests {
             signature::{Signature, Signer},
             system_transaction,
         },
-        rand::{seq::SliceRandom, Rng},
         std::{collections::HashSet, convert::TryInto, iter::repeat_with, sync::Arc},
     };
 

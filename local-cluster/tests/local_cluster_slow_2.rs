@@ -11,15 +11,15 @@ use {
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
     },
+    serial_test::serial,
+    solana_core::validator::ValidatorConfig,
+    solana_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
     solana_sdk::{
         client::SyncClient,
         clock::Slot,
         poh_config::PohConfig,
         signature::{Keypair, Signer},
     },
-    serial_test::serial,
-    solana_core::validator::ValidatorConfig,
-    solana_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
     solana_streamer::socket::SocketAddrSpace,
     std::{collections::HashSet, sync::Arc, thread::sleep, time::Duration},
 };

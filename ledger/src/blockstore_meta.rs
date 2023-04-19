@@ -1,11 +1,11 @@
 use {
     crate::shred::{Shred, ShredType},
     bitflags::bitflags,
+    serde::{Deserialize, Deserializer, Serialize, Serializer},
     solana_sdk::{
         clock::{Slot, UnixTimestamp},
         hash::Hash,
     },
-    serde::{Deserialize, Deserializer, Serialize, Serializer},
     std::{
         collections::BTreeSet,
         ops::{Range, RangeBounds},

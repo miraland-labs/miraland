@@ -3,11 +3,11 @@
 use {
     crate::ConfigKeys,
     bincode::deserialize,
+    solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
     solana_sdk::{
         feature_set, instruction::InstructionError, program_utils::limited_deserialize,
         pubkey::Pubkey,
     },
-    solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
     std::collections::BTreeSet,
 };
 
@@ -142,6 +142,8 @@ mod tests {
         super::*,
         crate::{config_instruction, get_config_data, id, ConfigKeys, ConfigState},
         bincode::serialized_size,
+        serde_derive::{Deserialize, Serialize},
+        solana_program_runtime::invoke_context::mock_process_instruction,
         solana_sdk::{
             account::{AccountSharedData, ReadableAccount},
             instruction::AccountMeta,
@@ -149,8 +151,6 @@ mod tests {
             signature::{Keypair, Signer},
             system_instruction::SystemInstruction,
         },
-        serde_derive::{Deserialize, Serialize},
-        solana_program_runtime::invoke_context::mock_process_instruction,
     };
 
     fn process_instruction(

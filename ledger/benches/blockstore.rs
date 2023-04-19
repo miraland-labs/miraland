@@ -4,13 +4,13 @@ extern crate solana_ledger;
 extern crate test;
 
 use {
-    solana_sdk::{clock::Slot, hash::Hash},
-    rand::Rng,
     miraland_entry::entry::{create_ticks, Entry},
+    rand::Rng,
     solana_ledger::{
         blockstore::{entries_to_test_shreds, Blockstore},
         get_tmp_ledger_path,
     },
+    solana_sdk::{clock::Slot, hash::Hash},
     std::path::Path,
     test::Bencher,
 };

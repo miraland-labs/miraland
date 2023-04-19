@@ -1,5 +1,11 @@
 #![allow(dead_code)]
 use {
+    solana_address_lookup_table_program::{
+        id,
+        processor::process_instruction,
+        state::{AddressLookupTable, LookupTableMeta},
+    },
+    solana_program_test::*,
     solana_sdk::{
         account::AccountSharedData,
         clock::Slot,
@@ -10,12 +16,6 @@ use {
         slot_hashes::SlotHashes,
         transaction::{Transaction, TransactionError},
     },
-    solana_address_lookup_table_program::{
-        id,
-        processor::process_instruction,
-        state::{AddressLookupTable, LookupTableMeta},
-    },
-    solana_program_test::*,
     std::borrow::Cow,
 };
 

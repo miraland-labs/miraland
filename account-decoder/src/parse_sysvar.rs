@@ -224,9 +224,7 @@ mod test {
     use solana_sdk::sysvar::recent_blockhashes::IterItem;
     use {
         super::*,
-        solana_sdk::{
-            account::create_account_for_test, fee_calculator::FeeCalculator, hash::Hash,
-        },
+        solana_sdk::{account::create_account_for_test, fee_calculator::FeeCalculator, hash::Hash},
     };
 
     #[test]

@@ -1,7 +1,7 @@
 use {
     clap::{crate_description, crate_name, crate_version, ArgEnum, Args, Parser},
-    solana_sdk::pubkey::Pubkey,
     serde::{Deserialize, Serialize},
+    solana_sdk::pubkey::Pubkey,
     std::{net::SocketAddr, process::exit, str::FromStr},
 };
 

@@ -82,8 +82,8 @@ mod tests {
             crds::{Crds, GossipRoute},
             crds_value::new_rand_timestamp,
         },
-        solana_sdk::signature::Keypair,
         rand::seq::SliceRandom,
+        solana_sdk::signature::Keypair,
         std::collections::HashMap,
     };
 

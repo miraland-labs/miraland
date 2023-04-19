@@ -1,12 +1,12 @@
 use {
     itertools::Itertools,
+    once_cell::sync::OnceCell,
+    serde::ser::{Serialize, Serializer},
     solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         instruction::InstructionError,
         pubkey::Pubkey,
     },
-    once_cell::sync::OnceCell,
-    serde::ser::{Serialize, Serializer},
     solana_vote_program::vote_state::VoteState,
     std::{
         cmp::Ordering,
@@ -322,8 +322,8 @@ mod tests {
     use {
         super::*,
         bincode::Options,
-        solana_sdk::{pubkey::Pubkey, sysvar::clock::Clock},
         rand::Rng,
+        solana_sdk::{pubkey::Pubkey, sysvar::clock::Clock},
         solana_vote_program::vote_state::{VoteInit, VoteStateVersions},
         std::iter::repeat_with,
     };

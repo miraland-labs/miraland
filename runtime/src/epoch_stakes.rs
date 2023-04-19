@@ -1,7 +1,7 @@
 use {
     crate::{stakes::StakesEnum, vote_account::VoteAccountsHashMap},
-    solana_sdk::{clock::Epoch, pubkey::Pubkey},
     serde::{Deserialize, Serialize},
+    solana_sdk::{clock::Epoch, pubkey::Pubkey},
     std::{collections::HashMap, sync::Arc},
 };
 
