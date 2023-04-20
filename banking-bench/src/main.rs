@@ -4,12 +4,12 @@ use {
     crossbeam_channel::{unbounded, Receiver},
     log::*,
     miraland_client::connection_cache::{ConnectionCache, DEFAULT_TPU_CONNECTION_POOL_SIZE},
+    miraland_core::banking_stage::BankingStage,
     miraland_gossip::cluster_info::{ClusterInfo, Node},
     miraland_measure::measure::Measure,
     miraland_poh::poh_recorder::{create_test_recorder, PohRecorder, WorkingBankEntry},
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_core::banking_stage::BankingStage,
     solana_ledger::{
         blockstore::Blockstore,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},

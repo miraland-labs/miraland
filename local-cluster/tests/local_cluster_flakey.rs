@@ -4,13 +4,13 @@
 use {
     common::*,
     log::*,
+    miraland_core::validator::ValidatorConfig,
     miraland_local_cluster::{
         cluster::Cluster,
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
     },
     serial_test::serial,
-    solana_core::validator::ValidatorConfig,
     solana_ledger::{ancestor_iterator::AncestorIterator, leader_schedule::FixedSchedule},
     solana_sdk::{
         clock::Slot,

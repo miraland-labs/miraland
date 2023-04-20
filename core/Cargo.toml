@@ -14,7 +14,8 @@ edition = "2021"
 codecov = { repository = "solana-labs/solana", branch = "master", service = "github" }
 
 [lib]
-name = "solana_core"
+crate-type = ["lib"]
+name = "miraland_core"
 
 [dependencies]
 ahash = "0.7.6"

@@ -65,7 +65,7 @@ fn test_rpc_client() {
     let client = RpcClient::new(test_validator.rpc_url());
 
     assert_eq!(
-        client.get_version().unwrap().solana_core,
+        client.get_version().unwrap().miraland_core,
         miraland_version::semver!()
     );
 

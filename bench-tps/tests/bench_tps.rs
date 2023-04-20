@@ -10,6 +10,7 @@ use {
         thin_client::ThinClient,
         tpu_client::{TpuClient, TpuClientConfig},
     },
+    miraland_core::validator::ValidatorConfig,
     miraland_faucet::faucet::run_local_faucet,
     miraland_local_cluster::{
         local_cluster::{ClusterConfig, LocalCluster},
@@ -18,7 +19,6 @@ use {
     miraland_rpc::rpc::JsonRpcConfig,
     miraland_test_validator::TestValidator,
     serial_test::serial,
-    solana_core::validator::ValidatorConfig,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         signature::{Keypair, Signer},

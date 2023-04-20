@@ -1,6 +1,7 @@
 use {
     log::*,
     miraland_client::rpc_client::RpcClient,
+    miraland_core::validator::{ValidatorConfig, ValidatorStartProgress},
     miraland_download_utils::{download_snapshot_archive, DownloadProgressRecord},
     miraland_genesis_utils::download_then_check_genesis_hash,
     miraland_gossip::{
@@ -10,7 +11,6 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     rand::{seq::SliceRandom, thread_rng, Rng},
-    solana_core::validator::{ValidatorConfig, ValidatorStartProgress},
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_package::SnapshotType,
@@ -414,7 +414,7 @@ pub fn rpc_bootstrap(
 
         let result = match rpc_client.get_version() {
             Ok(rpc_version) => {
-                info!("RPC node version: {}", rpc_version.solana_core);
+                info!("RPC node version: {}", rpc_version.miraland_core);
                 Ok(())
             }
             Err(err) => Err(format!("Failed to get RPC node version: {}", err)),

@@ -411,7 +411,7 @@ impl Blockstore {
     }
 
     /// Whether to disable compaction in [`Blockstore::compact_storage`], which is used
-    /// by the ledger cleanup service and `solana_core::validator::backup_and_clear_blockstore`.
+    /// by the ledger cleanup service and `miraland_core::validator::backup_and_clear_blockstore`.
     ///
     /// Note that this setting is not related to the RocksDB's background
     /// compaction.

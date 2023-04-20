@@ -49,6 +49,7 @@ use {
         rpc_client::RpcClient,
         tpu_connection::TpuConnection,
     },
+    miraland_core::serve_repair::{RepairProtocol, RepairRequestHeader, ServeRepair},
     miraland_dos::cli::*,
     miraland_gossip::{
         gossip_service::{discover, get_multi_client},
@@ -56,7 +57,6 @@ use {
     },
     miraland_measure::measure::Measure,
     rand::{thread_rng, Rng},
-    solana_core::serve_repair::{RepairProtocol, RepairRequestHeader, ServeRepair},
     solana_sdk::{
         hash::Hash,
         instruction::CompiledInstruction,
@@ -787,6 +787,7 @@ pub mod test {
     use {
         super::*,
         miraland_client::thin_client::ThinClient,
+        miraland_core::validator::ValidatorConfig,
         miraland_faucet::faucet::run_local_faucet,
         miraland_local_cluster::{
             cluster::Cluster,
@@ -794,7 +795,6 @@ pub mod test {
             validator_configs::make_identical_validator_configs,
         },
         miraland_rpc::rpc::JsonRpcConfig,
-        solana_core::validator::ValidatorConfig,
         solana_sdk::timing::timestamp,
     };
 

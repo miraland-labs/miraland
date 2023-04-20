@@ -2,18 +2,18 @@
 use {
     log::*,
     miraland_client::rpc_client::RpcClient,
+    miraland_core::{
+        broadcast_stage::BroadcastStageType,
+        consensus::{Tower, SWITCH_FORK_THRESHOLD},
+        tower_storage::{FileTowerStorage, SavedTower, SavedTowerVersions, TowerStorage},
+        validator::ValidatorConfig,
+    },
     miraland_gossip::gossip_service::discover_cluster,
     miraland_local_cluster::{
         cluster::{Cluster, ClusterValidatorInfo},
         cluster_tests,
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
-    },
-    solana_core::{
-        broadcast_stage::BroadcastStageType,
-        consensus::{Tower, SWITCH_FORK_THRESHOLD},
-        tower_storage::{FileTowerStorage, SavedTower, SavedTowerVersions, TowerStorage},
-        validator::ValidatorConfig,
     },
     solana_ledger::{
         ancestor_iterator::AncestorIterator,
@@ -46,7 +46,7 @@ use {
 };
 
 pub const RUST_LOG_FILTER: &str =
-    "error,solana_core::replay_stage=warn,miraland_local_cluster=info,local_cluster=info";
+    "error,miraland_core::replay_stage=warn,miraland_local_cluster=info,local_cluster=info";
 
 pub const DEFAULT_CLUSTER_LAMPORTS: u64 = 10_000_000 * LAMPORTS_PER_SOL;
 pub const DEFAULT_NODE_STAKE: u64 = 10 * LAMPORTS_PER_SOL;

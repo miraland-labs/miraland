@@ -630,12 +630,12 @@ fn main() {
 pub mod test {
     use {
         super::*,
+        miraland_core::validator::ValidatorConfig,
         miraland_local_cluster::{
             local_cluster::{ClusterConfig, LocalCluster},
             validator_configs::make_identical_validator_configs,
         },
         miraland_measure::measure::Measure,
-        solana_core::validator::ValidatorConfig,
         solana_sdk::poh_config::PohConfig,
     };
 

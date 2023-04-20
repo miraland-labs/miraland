@@ -4,6 +4,7 @@
 use {
     common::*,
     log::*,
+    miraland_core::validator::ValidatorConfig,
     miraland_gossip::gossip_service::discover_cluster,
     miraland_local_cluster::{
         cluster::Cluster,
@@ -12,7 +13,6 @@ use {
         validator_configs::*,
     },
     serial_test::serial,
-    solana_core::validator::ValidatorConfig,
     solana_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
     solana_sdk::{
         client::SyncClient,

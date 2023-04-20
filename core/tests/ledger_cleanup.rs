@@ -6,8 +6,8 @@ mod tests {
     use {
         crossbeam_channel::unbounded,
         log::*,
+        miraland_core::ledger_cleanup_service::LedgerCleanupService,
         miraland_measure::measure::Measure,
-        solana_core::ledger_cleanup_service::LedgerCleanupService,
         solana_ledger::{
             blockstore::{make_many_slot_shreds, Blockstore},
             blockstore_options::{

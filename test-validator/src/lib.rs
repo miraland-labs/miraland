@@ -10,6 +10,10 @@ use {
         rpc_client::RpcClient,
         rpc_request::MAX_MULTIPLE_ACCOUNTS,
     },
+    miraland_core::{
+        tower_storage::TowerStorage,
+        validator::{Validator, ValidatorConfig, ValidatorStartProgress},
+    },
     miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         gossip_service::discover_cluster,
@@ -17,10 +21,6 @@ use {
     },
     miraland_net_utils::PortRange,
     miraland_rpc::{rpc::JsonRpcConfig, rpc_pubsub_service::PubSubConfig},
-    solana_core::{
-        tower_storage::TowerStorage,
-        validator::{Validator, ValidatorConfig, ValidatorStartProgress},
-    },
     solana_ledger::{
         blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions,
         create_new_tmp_ledger,
@@ -300,7 +300,7 @@ impl TestValidatorGenesis {
                 .get_multiple_accounts(chunk)
                 .unwrap_or_else(|err| {
                     error!("Failed to fetch: {}", err);
-                    solana_core::validator::abort();
+                    miraland_core::validator::abort();
                 });
             for (address, res) in chunk.iter().zip(responses) {
                 if let Some(account) = res {
@@ -309,7 +309,7 @@ impl TestValidatorGenesis {
                     warn!("Could not find {}, skipping.", address);
                 } else {
                     error!("Failed to fetch {}", address);
-                    solana_core::validator::abort();
+                    miraland_core::validator::abort();
                 }
             }
         }
@@ -321,7 +321,7 @@ impl TestValidatorGenesis {
             let account_path =
                 solana_program_test::find_file(account.filename).unwrap_or_else(|| {
                     error!("Unable to locate {}", account.filename);
-                    solana_core::validator::abort();
+                    miraland_core::validator::abort();
                 });
             let mut file = File::open(&account_path).unwrap();
             let mut account_info_raw = String::new();
@@ -335,7 +335,7 @@ impl TestValidatorGenesis {
                         account_path.to_str().unwrap(),
                         err
                     );
-                    solana_core::validator::abort();
+                    miraland_core::validator::abort();
                 }
                 Ok(deserialized) => deserialized,
             };
@@ -364,7 +364,7 @@ impl TestValidatorGenesis {
             let matched_files = fs::read_dir(&dir)
                 .unwrap_or_else(|err| {
                     error!("Cannot read directory {}: {}", dir, err);
-                    solana_core::validator::abort();
+                    miraland_core::validator::abort();
                 })
                 .flatten()
                 .map(|entry| entry.path())

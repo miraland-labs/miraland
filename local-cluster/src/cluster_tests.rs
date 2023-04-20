@@ -5,6 +5,7 @@
 use log::*;
 use {
     miraland_client::{connection_cache::ConnectionCache, thin_client::ThinClient},
+    miraland_core::consensus::VOTE_THRESHOLD_DEPTH,
     miraland_entry::entry::{Entry, EntrySlice},
     miraland_gossip::{
         cluster_info,
@@ -15,7 +16,6 @@ use {
     },
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_core::consensus::VOTE_THRESHOLD_DEPTH,
     solana_ledger::blockstore::Blockstore,
     solana_sdk::{
         client::SyncClient,

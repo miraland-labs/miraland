@@ -354,7 +354,7 @@ impl RpcSender for MockSender {
             "getVersion" => {
                 let version = Version::default();
                 json!(RpcVersionInfo {
-                    solana_core: version.to_string(),
+                    miraland_core: version.to_string(),
                     feature_set: Some(version.feature_set),
                 })
             }

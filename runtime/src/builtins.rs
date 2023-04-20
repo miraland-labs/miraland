@@ -190,7 +190,7 @@ fn builtin_feature_transitions() -> Vec<BuiltinFeatureTransition> {
             builtin: Builtin::new(
                 "zk_token_proof_program",
                 solana_zk_token_sdk::zk_token_proof_program::id(),
-                miraland_zk_token_proof_program::process_instruction,
+                solana_zk_token_proof_program::process_instruction,
             ),
             feature_id: feature_set::zk_token_sdk_enabled::id(),
         },

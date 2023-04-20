@@ -4,6 +4,14 @@
 use {
     common::*,
     log::*,
+    miraland_core::{
+        broadcast_stage::{
+            broadcast_duplicates_run::BroadcastDuplicatesConfig, BroadcastStageType,
+        },
+        consensus::SWITCH_FORK_THRESHOLD,
+        replay_stage::DUPLICATE_THRESHOLD,
+        validator::ValidatorConfig,
+    },
     miraland_gossip::{
         crds::Cursor,
         gossip_service::{self, discover_cluster},
@@ -15,14 +23,6 @@ use {
         validator_configs::*,
     },
     serial_test::serial,
-    solana_core::{
-        broadcast_stage::{
-            broadcast_duplicates_run::BroadcastDuplicatesConfig, BroadcastStageType,
-        },
-        consensus::SWITCH_FORK_THRESHOLD,
-        replay_stage::DUPLICATE_THRESHOLD,
-        validator::ValidatorConfig,
-    },
     solana_ledger::ancestor_iterator::AncestorIterator,
     solana_runtime::vote_parser,
     solana_sdk::{

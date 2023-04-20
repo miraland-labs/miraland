@@ -10,6 +10,7 @@ use {
         },
     },
     miraland_client::rpc_client::RpcClient,
+    miraland_core::tower_storage::FileTowerStorage,
     miraland_faucet::faucet::{run_local_faucet_with_port, FAUCET_PORT},
     miraland_rpc::{
         rpc::{JsonRpcConfig, RpcBigtableConfig},
@@ -20,7 +21,6 @@ use {
         admin_rpc_service, dashboard::Dashboard, ledger_lockfile, lock_ledger, println_name_value,
         redirect_stderr_to_file,
     },
-    solana_core::tower_storage::FileTowerStorage,
     solana_sdk::{
         account::AccountSharedData,
         clock::Slot,
@@ -477,7 +477,7 @@ fn main() {
 
     info!("{} {}", crate_name!(), miraland_version::version!());
     info!("Starting validator with: {:#?}", std::env::args_os());
-    solana_core::validator::report_target_features();
+    miraland_core::validator::report_target_features();
 
     // TODO: Ideally test-validator should *only* allow private addresses.
     let socket_addr_space = SocketAddrSpace::new(/*allow_private_addr=*/ true);

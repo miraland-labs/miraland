@@ -655,6 +655,7 @@ fn main() {
 pub mod test {
     use {
         super::*,
+        miraland_core::validator::ValidatorConfig,
         miraland_faucet::faucet::run_local_faucet,
         miraland_local_cluster::{
             local_cluster::{ClusterConfig, LocalCluster},
@@ -662,7 +663,6 @@ pub mod test {
         },
         miraland_measure::measure::Measure,
         miraland_test_validator::TestValidator,
-        solana_core::validator::ValidatorConfig,
         solana_sdk::{native_token::sol_to_lamports, poh_config::PohConfig},
         spl_token::{
             solana_program::program_pack::Pack,

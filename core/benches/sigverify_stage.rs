@@ -1,20 +1,20 @@
 #![feature(test)]
 #![allow(clippy::integer_arithmetic)]
 
-extern crate solana_core;
+extern crate miraland_core;
 extern crate test;
 
 use {
     crossbeam_channel::unbounded,
     log::*,
+    miraland_core::{
+        sigverify::TransactionSigVerifier,
+        sigverify_stage::{SigVerifier, SigVerifyStage},
+    },
     miraland_measure::measure::Measure,
     rand::{
         distributions::{Distribution, Uniform},
         thread_rng, Rng,
-    },
-    solana_core::{
-        sigverify::TransactionSigVerifier,
-        sigverify_stage::{SigVerifier, SigVerifyStage},
     },
     solana_perf::{
         packet::{to_packet_batches, PacketBatch},

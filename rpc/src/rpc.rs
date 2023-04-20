@@ -2708,7 +2708,7 @@ pub mod rpc_minimal {
             debug!("get_version rpc request received");
             let version = miraland_version::Version::default();
             Ok(RpcVersionInfo {
-                solana_core: version.to_string(),
+                miraland_core: version.to_string(),
                 feature_set: Some(version.feature_set),
             })
         }

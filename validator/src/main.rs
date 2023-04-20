@@ -23,6 +23,13 @@ use {
         rpc_config::RpcLeaderScheduleConfig,
         rpc_request::MAX_MULTIPLE_ACCOUNTS,
     },
+    miraland_core::{
+        ledger_cleanup_service::{DEFAULT_MAX_LEDGER_SHREDS, DEFAULT_MIN_MAX_LEDGER_SHREDS},
+        system_monitor_service::SystemMonitorService,
+        tower_storage,
+        tpu::DEFAULT_TPU_COALESCE_MS,
+        validator::{is_snapshot_config_valid, Validator, ValidatorConfig, ValidatorStartProgress},
+    },
     miraland_gossip::{cluster_info::Node, legacy_contact_info::LegacyContactInfo as ContactInfo},
     miraland_net_utils::VALIDATOR_PORT_RANGE,
     miraland_poh::poh_service,
@@ -38,13 +45,6 @@ use {
         new_spinner_progress_bar, println_name_value, redirect_stderr_to_file,
     },
     rand::{seq::SliceRandom, thread_rng},
-    solana_core::{
-        ledger_cleanup_service::{DEFAULT_MAX_LEDGER_SHREDS, DEFAULT_MIN_MAX_LEDGER_SHREDS},
-        system_monitor_service::SystemMonitorService,
-        tower_storage,
-        tpu::DEFAULT_TPU_COALESCE_MS,
-        validator::{is_snapshot_config_valid, Validator, ValidatorConfig, ValidatorStartProgress},
-    },
     solana_ledger::blockstore_options::{
         BlockstoreCompressionType, BlockstoreRecoveryMode, LedgerColumnOptions, ShredStorageType,
         DEFAULT_ROCKS_FIFO_SHRED_STORAGE_SIZE_BYTES,
@@ -2257,7 +2257,7 @@ pub fn main() {
         enable_recycler_warming();
     }
 
-    solana_core::validator::report_target_features();
+    miraland_core::validator::report_target_features();
 
     let authorized_voter_keypairs = keypairs_of(&matches, "authorized_voter_keypairs")
         .map(|keypairs| keypairs.into_iter().map(Arc::new).collect())
@@ -2403,7 +2403,7 @@ pub fn main() {
         .ok()
         .or_else(|| get_cluster_shred_version(&entrypoint_addrs));
 
-    let tower_storage: Arc<dyn solana_core::tower_storage::TowerStorage> =
+    let tower_storage: Arc<dyn miraland_core::tower_storage::TowerStorage> =
         match value_t_or_exit!(matches, "tower_storage", String).as_str() {
             "file" => {
                 let tower_path = value_t!(matches, "tower", PathBuf)
