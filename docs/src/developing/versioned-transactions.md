@@ -68,11 +68,11 @@ curl http://localhost:8899 -X POST -H "Content-Type: application/json" -d \
 
 Versioned transactions can be created similar to the older method of creating transactions. There are differences in using certain libraries that should be noted.
 
-Below is an example of how to create a Versioned Transaction, using the `@solana/web3.js` library, to send perform a SOL transfer between two accounts.
+Below is an example of how to create a Versioned Transaction, using the `@solana/web3.js` library, to send perform a MLN transfer between two accounts.
 
 #### Notes:
 
-- `payer` is a valid `Keypair` wallet, funded with SOL
+- `payer` is a valid `Keypair` wallet, funded with MLN
 - `toAccount` a valid `Keypair`
 
 Firstly, import the web3.js library and create a `connection` to your desired cluster.
@@ -90,7 +90,7 @@ let blockhash = await connection
   .then((res) => res.blockhash);
 ```
 
-Create an `array` of all the `instructions` you desire to send in your transaction. In this example below, we are creating a simple SOL transfer instruction:
+Create an `array` of all the `instructions` you desire to send in your transaction. In this example below, we are creating a simple MLN transfer instruction:
 
 ```js
 // create an array with your desires `instructions`

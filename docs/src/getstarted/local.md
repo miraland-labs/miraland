@@ -20,7 +20,7 @@ This quickstart guide will demonstrate how to quickly install and setup your loc
 - How to install the Solana CLI locally
 - How to setup a localhost Solana cluster/validator
 - How to create a Solana wallet for developing
-- How to airdrop SOL tokens for your wallet
+- How to airdrop MLN tokens for your wallet
 
 ## Install the Solana CLI
 
@@ -55,7 +55,7 @@ solana config get
 
 ## Create a file system wallet
 
-To deploy a program with Solana CLI, you will need a Solana wallet with SOL tokens to pay for the cost of transactions.
+To deploy a program with Solana CLI, you will need a Solana wallet with MLN tokens to pay for the cost of transactions.
 
 Let's create a simple file system wallet for testing:
 
@@ -76,18 +76,18 @@ With your new file system wallet created, you must tell the Solana CLI to use th
 solana config set -k ~/.config/solana/id.json
 ```
 
-## Airdrop SOL tokens to your wallet
+## Airdrop MLN tokens to your wallet
 
-Once your new wallet is set as the default, you can request a free airdrop of SOL tokens to it:
+Once your new wallet is set as the default, you can request a free airdrop of MLN tokens to it:
 
 ```bash
 solana airdrop 2
 ```
 
 > **NOTE:**
-> The `solana airdrop` command has a limit of how many SOL tokens can be requested _per airdrop_ for each cluster (localhost, testnet, or devent). If your airdrop transaction fails, lower your airdrop request quantity and try again.
+> The `solana airdrop` command has a limit of how many MLN tokens can be requested _per airdrop_ for each cluster (localhost, testnet, or devent). If your airdrop transaction fails, lower your airdrop request quantity and try again.
 
-You can check your current wallet's SOL balance any time:
+You can check your current wallet's MLN balance any time:
 
 ```bash
 solana balance

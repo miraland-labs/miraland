@@ -10,7 +10,7 @@ import {
 import { useState, useEffect } from "react";
 import { Cluster, useCluster } from "providers/cluster";
 
-// Address of the SOL TLD
+// Address of the MLN TLD
 const SOL_TLD_AUTHORITY = new PublicKey(
   "58PwtjSDuFHuUkYjH9BYnnQKHfwo9reZhC2zMJv9JPkx"
 );

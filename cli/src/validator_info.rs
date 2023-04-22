@@ -137,11 +137,11 @@ impl ValidatorInfoSubCommands for App<'_, '_> {
     fn validator_info_subcommands(self) -> Self {
         self.subcommand(
             SubCommand::with_name("validator-info")
-                .about("Publish/get Validator info on Solana")
+                .about("Publish/get Validator info on Miraland")
                 .setting(AppSettings::SubcommandRequiredElseHelp)
                 .subcommand(
                     SubCommand::with_name("publish")
-                        .about("Publish Validator info on Solana")
+                        .about("Publish Validator info on Miraland")
                         .arg(
                             Arg::with_name("info_pubkey")
                                 .short("p")

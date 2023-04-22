@@ -72,7 +72,8 @@ impl GenericTokenAccount for Account {
 }
 
 pub mod native_mint {
-    solana_sdk::declare_id!("So11111111111111111111111111111111111111112");
+    // solana_sdk::declare_id!("So11111111111111111111111111111111111111112");
+    solana_sdk::declare_id!("MLN1111111111111111111111111111111111111111");
 
     /*
         Mint {

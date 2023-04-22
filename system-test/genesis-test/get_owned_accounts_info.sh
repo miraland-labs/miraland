@@ -18,7 +18,7 @@ usage: $0 [cluster_rpc_url] [identity_pubkey]
  Also report the system account balance for that same key.
 
  Required arguments:
-   cluster_rpc_url  - RPC URL and port for a running Solana cluster (ex: http://34.83.146.144:8899)
+   cluster_rpc_url  - RPC URL and port for a running Miraland cluster (ex: http://34.83.146.144:8899)
    identity_pubkey  - Base58 pubkey that is an authorized staker for at least one stake account on the cluster.
 EOF
   exit $exitcode
@@ -72,13 +72,13 @@ function display_results_summary {
   echo ""
   printf "Number of STAKE accounts: %'d\n" "$num_stake_accounts"
   printf "Balance of all STAKE accounts: %'d lamports\n" "$stake_account_balance_total"
-  printf "Balance of all STAKE accounts: %'.3f SOL\n" "$stake_account_balance_total_sol"
+  printf "Balance of all STAKE accounts: %'.3f MLN\n" "$stake_account_balance_total_sol"
   printf "\n"
   printf "Balance of SYSTEM account: %'d lamports\n" "$system_account_balance"
-  printf "Balance of SYSTEM account: %'.3f SOL\n" "$system_account_balance_sol"
+  printf "Balance of SYSTEM account: %'.3f MLN\n" "$system_account_balance_sol"
   printf "\n"
   printf "Total Balance of ALL accounts: %'d lamports\n" "$all_account_total_balance"
-  printf "Total Balance of ALL accounts: %'.3f SOL\n" "$all_account_total_balance_sol"
+  printf "Total Balance of ALL accounts: %'.3f MLN\n" "$all_account_total_balance_sol"
   echo "--------------------------------------------------------------------------------------"
 }
 

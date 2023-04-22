@@ -3,10 +3,10 @@ title: Staking on Solana
 ---
 
 _Note before reading: All references to increases in values are in absolute
-terms with regards to balance of SOL.
-This document makes no suggestion as to the monetary value of SOL at any time._
+terms with regards to balance of MLN.
+This document makes no suggestion as to the monetary value of MLN at any time._
 
-By staking your SOL tokens, you help secure the network and
+By staking your MLN tokens, you help secure the network and
 [earn rewards](implemented-proposals/staking-rewards.md) while doing so.
 
 You can stake by delegating your tokens to validators who process transactions and run the network.
@@ -46,9 +46,9 @@ Rewards and slashing align validator and token holder interests which helps keep
 secure, robust and performant.
 
 
-## How do I stake my SOL tokens?
+## How do I stake my MLN tokens?
 
-You can stake SOL by moving your tokens
+You can stake MLN by moving your tokens
 into a wallet that supports staking.   The wallet provides steps to create a stake account
 and do the delegation.
 

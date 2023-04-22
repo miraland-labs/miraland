@@ -4504,7 +4504,7 @@ pub mod tests {
         const ACCOUNTS_DATA_SIZE_DELTA_PER_ITERATION: u64 = ACCOUNT_SIZE - SHRINK_SIZE;
         const NUM_ITERATIONS: u64 =
             REMAINING_ACCOUNTS_DATA_SIZE / ACCOUNTS_DATA_SIZE_DELTA_PER_ITERATION;
-        const ACCOUNT_BALANCE: u64 = 70 * LAMPORTS_PER_SOL; // rent exempt amount for a 10MB account is a little less than 70 SOL
+        const ACCOUNT_BALANCE: u64 = 70 * LAMPORTS_PER_SOL; // rent exempt amount for a 10MB account is a little less than 70 MLN
 
         let GenesisConfigInfo {
             genesis_config,

@@ -174,7 +174,7 @@ network. **It is crucial to back-up this information.**
 
 If you don’t back up this information, you WILL NOT BE ABLE TO RECOVER YOUR
 VALIDATOR if you lose access to it. If this happens, YOU WILL LOSE YOUR
-ALLOCATION OF SOL TOO.
+ALLOCATION OF MLN TOO.
 
 To back-up your validator identify keypair, **back-up your
 "validator-keypair.json” file or your seed phrase to a secure location.**
@@ -200,14 +200,14 @@ Commitment: confirmed
 
 ## Airdrop & Check Validator Balance
 
-Airdrop yourself some SOL to get started:
+Airdrop yourself some MLN to get started:
 
 ```bash
 solana airdrop 1
 ```
 
 Note that airdrops are only available on Devnet and Testnet. Both are limited
-to 1 SOL per request.
+to 1 MLN per request.
 
 To view your current balance:
 
@@ -221,7 +221,7 @@ Or to see in finer detail:
 solana balance --lamports
 ```
 
-Read more about the [difference between SOL and lamports here](../introduction.md#what-are-sols).
+Read more about the [difference between MLN and lamports here](../introduction.md#what-are-sols).
 
 ## Create Authorized Withdrawer Account
 

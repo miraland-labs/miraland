@@ -172,7 +172,7 @@ describe('ComputeBudgetProgram', () => {
         amount: STARTING_AMOUNT,
       });
 
-      // lamport fee = 2B * 1M / 1M = 2 SOL
+      // lamport fee = 2B * 1M / 1M = 2 MLN
       const prioritizationFeeTooHighTransaction = new Transaction()
         .add(
           ComputeBudgetProgram.setComputeUnitPrice({
@@ -194,7 +194,7 @@ describe('ComputeBudgetProgram', () => {
         ),
       ).to.be.rejected;
 
-      // lamport fee = 1B * 1M / 1M = 1 SOL
+      // lamport fee = 1B * 1M / 1M = 1 MLN
       const validPrioritizationFeeTransaction = new Transaction()
         .add(
           ComputeBudgetProgram.setComputeUnitPrice({

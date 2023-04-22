@@ -323,7 +323,7 @@ function StatusCard({
 
         {fee && (
           <tr>
-            <td>Fee (SOL)</td>
+            <td>Fee (MLN)</td>
             <td className="text-lg-end">
               <SolBalance lamports={fee} />
             </td>
@@ -436,8 +436,8 @@ function AccountsCard({ signature }: SignatureProps) {
             <tr>
               <th className="text-muted">#</th>
               <th className="text-muted">Address</th>
-              <th className="text-muted">Change (SOL)</th>
-              <th className="text-muted">Post Balance (SOL)</th>
+              <th className="text-muted">Change (MLN)</th>
+              <th className="text-muted">Post Balance (MLN)</th>
               <th className="text-muted">Details</th>
             </tr>
           </thead>

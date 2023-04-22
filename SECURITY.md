@@ -81,32 +81,32 @@ We currently do not use the Github workflow to publish security advisories. Once
 We offer bounties for critical security issues. Please see below for more details. Either a demonstration or a valid bug report is all that's necessary to submit a bug bounty. A patch to fix the issue isn't required.
 
 #### Loss of Funds:
-$2,000,000 USD in locked SOL tokens (locked for 12 months)
+$2,000,000 USD in locked MLN tokens (locked for 12 months)
 * Theft of funds without users signature from any account
 * Theft of funds without users interaction in system, token, stake, vote programs
 * Theft of funds that requires users signature - creating a vote program that drains the delegated stakes.
 
 #### Consensus/Safety Violations:
-$1,000,000 USD in locked SOL tokens (locked for 12 months)
+$1,000,000 USD in locked MLN tokens (locked for 12 months)
 * Consensus safety violation
 * Tricking a validator to accept an optimistic confirmation or rooted slot without a double vote, etc.
 
 #### Liveness / Loss of Availability: 
-$400,000 USD in locked SOL tokens (locked for 12 months)
+$400,000 USD in locked MLN tokens (locked for 12 months)
 * Whereby consensus halts and requires human intervention
 * Eclipse attacks,
 * Remote attacks that partition the network,
 
 #### DoS Attacks:
-$100,000 USD in locked SOL tokens (locked for 12 months)
+$100,000 USD in locked MLN tokens (locked for 12 months)
 * Remote resource exaustion via Non-RPC protocols
 
 #### Supply Chain Attacks: 
-$100,000 USD in locked SOL tokens (locked for 12 months)
+$100,000 USD in locked MLN tokens (locked for 12 months)
 * Non-social attacks against source code change management, automated testing, release build, release publication and release hosting infrastructure of the monorepo.
 
 #### RPC DoS/Crashes:
-$5,000 USD in locked SOL tokens (locked for 12 months)
+$5,000 USD in locked MLN tokens (locked for 12 months)
 * RPC attacks
 
 ### Out of Scope:
@@ -144,6 +144,6 @@ bi = 2 ^ (R - ri) / ((2^R) - 1)
 
 ### Payment of Bug Bounties:
 * Bounties are currently awarded on a rolling/weekly basis and paid out within 30 days upon receipt of an invoice.
-* The SOL/USD conversion rate used for payments is the market price of SOL (denominated in USD) at the end of the day the invoice is submitted by the researcher.
+* The MLN/USD conversion rate used for payments is the market price of MLN (denominated in USD) at the end of the day the invoice is submitted by the researcher.
 * The reference for this price is the Closing Price given by Coingecko.com on that date given here: https://www.coingecko.com/en/coins/solana/historical_data/usd#panel
-* Bug bounties that are paid out in SOL are paid to stake accounts with a lockup expiring 12 months from the date of delivery of SOL.
+* Bug bounties that are paid out in MLN are paid to stake accounts with a lockup expiring 12 months from the date of delivery of MLN.

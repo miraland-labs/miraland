@@ -2,14 +2,14 @@
 title: Validator Requirements
 ---
 
-## Minimum SOL requirements
+## Minimum MLN requirements
 
-There is no strict minimum amount of SOL required to run a validator on Solana.
+There is no strict minimum amount of MLN required to run a validator on Solana.
 
 However in order to participate in consensus, a vote account is required which
-has a rent-exempt reserve of 0.02685864 SOL. Voting also requires sending a vote
+has a rent-exempt reserve of 0.02685864 MLN. Voting also requires sending a vote
 transaction for each block the validator agrees with, which can cost up to
-1.1 SOL per day.
+1.1 MLN per day.
 
 ## Hardware Recommendations
 

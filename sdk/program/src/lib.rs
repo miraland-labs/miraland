@@ -145,7 +145,7 @@
 //! that will fail in off-chain scenarios at runtime. This distinction is not
 //! well-reflected in the documentation.
 //!
-//! For a more complete description of Solana's implementation of eBPF and its
+//! For a more complete description of Miraland's implementation of eBPF and its
 //! limitations, see the main Solana documentation for [on-chain programs][ocp].
 //!
 //! [ocp]: https://docs.solana.com/developing/on-chain-programs/overview
@@ -170,7 +170,7 @@
 //! - [`ProgramError`] and [`ProgramResult`] &mdash; The error type that all programs
 //!   must return, reported to the runtime as a `u64`.
 //! - [`Sol`] &mdash; The Solana native token type, with conversions to and from
-//!   [_lamports_], the smallest fractional unit of SOL, in the [`native_token`]
+//!   [_lamports_], the smallest fractional unit of MLN, in the [`native_token`]
 //!   module.
 //!
 //! [acc]: https://docs.solana.com/developing/programming-model/accounts

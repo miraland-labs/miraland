@@ -31,7 +31,7 @@ const connection = new web3.Connection(web3.clusterApiUrl("devnet"));
 const slot = await connection.getSlot();
 
 // Assumption:
-// `payer` is a valid `Keypair` with enough SOL to pay for the execution
+// `payer` is a valid `Keypair` with enough MLN to pay for the execution
 
 const [lookupTableInst, lookupTableAddress] =
   web3.AddressLookupTableProgram.createLookupTable({

@@ -92,7 +92,7 @@ function AccountInfo({
   return (
     <span className="text-muted">
       {`Owned by ${ownerLabel || ownerAddress}.`}
-      {` Balance is ${lamportsToSolString(info.data.lamports)} SOL.`}
+      {` Balance is ${lamportsToSolString(info.data.lamports)} MLN.`}
       {` Size is ${new Intl.NumberFormat("en-US").format(
         info.data.details.space
       )} byte(s).`}
