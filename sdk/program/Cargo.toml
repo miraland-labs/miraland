@@ -1,6 +1,6 @@
 [package]
 name = "miraland-program"
-version = "1.14.17"
+version = "1.14.17-rc.1"
 description = "Miraland Program"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -31,9 +31,9 @@ serde_derive = "1.0"
 serde_json = "1.0"
 sha2 = "0.10.0"
 sha3 = "0.10.0"
-miraland-frozen-abi = { path = "../../frozen-abi", version = "=1.14.17" }
-miraland-frozen-abi-macro = { path = "../../frozen-abi/macro", version = "=1.14.17" }
-miraland-sdk-macro = { path = "../macro", version = "=1.14.17" }
+miraland-frozen-abi = { path = "../../frozen-abi", version = "=1.14.17-rc.1" }
+miraland-frozen-abi-macro = { path = "../../frozen-abi/macro", version = "=1.14.17-rc.1" }
+miraland-sdk-macro = { path = "../macro", version = "=1.14.17-rc.1" }
 thiserror = "1.0"
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
