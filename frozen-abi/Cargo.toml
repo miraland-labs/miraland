@@ -43,7 +43,7 @@ rand_core = { version = "0.6.3", features = ["alloc", "getrandom", "std"] }
 subtle = { version = "2.4.1", features = ["default", "i128", "std"] }
 
 [target.'cfg(not(target_os = "solana"))'.dev-dependencies]
-miraland-logger = { path = "../logger", version = "=1.14.17" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc.1" }
 
 [build-dependencies]
 rustc_version = "0.4"
