@@ -2,7 +2,7 @@
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 edition = "2021"
 name = "miraland-bench-tps"
-version = "1.14.17"
+version = "1.14.17-rc1"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -12,30 +12,30 @@ publish = false
 clap = "2.33.1"
 crossbeam-channel = "0.5"
 log = "0.4.17"
-miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17" }
-miraland-cli-config = { path = "../cli-config", version = "=1.14.17" }
-miraland-client = { path = "../client", version = "=1.14.17" }
-miraland-core = { path = "../core", version = "=1.14.17" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17" }
-miraland-genesis = { path = "../genesis", version = "=1.14.17" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17" }
-miraland-logger = { path = "../logger", version = "=1.14.17" }
-miraland-measure = { path = "../measure", version = "=1.14.17" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17" }
-miraland-rpc = { path = "../rpc", version = "=1.14.17" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17" }
-miraland-version = { path = "../version", version = "=1.14.17" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc1" }
+miraland-cli-config = { path = "../cli-config", version = "=1.14.17-rc1" }
+miraland-client = { path = "../client", version = "=1.14.17-rc1" }
+miraland-core = { path = "../core", version = "=1.14.17-rc1" }
+miraland-faucet = { path = "../faucet", version = "=1.14.17-rc1" }
+miraland-genesis = { path = "../genesis", version = "=1.14.17-rc1" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17-rc1" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc1" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc1" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc1" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc1" }
+miraland-rpc = { path = "../rpc", version = "=1.14.17-rc1" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc1" }
+miraland-version = { path = "../version", version = "=1.14.17-rc1" }
 rayon = "1.5.3"
 serde_json = "1.0.81"
 serde_yaml = "0.8.26"
 thiserror = "1.0"
 
 [dev-dependencies]
-miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17" }
-miraland-test-validator = { path = "../test-validator", version = "=1.14.17" }
+miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc1" }
+miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc1" }
 serial_test = "0.8.0"
 
 [package.metadata.docs.rs]

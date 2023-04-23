@@ -1,6 +1,6 @@
 [package]
 name = "miraland-clap-utils"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Solana utilities for the clap"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -12,9 +12,9 @@ edition = "2021"
 [dependencies]
 chrono = "0.4"
 clap = "2.33.0"
-miraland-perf = { path = "../perf", version = "=1.14.17" }
-miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17", default-features = false }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc1" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17-rc1", default-features = false }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
 rpassword = "6.0"
 thiserror = "1.0.31"
 tiny-bip39 = "0.8.2"

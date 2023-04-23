@@ -1,6 +1,6 @@
 [package]
 name = "solana-bpf-rust-curve25519"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Solana BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -10,8 +10,8 @@ documentation = "https://docs.rs/solana-bpf-rust-zktoken_crypto"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17" }
-miraland-zk-token-sdk = { path = "../../../../zk-token-sdk", version = "=1.14.17" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc1" }
+miraland-zk-token-sdk = { path = "../../../../zk-token-sdk", version = "=1.14.17-rc1" }
 
 [lib]
 crate-type = ["cdylib"]

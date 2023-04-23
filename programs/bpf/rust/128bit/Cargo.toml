@@ -1,6 +1,6 @@
 [package]
 name = "solana-bpf-rust-128bit"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Solana BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -10,8 +10,8 @@ documentation = "https://docs.rs/solana-bpf-rust-128bit"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17" }
-solana-bpf-rust-128bit-dep = { path = "../128bit_dep", version = "=1.14.17" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc1" }
+solana-bpf-rust-128bit-dep = { path = "../128bit_dep", version = "=1.14.17-rc1" }
 
 [lib]
 crate-type = ["cdylib"]

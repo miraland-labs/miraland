@@ -1,6 +1,6 @@
 [package]
 name = "solana-bpf-rust-sysvar"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Solana BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -10,12 +10,12 @@ documentation = "https://docs.rs/solana-bpf-rust-sysvar"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc1" }
 
 [dev-dependencies]
-miraland-program-runtime = { path = "../../../../program-runtime", version = "=1.14.17" }
-miraland-program-test = { path = "../../../../program-test", version = "=1.14.17" }
-miraland-sdk = { path = "../../../../sdk", version = "=1.14.17" }
+miraland-program-runtime = { path = "../../../../program-runtime", version = "=1.14.17-rc1" }
+miraland-program-test = { path = "../../../../program-test", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "../../../../sdk", version = "=1.14.17-rc1" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

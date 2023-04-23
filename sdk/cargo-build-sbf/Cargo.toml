@@ -1,6 +1,6 @@
 [package]
 name = "miraland-cargo-build-sbf"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Compile a local package and all of its dependencies using the Solana SBF SDK"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -14,9 +14,9 @@ bzip2 = "0.4.4"
 cargo_metadata = "0.15.0"
 clap = { version = "3.1.5", features = ["cargo", "env"] }
 log = { version = "0.4.14", features = ["std"] }
-miraland-download-utils = { path = "../../download-utils", version = "=1.14.17" }
-miraland-logger = { path = "../../logger", version = "=1.14.17" }
-miraland-sdk = { path = "..", version = "=1.14.17" }
+miraland-download-utils = { path = "../../download-utils", version = "=1.14.17-rc1" }
+miraland-logger = { path = "../../logger", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "..", version = "=1.14.17-rc1" }
 regex = "1.5.6"
 tar = "0.4.38"
 

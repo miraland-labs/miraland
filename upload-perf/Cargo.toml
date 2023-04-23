@@ -1,6 +1,6 @@
 [package]
 name = "miraland-upload-perf"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Metrics Upload Utility"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -10,7 +10,7 @@ homepage = "https://miraland.top/"
 publish = false
 
 [dependencies]
-miraland-metrics = { path = "../metrics", version = "=1.14.17" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc1" }
 serde_json = "1.0.81"
 
 [[bin]]

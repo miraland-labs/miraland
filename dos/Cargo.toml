@@ -2,7 +2,7 @@
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 edition = "2021"
 name = "miraland-dos"
-version = "1.14.17"
+version = "1.14.17-rc1"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -15,19 +15,19 @@ clap = { version = "3.1.5", features = ["derive", "cargo"] }
 crossbeam-channel = "0.5.4"
 itertools = "0.10.3"
 log = "0.4.17"
-miraland-bench-tps = { path = "../bench-tps", version = "=1.14.17" }
-miraland-client = { path = "../client", version = "=1.14.17" }
-miraland-core = { path = "../core", version = "=1.14.17" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17" }
-miraland-logger = { path = "../logger", version = "=1.14.17" }
-miraland-measure = { path = "../measure", version = "=1.14.17" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17" }
-miraland-perf = { path = "../perf", version = "=1.14.17" }
-miraland-rpc = { path = "../rpc", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17" }
-miraland-version = { path = "../version", version = "=1.14.17" }
+miraland-bench-tps = { path = "../bench-tps", version = "=1.14.17-rc1" }
+miraland-client = { path = "../client", version = "=1.14.17-rc1" }
+miraland-core = { path = "../core", version = "=1.14.17-rc1" }
+miraland-faucet = { path = "../faucet", version = "=1.14.17-rc1" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17-rc1" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc1" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc1" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc1" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc1" }
+miraland-rpc = { path = "../rpc", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc1" }
+miraland-version = { path = "../version", version = "=1.14.17-rc1" }
 rand = "0.7.0"
 serde = "1.0.138"
 
@@ -35,5 +35,5 @@ serde = "1.0.138"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dev-dependencies]
-miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17" }
+miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc1" }
 serial_test = "0.8.0"

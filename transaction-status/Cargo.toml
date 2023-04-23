@@ -1,6 +1,6 @@
 [package]
 name = "miraland-transaction-status"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Miraland transaction status types"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -17,12 +17,12 @@ borsh = "0.9.1"
 bs58 = "0.4.0"
 lazy_static = "1.4.0"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17" }
-miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17" }
-miraland-measure = { path = "../measure", version = "=1.14.17" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc1" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17-rc1" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc1" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc1" }
 serde = "1.0.138"
 serde_derive = "1.0.103"
 serde_json = "1.0.81"

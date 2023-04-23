@@ -1,6 +1,6 @@
 [package]
 name = "miraland-version"
-version = "1.14.17"
+version = "1.14.17-rc1"
 description = "Miraland Version"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -11,9 +11,9 @@ edition = "2021"
 
 [dependencies]
 log = "0.4.17"
-miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17" }
-miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17-rc1" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
 semver = "1.0.10"
 serde = "1.0.138"
 serde_derive = "1.0.103"
