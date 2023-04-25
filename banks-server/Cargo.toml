@@ -1,7 +1,7 @@
 [package]
 name = "miraland-banks-server"
 version = "1.14.17-rc1"
-description = "Solana banks server"
+description = "Miraland banks server"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"

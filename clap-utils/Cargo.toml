@@ -1,7 +1,7 @@
 [package]
 name = "miraland-clap-utils"
 version = "1.14.17-rc1"
-description = "Solana utilities for the clap"
+description = "Miraland utilities for the clap"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"

@@ -150,7 +150,7 @@ export const PROGRAM_INFO_BY_ID: { [address: string]: ProgramInfo } = {
   },
 
   // spl
-  ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL: {
+  ATAccPjxdgWfJKKN4PmfJ55FbEDEwD8zJUwVjuL9MuHy: {
     name: PROGRAM_NAMES.ASSOCIATED_TOKEN,
     deployments: ALL_CLUSTERS,
   },
@@ -162,11 +162,11 @@ export const PROGRAM_INFO_BY_ID: { [address: string]: ProgramInfo } = {
     name: PROGRAM_NAMES.LENDING,
     deployments: LIVE_CLUSTERS,
   },
-  Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo: {
+  MemojWWmbFiRdUEQtRpMkeeyNB181Mr9uWEzdrgHUnc: {
     name: PROGRAM_NAMES.MEMO,
     deployments: ALL_CLUSTERS,
   },
-  MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr: {
+  MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd: {
     name: PROGRAM_NAMES.MEMO_2,
     deployments: ALL_CLUSTERS,
   },
@@ -182,7 +182,7 @@ export const PROGRAM_INFO_BY_ID: { [address: string]: ProgramInfo } = {
     name: PROGRAM_NAMES.SWAP,
     deployments: LIVE_CLUSTERS,
   },
-  TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA: {
+  Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM: {
     name: PROGRAM_NAMES.TOKEN,
     deployments: ALL_CLUSTERS,
   },

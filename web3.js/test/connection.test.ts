@@ -930,7 +930,7 @@ describe('Connection', function () {
               },
             ],
             programId: new PublicKey(
-              'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr',
+              'MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd',
             ),
             data: Buffer.from('Hello world', 'utf8'),
           });
@@ -2353,7 +2353,7 @@ describe('Connection', function () {
                 {
                   accounts: ['va12u4o9DipLEB2z4fuoHszroq1U9NcAB9aooFDPJSf'],
                   data: '37u9WtQpcm6ULa3VtWDFAWoQc1hUvybPrA3dtx99tgHvvcE7pKRZjuGmn7VX2tC3JmYDYGG7',
-                  programId: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+                  programId: 'Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM',
                 },
               ],
               recentBlockhash: 'GeyAFFRY3WGpmam2hbgrKw4rbU2RKzfVLm5QLSeZwTZE',
@@ -2385,7 +2385,7 @@ describe('Connection', function () {
         value: getMockData({
           parsed: {},
           program: 'spl-token',
-          programId: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+          programId: 'Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM',
         }),
       });
 
@@ -2408,7 +2408,7 @@ describe('Connection', function () {
             '6tVrjJhFm5SAvvdh6tysjotQurCSELpxuW3JaAAYeC1m',
           ],
           data: 'ai3535',
-          programId: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+          programId: 'Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM',
         }),
       });
 
@@ -3202,7 +3202,7 @@ describe('Connection', function () {
   });
 
   const TOKEN_PROGRAM_ID = new PublicKey(
-    'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
+    'Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM',
   );
 
   if (process.env.TEST_LIVE) {
@@ -3833,7 +3833,7 @@ describe('Connection', function () {
         accountKeys: [
           account1.publicKey.toString(),
           account2.publicKey.toString(),
-          'Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo',
+          'MemojWWmbFiRdUEQtRpMkeeyNB181Mr9uWEzdrgHUnc',
         ],
         header: {
           numReadonlySignedAccounts: 1,
