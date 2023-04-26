@@ -46,7 +46,7 @@ pub fn redirect_stderr_to_file(logfile: Option<String>) -> Option<JoinHandle<()>
         env::set_var("RUST_BACKTRACE", "1")
     }
 
-    let filter = "solana=info";
+    let filter = "solana=info,miraland=info";
     match logfile {
         None => {
             solana_logger::setup_with_default(filter);

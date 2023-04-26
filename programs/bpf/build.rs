@@ -104,7 +104,7 @@ fn main() {
         ];
         for program in rust_programs.iter() {
             println!(
-                "cargo:warning=(not a warning) Building Rust-based BPF programs: solana_bpf_rust_{}",
+                "cargo:warning=(not a warning) Building Rust-based BPF programs: miraland_bpf_rust_{}",
                 program
             );
             assert!(Command::new("../../cargo-build-bpf")

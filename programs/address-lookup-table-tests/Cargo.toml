@@ -1,5 +1,5 @@
 # This package only exists to avoid circular dependencies during cargo publish:
-# miraland-runtime -> solana-address-program -> miraland-program-test -> miraland-runtime
+# miraland-runtime -> miraland-address-program -> miraland-program-test -> miraland-runtime
 
 [package]
 name = "miraland-address-lookup-table-program-tests"

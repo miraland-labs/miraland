@@ -1,12 +1,12 @@
 [package]
-name = "solana-bpf-rust-dup-accounts"
+name = "miraland-bpf-rust-dup-accounts"
 version = "1.14.17-rc1"
 description = "Miraland BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
-documentation = "https://docs.rs/solana-bpf-rust-dup-accounts"
+documentation = "https://docs.rs/miraland-bpf-rust-dup-accounts"
 edition = "2021"
 
 [dependencies]

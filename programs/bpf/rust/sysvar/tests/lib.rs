@@ -1,5 +1,5 @@
 use {
-    solana_bpf_rust_sysvar::process_instruction,
+    miraland_bpf_rust_sysvar::process_instruction,
     solana_program_test::*,
     solana_sdk::{
         feature_set::disable_fees_sysvar,
@@ -19,7 +19,7 @@ async fn test_sysvars() {
     let program_id = Pubkey::new_unique();
 
     let program_test = ProgramTest::new(
-        "solana_bpf_rust_sysvar",
+        "miraland_bpf_rust_sysvar",
         program_id,
         processor!(process_instruction),
     );
@@ -51,7 +51,7 @@ async fn test_sysvars() {
     banks_client.process_transaction(transaction).await.unwrap();
 
     let mut program_test = ProgramTest::new(
-        "solana_bpf_rust_sysvar",
+        "miraland_bpf_rust_sysvar",
         program_id,
         processor!(process_instruction),
     );

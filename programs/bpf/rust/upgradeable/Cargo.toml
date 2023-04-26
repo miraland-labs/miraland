@@ -1,19 +1,19 @@
 [package]
-name = "solana-bpf-rust-upgradeable"
+name = "miraland-bpf-rust-upgradeable"
 version = "1.14.17-rc1"
 description = "Miraland BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
-documentation = "https://docs.rs/solana-bpf-rust-upgradeable"
+documentation = "https://docs.rs/miraland-bpf-rust-upgradeable"
 edition = "2021"
 
 [dependencies]
 miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc1" }
 
 [lib]
-name = "solana_bpf_rust_upgradeable"
+name = "miraland_bpf_rust_upgradeable"
 crate-type = ["cdylib"]
 
 [package.metadata.docs.rs]

@@ -5,7 +5,7 @@
 extern crate solana_program;
 use {
     crate::instructions::*,
-    solana_bpf_rust_realloc::instructions::*,
+    miraland_bpf_rust_realloc::instructions::*,
     solana_program::{
         account_info::AccountInfo,
         entrypoint::{ProgramResult, MAX_PERMITTED_DATA_INCREASE},

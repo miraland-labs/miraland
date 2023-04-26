@@ -16,7 +16,7 @@ fn no_panic() {
     let program_id = Pubkey::new_unique();
 
     let (test_validator, payer) = TestValidatorGenesis::default()
-        .add_program("solana_bpf_rust_simulation", program_id)
+        .add_program("miraland_bpf_rust_simulation", program_id)
         .start();
     let rpc_client = test_validator.get_rpc_client();
     let blockhash = rpc_client.get_latest_blockhash().unwrap();

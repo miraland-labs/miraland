@@ -35,9 +35,9 @@ miraland-runtime = { path = "../../runtime", version = "=1.14.17-rc1" }
 miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc1" }
 miraland-transaction-status = { path = "../../transaction-status", version = "=1.14.17-rc1" }
 net2 = "0.2.37"
-solana-bpf-rust-invoke = { path = "rust/invoke", version = "=1.14.17-rc1" }
-solana-bpf-rust-realloc = { path = "rust/realloc", version = "=1.14.17-rc1" }
-solana-bpf-rust-realloc-invoke = { path = "rust/realloc_invoke", version = "=1.14.17-rc1" }
+miraland-bpf-rust-invoke = { path = "rust/invoke", version = "=1.14.17-rc1" }
+miraland-bpf-rust-realloc = { path = "rust/realloc", version = "=1.14.17-rc1" }
+miraland-bpf-rust-realloc-invoke = { path = "rust/realloc_invoke", version = "=1.14.17-rc1" }
 solana_rbpf = "=0.2.31"
 
 [dev-dependencies]

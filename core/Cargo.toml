@@ -11,7 +11,7 @@ license = "Apache-2.0"
 edition = "2021"
 
 [badges]
-codecov = { repository = "solana-labs/solana", branch = "master", service = "github" }
+codecov = { repository = "miraland-labs/miraland", branch = "main", service = "github" }
 
 [lib]
 crate-type = ["lib"]

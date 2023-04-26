@@ -2450,7 +2450,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-account-decoder"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "Inflector",
  "base64 0.13.0",
@@ -2465,15 +2465,15 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "spl-token",
- "spl-token-2022 0.6.0",
+ "solarti-token",
+ "solarti-token-2022",
  "thiserror",
  "zstd",
 ]
 
 [[package]]
 name = "miraland-address-lookup-table-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "bytemuck",
@@ -2492,7 +2492,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-client"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "borsh",
  "futures 0.3.21",
@@ -2507,7 +2507,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-interface"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-sdk",
  "serde",
@@ -2516,7 +2516,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-server"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "crossbeam-channel",
@@ -2534,7 +2534,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bloom"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bv",
  "fnv",
@@ -2551,7 +2551,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bpf-loader-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "byteorder 1.4.3",
@@ -2568,7 +2568,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bpf-programs"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "byteorder 1.4.3",
@@ -2596,7 +2596,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bucket-map"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "log",
  "memmap2",
@@ -2609,7 +2609,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-clap-utils"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "chrono",
  "clap 2.33.3",
@@ -2625,7 +2625,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cli-config"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "dirs-next",
  "lazy_static",
@@ -2639,7 +2639,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cli-output"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "Inflector",
  "base64 0.13.0",
@@ -2659,12 +2659,12 @@ dependencies = [
  "semver",
  "serde",
  "serde_json",
- "spl-memo",
+ "solarti-memo",
 ]
 
 [[package]]
 name = "miraland-client"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "async-mutex",
  "async-trait",
@@ -2705,7 +2705,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "spl-token-2022 0.6.0",
+ "solarti-token-2022",
  "thiserror",
  "tokio",
  "tokio-stream",
@@ -2716,7 +2716,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-compute-budget-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program-runtime",
  "miraland-sdk",
@@ -2724,7 +2724,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-config-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "chrono",
@@ -2736,7 +2736,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-core"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "ahash",
  "base64 0.13.0",
@@ -2795,7 +2795,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-download-utils"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "console",
  "indicatif",
@@ -2807,7 +2807,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-entry"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "crossbeam-channel",
@@ -2828,7 +2828,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-faucet"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "byteorder 1.4.3",
@@ -2843,14 +2843,14 @@ dependencies = [
  "miraland-version",
  "serde",
  "serde_derive",
- "spl-memo",
+ "solarti-memo",
  "thiserror",
  "tokio",
 ]
 
 [[package]]
 name = "miraland-frozen-abi"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "ahash",
  "blake3",
@@ -2882,7 +2882,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-frozen-abi-macro"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "proc-macro2 1.0.51",
  "quote 1.0.18",
@@ -2892,7 +2892,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-genesis-utils"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-download-utils",
  "miraland-runtime",
@@ -2901,7 +2901,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-geyser-plugin-interface"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "log",
  "miraland-sdk",
@@ -2911,7 +2911,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-geyser-plugin-manager"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bs58",
  "crossbeam-channel",
@@ -2931,7 +2931,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-gossip"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "bv",
@@ -2974,7 +2974,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-ledger"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -3020,8 +3020,8 @@ dependencies = [
  "serde",
  "serde_bytes",
  "sha2 0.10.2",
- "spl-token",
- "spl-token-2022 0.6.0",
+ "solarti-token",
+ "solarti-token-2022",
  "static_assertions",
  "tempfile",
  "thiserror",
@@ -3032,7 +3032,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-logger"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "env_logger",
  "lazy_static",
@@ -3041,7 +3041,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-measure"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "log",
  "miraland-sdk",
@@ -3049,7 +3049,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-merkle-tree"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "fast-math",
  "matches",
@@ -3058,7 +3058,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-metrics"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "crossbeam-channel",
  "gethostname",
@@ -3070,7 +3070,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-net-utils"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "clap 3.1.6",
@@ -3090,7 +3090,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-perf"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "ahash",
  "bincode",
@@ -3115,7 +3115,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-poh"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "core_affinity",
  "crossbeam-channel",
@@ -3132,7 +3132,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "base64 0.13.0",
  "bincode",
@@ -3179,7 +3179,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-program-runtime"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "base64 0.13.0",
  "bincode",
@@ -3204,7 +3204,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-program-test"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "assert_matches",
  "async-trait",
@@ -3227,7 +3227,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rayon-threadlimit"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "lazy_static",
  "num_cpus",
@@ -3235,7 +3235,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-remote-wallet"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "console",
  "dialoguer",
@@ -3252,7 +3252,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "base64 0.13.0",
  "bincode",
@@ -3293,8 +3293,8 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "soketto",
- "spl-token",
- "spl-token-2022 0.6.0",
+ "solarti-token",
+ "solarti-token-2022",
  "stream-cancel",
  "thiserror",
  "tokio",
@@ -3303,7 +3303,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-runtime"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "arrayref",
  "bincode",
@@ -3362,7 +3362,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-sdk"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "assert_matches",
  "base64 0.13.0",
@@ -3411,7 +3411,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-sdk-macro"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bs58",
  "proc-macro2 1.0.51",
@@ -3422,7 +3422,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-send-transaction-service"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "crossbeam-channel",
  "log",
@@ -3435,7 +3435,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-stake-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "log",
@@ -3456,7 +3456,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-storage-bigtable"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "backoff",
  "bincode",
@@ -3488,7 +3488,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-storage-proto"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "bs58",
@@ -3503,7 +3503,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-streamer"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "crossbeam-channel",
  "futures-util",
@@ -3530,7 +3530,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-sys-tuner"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "clap 2.33.3",
  "libc",
@@ -3545,7 +3545,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-test-validator"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "base64 0.13.0",
  "log",
@@ -3569,7 +3569,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-transaction-status"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "Inflector",
  "base64 0.13.0",
@@ -3587,16 +3587,16 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "spl-associated-token-account",
- "spl-memo",
- "spl-token",
- "spl-token-2022 0.6.0",
+ "solarti-associated-token-account",
+ "solarti-memo",
+ "solarti-token",
+ "solarti-token-2022",
  "thiserror",
 ]
 
 [[package]]
 name = "miraland-validator"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "chrono",
  "clap 2.33.3",
@@ -3647,7 +3647,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-version"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "log",
  "miraland-frozen-abi",
@@ -3661,7 +3661,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-vote-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bincode",
  "log",
@@ -3680,7 +3680,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-proof-program"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "bytemuck",
  "getrandom 0.1.14",
@@ -3693,7 +3693,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-sdk"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "aes-gcm-siv",
  "arrayref",
@@ -5326,7 +5326,7 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-128bit"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "solana-bpf-rust-128bit-dep",
@@ -5334,35 +5334,35 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-128bit-dep"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-alloc"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-call-depth"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-caller-access"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-curve25519"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "miraland-zk-token-sdk",
@@ -5370,14 +5370,14 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-custom-heap"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-dep-crate"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "byteorder 1.4.3",
  "miraland-address-lookup-table-program",
@@ -5386,21 +5386,21 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-deprecated-loader"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-dup-accounts"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-error-handling"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "num-derive",
@@ -5410,42 +5410,42 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-external-spend"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-finalize"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-get-minimum-delegation"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-inner_instruction_alignment_check"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-instruction-introspection"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-invoke"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "solana-bpf-rust-invoked",
@@ -5453,49 +5453,49 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-invoke-and-error"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-invoke-and-ok"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-invoke-and-return"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-invoked"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-iter"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-log-data"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-many-args"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "solana-bpf-rust-many-args-dep",
@@ -5503,14 +5503,14 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-many-args-dep"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-mem"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "miraland-program-runtime",
@@ -5520,7 +5520,7 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-membuiltins"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "solana-bpf-rust-mem",
@@ -5528,21 +5528,21 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-noop"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-panic"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-param-passing"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "solana-bpf-rust-param-passing-dep",
@@ -5550,14 +5550,14 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-param-passing-dep"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-rand"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "getrandom 0.1.14",
  "miraland-program",
@@ -5566,14 +5566,14 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-realloc"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-realloc-invoke"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "solana-bpf-rust-realloc",
@@ -5581,21 +5581,21 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-ro-account_modify"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-ro-modify"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-sanity"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "miraland-program-runtime",
@@ -5605,7 +5605,7 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-secp256k1-recover"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "libsecp256k1 0.7.0",
  "miraland-program",
@@ -5613,7 +5613,7 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-sha"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "blake3",
  "miraland-program",
@@ -5621,21 +5621,21 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-sibling-instructions"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-sibling_inner-instructions"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-simulation"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-logger",
  "miraland-program",
@@ -5646,21 +5646,21 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-spoof1"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-spoof1-system"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-sysvar"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
  "miraland-program-runtime",
@@ -5670,14 +5670,14 @@ dependencies = [
 
 [[package]]
 name = "solana-bpf-rust-upgradeable"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solana-bpf-rust-upgraded"
-version = "1.14.17"
+version = "1.14.17-rc1"
 dependencies = [
  "miraland-program",
 ]
@@ -5902,6 +5902,64 @@ dependencies = [
 ]
 
 [[package]]
+name = "solarti-associated-token-account"
+version = "1.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "142d3533d263f2eae9c54d7b5fcac0d53145ed3b8713044e8176b0db5b9d1410"
+dependencies = [
+ "assert_matches",
+ "borsh",
+ "num-derive",
+ "num-traits",
+ "solana-program",
+ "solarti-token",
+ "solarti-token-2022",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-memo"
+version = "3.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2cb38e3432c4028dc8b058aacaaae491da25b0e22cc6cd7ee66b05f45fe58a68"
+dependencies = [
+ "solana-program",
+]
+
+[[package]]
+name = "solarti-token"
+version = "3.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6d65154d4089c11065a4d2c2b389f99c2052556015c77d81045bf5a6f7b1e4c0"
+dependencies = [
+ "arrayref",
+ "bytemuck",
+ "num-derive",
+ "num-traits",
+ "num_enum",
+ "solana-program",
+ "thiserror",
+]
+
+[[package]]
+name = "solarti-token-2022"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4017f3858b69c94db666711a49c7fb423c5311479c0a5d1b0c574f2b950c43a2"
+dependencies = [
+ "arrayref",
+ "bytemuck",
+ "num-derive",
+ "num-traits",
+ "num_enum",
+ "solana-program",
+ "solana-zk-token-sdk",
+ "solarti-token",
+ "spl-memo",
+ "thiserror",
+]
+
+[[package]]
 name = "spin"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5924,79 +5982,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "spl-associated-token-account"
-version = "1.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fbc000f0fdf1f12f99d77d398137c1751345b18c88258ce0f99b7872cf6c9bd6"
-dependencies = [
- "assert_matches",
- "borsh",
- "num-derive",
- "num-traits",
- "solana-program",
- "spl-token",
- "spl-token-2022 0.5.0",
- "thiserror",
-]
-
-[[package]]
 name = "spl-memo"
 version = "3.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd0dc6f70db6bacea7ff25870b016a65ba1d1b6013536f08e4fd79a8f9005325"
 dependencies = [
  "solana-program",
-]
-
-[[package]]
-name = "spl-token"
-version = "3.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e85e168a785e82564160dcb87b2a8e04cee9bfd1f4d488c729d53d6a4bd300d"
-dependencies = [
- "arrayref",
- "bytemuck",
- "num-derive",
- "num-traits",
- "num_enum",
- "solana-program",
- "thiserror",
-]
-
-[[package]]
-name = "spl-token-2022"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0edb869dbe159b018f17fb9bfa67118c30f232d7f54a73742bc96794dff77ed8"
-dependencies = [
- "arrayref",
- "bytemuck",
- "num-derive",
- "num-traits",
- "num_enum",
- "solana-program",
- "solana-zk-token-sdk",
- "spl-memo",
- "spl-token",
- "thiserror",
-]
-
-[[package]]
-name = "spl-token-2022"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67fcd758e8d22c5fce17315015f5ff319604d1a6e57a73c72795639dba898890"
-dependencies = [
- "arrayref",
- "bytemuck",
- "num-derive",
- "num-traits",
- "num_enum",
- "solana-program",
- "solana-zk-token-sdk",
- "spl-memo",
- "spl-token",
- "thiserror",
 ]
 
 [[package]]

@@ -4,4 +4,4 @@ set -ex
 cd "$(dirname "$0")"
 
 cargo build-bpf
-cp ./target/deploy/solana_bpf_rust_noop.so .
+cp ./target/deploy/miraland_bpf_rust_noop.so .

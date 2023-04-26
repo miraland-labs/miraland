@@ -475,7 +475,7 @@ fn run_accounts_bench(
 }
 
 fn main() {
-    solana_logger::setup_with_default("solana=info");
+    solana_logger::setup_with_default("solana=info,miraland=info");
     let matches = App::new(crate_name!())
         .about(crate_description!())
         .version(miraland_version::version!())

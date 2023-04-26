@@ -1,12 +1,12 @@
 [package]
-name = "solana-bpf-rust-external-spend"
+name = "miraland-bpf-rust-external-spend"
 version = "1.14.17-rc1"
 description = "Miraland BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
-documentation = "https://docs.rs/solana-bpf-rust-external-spend"
+documentation = "https://docs.rs/miraland-bpf-rust-external-spend"
 edition = "2021"
 
 [dependencies]

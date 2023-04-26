@@ -1,17 +1,17 @@
 [package]
-name = "solana-bpf-rust-membuiltins"
+name = "miraland-bpf-rust-membuiltins"
 version = "1.14.17-rc1"
 description = "Miraland BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
-documentation = "https://docs.rs/solana-bpf-rust-mem"
+documentation = "https://docs.rs/miraland-bpf-rust-mem"
 edition = "2021"
 
 [dependencies]
 miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc1" }
-solana-bpf-rust-mem = { path = "../mem", version = "=1.14.17-rc1", features = [ "no-entrypoint" ] }
+miraland-bpf-rust-mem = { path = "../mem", version = "=1.14.17-rc1", features = [ "no-entrypoint" ] }
 
 [lib]
 crate-type = ["cdylib"]

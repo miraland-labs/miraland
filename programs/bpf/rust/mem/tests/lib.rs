@@ -1,5 +1,5 @@
 use {
-    solana_bpf_rust_mem::entrypoint::process_instruction,
+    miraland_bpf_rust_mem::entrypoint::process_instruction,
     solana_program_test::*,
     solana_sdk::{
         instruction::Instruction, pubkey::Pubkey, signature::Signer, transaction::Transaction,
@@ -10,7 +10,7 @@ use {
 async fn test_mem() {
     let program_id = Pubkey::new_unique();
     let program_test = ProgramTest::new(
-        "solana_bpf_rust_mem",
+        "miraland_bpf_rust_mem",
         program_id,
         processor!(process_instruction),
     );

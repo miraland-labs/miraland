@@ -1,7 +1,7 @@
 #![cfg(feature = "test-bpf")]
 
 use {
-    solana_bpf_rust_simulation::process_instruction,
+    miraland_bpf_rust_simulation::process_instruction,
     solana_program_test::{processor, tokio, ProgramTest},
     solana_sdk::{
         instruction::{AccountMeta, Instruction},
@@ -16,7 +16,7 @@ use {
 async fn no_panic() {
     let program_id = Pubkey::new_unique();
     let program_test = ProgramTest::new(
-        "solana_bpf_rust_simulation",
+        "miraland_bpf_rust_simulation",
         program_id,
         processor!(process_instruction),
     );
