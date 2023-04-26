@@ -838,7 +838,7 @@ pub fn process_balances(client: &RpcClient, args: &BalancesArgs) -> Result<(), E
     let token = if let Some(spl_token_args) = &args.spl_token_args {
         spl_token_args.mint.to_string()
     } else {
-        "◎".to_string()
+        "𝇊".to_string()
     };
     println!("{} {}", style("Token:").bold(), token);
 

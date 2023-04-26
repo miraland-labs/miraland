@@ -859,7 +859,7 @@ impl fmt::Display for CliKeyedEpochRewards {
                 Some(reward) => {
                     writeln!(
                         f,
-                        "  {:<44}  ◎{:<17.9}  ◎{:<17.9}  {:>13.9}%  {:>14}  {:>10}",
+                        "  {:<44}  𝇊{:<17.9}  𝇊{:<17.9}  {:>13.9}%  {:>14}  {:>10}",
                         keyed_reward.address,
                         lamports_to_sol(reward.amount),
                         lamports_to_sol(reward.post_balance),
@@ -994,7 +994,7 @@ fn show_epoch_rewards(
         for reward in epoch_rewards {
             writeln!(
                 f,
-                "  {:<6}  {:<11}  ◎{:<17.9}  ◎{:<17.9}  {:>13.9}%  {:>14}  {:>10}",
+                "  {:<6}  {:<11}  𝇊{:<17.9}  𝇊{:<17.9}  {:>13.9}%  {:>14}  {:>10}",
                 reward.epoch,
                 reward.effective_slot,
                 lamports_to_sol(reward.amount),
@@ -2384,7 +2384,7 @@ impl fmt::Display for CliBlock {
                         "-".to_string()
                     },
                     format!(
-                        "{}◎{:<14.9}",
+                        "{}𝇊{:<14.9}",
                         sign,
                         lamports_to_sol(reward.lamports.unsigned_abs())
                     ),
@@ -2392,7 +2392,7 @@ impl fmt::Display for CliBlock {
                         "          -                 -".to_string()
                     } else {
                         format!(
-                            "◎{:<19.9}  {:>13.9}%",
+                            "𝇊{:<19.9}  {:>13.9}%",
                             lamports_to_sol(reward.post_balance),
                             (reward.lamports.abs() as f64
                                 / (reward.post_balance as f64 - reward.lamports as f64))
@@ -2409,7 +2409,7 @@ impl fmt::Display for CliBlock {
             let sign = if total_rewards < 0 { "-" } else { "" };
             writeln!(
                 f,
-                "Total Rewards: {}◎{:<12.9}",
+                "Total Rewards: {}𝇊{:<12.9}",
                 sign,
                 lamports_to_sol(total_rewards.unsigned_abs())
             )?;

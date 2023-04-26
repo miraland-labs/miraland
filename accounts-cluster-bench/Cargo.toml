@@ -26,7 +26,7 @@ miraland-transaction-status = { path = "../transaction-status", version = "=1.14
 miraland-version = { path = "../version", version = "=1.14.17-rc1" }
 rand = "0.7.0"
 rayon = "1.5.3"
-spl-token = { version = "=3.5.0", features = ["no-entrypoint"] }
+solarti-token = { version = "=3.5.0", features = ["no-entrypoint"] }
 
 [dev-dependencies]
 miraland-core = { path = "../core", version = "=1.14.17-rc1" }

@@ -525,7 +525,7 @@ fn write_rewards<W: io::Write>(
                 let sign = if reward.lamports < 0 { "-" } else { "" };
                 writeln!(
                     w,
-                    "{}  {:<44}  {:^15}  {}◎{:<14.9}  ◎{:<18.9}",
+                    "{}  {:<44}  {:^15}  {}𝇊{:<14.9}  𝇊{:<18.9}",
                     prefix,
                     reward.pubkey,
                     if let Some(reward_type) = reward.reward_type {
@@ -560,7 +560,7 @@ fn write_status<W: io::Write>(
 }
 
 fn write_fees<W: io::Write>(w: &mut W, transaction_fee: u64, prefix: &str) -> io::Result<()> {
-    writeln!(w, "{}  Fee: ◎{}", prefix, lamports_to_sol(transaction_fee))
+    writeln!(w, "{}  Fee: 𝇊{}", prefix, lamports_to_sol(transaction_fee))
 }
 
 fn write_balances<W: io::Write>(
@@ -581,7 +581,7 @@ fn write_balances<W: io::Write>(
         if pre == post {
             writeln!(
                 w,
-                "{}  Account {} balance: ◎{}",
+                "{}  Account {} balance: 𝇊{}",
                 prefix,
                 i,
                 lamports_to_sol(*pre)
@@ -589,7 +589,7 @@ fn write_balances<W: io::Write>(
         } else {
             writeln!(
                 w,
-                "{}  Account {} balance: ◎{} -> ◎{}",
+                "{}  Account {} balance: 𝇊{} -> 𝇊{}",
                 prefix,
                 i,
                 lamports_to_sol(*pre),
@@ -850,9 +850,9 @@ Instruction 0
   Account 0: 4zvwRjXUKGfvwnParsHAS3HuSVzV5cA4McphgmoCtajS (0)
   Data: []
 Status: Ok
-  Fee: ◎0.000005
-  Account 0 balance: ◎0.000005 -> ◎0
-  Account 1 balance: ◎0.00001 -> ◎0.0000099
+  Fee: 𝇊0.000005
+  Account 0 balance: 𝇊0.000005 -> 𝇊0
+  Account 1 balance: 𝇊0.00001 -> 𝇊0.0000099
 Compute Units Consumed: 1234
 Log Messages:
   Test message
@@ -861,7 +861,7 @@ Return Data from Program 8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR:
 0000:   01 02 03                                             ...
 Rewards:
   Address                                            Type        Amount            New Balance         \0
-  4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi        rent        -◎0.000000100     ◎0.000009900       \0
+  4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi        rent        -𝇊0.000000100     𝇊0.000009900       \0
 "#.replace("\\0", "") // replace marker used to subvert trailing whitespace linter on CI
         );
     }
@@ -936,11 +936,11 @@ Address Table Lookup 0
   Writable Indexes: [0]
   Readonly Indexes: [1]
 Status: Ok
-  Fee: ◎0.000005
-  Account 0 balance: ◎0.000005 -> ◎0
-  Account 1 balance: ◎0.00001
-  Account 2 balance: ◎0.000015 -> ◎0.0000149
-  Account 3 balance: ◎0.00002
+  Fee: 𝇊0.000005
+  Account 0 balance: 𝇊0.000005 -> 𝇊0
+  Account 1 balance: 𝇊0.00001
+  Account 2 balance: 𝇊0.000015 -> 𝇊0.0000149
+  Account 3 balance: 𝇊0.00002
 Compute Units Consumed: 2345
 Log Messages:
   Test message
@@ -949,7 +949,7 @@ Return Data from Program 8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR:
 0000:   01 02 03                                             ...
 Rewards:
   Address                                            Type        Amount            New Balance         \0
-  CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8        rent        -◎0.000000100     ◎0.000014900       \0
+  CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8        rent        -𝇊0.000000100     𝇊0.000014900       \0
 "#.replace("\\0", "") // replace marker used to subvert trailing whitespace linter on CI
         );
     }

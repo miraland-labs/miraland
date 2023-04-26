@@ -7,8 +7,8 @@ use {
     },
 };
 
-// MI: change ◎ to 𝇊 for MLN
-// const SOL_SYMBOL: &str = "◎";
+// MI: change 𝇊 to 𝇊 for MLN
+// const SOL_SYMBOL: &str = "𝇊";
 const SOL_SYMBOL: &str = "𝇊";
 
 #[derive(PartialEq, Eq)]

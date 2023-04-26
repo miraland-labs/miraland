@@ -22,7 +22,7 @@ impl Sol {
     fn write_in_sol(&self, f: &mut Formatter) -> Result {
         write!(
             f,
-            "◎{}.{:09}",
+            "𝇊{}.{:09}",
             self.0 / LAMPORTS_PER_SOL,
             self.0 % LAMPORTS_PER_SOL
         )

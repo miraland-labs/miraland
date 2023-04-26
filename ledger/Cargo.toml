@@ -52,8 +52,8 @@ reed-solomon-erasure = { version = "6.0.0", features = ["simd-accel"] }
 serde = "1.0.138"
 serde_bytes = "0.11.6"
 sha2 = "0.10.2"
-spl-token = { version = "=3.5.0", features = ["no-entrypoint"] }
-spl-token-2022 = { version = "=0.6.0", features = ["no-entrypoint"] }
+solarti-token = { version = "=3.5.0", features = ["no-entrypoint"] }
+solarti-token-2022 = { version = "=0.6.1", features = ["no-entrypoint"] }
 static_assertions = "1.1.0"
 tempfile = "3.3.0"
 thiserror = "1.0"
