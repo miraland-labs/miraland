@@ -15,12 +15,12 @@ use {
     miraland_measure::measure::Measure,
     miraland_rayon_threadlimit::get_thread_count,
     rayon::{prelude::*, ThreadPool},
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::{Blockstore, BlockstoreInsertionMetrics},
         leader_schedule_cache::LeaderScheduleCache,
         shred::{self, Nonce, ReedSolomonCache, Shred},
     },
-    solana_metrics::inc_new_counter_error,
+    miraland_metrics::inc_new_counter_error,
     solana_perf::packet::{Packet, PacketBatch},
     solana_sdk::clock::Slot,
     std::{
@@ -484,7 +484,7 @@ mod test {
         super::*,
         miraland_entry::entry::{create_ticks, Entry},
         miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::{make_many_slot_entries, Blockstore},
             get_tmp_ledger_path,
             shred::{ProcessShredsStats, Shredder},

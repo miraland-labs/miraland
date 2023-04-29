@@ -15,7 +15,7 @@ use {
     miraland_rpc::{max_slots::MaxSlots, rpc_subscriptions::RpcSubscriptions},
     rand::Rng,
     rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
-    solana_ledger::{
+    miraland_ledger::{
         leader_schedule_cache::LeaderScheduleCache,
         shred::{self, ShredId},
     },
@@ -586,7 +586,7 @@ mod tests {
         super::*,
         rand::SeedableRng,
         rand_chacha::ChaChaRng,
-        solana_ledger::shred::{Shred, ShredFlags},
+        miraland_ledger::shred::{Shred, ShredFlags},
     };
 
     #[test]

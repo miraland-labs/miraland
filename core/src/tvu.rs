@@ -36,7 +36,7 @@ use {
         max_slots::MaxSlots, optimistically_confirmed_bank_tracker::BankNotificationSender,
         rpc_subscriptions::RpcSubscriptions,
     },
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::Blockstore, blockstore_processor::TransactionStatusSender,
         leader_schedule_cache::LeaderScheduleCache,
     },
@@ -346,7 +346,7 @@ pub mod tests {
         miraland_poh::poh_recorder::create_test_recorder,
         miraland_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         serial_test::serial,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::BlockstoreSignals,
             blockstore_options::BlockstoreOptions,
             create_new_tmp_ledger,

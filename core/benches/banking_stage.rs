@@ -18,7 +18,7 @@ use {
     miraland_poh::poh_recorder::{create_test_recorder, WorkingBankEntry},
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::Blockstore,
         blockstore_processor::process_entries_for_tests,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},

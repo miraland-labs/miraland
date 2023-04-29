@@ -19,7 +19,7 @@ use {
     },
     itertools::Itertools,
     rayon::ThreadPool,
-    solana_ledger::shred::Shred,
+    miraland_ledger::shred::Shred,
     solana_sdk::{
         hash::Hash,
         pubkey::Pubkey,

@@ -154,7 +154,7 @@ export const PROGRAM_INFO_BY_ID: { [address: string]: ProgramInfo } = {
     name: PROGRAM_NAMES.ASSOCIATED_TOKEN,
     deployments: ALL_CLUSTERS,
   },
-  Feat1YXHhH6t1juaWF74WLcfv4XoNocjXA6sPWHNgAse: {
+  FeatQtFWK7aZCvBCVURnhLaUvrm2m8tPN4jHhriettbc: {
     name: PROGRAM_NAMES.FEATURE_PROPOSAL,
     deployments: ALL_CLUSTERS,
   },
@@ -170,11 +170,11 @@ export const PROGRAM_INFO_BY_ID: { [address: string]: ProgramInfo } = {
     name: PROGRAM_NAMES.MEMO_2,
     deployments: ALL_CLUSTERS,
   },
-  namesLPneVptA9Z5rqUDD9tMTWEJwofgaYwp8cawRkX: {
+  NamSVdu81GY7ntoqY5Ts4ojoch1JZoetQXb8cuS8gbx: {
     name: PROGRAM_NAMES.NAME,
     deployments: LIVE_CLUSTERS,
   },
-  SPoo1Ku8WFXoNDMHPsrGSTSG1Y47rzgn41SLUNakuHy: {
+  spooqgqqDxZgVc3pR6EvuVFZJ1kj7ABM4Hccz1gwAN1: {
     name: PROGRAM_NAMES.STAKE_POOL,
     deployments: LIVE_CLUSTERS,
   },

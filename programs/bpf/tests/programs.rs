@@ -22,7 +22,7 @@ use {
     miraland_bpf_rust_invoke::instructions::*,
     miraland_bpf_rust_realloc::instructions::*,
     miraland_bpf_rust_realloc_invoke::instructions::*,
-    solana_ledger::token_balances::collect_token_balances,
+    miraland_ledger::token_balances::collect_token_balances,
     solana_program_runtime::{
         compute_budget::ComputeBudget, invoke_context::with_mock_invoke_context,
         timings::ExecuteTimings,

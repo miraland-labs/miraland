@@ -13,7 +13,7 @@ use {
     },
     miraland_entry::poh::compute_hashes_per_tick,
     miraland_genesis::{genesis_accounts::add_genesis_accounts, Base64Account},
-    solana_ledger::{blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions},
+    miraland_ledger::{blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions},
     solana_runtime::hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
     solana_sdk::{
         account::{Account, AccountSharedData, ReadableAccount, WritableAccount},

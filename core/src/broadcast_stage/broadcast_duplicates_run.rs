@@ -4,7 +4,7 @@ use {
     itertools::Itertools,
     miraland_entry::entry::Entry,
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-    solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
+    miraland_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     solana_sdk::{
         hash::Hash,
         signature::{Keypair, Signature, Signer},

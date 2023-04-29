@@ -385,7 +385,7 @@ mod tests {
         super::*,
         miraland_measure::measure::Measure,
         rand::{thread_rng, Rng},
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::Blockstore,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             get_tmp_ledger_path,

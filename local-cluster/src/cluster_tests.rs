@@ -16,7 +16,7 @@ use {
     },
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_ledger::blockstore::Blockstore,
+    miraland_ledger::blockstore::Blockstore,
     solana_sdk::{
         client::SyncClient,
         clock::{self, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},

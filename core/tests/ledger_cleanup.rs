@@ -8,7 +8,7 @@ mod tests {
         log::*,
         miraland_core::ledger_cleanup_service::LedgerCleanupService,
         miraland_measure::measure::Measure,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::{make_many_slot_shreds, Blockstore},
             blockstore_options::{
                 BlockstoreOptions, BlockstoreRocksFifoOptions, LedgerColumnOptions,

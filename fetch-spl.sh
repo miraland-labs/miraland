@@ -43,7 +43,7 @@ fetch_program token-2022 0.6.0 Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89 BPFLo
 fetch_program memo  1.0.0 MemojWWmbFiRdUEQtRpMkeeyNB181Mr9uWEzdrgHUnc BPFLoader1111111111111111111111111111111111
 fetch_program memo  3.0.0 MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd BPFLoader2111111111111111111111111111111111
 fetch_program associated-token-account 1.1.2 ATAccPjxdgWfJKKN4PmfJ55FbEDEwD8zJUwVjuL9MuHy BPFLoader2111111111111111111111111111111111
-fetch_program feature-proposal 1.0.0 Feat1YXHhH6t1juaWF74WLcfv4XoNocjXA6sPWHNgAse BPFLoader2111111111111111111111111111111111
+fetch_program feature-proposal 1.0.0 FeatQtFWK7aZCvBCVURnhLaUvrm2m8tPN4jHhriettbc BPFLoader2111111111111111111111111111111111
 
 echo "${genesis_args[@]}" > spl-genesis-args.sh
 

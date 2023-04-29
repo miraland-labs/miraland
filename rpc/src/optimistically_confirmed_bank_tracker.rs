@@ -317,7 +317,7 @@ impl OptimisticallyConfirmedBankTracker {
 mod tests {
     use {
         super::*,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_runtime::{
             accounts_background_service::AbsRequestSender, commitment::BlockCommitmentCache,
         },

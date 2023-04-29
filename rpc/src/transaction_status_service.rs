@@ -5,7 +5,7 @@ use {
     miraland_transaction_status::{
         extract_and_fmt_memos, InnerInstructions, Reward, TransactionStatusMeta,
     },
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::Blockstore,
         blockstore_processor::{TransactionStatusBatch, TransactionStatusMessage},
     },
@@ -225,7 +225,7 @@ pub(crate) mod tests {
             token_balances::TransactionTokenBalancesSet, TransactionStatusMeta,
             TransactionTokenBalance,
         },
-        solana_ledger::{genesis_utils::create_genesis_config, get_tmp_ledger_path},
+        miraland_ledger::{genesis_utils::create_genesis_config, get_tmp_ledger_path},
         solana_runtime::bank::{Bank, NonceFull, NoncePartial, RentDebits, TransactionBalancesSet},
         solana_sdk::{
             account_utils::StateMut,

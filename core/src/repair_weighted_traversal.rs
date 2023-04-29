@@ -3,7 +3,7 @@ use {
         heaviest_subtree_fork_choice::HeaviestSubtreeForkChoice, repair_service::RepairService,
         serve_repair::ShredRepairType, tree_diff::TreeDiff,
     },
-    solana_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
+    miraland_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
     solana_runtime::contains::Contains,
     solana_sdk::{clock::Slot, hash::Hash},
     std::collections::{HashMap, HashSet},
@@ -140,7 +140,7 @@ pub fn get_best_repair_shreds<'a>(
 pub mod test {
     use {
         super::*,
-        solana_ledger::{
+        miraland_ledger::{
             get_tmp_ledger_path,
             shred::{Shred, ShredFlags},
         },

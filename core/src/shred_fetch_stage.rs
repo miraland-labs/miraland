@@ -4,7 +4,7 @@ use {
     crate::{cluster_nodes::check_feature_activation, serve_repair::ServeRepair},
     crossbeam_channel::{unbounded, Sender},
     miraland_gossip::cluster_info::ClusterInfo,
-    solana_ledger::shred::{should_discard_shred, ShredFetchStats},
+    miraland_ledger::shred::{should_discard_shred, ShredFetchStats},
     solana_perf::packet::{PacketBatch, PacketBatchRecycler, PacketFlags},
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{
@@ -249,7 +249,7 @@ fn should_drop_merkle_shreds(shred_slot: Slot, root_bank: &Bank) -> bool {
 mod tests {
     use {
         super::*,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::MAX_DATA_SHREDS_PER_SLOT,
             shred::{ReedSolomonCache, Shred, ShredFlags},
         },
@@ -288,7 +288,7 @@ mod tests {
             |_| false, // should_drop_merkle_shreds
             &mut stats,
         ));
-        let coding = solana_ledger::shred::Shredder::generate_coding_shreds(
+        let coding = miraland_ledger::shred::Shredder::generate_coding_shreds(
             &[shred],
             3, // next_code_index
             &ReedSolomonCache::default(),

@@ -4,7 +4,7 @@ use {
     miraland_account_decoder::{UiAccountEncoding, UiDataSliceConfig},
     miraland_client::rpc_filter::RpcFilterType,
     miraland_transaction_status::{TransactionDetails, UiTransactionEncoding},
-    solana_metrics::{CounterToken, TokenCounter},
+    miraland_metrics::{CounterToken, TokenCounter},
     solana_runtime::{
         bank::{TransactionLogCollectorConfig, TransactionLogCollectorFilter},
         bank_forks::BankForks,
@@ -593,7 +593,7 @@ mod tests {
     use {
         super::*,
         crate::rpc_pubsub_service::PubSubConfig,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_runtime::bank::Bank,
         std::str::FromStr,
     };

@@ -10,7 +10,7 @@ use {
     },
     miraland_cli_output::display::format_labeled_address,
     miraland_client::{client_error, rpc_client::RpcClient, rpc_response::RpcVoteAccountStatus},
-    solana_metrics::{datapoint_error, datapoint_info},
+    miraland_metrics::{datapoint_error, datapoint_info},
     solana_notifier::Notifier,
     solana_sdk::{
         hash::Hash,
@@ -228,7 +228,7 @@ fn get_cluster_info(
 
 fn main() -> Result<(), Box<dyn error::Error>> {
     solana_logger::setup_with_default("solana=info,miraland=info");
-    solana_metrics::set_panic_hook("watchtower", /*version:*/ None);
+    miraland_metrics::set_panic_hook("watchtower", /*version:*/ None);
 
     let config = get_config();
 

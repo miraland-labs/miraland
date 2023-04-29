@@ -5,7 +5,7 @@ extern crate test;
 use {
     bincode::{deserialize, serialize},
     miraland_transaction_status::{Reward, Rewards},
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::Blockstore,
         blockstore_db::{columns as cf, LedgerColumn},
         get_tmp_ledger_path,

@@ -7,7 +7,7 @@ use {
     miraland_entry::entry::{create_ticks, Entry},
     rand::seq::SliceRandom,
     raptorq::{Decoder, Encoder},
-    solana_ledger::shred::{
+    miraland_ledger::shred::{
         max_entries_per_n_shred, max_ticks_per_n_shreds, ProcessShredsStats, ReedSolomonCache,
         Shred, ShredFlags, Shredder, DATA_SHREDS_PER_FEC_BLOCK, LEGACY_SHRED_DATA_CAPACITY,
     },

@@ -3,7 +3,7 @@
 extern crate serde_derive;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 pub mod blockhash_query;
 pub mod client_error;

@@ -117,10 +117,10 @@ test-stable-bpf)
   # miraland-program is performed when simulation crate is built. This
   # last compiled miraland-program is of different version, normally the
   # latest mainbeta release version.
-  solana_program_count=$(grep -c 'miraland-program v' cargo.log)
+  miraland_program_count=$(grep -c 'miraland-program v' cargo.log)
   rm -f cargo.log
-  if ((solana_program_count > 10)); then
-      echo "Regression of build redundancy ${solana_program_count}."
+  if ((miraland_program_count > 10)); then
+      echo "Regression of build redundancy ${miraland_program_count}."
       echo "Review dependency features that trigger redundant rebuilds of miraland-program."
       exit 1
   fi

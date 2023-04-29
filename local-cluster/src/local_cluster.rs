@@ -21,7 +21,7 @@ use {
         cluster_info::Node, gossip_service::discover_cluster,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_ledger::create_new_tmp_ledger,
+    miraland_ledger::create_new_tmp_ledger,
     solana_runtime::{
         genesis_utils::{
             create_genesis_config_with_vote_accounts_and_cluster_type, GenesisConfigInfo,

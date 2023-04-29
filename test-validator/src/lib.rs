@@ -21,7 +21,7 @@ use {
     },
     miraland_net_utils::PortRange,
     miraland_rpc::{rpc::JsonRpcConfig, rpc_pubsub_service::PubSubConfig},
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions,
         create_new_tmp_ledger,
     },

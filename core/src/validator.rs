@@ -56,7 +56,7 @@ use {
     },
     miraland_send_transaction_service::send_transaction_service,
     rand::{thread_rng, Rng},
-    solana_ledger::{
+    miraland_ledger::{
         bank_forks_utils,
         blockstore::{
             Blockstore, BlockstoreError, BlockstoreSignals, CompletedSlotsReceiver, PurgeType,
@@ -66,7 +66,7 @@ use {
         leader_schedule::FixedSchedule,
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_metrics::{datapoint_info, poh_timing_point::PohTimingSender},
+    miraland_metrics::{datapoint_info, poh_timing_point::PohTimingSender},
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandler, AbsRequestSender, AccountsBackgroundService, DroppedSlotsReceiver,
@@ -2120,7 +2120,7 @@ mod tests {
         miraland_client::connection_cache::{
             DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_ENABLE_UDP, DEFAULT_TPU_USE_QUIC,
         },
-        solana_ledger::{create_new_tmp_ledger, genesis_utils::create_genesis_config_with_leader},
+        miraland_ledger::{create_new_tmp_ledger, genesis_utils::create_genesis_config_with_leader},
         solana_sdk::{genesis_config::create_genesis_config, poh_config::PohConfig},
         std::{fs::remove_dir_all, thread, time::Duration},
     };
@@ -2174,7 +2174,7 @@ mod tests {
         solana_logger::setup();
         use {
             miraland_entry::entry,
-            solana_ledger::{blockstore, get_tmp_ledger_path},
+            miraland_ledger::{blockstore, get_tmp_ledger_path},
         };
 
         let validator_config = ValidatorConfig::default_for_test();

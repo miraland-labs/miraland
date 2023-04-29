@@ -341,7 +341,7 @@ impl AdminRpcImpl {
                     })?;
             }
 
-            solana_metrics::set_host_id(identity_keypair.pubkey().to_string());
+            miraland_metrics::set_host_id(identity_keypair.pubkey().to_string());
             post_init
                 .cluster_info
                 .set_keypair(Arc::new(identity_keypair));

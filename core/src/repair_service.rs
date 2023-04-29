@@ -15,7 +15,7 @@ use {
     lru::LruCache,
     miraland_gossip::cluster_info::ClusterInfo,
     miraland_measure::measure::Measure,
-    solana_ledger::blockstore::{Blockstore, SlotMeta},
+    miraland_ledger::blockstore::{Blockstore, SlotMeta},
     solana_runtime::{bank_forks::BankForks, contains::Contains},
     solana_sdk::{
         clock::Slot, epoch_schedule::EpochSchedule, hash::Hash, pubkey::Pubkey,
@@ -35,7 +35,7 @@ use {
     },
 };
 #[cfg(test)]
-use {solana_ledger::shred::Nonce, solana_sdk::timing::timestamp};
+use {miraland_ledger::shred::Nonce, solana_sdk::timing::timestamp};
 
 pub type DuplicateSlotsResetSender = CrossbeamSender<Vec<(Slot, Hash)>>;
 pub type DuplicateSlotsResetReceiver = CrossbeamReceiver<Vec<(Slot, Hash)>>;
@@ -730,7 +730,7 @@ mod test {
         miraland_gossip::{
             cluster_info::Node, legacy_contact_info::LegacyContactInfo as ContactInfo,
         },
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::{
                 make_chaining_slot_entries, make_many_slot_entries, make_slot_entries, Blockstore,
             },

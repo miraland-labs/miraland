@@ -8,7 +8,7 @@ use {
     log::*,
     miraland_client::nonce_utils,
     rayon::prelude::*,
-    solana_metrics::{self, datapoint_info},
+    miraland_metrics::{self, datapoint_info},
     solana_sdk::{
         clock::{DEFAULT_MS_PER_SLOT, DEFAULT_S_PER_SLOT, MAX_PROCESSING_AGE},
         hash::Hash,

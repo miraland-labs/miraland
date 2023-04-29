@@ -3,7 +3,7 @@ use {
     miraland_gossip::cluster_info::ClusterInfo,
     miraland_rayon_threadlimit::get_thread_count,
     rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
-    solana_ledger::{
+    miraland_ledger::{
         leader_schedule_cache::LeaderScheduleCache, shred, sigverify_shreds::verify_shreds_gpu,
     },
     solana_perf::{self, packet::PacketBatch, recycler_cache::RecyclerCache, sigverify::Deduper},
@@ -271,7 +271,7 @@ impl ShredSigVerifyStats {
 mod tests {
     use {
         super::*,
-        solana_ledger::{
+        miraland_ledger::{
             genesis_utils::create_genesis_config_with_leader,
             shred::{Shred, ShredFlags},
         },

@@ -3,7 +3,7 @@ use {
         heaviest_subtree_fork_choice::HeaviestSubtreeForkChoice, repair_service::RepairService,
         serve_repair::ShredRepairType, tree_diff::TreeDiff,
     },
-    solana_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
+    miraland_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
     solana_sdk::{clock::Slot, hash::Hash},
     std::collections::{HashMap, HashSet},
 };
@@ -195,7 +195,7 @@ pub fn get_closest_completion(
 pub mod test {
     use {
         super::*,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::{Blockstore, MAX_TURBINE_PROPAGATION_IN_MS},
             get_tmp_ledger_path,
         },
@@ -301,7 +301,7 @@ pub mod test {
                 );
                 blockhashes.insert(slot, entries.last().unwrap().hash);
 
-                let mut shreds = solana_ledger::blockstore::entries_to_test_shreds(
+                let mut shreds = miraland_ledger::blockstore::entries_to_test_shreds(
                     &entries,
                     slot,
                     parent.unwrap_or(slot),

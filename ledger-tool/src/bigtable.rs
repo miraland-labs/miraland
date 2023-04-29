@@ -18,7 +18,7 @@ use {
         UiTransactionEncoding,
     },
     serde_json::json,
-    solana_ledger::{
+    miraland_ledger::{
         bigtable_upload::ConfirmedBlockUploadConfig,
         blockstore::Blockstore,
         blockstore_options::{AccessType, ShredStorageType},
@@ -60,7 +60,7 @@ async fn upload(
             ending_slot,
             starting_slot.saturating_add(config.max_num_slots_to_check as u64 * 2),
         );
-        let last_slot_uploaded = solana_ledger::bigtable_upload::upload_confirmed_blocks(
+        let last_slot_uploaded = miraland_ledger::bigtable_upload::upload_confirmed_blocks(
             blockstore.clone(),
             bigtable.clone(),
             starting_slot,
@@ -85,7 +85,7 @@ async fn delete_slots(
         .await
         .map_err(|err| format!("Failed to connect to storage: {:?}", err))?;
 
-    solana_ledger::bigtable_delete::delete_confirmed_blocks(bigtable, slots, dry_run).await
+    miraland_ledger::bigtable_delete::delete_confirmed_blocks(bigtable, slots, dry_run).await
 }
 
 async fn first_available_block(

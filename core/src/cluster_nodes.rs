@@ -12,7 +12,7 @@ use {
     },
     rand::{seq::SliceRandom, Rng, SeedableRng},
     rand_chacha::ChaChaRng,
-    solana_ledger::shred::ShredId,
+    miraland_ledger::shred::ShredId,
     solana_runtime::bank::Bank,
     solana_sdk::{
         clock::{Epoch, Slot},

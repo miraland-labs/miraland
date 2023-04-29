@@ -35,4 +35,4 @@ extern crate serde_derive;
 extern crate miraland_frozen_abi_macro;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;

@@ -9,7 +9,7 @@ use {
     },
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
     rand::{seq::SliceRandom, Rng},
-    solana_ledger::{
+    miraland_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         shred::{Shred, ShredFlags},
     },

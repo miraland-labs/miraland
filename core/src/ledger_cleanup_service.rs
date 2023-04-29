@@ -8,7 +8,7 @@ use {
     crossbeam_channel::{Receiver, RecvTimeoutError},
     miraland_measure::measure::Measure,
     rand::{thread_rng, Rng},
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::{Blockstore, PurgeType},
         blockstore_db::Result as BlockstoreResult,
     },
@@ -346,7 +346,7 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        solana_ledger::{blockstore::make_many_slot_entries, get_tmp_ledger_path},
+        miraland_ledger::{blockstore::make_many_slot_entries, get_tmp_ledger_path},
     };
 
     #[test]

@@ -1,5 +1,5 @@
 use {
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::Blockstore,
         shred::{Nonce, SIZE_OF_NONCE},
     },
@@ -53,7 +53,7 @@ pub(crate) fn nonce(packet: &Packet) -> Option<Nonce> {
 mod test {
     use {
         super::*,
-        solana_ledger::{
+        miraland_ledger::{
             shred::{Shred, ShredFlags},
             sigverify_shreds::verify_shred_cpu,
         },

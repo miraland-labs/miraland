@@ -23,7 +23,7 @@ rand = "0.7.0"
 serial_test = "0.8.0"
 
 [lib]
-name = "solana_metrics"
+name = "miraland_metrics"
 
 [[bench]]
 name = "metrics"

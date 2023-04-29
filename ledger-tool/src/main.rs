@@ -21,7 +21,7 @@ use {
     regex::Regex,
     serde::Serialize,
     serde_json::json,
-    solana_ledger::{
+    miraland_ledger::{
         ancestor_iterator::AncestorIterator,
         bank_forks_utils,
         blockstore::{create_new_ledger, Blockstore, PurgeType},
@@ -703,7 +703,7 @@ fn graph_forks(bank_forks: &BankForks, config: &GraphConfig) -> String {
 }
 
 fn analyze_column<
-    C: solana_ledger::blockstore_db::Column + solana_ledger::blockstore_db::ColumnName,
+    C: miraland_ledger::blockstore_db::Column + miraland_ledger::blockstore_db::ColumnName,
 >(
     db: &Database,
     name: &str,

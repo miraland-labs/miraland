@@ -4,7 +4,7 @@ use {
     crossbeam_channel::Receiver,
     miraland_entry::entry::Entry,
     miraland_poh::poh_recorder::WorkingBankEntry,
-    solana_ledger::shred::ShredData,
+    miraland_ledger::shred::ShredData,
     solana_runtime::bank::Bank,
     solana_sdk::clock::Slot,
     std::{
@@ -102,7 +102,7 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_sdk::{
             genesis_config::GenesisConfig, pubkey::Pubkey, system_transaction,
             transaction::Transaction,

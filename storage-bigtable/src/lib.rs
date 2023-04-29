@@ -10,7 +10,7 @@ use {
         TransactionWithStatusMeta, VersionedConfirmedBlock, VersionedTransactionWithStatusMeta,
     },
     serde::{Deserialize, Serialize},
-    solana_metrics::{datapoint_info, inc_new_counter_debug},
+    miraland_metrics::{datapoint_info, inc_new_counter_debug},
     solana_sdk::{
         clock::{Slot, UnixTimestamp},
         deserialize_utils::default_on_eof,
@@ -30,7 +30,7 @@ use {
 };
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 #[macro_use]
 extern crate serde_derive;

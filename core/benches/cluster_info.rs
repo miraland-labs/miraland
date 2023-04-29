@@ -14,7 +14,7 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     rand::{thread_rng, Rng},
-    solana_ledger::{
+    miraland_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         shred::{Shred, ShredFlags},
     },

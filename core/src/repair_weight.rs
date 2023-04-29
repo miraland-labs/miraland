@@ -8,7 +8,7 @@ use {
         tree_diff::TreeDiff,
     },
     miraland_measure::measure::Measure,
-    solana_ledger::{
+    miraland_ledger::{
         ancestor_iterator::AncestorIterator, blockstore::Blockstore, blockstore_meta::SlotMeta,
     },
     solana_runtime::{contains::Contains, epoch_stakes::EpochStakes},
@@ -651,7 +651,7 @@ impl RepairWeight {
 mod test {
     use {
         super::*,
-        solana_ledger::{blockstore::Blockstore, get_tmp_ledger_path},
+        miraland_ledger::{blockstore::Blockstore, get_tmp_ledger_path},
         solana_runtime::{bank::Bank, bank_utils},
         solana_sdk::hash::Hash,
         trees::tr,

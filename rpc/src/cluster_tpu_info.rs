@@ -60,7 +60,7 @@ mod test {
     use {
         super::*,
         miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::Blockstore, get_tmp_ledger_path, leader_schedule_cache::LeaderScheduleCache,
         },
         solana_runtime::{
@@ -147,13 +147,13 @@ mod test {
 
             let slot = bank.slot();
             let first_leader =
-                solana_ledger::leader_schedule_utils::slot_leader_at(slot, &bank).unwrap();
+                miraland_ledger::leader_schedule_utils::slot_leader_at(slot, &bank).unwrap();
             assert_eq!(
                 leader_info.get_leader_tpus(1),
                 vec![recent_peers.get(&first_leader).unwrap()]
             );
 
-            let second_leader = solana_ledger::leader_schedule_utils::slot_leader_at(
+            let second_leader = miraland_ledger::leader_schedule_utils::slot_leader_at(
                 slot + NUM_CONSECUTIVE_LEADER_SLOTS,
                 &bank,
             )
@@ -165,7 +165,7 @@ mod test {
             expected_leader_sockets.dedup();
             assert_eq!(leader_info.get_leader_tpus(2), expected_leader_sockets);
 
-            let third_leader = solana_ledger::leader_schedule_utils::slot_leader_at(
+            let third_leader = miraland_ledger::leader_schedule_utils::slot_leader_at(
                 slot + (2 * NUM_CONSECUTIVE_LEADER_SLOTS),
                 &bank,
             )

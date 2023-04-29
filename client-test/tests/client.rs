@@ -22,7 +22,7 @@ use {
     },
     serde_json::{json, Value},
     serial_test::serial,
-    solana_ledger::{blockstore::Blockstore, get_tmp_ledger_path},
+    miraland_ledger::{blockstore::Blockstore, get_tmp_ledger_path},
     solana_runtime::{
         bank::Bank,
         bank_forks::BankForks,

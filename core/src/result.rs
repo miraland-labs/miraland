@@ -2,7 +2,7 @@
 
 use {
     miraland_gossip::{cluster_info, gossip_error::GossipError},
-    solana_ledger::blockstore,
+    miraland_ledger::blockstore,
     thiserror::Error,
 };
 

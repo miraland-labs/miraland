@@ -43,7 +43,7 @@ use {
         rpc_subscriptions::RpcSubscriptions,
     },
     rayon::{prelude::*, ThreadPool},
-    solana_ledger::{
+    miraland_ledger::{
         block_error::BlockError,
         blockstore::Blockstore,
         blockstore_processor::{
@@ -52,7 +52,7 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
         leader_schedule_utils::first_of_consecutive_leader_slots,
     },
-    solana_metrics::inc_new_counter_info,
+    miraland_metrics::inc_new_counter_info,
     solana_program_runtime::timings::ExecuteTimings,
     solana_runtime::{
         accounts_background_service::AbsRequestSender,
@@ -3632,7 +3632,7 @@ pub(crate) mod tests {
             rpc::{create_test_transaction_entries, populate_blockstore_for_tests},
         },
         miraland_transaction_status::VersionedTransactionWithStatusMeta,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::{entries_to_test_shreds, make_slot_entries, BlockstoreError},
             create_new_tmp_ledger,
             genesis_utils::{create_genesis_config, create_genesis_config_with_leader},

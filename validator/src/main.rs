@@ -45,7 +45,7 @@ use {
         new_spinner_progress_bar, println_name_value, redirect_stderr_to_file,
     },
     rand::{seq::SliceRandom, thread_rng},
-    solana_ledger::blockstore_options::{
+    miraland_ledger::blockstore_options::{
         BlockstoreCompressionType, BlockstoreRecoveryMode, LedgerColumnOptions, ShredStorageType,
         DEFAULT_ROCKS_FIFO_SHRED_STORAGE_SIZE_BYTES,
     },
@@ -3091,8 +3091,8 @@ pub fn main() {
         }
     }
 
-    solana_metrics::set_host_id(identity_keypair.pubkey().to_string());
-    solana_metrics::set_panic_hook("validator", {
+    miraland_metrics::set_host_id(identity_keypair.pubkey().to_string());
+    miraland_metrics::set_panic_hook("validator", {
         let version = format!("{:?}", miraland_version::version!());
         Some(version)
     });

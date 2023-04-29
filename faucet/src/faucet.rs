@@ -10,7 +10,7 @@ use {
     crossbeam_channel::{unbounded, Sender},
     log::*,
     serde_derive::{Deserialize, Serialize},
-    solana_metrics::datapoint_info,
+    miraland_metrics::datapoint_info,
     solana_sdk::{
         hash::Hash,
         instruction::Instruction,
@@ -271,7 +271,7 @@ impl Faucet {
 
 impl Drop for Faucet {
     fn drop(&mut self) {
-        solana_metrics::flush();
+        miraland_metrics::flush();
     }
 }
 

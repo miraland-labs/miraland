@@ -9,7 +9,7 @@ pub mod vote_state;
 pub mod vote_transaction;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 #[macro_use]
 extern crate miraland_frozen_abi_macro;

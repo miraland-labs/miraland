@@ -9,7 +9,7 @@ use {
         broadcast_stage::broadcast_utils::UnfinishedSlotInfo, cluster_nodes::ClusterNodesCache,
     },
     miraland_entry::entry::Entry,
-    solana_ledger::{
+    miraland_ledger::{
         blockstore,
         shred::{shred_code, ProcessShredsStats, ReedSolomonCache, Shred, ShredFlags, Shredder},
     },
@@ -508,7 +508,7 @@ mod test {
         super::*,
         miraland_entry::entry::create_ticks,
         miraland_gossip::cluster_info::{ClusterInfo, Node},
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::Blockstore, genesis_utils::create_genesis_config, get_tmp_ledger_path,
             shred::max_ticks_per_n_shreds,
         },

@@ -52,7 +52,7 @@ use {
     rand::{seq::SliceRandom, thread_rng, CryptoRng, Rng},
     rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
     serde::ser::Serialize,
-    solana_ledger::shred::Shred,
+    miraland_ledger::shred::Shred,
     solana_perf::{
         data_budget::DataBudget,
         packet::{Packet, PacketBatch, PacketBatchRecycler, PACKET_DATA_SIZE},
@@ -3152,7 +3152,7 @@ mod tests {
         rand::{seq::SliceRandom, SeedableRng},
         rand_chacha::ChaChaRng,
         regex::Regex,
-        solana_ledger::shred::Shredder,
+        miraland_ledger::shred::Shredder,
         solana_sdk::signature::{Keypair, Signer},
         solana_vote_program::{vote_instruction, vote_state::Vote},
         std::{

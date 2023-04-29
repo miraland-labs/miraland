@@ -11,7 +11,7 @@ use {
     dashmap::{mapref::entry::Entry, DashMap},
     jsonrpc_core::IoHandler,
     soketto::handshake::{server, Server},
-    solana_metrics::TokenCounter,
+    miraland_metrics::TokenCounter,
     std::{
         io,
         net::SocketAddr,

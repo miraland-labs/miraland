@@ -31,7 +31,7 @@ mod staking_utils;
 pub mod token_balances;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 #[macro_use]
 extern crate log;
