@@ -1,6 +1,6 @@
 [package]
 name = "miraland-cargo-build-bpf"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 description = "Compile a local package and all of its dependencies using the Miraland SBF SDK"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -12,7 +12,7 @@ publish = false
 [dependencies]
 cargo_metadata = "0.15.0"
 clap = { version = "3.1.5", features = ["cargo", "env"] }
-miraland-sdk = { path = "..", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "..", version = "=1.14.17-rc3" }
 
 [features]
 program = []

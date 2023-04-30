@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-noop"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 description = "Miraland BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -10,7 +10,7 @@ documentation = "https://docs.rs/miraland-bpf-rust-noop"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc1" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc3" }
 
 [lib]
 crate-type = ["cdylib"]

@@ -3,7 +3,7 @@
 
 [package]
 name = "miraland-bpf-loader-program-tests"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
@@ -14,9 +14,9 @@ publish = false
 [dev-dependencies]
 assert_matches = "1.5.0"
 bincode = "1.3.3"
-miraland-bpf-loader-program = { path = "../bpf_loader", version = "=1.14.17-rc1" }
-miraland-program-test = { path = "../../program-test", version = "=1.14.17-rc1" }
-miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc1" }
+miraland-bpf-loader-program = { path = "../bpf_loader", version = "=1.14.17-rc3" }
+miraland-program-test = { path = "../../program-test", version = "=1.14.17-rc3" }
+miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc3" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

@@ -1,6 +1,6 @@
 [package]
 name = "miraland-program-runtime"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 description = "Miraland program runtime"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -21,16 +21,16 @@ num-derive = { version = "0.3" }
 num-traits = { version = "0.2" }
 rand = "0.7.0"
 serde = { version = "1.0.129", features = ["derive", "rc"] }
-miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17-rc1" }
-miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17-rc1" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc1" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc1" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17-rc3" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17-rc3" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc3" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc3" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
 thiserror = "1.0"
 enum-iterator = "0.8.1"
 
 [dev-dependencies]
-miraland-logger = { path = "../logger", version = "=1.14.17-rc1" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc3" }
 
 [lib]
 crate-type = ["lib"]

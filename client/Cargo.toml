@@ -1,6 +1,6 @@
 [package]
 name = "miraland-client"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 description = "Miraland Client"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -27,17 +27,17 @@ itertools = "0.10.2"
 jsonrpc-core = "18.0.0"
 lazy_static = "1.4.0"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc1" }
-miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc1" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17-rc1" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc1" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc1" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc1" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc1" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc1" }
-miraland-version = { path = "../version", version = "=1.14.17-rc1" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc1" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc3" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc3" }
+miraland-faucet = { path = "../faucet", version = "=1.14.17-rc3" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc3" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc3" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc3" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc3" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc3" }
+miraland-version = { path = "../version", version = "=1.14.17-rc3" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc3" }
 quinn = "0.8.3"
 quinn-proto = "0.8.3"
 rand = "0.7.0"
@@ -61,8 +61,8 @@ url = "2.2.2"
 anyhow = "1.0.58"
 assert_matches = "1.5.0"
 jsonrpc-http-server = "18.0.0"
-miraland-logger = { path = "../logger", version = "=1.14.17-rc1" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc1" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc3" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc3" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

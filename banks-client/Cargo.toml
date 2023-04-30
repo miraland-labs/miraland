@@ -1,6 +1,6 @@
 [package]
 name = "miraland-banks-client"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 description = "Miraland banks client"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -12,17 +12,17 @@ edition = "2021"
 [dependencies]
 borsh = "0.9.3"
 futures = "0.3"
-miraland-banks-interface = { path = "../banks-interface", version = "=1.14.17-rc1" }
-miraland-program = { path = "../sdk/program", version = "=1.14.17-rc1" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
+miraland-banks-interface = { path = "../banks-interface", version = "=1.14.17-rc3" }
+miraland-program = { path = "../sdk/program", version = "=1.14.17-rc3" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
 tarpc = { version = "0.29.0", features = ["full"] }
 thiserror = "1.0"
 tokio = { version = "~1.14.1", features = ["full"] }
 tokio-serde = { version = "0.8", features = ["bincode"] }
 
 [dev-dependencies]
-miraland-banks-server = { path = "../banks-server", version = "=1.14.17-rc1" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc1" }
+miraland-banks-server = { path = "../banks-server", version = "=1.14.17-rc3" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc3" }
 
 [lib]
 crate-type = ["lib"]

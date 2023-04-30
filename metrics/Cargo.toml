@@ -1,6 +1,6 @@
 [package]
 name = "miraland-metrics"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 description = "Miraland Metrics"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -14,7 +14,7 @@ crossbeam-channel = "0.5"
 gethostname = "0.2.3"
 lazy_static = "1.4.0"
 log = "0.4.17"
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
 reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 
 [dev-dependencies]

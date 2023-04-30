@@ -1,6 +1,6 @@
 [package]
 name = "miraland-rpc-test"
-version = "1.14.17-rc1"
+version = "1.14.17-rc3"
 description = "Miraland RPC Test"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -16,20 +16,20 @@ bs58 = "0.4.0"
 crossbeam-channel = "0.5"
 futures-util = "0.3.21"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc1" }
-miraland-client = { path = "../client", version = "=1.14.17-rc1" }
-miraland-rpc = { path = "../rpc", version = "=1.14.17-rc1" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc1" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc1" }
-miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc1" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc1" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc3" }
+miraland-client = { path = "../client", version = "=1.14.17-rc3" }
+miraland-rpc = { path = "../rpc", version = "=1.14.17-rc3" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc3" }
+miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc3" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc3" }
 reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 serde = "1.0.138"
 serde_json = "1.0.81"
 tokio = { version = "~1.14.1", features = ["full"] }
 
 [dev-dependencies]
-miraland-logger = { path = "../logger", version = "=1.14.17-rc1" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc3" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
