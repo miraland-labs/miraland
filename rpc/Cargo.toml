@@ -1,6 +1,6 @@
 [package]
 name = "miraland-rpc"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland RPC"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -23,43 +23,43 @@ jsonrpc-http-server = "18.0.0"
 jsonrpc-pubsub = "18.0.0"
 libc = "0.2.126"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc3" }
-miraland-client = { path = "../client", version = "=1.14.17-rc3" }
-miraland-entry = { path = "../entry", version = "=1.14.17-rc3" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17-rc3" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc3" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc3" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc3" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc3" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc3" }
-miraland-poh = { path = "../poh", version = "=1.14.17-rc3" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc3" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
-miraland-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17-rc3" }
-miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc3" }
-miraland-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17-rc3" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc3" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc3" }
-miraland-version = { path = "../version", version = "=1.14.17-rc3" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc3" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc4" }
+miraland-client = { path = "../client", version = "=1.14.17-rc4" }
+miraland-entry = { path = "../entry", version = "=1.14.17-rc4" }
+miraland-faucet = { path = "../faucet", version = "=1.14.17-rc4" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17-rc4" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17-rc4" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc4" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc4" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc4" }
+miraland-poh = { path = "../poh", version = "=1.14.17-rc4" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc4" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
+miraland-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17-rc4" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc4" }
+miraland-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17-rc4" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc4" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc4" }
+miraland-version = { path = "../version", version = "=1.14.17-rc4" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc4" }
 rayon = "1.5.3"
 regex = "1.5.6"
 serde = "1.0.138"
 serde_derive = "1.0.103"
 serde_json = "1.0.81"
 soketto = "0.7"
-solarti-token = { version = "=3.5.0", features = ["no-entrypoint"] }
-solarti-token-2022 = { version = "=0.6.1", features = ["no-entrypoint"] }
+solarti-token = { version = "3.5", features = ["no-entrypoint"] }
+solarti-token-2022 = { version = "0.6", features = ["no-entrypoint"] }
 stream-cancel = "0.8.1"
 thiserror = "1.0"
 tokio = { version = "~1.14.1", features = ["full"] }
 tokio-util = { version = "0.6", features = ["codec", "compat"] }
 
 [dev-dependencies]
-miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17-rc3" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc3" }
-miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc3" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17-rc4" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc4" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc4" }
 serial_test = "0.8.0"
 symlink = "0.1.0"
 

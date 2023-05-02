@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-128bit"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -10,8 +10,8 @@ documentation = "https://docs.rs/miraland-bpf-rust-128bit"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc3" }
-miraland-bpf-rust-128bit-dep = { path = "../128bit_dep", version = "=1.14.17-rc3" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc4" }
+miraland-bpf-rust-128bit-dep = { path = "../128bit_dep", version = "=1.14.17-rc4" }
 
 [lib]
 crate-type = ["cdylib"]

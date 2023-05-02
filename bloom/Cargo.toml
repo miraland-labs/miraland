@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bloom"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland bloom filter"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -13,9 +13,9 @@ edition = "2021"
 bv = { version = "0.11.1", features = ["serde"] }
 fnv = "1.0.7"
 log = "0.4.17"
-miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17-rc3" }
-miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17-rc4" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
 rand = "0.7.0"
 rayon = "1.5.3"
 serde = { version = "1.0.138", features = ["rc"] }

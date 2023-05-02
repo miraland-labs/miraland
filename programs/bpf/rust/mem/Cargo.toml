@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-mem"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland BPF test program written in Rust"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -13,12 +13,12 @@ edition = "2021"
 no-entrypoint = []
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc3" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc4" }
 
 [dev-dependencies]
-miraland-program-runtime = { path = "../../../../program-runtime", version = "=1.14.17-rc3" }
-miraland-program-test = { path = "../../../../program-test", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../../../../sdk", version = "=1.14.17-rc3" }
+miraland-program-runtime = { path = "../../../../program-runtime", version = "=1.14.17-rc4" }
+miraland-program-test = { path = "../../../../program-test", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../../../../sdk", version = "=1.14.17-rc4" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

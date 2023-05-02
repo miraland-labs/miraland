@@ -1,6 +1,6 @@
 [package]
 name = "miraland-entry"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland Entry"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -16,19 +16,19 @@ dlopen = "0.1.8"
 dlopen_derive = "0.1.4"
 lazy_static = "1.4.0"
 log = "0.4.17"
-miraland-measure = { path = "../measure", version = "=1.14.17-rc3" }
-miraland-merkle-tree = { path = "../merkle-tree", version = "=1.14.17-rc3" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc3" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc3" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc4" }
+miraland-merkle-tree = { path = "../merkle-tree", version = "=1.14.17-rc4" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc4" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc4" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
 rand = "0.7.0"
 rayon = "1.5.3"
 serde = "1.0.138"
 
 [dev-dependencies]
 matches = "0.1.9"
-miraland-logger = { path = "../logger", version = "=1.14.17-rc3" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc4" }
 
 [lib]
 crate-type = ["lib"]

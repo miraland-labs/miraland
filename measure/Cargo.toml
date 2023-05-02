@@ -1,7 +1,7 @@
 [package]
 name = "miraland-measure"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-measure"
 readme = "../README.md"
@@ -12,7 +12,7 @@ edition = "2021"
 
 [dependencies]
 log = "0.4.17"
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

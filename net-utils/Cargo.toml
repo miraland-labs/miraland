@@ -1,6 +1,6 @@
 [package]
 name = "miraland-net-utils"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland Network Utilities"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -14,9 +14,9 @@ bincode = "1.3.3"
 clap = { version = "3.1.5", features = ["cargo"] }
 crossbeam-channel = "0.5"
 log = "0.4.17"
-miraland-logger = { path = "../logger", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
-miraland-version = { path = "../version", version = "=1.14.17-rc3" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
+miraland-version = { path = "../version", version = "=1.14.17-rc4" }
 nix = "0.24.2"
 rand = "0.7.0"
 serde = "1.0.138"

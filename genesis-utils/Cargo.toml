@@ -1,6 +1,6 @@
 [package]
 name = "miraland-genesis-utils"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland Genesis Utils"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -10,9 +10,9 @@ documentation = "https://docs.rs/miraland-genesis-utils"
 edition = "2021"
 
 [dependencies]
-miraland-download-utils = { path = "../download-utils", version = "=1.14.17-rc3" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
+miraland-download-utils = { path = "../download-utils", version = "=1.14.17-rc4" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
 
 [lib]
 crate-type = ["lib"]

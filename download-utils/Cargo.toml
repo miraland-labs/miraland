@@ -1,6 +1,6 @@
 [package]
 name = "miraland-download-utils"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland Download Utils"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
@@ -13,8 +13,8 @@ edition = "2021"
 console = "0.15.0"
 indicatif = "0.16.2"
 log = "0.4.17"
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
 reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 
 [lib]

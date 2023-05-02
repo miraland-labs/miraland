@@ -2,7 +2,7 @@
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 edition = "2021"
 name = "miraland-banking-bench"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -12,18 +12,18 @@ publish = false
 clap = { version = "3.1.8", features = ["derive"] }
 crossbeam-channel = "0.5"
 log = "0.4.17"
-miraland-client = { path = "../client", version = "=1.14.17-rc3" }
-miraland-core = { path = "../core", version = "=1.14.17-rc3" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc3" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc3" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc3" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc3" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc3" }
-miraland-poh = { path = "../poh", version = "=1.14.17-rc3" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc3" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc3" }
-miraland-version = { path = "../version", version = "=1.14.17-rc3" }
+miraland-client = { path = "../client", version = "=1.14.17-rc4" }
+miraland-core = { path = "../core", version = "=1.14.17-rc4" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17-rc4" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17-rc4" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc4" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc4" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc4" }
+miraland-poh = { path = "../poh", version = "=1.14.17-rc4" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc4" }
+miraland-version = { path = "../version", version = "=1.14.17-rc4" }
 rand = "0.7.0"
 rayon = "1.5.3"
 

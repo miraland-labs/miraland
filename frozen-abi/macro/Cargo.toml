@@ -1,6 +1,6 @@
 [package]
 name = "miraland-frozen-abi-macro"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 description = "Miraland Frozen ABI Macro"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"

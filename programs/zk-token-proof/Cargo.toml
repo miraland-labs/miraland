@@ -3,16 +3,16 @@ name = "miraland-zk-token-proof-program"
 description = "Miraland Zk Token Proof Program"
 authors = ["Solana Maintainers <maintainers@solana.foundation>"]
 repository = "https://github.com/miraland-labs/miraland"
-version = "1.14.17-rc3"
+version = "1.14.17-rc4"
 license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
 bytemuck = { version = "1.11.0", features = ["derive"] }
 getrandom = { version = "0.1", features = ["dummy"] }
-miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17-rc3" }
-miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc3" }
-miraland-zk-token-sdk = { path = "../../zk-token-sdk", version = "=1.14.17-rc3" }
+miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17-rc4" }
+miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc4" }
+miraland-zk-token-sdk = { path = "../../zk-token-sdk", version = "=1.14.17-rc4" }
 num-derive = "0.3"
 num-traits = "0.2"
 
