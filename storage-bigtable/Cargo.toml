@@ -32,6 +32,7 @@ serde = "1.0.138"
 serde_derive = "1.0.103"
 smpl_jwt = "0.7.1"
 thiserror = "1.0"
+time = "=0.3.9"
 tokio = "1"
 tonic = { version = "0.8.0", features = ["tls", "transport"] }
 zstd = "0.11.2"

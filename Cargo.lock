@@ -4251,6 +4251,7 @@ dependencies = [
  "serde_derive",
  "smpl_jwt",
  "thiserror",
+ "time 0.3.9",
  "tokio",
  "tonic 0.8.0",
  "zstd",
