@@ -26,6 +26,7 @@ miraland-metrics = { path = "../metrics", version = "=1.14.17-rc4" }
 miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
 miraland-storage-proto = { path = "../storage-proto", version = "=1.14.17-rc4" }
 miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc4" }
+openssl-src = "=111.25.0+1.1.1t"
 prost = "0.11.0"
 prost-types = "0.11.0"
 serde = "1.0.138"
