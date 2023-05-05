@@ -197,7 +197,7 @@ impl ValidatorInfoSubCommands for App<'_, '_> {
                 )
                 .subcommand(
                     SubCommand::with_name("get")
-                        .about("Get and parse Solana Validator info")
+                        .about("Get and parse Miraland Validator info")
                         .arg(
                             Arg::with_name("info_pubkey")
                                 .index(1)

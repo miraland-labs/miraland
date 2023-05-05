@@ -144,10 +144,9 @@ mkdir -p "$installDir/bin"
   # Exclude `spl-token` binary for net.sh builds
   if [[ -z "$validatorOnly" ]]; then
     # shellcheck disable=SC2086 # Don't want to double quote $rust_version
-    "$cargo" $maybeRustVersion install --locked spl-token-cli --root "$installDir"
+    "$cargo" $maybeRustVersion install --locked solarti-token-cli --root "$installDir"
     # solution if above line does not pass ci
-    # "$cargo" $maybeRustVersion install --locked spl-token-cli --version 2.3.0 --root "$installDir"
-    # TODO: change spl-token-cli to solarti-token-cli, MI
+    # "$cargo" $maybeRustVersion install --locked solarti-token-cli --version 2.3.0 --root "$installDir"
   fi
 )
 
@@ -172,7 +171,12 @@ fi
   set -x
   # deps dir can be empty
   shopt -s nullglob
+  # MI: all original libs starting with solana_ are divided into 2 groups,
+  #     starts with solana_ or miraland_
   for dep in target/"$buildVariant"/deps/libsolana*program.*; do
+    cp -fv "$dep" "$installDir/bin/deps"
+  done
+  for dep in target/"$buildVariant"/deps/libmiraland*program.*; do
     cp -fv "$dep" "$installDir/bin/deps"
   done
 )

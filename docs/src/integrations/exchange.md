@@ -759,7 +759,7 @@ installed using a handy one-liner for your platform at [rustup.rs](https://rustu
 Once `cargo` is installed, `spl-token` can be obtained with the following command:
 
 ```
-cargo install spl-token-cli
+cargo install solarti-token-cli
 ```
 
 You can then check the installed version to verify
@@ -771,7 +771,7 @@ spl-token --version
 Which should result in something like
 
 ```text
-spl-token-cli 2.0.1
+solarti-token-cli 2.0.1
 ```
 
 ### Account Creation

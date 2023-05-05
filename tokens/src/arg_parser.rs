@@ -40,7 +40,7 @@ where
                 .global(true)
                 .takes_value(true)
                 .value_name("URL")
-                .help("RPC entrypoint address. i.e. http://api.devnet.solana.com"),
+                .help("RPC entrypoint address. i.e. http://api.devnet-mln.miraland.top"),
         )
         .subcommand(
             SubCommand::with_name("distribute-tokens")

@@ -72,7 +72,7 @@ spl() {
       $cargo_test_bpf --manifest-path "$program"/Cargo.toml
     done
 
-    # TODO better: `build.rs` for spl-token-cli doesn't seem to properly build
+    # TODO better: `build.rs` for solarti-token-cli doesn't seem to properly build
     # the required programs to run the tests, so instead we run the tests
     # after we know programs have been built
     $cargo build
