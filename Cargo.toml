@@ -28,6 +28,7 @@ members = [
     "genesis-utils",
     "geyser-plugin-interface",
     "geyser-plugin-manager",
+    "geyser-plugin-postgres",
     "gossip",
     "install",
     "keygen",
