@@ -3,12 +3,12 @@ use {
     miraland_test_validator::TestValidator,
     miraland_tokens::commands::test_process_distribute_tokens_with_client,
     solana_sdk::signature::{Keypair, Signer},
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
 };
 
 #[test]
 fn test_process_distribute_with_rpc_client() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let test_validator =

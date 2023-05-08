@@ -26,7 +26,7 @@ use {
         system_transaction,
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         net::UdpSocket,
         sync::{
@@ -49,7 +49,7 @@ use {
 #[bench]
 #[allow(clippy::same_item_push)]
 fn bench_retransmitter(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let cluster_info = ClusterInfo::new(
         Node::new_localhost().info,
         Arc::new(Keypair::new()),

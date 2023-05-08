@@ -260,7 +260,7 @@ mod tests {
 
     #[test]
     fn test_add_packet_to_batches() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // set test batch limit to be 1 millionth of regular block limit
         let limit_ratio = 1_000_000u32;
         let number_of_batches = 2;

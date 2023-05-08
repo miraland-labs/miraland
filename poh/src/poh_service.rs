@@ -402,7 +402,7 @@ mod tests {
     #[test]
     #[ignore]
     fn test_poh_service() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(2);
         let bank = Arc::new(Bank::new_no_wallclock_throttle_for_tests(&genesis_config));
         let prev_hash = bank.last_blockhash();

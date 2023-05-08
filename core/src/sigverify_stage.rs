@@ -19,7 +19,7 @@ use {
         },
     },
     solana_sdk::timing,
-    solana_streamer::streamer::{self, StreamerError},
+    miraland_streamer::streamer::{self, StreamerError},
     std::{
         thread::{self, Builder, JoinHandle},
         time::Instant,
@@ -486,7 +486,7 @@ mod tests {
 
     #[test]
     fn test_packet_discard() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let batch_size = 10;
         let mut batch = PacketBatch::with_capacity(batch_size);
         let mut tracer_packet = Packet::default();
@@ -536,7 +536,7 @@ mod tests {
 
     #[test]
     fn test_sigverify_stage() {
-        solana_logger::setup();
+        miraland_logger::setup();
         trace!("start");
         let (packet_s, packet_r) = unbounded();
         let (verified_s, verified_r) = unbounded();

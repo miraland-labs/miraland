@@ -494,7 +494,7 @@ mod test {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
     };
 
     fn local_entries_to_shred(
@@ -580,7 +580,7 @@ mod test {
             crate::serve_repair::ShredRepairType,
             std::net::{IpAddr, Ipv4Addr},
         };
-        solana_logger::setup();
+        miraland_logger::setup();
         let shred = Shred::new_from_parity_shard(
             5,   // slot
             5,   // index

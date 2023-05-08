@@ -125,7 +125,7 @@ fn do_bench_transactions(
     bench_work: &dyn Fn(&Arc<Bank>, &BankClient, &[Transaction]),
     create_transactions: &dyn Fn(&BankClient, &Keypair) -> Vec<Transaction>,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let ns_per_s = 1_000_000_000;
     let (mut genesis_config, mint_keypair) = create_genesis_config(100_000_000_000_000);
     genesis_config.ticks_per_slot = 100;

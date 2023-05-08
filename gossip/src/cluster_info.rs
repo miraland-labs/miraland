@@ -69,7 +69,7 @@ use {
         timing::timestamp,
         transaction::Transaction,
     },
-    solana_streamer::{
+    miraland_streamer::{
         packet,
         socket::SocketAddrSpace,
         streamer::{PacketBatchReceiver, PacketBatchSender},
@@ -3183,7 +3183,7 @@ mod tests {
 
     #[test]
     fn test_cluster_info_trace() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let keypair = Keypair::from_base58_string("3jATNWfbii1btv6nCpToAXAJz6a4km5HsLSWiwLfNvHNQAmvksLFVAKGUz286bXb9N4ivXx8nuwkn91PFDTyoFEp");
 
         let node = {
@@ -3268,7 +3268,7 @@ RPC Enabled Nodes: 1"#;
 
     #[test]
     fn test_handle_pull() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let node = Node::new_localhost();
         let cluster_info = Arc::new(ClusterInfo::new(
             node.info,

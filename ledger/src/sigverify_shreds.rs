@@ -494,7 +494,7 @@ mod tests {
     };
 
     fn run_test_sigverify_shred_cpu(slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut packet = Packet::default();
         let mut shred = Shred::new_from_data(
             slot,
@@ -536,7 +536,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_cpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut batches = [PacketBatch::default()];
         let mut shred = Shred::new_from_data(
             slot,
@@ -589,7 +589,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_gpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler_cache = RecyclerCache::default();
 
         let mut batches = [PacketBatch::default()];
@@ -653,7 +653,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_sign_gpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler_cache = RecyclerCache::default();
 
         let num_packets = 32;
@@ -710,7 +710,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_sign_cpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut batches = [PacketBatch::default()];
         let keypair = Keypair::new();

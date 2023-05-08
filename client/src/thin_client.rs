@@ -633,7 +633,7 @@ mod tests {
 
     #[test]
     fn test_client_optimizer() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         const NUM_CLIENTS: usize = 5;
         let optimizer = ClientOptimizer::new(NUM_CLIENTS);

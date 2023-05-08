@@ -2377,7 +2377,7 @@ mod tests {
 
     #[test]
     fn test_cli_deploy() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut pathbuf = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         pathbuf.push("tests");
         pathbuf.push("fixtures");

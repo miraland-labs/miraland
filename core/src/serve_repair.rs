@@ -40,7 +40,7 @@ use {
         signer::keypair::Keypair,
         timing::{duration_as_ms, timestamp},
     },
-    solana_streamer::{
+    miraland_streamer::{
         sendmmsg::{batch_send, SendPktsError},
         streamer::{PacketBatchReceiver, PacketBatchSender},
     },
@@ -1213,7 +1213,7 @@ mod tests {
             feature_set::FeatureSet, hash::Hash, pubkey::Pubkey, signature::Keypair,
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::io::Cursor,
     };
 
@@ -1537,7 +1537,7 @@ mod tests {
     /// test run_window_request responds with the right shred, and do not overrun
     fn run_highest_window_request(slot: Slot, num_slots: u64, nonce: Nonce) {
         let recycler = PacketBatchRecycler::default();
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path!();
         {
             let blockstore = Arc::new(Blockstore::open(&ledger_path).unwrap());
@@ -1606,7 +1606,7 @@ mod tests {
     /// test window requests respond with the right shred, and do not overrun
     fn run_window_request(slot: Slot, nonce: Nonce) {
         let recycler = PacketBatchRecycler::default();
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path!();
         {
             let blockstore = Arc::new(Blockstore::open(&ledger_path).unwrap());
@@ -1760,7 +1760,7 @@ mod tests {
     }
 
     fn run_orphan(slot: Slot, num_slots: u64, nonce: Nonce) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler = PacketBatchRecycler::default();
         let ledger_path = get_tmp_ledger_path!();
         {
@@ -1827,7 +1827,7 @@ mod tests {
 
     #[test]
     fn run_orphan_corrupted_shred_size() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler = PacketBatchRecycler::default();
         let ledger_path = get_tmp_ledger_path!();
         {
@@ -1888,7 +1888,7 @@ mod tests {
                 .unwrap()
         }
 
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler = PacketBatchRecycler::default();
         let ledger_path = get_tmp_ledger_path!();
         {

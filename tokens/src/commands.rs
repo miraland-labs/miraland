@@ -1230,7 +1230,7 @@ mod tests {
             signature::{read_keypair_file, write_keypair_file, Signer},
             stake::instruction::StakeInstruction,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
     };
 
     fn one_signer_message(client: &RpcClient) -> Message {
@@ -1691,7 +1691,7 @@ mod tests {
 
     #[test]
     fn test_check_payer_balances_distribute_tokens_separate_payers() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let alice = Keypair::new();
         let test_validator = simple_test_validator(alice.pubkey());
         let url = test_validator.rpc_url();
@@ -1942,7 +1942,7 @@ mod tests {
 
     #[test]
     fn test_check_payer_balances_distribute_stakes_separate_payers() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let alice = Keypair::new();
         let test_validator = simple_test_validator(alice.pubkey());
         let url = test_validator.rpc_url();

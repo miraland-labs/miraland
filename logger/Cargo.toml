@@ -15,7 +15,7 @@ lazy_static = "1.4.0"
 log = "0.4.17"
 
 [lib]
-name = "solana_logger"
+name = "miraland_logger"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

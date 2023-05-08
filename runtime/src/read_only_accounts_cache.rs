@@ -170,7 +170,7 @@ mod tests {
 
     #[test]
     fn test_read_only_accounts_cache() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let per_account_size = CACHE_ENTRY_SIZE;
         let data_size = 100;
         let max = data_size + per_account_size;

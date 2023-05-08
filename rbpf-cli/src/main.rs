@@ -52,7 +52,7 @@ fn load_accounts(path: &Path) -> Result<Input> {
 }
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let matches = Command::new("Solana BPF CLI")
         .version(crate_version!())
         .author("Solana Maintainers <maintainers@solana.foundation>")

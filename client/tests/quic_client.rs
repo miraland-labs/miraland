@@ -8,7 +8,7 @@ mod tests {
         },
         solana_perf::packet::PacketBatch,
         solana_sdk::{packet::PACKET_DATA_SIZE, signature::Keypair},
-        solana_streamer::{quic::StreamStats, streamer::StakedNodes},
+        miraland_streamer::{quic::StreamStats, streamer::StakedNodes},
         std::{
             net::{IpAddr, SocketAddr, UdpSocket},
             sync::{
@@ -63,11 +63,11 @@ mod tests {
     #[test]
     fn test_quic_client_multiple_writes() {
         use miraland_client::{quic_client::QuicTpuConnection, tpu_connection::TpuConnection};
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let staked_nodes = Arc::new(RwLock::new(StakedNodes::default()));
         let (s, exit, keypair, ip, stats) = server_args();
-        let t = solana_streamer::quic::spawn_server(
+        let t = miraland_streamer::quic::spawn_server(
             s.try_clone().unwrap(),
             &keypair,
             ip,
@@ -108,11 +108,11 @@ mod tests {
         use miraland_client::nonblocking::{
             quic_client::QuicTpuConnection, tpu_connection::TpuConnection,
         };
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let staked_nodes = Arc::new(RwLock::new(StakedNodes::default()));
         let (s, exit, keypair, ip, stats) = server_args();
-        let t = solana_streamer::nonblocking::quic::spawn_server(
+        let t = miraland_streamer::nonblocking::quic::spawn_server(
             s.try_clone().unwrap(),
             &keypair,
             ip,

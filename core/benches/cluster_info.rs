@@ -24,7 +24,7 @@ use {
         signature::Keypair,
         timing::{timestamp, AtomicInterval},
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashMap,
         net::UdpSocket,
@@ -36,7 +36,7 @@ use {
 
 #[bench]
 fn broadcast_shreds_bench(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let leader_pubkey = pubkey::new_rand();
     let leader_info = Node::new_localhost_with_pubkey(&leader_pubkey);
     let cluster_info = ClusterInfo::new(

@@ -517,7 +517,7 @@ mod test {
             genesis_config::GenesisConfig,
             signature::{Keypair, Signer},
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::{ops::Deref, sync::Arc, time::Duration},
     };
 
@@ -814,7 +814,7 @@ mod test {
 
     #[test]
     fn entries_to_shreds_max() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut bs = StandardBroadcastRun::new(0);
         bs.current_slot_and_parent = Some((1, 0));
         let keypair = Keypair::new();

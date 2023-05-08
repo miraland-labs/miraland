@@ -19,7 +19,7 @@ use {
     solana_sdk::{
         commitment_config::CommitmentConfig, fee_calculator::FeeRateGovernor, system_program,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{collections::HashMap, fs::File, io::prelude::*, path::Path, process::exit, sync::Arc},
 };
 
@@ -27,7 +27,7 @@ use {
 pub const NUM_SIGNATURES_FOR_TXS: u64 = 100_000 * 60 * 60 * 24 * 7;
 
 fn main() {
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     miraland_metrics::set_panic_hook("bench-tps", /*version:*/ None);
 
     let matches = cli::build_args(miraland_version::version!()).get_matches();

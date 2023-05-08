@@ -3654,7 +3654,7 @@ pub(crate) mod tests {
             system_transaction,
             transaction::TransactionError,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         solana_vote_program::{
             vote_state::{VoteState, VoteStateVersions},
             vote_transaction,
@@ -4164,7 +4164,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_dead_fork_invalid_slot_tick_count() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // Too many ticks per slot
         let res = check_dead_fork(|_keypair, bank| {
             let blockhash = bank.last_blockhash();

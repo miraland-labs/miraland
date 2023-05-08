@@ -63,7 +63,7 @@ use {
         transaction::{self, SanitizedTransaction, TransactionError, VersionedTransaction},
         transport::TransportError,
     },
-    solana_streamer::sendmmsg::batch_send,
+    miraland_streamer::sendmmsg::batch_send,
     std::{
         cmp,
         collections::{HashMap, HashSet},
@@ -2339,7 +2339,7 @@ mod tests {
             system_transaction,
             transaction::{MessageHash, Transaction, TransactionError, VersionedTransaction},
         },
-        solana_streamer::{recvmmsg::recv_mmsg, socket::SocketAddrSpace},
+        miraland_streamer::{recvmmsg::recv_mmsg, socket::SocketAddrSpace},
         std::{
             borrow::Cow,
             path::Path,
@@ -2403,7 +2403,7 @@ mod tests {
 
     #[test]
     fn test_banking_stage_tick() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             mut genesis_config, ..
         } = create_genesis_config(2);
@@ -2480,7 +2480,7 @@ mod tests {
 
     #[test]
     fn test_banking_stage_entries_only() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -2606,7 +2606,7 @@ mod tests {
 
     #[test]
     fn test_banking_stage_entryfication() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // In this attack we'll demonstrate that a verifier can interpret the ledger
         // differently if either the server doesn't signal the ledger to add an
         // Entry OR if the verifier tries to parallelize across multiple Entries.
@@ -2723,7 +2723,7 @@ mod tests {
 
     #[test]
     fn test_bank_record_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,
@@ -2932,7 +2932,7 @@ mod tests {
 
     #[test]
     fn test_bank_process_and_record_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3068,7 +3068,7 @@ mod tests {
 
     #[test]
     fn test_bank_process_and_record_transactions_all_unexecuted() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3150,7 +3150,7 @@ mod tests {
 
     #[test]
     fn test_bank_process_and_record_transactions_cost_tracker() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3298,7 +3298,7 @@ mod tests {
 
     #[test]
     fn test_bank_process_and_record_transactions_account_in_use() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3374,7 +3374,7 @@ mod tests {
 
     #[test]
     fn test_filter_valid_packets() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_slow_genesis_config(10);
         let bank = Bank::new_no_wallclock_throttle_for_tests(&genesis_config);
         let bank_forks = Arc::new(RwLock::new(BankForks::new(bank)));
@@ -3462,7 +3462,7 @@ mod tests {
 
     #[test]
     fn test_process_transactions_returns_unprocessed_txs() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3594,7 +3594,7 @@ mod tests {
 
     #[test]
     fn test_process_transactions_instruction_error() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let lamports = 10_000;
         let GenesisConfigInfo {
             genesis_config,
@@ -3655,7 +3655,7 @@ mod tests {
     }
     #[test]
     fn test_process_transactions_account_in_use() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3714,7 +3714,7 @@ mod tests {
 
     #[test]
     fn test_write_persist_transaction_status() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
@@ -3875,7 +3875,7 @@ mod tests {
 
     #[test]
     fn test_write_persist_loaded_addresses() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -4214,7 +4214,7 @@ mod tests {
     #[test]
     #[ignore]
     fn test_forwarder_budget() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // Create `PacketBatch` with 1 unprocessed packet
         let tx = system_transaction::transfer(
             &Keypair::new(),
@@ -4302,7 +4302,7 @@ mod tests {
     #[test]
     #[ignore]
     fn test_handle_forwarding() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // packets are deserialized upon receiving, failed packets will not be
         // forwarded; Therefore need to create real packets here.
         let keypair = Keypair::new();

@@ -160,7 +160,7 @@ mod tests {
     use {
         super::*,
         miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::net::{IpAddr, Ipv4Addr, SocketAddr},
     };
 

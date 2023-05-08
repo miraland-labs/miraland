@@ -376,7 +376,7 @@ pub mod tests {
 
     #[test]
     fn test_next_bucket_to_flush() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let bins = 4;
         let test = BucketMapHolder::<u64>::new(bins, &Some(AccountsIndexConfig::default()), 1);
         let visited = (0..bins)
@@ -400,7 +400,7 @@ pub mod tests {
 
     #[test]
     fn test_age_increment() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let bins = 4;
         let test = BucketMapHolder::<u64>::new(bins, &Some(AccountsIndexConfig::default()), 1);
         for age in 0..513 {
@@ -421,7 +421,7 @@ pub mod tests {
 
     #[test]
     fn test_throttle() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let bins = 128;
         let test = BucketMapHolder::<u64>::new(bins, &Some(AccountsIndexConfig::default()), 1);
         let bins = test.bins as u64;
@@ -461,7 +461,7 @@ pub mod tests {
 
     #[test]
     fn test_age_time() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let bins = 1;
         let test = BucketMapHolder::<u64>::new(bins, &Some(AccountsIndexConfig::default()), 1);
         let threads = 2;
@@ -493,7 +493,7 @@ pub mod tests {
 
     #[test]
     fn test_age_broad() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let bins = 4;
         let test = BucketMapHolder::<u64>::new(bins, &Some(AccountsIndexConfig::default()), 1);
         assert_eq!(test.current_age(), 0);

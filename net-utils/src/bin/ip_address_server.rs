@@ -4,7 +4,7 @@ use {
 };
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let matches = Command::new("miraland-ip-address-server")
         .version(miraland_version::version!())
         .arg(

@@ -43,7 +43,7 @@ use {
         client::SyncClient, clock::Slot, commitment_config::CommitmentConfig,
         epoch_schedule::MINIMUM_SLOTS_PER_EPOCH, hash::Hash,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         fs::{self, File},
         io::Read,
@@ -243,7 +243,7 @@ fn test_without_plugin() {
 #[test]
 #[serial]
 fn test_postgres_plugin() {
-    solana_logger::setup_with_default(RUST_LOG_FILTER);
+    miraland_logger::setup_with_default(RUST_LOG_FILTER);
 
     unsafe {
         let filename = match std::env::consts::OS {

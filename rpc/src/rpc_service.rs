@@ -589,7 +589,7 @@ mod tests {
             signature::Signer,
             signer::keypair::Keypair,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::{
             io::Write,
             net::{IpAddr, Ipv4Addr},

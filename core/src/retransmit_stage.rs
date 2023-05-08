@@ -22,7 +22,7 @@ use {
     solana_perf::sigverify::Deduper,
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{clock::Slot, pubkey::Pubkey, timing::timestamp},
-    solana_streamer::{
+    miraland_streamer::{
         sendmmsg::{multi_target_send, SendPktsError},
         socket::SocketAddrSpace,
     },

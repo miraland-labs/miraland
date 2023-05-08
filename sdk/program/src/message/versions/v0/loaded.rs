@@ -256,7 +256,7 @@ mod tests {
 
     #[test]
     fn test_is_writable() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let create_message_with_keys = |keys: Vec<Pubkey>| {
             LoadedMessage::new(
                 v0::Message {

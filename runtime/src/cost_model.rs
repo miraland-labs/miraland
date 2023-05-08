@@ -263,7 +263,7 @@ mod tests {
     };
 
     fn test_setup() -> (Keypair, Hash) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,

@@ -21,7 +21,7 @@ use {
         system_instruction, system_program,
         transaction::Transaction,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         cmp::min,
         net::SocketAddr,
@@ -475,7 +475,7 @@ fn run_accounts_bench(
 }
 
 fn main() {
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     let matches = App::new(crate_name!())
         .about(crate_description!())
         .version(miraland_version::version!())
@@ -672,7 +672,7 @@ pub mod test {
 
     #[test]
     fn test_accounts_cluster_bench() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let validator_config = ValidatorConfig::default_for_test();
         let num_nodes = 1;
         let mut config = ClusterConfig {
@@ -711,7 +711,7 @@ pub mod test {
 
     #[test]
     fn test_create_then_reclaim_spl_token_accounts() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mint_keypair = Keypair::new();
         let mint_pubkey = mint_keypair.pubkey();
         let faucet_addr = run_local_faucet(mint_keypair, None);

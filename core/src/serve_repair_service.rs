@@ -3,7 +3,7 @@ use {
     crossbeam_channel::{unbounded, Sender},
     miraland_ledger::blockstore::Blockstore,
     solana_perf::recycler::Recycler,
-    solana_streamer::{
+    miraland_streamer::{
         socket::SocketAddrSpace,
         streamer::{self, StreamerReceiveStats},
     },

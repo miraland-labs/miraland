@@ -9,7 +9,7 @@ use {
         native_token::sol_to_lamports,
         signature::{Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
 };
 
 #[test]

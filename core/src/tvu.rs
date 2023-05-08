@@ -354,7 +354,7 @@ pub mod tests {
         },
         solana_runtime::bank::Bank,
         solana_sdk::signature::{Keypair, Signer},
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::sync::atomic::{AtomicU64, Ordering},
     };
 
@@ -362,7 +362,7 @@ pub mod tests {
     #[test]
     #[serial]
     fn test_tvu_exit() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let leader = Node::new_localhost();
         let target1_keypair = Keypair::new();
         let target1 = Node::new_localhost_with_pubkey(&target1_keypair.pubkey());

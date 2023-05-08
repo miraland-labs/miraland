@@ -23,7 +23,7 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         ops::Deref,
@@ -662,7 +662,7 @@ fn test_star_network_push_ring_200() {
 #[test]
 #[serial]
 fn test_connected_staked_network() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let thread_pool = build_gossip_thread_pool();
     let stakes = [
         [1000; 2].to_vec(),
@@ -691,7 +691,7 @@ fn test_connected_staked_network() {
 #[test]
 #[ignore]
 fn test_star_network_large_pull() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mut network = star_network_create(2000);
     let thread_pool = build_gossip_thread_pool();
     network_simulator_pull_only(&thread_pool, &mut network);
@@ -699,7 +699,7 @@ fn test_star_network_large_pull() {
 #[test]
 #[ignore]
 fn test_rstar_network_large_push() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mut network = rstar_network_create(4000);
     let thread_pool = build_gossip_thread_pool();
     network_simulator(&thread_pool, &mut network, 0.9);
@@ -707,7 +707,7 @@ fn test_rstar_network_large_push() {
 #[test]
 #[ignore]
 fn test_ring_network_large_push() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mut network = ring_network_create(4001);
     let thread_pool = build_gossip_thread_pool();
     network_simulator(&thread_pool, &mut network, 0.9);
@@ -715,7 +715,7 @@ fn test_ring_network_large_push() {
 #[test]
 #[ignore]
 fn test_star_network_large_push() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mut network = star_network_create(4002);
     let thread_pool = build_gossip_thread_pool();
     network_simulator(&thread_pool, &mut network, 0.9);

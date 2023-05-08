@@ -73,7 +73,7 @@ fn insert_packet_batches(
     packet_per_batch_count: usize,
     randomize: bool,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mut unprocessed_packet_batches = UnprocessedPacketBatches::with_capacity(buffer_max_size);
 
     let mut timer = Measure::start("insert_batch");
@@ -197,7 +197,7 @@ fn buffer_iter_desc_and_forward(
     packet_per_batch_count: usize,
     randomize: bool,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mut unprocessed_packet_batches = UnprocessedPacketBatches::with_capacity(buffer_max_size);
 
     // fill buffer

@@ -131,7 +131,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_real() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let verify = Arc::new(VerifyAccountsHashInBackground::default());
         start_thread_and_return(&verify, true, || {});
         verify.wait_for_complete();
@@ -149,7 +149,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_long_running() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let verify = Arc::new(VerifyAccountsHashInBackground::default());
         let finish = Arc::new(AtomicBool::default());
         let finish_ = finish.clone();

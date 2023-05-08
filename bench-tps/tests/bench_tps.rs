@@ -23,14 +23,14 @@ use {
         commitment_config::CommitmentConfig,
         signature::{Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{sync::Arc, time::Duration},
 };
 
 fn test_bench_tps_local_cluster(config: Config) {
     let native_instruction_processors = vec![];
 
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let faucet_keypair = Keypair::new();
     let faucet_pubkey = faucet_keypair.pubkey();
@@ -83,7 +83,7 @@ fn test_bench_tps_local_cluster(config: Config) {
 }
 
 fn test_bench_tps_test_validator(config: Config) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();

@@ -3,7 +3,7 @@
 use {
     clap::{crate_description, crate_name, Arg, Command},
     crossbeam_channel::unbounded,
-    solana_streamer::{
+    miraland_streamer::{
         packet::{Packet, PacketBatch, PacketBatchRecycler, PACKET_DATA_SIZE},
         streamer::{receiver, PacketBatchReceiver, StreamerReceiveStats},
     },

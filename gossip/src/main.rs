@@ -13,7 +13,7 @@ use {
         gossip_service::discover, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     solana_sdk::pubkey::Pubkey,
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         error,
         net::{IpAddr, Ipv4Addr, SocketAddr},
@@ -326,7 +326,7 @@ fn process_rpc_url(
 }
 
 fn main() -> Result<(), Box<dyn error::Error>> {
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
 
     let matches = parse_matches();
     let socket_addr_space = SocketAddrSpace::new(matches.is_present("allow_private_addr"));

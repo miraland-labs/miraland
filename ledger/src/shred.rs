@@ -1165,7 +1165,7 @@ mod tests {
 
     #[test]
     fn test_should_discard_shred() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut packet = Packet::default();
         let root = 1;
         let shred_version = 798;

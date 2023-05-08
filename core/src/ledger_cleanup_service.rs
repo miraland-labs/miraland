@@ -351,7 +351,7 @@ mod tests {
 
     #[test]
     fn test_cleanup1() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let blockstore_path = get_tmp_ledger_path!();
         let blockstore = Blockstore::open(&blockstore_path).unwrap();
         let (shreds, _) = make_many_slot_entries(0, 50, 5);
@@ -399,7 +399,7 @@ mod tests {
 
     #[test]
     fn test_cleanup_speed() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let blockstore_path = get_tmp_ledger_path!();
         let mut blockstore = Blockstore::open(&blockstore_path).unwrap();
         blockstore.set_no_compaction(true);

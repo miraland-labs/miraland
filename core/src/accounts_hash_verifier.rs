@@ -348,7 +348,7 @@ mod tests {
             signature::{Keypair, Signer},
             sysvar::epoch_schedule::EpochSchedule,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::str::FromStr,
     };
 
@@ -395,7 +395,7 @@ mod tests {
 
     #[test]
     fn test_max_hashes() {
-        solana_logger::setup();
+        miraland_logger::setup();
         use {std::path::PathBuf, tempfile::TempDir};
         let keypair = Keypair::new();
 

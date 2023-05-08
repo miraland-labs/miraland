@@ -14,7 +14,7 @@ use {
         clock::DEFAULT_TICKS_PER_SLOT,
         packet::{Packet, PacketFlags},
     },
-    solana_streamer::streamer::{
+    miraland_streamer::streamer::{
         self, PacketBatchReceiver, PacketBatchSender, StreamerReceiveStats,
     },
     std::{

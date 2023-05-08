@@ -12,7 +12,7 @@ use {
     solana_sdk::{
         pubkey::Pubkey, quic::QUIC_PORT_OFFSET, signature::Keypair, timing::AtomicInterval,
     },
-    solana_streamer::{
+    miraland_streamer::{
         nonblocking::quic::{compute_max_allowed_uni_streams, ConnectionPeerType},
         streamer::StakedNodes,
         tls_certificates::new_self_signed_tls_certificate_chain,
@@ -662,7 +662,7 @@ mod tests {
                 QUIC_PORT_OFFSET,
             },
         },
-        solana_streamer::streamer::StakedNodes,
+        miraland_streamer::streamer::StakedNodes,
         std::{
             net::{IpAddr, Ipv4Addr, SocketAddr},
             sync::{Arc, RwLock},
@@ -682,7 +682,7 @@ mod tests {
 
     #[test]
     fn test_connection_cache() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // Allow the test to run deterministically
         // with the same pseudorandom sequence between runs
         // and on different platforms - the cryptographic security
@@ -740,7 +740,7 @@ mod tests {
 
     #[test]
     fn test_connection_cache_max_parallel_chunks() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut connection_cache = ConnectionCache::default();
         assert_eq!(
             connection_cache.compute_max_parallel_streams(),

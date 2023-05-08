@@ -36,7 +36,7 @@ use {
         timing::{duration_as_us, timestamp},
         transaction::{Transaction, VersionedTransaction},
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         sync::{atomic::Ordering, Arc, RwLock},
         time::{Duration, Instant},
@@ -147,7 +147,7 @@ enum TransactionType {
 }
 
 fn bench_banking(bencher: &mut Bencher, tx_type: TransactionType) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let num_threads = BankingStage::num_threads() as usize;
     //   a multiple of packet chunk duplicates to avoid races
     const CHUNKS: usize = 8;

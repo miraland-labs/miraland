@@ -38,7 +38,7 @@ use {
         signature::{Keypair, Signer},
         system_program, system_transaction,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashSet,
         net::{IpAddr, SocketAddr},
@@ -54,7 +54,7 @@ use {
 
 #[test]
 fn test_rpc_client() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let test_validator =

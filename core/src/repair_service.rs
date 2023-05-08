@@ -21,7 +21,7 @@ use {
         clock::Slot, epoch_schedule::EpochSchedule, hash::Hash, pubkey::Pubkey,
         signer::keypair::Keypair,
     },
-    solana_streamer::sendmmsg::{batch_send, SendPktsError},
+    miraland_streamer::sendmmsg::{batch_send, SendPktsError},
     std::{
         collections::{HashMap, HashSet},
         iter::Iterator,
@@ -740,7 +740,7 @@ mod test {
         },
         solana_runtime::bank::Bank,
         solana_sdk::signature::Keypair,
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::collections::HashSet,
     };
 

@@ -376,7 +376,7 @@ fn execute_transactions(
 #[test]
 #[cfg(any(feature = "bpf_c", feature = "bpf_rust"))]
 fn test_program_bpf_sanity() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut programs = Vec::new();
     #[cfg(feature = "bpf_c")]
@@ -456,7 +456,7 @@ fn test_program_bpf_sanity() {
 #[test]
 #[cfg(any(feature = "bpf_c", feature = "bpf_rust"))]
 fn test_program_bpf_loader_deprecated() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut programs = Vec::new();
     #[cfg(feature = "bpf_c")]
@@ -504,7 +504,7 @@ fn test_program_bpf_loader_deprecated() {
 
 #[test]
 fn test_sol_alloc_free_no_longer_deployable() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let program_keypair = Keypair::new();
     let program_address = program_keypair.pubkey();
@@ -589,7 +589,7 @@ fn test_sol_alloc_free_no_longer_deployable() {
 
 #[test]
 fn test_program_bpf_duplicate_accounts() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut programs = Vec::new();
     #[cfg(feature = "bpf_c")]
@@ -690,7 +690,7 @@ fn test_program_bpf_duplicate_accounts() {
 
 #[test]
 fn test_program_bpf_error_handling() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut programs = Vec::new();
     #[cfg(feature = "bpf_c")]
@@ -795,7 +795,7 @@ fn test_program_bpf_error_handling() {
 #[test]
 #[cfg(any(feature = "bpf_c", feature = "bpf_rust"))]
 fn test_return_data_and_log_data_syscall() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut programs = Vec::new();
     #[cfg(feature = "bpf_c")]
@@ -848,7 +848,7 @@ fn test_return_data_and_log_data_syscall() {
 
 #[test]
 fn test_program_bpf_invoke_sanity() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     #[allow(dead_code)]
     #[derive(Debug)]
@@ -1363,7 +1363,7 @@ fn test_program_bpf_caller_has_access_to_cpi_program() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_ro_modify() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1420,7 +1420,7 @@ fn test_program_bpf_ro_modify() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_call_depth() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1455,7 +1455,7 @@ fn test_program_bpf_call_depth() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_compute_budget() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1488,7 +1488,7 @@ fn test_program_bpf_compute_budget() {
 
 #[test]
 fn assert_instruction_count() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut programs = Vec::new();
     #[cfg(feature = "bpf_c")]
@@ -1553,7 +1553,7 @@ fn assert_instruction_count() {
 #[cfg(any(feature = "bpf_rust"))]
 #[test]
 fn test_program_bpf_instruction_introspection() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1614,7 +1614,7 @@ fn test_program_bpf_instruction_introspection() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_test_use_latest_executor() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1683,7 +1683,7 @@ fn test_program_bpf_test_use_latest_executor() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_upgrade() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1771,7 +1771,7 @@ fn test_program_bpf_upgrade() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_invoke_in_same_tx_as_deployment() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1863,7 +1863,7 @@ fn test_program_bpf_invoke_in_same_tx_as_deployment() {
 #[test]
 #[cfg(feature = "bpf_rust")]
 fn test_program_bpf_invoke_in_same_tx_as_redeployment() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -1955,7 +1955,7 @@ fn test_program_bpf_invoke_in_same_tx_as_redeployment() {
 #[test]
 #[cfg(feature = "bpf_rust")]
 fn test_program_bpf_invoke_in_same_tx_as_undeployment() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -2061,7 +2061,7 @@ fn test_program_bpf_invoke_in_same_tx_as_undeployment() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_invoke_upgradeable_via_cpi() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -2164,7 +2164,7 @@ fn test_program_bpf_invoke_upgradeable_via_cpi() {
 #[test]
 #[cfg(any(feature = "bpf_c", feature = "bpf_rust"))]
 fn test_program_bpf_disguised_as_bpf_loader() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut programs = Vec::new();
     #[cfg(feature = "bpf_c")]
@@ -2202,7 +2202,7 @@ fn test_program_bpf_disguised_as_bpf_loader() {
 #[test]
 #[cfg(feature = "bpf_c")]
 fn test_program_bpf_c_dup() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -2234,7 +2234,7 @@ fn test_program_bpf_c_dup() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_upgrade_via_cpi() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -2341,7 +2341,7 @@ fn test_program_bpf_upgrade_via_cpi() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_set_upgrade_authority_via_cpi() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -2434,7 +2434,7 @@ fn test_program_upgradeable_locks() {
         buffer_keypair: &Keypair,
         program_keypair: &Keypair,
     ) -> (Arc<Bank>, Transaction, Transaction) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,
@@ -2555,7 +2555,7 @@ fn test_program_upgradeable_locks() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_finalize() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -2601,7 +2601,7 @@ fn test_program_bpf_finalize() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_ro_account_modify() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -2663,7 +2663,7 @@ fn test_program_bpf_ro_account_modify() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_realloc() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     const START_BALANCE: u64 = 100_000_000_000;
 
@@ -2959,7 +2959,7 @@ fn test_program_bpf_realloc() {
 #[test]
 #[cfg(feature = "bpf_rust")]
 fn test_program_bpf_realloc_invoke() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     const START_BALANCE: u64 = 100_000_000_000;
 
@@ -3483,7 +3483,7 @@ fn test_program_bpf_realloc_invoke() {
 #[test]
 #[cfg(any(feature = "bpf_rust"))]
 fn test_program_bpf_processed_inner_instruction() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -3559,7 +3559,7 @@ fn test_program_bpf_processed_inner_instruction() {
 #[test]
 #[cfg(feature = "bpf_rust")]
 fn test_program_fees() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let congestion_multiplier = 1;
 
@@ -3665,7 +3665,7 @@ fn test_get_minimum_delegation() {
 #[cfg(feature = "bpf_rust")]
 #[test]
 fn test_program_bpf_inner_instruction_alignment_checks() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         mut genesis_config,

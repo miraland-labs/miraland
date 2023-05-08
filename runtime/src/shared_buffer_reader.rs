@@ -532,7 +532,7 @@ pub mod tests {
     #[test]
     #[should_panic(expected = "total_buffer_budget > 0")]
     fn test_shared_buffer_buffers_invalid() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (_sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         SharedBuffer::new_with_sizes(0, 1, file);
@@ -541,7 +541,7 @@ pub mod tests {
     #[test]
     #[should_panic(expected = "chunk_size > 0")]
     fn test_shared_buffer_buffers_invalid2() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (_sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         SharedBuffer::new_with_sizes(1, 0, file);
@@ -550,7 +550,7 @@ pub mod tests {
     #[test]
     #[should_panic(expected = "SharedBufferReaders must all be created before the first one reads")]
     fn test_shared_buffer_start_too_late() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         let shared_buffer = SharedBuffer::new(file);
@@ -567,7 +567,7 @@ pub mod tests {
 
     #[test]
     fn test_shared_buffer_simple_read_to_end() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         let shared_buffer = SharedBuffer::new(file);
@@ -588,7 +588,7 @@ pub mod tests {
 
     #[test]
     fn test_shared_buffer_simple_read() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         let shared_buffer = SharedBuffer::new(file);
@@ -605,7 +605,7 @@ pub mod tests {
 
     #[test]
     fn test_shared_buffer_error() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         let shared_buffer = SharedBuffer::new(file);
@@ -622,7 +622,7 @@ pub mod tests {
 
     #[test]
     fn test_shared_buffer_2_errors() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         let shared_buffer = SharedBuffer::new(file);
@@ -645,7 +645,7 @@ pub mod tests {
 
     #[test]
     fn test_shared_buffer_2_errors_after_read() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         let shared_buffer = SharedBuffer::new(file);
@@ -676,7 +676,7 @@ pub mod tests {
 
     #[test]
     fn test_shared_buffer_2_errors_after_read2() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let file = SimpleReader::new(receiver);
         let shared_buffer = SharedBuffer::new(file);
@@ -778,7 +778,7 @@ pub mod tests {
 
     #[test]
     fn test_shared_buffer_sweep() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // try the inflection points with 1 to 3 readers, including a parallel reader
         // a few different chunk sizes
         for chunk_sz in [1, 2, 10] {

@@ -21,7 +21,7 @@ use {
         signature::Keypair,
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         any::TypeId,
         cmp::Reverse,

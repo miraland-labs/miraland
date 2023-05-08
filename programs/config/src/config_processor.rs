@@ -227,7 +227,7 @@ mod tests {
 
     #[test]
     fn test_process_create_ok() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (_, config_account) = create_config_account(vec![]);
         assert_eq!(
             Some(MyConfig::default()),
@@ -237,7 +237,7 @@ mod tests {
 
     #[test]
     fn test_process_store_ok() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let keys = vec![];
         let (config_keypair, config_account) = create_config_account(keys.clone());
         let config_pubkey = config_keypair.pubkey();
@@ -262,7 +262,7 @@ mod tests {
 
     #[test]
     fn test_process_store_fail_instruction_data_too_large() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let keys = vec![];
         let (config_keypair, config_account) = create_config_account(keys.clone());
         let config_pubkey = config_keypair.pubkey();
@@ -284,7 +284,7 @@ mod tests {
 
     #[test]
     fn test_process_store_fail_account0_not_signer() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let keys = vec![];
         let (config_keypair, config_account) = create_config_account(keys);
         let config_pubkey = config_keypair.pubkey();
@@ -306,7 +306,7 @@ mod tests {
 
     #[test]
     fn test_process_store_with_additional_signers() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let pubkey = Pubkey::new_unique();
         let signer0_pubkey = Pubkey::new_unique();
         let signer1_pubkey = Pubkey::new_unique();
@@ -358,7 +358,7 @@ mod tests {
 
     #[test]
     fn test_process_store_without_config_signer() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let pubkey = Pubkey::new_unique();
         let signer0_pubkey = Pubkey::new_unique();
         let keys = vec![(pubkey, false), (signer0_pubkey, true)];
@@ -382,7 +382,7 @@ mod tests {
 
     #[test]
     fn test_process_store_with_bad_additional_signer() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let signer0_pubkey = Pubkey::new_unique();
         let signer1_pubkey = Pubkey::new_unique();
         let signer0_account = AccountSharedData::new(0, 0, &Pubkey::new_unique());
@@ -440,7 +440,7 @@ mod tests {
 
     #[test]
     fn test_config_updates() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let pubkey = Pubkey::new_unique();
         let signer0_pubkey = Pubkey::new_unique();
         let signer1_pubkey = Pubkey::new_unique();
@@ -589,7 +589,7 @@ mod tests {
 
     #[test]
     fn test_config_initialize_contains_duplicates_fails() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let config_address = Pubkey::new_unique();
         let signer0_pubkey = Pubkey::new_unique();
         let signer0_account = AccountSharedData::new(0, 0, &Pubkey::new_unique());
@@ -633,7 +633,7 @@ mod tests {
 
     #[test]
     fn test_config_update_contains_duplicates_fails() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let config_address = Pubkey::new_unique();
         let signer0_pubkey = Pubkey::new_unique();
         let signer1_pubkey = Pubkey::new_unique();
@@ -713,7 +713,7 @@ mod tests {
 
     #[test]
     fn test_config_updates_requiring_config() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let pubkey = Pubkey::new_unique();
         let signer0_pubkey = Pubkey::new_unique();
         let signer0_account = AccountSharedData::new(0, 0, &Pubkey::new_unique());

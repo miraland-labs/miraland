@@ -2,7 +2,7 @@ use {
     miraland_gossip::cluster_info::ClusterInfo,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::pubkey::Pubkey,
-    solana_streamer::streamer::StakedNodes,
+    miraland_streamer::streamer::StakedNodes,
     std::{
         collections::HashMap,
         net::IpAddr,

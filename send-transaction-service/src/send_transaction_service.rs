@@ -812,7 +812,7 @@ mod test {
 
     #[test]
     fn process_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let (genesis_config, mint_keypair) = create_genesis_config(4);
         let bank = Bank::new_for_tests(&genesis_config);
@@ -1074,7 +1074,7 @@ mod test {
 
     #[test]
     fn test_retry_durable_nonce_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let (genesis_config, mint_keypair) = create_genesis_config(4);
         let bank = Bank::new_for_tests(&genesis_config);

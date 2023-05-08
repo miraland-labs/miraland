@@ -99,7 +99,7 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    solana_streamer::{socket::SocketAddrSpace, streamer::StakedNodes},
+    miraland_streamer::{socket::SocketAddrSpace, streamer::StakedNodes},
     solana_vote_program::vote_state::VoteState,
     std::{
         collections::{HashMap, HashSet},
@@ -2127,7 +2127,7 @@ mod tests {
 
     #[test]
     fn validator_exit() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let leader_keypair = Keypair::new();
         let leader_node = Node::new_localhost_with_pubkey(&leader_keypair.pubkey());
 
@@ -2171,7 +2171,7 @@ mod tests {
     #[test]
     fn test_backup_and_clear_blockstore() {
         use std::time::Instant;
-        solana_logger::setup();
+        miraland_logger::setup();
         use {
             miraland_entry::entry,
             miraland_ledger::{blockstore, get_tmp_ledger_path},
@@ -2280,7 +2280,7 @@ mod tests {
 
     #[test]
     fn test_wait_for_supermajority() {
-        solana_logger::setup();
+        miraland_logger::setup();
         use solana_sdk::hash::hash;
         let node_keypair = Arc::new(Keypair::new());
         let cluster_info = ClusterInfo::new(
@@ -2393,7 +2393,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_poh_speed() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let poh_config = PohConfig {
             target_tick_duration: Duration::from_millis(solana_sdk::clock::MS_PER_TICK),
             // make PoH rate really fast to cause the panic condition

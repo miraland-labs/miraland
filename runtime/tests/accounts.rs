@@ -24,7 +24,7 @@ use {
 
 #[test]
 fn test_shrink_and_clean() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     // repeat the whole test scenario
     for _ in 0..5 {
@@ -77,7 +77,7 @@ fn test_shrink_and_clean() {
 
 #[test]
 fn test_bad_bank_hash() {
-    solana_logger::setup();
+    miraland_logger::setup();
     use solana_sdk::signature::{Keypair, Signer};
     let db = AccountsDb::new_for_tests(Vec::new(), &ClusterType::Development);
 

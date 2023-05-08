@@ -69,7 +69,7 @@ use {
         timing::timestamp,
         transaction::Transaction,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         net::{SocketAddr, UdpSocket},
         process::exit,
@@ -731,7 +731,7 @@ fn run_dos<T: 'static + BenchTpsClient + Send + Sync>(
 }
 
 fn main() {
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     let cmd_params = build_cli_parameters();
 
     let (nodes, client) = if !cmd_params.skip_gossip {
@@ -889,7 +889,7 @@ pub mod test {
 
     #[test]
     fn test_dos_random() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let num_nodes = 1;
         let cluster =
             LocalCluster::new_with_equal_stakes(num_nodes, 100, 3, SocketAddrSpace::Unspecified);
@@ -922,7 +922,7 @@ pub mod test {
 
     #[test]
     fn test_dos_without_blockhash() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let num_nodes = 1;
         let cluster =
             LocalCluster::new_with_equal_stakes(num_nodes, 100, 3, SocketAddrSpace::Unspecified);
@@ -1021,7 +1021,7 @@ pub mod test {
     }
 
     fn run_dos_with_blockhash_and_payer(tpu_use_quic: bool) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         // 1. Create faucet thread
         let faucet_keypair = Keypair::new();

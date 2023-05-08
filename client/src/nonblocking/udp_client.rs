@@ -4,7 +4,7 @@
 use {
     crate::nonblocking::tpu_connection::TpuConnection, async_trait::async_trait,
     core::iter::repeat, solana_sdk::transport::Result as TransportResult,
-    solana_streamer::nonblocking::sendmmsg::batch_send, std::net::SocketAddr,
+    miraland_streamer::nonblocking::sendmmsg::batch_send, std::net::SocketAddr,
     tokio::net::UdpSocket,
 };
 
@@ -55,7 +55,7 @@ mod tests {
     use {
         crate::nonblocking::{tpu_connection::TpuConnection, udp_client::UdpTpuConnection},
         solana_sdk::packet::{Packet, PACKET_DATA_SIZE},
-        solana_streamer::nonblocking::recvmmsg::recv_mmsg,
+        miraland_streamer::nonblocking::recvmmsg::recv_mmsg,
         std::net::{IpAddr, Ipv4Addr},
         tokio::net::UdpSocket,
     };

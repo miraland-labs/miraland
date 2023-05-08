@@ -1843,7 +1843,7 @@ pub mod tests {
 
     // Intentionally make slot 1 faulty and ensure that processing sees it as dead
     fn do_test_process_blockstore_with_missing_hashes(blockstore_access_type: AccessType) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let hashes_per_tick = 2;
         let GenesisConfigInfo {
@@ -1899,7 +1899,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_invalid_slot_tick_count() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -1959,7 +1959,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_slot_with_trailing_entry() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             mint_keypair,
@@ -2009,7 +2009,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_incomplete_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2094,7 +2094,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_two_forks_and_squash() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2173,7 +2173,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_two_forks() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2263,7 +2263,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_dead_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2306,7 +2306,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_dead_child() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2362,7 +2362,7 @@ pub mod tests {
 
     #[test]
     fn test_root_with_all_dead_children() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2391,7 +2391,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_epoch_boundary_root() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2482,7 +2482,7 @@ pub mod tests {
 
     #[test]
     fn test_process_empty_entry_is_registered() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,
@@ -2512,7 +2512,7 @@ pub mod tests {
 
     #[test]
     fn test_process_ledger_simple() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let leader_pubkey = solana_sdk::pubkey::new_rand();
         let mint = 100;
         let hashes_per_tick = 10;
@@ -2891,7 +2891,7 @@ pub mod tests {
 
     #[test]
     fn test_process_entries_2nd_entry_collision_with_self_and_error() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,
@@ -3451,7 +3451,7 @@ pub mod tests {
     fn test_process_entries_stress() {
         // this test throws lots of rayon threads at process_entries()
         //  finds bugs in very low-layer stuff
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3793,7 +3793,7 @@ pub mod tests {
         blockstore_root: Option<Slot>,
         blockstore_access_type: AccessType,
     ) {
-        solana_logger::setup();
+        miraland_logger::setup();
         /*
             Build fork structure:
                  slot 0

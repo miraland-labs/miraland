@@ -103,7 +103,7 @@ fn get_staked(bank: &Bank, stake_pubkey: &Pubkey) -> u64 {
 
 #[test]
 fn test_stake_create_and_split_single_signature() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,
@@ -179,7 +179,7 @@ fn test_stake_create_and_split_to_existing_system_account() {
     // Ensure stake-split allows the user to promote an existing system account into
     // a stake account.
 
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,

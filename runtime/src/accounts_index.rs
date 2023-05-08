@@ -3240,7 +3240,7 @@ pub mod tests {
 
     #[test]
     fn test_update_new_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let key = Keypair::new();
         let index = AccountsIndex::<bool>::default_for_tests();
         let ancestors = vec![(0, 0)].into_iter().collect();
@@ -4060,7 +4060,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_rooted_entries_return() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let value = true;
         let key = solana_sdk::pubkey::new_rand();
         let key_unknown = solana_sdk::pubkey::new_rand();

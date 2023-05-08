@@ -482,7 +482,7 @@ fn configure(matches: &ArgMatches) {
 }
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let matches = Command::new(crate_name!())
         .about(crate_description!())

@@ -24,12 +24,12 @@ use {
         signature::{keypair_from_seed, Keypair, NullSigner, Signer},
         stake,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
 };
 
 #[test]
 fn test_transfer() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let fee_one_sig = FeeStructure::default().get_max_fee(1, 0);
     let fee_two_sig = FeeStructure::default().get_max_fee(2, 0);
     let mint_keypair = Keypair::new();
@@ -327,7 +327,7 @@ fn test_transfer() {
 
 #[test]
 fn test_transfer_multisession_signing() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let fee = FeeStructure::default().get_max_fee(2, 0);
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -479,7 +479,7 @@ fn test_transfer_multisession_signing() {
 
 #[test]
 fn test_transfer_all() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let fee = FeeStructure::default().get_max_fee(1, 0);
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -534,7 +534,7 @@ fn test_transfer_all() {
 
 #[test]
 fn test_transfer_unfunded_recipient() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
     let faucet_addr = run_local_faucet(mint_keypair, None);
@@ -588,7 +588,7 @@ fn test_transfer_unfunded_recipient() {
 
 #[test]
 fn test_transfer_with_seed() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let fee = FeeStructure::default().get_max_fee(1, 0);
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();

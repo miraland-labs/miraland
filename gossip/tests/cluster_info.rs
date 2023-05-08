@@ -12,7 +12,7 @@ use {
     rayon::{iter::ParallelIterator, prelude::*},
     serial_test::serial,
     solana_sdk::{pubkey::Pubkey, signer::keypair::Keypair},
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         sync::{Arc, Mutex},

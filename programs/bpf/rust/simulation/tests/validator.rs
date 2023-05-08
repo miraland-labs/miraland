@@ -12,7 +12,7 @@ use {
 
 #[test]
 fn no_panic() {
-    solana_logger::setup_with_default("solana_program_runtime=debug");
+    miraland_logger::setup_with_default("solana_program_runtime=debug");
     let program_id = Pubkey::new_unique();
 
     let (test_validator, payer) = TestValidatorGenesis::default()

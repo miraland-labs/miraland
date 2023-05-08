@@ -562,7 +562,7 @@ mod tests {
 
     #[test]
     fn test_compute_transaction_costs() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         // make a vec of txs
         let keypair = Keypair::new();
@@ -602,7 +602,7 @@ mod tests {
 
     #[test]
     fn test_select_transactions_per_cost() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10);
         let bank = Arc::new(Bank::new_for_tests(&genesis_config));
         let cost_model = Arc::new(RwLock::new(CostModel::default()));
@@ -654,7 +654,7 @@ mod tests {
 
     #[test]
     fn test_update_or_remove_transaction_costs_commited() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10);
         let bank = Arc::new(Bank::new_for_tests(&genesis_config));
 
@@ -708,7 +708,7 @@ mod tests {
 
     #[test]
     fn test_update_or_remove_transaction_costs_not_commited() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10);
         let bank = Arc::new(Bank::new_for_tests(&genesis_config));
 
@@ -747,7 +747,7 @@ mod tests {
 
     #[test]
     fn test_update_or_remove_transaction_costs_mixed_execution() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10);
         let bank = Arc::new(Bank::new_for_tests(&genesis_config));
 

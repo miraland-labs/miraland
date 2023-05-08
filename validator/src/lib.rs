@@ -49,7 +49,7 @@ pub fn redirect_stderr_to_file(logfile: Option<String>) -> Option<JoinHandle<()>
     let filter = "solana=info,miraland=info";
     match logfile {
         None => {
-            solana_logger::setup_with_default(filter);
+            miraland_logger::setup_with_default(filter);
             None
         }
         Some(logfile) => {
@@ -63,7 +63,7 @@ pub fn redirect_stderr_to_file(logfile: Option<String>) -> Option<JoinHandle<()>
                             exit(1);
                         });
 
-                solana_logger::setup_with_default(filter);
+                miraland_logger::setup_with_default(filter);
                 redirect_stderr(&logfile);
                 Some(
                     std::thread::Builder::new()
@@ -83,7 +83,7 @@ pub fn redirect_stderr_to_file(logfile: Option<String>) -> Option<JoinHandle<()>
             #[cfg(not(unix))]
             {
                 println!("logrotate is not supported on this platform");
-                solana_logger::setup_file_with_default(&logfile, filter);
+                miraland_logger::setup_file_with_default(&logfile, filter);
                 None
             }
         }

@@ -74,7 +74,7 @@ mod test {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::sync::atomic::AtomicBool,
     };
 

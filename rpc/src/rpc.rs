@@ -90,7 +90,7 @@ use {
     },
     solana_stake_program,
     solana_storage_bigtable::Error as StorageError,
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     solana_vote_program::vote_state::{VoteState, MAX_LOCKOUT_HISTORY},
     spl_token_2022::{
         extension::StateWithExtensions,

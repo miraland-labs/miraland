@@ -20,7 +20,7 @@ use {
         poh_config::PohConfig,
         signature::{Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{collections::HashSet, sync::Arc, thread::sleep, time::Duration},
 };
 
@@ -67,7 +67,7 @@ fn test_cluster_partition_1_1_1() {
 #[test]
 #[serial]
 fn test_consistency_halt() {
-    solana_logger::setup_with_default(RUST_LOG_FILTER);
+    miraland_logger::setup_with_default(RUST_LOG_FILTER);
     let snapshot_interval_slots = 20;
     let num_account_paths = 1;
 
@@ -171,7 +171,7 @@ fn test_consistency_halt() {
 #[test]
 #[serial]
 fn test_leader_failure_4() {
-    solana_logger::setup_with_default(RUST_LOG_FILTER);
+    miraland_logger::setup_with_default(RUST_LOG_FILTER);
     error!("test_leader_failure_4");
     let num_nodes = 4;
     let validator_config = ValidatorConfig::default_for_test();
@@ -202,7 +202,7 @@ fn test_leader_failure_4() {
 #[test]
 #[serial]
 fn test_ledger_cleanup_service() {
-    solana_logger::setup_with_default(RUST_LOG_FILTER);
+    miraland_logger::setup_with_default(RUST_LOG_FILTER);
     error!("test_ledger_cleanup_service");
     let num_nodes = 3;
     let validator_config = ValidatorConfig {
@@ -268,7 +268,7 @@ fn test_ledger_cleanup_service() {
 
 #[test]
 fn test_slot_hash_expiry() {
-    solana_logger::setup_with_default(RUST_LOG_FILTER);
+    miraland_logger::setup_with_default(RUST_LOG_FILTER);
     solana_sdk::slot_hashes::set_entries_for_tests_only(64);
 
     let slots_per_epoch = 2048;

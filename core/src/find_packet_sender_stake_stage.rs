@@ -3,7 +3,7 @@ use {
     miraland_measure::measure::Measure,
     solana_perf::packet::PacketBatch,
     solana_sdk::timing::timestamp,
-    solana_streamer::streamer::{self, StakedNodes, StreamerError},
+    miraland_streamer::streamer::{self, StakedNodes, StreamerError},
     std::{
         collections::HashMap,
         net::IpAddr,

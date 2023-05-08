@@ -136,7 +136,7 @@ where
 }
 
 fn test_accounts_serialize_style(serde_style: SerdeStyle) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let (_accounts_dir, paths) = get_temp_accounts_paths(4).unwrap();
     let accounts = Accounts::new_with_config_for_tests(
         paths,
@@ -192,7 +192,7 @@ fn test_bank_serialize_style(
     update_accounts_hash: bool,
     _incremental_snapshot_persistence: bool,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     // in 1.11, don't test incremental snapshot persistence because we are not writing it - only reading it and ignoring it
     let incremental_snapshot_persistence = false;
@@ -401,7 +401,7 @@ fn test_bank_serialize_newer() {
 
 #[test]
 fn test_extra_fields_eof() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let (mut genesis_config, _) = create_genesis_config(500);
     activate_feature(&mut genesis_config, disable_fee_calculator::id());
 
@@ -461,7 +461,7 @@ fn test_extra_fields_eof() {
 
 #[test]
 fn test_extra_fields_full_snapshot_archive() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let (mut genesis_config, _) = create_genesis_config(500);
     activate_all_features(&mut genesis_config);
@@ -522,7 +522,7 @@ fn test_extra_fields_full_snapshot_archive() {
 
 #[test]
 fn test_blank_extra_fields() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let (mut genesis_config, _) = create_genesis_config(500);
     activate_feature(&mut genesis_config, disable_fee_calculator::id());
 

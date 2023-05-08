@@ -227,7 +227,7 @@ fn get_cluster_info(
 }
 
 fn main() -> Result<(), Box<dyn error::Error>> {
-    solana_logger::setup_with_default("solana=info,miraland=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     miraland_metrics::set_panic_hook("watchtower", /*version:*/ None);
 
     let config = get_config();

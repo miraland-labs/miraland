@@ -29,7 +29,7 @@ use {
         signature::Keypair,
         timing::{timestamp, AtomicInterval},
     },
-    solana_streamer::{
+    miraland_streamer::{
         sendmmsg::{batch_send, SendPktsError},
         socket::SocketAddrSpace,
     },
@@ -628,7 +628,7 @@ pub mod test {
 
     #[test]
     fn test_broadcast_ledger() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path!();
 
         {
