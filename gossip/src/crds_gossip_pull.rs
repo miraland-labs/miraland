@@ -29,7 +29,7 @@ use {
         Rng,
     },
     rayon::{prelude::*, ThreadPool},
-    solana_bloom::bloom::{AtomicBloom, Bloom},
+    miraland_bloom::bloom::{AtomicBloom, Bloom},
     solana_sdk::{
         hash::{hash, Hash},
         pubkey::Pubkey,
@@ -669,7 +669,7 @@ pub(crate) mod tests {
         rand::{seq::SliceRandom, thread_rng, SeedableRng},
         rand_chacha::ChaChaRng,
         rayon::ThreadPoolBuilder,
-        solana_perf::test_tx::new_test_vote_tx,
+        miraland_perf::test_tx::new_test_vote_tx,
         solana_sdk::{
             hash::{hash, HASH_BYTES},
             packet::PACKET_DATA_SIZE,

@@ -11,7 +11,7 @@ use {
     crossbeam_channel::{RecvTimeoutError, SendError},
     itertools::Itertools,
     miraland_measure::measure::Measure,
-    solana_perf::{
+    miraland_perf::{
         packet::{Packet, PacketBatch},
         sigverify::{
             count_discarded_packets, count_packets_in_batches, count_valid_packets,
@@ -307,7 +307,7 @@ impl SigVerifyStage {
         );
 
         let mut discard_random_time = Measure::start("sigverify_discard_random_time");
-        let non_discarded_packets = solana_perf::discard::discard_batches_randomly(
+        let non_discarded_packets = miraland_perf::discard::discard_batches_randomly(
             &mut batches,
             MAX_DEDUP_BATCH,
             num_packets,
@@ -469,7 +469,7 @@ mod tests {
         super::*,
         crate::{sigverify::TransactionSigVerifier, sigverify_stage::timing::duration_as_ms},
         crossbeam_channel::unbounded,
-        solana_perf::{
+        miraland_perf::{
             packet::{to_packet_batches, Packet},
             test_tx::test_tx,
         },

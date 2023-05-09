@@ -2,7 +2,7 @@ use {
     miraland_gossip::cluster_info::{
         ClusterInfo, MAX_INCREMENTAL_SNAPSHOT_HASHES, MAX_SNAPSHOT_HASHES,
     },
-    solana_perf::thread::renice_this_thread,
+    miraland_perf::thread::renice_this_thread,
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_config::SnapshotConfig,

@@ -5,7 +5,7 @@ extern crate test;
 use {
     log::*,
     rand::{thread_rng, Rng},
-    solana_perf::{
+    miraland_perf::{
         packet::{to_packet_batches, Packet, PacketBatch},
         recycler::Recycler,
         sigverify,

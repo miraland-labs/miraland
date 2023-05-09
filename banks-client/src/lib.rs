@@ -7,12 +7,12 @@
 
 pub use {
     crate::error::BanksClientError,
-    solana_banks_interface::{BanksClient as TarpcClient, TransactionStatus},
+    miraland_banks_interface::{BanksClient as TarpcClient, TransactionStatus},
 };
 use {
     borsh::BorshDeserialize,
     futures::{future::join_all, Future, FutureExt, TryFutureExt},
-    solana_banks_interface::{BanksRequest, BanksResponse, BanksTransactionResultWithSimulation},
+    miraland_banks_interface::{BanksRequest, BanksResponse, BanksTransactionResultWithSimulation},
     solana_program::{
         clock::Slot, fee_calculator::FeeCalculator, hash::Hash, program_pack::Pack, pubkey::Pubkey,
         rent::Rent, sysvar::Sysvar,

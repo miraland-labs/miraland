@@ -29,7 +29,7 @@ rayon = "1.5.3"
 
 [lib]
 crate-type = ["lib"]
-name = "solana_bucket_map"
+name = "miraland_bucket_map"
 
 [[bench]]
 name = "bucket_map"

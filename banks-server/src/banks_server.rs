@@ -7,7 +7,7 @@ use {
         send_transaction_service::{SendTransactionService, TransactionInfo},
         tpu_info::NullTpuInfo,
     },
-    solana_banks_interface::{
+    miraland_banks_interface::{
         Banks, BanksRequest, BanksResponse, BanksTransactionResultWithSimulation,
         TransactionConfirmationStatus, TransactionSimulationDetails, TransactionStatus,
     },

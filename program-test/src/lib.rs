@@ -8,7 +8,7 @@ use {
     chrono_humanize::{Accuracy, HumanTime, Tense},
     log::*,
     miraland_banks_server::banks_server::start_local_server,
-    solana_banks_client::start_client,
+    miraland_banks_client::start_client,
     solana_bpf_loader_program::serialization::serialize_parameters,
     solana_program_runtime::{
         compute_budget::ComputeBudget, ic_msg, invoke_context::ProcessInstructionWithContext,
@@ -59,7 +59,7 @@ use {
 };
 // Export types so test clients can limit their solana crate dependencies
 pub use {
-    solana_banks_client::{BanksClient, BanksClientError},
+    miraland_banks_client::{BanksClient, BanksClientError},
     solana_program_runtime::invoke_context::InvokeContext,
 };
 

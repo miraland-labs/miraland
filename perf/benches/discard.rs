@@ -3,7 +3,7 @@
 extern crate test;
 
 use {
-    solana_perf::{discard::discard_batches_randomly, packet::to_packet_batches, test_tx::test_tx},
+    miraland_perf::{discard::discard_batches_randomly, packet::to_packet_batches, test_tx::test_tx},
     test::Bencher,
 };
 

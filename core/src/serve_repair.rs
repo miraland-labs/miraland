@@ -25,7 +25,7 @@ use {
         shred::{Nonce, Shred, ShredFetchStats, SIZE_OF_NONCE},
     },
     miraland_metrics::inc_new_counter_debug,
-    solana_perf::{
+    miraland_perf::{
         data_budget::DataBudget,
         packet::{Packet, PacketBatch, PacketBatchRecycler},
     },
@@ -1207,7 +1207,7 @@ mod tests {
             get_tmp_ledger_path,
             shred::{max_ticks_per_n_shreds, Shred, ShredFlags},
         },
-        solana_perf::packet::{deserialize_from_with_limit, Packet},
+        miraland_perf::packet::{deserialize_from_with_limit, Packet},
         solana_runtime::bank::Bank,
         solana_sdk::{
             feature_set::FeatureSet, hash::Hash, pubkey::Pubkey, signature::Keypair,

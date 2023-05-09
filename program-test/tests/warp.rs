@@ -2,7 +2,7 @@
 use {
     bincode::deserialize,
     log::debug,
-    solana_banks_client::BanksClient,
+    miraland_banks_client::BanksClient,
     solana_program_test::{
         processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestContext, ProgramTestError,
     },

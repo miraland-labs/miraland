@@ -5,7 +5,7 @@ use {
     rayon::{prelude::*, ThreadPool},
     sha2::{Digest, Sha512},
     miraland_metrics::inc_new_counter_debug,
-    solana_perf::{
+    miraland_perf::{
         cuda_runtime::PinnedVec,
         packet::{Packet, PacketBatch},
         perf_libs,

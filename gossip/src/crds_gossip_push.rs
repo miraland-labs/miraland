@@ -26,7 +26,7 @@ use {
     itertools::Itertools,
     lru::LruCache,
     rand::{seq::SliceRandom, Rng},
-    solana_bloom::bloom::{AtomicBloom, Bloom},
+    miraland_bloom::bloom::{AtomicBloom, Bloom},
     solana_sdk::{
         packet::PACKET_DATA_SIZE,
         pubkey::Pubkey,

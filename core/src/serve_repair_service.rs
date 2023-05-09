@@ -2,7 +2,7 @@ use {
     crate::serve_repair::ServeRepair,
     crossbeam_channel::{unbounded, Sender},
     miraland_ledger::blockstore::Blockstore,
-    solana_perf::recycler::Recycler,
+    miraland_perf::recycler::Recycler,
     miraland_streamer::{
         socket::SocketAddrSpace,
         streamer::{self, StreamerReceiveStats},

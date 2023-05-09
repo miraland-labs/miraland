@@ -6,7 +6,7 @@ mod tests {
             connection_cache::ConnectionCacheStats,
             nonblocking::quic_client::QuicLazyInitializedEndpoint,
         },
-        solana_perf::packet::PacketBatch,
+        miraland_perf::packet::PacketBatch,
         solana_sdk::{packet::PACKET_DATA_SIZE, signature::Keypair},
         miraland_streamer::{quic::StreamStats, streamer::StakedNodes},
         std::{

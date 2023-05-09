@@ -6,7 +6,7 @@ use {
     miraland_ledger::{
         leader_schedule_cache::LeaderScheduleCache, shred, sigverify_shreds::verify_shreds_gpu,
     },
-    solana_perf::{self, packet::PacketBatch, recycler_cache::RecyclerCache, sigverify::Deduper},
+    miraland_perf::{self, packet::PacketBatch, recycler_cache::RecyclerCache, sigverify::Deduper},
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signer},
     std::{
@@ -155,7 +155,7 @@ fn verify_packets(
             .chain(std::iter::once((Slot::MAX, [0u8; 32])))
             .collect();
     let out = verify_shreds_gpu(thread_pool, packets, &leader_slots, recycler_cache);
-    solana_perf::sigverify::mark_disabled(packets, &out);
+    miraland_perf::sigverify::mark_disabled(packets, &out);
 }
 
 // Returns pubkey of leaders for shred slots refrenced in the packets.
@@ -275,7 +275,7 @@ mod tests {
             genesis_utils::create_genesis_config_with_leader,
             shred::{Shred, ShredFlags},
         },
-        solana_perf::packet::Packet,
+        miraland_perf::packet::Packet,
         solana_runtime::bank::Bank,
         solana_sdk::signature::{Keypair, Signer},
     };

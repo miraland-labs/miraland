@@ -14,9 +14,9 @@ use {
     rand::{thread_rng, Rng},
     rayon::{prelude::*, ThreadPool},
     serde::{Deserialize, Serialize},
-    solana_merkle_tree::MerkleTree,
+    miraland_merkle_tree::MerkleTree,
     miraland_metrics::*,
-    solana_perf::{
+    miraland_perf::{
         cuda_runtime::PinnedVec,
         packet::{Packet, PacketBatch, PacketBatchRecycler, PACKETS_PER_BATCH},
         perf_libs,
@@ -67,9 +67,9 @@ fn init(name: &OsStr) {
     unsafe {
         INIT_HOOK.call_once(|| {
             let path;
-            let lib_name = if let Some(perf_libs_path) = solana_perf::perf_libs::locate_perf_libs()
+            let lib_name = if let Some(perf_libs_path) = miraland_perf::perf_libs::locate_perf_libs()
             {
-                solana_perf::perf_libs::append_to_ld_library_path(
+                miraland_perf::perf_libs::append_to_ld_library_path(
                     perf_libs_path.to_str().unwrap_or("").to_string(),
                 );
                 path = perf_libs_path.join(name);
@@ -906,7 +906,7 @@ pub fn next_versioned_entry(
 mod tests {
     use {
         super::*,
-        solana_perf::test_tx::{test_invalid_tx, test_tx},
+        miraland_perf::test_tx::{test_invalid_tx, test_tx},
         solana_sdk::{
             hash::{hash, Hash},
             pubkey::Pubkey,

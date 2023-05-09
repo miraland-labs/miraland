@@ -418,7 +418,7 @@ mod test {
             streamer::{receiver, responder},
         },
         crossbeam_channel::unbounded,
-        solana_perf::recycler::Recycler,
+        miraland_perf::recycler::Recycler,
         std::{
             io,
             io::Write,

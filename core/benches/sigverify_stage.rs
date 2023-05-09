@@ -16,7 +16,7 @@ use {
         distributions::{Distribution, Uniform},
         thread_rng, Rng,
     },
-    solana_perf::{
+    miraland_perf::{
         packet::{to_packet_batches, PacketBatch},
         test_tx::test_tx,
     },

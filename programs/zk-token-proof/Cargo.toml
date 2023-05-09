@@ -21,4 +21,4 @@ num-traits = "0.2"
 
 [lib]
 crate-type = ["lib"]
-name = "solana_zk_token_proof_program"
+name = "miraland_zk_token_proof_program"

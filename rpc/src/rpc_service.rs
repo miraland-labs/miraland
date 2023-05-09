@@ -28,7 +28,7 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
     },
     miraland_metrics::inc_new_counter_info,
-    solana_perf::thread::renice_this_thread,
+    miraland_perf::thread::renice_this_thread,
     solana_runtime::{
         bank_forks::BankForks, commitment::BlockCommitmentCache,
         prioritization_fee_cache::PrioritizationFeeCache,

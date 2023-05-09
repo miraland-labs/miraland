@@ -1,7 +1,7 @@
 use {
     miraland_measure::measure::Measure,
     rayon::prelude::*,
-    solana_bucket_map::bucket_map::{BucketMap, BucketMapConfig},
+    miraland_bucket_map::bucket_map::{BucketMap, BucketMapConfig},
     solana_sdk::pubkey::Pubkey,
     std::path::PathBuf,
 };

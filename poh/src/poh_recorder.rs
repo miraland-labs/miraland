@@ -992,7 +992,7 @@ mod tests {
         bincode::serialize,
         crossbeam_channel::bounded,
         miraland_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta, get_tmp_ledger_path},
-        solana_perf::test_tx::test_tx,
+        miraland_perf::test_tx::test_tx,
         solana_sdk::{clock::DEFAULT_TICKS_PER_SLOT, hash::hash},
     };
 

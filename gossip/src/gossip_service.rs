@@ -5,7 +5,7 @@ use {
     crossbeam_channel::{unbounded, Sender},
     miraland_client::{connection_cache::ConnectionCache, thin_client::ThinClient},
     rand::{thread_rng, Rng},
-    solana_perf::recycler::Recycler,
+    miraland_perf::recycler::Recycler,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         pubkey::Pubkey,

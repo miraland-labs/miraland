@@ -36,7 +36,7 @@ libc = "0.2.126"
 nix = "0.24.2"
 
 [lib]
-name = "solana_perf"
+name = "miraland_perf"
 
 [dev-dependencies]
 matches = "0.1.9"

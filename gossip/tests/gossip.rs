@@ -10,7 +10,7 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     rayon::iter::*,
-    solana_perf::packet::Packet,
+    miraland_perf::packet::Packet,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         hash::Hash,
@@ -288,7 +288,7 @@ pub fn cluster_info_retransmit() {
 pub fn cluster_info_scale() {
     use {
         miraland_measure::measure::Measure,
-        solana_perf::test_tx::test_tx,
+        miraland_perf::test_tx::test_tx,
         solana_runtime::{
             bank::Bank,
             genesis_utils::{create_genesis_config_with_vote_accounts, ValidatorVoteKeypairs},

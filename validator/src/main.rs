@@ -49,7 +49,7 @@ use {
         BlockstoreCompressionType, BlockstoreRecoveryMode, LedgerColumnOptions, ShredStorageType,
         DEFAULT_ROCKS_FIFO_SHRED_STORAGE_SIZE_BYTES,
     },
-    solana_perf::recycler::enable_recycler_warming,
+    miraland_perf::recycler::enable_recycler_warming,
     solana_runtime::{
         accounts_db::{
             AccountShrinkThreshold, AccountsDbConfig, FillerAccountsConfig,
@@ -2253,7 +2253,7 @@ pub fn main() {
 
     let cuda = matches.is_present("cuda");
     if cuda {
-        solana_perf::perf_libs::init_cuda();
+        miraland_perf::perf_libs::init_cuda();
         enable_recycler_warming();
     }
 

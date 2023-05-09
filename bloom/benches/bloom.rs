@@ -5,7 +5,7 @@ use {
     bv::BitVec,
     fnv::FnvHasher,
     rand::Rng,
-    solana_bloom::bloom::{AtomicBloom, Bloom, BloomHashIndex},
+    miraland_bloom::bloom::{AtomicBloom, Bloom, BloomHashIndex},
     solana_sdk::{
         hash::{hash, Hash},
         signature::Signature,

@@ -6,7 +6,7 @@ use miraland_entry::entry::{create_ticks, init_poh, EntrySlice, VerifyRecyclers}
 use {
     clap::{crate_description, crate_name, Arg, Command},
     miraland_measure::measure::Measure,
-    solana_perf::perf_libs,
+    miraland_perf::perf_libs,
     solana_sdk::hash::hash,
 };
 

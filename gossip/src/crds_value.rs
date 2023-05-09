@@ -688,7 +688,7 @@ mod test {
         bincode::{deserialize, Options},
         rand::SeedableRng,
         rand_chacha::ChaChaRng,
-        solana_perf::test_tx::new_test_vote_tx,
+        miraland_perf::test_tx::new_test_vote_tx,
         solana_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,

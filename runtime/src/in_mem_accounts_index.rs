@@ -10,7 +10,7 @@ use {
     },
     miraland_measure::measure::Measure,
     rand::{thread_rng, Rng},
-    solana_bucket_map::bucket_api::BucketApi,
+    miraland_bucket_map::bucket_api::BucketApi,
     solana_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         collections::{

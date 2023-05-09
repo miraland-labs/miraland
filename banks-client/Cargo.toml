@@ -29,7 +29,7 @@ miraland-runtime = { path = "../runtime", version = "=1.14.17-rc4" }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_banks_client"
+name = "miraland_banks_client"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

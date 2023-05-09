@@ -35,3 +35,7 @@ log-*/
 /bin/
 .crates.toml
 .crates2.json
+miraland-install-init-aarch64-apple-darwin
+miraland-release-aarch64-apple-darwin.tar.bz2
+miraland-release-aarch64-apple-darwin.yml
+bpf-sdk.tar.bz2

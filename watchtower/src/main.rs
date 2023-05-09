@@ -11,7 +11,7 @@ use {
     miraland_cli_output::display::format_labeled_address,
     miraland_client::{client_error, rpc_client::RpcClient, rpc_response::RpcVoteAccountStatus},
     miraland_metrics::{datapoint_error, datapoint_info},
-    solana_notifier::Notifier,
+    miraland_notifier::Notifier,
     solana_sdk::{
         hash::Hash,
         native_token::{sol_to_lamports, Sol},

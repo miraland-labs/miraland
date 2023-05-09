@@ -1,6 +1,6 @@
 //! The `validator` module hosts all the validator microservices.
 
-pub use solana_perf::report_target_features;
+pub use miraland_perf::report_target_features;
 use {
     crate::{
         accounts_hash_verifier::AccountsHashVerifier,
@@ -449,7 +449,7 @@ impl Validator {
             warn!("Rayon global thread pool already initialized");
         }
 
-        if solana_perf::perf_libs::api().is_some() {
+        if miraland_perf::perf_libs::api().is_some() {
             info!("Initializing sigverify, this could take a while...");
         } else {
             info!("Initializing sigverify...");

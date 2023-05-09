@@ -19,7 +19,7 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
         shred::{self, ShredId},
     },
-    solana_perf::sigverify::Deduper,
+    miraland_perf::sigverify::Deduper,
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{clock::Slot, pubkey::Pubkey, timing::timestamp},
     miraland_streamer::{
