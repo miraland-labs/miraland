@@ -1,7 +1,10 @@
 [package]
 name = "miraland-zk-token-proof-program"
 description = "Miraland Zk Token Proof Program"
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 repository = "https://github.com/miraland-labs/miraland"
 version = "1.14.17-rc4"
 license = "Apache-2.0"

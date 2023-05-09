@@ -1,5 +1,8 @@
 [package]
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 edition = "2021"
 name = "miraland-install"
 description = "The miraland cluster software installer"

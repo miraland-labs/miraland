@@ -1,5 +1,8 @@
 [package]
-authors = ["Solana Maintainers <maintainers@solana.com>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.com>"
+]
 edition = "2021"
 name = "miraland-log-analyzer"
 description = "The miraland cluster network analysis tool"

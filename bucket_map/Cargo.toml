@@ -6,7 +6,10 @@ homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-bucket-map"
 readme = "../README.md"
 repository = "https://github.com/miraland-labs/miraland"
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 license = "Apache-2.0"
 edition = "2021"
 

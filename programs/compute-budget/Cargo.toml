@@ -5,7 +5,10 @@ version = "1.14.17-rc4"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-compute-budget-program"
 repository = "https://github.com/miraland-labs/miraland"
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 license = "Apache-2.0"
 edition = "2021"
 

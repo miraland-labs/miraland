@@ -1,5 +1,8 @@
 [package]
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 description = "Miraland Program Test Framework"
 edition = "2021"
 license = "Apache-2.0"

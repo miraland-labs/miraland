@@ -1,5 +1,8 @@
 [package]
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 edition = "2021"
 name = "miraland-geyser-plugin-manager"
 description = "The Solana Geyser plugin manager."

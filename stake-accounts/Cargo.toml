@@ -1,7 +1,10 @@
 [package]
 name = "miraland-stake-accounts"
 description = "Blockchain for community beyond the horizon"
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 edition = "2021"
 version = "1.14.17-rc4"
 repository = "https://github.com/miraland-labs/miraland"

@@ -2,7 +2,10 @@
 name = "miraland-cargo-build-sbf"
 version = "1.14.17-rc4"
 description = "Compile a local package and all of its dependencies using the Solana SBF SDK"
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 repository = "https://github.com/miraland-labs/miraland"
 homepage = "https://miraland.top/"
 license = "Apache-2.0"

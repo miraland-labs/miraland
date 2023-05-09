@@ -53,9 +53,9 @@ fn load_accounts(path: &Path) -> Result<Input> {
 
 fn main() {
     miraland_logger::setup();
-    let matches = Command::new("Solana BPF CLI")
+    let matches = Command::new("Miraland BPF CLI")
         .version(crate_version!())
-        .author("Solana Maintainers <maintainers@solana.foundation>")
+        .author("Miraland Crafters <crafters@miraland.top>")
         .about(
             r##"CLI to test and analyze eBPF programs.
 

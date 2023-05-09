@@ -2,7 +2,10 @@
 name = "miraland-cargo-test-sbf"
 version = "1.14.17-rc4"
 description = "Execute all unit and integration tests after building with the Miraland SBF SDK"
-authors = ["Solana Maintainers <maintainers@solana.foundation>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.foundation>"
+]
 repository = "https://github.com/miraland-labs/miraland"
 homepage = "https://miraland.top/"
 license = "Apache-2.0"

@@ -1,5 +1,8 @@
 [package]
-authors = ["Solana Maintainers <maintainers@solana.com>"]
+authors = [
+  "Miraland Crafters <crafters@miraland.top>",
+  "Solana Maintainers <maintainers@solana.com>"
+]
 description = "Blockchain for community beyond the horizon"
 edition = "2021"
 homepage = "https://miraland.top/"
