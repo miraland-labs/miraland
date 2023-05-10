@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-sys-tuner"
 description = "The miraland cluster system tuner daemon"
-version = "1.14.17-rc4"
+version = "1.14.17-rc5"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -17,8 +17,8 @@ publish = true
 clap = "2.33.1"
 libc = "0.2.126"
 log = "0.4.17"
-miraland-logger = { path = "../logger", version = "=1.14.17-rc4" }
-miraland-version = { path = "../version", version = "=1.14.17-rc4" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc5" }
+miraland-version = { path = "../version", version = "=1.14.17-rc5" }
 
 [target."cfg(unix)".dependencies]
 unix_socket2 = "0.5.4"

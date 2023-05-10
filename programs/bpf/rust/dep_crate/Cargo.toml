@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-dep-crate"
-version = "1.14.17-rc4"
+version = "1.14.17-rc5"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,8 +15,8 @@ edition = "2021"
 [dependencies]
 byteorder = { version = "1", default-features = false }
 # list of crates which must be buildable for bpf programs
-miraland-address-lookup-table-program = { path = "../../../../programs/address-lookup-table", version = "=1.14.17-rc4" }
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc4" }
+miraland-address-lookup-table-program = { path = "../../../../programs/address-lookup-table", version = "=1.14.17-rc5" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc5" }
 
 [lib]
 crate-type = ["cdylib"]

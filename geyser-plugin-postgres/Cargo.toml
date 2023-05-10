@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-geyser-plugin-postgres"
 description = "The Miraland AccountsDb plugin for PostgreSQL database."
-version = "1.14.17-rc4"
+version = "1.14.17-rc5"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -28,13 +28,13 @@ postgres-openssl = { version = "0.5.0"}
 serde = "1.0.138"
 serde_derive = "1.0.103"
 serde_json = "1.0.81"
-miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "=1.14.17-rc4" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc4" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc4" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc4" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc4" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc4" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc4" }
+miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "=1.14.17-rc5" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc5" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc5" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc5" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc5" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc5" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc5" }
 thiserror = "1.0.31"
 tokio-postgres = "0.7.7"
 
@@ -44,11 +44,11 @@ libloading = "0.7.3"
 serial_test = "0.8.0"
 socket2 = { version = "0.4.4", features = ["all"] }
 
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc4" }
-miraland-core = { path = "../core", version = "=1.14.17-rc4" }
-miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc4" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc4" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc4" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc5" }
+miraland-core = { path = "../core", version = "=1.14.17-rc5" }
+miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc5" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc5" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc5" }
 tempfile = "3.3.0"
 
 [package.metadata.docs.rs]

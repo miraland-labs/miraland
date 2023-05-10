@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-invoked"
-version = "1.14.17-rc4"
+version = "1.14.17-rc5"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -17,7 +17,7 @@ default = ["program"]
 program = []
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc4" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc5" }
 
 [lib]
 crate-type = ["lib", "cdylib"]

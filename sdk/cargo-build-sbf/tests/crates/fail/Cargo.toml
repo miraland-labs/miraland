@@ -1,6 +1,6 @@
 [package]
 name = "fail"
-version = "1.14.17-rc4"
+version = "1.14.17-rc5"
 description = "Miraland SBF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,7 +13,7 @@ edition = "2021"
 publish = false
 
 [dependencies]
-miraland-program = { path = "../../../../program", version = "=1.14.17-rc4" }
+miraland-program = { path = "../../../../program", version = "=1.14.17-rc5" }
 
 [lib]
 crate-type = ["cdylib"]

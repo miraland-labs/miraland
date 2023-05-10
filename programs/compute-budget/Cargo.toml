@@ -1,7 +1,7 @@
 [package]
 name = "miraland-compute-budget-program"
 description = "Miraland Compute Budget program"
-version = "1.14.17-rc4"
+version = "1.14.17-rc5"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-compute-budget-program"
 repository = "https://github.com/miraland-labs/miraland"
@@ -13,8 +13,8 @@ license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17-rc4" }
-miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc4" }
+miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17-rc5" }
+miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc5" }
 
 [lib]
 crate-type = ["lib"]
