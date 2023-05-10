@@ -526,7 +526,7 @@ pub fn start_verify_transactions(
             let out_recycler = verify_recyclers.out_recycler;
             let num_packets = entry_txs.len();
             let gpu_verify_thread = thread::Builder::new()
-                .name("solGpuSigVerify".into())
+                .name("mlnGpuSigVerify".into())
                 .spawn(move || {
                     let mut verify_time = Measure::start("sigverify");
                     sigverify::ed25519_verify(
@@ -773,7 +773,7 @@ impl EntrySlice for [Entry] {
         let hashes_clone = hashes.clone();
 
         let gpu_verify_thread = thread::Builder::new()
-            .name("solGpuPohVerify".into())
+            .name("mlnGpuPohVerify".into())
             .spawn(move || {
                 let mut hashes = hashes_clone.lock().unwrap();
                 let gpu_wait = Instant::now();

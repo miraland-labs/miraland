@@ -396,7 +396,7 @@ impl SystemMonitorService {
     ) -> Self {
         info!("Starting SystemMonitorService");
         let thread_hdl = Builder::new()
-            .name("solSystemMonitr".to_string())
+            .name("mlnSystemMonitr".to_string())
             .spawn(move || {
                 Self::run(
                     exit,

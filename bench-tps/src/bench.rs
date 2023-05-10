@@ -344,7 +344,7 @@ where
         let client = client.clone();
         let id = id.pubkey();
         Builder::new()
-            .name("solana-blockhash-poller".to_string())
+            .name("miraland-blockhash-poller".to_string())
             .spawn(move || {
                 poll_blockhash(&exit_signal, &blockhash, &client, &id);
             })

@@ -84,7 +84,7 @@ impl FindPacketSenderStakeStage {
     ) -> Self {
         let mut stats = FindPacketSenderStakeStats::default();
         let thread_hdl = Builder::new()
-            .name("solPktStake".to_string())
+            .name("mlnPktStake".to_string())
             .spawn(move || loop {
                 match streamer::recv_packet_batches(&packet_receiver) {
                     Ok((mut batches, num_packets, recv_duration)) => {

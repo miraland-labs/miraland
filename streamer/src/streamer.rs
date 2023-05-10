@@ -166,7 +166,7 @@ pub fn receiver(
     let res = socket.set_read_timeout(Some(Duration::new(1, 0)));
     assert!(res.is_ok(), "streamer::receiver set_read_timeout error");
     Builder::new()
-        .name("solReceiver".to_string())
+        .name("mlnReceiver".to_string())
         .spawn(move || {
             let _ = recv_loop(
                 &socket,

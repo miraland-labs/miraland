@@ -377,7 +377,7 @@ impl WindowService {
             inc_new_counter_error!("solana-check-duplicate-error", 1, 1);
         };
         Builder::new()
-            .name("solWinCheckDup".to_string())
+            .name("mlnWinCheckDup".to_string())
             .spawn(move || {
                 while !exit.load(Ordering::Relaxed) {
                     if let Err(e) = run_check_duplicate(
@@ -415,7 +415,7 @@ impl WindowService {
             .unwrap();
         let reed_solomon_cache = ReedSolomonCache::default();
         Builder::new()
-            .name("solWinInsert".to_string())
+            .name("mlnWinInsert".to_string())
             .spawn(move || {
                 let handle_duplicate = |shred| {
                     let _ = check_duplicate_sender.send(shred);

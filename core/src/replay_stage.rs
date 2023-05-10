@@ -993,7 +993,7 @@ impl ReplayStage {
             }
         };
         let t_replay = Builder::new()
-            .name("solReplayStage".to_string())
+            .name("mlnReplayStage".to_string())
             .spawn(run_replay)
             .unwrap();
 

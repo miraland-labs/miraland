@@ -67,7 +67,7 @@ pub fn redirect_stderr_to_file(logfile: Option<String>) -> Option<JoinHandle<()>
                 redirect_stderr(&logfile);
                 Some(
                     std::thread::Builder::new()
-                        .name("solSigUsr1".into())
+                        .name("mlnSigUsr1".into())
                         .spawn(move || {
                             for signal in signals.forever() {
                                 info!(

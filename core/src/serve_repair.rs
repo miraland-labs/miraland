@@ -650,7 +650,7 @@ impl ServeRepair {
 
         let recycler = PacketBatchRecycler::default();
         Builder::new()
-            .name("solRepairListen".to_string())
+            .name("mlnRepairListen".to_string())
             .spawn(move || {
                 let mut last_print = Instant::now();
                 let mut stats = ServeRepairStats::default();

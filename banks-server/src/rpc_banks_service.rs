@@ -88,7 +88,7 @@ impl RpcBanksService {
         let connection_cache = connection_cache.clone();
         let exit = exit.clone();
         let thread_hdl = Builder::new()
-            .name("solRpcBanksSvc".to_string())
+            .name("mlnRpcBanksSvc".to_string())
             .spawn(move || {
                 Self::run(
                     listen_addr,

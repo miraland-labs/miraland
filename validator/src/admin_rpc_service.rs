@@ -189,7 +189,7 @@ impl AdminRpc for AdminRpcImpl {
         debug!("exit admin rpc request received");
 
         thread::Builder::new()
-            .name("solProcessExit".into())
+            .name("mlnProcessExit".into())
             .spawn(move || {
                 // Delay exit signal until this RPC request completes, otherwise the caller of `exit` might
                 // receive a confusing error as the validator shuts down before a response is sent back.
@@ -356,14 +356,14 @@ pub fn run(ledger_path: &Path, metadata: AdminRpcRequestMetadata) {
     let admin_rpc_path = admin_rpc_path(ledger_path);
 
     let event_loop = tokio::runtime::Builder::new_multi_thread()
-        .thread_name("solAdminRpcEl")
+        .thread_name("mlnAdminRpcEl")
         .worker_threads(3) // Three still seems like a lot, and better than the default of available core count
         .enable_all()
         .build()
         .unwrap();
 
     Builder::new()
-        .name("solAdminRpc".to_string())
+        .name("mlnAdminRpc".to_string())
         .spawn(move || {
             let mut io = MetaIoHandler::default();
             io.extend_with(AdminRpcImpl.to_delegate());

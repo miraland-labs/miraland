@@ -72,7 +72,7 @@ impl QosService {
         let metrics_clone = Arc::clone(&metrics);
         let reporting_thread = Some(
             Builder::new()
-                .name("solQosSvcMetr".to_string())
+                .name("mlnQosSvcMetr".to_string())
                 .spawn(move || {
                     Self::reporting_loop(running_flag_clone, metrics_clone, report_receiver);
                 })

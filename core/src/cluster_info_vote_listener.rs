@@ -252,7 +252,7 @@ impl ClusterInfoVoteListener {
             let exit = exit.clone();
             let bank_forks = bank_forks.clone();
             Builder::new()
-                .name("solCiVoteLstnr".to_string())
+                .name("mlnCiVoteLstnr".to_string())
                 .spawn(move || {
                     let _ = Self::recv_loop(
                         exit,
@@ -266,7 +266,7 @@ impl ClusterInfoVoteListener {
         };
         let exit_ = exit.clone();
         let bank_send_thread = Builder::new()
-            .name("solCiBankSend".to_string())
+            .name("mlnCiBankSend".to_string())
             .spawn(move || {
                 let _ = Self::bank_send_loop(
                     exit_,
@@ -278,7 +278,7 @@ impl ClusterInfoVoteListener {
             .unwrap();
 
         let send_thread = Builder::new()
-            .name("solCiProcVotes".to_string())
+            .name("mlnCiProcVotes".to_string())
             .spawn(move || {
                 let _ = Self::process_votes_loop(
                     exit,

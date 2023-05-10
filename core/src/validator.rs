@@ -303,7 +303,7 @@ impl BlockstoreRootScan {
             let exit = exit.clone();
             Some(
                 Builder::new()
-                    .name("solBStoreRtScan".to_string())
+                    .name("mlnBStoreRtScan".to_string())
                     .spawn(move || blockstore.scan_and_fix_roots(&exit))
                     .unwrap(),
             )
@@ -1613,7 +1613,7 @@ impl<'a> ProcessBlockStore<'a> {
                 let start_progress = self.start_progress.clone();
 
                 let _ = Builder::new()
-                    .name("solRptLdgrStat".to_string())
+                    .name("mlnRptLdgrStat".to_string())
                     .spawn(move || {
                         while !exit.load(Ordering::Relaxed) {
                             let slot = bank_forks.read().unwrap().working_bank().slot();

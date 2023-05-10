@@ -785,7 +785,7 @@ where
     let accounts_db = Arc::new(accounts_db);
     let accounts_db_clone = accounts_db.clone();
     let handle = Builder::new()
-        .name("solNfyAccRestor".to_string())
+        .name("mlnNfyAccRestor".to_string())
         .spawn(move || {
             accounts_db_clone.notify_account_restore_from_snapshot();
         })

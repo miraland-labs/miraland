@@ -2318,7 +2318,7 @@ impl AccountsDb {
     fn start_background_hasher(&mut self) {
         let (sender, receiver) = unbounded();
         Builder::new()
-            .name("solDbStoreHashr".to_string())
+            .name("mlnDbStoreHashr".to_string())
             .spawn(move || {
                 Self::background_hasher(receiver);
             })

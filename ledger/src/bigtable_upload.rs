@@ -165,7 +165,7 @@ pub async fn upload_confirmed_blocks(
                     let slot_receiver = slot_receiver.clone();
                     let exit = exit.clone();
                     std::thread::Builder::new()
-                        .name("solBigTGetBlk".into())
+                        .name("mlnBigTGetBlk".into())
                         .spawn(move || {
                             let start = Instant::now();
                             let mut num_blocks_read = 0;

@@ -416,7 +416,7 @@ impl SigVerifyStage {
         const DEDUPER_FALSE_POSITIVE_RATE: f64 = 0.001;
         const DEDUPER_NUM_BITS: u64 = 63_999_979;
         Builder::new()
-            .name("solSigVerifier".to_string())
+            .name("mlnSigVerifier".to_string())
             .spawn(move || {
                 let mut rng = rand::thread_rng();
                 let mut deduper = Deduper::<2, [u8]>::new(&mut rng, DEDUPER_NUM_BITS);

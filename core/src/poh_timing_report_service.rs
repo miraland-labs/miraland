@@ -28,7 +28,7 @@ impl PohTimingReportService {
         let exit_signal = exit.clone();
         let mut poh_timing_reporter = PohTimingReporter::default();
         let t_poh_timing = Builder::new()
-            .name("solPohTimingRpt".to_string())
+            .name("mlnPohTimingRpt".to_string())
             .spawn(move || loop {
                 if exit_signal.load(Ordering::Relaxed) {
                     break;

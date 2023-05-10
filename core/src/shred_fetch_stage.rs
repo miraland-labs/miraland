@@ -141,7 +141,7 @@ impl ShredFetchStage {
             })
             .collect();
         let modifier_hdl = Builder::new()
-            .name("solTvuFetchPMod".to_string())
+            .name("mlnTvuFetchPMod".to_string())
             .spawn(move || {
                 let repair_context = repair_context
                     .as_ref()

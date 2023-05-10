@@ -655,7 +655,7 @@ impl RpcSubscriptions {
         } else {
             Some(
                 Builder::new()
-                    .name("solRpcNotifier".to_string())
+                    .name("mlnRpcNotifier".to_string())
                     .spawn(move || {
                         let pool = rayon::ThreadPoolBuilder::new()
                             .num_threads(notification_threads)

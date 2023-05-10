@@ -304,7 +304,7 @@ pub fn spawn_server(
         )
     }?;
     let handle = thread::Builder::new()
-        .name("solQuicServer".into())
+        .name("mlnQuicServer".into())
         .spawn(move || {
             if let Err(e) = runtime.block_on(task) {
                 warn!("error from runtime.block_on: {:?}", e);

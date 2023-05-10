@@ -74,7 +74,7 @@ pub(crate) fn spawn_shred_sigverify(
         }
     };
     Builder::new()
-        .name("solShredVerifr".to_string())
+        .name("mlnShredVerifr".to_string())
         .spawn(run_shred_sigverify)
         .unwrap()
 }

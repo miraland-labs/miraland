@@ -1735,7 +1735,7 @@ impl ClusterInfo {
             .build()
             .unwrap();
         Builder::new()
-            .name("solGossip".to_string())
+            .name("mlnGossip".to_string())
             .spawn(move || {
                 let mut last_push = 0;
                 let mut last_contact_info_trace = timestamp();
@@ -2660,7 +2660,7 @@ impl ClusterInfo {
             .build()
             .unwrap();
         Builder::new()
-            .name("solGossipListen".to_string())
+            .name("mlnGossipListen".to_string())
             .spawn(move || {
                 while !exit.load(Ordering::Relaxed) {
                     if let Err(err) = self.run_listen(

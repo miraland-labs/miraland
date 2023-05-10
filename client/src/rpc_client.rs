@@ -213,7 +213,7 @@ impl RpcClient {
             rpc_client: nonblocking::rpc_client::RpcClient::new_sender(sender, config),
             runtime: Some(
                 tokio::runtime::Builder::new_current_thread()
-                    .thread_name("solRpcClient")
+                    .thread_name("mlnRpcClient")
                     .enable_io()
                     .enable_time()
                     .build()

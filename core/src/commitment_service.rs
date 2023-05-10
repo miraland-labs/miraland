@@ -69,7 +69,7 @@ impl AggregateCommitmentService {
             sender,
             Self {
                 t_commitment: Builder::new()
-                    .name("solAggCommitSvc".to_string())
+                    .name("mlnAggCommitSvc".to_string())
                     .spawn(move || loop {
                         if exit_.load(Ordering::Relaxed) {
                             break;
