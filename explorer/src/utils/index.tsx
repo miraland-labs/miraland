@@ -6,7 +6,7 @@ import {
 import { PublicKey } from "@solana/web3.js";
 
 // Switch to web3 constant when web3 updates superstruct
-export const LAMPORTS_PER_SOL = 1_000_000_000;
+export const LAMPORTS_PER_MLN = 1_000_000_000;
 export const MICRO_LAMPORTS_PER_LAMPORT = 1_000_000;
 
 export const NUM_TICKS_PER_SECOND = 160;
@@ -58,7 +58,7 @@ export function microLamportsToLamportsString(
 
 export function lamportsToSol(lamports: number | BN): number {
   if (typeof lamports === "number") {
-    return Math.abs(lamports) / LAMPORTS_PER_SOL;
+    return Math.abs(lamports) / LAMPORTS_PER_MLN;
   }
 
   let signMultiplier = 1;

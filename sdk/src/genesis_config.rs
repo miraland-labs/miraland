@@ -10,7 +10,7 @@ use {
         fee_calculator::FeeRateGovernor,
         hash::{hash, Hash},
         inflation::Inflation,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
         poh_config::PohConfig,
         pubkey::Pubkey,
         rent::Rent,
@@ -275,7 +275,7 @@ impl fmt::Display for GenesisConfig {
             self.inflation,
             self.rent,
             self.fee_rate_governor,
-            lamports_to_sol(
+            lamports_to_mln(
                 self.accounts
                     .iter()
                     .map(|(pubkey, account)| {

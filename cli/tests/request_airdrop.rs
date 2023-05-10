@@ -6,7 +6,7 @@ use {
     miraland_test_validator::TestValidator,
     solana_sdk::{
         commitment_config::CommitmentConfig,
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         signature::{Keypair, Signer},
     },
     miraland_streamer::socket::SocketAddrSpace,
@@ -24,7 +24,7 @@ fn test_cli_request_airdrop() {
     bob_config.json_rpc_url = test_validator.rpc_url();
     bob_config.command = CliCommand::Airdrop {
         pubkey: None,
-        lamports: sol_to_lamports(50.0),
+        lamports: mln_to_lamports(50.0),
     };
     let keypair = Keypair::new();
     bob_config.signers = vec![&keypair];
@@ -38,5 +38,5 @@ fn test_cli_request_airdrop() {
     let balance = rpc_client
         .get_balance(&bob_config.signers[0].pubkey())
         .unwrap();
-    assert_eq!(balance, sol_to_lamports(50.0));
+    assert_eq!(balance, mln_to_lamports(50.0));
 }

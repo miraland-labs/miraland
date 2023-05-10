@@ -593,7 +593,7 @@ mod tests {
         hash::{hash, Hash},
         instruction::{AccountMeta, Instruction, InstructionError},
         message::Message,
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         nonce::{
             self,
             state::{
@@ -1544,7 +1544,7 @@ mod tests {
 
     #[test]
     fn test_allocate() {
-        let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.0));
+        let (genesis_config, mint_keypair) = create_genesis_config(mln_to_lamports(1.0));
         let bank = Bank::new_for_tests(&genesis_config);
         let bank_client = BankClient::new(bank);
         let data_len = 2;
@@ -1597,7 +1597,7 @@ mod tests {
         let program = Pubkey::new_unique();
         let collector = Pubkey::new_unique();
 
-        let mint_lamports = sol_to_lamports(1.0);
+        let mint_lamports = mln_to_lamports(1.0);
         let len1 = 123;
         let len2 = 456;
 
@@ -1666,7 +1666,7 @@ mod tests {
 
     #[test]
     fn test_assign_with_seed() {
-        let (genesis_config, mint_keypair) = create_genesis_config(sol_to_lamports(1.0));
+        let (genesis_config, mint_keypair) = create_genesis_config(mln_to_lamports(1.0));
         let bank = Bank::new_for_tests(&genesis_config);
         let bank_client = BankClient::new(bank);
 
@@ -1701,7 +1701,7 @@ mod tests {
 
     #[test]
     fn test_system_unsigned_transaction() {
-        let (genesis_config, alice_keypair) = create_genesis_config(sol_to_lamports(1.0));
+        let (genesis_config, alice_keypair) = create_genesis_config(mln_to_lamports(1.0));
         let alice_pubkey = alice_keypair.pubkey();
         let mallory_keypair = Keypair::new();
         let mallory_pubkey = mallory_keypair.pubkey();
@@ -1734,7 +1734,7 @@ mod tests {
         );
         assert_eq!(
             bank_client.get_balance(&alice_pubkey).unwrap(),
-            sol_to_lamports(1.0) - amount
+            mln_to_lamports(1.0) - amount
         );
         assert_eq!(bank_client.get_balance(&mallory_pubkey).unwrap(), amount);
     }

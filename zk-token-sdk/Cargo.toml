@@ -39,4 +39,4 @@ zeroize = { version = "1.3", default-features = false, features = ["zeroize_deri
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-name = "miraland_zk_token_sdk"
+name = "solana_zk_token_sdk"

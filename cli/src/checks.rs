@@ -5,7 +5,7 @@ use {
         rpc_client::RpcClient,
     },
     solana_sdk::{
-        commitment_config::CommitmentConfig, message::Message, native_token::lamports_to_sol,
+        commitment_config::CommitmentConfig, message::Message, native_token::lamports_to_mln,
         pubkey::Pubkey,
     },
 };
@@ -94,13 +94,13 @@ pub fn check_account_for_spend_and_fee_with_commitment(
     {
         if balance > 0 {
             return Err(CliError::InsufficientFundsForSpendAndFee(
-                lamports_to_sol(balance),
-                lamports_to_sol(fee),
+                lamports_to_mln(balance),
+                lamports_to_mln(fee),
                 *account_pubkey,
             ));
         } else {
             return Err(CliError::InsufficientFundsForFee(
-                lamports_to_sol(fee),
+                lamports_to_mln(fee),
                 *account_pubkey,
             ));
         }

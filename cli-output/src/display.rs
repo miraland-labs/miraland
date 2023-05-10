@@ -12,7 +12,7 @@ use {
         hash::Hash,
         instruction::CompiledInstruction,
         message::v0::MessageAddressTableLookup,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
         program_utils::limited_deserialize,
         pubkey::Pubkey,
         signature::Signature,
@@ -52,8 +52,8 @@ pub fn build_balance_message_with_config(
     let value = if config.use_lamports_unit {
         lamports.to_string()
     } else {
-        let sol = lamports_to_sol(lamports);
-        let sol_str = format!("{:.9}", sol);
+        let mln = lamports_to_mln(lamports);
+        let sol_str = format!("{:.9}", mln);
         if config.trim_trailing_zeros {
             sol_str
                 .trim_end_matches('0')
@@ -534,8 +534,8 @@ fn write_rewards<W: io::Write>(
                         "-".to_string()
                     },
                     sign,
-                    lamports_to_sol(reward.lamports.unsigned_abs()),
-                    lamports_to_sol(reward.post_balance)
+                    lamports_to_mln(reward.lamports.unsigned_abs()),
+                    lamports_to_mln(reward.post_balance)
                 )?;
             }
         }
@@ -560,7 +560,7 @@ fn write_status<W: io::Write>(
 }
 
 fn write_fees<W: io::Write>(w: &mut W, transaction_fee: u64, prefix: &str) -> io::Result<()> {
-    writeln!(w, "{}  Fee: 𝇊{}", prefix, lamports_to_sol(transaction_fee))
+    writeln!(w, "{}  Fee: 𝇊{}", prefix, lamports_to_mln(transaction_fee))
 }
 
 fn write_balances<W: io::Write>(
@@ -584,7 +584,7 @@ fn write_balances<W: io::Write>(
                 "{}  Account {} balance: 𝇊{}",
                 prefix,
                 i,
-                lamports_to_sol(*pre)
+                lamports_to_mln(*pre)
             )?;
         } else {
             writeln!(
@@ -592,8 +592,8 @@ fn write_balances<W: io::Write>(
                 "{}  Account {} balance: 𝇊{} -> 𝇊{}",
                 prefix,
                 i,
-                lamports_to_sol(*pre),
-                lamports_to_sol(*post)
+                lamports_to_mln(*pre),
+                lamports_to_mln(*post)
             )?;
         }
     }

@@ -1783,7 +1783,7 @@ pub mod tests {
             epoch_schedule::EpochSchedule,
             hash::Hash,
             instruction::InstructionError,
-            native_token::LAMPORTS_PER_SOL,
+            native_token::LAMPORTS_PER_MLN,
             pubkey::Pubkey,
             signature::{Keypair, Signer},
             system_instruction::{SystemError, MAX_PERMITTED_DATA_LENGTH},
@@ -4147,7 +4147,7 @@ pub mod tests {
             genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config(100 * LAMPORTS_PER_SOL);
+        } = create_genesis_config(100 * LAMPORTS_PER_MLN);
         let genesis_hash = genesis_config.hash();
         let bank = Arc::new(Bank::new_for_tests(&genesis_config));
         let mut timing = ConfirmationTiming::default();
@@ -4157,9 +4157,9 @@ pub mod tests {
         let keypair2 = Keypair::new();
         let keypair3 = Keypair::new();
         let keypair4 = Keypair::new();
-        bank.transfer(LAMPORTS_PER_SOL, &mint_keypair, &keypair1.pubkey())
+        bank.transfer(LAMPORTS_PER_MLN, &mint_keypair, &keypair1.pubkey())
             .unwrap();
-        bank.transfer(LAMPORTS_PER_SOL, &mint_keypair, &keypair2.pubkey())
+        bank.transfer(LAMPORTS_PER_MLN, &mint_keypair, &keypair2.pubkey())
             .unwrap();
 
         let (transaction_status_sender, transaction_status_receiver) =
@@ -4452,7 +4452,7 @@ pub mod tests {
             genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config((1_000_000 + NUM_ACCOUNTS + 1) * LAMPORTS_PER_SOL);
+        } = create_genesis_config((1_000_000 + NUM_ACCOUNTS + 1) * LAMPORTS_PER_MLN);
         let mut bank = Bank::new_for_tests(&genesis_config);
         bank.deactivate_feature(
             &feature_set::enable_early_verification_of_account_modifications::id(),
@@ -4467,7 +4467,7 @@ pub mod tests {
                 &mint_keypair,
                 &Keypair::new(),
                 bank.last_blockhash(),
-                LAMPORTS_PER_SOL,
+                LAMPORTS_PER_MLN,
                 ACCOUNT_SIZE,
                 &solana_sdk::system_program::id(),
             );
@@ -4482,7 +4482,7 @@ pub mod tests {
             &mint_keypair,
             &Keypair::new(),
             bank.last_blockhash(),
-            LAMPORTS_PER_SOL,
+            LAMPORTS_PER_MLN,
             ACCOUNT_SIZE,
             &solana_sdk::system_program::id(),
         );
@@ -4504,7 +4504,7 @@ pub mod tests {
         const ACCOUNTS_DATA_SIZE_DELTA_PER_ITERATION: u64 = ACCOUNT_SIZE - SHRINK_SIZE;
         const NUM_ITERATIONS: u64 =
             REMAINING_ACCOUNTS_DATA_SIZE / ACCOUNTS_DATA_SIZE_DELTA_PER_ITERATION;
-        const ACCOUNT_BALANCE: u64 = 70 * LAMPORTS_PER_SOL; // rent exempt amount for a 10MB account is a little less than 70 MLN
+        const ACCOUNT_BALANCE: u64 = 70 * LAMPORTS_PER_MLN; // rent exempt amount for a 10MB account is a little less than 70 MLN
 
         let GenesisConfigInfo {
             genesis_config,

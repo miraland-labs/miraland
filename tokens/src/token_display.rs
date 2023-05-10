@@ -1,19 +1,18 @@
 use {
     miraland_account_decoder::parse_token::real_number_string_trimmed,
-    solana_sdk::native_token::lamports_to_sol,
+    solana_sdk::native_token::lamports_to_mln,
     std::{
         fmt::{Debug, Display, Formatter, Result},
         ops::Add,
     },
 };
 
-// MI: change 𝇊 to 𝇊 for MLN
-// const SOL_SYMBOL: &str = "𝇊";
-const SOL_SYMBOL: &str = "𝇊";
+// MI: change symbol to 𝇊 for MLN
+const MLN_SYMBOL: &str = "𝇊";
 
 #[derive(PartialEq, Eq)]
 pub enum TokenType {
-    Sol,
+    Mln,
     SplToken,
 }
 
@@ -26,9 +25,9 @@ pub struct Token {
 impl Token {
     fn write_with_symbol(&self, f: &mut Formatter) -> Result {
         match &self.token_type {
-            TokenType::Sol => {
-                let amount = lamports_to_sol(self.amount);
-                write!(f, "{}{}", SOL_SYMBOL, amount)
+            TokenType::Mln => {
+                let amount = lamports_to_mln(self.amount);
+                write!(f, "{}{}", MLN_SYMBOL, amount)
             }
             TokenType::SplToken => {
                 let amount = real_number_string_trimmed(self.amount, self.decimals);
@@ -37,11 +36,11 @@ impl Token {
         }
     }
 
-    pub fn sol(amount: u64) -> Self {
+    pub fn mln(amount: u64) -> Self {
         Self {
             amount,
             decimals: 9,
-            token_type: TokenType::Sol,
+            token_type: TokenType::Mln,
         }
     }
 

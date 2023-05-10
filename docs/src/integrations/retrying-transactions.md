@@ -234,7 +234,7 @@ transactions at a constant interval until some timeout has occurred.
 import {
   Keypair,
   Connection,
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_MLN,
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
@@ -252,7 +252,7 @@ const sleep = async (ms: number) => {
 
   const airdropSignature = await connection.requestAirdrop(
     payer.publicKey,
-    LAMPORTS_PER_SOL,
+    LAMPORTS_PER_MLN,
   );
 
   await connection.confirmTransaction({ signature: airdropSignature });

@@ -412,7 +412,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
                         .multiple_occurrences(true)
                         .multiple_values(true)
                         .validator(grind_validator_starts_with)
-                        .help("Saves specified number of keypairs whos public key starts with the indicated prefix\nExample: --starts-with sol:4\nPREFIX type is Base58\nCOUNT type is u64"),
+                        .help("Saves specified number of keypairs whos public key starts with the indicated prefix\nExample: --starts-with mira:4\nPREFIX type is Base58\nCOUNT type is u64"),
                 )
                 .arg(
                     Arg::new("ends_with")
@@ -423,7 +423,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
                         .multiple_occurrences(true)
                         .multiple_values(true)
                         .validator(grind_validator_ends_with)
-                        .help("Saves specified number of keypairs whos public key ends with the indicated suffix\nExample: --ends-with ana:4\nSUFFIX type is Base58\nCOUNT type is u64"),
+                        .help("Saves specified number of keypairs whos public key ends with the indicated suffix\nExample: --ends-with Land:4\nSUFFIX type is Base58\nCOUNT type is u64"),
                 )
                 .arg(
                     Arg::new("starts_and_ends_with")
@@ -434,7 +434,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
                         .multiple_occurrences(true)
                         .multiple_values(true)
                         .validator(grind_validator_starts_and_ends_with)
-                        .help("Saves specified number of keypairs whos public key starts and ends with the indicated perfix and suffix\nExample: --starts-and-ends-with sol:ana:4\nPREFIX and SUFFIX type is Base58\nCOUNT type is u64"),
+                        .help("Saves specified number of keypairs whos public key starts and ends with the indicated perfix and suffix\nExample: --starts-and-ends-with mira:Land:4\nPREFIX and SUFFIX type is Base58\nCOUNT type is u64"),
                 )
                 .arg(
                     Arg::new("num_threads")

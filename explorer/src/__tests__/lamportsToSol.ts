@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { lamportsToSol, LAMPORTS_PER_SOL } from "utils";
+import { lamportsToSol, LAMPORTS_PER_MLN } from "utils";
 import BN from "bn.js";
 
 describe("lamportsToSol", () => {
@@ -13,8 +13,8 @@ describe("lamportsToSol", () => {
   });
 
   it("1 MLN", () => {
-    expect(lamportsToSol(new BN(LAMPORTS_PER_SOL))).to.eq(1.0);
-    expect(lamportsToSol(new BN(-LAMPORTS_PER_SOL))).to.eq(-1.0);
+    expect(lamportsToSol(new BN(LAMPORTS_PER_MLN))).to.eq(1.0);
+    expect(lamportsToSol(new BN(-LAMPORTS_PER_MLN))).to.eq(-1.0);
   });
 
   it("u64::MAX lamports", () => {

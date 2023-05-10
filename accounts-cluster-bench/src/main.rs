@@ -663,7 +663,7 @@ pub mod test {
         },
         miraland_measure::measure::Measure,
         miraland_test_validator::TestValidator,
-        solana_sdk::{native_token::sol_to_lamports, poh_config::PohConfig},
+        solana_sdk::{native_token::mln_to_lamports, poh_config::PohConfig},
         spl_token::{
             solana_program::program_pack::Pack,
             state::{Account, Mint},
@@ -730,7 +730,7 @@ pub mod test {
         let signature = rpc_client
             .request_airdrop_with_blockhash(
                 &funder.pubkey(),
-                sol_to_lamports(1.0),
+                mln_to_lamports(1.0),
                 &latest_blockhash,
             )
             .unwrap();

@@ -9,7 +9,7 @@ use {
     },
     miraland_client::rpc_client::RpcClient,
     miraland_transaction_status::parse_token::spl_token_instruction,
-    solana_sdk::{instruction::Instruction, message::Message, native_token::lamports_to_sol},
+    solana_sdk::{instruction::Instruction, message::Message, native_token::lamports_to_mln},
     spl_associated_token_account::{
         get_associated_token_address, instruction::create_associated_token_account,
     },
@@ -105,7 +105,7 @@ pub fn check_spl_token_balances(
     if fee_payer_balance < fees + account_creation_amount {
         return Err(Error::InsufficientFunds(
             vec![FundingSource::FeePayer].into(),
-            lamports_to_sol(fees + account_creation_amount).to_string(),
+            lamports_to_mln(fees + account_creation_amount).to_string(),
         ));
     }
     let source_token_account = client

@@ -32,4 +32,4 @@ export * from './util/cluster';
 /**
  * There are 1-billion lamports in one MLN
  */
-export const LAMPORTS_PER_SOL = 1000000000;
+export const LAMPORTS_PER_MLN = 1000000000;

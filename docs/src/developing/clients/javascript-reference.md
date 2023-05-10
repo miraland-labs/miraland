@@ -73,7 +73,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   payer.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -250,7 +250,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   payer.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -363,7 +363,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   fromPublicKey.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -410,7 +410,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   fromPublicKey.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -530,7 +530,7 @@ let nonceAccount = web3.Keypair.generate();
 // Fund account
 let airdropSignature = await connection.requestAirdrop(
   account.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -680,7 +680,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   fromPublicKey.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 await connection.confirmTransaction({ signature: airdropSignature });
 

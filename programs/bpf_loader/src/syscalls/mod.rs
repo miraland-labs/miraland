@@ -1132,7 +1132,7 @@ declare_syscall!(
         memory_mapping: &mut MemoryMapping,
         result: &mut Result<u64, EbpfError<BpfError>>,
     ) {
-        use miraland_zk_token_sdk::curve25519::{curve_syscall_traits::*, edwards, ristretto};
+        use solana_zk_token_sdk::curve25519::{curve_syscall_traits::*, edwards, ristretto};
 
         let invoke_context = question_mark!(
             self.invoke_context
@@ -1206,7 +1206,7 @@ declare_syscall!(
         memory_mapping: &mut MemoryMapping,
         result: &mut Result<u64, EbpfError<BpfError>>,
     ) {
-        use miraland_zk_token_sdk::curve25519::{
+        use solana_zk_token_sdk::curve25519::{
             curve_syscall_traits::*, edwards, ristretto, scalar,
         };
 
@@ -2861,7 +2861,7 @@ mod tests {
 
     #[test]
     fn test_syscall_edwards_curve_point_validation() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_EDWARDS;
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_EDWARDS;
 
         let config = Config::default();
         prepare_mockup!(
@@ -2962,7 +2962,7 @@ mod tests {
 
     #[test]
     fn test_syscall_ristretto_curve_point_validation() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_RISTRETTO;
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_RISTRETTO;
 
         let config = Config::default();
         prepare_mockup!(
@@ -3063,7 +3063,7 @@ mod tests {
 
     #[test]
     fn test_syscall_edwards_curve_group_ops() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
             ADD, CURVE25519_EDWARDS, MUL, SUB,
         };
 
@@ -3270,7 +3270,7 @@ mod tests {
 
     #[test]
     fn test_syscall_ristretto_curve_group_ops() {
-        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
             ADD, CURVE25519_RISTRETTO, MUL, SUB,
         };
 

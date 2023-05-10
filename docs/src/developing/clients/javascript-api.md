@@ -118,7 +118,7 @@ const {
   Keypair,
   Transaction,
   SystemProgram,
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_MLN,
 } = require("@solana/web3.js");
 
 let fromKeypair = Keypair.generate();
@@ -129,7 +129,7 @@ transaction.add(
   SystemProgram.transfer({
     fromPubkey: fromKeypair.publicKey,
     toPubkey: toKeypair.publicKey,
-    lamports: LAMPORTS_PER_SOL,
+    lamports: LAMPORTS_PER_MLN,
   }),
 );
 ```
@@ -181,7 +181,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("testnet"));
 
 let airdropSignature = await connection.requestAirdrop(
   payer.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -306,7 +306,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("testnet"));
 
 let airdropSignature = await connection.requestAirdrop(
   payer.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });

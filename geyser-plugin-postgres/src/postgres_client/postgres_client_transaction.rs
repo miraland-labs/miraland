@@ -1152,43 +1152,45 @@ pub(crate) mod tests {
         check_message_header_equality(&message_header, &db_message_header)
     }
 
-    fn check_transaction_message_equality(message: &Message, db_message: &DbTransactionMessage) {
-        check_message_header_equality(&message.header, &db_message.header);
-        assert_eq!(message.account_keys.len(), db_message.account_keys.len());
-        for i in 0..message.account_keys.len() {
-            assert_eq!(message.account_keys[i].as_ref(), db_message.account_keys[i]);
+    fn check_transaction_message_equality(message: &LegacyMessage, db_message: &DbTransactionMessage) {
+        check_message_header_equality(&message.message.header, &db_message.header);
+        assert_eq!(message.message.account_keys.len(), db_message.account_keys.len());
+        for i in 0..message.message.account_keys.len() {
+            assert_eq!(message.message.account_keys[i].as_ref(), db_message.account_keys[i]);
         }
-        assert_eq!(message.instructions.len(), db_message.instructions.len());
-        for i in 0..message.instructions.len() {
+        assert_eq!(message.message.instructions.len(), db_message.instructions.len());
+        for i in 0..message.message.instructions.len() {
             check_compiled_instruction_equality(
-                &message.instructions[i],
+                &message.message.instructions[i],
                 &db_message.instructions[i],
             );
         }
     }
 
-    fn build_message() -> Message {
-        Message {
-            header: MessageHeader {
-                num_readonly_signed_accounts: 11,
-                num_readonly_unsigned_accounts: 12,
-                num_required_signatures: 13,
-            },
-            account_keys: vec![Pubkey::new_unique(), Pubkey::new_unique()],
-            recent_blockhash: Hash::new_unique(),
-            instructions: vec![
-                CompiledInstruction {
-                    program_id_index: 0,
-                    accounts: vec![1, 2, 3],
-                    data: vec![4, 5, 6],
+    fn build_message() -> LegacyMessage<'static> { // MI: Message ==> LegacyMessage
+        LegacyMessage::new(
+            Message {
+                header: MessageHeader {
+                    num_readonly_signed_accounts: 11,
+                    num_readonly_unsigned_accounts: 12,
+                    num_required_signatures: 13,
                 },
-                CompiledInstruction {
-                    program_id_index: 3,
-                    accounts: vec![11, 12, 13],
-                    data: vec![14, 15, 16],
-                },
-            ],
-        }
+                account_keys: vec![Pubkey::new_unique(), Pubkey::new_unique()],
+                recent_blockhash: Hash::new_unique(),
+                instructions: vec![
+                    CompiledInstruction {
+                        program_id_index: 0,
+                        accounts: vec![1, 2, 3],
+                        data: vec![4, 5, 6],
+                    },
+                    CompiledInstruction {
+                        program_id_index: 3,
+                        accounts: vec![11, 12, 13],
+                        data: vec![14, 15, 16],
+                    },
+                ],
+            }
+        )
     }
 
     #[test]
