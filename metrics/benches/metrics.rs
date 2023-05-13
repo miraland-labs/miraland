@@ -4,12 +4,12 @@ extern crate test;
 
 use {
     log::*,
-    rand::distributions::{Distribution, Uniform},
     miraland_metrics::{
         counter::CounterPoint,
         datapoint::DataPoint,
         metrics::{serialize_points, test_mocks::MockMetricsWriter, MetricsAgent},
     },
+    rand::distributions::{Distribution, Uniform},
     std::{sync::Arc, time::Duration},
     test::Bencher,
 };

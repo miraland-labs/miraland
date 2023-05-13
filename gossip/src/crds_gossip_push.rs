@@ -25,15 +25,15 @@ use {
     indexmap::map::IndexMap,
     itertools::Itertools,
     lru::LruCache,
-    rand::{seq::SliceRandom, Rng},
     miraland_bloom::bloom::{AtomicBloom, Bloom},
+    miraland_streamer::socket::SocketAddrSpace,
+    rand::{seq::SliceRandom, Rng},
     solana_sdk::{
         packet::PACKET_DATA_SIZE,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         cmp,
         collections::{HashMap, HashSet},

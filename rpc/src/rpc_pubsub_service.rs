@@ -10,8 +10,8 @@ use {
     },
     dashmap::{mapref::entry::Entry, DashMap},
     jsonrpc_core::IoHandler,
-    soketto::handshake::{server, Server},
     miraland_metrics::TokenCounter,
+    soketto::handshake::{server, Server},
     std::{
         io,
         net::SocketAddr,

@@ -16,6 +16,7 @@ use {
         rpc_response::{RpcStakeActivation, StakeActivationState},
     },
     miraland_faucet::faucet::run_local_faucet,
+    miraland_streamer::socket::SocketAddrSpace,
     miraland_test_validator::{TestValidator, TestValidatorGenesis},
     solana_sdk::{
         account_utils::StateMut,
@@ -33,7 +34,6 @@ use {
             state::{Lockup, StakeAuthorize, StakeState},
         },
     },
-    miraland_streamer::socket::SocketAddrSpace,
 };
 
 #[test]

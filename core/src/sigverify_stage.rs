@@ -18,8 +18,8 @@ use {
             dedup_packets_and_count_discards, shrink_batches, Deduper,
         },
     },
-    solana_sdk::timing,
     miraland_streamer::streamer::{self, StreamerError},
+    solana_sdk::timing,
     std::{
         thread::{self, Builder, JoinHandle},
         time::Instant,

@@ -8,11 +8,11 @@ use {
         retransmit_stage::RetransmitStage,
     },
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-    rand::{seq::SliceRandom, Rng},
     miraland_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         shred::{Shred, ShredFlags},
     },
+    rand::{seq::SliceRandom, Rng},
     solana_runtime::bank::Bank,
     solana_sdk::{clock::Slot, pubkey::Pubkey},
     test::Bencher,

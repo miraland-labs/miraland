@@ -7,24 +7,26 @@ use {
     },
     chrono::Utc,
     log::*,
-    postgres::{Client, Statement},
-    postgres_types::{FromSql, ToSql},
     miraland_geyser_plugin_interface::geyser_plugin_interface::{
         GeyserPluginError, ReplicaTransactionInfoV2,
     },
+    miraland_transaction_status::{
+        InnerInstructions, Reward, TransactionStatusMeta, TransactionTokenBalance,
+    },
+    postgres::{Client, Statement},
+    postgres_types::{FromSql, ToSql},
     solana_runtime::bank::RewardType,
     solana_sdk::{
         instruction::CompiledInstruction,
         message::{
             v0::{self, LoadedAddresses, MessageAddressTableLookup},
-            Message, MessageHeader, SanitizedMessage,
             // MI: add next line
             LegacyMessage,
+            Message,
+            MessageHeader,
+            SanitizedMessage,
         },
         transaction::TransactionError,
-    },
-    miraland_transaction_status::{
-        InnerInstructions, Reward, TransactionStatusMeta, TransactionTokenBalance,
     },
     std::sync::atomic::Ordering,
 };
@@ -237,7 +239,7 @@ impl From<&Message> for DbTransactionMessage {
     }
 }
 
-// MI: 2023-05-07 
+// MI: 2023-05-07
 // in 1.14.17, in enum SanitizedMessage::Legacy(LegacyMessage)
 // LegacyMessage is redefined which is different with old version(1.14.7)
 // struct LegacyMessage is a wrapper of legacy::Message
@@ -1152,13 +1154,25 @@ pub(crate) mod tests {
         check_message_header_equality(&message_header, &db_message_header)
     }
 
-    fn check_transaction_message_equality(message: &LegacyMessage, db_message: &DbTransactionMessage) {
+    fn check_transaction_message_equality(
+        message: &LegacyMessage,
+        db_message: &DbTransactionMessage,
+    ) {
         check_message_header_equality(&message.message.header, &db_message.header);
-        assert_eq!(message.message.account_keys.len(), db_message.account_keys.len());
+        assert_eq!(
+            message.message.account_keys.len(),
+            db_message.account_keys.len()
+        );
         for i in 0..message.message.account_keys.len() {
-            assert_eq!(message.message.account_keys[i].as_ref(), db_message.account_keys[i]);
+            assert_eq!(
+                message.message.account_keys[i].as_ref(),
+                db_message.account_keys[i]
+            );
         }
-        assert_eq!(message.message.instructions.len(), db_message.instructions.len());
+        assert_eq!(
+            message.message.instructions.len(),
+            db_message.instructions.len()
+        );
         for i in 0..message.message.instructions.len() {
             check_compiled_instruction_equality(
                 &message.message.instructions[i],
@@ -1167,30 +1181,29 @@ pub(crate) mod tests {
         }
     }
 
-    fn build_message() -> LegacyMessage<'static> { // MI: Message ==> LegacyMessage
-        LegacyMessage::new(
-            Message {
-                header: MessageHeader {
-                    num_readonly_signed_accounts: 11,
-                    num_readonly_unsigned_accounts: 12,
-                    num_required_signatures: 13,
+    fn build_message() -> LegacyMessage<'static> {
+        // MI: Message ==> LegacyMessage
+        LegacyMessage::new(Message {
+            header: MessageHeader {
+                num_readonly_signed_accounts: 11,
+                num_readonly_unsigned_accounts: 12,
+                num_required_signatures: 13,
+            },
+            account_keys: vec![Pubkey::new_unique(), Pubkey::new_unique()],
+            recent_blockhash: Hash::new_unique(),
+            instructions: vec![
+                CompiledInstruction {
+                    program_id_index: 0,
+                    accounts: vec![1, 2, 3],
+                    data: vec![4, 5, 6],
                 },
-                account_keys: vec![Pubkey::new_unique(), Pubkey::new_unique()],
-                recent_blockhash: Hash::new_unique(),
-                instructions: vec![
-                    CompiledInstruction {
-                        program_id_index: 0,
-                        accounts: vec![1, 2, 3],
-                        data: vec![4, 5, 6],
-                    },
-                    CompiledInstruction {
-                        program_id_index: 3,
-                        accounts: vec![11, 12, 13],
-                        data: vec![14, 15, 16],
-                    },
-                ],
-            }
-        )
+                CompiledInstruction {
+                    program_id_index: 3,
+                    accounts: vec![11, 12, 13],
+                    data: vec![14, 15, 16],
+                },
+            ],
+        })
     }
 
     #[test]

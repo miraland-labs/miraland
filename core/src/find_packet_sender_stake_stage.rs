@@ -2,8 +2,8 @@ use {
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     miraland_measure::measure::Measure,
     miraland_perf::packet::PacketBatch,
-    solana_sdk::timing::timestamp,
     miraland_streamer::streamer::{self, StakedNodes, StreamerError},
+    solana_sdk::timing::timestamp,
     std::{
         collections::HashMap,
         net::IpAddr,
@@ -92,11 +92,12 @@ impl FindPacketSenderStakeStage {
 
                         let mut discard_random_time =
                             Measure::start("findpacketsenderstake_discard_random_time");
-                        let non_discarded_packets = miraland_perf::discard::discard_batches_randomly(
-                            &mut batches,
-                            MAX_FINDPACKETSENDERSTAKE_BATCH,
-                            num_packets,
-                        );
+                        let non_discarded_packets =
+                            miraland_perf::discard::discard_batches_randomly(
+                                &mut batches,
+                                MAX_FINDPACKETSENDERSTAKE_BATCH,
+                                num_packets,
+                            );
                         let num_discarded_randomly =
                             num_packets.saturating_sub(non_discarded_packets);
                         discard_random_time.stop();

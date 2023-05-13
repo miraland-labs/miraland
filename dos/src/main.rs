@@ -56,6 +56,7 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     miraland_measure::measure::Measure,
+    miraland_streamer::socket::SocketAddrSpace,
     rand::{thread_rng, Rng},
     solana_sdk::{
         hash::Hash,
@@ -69,7 +70,6 @@ use {
         timing::timestamp,
         transaction::Transaction,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         net::{SocketAddr, UdpSocket},
         process::exit,

@@ -1,5 +1,6 @@
 use {
     crate::crds_value::MAX_WALLCLOCK,
+    miraland_streamer::socket::SocketAddrSpace,
     solana_sdk::{
         pubkey::Pubkey,
         rpc_port,
@@ -7,7 +8,6 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::net::{IpAddr, SocketAddr},
 };
 

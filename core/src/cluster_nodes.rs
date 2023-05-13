@@ -10,9 +10,10 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
+    miraland_ledger::shred::ShredId,
+    miraland_streamer::socket::SocketAddrSpace,
     rand::{seq::SliceRandom, Rng, SeedableRng},
     rand_chacha::ChaChaRng,
-    miraland_ledger::shred::ShredId,
     solana_runtime::bank::Bank,
     solana_sdk::{
         clock::{Epoch, Slot},
@@ -21,7 +22,6 @@ use {
         signature::Keypair,
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         any::TypeId,
         cmp::Reverse,

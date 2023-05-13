@@ -512,12 +512,12 @@ mod test {
             blockstore::Blockstore, genesis_utils::create_genesis_config, get_tmp_ledger_path,
             shred::max_ticks_per_n_shreds,
         },
+        miraland_streamer::socket::SocketAddrSpace,
         solana_runtime::bank::Bank,
         solana_sdk::{
             genesis_config::GenesisConfig,
             signature::{Keypair, Signer},
         },
-        miraland_streamer::socket::SocketAddrSpace,
         std::{ops::Deref, sync::Arc, time::Duration},
     };
 

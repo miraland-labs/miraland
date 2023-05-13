@@ -7,7 +7,6 @@ mod tests {
         crossbeam_channel::unbounded,
         log::*,
         miraland_core::ledger_cleanup_service::LedgerCleanupService,
-        miraland_measure::measure::Measure,
         miraland_ledger::{
             blockstore::{make_many_slot_shreds, Blockstore},
             blockstore_options::{
@@ -16,6 +15,7 @@ mod tests {
             },
             get_tmp_ledger_path,
         },
+        miraland_measure::measure::Measure,
         std::{
             collections::VecDeque,
             str::FromStr,

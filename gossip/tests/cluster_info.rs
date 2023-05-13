@@ -7,12 +7,12 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         weighted_shuffle::WeightedShuffle,
     },
+    miraland_streamer::socket::SocketAddrSpace,
     rand::SeedableRng,
     rand_chacha::ChaChaRng,
     rayon::{iter::ParallelIterator, prelude::*},
     serial_test::serial,
     solana_sdk::{pubkey::Pubkey, signer::keypair::Keypair},
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         sync::{Arc, Mutex},

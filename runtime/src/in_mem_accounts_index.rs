@@ -8,9 +8,9 @@ use {
         bucket_map_holder_stats::BucketMapHolderStats,
         waitable_condvar::WaitableCondvar,
     },
+    miraland_bucket_map::bucket_api::BucketApi,
     miraland_measure::measure::Measure,
     rand::{thread_rng, Rng},
-    miraland_bucket_map::bucket_api::BucketApi,
     solana_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         collections::{

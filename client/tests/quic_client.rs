@@ -7,8 +7,8 @@ mod tests {
             nonblocking::quic_client::QuicLazyInitializedEndpoint,
         },
         miraland_perf::packet::PacketBatch,
-        solana_sdk::{packet::PACKET_DATA_SIZE, signature::Keypair},
         miraland_streamer::{quic::StreamStats, streamer::StakedNodes},
+        solana_sdk::{packet::PACKET_DATA_SIZE, signature::Keypair},
         std::{
             net::{IpAddr, SocketAddr, UdpSocket},
             sync::{

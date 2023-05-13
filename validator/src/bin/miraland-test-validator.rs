@@ -16,6 +16,7 @@ use {
         rpc::{JsonRpcConfig, RpcBigtableConfig},
         rpc_pubsub_service::PubSubConfig,
     },
+    miraland_streamer::socket::SocketAddrSpace,
     miraland_test_validator::*,
     miraland_validator::{
         admin_rpc_service, dashboard::Dashboard, ledger_lockfile, lock_ledger, println_name_value,
@@ -32,7 +33,6 @@ use {
         signature::{read_keypair_file, write_keypair_file, Keypair, Signer},
         system_program,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashSet,
         fs, io,

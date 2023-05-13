@@ -41,7 +41,9 @@ pub(crate) trait GenericTokenAccount {
 
     // Call after account length has already been verified
     fn unpack_pubkey_unchecked(account_data: &[u8], offset: usize) -> &Pubkey {
-        bytemuck::from_bytes(&account_data[offset..offset + PUBKEY_BYTES])
+        // bytemuck::from_bytes(&account_data[offset..offset + PUBKEY_BYTES])
+        // MI: to avoid error: integer arithmetic detected in CI due to clippy
+        bytemuck::from_bytes(&account_data[offset..offset.checked_add(PUBKEY_BYTES)])
     }
 
     fn unpack_account_owner(account_data: &[u8]) -> Option<&Pubkey> {

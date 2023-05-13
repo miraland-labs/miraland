@@ -7,10 +7,10 @@ use {
     },
     chrono::Utc,
     log::*,
-    postgres::{Client, Statement},
     miraland_geyser_plugin_interface::geyser_plugin_interface::{
         GeyserPluginError, ReplicaBlockInfo,
     },
+    postgres::{Client, Statement},
 };
 
 #[derive(Clone, Debug)]

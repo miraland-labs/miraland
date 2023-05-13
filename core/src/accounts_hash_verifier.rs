@@ -338,6 +338,7 @@ mod tests {
             cluster_info::make_accounts_hashes_message,
             legacy_contact_info::LegacyContactInfo as ContactInfo,
         },
+        miraland_streamer::socket::SocketAddrSpace,
         solana_runtime::{
             rent_collector::RentCollector,
             snapshot_utils::{ArchiveFormat, SnapshotVersion},
@@ -348,7 +349,6 @@ mod tests {
             signature::{Keypair, Signer},
             sysvar::epoch_schedule::EpochSchedule,
         },
-        miraland_streamer::socket::SocketAddrSpace,
         std::str::FromStr,
     };
 

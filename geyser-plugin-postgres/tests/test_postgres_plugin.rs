@@ -1,7 +1,6 @@
 #![allow(clippy::integer_arithmetic)]
 
 use serde_json::json;
-
 /// Integration testing for the PostgreSQL plugin
 /// This requires a PostgreSQL database named 'solana' be setup at localhost at port 5432
 /// This is automatically setup in the CI environment.
@@ -25,7 +24,6 @@ use serde_json::json;
 use {
     libloading::Library,
     log::*,
-    serial_test::serial,
     miraland_core::validator::ValidatorConfig,
     miraland_geyser_plugin_postgres::{
         geyser_plugin_postgres::GeyserPluginPostgresConfig, postgres_client::SimplePostgresClient,
@@ -35,6 +33,8 @@ use {
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::*,
     },
+    miraland_streamer::socket::SocketAddrSpace,
+    serial_test::serial,
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter, snapshot_config::SnapshotConfig,
         snapshot_utils,
@@ -43,7 +43,6 @@ use {
         client::SyncClient, clock::Slot, commitment_config::CommitmentConfig,
         epoch_schedule::MINIMUM_SLOTS_PER_EPOCH, hash::Hash,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         fs::{self, File},
         io::Read,

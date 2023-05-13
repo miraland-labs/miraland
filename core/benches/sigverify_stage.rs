@@ -12,13 +12,13 @@ use {
         sigverify_stage::{SigVerifier, SigVerifyStage},
     },
     miraland_measure::measure::Measure,
-    rand::{
-        distributions::{Distribution, Uniform},
-        thread_rng, Rng,
-    },
     miraland_perf::{
         packet::{to_packet_batches, PacketBatch},
         test_tx::test_tx,
+    },
+    rand::{
+        distributions::{Distribution, Uniform},
+        thread_rng, Rng,
     },
     solana_sdk::{
         hash::Hash,

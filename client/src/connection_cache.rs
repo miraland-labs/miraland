@@ -8,14 +8,14 @@ use {
     },
     indexmap::map::{Entry, IndexMap},
     miraland_measure::measure::Measure,
-    rand::{thread_rng, Rng},
-    solana_sdk::{
-        pubkey::Pubkey, quic::QUIC_PORT_OFFSET, signature::Keypair, timing::AtomicInterval,
-    },
     miraland_streamer::{
         nonblocking::quic::{compute_max_allowed_uni_streams, ConnectionPeerType},
         streamer::StakedNodes,
         tls_certificates::new_self_signed_tls_certificate_chain,
+    },
+    rand::{thread_rng, Rng},
+    solana_sdk::{
+        pubkey::Pubkey, quic::QUIC_PORT_OFFSET, signature::Keypair, timing::AtomicInterval,
     },
     std::{
         error::Error,
@@ -653,6 +653,7 @@ mod tests {
             connection_cache::{ConnectionCache, MAX_CONNECTIONS},
             tpu_connection::TpuConnection,
         },
+        miraland_streamer::streamer::StakedNodes,
         rand::{Rng, SeedableRng},
         rand_chacha::ChaChaRng,
         solana_sdk::{
@@ -662,7 +663,6 @@ mod tests {
                 QUIC_PORT_OFFSET,
             },
         },
-        miraland_streamer::streamer::StakedNodes,
         std::{
             net::{IpAddr, Ipv4Addr, SocketAddr},
             sync::{Arc, RwLock},

@@ -7,6 +7,7 @@ use {
     miraland_client::{rpc_client::RpcClient, transaction_executor::TransactionExecutor},
     miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
     miraland_gossip::gossip_service::discover,
+    miraland_streamer::socket::SocketAddrSpace,
     miraland_transaction_status::parse_token::spl_token_instruction,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
@@ -21,7 +22,6 @@ use {
         system_instruction, system_program,
         transaction::Transaction,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         cmp::min,
         net::SocketAddr,

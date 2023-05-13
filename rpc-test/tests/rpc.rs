@@ -14,6 +14,7 @@ use {
         rpc_response::{Response as RpcResponse, RpcSignatureResult, SlotUpdate},
         tpu_client::{TpuClient, TpuClientConfig},
     },
+    miraland_streamer::socket::SocketAddrSpace,
     miraland_test_validator::TestValidator,
     miraland_transaction_status::TransactionStatus,
     reqwest::{self, header::CONTENT_TYPE},
@@ -27,7 +28,6 @@ use {
         system_transaction,
         transaction::Transaction,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashSet,
         net::UdpSocket,

@@ -13,6 +13,10 @@ use {
     log::*,
     miraland_measure::measure::Measure,
     miraland_net_utils::VALIDATOR_PORT_RANGE,
+    miraland_streamer::{
+        nonblocking::quic::ALPN_TPU_PROTOCOL_ID,
+        tls_certificates::new_self_signed_tls_certificate_chain,
+    },
     quinn::{
         ClientConfig, ConnectError, ConnectionError, Endpoint, EndpointConfig, IdleTimeout,
         NewConnection, VarInt, WriteError,
@@ -24,10 +28,6 @@ use {
         },
         signature::Keypair,
         transport::Result as TransportResult,
-    },
-    miraland_streamer::{
-        nonblocking::quic::ALPN_TPU_PROTOCOL_ID,
-        tls_certificates::new_self_signed_tls_certificate_chain,
     },
     std::{
         net::{IpAddr, Ipv4Addr, SocketAddr, UdpSocket},

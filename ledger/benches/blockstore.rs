@@ -5,11 +5,11 @@ extern crate test;
 
 use {
     miraland_entry::entry::{create_ticks, Entry},
-    rand::Rng,
     miraland_ledger::{
         blockstore::{entries_to_test_shreds, Blockstore},
         get_tmp_ledger_path,
     },
+    rand::Rng,
     solana_sdk::{clock::Slot, hash::Hash},
     std::path::Path,
     test::Bencher,

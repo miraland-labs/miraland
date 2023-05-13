@@ -7,6 +7,7 @@ use {
     miraland_client::{rpc_client::RpcClient, transaction_executor::TransactionExecutor},
     miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
     miraland_gossip::gossip_service::discover,
+    miraland_streamer::socket::SocketAddrSpace,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
     solana_sdk::{
@@ -20,7 +21,6 @@ use {
         system_instruction,
         transaction::Transaction,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         net::SocketAddr,
         process::exit,

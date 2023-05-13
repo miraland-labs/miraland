@@ -130,7 +130,7 @@ impl RpcHealth {
     pub(crate) fn stub() -> Arc<Self> {
         use {
             miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
-            solana_sdk::signer::keypair::Keypair, miraland_streamer::socket::SocketAddrSpace,
+            miraland_streamer::socket::SocketAddrSpace, solana_sdk::signer::keypair::Keypair,
         };
         Arc::new(Self::new(
             Arc::new(ClusterInfo::new(

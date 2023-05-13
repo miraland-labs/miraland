@@ -283,8 +283,8 @@ pub(crate) mod tests {
     use {
         super::*,
         miraland_entry::entry::Entry,
-        rand::Rng,
         miraland_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
+        rand::Rng,
         solana_sdk::{
             hash,
             signature::{Keypair, Signer},

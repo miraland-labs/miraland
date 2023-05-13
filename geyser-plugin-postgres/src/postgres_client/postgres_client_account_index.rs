@@ -9,10 +9,10 @@ use {
         inline_spl_token_2022,
     },
     log::*,
-    postgres::{Client, Statement},
     miraland_geyser_plugin_interface::geyser_plugin_interface::GeyserPluginError,
     miraland_measure::measure::Measure,
     miraland_metrics::*,
+    postgres::{Client, Statement},
     solana_sdk::pubkey::Pubkey,
     tokio_postgres::types,
 };

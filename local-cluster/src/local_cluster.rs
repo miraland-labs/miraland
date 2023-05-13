@@ -22,6 +22,7 @@ use {
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     miraland_ledger::create_new_tmp_ledger,
+    miraland_streamer::socket::SocketAddrSpace,
     solana_runtime::{
         genesis_utils::{
             create_genesis_config_with_vote_accounts_and_cluster_type, GenesisConfigInfo,
@@ -48,7 +49,6 @@ use {
         transaction::Transaction,
     },
     solana_stake_program::{config::create_account as create_stake_config_account, stake_state},
-    miraland_streamer::socket::SocketAddrSpace,
     solana_vote_program::{
         vote_instruction,
         vote_state::{VoteInit, VoteState},

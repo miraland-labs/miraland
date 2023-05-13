@@ -63,6 +63,7 @@ mod test {
         miraland_ledger::{
             blockstore::Blockstore, get_tmp_ledger_path, leader_schedule_cache::LeaderScheduleCache,
         },
+        miraland_streamer::socket::SocketAddrSpace,
         solana_runtime::{
             bank::Bank,
             genesis_utils::{
@@ -74,7 +75,6 @@ mod test {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        miraland_streamer::socket::SocketAddrSpace,
         std::sync::atomic::AtomicBool,
     };
 

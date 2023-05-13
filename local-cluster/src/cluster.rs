@@ -2,8 +2,8 @@ use {
     miraland_client::thin_client::ThinClient,
     miraland_core::validator::{Validator, ValidatorConfig},
     miraland_gossip::{cluster_info::Node, legacy_contact_info::LegacyContactInfo as ContactInfo},
-    solana_sdk::{pubkey::Pubkey, signature::Keypair},
     miraland_streamer::socket::SocketAddrSpace,
+    solana_sdk::{pubkey::Pubkey, signature::Keypair},
     std::{path::PathBuf, sync::Arc},
 };
 

@@ -1,8 +1,8 @@
 use {
     crate::{quic_client::QuicTpuConnection, udp_client::UdpTpuConnection},
     enum_dispatch::enum_dispatch,
-    rayon::iter::{IntoParallelIterator, ParallelIterator},
     miraland_metrics::MovingStat,
+    rayon::iter::{IntoParallelIterator, ParallelIterator},
     solana_sdk::{transaction::VersionedTransaction, transport::Result as TransportResult},
     std::{net::SocketAddr, sync::atomic::AtomicU64},
 };

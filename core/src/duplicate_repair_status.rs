@@ -354,8 +354,8 @@ impl DeadSlotAncestorRequestStatus {
 pub mod tests {
     use {
         super::*,
-        rand::{self, seq::SliceRandom, thread_rng},
         miraland_ledger::get_tmp_ledger_path_auto_delete,
+        rand::{self, seq::SliceRandom, thread_rng},
         std::{collections::BTreeMap, net::IpAddr},
         tempfile::TempDir,
     };

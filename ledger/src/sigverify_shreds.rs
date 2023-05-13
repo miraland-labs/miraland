@@ -2,8 +2,6 @@
 use {
     crate::shred,
     itertools::{izip, Itertools},
-    rayon::{prelude::*, ThreadPool},
-    sha2::{Digest, Sha512},
     miraland_metrics::inc_new_counter_debug,
     miraland_perf::{
         cuda_runtime::PinnedVec,
@@ -12,6 +10,8 @@ use {
         recycler_cache::RecyclerCache,
         sigverify::{self, count_packets_in_batches, TxOffset},
     },
+    rayon::{prelude::*, ThreadPool},
+    sha2::{Digest, Sha512},
     solana_sdk::{
         clock::Slot,
         hash::Hash,

@@ -3,8 +3,8 @@ use {
     bincode::serialized_size,
     crossbeam_channel::Receiver,
     miraland_entry::entry::Entry,
-    miraland_poh::poh_recorder::WorkingBankEntry,
     miraland_ledger::shred::ShredData,
+    miraland_poh::poh_recorder::WorkingBankEntry,
     solana_runtime::bank::Bank,
     solana_sdk::clock::Slot,
     std::{

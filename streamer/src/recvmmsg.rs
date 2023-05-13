@@ -1,9 +1,9 @@
 //! The `recvmmsg` module provides recvmmsg() API implementation
 
+pub use miraland_perf::packet::NUM_RCVMMSGS;
 #[cfg(target_os = "linux")]
 #[allow(deprecated)]
 use nix::sys::socket::InetAddr;
-pub use miraland_perf::packet::NUM_RCVMMSGS;
 use {
     crate::packet::{Meta, Packet},
     std::{cmp, io, net::UdpSocket},

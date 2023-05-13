@@ -13,6 +13,7 @@ use {
     miraland_gossip::{
         cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    miraland_streamer::socket::SocketAddrSpace,
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandler, AbsRequestSender, AccountsBackgroundService, SnapshotRequestHandler,
@@ -46,7 +47,6 @@ use {
         system_transaction,
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashSet,
         fs,

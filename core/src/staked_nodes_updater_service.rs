@@ -1,8 +1,8 @@
 use {
     miraland_gossip::cluster_info::ClusterInfo,
+    miraland_streamer::streamer::StakedNodes,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::pubkey::Pubkey,
-    miraland_streamer::streamer::StakedNodes,
     std::{
         collections::HashMap,
         net::IpAddr,

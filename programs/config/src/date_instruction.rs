@@ -29,7 +29,7 @@ impl DateConfig {
     pub fn new(date_time: DateTime<Utc>) -> Self {
         Self {
             // date_time: date.and_hms(0, 0, 0), // MI: vanilla
-            date_time
+            date_time,
         }
     }
 

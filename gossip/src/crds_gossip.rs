@@ -18,15 +18,15 @@ use {
         ping_pong::PingCache,
     },
     itertools::Itertools,
-    rayon::ThreadPool,
     miraland_ledger::shred::Shred,
+    miraland_streamer::socket::SocketAddrSpace,
+    rayon::ThreadPool,
     solana_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         net::SocketAddr,

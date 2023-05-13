@@ -9,8 +9,8 @@ use {
     byteorder::{ByteOrder, LittleEndian},
     crossbeam_channel::{unbounded, Sender},
     log::*,
-    serde_derive::{Deserialize, Serialize},
     miraland_metrics::datapoint_info,
+    serde_derive::{Deserialize, Serialize},
     solana_sdk::{
         hash::Hash,
         instruction::Instruction,

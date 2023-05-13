@@ -10,6 +10,7 @@ use {
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
+    miraland_streamer::socket::SocketAddrSpace,
     rand::{seq::SliceRandom, thread_rng, Rng},
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
@@ -26,7 +27,6 @@ use {
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         net::{SocketAddr, TcpListener, UdpSocket},

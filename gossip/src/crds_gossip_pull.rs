@@ -24,18 +24,18 @@ use {
     },
     itertools::Itertools,
     lru::LruCache,
+    miraland_bloom::bloom::{AtomicBloom, Bloom},
+    miraland_streamer::socket::SocketAddrSpace,
     rand::{
         distributions::{Distribution, WeightedIndex},
         Rng,
     },
     rayon::{prelude::*, ThreadPool},
-    miraland_bloom::bloom::{AtomicBloom, Bloom},
     solana_sdk::{
         hash::{hash, Hash},
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet, VecDeque},
         convert::TryInto,
@@ -666,10 +666,10 @@ pub(crate) mod tests {
             socketaddr,
         },
         itertools::Itertools,
+        miraland_perf::test_tx::new_test_vote_tx,
         rand::{seq::SliceRandom, thread_rng, SeedableRng},
         rand_chacha::ChaChaRng,
         rayon::ThreadPoolBuilder,
-        miraland_perf::test_tx::new_test_vote_tx,
         solana_sdk::{
             hash::{hash, HASH_BYTES},
             packet::PACKET_DATA_SIZE,

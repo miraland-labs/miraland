@@ -1223,6 +1223,7 @@ pub fn test_process_distribute_stake_with_client(client: &RpcClient, sender_keyp
 mod tests {
     use {
         super::*,
+        miraland_streamer::socket::SocketAddrSpace,
         miraland_test_validator::TestValidator,
         miraland_transaction_status::TransactionConfirmationStatus,
         solana_sdk::{
@@ -1230,7 +1231,6 @@ mod tests {
             signature::{read_keypair_file, write_keypair_file, Signer},
             stake::instruction::StakeInstruction,
         },
-        miraland_streamer::socket::SocketAddrSpace,
     };
 
     fn one_signer_message(client: &RpcClient) -> Message {

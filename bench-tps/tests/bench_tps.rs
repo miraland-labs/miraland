@@ -17,13 +17,13 @@ use {
         validator_configs::make_identical_validator_configs,
     },
     miraland_rpc::rpc::JsonRpcConfig,
+    miraland_streamer::socket::SocketAddrSpace,
     miraland_test_validator::TestValidator,
     serial_test::serial,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         signature::{Keypair, Signer},
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{sync::Arc, time::Duration},
 };
 
