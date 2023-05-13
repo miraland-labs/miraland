@@ -5,7 +5,7 @@ authors = [
 ]
 edition = "2021"
 name = "miraland-accounts-cluster-bench"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -14,27 +14,27 @@ publish = false
 [dependencies]
 clap = "2.33.1"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc5" }
-miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc5" }
-miraland-client = { path = "../client", version = "=1.14.17-rc5" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17-rc5" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc5" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc5" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc5" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc5" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc5" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc5" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc5" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc5" }
-miraland-version = { path = "../version", version = "=1.14.17-rc5" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc6" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc6" }
+miraland-client = { path = "../client", version = "=1.14.17-rc6" }
+miraland-faucet = { path = "../faucet", version = "=1.14.17-rc6" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17-rc6" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc6" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc6" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc6" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc6" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc6" }
+miraland-version = { path = "../version", version = "=1.14.17-rc6" }
 rand = "0.7.0"
 rayon = "1.5.3"
 solarti-token = { version = "3.5", features = ["no-entrypoint"] }
 
 [dev-dependencies]
-miraland-core = { path = "../core", version = "=1.14.17-rc5" }
-miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc5" }
-miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc5" }
+miraland-core = { path = "../core", version = "=1.14.17-rc6" }
+miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc6" }
+miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc6" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

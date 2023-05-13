@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-realloc-invoke"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -17,8 +17,8 @@ default = ["program"]
 program = []
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc5" }
-miraland-bpf-rust-realloc = { path = "../realloc", version = "=1.14.17-rc5", default-features = false }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc6" }
+miraland-bpf-rust-realloc = { path = "../realloc", version = "=1.14.17-rc6", default-features = false }
 
 [lib]
 crate-type = ["lib", "cdylib"]

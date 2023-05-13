@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-ledger-tool"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -22,20 +22,20 @@ dashmap = "4.0.2"
 histogram = "0.6.9"
 itertools = "0.10.3"
 log = { version = "0.4.17" }
-miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc5" }
-miraland-cli-output = { path = "../cli-output", version = "=1.14.17-rc5" }
-miraland-core = { path = "../core", version = "=1.14.17-rc5" }
-miraland-entry = { path = "../entry", version = "=1.14.17-rc5" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc5" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc5" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc5" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc5" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc5" }
-miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc5" }
-miraland-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17-rc5" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc5" }
-miraland-version = { path = "../version", version = "=1.14.17-rc5" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc5" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc6" }
+miraland-cli-output = { path = "../cli-output", version = "=1.14.17-rc6" }
+miraland-core = { path = "../core", version = "=1.14.17-rc6" }
+miraland-entry = { path = "../entry", version = "=1.14.17-rc6" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17-rc6" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc6" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc6" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
+miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc6" }
+miraland-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17-rc6" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc6" }
+miraland-version = { path = "../version", version = "=1.14.17-rc6" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc6" }
 regex = "1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0.81"

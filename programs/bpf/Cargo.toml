@@ -1,7 +1,7 @@
 [package]
 name = "miraland-bpf-programs"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 documentation = "https://docs.rs/solana"
 homepage = "https://miraland.top/"
 readme = "README.md"
@@ -28,23 +28,23 @@ elf = "0.0.10"
 itertools = "0.10.1"
 log = "0.4.11"
 miow = "0.3.6"
-miraland-account-decoder = { path = "../../account-decoder", version = "=1.14.17-rc5" }
-miraland-bpf-loader-program = { path = "../bpf_loader", version = "=1.14.17-rc5" }
-miraland-cli-output = { path = "../../cli-output", version = "=1.14.17-rc5" }
-miraland-logger = { path = "../../logger", version = "=1.14.17-rc5" }
-miraland-measure = { path = "../../measure", version = "=1.14.17-rc5" }
-miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17-rc5" }
-miraland-runtime = { path = "../../runtime", version = "=1.14.17-rc5" }
-miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc5" }
-miraland-transaction-status = { path = "../../transaction-status", version = "=1.14.17-rc5" }
+miraland-account-decoder = { path = "../../account-decoder", version = "=1.14.17-rc6" }
+miraland-bpf-loader-program = { path = "../bpf_loader", version = "=1.14.17-rc6" }
+miraland-cli-output = { path = "../../cli-output", version = "=1.14.17-rc6" }
+miraland-logger = { path = "../../logger", version = "=1.14.17-rc6" }
+miraland-measure = { path = "../../measure", version = "=1.14.17-rc6" }
+miraland-program-runtime = { path = "../../program-runtime", version = "=1.14.17-rc6" }
+miraland-runtime = { path = "../../runtime", version = "=1.14.17-rc6" }
+miraland-sdk = { path = "../../sdk", version = "=1.14.17-rc6" }
+miraland-transaction-status = { path = "../../transaction-status", version = "=1.14.17-rc6" }
 net2 = "0.2.37"
-miraland-bpf-rust-invoke = { path = "rust/invoke", version = "=1.14.17-rc5" }
-miraland-bpf-rust-realloc = { path = "rust/realloc", version = "=1.14.17-rc5" }
-miraland-bpf-rust-realloc-invoke = { path = "rust/realloc_invoke", version = "=1.14.17-rc5" }
+miraland-bpf-rust-invoke = { path = "rust/invoke", version = "=1.14.17-rc6" }
+miraland-bpf-rust-realloc = { path = "rust/realloc", version = "=1.14.17-rc6" }
+miraland-bpf-rust-realloc-invoke = { path = "rust/realloc_invoke", version = "=1.14.17-rc6" }
 solana_rbpf = "=0.2.31"
 
 [dev-dependencies]
-miraland-ledger = { path = "../../ledger", version = "=1.14.17-rc5" }
+miraland-ledger = { path = "../../ledger", version = "=1.14.17-rc6" }
 
 [[bench]]
 name = "bpf_loader"

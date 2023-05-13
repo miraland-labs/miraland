@@ -1,6 +1,6 @@
 [package]
 name = "miraland-perf"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 description = "Miraland Performance APIs"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -22,10 +22,10 @@ dlopen_derive = "0.1.4"
 fnv = "1.0.7"
 lazy_static = "1.4.0"
 log = "0.4.17"
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc5" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc5" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc5" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc5" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc6" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc6" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc6" }
 rand = "0.7.0"
 rayon = "1.5.3"
 serde = "1.0.138"
@@ -40,7 +40,7 @@ name = "miraland_perf"
 
 [dev-dependencies]
 matches = "0.1.9"
-miraland-logger = { path = "../logger", version = "=1.14.17-rc5" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
 rand_chacha = "0.2.2"
 test-case = "2.1.0"
 

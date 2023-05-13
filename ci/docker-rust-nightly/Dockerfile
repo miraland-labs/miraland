@@ -1,4 +1,4 @@
-FROM miralandlabs/rust:1.65.0
+FROM miralandlabs/rust:1.60.0
 ARG date
 
 RUN set -x \

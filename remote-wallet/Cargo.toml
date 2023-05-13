@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-remote-wallet"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -17,7 +17,7 @@ console = "0.15.0"
 dialoguer = "0.10.1"
 hidapi = { version = "1.4.1", default-features = false, optional = true }
 log = "0.4.17"
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc5" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
 num-derive = { version = "0.3" }
 num-traits = { version = "0.2" }
 parking_lot = "0.12"

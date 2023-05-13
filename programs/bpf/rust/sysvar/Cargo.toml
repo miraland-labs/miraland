@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-sysvar"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,12 +13,12 @@ documentation = "https://docs.rs/miraland-bpf-rust-sysvar"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc5" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc6" }
 
 [dev-dependencies]
-miraland-program-runtime = { path = "../../../../program-runtime", version = "=1.14.17-rc5" }
-miraland-program-test = { path = "../../../../program-test", version = "=1.14.17-rc5" }
-miraland-sdk = { path = "../../../../sdk", version = "=1.14.17-rc5" }
+miraland-program-runtime = { path = "../../../../program-runtime", version = "=1.14.17-rc6" }
+miraland-program-test = { path = "../../../../program-test", version = "=1.14.17-rc6" }
+miraland-sdk = { path = "../../../../sdk", version = "=1.14.17-rc6" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

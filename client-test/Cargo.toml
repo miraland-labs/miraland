@@ -1,6 +1,6 @@
 [package]
 name = "miraland-client-test"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 description = "Miraland RPC Test"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,27 +15,27 @@ publish = false
 
 [dependencies]
 futures-util = "0.3.21"
-miraland-client = { path = "../client", version = "=1.14.17-rc5" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc5" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc5" }
-miraland-merkle-tree = { path = "../merkle-tree", version = "=1.14.17-rc5" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc5" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc5" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc5" }
-miraland-rpc = { path = "../rpc", version = "=1.14.17-rc5" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc5" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc5" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc5" }
-miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc5" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc5" }
-miraland-version = { path = "../version", version = "=1.14.17-rc5" }
+miraland-client = { path = "../client", version = "=1.14.17-rc6" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17-rc6" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc6" }
+miraland-merkle-tree = { path = "../merkle-tree", version = "=1.14.17-rc6" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc6" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc6" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc6" }
+miraland-rpc = { path = "../rpc", version = "=1.14.17-rc6" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc6" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc6" }
+miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc6" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc6" }
+miraland-version = { path = "../version", version = "=1.14.17-rc6" }
 serde_json = "1.0.81"
 serial_test = "0.8.0"
 systemstat = "0.1.11"
 tokio = { version = "~1.14.1", features = ["full"] }
 
 [dev-dependencies]
-miraland-logger = { path = "../logger", version = "=1.14.17-rc5" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

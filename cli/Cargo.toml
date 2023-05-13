@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-cli"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -23,22 +23,22 @@ crossbeam-channel = "0.5"
 ctrlc = { version = "3.2.2", features = ["termination"] }
 humantime = "2.0.1"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc5" }
-miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17-rc5" }
-miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17-rc5" }
-miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc5" }
-miraland-cli-config = { path = "../cli-config", version = "=1.14.17-rc5" }
-miraland-cli-output = { path = "../cli-output", version = "=1.14.17-rc5" }
-miraland-client = { path = "../client", version = "=1.14.17-rc5" }
-miraland-config-program = { path = "../programs/config", version = "=1.14.17-rc5" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17-rc5" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc5" }
-miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc5" }
-miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17-rc5" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc5" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc5" }
-miraland-version = { path = "../version", version = "=1.14.17-rc5" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc5" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc6" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17-rc6" }
+miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17-rc6" }
+miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc6" }
+miraland-cli-config = { path = "../cli-config", version = "=1.14.17-rc6" }
+miraland-cli-output = { path = "../cli-output", version = "=1.14.17-rc6" }
+miraland-client = { path = "../client", version = "=1.14.17-rc6" }
+miraland-config-program = { path = "../programs/config", version = "=1.14.17-rc6" }
+miraland-faucet = { path = "../faucet", version = "=1.14.17-rc6" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
+miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc6" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "=1.14.17-rc6" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc6" }
+miraland-version = { path = "../version", version = "=1.14.17-rc6" }
+miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc6" }
 num-traits = "0.2"
 pretty-hex = "0.3.0"
 reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
@@ -52,8 +52,8 @@ thiserror = "1.0.31"
 tiny-bip39 = "0.8.2"
 
 [dev-dependencies]
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc5" }
-miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc5" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc6" }
+miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc6" }
 tempfile = "3.3.0"
 
 [[bin]]

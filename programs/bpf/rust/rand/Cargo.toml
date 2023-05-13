@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-rand"
-version = "1.14.17-rc5"
+version = "1.14.17-rc6"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -14,7 +14,7 @@ edition = "2021"
 
 [dependencies]
 getrandom = { version = "0.1.14", features = ["dummy"] }
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc5" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc6" }
 rand = "0.7"
 
 [lib]
