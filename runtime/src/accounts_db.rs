@@ -4202,8 +4202,8 @@ impl AccountsDb {
     {
         let key = match &index_key {
             IndexKey::ProgramId(key) => key,
-            IndexKey::SplTokenMint(key) => key,
-            IndexKey::SplTokenOwner(key) => key,
+            IndexKey::SolartiTokenMint(key) => key,
+            IndexKey::SolartiTokenOwner(key) => key,
         };
         if !self.account_indexes.include_key(key) {
             // the requested key was not indexed in the secondary index, so do a normal scan
@@ -10811,7 +10811,7 @@ pub mod tests {
 
         // Secondary index should still find both pubkeys
         let mut found_accounts = HashSet::new();
-        let index_key = IndexKey::SplTokenMint(mint_key);
+        let index_key = IndexKey::SolartiTokenMint(mint_key);
         let bank_id = 0;
         accounts
             .accounts_index
@@ -10897,7 +10897,7 @@ pub mod tests {
             .index_scan_accounts(
                 &Ancestors::default(),
                 bank_id,
-                IndexKey::SplTokenMint(mint_key),
+                IndexKey::SolartiTokenMint(mint_key),
                 |key, _| found_accounts.push(*key),
                 &ScanConfig::default(),
             )

@@ -46,7 +46,7 @@ lazy_static! {
         m.insert(*MEMO_V1_PROGRAM_ID, ParsableProgram::SplMemo);
         m.insert(*MEMO_V3_PROGRAM_ID, ParsableProgram::SplMemo);
         for spl_token_id in spl_token_ids() {
-            m.insert(spl_token_id, ParsableProgram::SplToken);
+            m.insert(spl_token_id, ParsableProgram::SolartiToken);
         }
         m.insert(*BPF_LOADER_PROGRAM_ID, ParsableProgram::BpfLoader);
         m.insert(
@@ -98,7 +98,7 @@ pub enum ParsableProgram {
     AddressLookupTable,
     SplAssociatedTokenAccount,
     SplMemo,
-    SplToken,
+    SolartiToken,
     BpfLoader,
     BpfUpgradeableLoader,
     Stake,
@@ -122,7 +122,9 @@ pub fn parse(
             serde_json::to_value(parse_associated_token(instruction, account_keys)?)?
         }
         ParsableProgram::SplMemo => parse_memo(instruction)?,
-        ParsableProgram::SplToken => serde_json::to_value(parse_token(instruction, account_keys)?)?,
+        ParsableProgram::SolartiToken => {
+            serde_json::to_value(parse_token(instruction, account_keys)?)?
+        }
         ParsableProgram::BpfLoader => {
             serde_json::to_value(parse_bpf_loader(instruction, account_keys)?)?
         }

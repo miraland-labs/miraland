@@ -30,8 +30,9 @@ pub fn parse_associated_token(
     let ata_instruction = if instruction.data.is_empty() {
         AssociatedTokenAccountInstruction::Create
     } else {
-        AssociatedTokenAccountInstruction::try_from_slice(&instruction.data)
-            .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken))?
+        AssociatedTokenAccountInstruction::try_from_slice(&instruction.data).map_err(|_| {
+            ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
+        })?
     };
 
     match ata_instruction {

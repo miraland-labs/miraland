@@ -13,13 +13,13 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
     account_keys: &AccountKeys,
 ) -> Result<ParsedInstructionEnum, ParseInstructionError> {
     match decode_instruction_type(instruction_data)
-        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken))?
+        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken))?
     {
         ConfidentialTransferInstruction::InitializeMint => {
             check_num_token_accounts(account_indexes, 1)?;
             let confidential_transfer_mint: ConfidentialTransferMint =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let confidential_transfer_mint: UiConfidentialTransferMint =
                 confidential_transfer_mint.into();
@@ -37,7 +37,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 3)?;
             let confidential_transfer_mint: ConfidentialTransferMint =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let confidential_transfer_mint: UiConfidentialTransferMint =
                 confidential_transfer_mint.into();
@@ -57,7 +57,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 3)?;
             let configure_account_data: ConfigureAccountInstructionData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let maximum_pending_balance_credit_counter: u64 = configure_account_data
                 .maximum_pending_balance_credit_counter
@@ -98,7 +98,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 3)?;
             let empty_account_data: EmptyAccountInstructionData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let proof_instruction_offset: i8 = empty_account_data.proof_instruction_offset;
             let mut value = json!({
@@ -125,7 +125,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 4)?;
             let deposit_data: DepositInstructionData = *decode_instruction_data(instruction_data)
                 .map_err(|_| {
-                ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
             })?;
             let amount: u64 = deposit_data.amount.into();
             let mut value = json!({
@@ -154,7 +154,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 5)?;
             let withdrawal_data: WithdrawInstructionData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let amount: u64 = withdrawal_data.amount.into();
             let proof_instruction_offset: i8 = withdrawal_data.proof_instruction_offset;
@@ -187,7 +187,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 5)?;
             let transfer_data: TransferInstructionData = *decode_instruction_data(instruction_data)
                 .map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let proof_instruction_offset: i8 = transfer_data.proof_instruction_offset;
             let mut value = json!({
@@ -217,7 +217,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 2)?;
             let apply_pending_balance_data: ApplyPendingBalanceData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let expected_pending_balance_credit_counter: u64 = apply_pending_balance_data
                 .expected_pending_balance_credit_counter
@@ -326,7 +326,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
             check_num_token_accounts(account_indexes, 4)?;
             let withdraw_withheld_data: WithdrawWithheldTokensFromMintData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let proof_instruction_offset: i8 = withdraw_withheld_data.proof_instruction_offset;
             let mut value = json!({
@@ -353,7 +353,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_instruction(
         ConfidentialTransferInstruction::WithdrawWithheldTokensFromAccounts => {
             let withdraw_withheld_data: WithdrawWithheldTokensFromAccountsData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let num_token_accounts = withdraw_withheld_data.num_token_accounts;
             check_num_token_accounts(account_indexes, 4 + num_token_accounts as usize)?;

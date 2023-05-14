@@ -18,7 +18,7 @@ use {
         extension::ExtensionType,
         instruction::{AuthorityType, TokenInstruction},
         solana_program::{
-            instruction::Instruction as SplTokenInstruction, program_option::COption,
+            instruction::Instruction as SolartiTokenInstruction, program_option::COption,
             pubkey::Pubkey,
         },
     },
@@ -30,14 +30,15 @@ pub fn parse_token(
     instruction: &CompiledInstruction,
     account_keys: &AccountKeys,
 ) -> Result<ParsedInstructionEnum, ParseInstructionError> {
-    let token_instruction = TokenInstruction::unpack(&instruction.data)
-        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken))?;
+    let token_instruction = TokenInstruction::unpack(&instruction.data).map_err(|_| {
+        ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
+    })?;
     match instruction.accounts.iter().max() {
         Some(index) if (*index as usize) < account_keys.len() => {}
         _ => {
             // Runtime should prevent this from ever happening
             return Err(ParseInstructionError::InstructionKeyMismatch(
-                ParsableProgram::SplToken,
+                ParsableProgram::SolartiToken,
             ));
         }
     }
@@ -513,12 +514,12 @@ pub fn parse_token(
             )
         }
         TokenInstruction::ConfidentialTransferExtension => Err(
-            ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken),
+            ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken),
         ),
         TokenInstruction::DefaultAccountStateExtension => {
             if instruction.data.len() <= 2 {
                 return Err(ParseInstructionError::InstructionNotParsable(
-                    ParsableProgram::SplToken,
+                    ParsableProgram::SolartiToken,
                 ));
             }
             parse_default_account_state_instruction(
@@ -533,7 +534,7 @@ pub fn parse_token(
         TokenInstruction::MemoTransferExtension => {
             if instruction.data.len() < 2 {
                 return Err(ParseInstructionError::InstructionNotParsable(
-                    ParsableProgram::SplToken,
+                    ParsableProgram::SolartiToken,
                 ));
             }
             parse_memo_transfer_instruction(
@@ -565,7 +566,7 @@ pub fn parse_token(
         TokenInstruction::InterestBearingMintExtension => {
             if instruction.data.len() < 2 {
                 return Err(ParseInstructionError::InstructionNotParsable(
-                    ParsableProgram::SplToken,
+                    ParsableProgram::SolartiToken,
                 ));
             }
             parse_interest_bearing_mint_instruction(
@@ -577,7 +578,7 @@ pub fn parse_token(
         TokenInstruction::CpiGuardExtension => {
             if instruction.data.len() < 2 {
                 return Err(ParseInstructionError::InstructionNotParsable(
-                    ParsableProgram::SplToken,
+                    ParsableProgram::SolartiToken,
                 ));
             }
             parse_cpi_guard_instruction(&instruction.data[1..], &instruction.accounts, account_keys)
@@ -693,10 +694,10 @@ fn parse_signers(
 }
 
 fn check_num_token_accounts(accounts: &[u8], num: usize) -> Result<(), ParseInstructionError> {
-    check_num_accounts(accounts, num, ParsableProgram::SplToken)
+    check_num_accounts(accounts, num, ParsableProgram::SolartiToken)
 }
 
-pub fn spl_token_instruction(instruction: SplTokenInstruction) -> Instruction {
+pub fn spl_token_instruction(instruction: SolartiTokenInstruction) -> Instruction {
     Instruction {
         program_id: pubkey_from_spl_token(&instruction.program_id),
         accounts: instruction
@@ -727,19 +728,19 @@ mod test {
         spl_token_2022::{
             instruction::*,
             solana_program::{
-                instruction::CompiledInstruction as SplTokenCompiledInstruction, message::Message,
-                pubkey::Pubkey as SplTokenPubkey,
+                instruction::CompiledInstruction as SolartiTokenCompiledInstruction,
+                message::Message, pubkey::Pubkey as SolartiTokenPubkey,
             },
         },
         std::str::FromStr,
     };
 
-    pub(super) fn convert_pubkey(pubkey: Pubkey) -> SplTokenPubkey {
-        SplTokenPubkey::from_str(&pubkey.to_string()).unwrap()
+    pub(super) fn convert_pubkey(pubkey: Pubkey) -> SolartiTokenPubkey {
+        SolartiTokenPubkey::from_str(&pubkey.to_string()).unwrap()
     }
 
     pub(super) fn convert_compiled_instruction(
-        instruction: &SplTokenCompiledInstruction,
+        instruction: &SolartiTokenCompiledInstruction,
     ) -> CompiledInstruction {
         CompiledInstruction {
             program_id_index: instruction.program_id_index,
@@ -756,7 +757,7 @@ mod test {
             .collect()
     }
 
-    fn test_parse_token(program_id: &SplTokenPubkey) {
+    fn test_parse_token(program_id: &SolartiTokenPubkey) {
         let mint_pubkey = Pubkey::new_unique();
         let mint_authority = Pubkey::new_unique();
         let freeze_authority = Pubkey::new_unique();
@@ -1748,7 +1749,7 @@ mod test {
         );
     }
 
-    fn test_token_ix_not_enough_keys(program_id: &SplTokenPubkey) {
+    fn test_token_ix_not_enough_keys(program_id: &SolartiTokenPubkey) {
         let mut keys: Vec<Pubkey> = vec![];
         for _ in 0..10 {
             keys.push(solana_sdk::pubkey::new_rand());

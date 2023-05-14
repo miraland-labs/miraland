@@ -13,7 +13,7 @@ const MLN_SYMBOL: &str = "𝇊";
 #[derive(PartialEq, Eq)]
 pub enum TokenType {
     Mln,
-    SplToken,
+    SolartiToken,
 }
 
 pub struct Token {
@@ -29,7 +29,7 @@ impl Token {
                 let amount = lamports_to_mln(self.amount);
                 write!(f, "{}{}", MLN_SYMBOL, amount)
             }
-            TokenType::SplToken => {
+            TokenType::SolartiToken => {
                 let amount = real_number_string_trimmed(self.amount, self.decimals);
                 write!(f, "{} tokens", amount)
             }
@@ -48,7 +48,7 @@ impl Token {
         Self {
             amount,
             decimals,
-            token_type: TokenType::SplToken,
+            token_type: TokenType::SolartiToken,
         }
     }
 }

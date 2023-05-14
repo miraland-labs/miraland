@@ -36,8 +36,8 @@ lazy_static! {
         );
         m.insert(*CONFIG_PROGRAM_ID, ParsableAccount::Config);
         m.insert(*SYSTEM_PROGRAM_ID, ParsableAccount::Nonce);
-        m.insert(spl_token_id(), ParsableAccount::SplToken);
-        m.insert(spl_token_2022_id(), ParsableAccount::SplToken2022);
+        m.insert(spl_token_id(), ParsableAccount::SolartiToken);
+        m.insert(spl_token_2022_id(), ParsableAccount::SolartiToken2022);
         m.insert(*STAKE_PROGRAM_ID, ParsableAccount::Stake);
         m.insert(*SYSVAR_PROGRAM_ID, ParsableAccount::Sysvar);
         m.insert(*VOTE_PROGRAM_ID, ParsableAccount::Vote);
@@ -78,8 +78,8 @@ pub enum ParsableAccount {
     BpfUpgradeableLoader,
     Config,
     Nonce,
-    SplToken,
-    SplToken2022,
+    SolartiToken,
+    SolartiToken2022,
     Stake,
     Sysvar,
     Vote,
@@ -109,7 +109,7 @@ pub fn parse_account_data(
         }
         ParsableAccount::Config => serde_json::to_value(parse_config(data, pubkey)?)?,
         ParsableAccount::Nonce => serde_json::to_value(parse_nonce(data)?)?,
-        ParsableAccount::SplToken | ParsableAccount::SplToken2022 => {
+        ParsableAccount::SolartiToken | ParsableAccount::SolartiToken2022 => {
             serde_json::to_value(parse_token(data, additional_data.spl_token_decimals)?)?
         }
         ParsableAccount::Stake => serde_json::to_value(parse_stake(data)?)?,

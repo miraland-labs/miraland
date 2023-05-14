@@ -2060,7 +2060,7 @@ impl JsonRpcRequestProcessor {
         if self
             .config
             .account_indexes
-            .contains(&AccountIndex::SplTokenOwner)
+            .contains(&AccountIndex::SolartiTokenOwner)
         {
             if !self.config.account_indexes.include_key(owner_key) {
                 return Err(RpcCustomError::KeyExcludedFromSecondaryIndex {
@@ -2069,7 +2069,7 @@ impl JsonRpcRequestProcessor {
             }
             Ok(bank
                 .get_filtered_indexed_accounts(
-                    &IndexKey::SplTokenOwner(*owner_key),
+                    &IndexKey::SolartiTokenOwner(*owner_key),
                     |account| {
                         account.owner() == program_id
                             && filters
@@ -2110,7 +2110,7 @@ impl JsonRpcRequestProcessor {
         if self
             .config
             .account_indexes
-            .contains(&AccountIndex::SplTokenMint)
+            .contains(&AccountIndex::SolartiTokenMint)
         {
             if !self.config.account_indexes.include_key(mint_key) {
                 return Err(RpcCustomError::KeyExcludedFromSecondaryIndex {
@@ -2119,7 +2119,7 @@ impl JsonRpcRequestProcessor {
             }
             Ok(bank
                 .get_filtered_indexed_accounts(
-                    &IndexKey::SplTokenMint(*mint_key),
+                    &IndexKey::SolartiTokenMint(*mint_key),
                     |account| {
                         account.owner() == program_id
                             && filters
@@ -4686,7 +4686,7 @@ pub mod tests {
                 mint_close_authority::MintCloseAuthority, ExtensionType, StateWithExtensionsMut,
             },
             pod::OptionalNonZeroPubkey,
-            solana_program::{program_option::COption, pubkey::Pubkey as SplTokenPubkey},
+            solana_program::{program_option::COption, pubkey::Pubkey as SolartiTokenPubkey},
             state::{AccountState as TokenAccountState, Mint},
         },
         std::{borrow::Cow, collections::HashMap},
@@ -7366,12 +7366,12 @@ pub mod tests {
             let rpc = RpcHandler::start();
             let bank = rpc.working_bank();
             let RpcHandler { io, meta, .. } = rpc;
-            let mint = SplTokenPubkey::new_from_array([2; 32]);
-            let owner = SplTokenPubkey::new_from_array([3; 32]);
-            let delegate = SplTokenPubkey::new_from_array([4; 32]);
+            let mint = SolartiTokenPubkey::new_from_array([2; 32]);
+            let owner = SolartiTokenPubkey::new_from_array([3; 32]);
+            let delegate = SolartiTokenPubkey::new_from_array([4; 32]);
             let token_account_pubkey = solana_sdk::pubkey::new_rand();
             let token_with_different_mint_pubkey = solana_sdk::pubkey::new_rand();
-            let new_mint = SplTokenPubkey::new_from_array([5; 32]);
+            let new_mint = SolartiTokenPubkey::new_from_array([5; 32]);
             if program_id == inline_spl_token_2022::id() {
                 // Add the token account
                 let account_base = TokenAccount {
@@ -7868,9 +7868,9 @@ pub mod tests {
             let bank = rpc.working_bank();
             let RpcHandler { io, meta, .. } = rpc;
 
-            let mint = SplTokenPubkey::new_from_array([2; 32]);
-            let owner = SplTokenPubkey::new_from_array([3; 32]);
-            let delegate = SplTokenPubkey::new_from_array([4; 32]);
+            let mint = SolartiTokenPubkey::new_from_array([2; 32]);
+            let owner = SolartiTokenPubkey::new_from_array([3; 32]);
+            let delegate = SolartiTokenPubkey::new_from_array([4; 32]);
             let token_account_pubkey = solana_sdk::pubkey::new_rand();
             let (program_name, account_size, mint_size) = if program_id
                 == inline_spl_token_2022::id()

@@ -3171,8 +3171,8 @@ fn process_account_indexes(matches: &ArgMatches) -> AccountSecondaryIndexes {
         .unwrap_or_default()
         .map(|value| match value {
             "program-id" => AccountIndex::ProgramId,
-            "solarti-token-mint" => AccountIndex::SplTokenMint,
-            "solarti-token-owner" => AccountIndex::SplTokenOwner,
+            "solarti-token-mint" => AccountIndex::SolartiTokenMint,
+            "solarti-token-owner" => AccountIndex::SolartiTokenOwner,
             _ => unreachable!(),
         })
         .collect();

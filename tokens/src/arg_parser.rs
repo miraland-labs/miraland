@@ -1,6 +1,6 @@
 use {
     crate::args::{
-        Args, BalancesArgs, Command, DistributeTokensArgs, SenderStakeArgs, SplTokenArgs,
+        Args, BalancesArgs, Command, DistributeTokensArgs, SenderStakeArgs, SolartiTokenArgs,
         StakeArgs, TransactionLogArgs,
     },
     clap::{
@@ -610,9 +610,9 @@ fn parse_distribute_spl_tokens_args(
         sender_keypair: token_owner,
         fee_payer,
         stake_args: None,
-        spl_token_args: Some(SplTokenArgs {
+        spl_token_args: Some(SolartiTokenArgs {
             token_account_address,
-            ..SplTokenArgs::default()
+            ..SolartiTokenArgs::default()
         }),
         transfer_amount: value_of(matches, "transfer_amount"),
     })
@@ -621,9 +621,11 @@ fn parse_distribute_spl_tokens_args(
 fn parse_balances_args(matches: &ArgMatches<'_>) -> Result<BalancesArgs, Box<dyn Error>> {
     let mut wallet_manager = maybe_wallet_manager()?;
     let spl_token_args =
-        pubkey_of_signer(matches, "mint_address", &mut wallet_manager)?.map(|mint| SplTokenArgs {
-            mint,
-            ..SplTokenArgs::default()
+        pubkey_of_signer(matches, "mint_address", &mut wallet_manager)?.map(|mint| {
+            SolartiTokenArgs {
+                mint,
+                ..SolartiTokenArgs::default()
+            }
         });
     Ok(BalancesArgs {
         input_csv: value_t_or_exit!(matches, "input_csv", String),

@@ -1,6 +1,6 @@
 use {
     crate::{
-        args::{DistributeTokensArgs, SplTokenArgs},
+        args::{DistributeTokensArgs, SolartiTokenArgs},
         commands::{get_fees_for_messages, Allocation, Error, FundingSource},
     },
     console::style,
@@ -15,24 +15,30 @@ use {
     },
     spl_token::{
         solana_program::program_pack::Pack,
-        state::{Account as SplTokenAccount, Mint},
+        state::{Account as SolartiTokenAccount, Mint},
     },
 };
 
-pub fn update_token_args(client: &RpcClient, args: &mut Option<SplTokenArgs>) -> Result<(), Error> {
+pub fn update_token_args(
+    client: &RpcClient,
+    args: &mut Option<SolartiTokenArgs>,
+) -> Result<(), Error> {
     if let Some(spl_token_args) = args {
         let sender_account = client
             .get_account(&spl_token_args.token_account_address)
             .unwrap_or_default();
         let mint_address =
-            pubkey_from_spl_token(&SplTokenAccount::unpack(&sender_account.data)?.mint);
+            pubkey_from_spl_token(&SolartiTokenAccount::unpack(&sender_account.data)?.mint);
         spl_token_args.mint = mint_address;
         update_decimals(client, args)?;
     }
     Ok(())
 }
 
-pub fn update_decimals(client: &RpcClient, args: &mut Option<SplTokenArgs>) -> Result<(), Error> {
+pub fn update_decimals(
+    client: &RpcClient,
+    args: &mut Option<SolartiTokenArgs>,
+) -> Result<(), Error> {
     if let Some(spl_token_args) = args {
         let mint_account = client.get_account(&spl_token_args.mint).unwrap_or_default();
         let mint = Mint::unpack(&mint_account.data)?;
@@ -99,7 +105,7 @@ pub fn check_spl_token_balances(
     let fees = get_fees_for_messages(messages, client)?;
 
     let token_account_rent_exempt_balance =
-        client.get_minimum_balance_for_rent_exemption(SplTokenAccount::LEN)?;
+        client.get_minimum_balance_for_rent_exemption(SolartiTokenAccount::LEN)?;
     let account_creation_amount = created_accounts * token_account_rent_exempt_balance;
     let fee_payer_balance = client.get_balance(&args.fee_payer.pubkey())?;
     if fee_payer_balance < fees + account_creation_amount {
@@ -111,10 +117,10 @@ pub fn check_spl_token_balances(
     let source_token_account = client
         .get_account(&spl_token_args.token_account_address)
         .unwrap_or_default();
-    let source_token = SplTokenAccount::unpack(&source_token_account.data)?;
+    let source_token = SolartiTokenAccount::unpack(&source_token_account.data)?;
     if source_token.amount < allocation_amount {
         return Err(Error::InsufficientFunds(
-            vec![FundingSource::SplTokenAccount].into(),
+            vec![FundingSource::SolartiTokenAccount].into(),
             real_number_string_trimmed(allocation_amount, spl_token_args.decimals),
         ));
     }
@@ -124,7 +130,7 @@ pub fn check_spl_token_balances(
 pub fn print_token_balances(
     client: &RpcClient,
     allocation: &Allocation,
-    spl_token_args: &SplTokenArgs,
+    spl_token_args: &SolartiTokenArgs,
 ) -> Result<(), Error> {
     let address = allocation.recipient.parse().unwrap();
     let expected = allocation.amount;
@@ -136,7 +142,7 @@ pub fn print_token_balances(
         .get_account(&pubkey_from_spl_token(&associated_token_address))
         .unwrap_or_default();
     let (actual, difference) = if let Ok(recipient_token) =
-        SplTokenAccount::unpack(&recipient_account.data)
+        SolartiTokenAccount::unpack(&recipient_account.data)
     {
         let actual_ui_amount = real_number_string(recipient_token.amount, spl_token_args.decimals);
         let delta_string =
