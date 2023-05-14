@@ -140,7 +140,11 @@ fn do_bench_transactions(
         &Pubkey::from(BUILTIN_PROGRAM_ID),
         process_instruction,
     );
-    bank.add_builtin_account("solana_noop_program", &Pubkey::from(NOOP_PROGRAM_ID), false);
+    bank.add_builtin_account(
+        "miraland_noop_program",
+        &Pubkey::from(NOOP_PROGRAM_ID),
+        false,
+    );
     let bank = Arc::new(bank);
     let bank_client = BankClient::new_shared(&bank);
     let transactions = create_transactions(&bank_client, &mint_keypair);

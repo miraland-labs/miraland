@@ -9,7 +9,7 @@ pub(crate) mod new_token_program {
 }
 
 /*
-    /// The SPL token definition -- we care about only the mint and owner fields for now.
+    /// The Solarti token definition -- we care about only the mint and owner fields for now.
     /// at offset 0 and 32 respectively.
     spl_token::state::Account {
         mint: Pubkey,

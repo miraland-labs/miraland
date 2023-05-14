@@ -276,7 +276,7 @@ where
         )
         .subcommand(
             SubCommand::with_name("distribute-solarti-tokens")
-                .about("Distribute SPL tokens")
+                .about("Distribute Solarti tokens")
                 .arg(
                     Arg::with_name("db_path")
                         .long("db-path")
@@ -308,7 +308,7 @@ where
                         .takes_value(true)
                         .value_name("AMOUNT")
                         .validator(is_amount)
-                        .help("The amount of SPL tokens to send to each recipient"),
+                        .help("The amount of Solarti tokens to send to each recipient"),
                 )
                 .arg(
                     Arg::with_name("output_path")
@@ -325,7 +325,7 @@ where
                         .takes_value(true)
                         .value_name("TOKEN_ACCOUNT_ADDRESS")
                         .validator(is_valid_pubkey)
-                        .help("SPL token account to send from"),
+                        .help("Solarti token account to send from"),
                 )
                 .arg(
                     Arg::with_name("token_owner")
@@ -334,7 +334,7 @@ where
                         .takes_value(true)
                         .value_name("TOKEN_ACCOUNT_OWNER_KEYPAIR")
                         .validator(is_valid_signer)
-                        .help("SPL token account owner"),
+                        .help("Solarti token account owner"),
                 )
                 .arg(
                     Arg::with_name("fee_payer")
@@ -360,7 +360,7 @@ where
         )
         .subcommand(
             SubCommand::with_name("solarti-token-balances")
-                .about("Balance of SPL token associated accounts")
+                .about("Balance of Solarti token associated accounts")
                 .arg(
                     Arg::with_name("input_csv")
                         .long("input-csv")
@@ -376,7 +376,7 @@ where
                         .takes_value(true)
                         .value_name("MINT_ADDRESS")
                         .validator(is_valid_pubkey)
-                        .help("SPL token mint of distribution"),
+                        .help("Solarti token mint of distribution"),
                 ),
         )
         .subcommand(

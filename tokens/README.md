@@ -126,7 +126,7 @@ operations such as delegating stake. The rest of the allocation is put in
 a stake account. The new stake account address is output in the transaction
 log.
 
-## Distribute SPL tokens
+## Distribute Solarti tokens
 
 Distributing Solarti Tokens works very similarly to distributing MLN, but requires
 the `--owner` parameter to sign transactions. Each recipient account must be an
@@ -134,7 +134,7 @@ system account that will own an Associated Token Account for the Solarti Token m
 The Associated Token Account will be created, and funded by the fee_payer, if it
 does not already exist.
 
-Send SPL tokens to the recipients in `<RECIPIENTS_CSV>`.
+Send Solarti tokens to the recipients in `<RECIPIENTS_CSV>`.
 *NOTE:* the CSV expects solarti-token amounts in raw format (no decimals)
 
 Example recipients.csv:

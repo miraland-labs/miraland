@@ -286,7 +286,7 @@ impl Rocks {
                 write_batch_perf_status: PerfSamplingStatus::default(),
             },
             AccessType::Secondary => {
-                let secondary_path = path.join("solana-secondary");
+                let secondary_path = path.join("miraland-secondary");
 
                 info!(
                     "Opening Rocks with secondary (read only) access at: {:?}",

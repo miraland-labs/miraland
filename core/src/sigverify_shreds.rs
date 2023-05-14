@@ -40,7 +40,7 @@ pub(crate) fn spawn_shred_sigverify(
     let mut stats = ShredSigVerifyStats::new(Instant::now());
     let thread_pool = ThreadPoolBuilder::new()
         .num_threads(get_thread_count())
-        .thread_name(|i| format!("solSvrfyShred{i:02}"))
+        .thread_name(|i| format!("mlnSvrfyShred{i:02}"))
         .build()
         .unwrap();
     let run_shred_sigverify = move || {

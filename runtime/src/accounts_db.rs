@@ -1718,7 +1718,7 @@ pub fn make_min_priority_thread_pool() -> ThreadPool {
     // Use lower thread count to reduce priority.
     let num_threads = quarter_thread_count();
     rayon::ThreadPoolBuilder::new()
-        .thread_name(|i| format!("solAccountsLo{:02}", i))
+        .thread_name(|i| format!("mlnAccountsLo{:02}", i))
         .num_threads(num_threads)
         .build()
         .unwrap()
@@ -1946,7 +1946,7 @@ impl AccountsDb {
             file_size: DEFAULT_FILE_SIZE,
             thread_pool: rayon::ThreadPoolBuilder::new()
                 .num_threads(num_threads)
-                .thread_name(|i| format!("solAccounts{:02}", i))
+                .thread_name(|i| format!("mlnAccounts{:02}", i))
                 .stack_size(ACCOUNTS_STACK_SIZE)
                 .build()
                 .unwrap(),

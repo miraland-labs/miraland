@@ -374,7 +374,7 @@ impl WindowService {
         duplicate_slots_sender: DuplicateSlotSender,
     ) -> JoinHandle<()> {
         let handle_error = || {
-            inc_new_counter_error!("solana-check-duplicate-error", 1, 1);
+            inc_new_counter_error!("miraland-check-duplicate-error", 1, 1);
         };
         Builder::new()
             .name("mlnWinCheckDup".to_string())
@@ -406,11 +406,11 @@ impl WindowService {
         outstanding_requests: Arc<RwLock<OutstandingShredRepairs>>,
     ) -> JoinHandle<()> {
         let handle_error = || {
-            inc_new_counter_error!("solana-window-insert-error", 1, 1);
+            inc_new_counter_error!("miraland-window-insert-error", 1, 1);
         };
         let thread_pool = rayon::ThreadPoolBuilder::new()
             .num_threads(get_thread_count().min(8))
-            .thread_name(|i| format!("solWinInsert{:02}", i))
+            .thread_name(|i| format!("mlnWinInsert{:02}", i))
             .build()
             .unwrap();
         let reed_solomon_cache = ReedSolomonCache::default();

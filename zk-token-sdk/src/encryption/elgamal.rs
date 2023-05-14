@@ -159,7 +159,7 @@ impl ElGamalKeypair {
     /// Solana keypair and then derive the ElGamal keypair on-the-fly whenever
     /// encryption/decryption is needed.
     ///
-    /// For the spl token-2022 confidential extension application, the ElGamal encryption public
+    /// For the solarti token-2022 confidential extension application, the ElGamal encryption public
     /// key is specified in a token account address. A natural way to derive an ElGamal keypair is
     /// then to define it from the hash of a Solana keypair and a Solana address. However, for
     /// general hardware wallets, the signing key is not exposed in the API. Therefore, this

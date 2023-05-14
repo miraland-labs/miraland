@@ -95,7 +95,7 @@ impl AeKey {
     }
 }
 
-/// For the purpose of encrypting balances for the spl token accounts, the nonce and ciphertext
+/// For the purpose of encrypting balances for the solarti token accounts, the nonce and ciphertext
 /// sizes should always be fixed.
 pub type Nonce = [u8; 12];
 pub type Ciphertext = [u8; 24];

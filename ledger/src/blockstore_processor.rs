@@ -78,7 +78,7 @@ struct ReplayEntry {
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(get_max_thread_count())
-        .thread_name(|ix| format!("solBstoreProc{:02}", ix))
+        .thread_name(|ix| format!("mlnBstoreProc{:02}", ix))
         .build()
         .unwrap();
 }

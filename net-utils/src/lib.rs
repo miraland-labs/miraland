@@ -145,7 +145,7 @@ fn do_verify_reachable_ports(
         let (sender, receiver) = unbounded();
         let listening_addr = tcp_listener.local_addr().unwrap();
         let thread_handle = std::thread::Builder::new()
-            .name(format!("solVrfyTcp{:05}", port))
+            .name(format!("mlnVrfyTcp{:05}", port))
             .spawn(move || {
                 debug!("Waiting for incoming connection on tcp/{}", port);
                 match tcp_listener.incoming().next() {
@@ -227,7 +227,7 @@ fn do_verify_reachable_ports(
                     let reachable_ports = reachable_ports.clone();
 
                     std::thread::Builder::new()
-                        .name(format!("solVrfyUdp{:05}", port))
+                        .name(format!("mlnVrfyUdp{:05}", port))
                         .spawn(move || {
                             let start = Instant::now();
 

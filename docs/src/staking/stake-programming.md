@@ -17,10 +17,10 @@ stake to "non-delinquent" validators that meet specified performance requirement
 
 This on-chain program pools together MLN to be staked by a manager, allowing MLN
 holders to stake and earn rewards without managing stakes.
-Users deposit MLN in exchange for SPL tokens (staking derivatives) that represent their ownership in the stake pool. The pool
+Users deposit MLN in exchange for Solarti tokens (staking derivatives) that represent their ownership in the stake pool. The pool
 manager stakes deposited MLN according to their strategy, perhaps using a variant
 of an auto-delegation bot as described above. As stakes earn rewards, the pool and pool tokens
-grow proportionally in value. Finally, pool token holders can send SPL tokens
+grow proportionally in value. Finally, pool token holders can send Solarti tokens
 back to the stake pool to redeem MLN, thereby participating in decentralization with much
 less work required. More information can be found at the
 [SPL stake pool documentation](https://spl.solana.com/stake-pool).

@@ -1732,7 +1732,7 @@ impl ClusterInfo {
     ) -> JoinHandle<()> {
         let thread_pool = ThreadPoolBuilder::new()
             .num_threads(std::cmp::min(get_thread_count(), 8))
-            .thread_name(|i| format!("solRunGossip{:02}", i))
+            .thread_name(|i| format!("mlnRunGossip{:02}", i))
             .build()
             .unwrap();
         Builder::new()
@@ -2625,7 +2625,7 @@ impl ClusterInfo {
     ) -> JoinHandle<()> {
         let thread_pool = ThreadPoolBuilder::new()
             .num_threads(get_thread_count().min(8))
-            .thread_name(|i| format!("solGossipCons{:02}", i))
+            .thread_name(|i| format!("mlnGossipCons{:02}", i))
             .build()
             .unwrap();
         let run_consume = move || {
@@ -2657,7 +2657,7 @@ impl ClusterInfo {
         let recycler = PacketBatchRecycler::default();
         let thread_pool = ThreadPoolBuilder::new()
             .num_threads(get_thread_count().min(8))
-            .thread_name(|i| format!("solGossipWork{:02}", i))
+            .thread_name(|i| format!("mlnGossipWork{:02}", i))
             .build()
             .unwrap();
         Builder::new()

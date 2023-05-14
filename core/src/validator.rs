@@ -442,7 +442,7 @@ impl Validator {
         }
 
         if rayon::ThreadPoolBuilder::new()
-            .thread_name(|ix| format!("solRayonGlob{:02}", ix))
+            .thread_name(|ix| format!("mlnRayonGlob{:02}", ix))
             .build_global()
             .is_err()
         {

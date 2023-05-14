@@ -181,7 +181,7 @@ CREATE TABLE block (
     updated_on TIMESTAMP NOT NULL
 );
 
--- The table storing spl token owner to account indexes
+-- The table storing solarti token owner to account indexes
 CREATE TABLE spl_token_owner_index (
     owner_key BYTEA NOT NULL,
     account_key BYTEA NOT NULL,

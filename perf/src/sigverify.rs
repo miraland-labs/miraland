@@ -46,7 +46,7 @@ pub const VERIFY_MIN_PACKETS_PER_THREAD: usize = 128;
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(get_thread_count())
-        .thread_name(|ix| format!("solSigVerify{:02}", ix))
+        .thread_name(|ix| format!("mlnSigVerify{:02}", ix))
         .build()
         .unwrap();
 }

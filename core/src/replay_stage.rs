@@ -101,7 +101,7 @@ const MAX_REPAIR_RETRY_LOOP_ATTEMPTS: usize = 10;
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(MAX_CONCURRENT_FORKS_TO_REPLAY)
-        .thread_name(|ix| format!("solReplay{:02}", ix))
+        .thread_name(|ix| format!("mlnReplay{:02}", ix))
         .build()
         .unwrap();
 }
