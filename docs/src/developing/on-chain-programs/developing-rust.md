@@ -68,7 +68,7 @@ machine which can be used for unit testing:
 $ cargo build
 ```
 
-To build a specific program, such as SPL Token, for the Solana BPF target which
+To build a specific program, such as Solarti Token, for the Solana BPF target which
 can be deployed to the cluster:
 
 ```bash

@@ -51,7 +51,7 @@ export type NFTData = {
 };
 
 export type TokenProgramData = {
-  program: "spl-token";
+  program: "solarti-token";
   parsed: TokenAccount;
   nftData?: NFTData;
 };
@@ -238,7 +238,7 @@ async function fetchAccountInfo(
               };
               break;
 
-            case "spl-token":
+            case "solarti-token":
               const parsed = create(info, TokenAccount);
               let nftData;
 
@@ -398,7 +398,7 @@ export function useMintAccountInfo(
     try {
       const data = accountInfo?.data?.details?.data;
       if (!data) return;
-      if (data.program !== "spl-token" || data.parsed.type !== "mint") {
+      if (data.program !== "solarti-token" || data.parsed.type !== "mint") {
         return;
       }
 
@@ -418,7 +418,7 @@ export function useTokenAccountInfo(
   try {
     const data = accountInfo?.data?.details?.data;
     if (!data) return;
-    if (data.program !== "spl-token" || data.parsed.type !== "account") {
+    if (data.program !== "solarti-token" || data.parsed.type !== "account") {
       return;
     }
 

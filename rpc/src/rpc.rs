@@ -2036,7 +2036,7 @@ impl JsonRpcRequestProcessor {
         }
     }
 
-    /// Get an iterator of spl-token accounts by owner address
+    /// Get an iterator of solarti-token accounts by owner address
     fn get_filtered_spl_token_accounts_by_owner(
         &self,
         bank: &Arc<Bank>,
@@ -2087,7 +2087,7 @@ impl JsonRpcRequestProcessor {
         }
     }
 
-    /// Get an iterator of spl-token accounts by mint address
+    /// Get an iterator of solarti-token accounts by mint address
     fn get_filtered_spl_token_accounts_by_mint(
         &self,
         bank: &Arc<Bank>,
@@ -2359,7 +2359,7 @@ fn encode_account<T: ReadableAccount>(
     }
 }
 
-/// Analyze custom filters to determine if the result will be a subset of spl-token accounts by
+/// Analyze custom filters to determine if the result will be a subset of solarti-token accounts by
 /// owner.
 /// NOTE: `optimize_filters()` should almost always be called before using this method because of
 /// the strict match on `MemcmpEncodedBytes::Bytes`.
@@ -2415,7 +2415,7 @@ fn get_spl_token_owner_filter(program_id: &Pubkey, filters: &[RpcFilterType]) ->
     }
 }
 
-/// Analyze custom filters to determine if the result will be a subset of spl-token accounts by
+/// Analyze custom filters to determine if the result will be a subset of solarti-token accounts by
 /// mint.
 /// NOTE: `optimize_filters()` should almost always be called before using this method because of
 /// the strict match on `MemcmpEncodedBytes::Bytes`.
@@ -3041,7 +3041,7 @@ pub mod rpc_accounts {
             config: Option<RpcEpochConfig>,
         ) -> Result<RpcStakeActivation>;
 
-        // SPL Token-specific RPC endpoints
+        // Solarti Token-specific RPC endpoints
         // See https://github.com/solana-labs/miraland-program-library/releases/tag/token-v2.0.0 for
         // program details
 
@@ -7940,7 +7940,7 @@ pub mod tests {
                     ..Account::default()
                 });
                 bank.store_account(&Pubkey::from_str(&mint.to_string()).unwrap(), &mint_account);
-                ("spl-token-2022", account_size, mint_size)
+                ("solarti-token-2022", account_size, mint_size)
             } else {
                 let account_size = TokenAccount::get_packed_len();
                 let mut account_data = vec![0; account_size];
@@ -7981,7 +7981,7 @@ pub mod tests {
                     ..Account::default()
                 });
                 bank.store_account(&Pubkey::from_str(&mint.to_string()).unwrap(), &mint_account);
-                ("spl-token", account_size, mint_size)
+                ("solarti-token", account_size, mint_size)
             };
 
             let req = format!(

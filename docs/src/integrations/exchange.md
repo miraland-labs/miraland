@@ -732,31 +732,31 @@ curl localhost:8899 -X POST -H "Content-Type: application/json" -d '{
 {"jsonrpc":"2.0","result":890880,"id":1}
 ```
 
-## Supporting the SPL Token Standard
+## Supporting the Solarti Token Standard
 
-[SPL Token](https://spl.solana.com/token) is the standard for wrapped/synthetic
+[Solarti Token](https://spl.solana.com/token) is the standard for wrapped/synthetic
 token creation and exchange on the Solana blockchain.
 
-The SPL Token workflow is similar to that of native MLN tokens, but there are a
+The Solarti Token workflow is similar to that of native MLN tokens, but there are a
 few differences which will be discussed in this section.
 
 ### Token Mints
 
-Each _type_ of SPL Token is declared by creating a _mint_ account. This account
+Each _type_ of Solarti Token is declared by creating a _mint_ account. This account
 stores metadata describing token features like the supply, number of decimals, and
-various authorities with control over the mint. Each SPL Token account references
-its associated mint and may only interact with SPL Tokens of that type.
+various authorities with control over the mint. Each Solarti Token account references
+its associated mint and may only interact with Solarti Tokens of that type.
 
-### Installing the `spl-token` CLI Tool
+### Installing the `solarti-token` CLI Tool
 
-SPL Token accounts are queried and modified using the `spl-token` command line
+Solarti Token accounts are queried and modified using the `solarti-token` command line
 utility. The examples provided in this section depend upon having it installed
 on the local system.
 
-`spl-token` is distributed from Rust [crates.io](https://crates.io/crates/spl-token)
+`solarti-token` is distributed from Rust [crates.io](https://crates.io/crates/solarti-token)
 via the Rust `cargo` command line utility. The latest version of `cargo` can be
 installed using a handy one-liner for your platform at [rustup.rs](https://rustup.rs).
-Once `cargo` is installed, `spl-token` can be obtained with the following command:
+Once `cargo` is installed, `solarti-token` can be obtained with the following command:
 
 ```
 cargo install solarti-token-cli
@@ -765,7 +765,7 @@ cargo install solarti-token-cli
 You can then check the installed version to verify
 
 ```
-spl-token --version
+solarti-token --version
 ```
 
 Which should result in something like
@@ -776,42 +776,42 @@ solarti-token-cli 2.0.1
 
 ### Account Creation
 
-SPL Token accounts carry additional requirements that native System Program
+Solarti Token accounts carry additional requirements that native System Program
 accounts do not:
 
-1. SPL Token accounts must be created before an amount of tokens can be
+1. Solarti Token accounts must be created before an amount of tokens can be
    deposited. Token accounts can be created explicitly with the
-   `spl-token create-account` command, or implicitly by the
-   `spl-token transfer --fund-recipient ...` command.
-1. SPL Token accounts must remain [rent-exempt](developing/programming-model/accounts.md#rent-exemption)
+   `solarti-token create-account` command, or implicitly by the
+   `solarti-token transfer --fund-recipient ...` command.
+1. Solarti Token accounts must remain [rent-exempt](developing/programming-model/accounts.md#rent-exemption)
    for the duration of their existence and therefore require a small amount of
-   native MLN tokens be deposited at account creation. For SPL Token v2 accounts,
+   native MLN tokens be deposited at account creation. For Solarti Token v2 accounts,
    this amount is 0.00203928 MLN (2,039,280 lamports).
 
 #### Command Line
 
-To create an SPL Token account with the following properties:
+To create an Solarti Token account with the following properties:
 
 1. Associated with the given mint
 1. Owned by the funding account's keypair
 
 ```
-spl-token create-account <TOKEN_MINT_ADDRESS>
+solarti-token create-account <TOKEN_MINT_ADDRESS>
 ```
 
 #### Example
 
 ```
-$ spl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir
+$ solarti-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir
 Creating account 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5XxyJwS73Vi5WsZL88D7
 ```
 
-Or to create an SPL Token account with a specific keypair:
+Or to create an Solarti Token account with a specific keypair:
 
 ```
 $ miraland-keygen new -o token-account.json
-$ spl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir token-account.json
+$ solarti-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir token-account.json
 Creating account 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5XxyJwS73Vi5WsZL88D7
 ```
@@ -821,7 +821,7 @@ Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5
 #### Command Line
 
 ```
-spl-token balance <TOKEN_ACCOUNT_ADDRESS>
+solarti-token balance <TOKEN_ACCOUNT_ADDRESS>
 ```
 
 #### Example
@@ -844,13 +844,13 @@ provided.
 #### Command Line
 
 ```
-spl-token transfer <SENDER_ACCOUNT_ADDRESS> <AMOUNT> <RECIPIENT_WALLET_ADDRESS> --fund-recipient
+solarti-token transfer <SENDER_ACCOUNT_ADDRESS> <AMOUNT> <RECIPIENT_WALLET_ADDRESS> --fund-recipient
 ```
 
 #### Example
 
 ```
-$ spl-token transfer 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN 1 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+$ solarti-token transfer 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN 1 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 Transfer 1 tokens
   Sender: 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN
   Recipient: 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
@@ -893,26 +893,26 @@ From the withdrawal address, the [Associated Token Account](https://spl.solana.c
 (ATA) for the correct mint is derived and the transfer issued to that account via a
 [TransferChecked](https://github.com/solana-labs/miraland-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L268)
 instruction. Note that it is possible that the ATA address does not yet exist, at which point the
-exchange should fund the account on behalf of the user. For SPL Token v2
+exchange should fund the account on behalf of the user. For Solarti Token v2
 accounts, funding the withdrawal account will require 0.00203928 MLN (2,039,280
 lamports).
 
-Template `spl-token transfer` command for a withdrawal:
+Template `solarti-token transfer` command for a withdrawal:
 
 ```
-$ spl-token transfer --fund-recipient <exchange token account> <withdrawal amount> <withdrawal address>
+$ solarti-token transfer --fund-recipient <exchange token account> <withdrawal amount> <withdrawal address>
 ```
 
 ### Other Considerations
 
 #### Freeze Authority
 
-For regulatory compliance reasons, an SPL Token issuing entity may optionally
+For regulatory compliance reasons, an Solarti Token issuing entity may optionally
 choose to hold "Freeze Authority" over all accounts created in association with
 its mint. This allows them to [freeze](https://spl.solana.com/token#freezing-accounts)
 the assets in a given account at will, rendering the account unusable until thawed.
 If this feature is in use, the freeze authority's pubkey will be registered in
-the SPL Token's mint account.
+the Solarti Token's mint account.
 
 ## Testing the Integration
 

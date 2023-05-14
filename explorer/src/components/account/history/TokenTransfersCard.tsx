@@ -250,7 +250,7 @@ function getTransfer(
   cluster: Cluster,
   signature: string
 ): Transfer | TransferChecked | undefined {
-  if ("parsed" in instruction && instruction.program === "spl-token") {
+  if ("parsed" in instruction && instruction.program === "solarti-token") {
     try {
       const { type: rawType } = instruction.parsed;
       const type = create(rawType, TokenInstructionType);

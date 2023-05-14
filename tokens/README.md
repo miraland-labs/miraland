@@ -128,14 +128,14 @@ log.
 
 ## Distribute SPL tokens
 
-Distributing SPL Tokens works very similarly to distributing MLN, but requires
+Distributing Solarti Tokens works very similarly to distributing MLN, but requires
 the `--owner` parameter to sign transactions. Each recipient account must be an
-system account that will own an Associated Token Account for the SPL Token mint.
+system account that will own an Associated Token Account for the Solarti Token mint.
 The Associated Token Account will be created, and funded by the fee_payer, if it
 does not already exist.
 
 Send SPL tokens to the recipients in `<RECIPIENTS_CSV>`.
-*NOTE:* the CSV expects SPL-token amounts in raw format (no decimals)
+*NOTE:* the CSV expects solarti-token amounts in raw format (no decimals)
 
 Example recipients.csv:
 
@@ -148,10 +148,10 @@ C56nwrDVFpPrqwGYsTgQxv1ZraTh81H14PV4RHvZe36s,10000
 ```
 
 You can check the status of the recipients before beginning a distribution. You
-must include the SPL Token mint address:
+must include the Solarti Token mint address:
 
 ```bash
-miraland-tokens spl-token-balances --mint <ADDRESS> --input-csv <RECIPIENTS_CSV>
+miraland-tokens solarti-token-balances --mint <ADDRESS> --input-csv <RECIPIENTS_CSV>
 ```
 
 Example output:
@@ -168,7 +168,7 @@ C56nwrDVFpPrqwGYsTgQxv1ZraTh81H14PV4RHvZe36s                    10.000  Associat
 To run the distribution:
 
 ```bash
-miraland-tokens distribute-spl-tokens --from <ADDRESS> --owner <KEYPAIR> \
+miraland-tokens distribute-solarti-tokens --from <ADDRESS> --owner <KEYPAIR> \
     --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
 ```
 

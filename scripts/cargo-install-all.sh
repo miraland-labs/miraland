@@ -141,7 +141,7 @@ mkdir -p "$installDir/bin"
   # shellcheck disable=SC2086 # Don't want to double quote $rust_version
   "$cargo" $maybeRustVersion build $maybeReleaseFlag "${binArgs[@]}"
 
-  # Exclude `spl-token` binary for net.sh builds
+  # Exclude `solarti-token` binary for net.sh builds
   if [[ -z "$validatorOnly" ]]; then
     # shellcheck disable=SC2086 # Don't want to double quote $rust_version
     "$cargo" $maybeRustVersion install --locked solarti-token-cli --root "$installDir"

@@ -1,6 +1,6 @@
 import bs58 from 'bs58';
 import {Buffer} from 'buffer';
-import * as splToken from '@solana/spl-token';
+import * as splToken from '@solana/solarti-token';
 import {expect, use} from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import {useFakeTimers, SinonFakeTimers} from 'sinon';
@@ -2384,7 +2384,7 @@ describe('Connection', function () {
         params: [confirmedTransaction, {encoding: 'jsonParsed'}],
         value: getMockData({
           parsed: {},
-          program: 'spl-token',
+          program: 'solarti-token',
           programId: 'Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM',
         }),
       });
@@ -3335,7 +3335,7 @@ describe('Connection', function () {
         expect(signatures[0]).to.eq(testSignature);
         const ix = message.instructions[0];
         if ('parsed' in ix) {
-          expect(ix.program).to.eq('spl-token');
+          expect(ix.program).to.eq('solarti-token');
           expect(ix.programId).to.eql(TOKEN_PROGRAM_ID);
         } else {
           expect('parsed' in ix).to.be.true;
@@ -3371,7 +3371,7 @@ describe('Connection', function () {
           if (Buffer.isBuffer(data)) {
             expect(Buffer.isBuffer(data)).to.eq(false);
           } else {
-            expect(data.program).to.eq('spl-token');
+            expect(data.program).to.eq('solarti-token');
             expect(data.parsed).to.be.ok;
           }
         }
@@ -3388,7 +3388,7 @@ describe('Connection', function () {
             expect(Buffer.isBuffer(data)).to.eq(false);
           } else {
             expect(data.parsed).to.be.ok;
-            expect(data.program).to.eq('spl-token');
+            expect(data.program).to.eq('solarti-token');
           }
         });
       });
@@ -3409,7 +3409,7 @@ describe('Connection', function () {
             expect(Buffer.isBuffer(data)).to.eq(false);
           } else {
             expect(data.parsed).to.be.ok;
-            expect(data.program).to.eq('spl-token');
+            expect(data.program).to.eq('solarti-token');
           }
         });
       });

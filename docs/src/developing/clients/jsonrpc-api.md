@@ -221,8 +221,8 @@ JSON parsing for the following native and SPL programs:
 | Config | stable |   |
 | SPL Associated Token Account | n/a | stable |
 | SPL Memo | n/a | stable |
-| SPL Token | stable | stable |
-| SPL Token 2022 | stable | stable |
+| Solarti Token | stable | stable |
+| Solarti Token 2022 | stable | stable |
 | Stake | stable | stable |
 | Vote | stable | stable |
 
@@ -2649,7 +2649,7 @@ Result:
 
 ### getTokenAccountBalance
 
-Returns the token balance of an SPL Token account.
+Returns the token balance of an Solarti Token account.
 
 #### Parameters:
 
@@ -2701,7 +2701,7 @@ Result:
 
 ### getTokenAccountsByDelegate
 
-Returns all SPL Token accounts by approved Delegate.
+Returns all Solarti Token accounts by approved Delegate.
 
 #### Parameters:
 
@@ -2767,7 +2767,7 @@ Result:
       {
         "account": {
           "data": {
-            "program": "spl-token",
+            "program": "solarti-token",
             "parsed": {
               "info": {
                 "tokenAmount": {
@@ -2807,7 +2807,7 @@ Result:
 
 ### getTokenAccountsByOwner
 
-Returns all SPL Token accounts by token owner.
+Returns all Solarti Token accounts by token owner.
 
 #### Parameters:
 
@@ -2873,7 +2873,7 @@ Result:
       {
         "account": {
           "data": {
-            "program": "spl-token",
+            "program": "solarti-token",
             "parsed": {
               "accountType": "account",
               "info": {
@@ -2914,7 +2914,7 @@ Result:
 
 ### getTokenLargestAccounts
 
-Returns the 20 largest accounts of a particular SPL Token type.
+Returns the 20 largest accounts of a particular Solarti Token type.
 
 #### Parameters:
 
@@ -2972,7 +2972,7 @@ Result:
 
 ### getTokenSupply
 
-Returns the total supply of an SPL Token type.
+Returns the total supply of an Solarti Token type.
 
 #### Parameters:
 

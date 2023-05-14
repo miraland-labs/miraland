@@ -28,12 +28,12 @@ pub(crate) fn spl_token_2022_id() -> Pubkey {
     Pubkey::new_from_array(spl_token_2022::id().to_bytes())
 }
 
-// Returns all known SPL Token program ids
+// Returns all known Solarti Token program ids
 pub fn spl_token_ids() -> Vec<Pubkey> {
     vec![spl_token_id(), spl_token_2022_id()]
 }
 
-// Check if the provided program id as a known SPL Token program id
+// Check if the provided program id as a known Solarti Token program id
 pub fn is_known_spl_token_id(program_id: &Pubkey) -> bool {
     *program_id == spl_token_id() || *program_id == spl_token_2022_id()
 }
@@ -66,7 +66,7 @@ pub fn parse_token(
     if let Ok(account) = StateWithExtensions::<Account>::unpack(data) {
         let decimals = mint_decimals.ok_or_else(|| {
             ParseAccountError::AdditionalDataMissing(
-                "no mint_decimals provided to parse spl-token account".to_string(),
+                "no mint_decimals provided to parse solarti-token account".to_string(),
             )
         })?;
         let extension_types = account.get_extension_types().unwrap_or_default();

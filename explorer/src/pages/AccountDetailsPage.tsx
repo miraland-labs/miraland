@@ -48,7 +48,7 @@ import { useAnchorProgram } from "providers/anchor";
 const IDENTICON_WIDTH = 64;
 
 const TABS_LOOKUP: { [id: string]: Tab[] } = {
-  "spl-token:mint": [
+  "solarti-token:mint": [
     {
       slug: "transfers",
       title: "Transfers",
@@ -65,7 +65,7 @@ const TABS_LOOKUP: { [id: string]: Tab[] } = {
       path: "/largest",
     },
   ],
-  "spl-token:mint:metaplexNFT": [
+  "solarti-token:mint:metaplexNFT": [
     {
       slug: "metadata",
       title: "Metadata",
@@ -127,7 +127,7 @@ const TABS_LOOKUP: { [id: string]: Tab[] } = {
 };
 
 const TOKEN_TABS_HIDDEN = [
-  "spl-token:mint",
+  "solarti-token:mint",
   "config",
   "vote",
   "sysvar",
@@ -180,7 +180,7 @@ export function AccountHeader({
   const mintInfo = useMintAccountInfo(address);
   const account = info?.data;
   const data = account?.details?.data;
-  const isToken = data?.program === "spl-token" && data?.parsed.type === "mint";
+  const isToken = data?.program === "solarti-token" && data?.parsed.type === "mint";
 
   if (isMetaplexNFT(data, mintInfo)) {
     return (
@@ -328,7 +328,7 @@ function InfoSection({ account }: { account: Account }) {
         stakeAccountType={data.parsed.type}
       />
     );
-  } else if (data && data.program === "spl-token") {
+  } else if (data && data.program === "solarti-token") {
     return <TokenAccountSection account={account} tokenAccount={data.parsed} />;
   } else if (data && data.program === "nonce") {
     return <NonceAccountSection account={account} nonceAccount={data.parsed} />;
@@ -487,7 +487,7 @@ function getTabs(pubkey: PublicKey, account: Account): TabComponent[] {
   // Add the key for Metaplex NFTs
   if (
     data &&
-    programTypeKey === "spl-token:mint" &&
+    programTypeKey === "solarti-token:mint" &&
     (data as TokenProgramData).nftData
   ) {
     tabs.push(...TABS_LOOKUP[`${programTypeKey}:metaplexNFT`]);

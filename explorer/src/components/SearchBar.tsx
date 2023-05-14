@@ -12,7 +12,7 @@ import {
 } from "utils/tx";
 import { Cluster, useCluster } from "providers/cluster";
 import { useTokenRegistry } from "providers/mints/token-registry";
-import { TokenInfoMap } from "@solana/spl-token-registry";
+import { TokenInfoMap } from "@solana/solarti-token-registry";
 import { Connection } from "@solana/web3.js";
 import { getDomainInfo, hasDomainSyntax } from "utils/name-service";
 

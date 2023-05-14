@@ -104,7 +104,7 @@ export function getTokenInstructionName(
   }
 
   if ("parsed" in ix) {
-    if (ix.program === "spl-token") {
+    if (ix.program === "solarti-token") {
       name = getTokenProgramInstructionName(ix, signatureInfo);
     } else {
       return undefined;

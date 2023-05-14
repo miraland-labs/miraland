@@ -1,4 +1,4 @@
-/// Partial SPL Token declarations inlined to avoid an external dependency on the spl-token crate
+/// Partial Solarti Token declarations inlined to avoid an external dependency on the solarti-token crate
 /// Copied from solana-runtime
 use solana_sdk::pubkey::{Pubkey, PUBKEY_BYTES};
 

@@ -1,4 +1,4 @@
-/// Partial SPL Token declarations inlined to avoid an external dependency on the spl-token crate
+/// Partial Solarti Token declarations inlined to avoid an external dependency on the solarti-token crate
 use solana_sdk::pubkey::{Pubkey, PUBKEY_BYTES};
 
 solana_sdk::declare_id!("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM");

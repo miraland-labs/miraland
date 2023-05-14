@@ -1,4 +1,4 @@
-/// Partial SPL Token declarations inlined to avoid an external dependency on the spl-token-2022 crate
+/// Partial Solarti Token declarations inlined to avoid an external dependency on the solarti-token-2022 crate
 /// Copied from solana-runtime
 use crate::inline_spl_token::{self, GenericTokenAccount};
 

@@ -48,7 +48,7 @@ import { useCluster, Cluster } from "providers/cluster";
 import { Link } from "react-router-dom";
 import { Location } from "history";
 import { useQuery } from "utils/url";
-import { TokenInfoMap } from "@solana/spl-token-registry";
+import { TokenInfoMap } from "@solana/solarti-token-registry";
 import { useTokenRegistry } from "providers/mints/token-registry";
 import { getTokenProgramInstructionName } from "utils/instruction";
 import {
@@ -459,7 +459,7 @@ const TokenTransactionRow = React.memo(
           }
 
           if ("parsed" in ix) {
-            if (ix.program === "spl-token") {
+            if (ix.program === "solarti-token") {
               name = getTokenProgramInstructionName(ix, tx);
             } else {
               return undefined;
@@ -579,7 +579,7 @@ function InstructionDetails({
 
   let instructionTypes = instructionType.innerInstructions
     .map((ix) => {
-      if ("parsed" in ix && ix.program === "spl-token") {
+      if ("parsed" in ix && ix.program === "solarti-token") {
         return getTokenProgramInstructionName(ix, tx);
       }
       return undefined;

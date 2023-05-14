@@ -43,12 +43,12 @@ function Home() {
               <Card
                 to="https://spl.solana.com/token"
                 header={{
-                  label: "🏛 Create an SPL Token",
+                  label: "🏛 Create an Solarti Token",
                   translateId: "create-spl",
                 }}
                 body={{
                   label:
-                    "Launch your own SPL Token, Solana's equivalent of ERC-20.",
+                    "Launch your own Solarti Token, Solana's equivalent of ERC-20.",
                   translateId: "erc-20",
                 }}
               />

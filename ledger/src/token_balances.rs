@@ -267,13 +267,13 @@ mod test {
             })
         );
 
-        // TokenAccount is not owned by known spl-token program_id
+        // TokenAccount is not owned by known solarti-token program_id
         assert_eq!(
             collect_token_balance_from_account(&bank, &other_account_pubkey, &mut mint_decimals),
             None
         );
 
-        // TokenAccount's mint is not owned by known spl-token program_id
+        // TokenAccount's mint is not owned by known solarti-token program_id
         assert_eq!(
             collect_token_balance_from_account(
                 &bank,
@@ -458,13 +458,13 @@ mod test {
             })
         );
 
-        // TokenAccount is not owned by known spl-token program_id
+        // TokenAccount is not owned by known solarti-token program_id
         assert_eq!(
             collect_token_balance_from_account(&bank, &other_account_pubkey, &mut mint_decimals),
             None
         );
 
-        // TokenAccount's mint is not owned by known spl-token program_id
+        // TokenAccount's mint is not owned by known solarti-token program_id
         assert_eq!(
             collect_token_balance_from_account(
                 &bank,

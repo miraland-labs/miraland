@@ -183,7 +183,7 @@ function InstructionCard({
     };
 
     switch (ix.program) {
-      case "spl-token":
+      case "solarti-token":
         return <TokenDetailsCard {...props} />;
       case "bpf-loader":
         return <BpfLoaderDetailsCard {...props} />;

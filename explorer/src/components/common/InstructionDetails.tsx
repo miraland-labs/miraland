@@ -16,7 +16,7 @@ export function InstructionDetails({
 
   let instructionTypes = instructionType.innerInstructions
     .map((ix) => {
-      if ("parsed" in ix && ix.program === "spl-token") {
+      if ("parsed" in ix && ix.program === "solarti-token") {
         return getTokenProgramInstructionName(ix, tx);
       }
       return undefined;
