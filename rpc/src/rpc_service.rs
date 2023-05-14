@@ -653,7 +653,7 @@ mod tests {
             Arc::new(PrioritizationFeeCache::default()),
         );
         let thread = rpc_service.thread_hdl.thread();
-        assert_eq!(thread.name().unwrap(), "solJsonRpcSvc");
+        assert_eq!(thread.name().unwrap(), "mlnJsonRpcSvc");
 
         assert_eq!(
             10_000,

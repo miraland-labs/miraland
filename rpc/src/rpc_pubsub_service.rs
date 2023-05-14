@@ -418,6 +418,6 @@ mod tests {
         let (_trigger, pubsub_service) =
             PubSubService::new(PubSubConfig::default(), &subscriptions, pubsub_addr);
         let thread = pubsub_service.thread_hdl.thread();
-        assert_eq!(thread.name().unwrap(), "solRpcPubSub");
+        assert_eq!(thread.name().unwrap(), "mlnRpcPubSub");
     }
 }
