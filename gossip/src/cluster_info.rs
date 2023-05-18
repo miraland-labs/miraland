@@ -2641,7 +2641,7 @@ impl ClusterInfo {
                 }
             }
         };
-        let thread_name = String::from("solGossipConsum");
+        let thread_name = String::from("mlnGossipConsum");
         Builder::new().name(thread_name).spawn(run_consume).unwrap()
     }
 

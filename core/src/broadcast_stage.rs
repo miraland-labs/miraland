@@ -281,7 +281,7 @@ impl BroadcastStage {
                 .spawn(move || loop {
                     let res =
                         bs_transmit.transmit(&socket_receiver, &cluster_info, &sock, &bank_forks);
-                    let res = Self::handle_error(res, "solana-broadcaster-transmit");
+                    let res = Self::handle_error(res, "miraland-broadcaster-transmit");
                     if let Some(res) = res {
                         return res;
                     }
@@ -298,7 +298,7 @@ impl BroadcastStage {
                 .name("mlnBroadcastRec".to_string())
                 .spawn(move || loop {
                     let res = bs_record.record(&blockstore_receiver, &btree);
-                    let res = Self::handle_error(res, "solana-broadcaster-record");
+                    let res = Self::handle_error(res, "miraland-broadcaster-record");
                     if let Some(res) = res {
                         return res;
                     }
@@ -316,7 +316,7 @@ impl BroadcastStage {
                         &retransmit_slots_receiver,
                         &socket_sender,
                     ),
-                    "solana-broadcaster-retransmit-check_retransmit_signals",
+                    "miraland-broadcaster-retransmit-check_retransmit_signals",
                 ) {
                     return res;
                 }
