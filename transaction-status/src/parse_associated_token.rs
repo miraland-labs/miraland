@@ -23,7 +23,7 @@ pub fn parse_associated_token(
         _ => {
             // Runtime should prevent this from ever happening
             return Err(ParseInstructionError::InstructionKeyMismatch(
-                ParsableProgram::SplAssociatedTokenAccount,
+                ParsableProgram::SolartiAssociatedTokenAccount,
             ));
         }
     }
@@ -86,7 +86,7 @@ fn check_num_associated_token_accounts(
     accounts: &[u8],
     num: usize,
 ) -> Result<(), ParseInstructionError> {
-    check_num_accounts(accounts, num, ParsableProgram::SplAssociatedTokenAccount)
+    check_num_accounts(accounts, num, ParsableProgram::SolartiAssociatedTokenAccount)
 }
 
 #[cfg(test)]

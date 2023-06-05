@@ -41,10 +41,10 @@ lazy_static! {
         );
         m.insert(
             *ASSOCIATED_TOKEN_PROGRAM_ID,
-            ParsableProgram::SplAssociatedTokenAccount,
+            ParsableProgram::SolartiAssociatedTokenAccount,
         );
-        m.insert(*MEMO_V1_PROGRAM_ID, ParsableProgram::SplMemo);
-        m.insert(*MEMO_V3_PROGRAM_ID, ParsableProgram::SplMemo);
+        m.insert(*MEMO_V1_PROGRAM_ID, ParsableProgram::SolartiMemo);
+        m.insert(*MEMO_V3_PROGRAM_ID, ParsableProgram::SolartiMemo);
         for spl_token_id in spl_token_ids() {
             m.insert(spl_token_id, ParsableProgram::SolartiToken);
         }
@@ -96,8 +96,8 @@ pub struct ParsedInstructionEnum {
 #[serde(rename_all = "camelCase")]
 pub enum ParsableProgram {
     AddressLookupTable,
-    SplAssociatedTokenAccount,
-    SplMemo,
+    SolartiAssociatedTokenAccount,
+    SolartiMemo,
     SolartiToken,
     BpfLoader,
     BpfUpgradeableLoader,
@@ -118,10 +118,10 @@ pub fn parse(
         ParsableProgram::AddressLookupTable => {
             serde_json::to_value(parse_address_lookup_table(instruction, account_keys)?)?
         }
-        ParsableProgram::SplAssociatedTokenAccount => {
+        ParsableProgram::SolartiAssociatedTokenAccount => {
             serde_json::to_value(parse_associated_token(instruction, account_keys)?)?
         }
-        ParsableProgram::SplMemo => parse_memo(instruction)?,
+        ParsableProgram::SolartiMemo => parse_memo(instruction)?,
         ParsableProgram::SolartiToken => {
             serde_json::to_value(parse_token(instruction, account_keys)?)?
         }
@@ -145,7 +145,7 @@ pub fn parse(
 fn parse_memo(instruction: &CompiledInstruction) -> Result<Value, ParseInstructionError> {
     parse_memo_data(&instruction.data)
         .map(Value::String)
-        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SplMemo))
+        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiMemo))
 }
 
 pub fn parse_memo_data(data: &[u8]) -> Result<String, Utf8Error> {
