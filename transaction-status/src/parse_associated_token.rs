@@ -86,7 +86,11 @@ fn check_num_associated_token_accounts(
     accounts: &[u8],
     num: usize,
 ) -> Result<(), ParseInstructionError> {
-    check_num_accounts(accounts, num, ParsableProgram::SolartiAssociatedTokenAccount)
+    check_num_accounts(
+        accounts,
+        num,
+        ParsableProgram::SolartiAssociatedTokenAccount,
+    )
 }
 
 #[cfg(test)]
