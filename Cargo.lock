@@ -2707,6 +2707,7 @@ dependencies = [
  "solarti-token",
  "solarti-token-2022",
  "thiserror",
+ "toml_datetime",
  "winnow",
  "zstd",
 ]
