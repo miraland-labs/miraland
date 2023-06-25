@@ -2395,9 +2395,9 @@ checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
 
 [[package]]
 name = "libc"
-version = "0.2.126"
+version = "0.2.147"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "349d5a591cd28b49e1d1037471617a32ddcda5731b99419008085f72d5a53836"
+checksum = "b4668fb0ea861c1df094127ac5f1da3409a82116a4ba74fca2e58ef927159bb3"
 
 [[package]]
 name = "libloading"
@@ -2582,9 +2582,18 @@ checksum = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
 
 [[package]]
 name = "memmap2"
-version = "0.5.3"
+version = "0.5.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "057a3db23999c867821a7a59feb06a578fcb03685e983dff90daf9e7d24ac08f"
+checksum = "83faa42c0a078c393f6b29d5db232d8be22776a891f8f56e5284faee4a20b327"
+dependencies = [
+ "libc",
+]
+
+[[package]]
+name = "memmap2"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f49388d20533534cd19360ad3d6a7dadc885944aa802ba3995040c5ec11288c6"
 dependencies = [
  "libc",
 ]
@@ -4839,7 +4848,7 @@ version = "1.14.7"
 dependencies = [
  "fs_extra",
  "log",
- "memmap2",
+ "memmap2 0.7.1",
  "modular-bitfield",
  "rand 0.7.3",
  "rayon",
@@ -5291,7 +5300,7 @@ dependencies = [
  "im",
  "lazy_static",
  "log",
- "memmap2",
+ "memmap2 0.5.10",
  "rustc_version 0.4.0",
  "serde",
  "serde_bytes",
@@ -5319,7 +5328,7 @@ dependencies = [
  "im",
  "lazy_static",
  "log",
- "memmap2",
+ "memmap2 0.7.1",
  "once_cell",
  "rand_core 0.6.3",
  "rustc_version 0.4.0",
@@ -6131,7 +6140,7 @@ dependencies = [
  "libsecp256k1",
  "log",
  "lz4",
- "memmap2",
+ "memmap2 0.7.1",
  "num-derive",
  "num-traits",
  "num_cpus",
@@ -6195,7 +6204,7 @@ dependencies = [
  "lazy_static",
  "libsecp256k1",
  "log",
- "memmap2",
+ "memmap2 0.5.10",
  "num-derive",
  "num-traits",
  "pbkdf2 0.10.1",
@@ -6247,7 +6256,7 @@ dependencies = [
  "lazy_static",
  "libsecp256k1",
  "log",
- "memmap2",
+ "memmap2 0.7.1",
  "num-derive",
  "num-traits",
  "pbkdf2 0.11.0",
