@@ -999,7 +999,7 @@ pub fn parse_split_stake(
         pubkey_of_signer(matches, "stake_account_pubkey", wallet_manager)?.unwrap();
     let (split_stake_account, split_stake_account_pubkey) =
         signer_of(matches, "split_stake_account", wallet_manager)?;
-    let lamports = lamports_of_sol(matches, "amount").unwrap();
+    let lamports = lamports_of_mln(matches, "amount").unwrap();
     let seed = matches.value_of("seed").map(|s| s.to_string());
 
     let sign_only = matches.is_present(SIGN_ONLY_ARG.name);

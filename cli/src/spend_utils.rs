@@ -4,7 +4,7 @@ use {
         cli::CliError,
     },
     clap::ArgMatches,
-    miraland_clap_utils::{input_parsers::lamports_of_sol, offline::SIGN_ONLY_ARG},
+    miraland_clap_utils::{input_parsers::lamports_of_mln, offline::SIGN_ONLY_ARG},
     miraland_client::rpc_client::RpcClient,
     solana_sdk::{
         commitment_config::CommitmentConfig, hash::Hash, message::Message,
@@ -35,7 +35,7 @@ impl SpendAmount {
     }
 
     pub fn new_from_matches(matches: &ArgMatches<'_>, name: &str) -> Self {
-        let amount = lamports_of_sol(matches, name);
+        let amount = lamports_of_mln(matches, name);
         let sign_only = matches.is_present(SIGN_ONLY_ARG.name);
         SpendAmount::new(amount, sign_only)
     }

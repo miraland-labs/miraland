@@ -318,7 +318,7 @@ pub fn parse_airdrop(
     } else {
         vec![default_signer.signer_from_path(matches, wallet_manager)?]
     };
-    let lamports = lamports_of_sol(matches, "amount").unwrap();
+    let lamports = lamports_of_mln(matches, "amount").unwrap();
     Ok(CliCommandInfo {
         command: CliCommand::Airdrop { pubkey, lamports },
         signers,

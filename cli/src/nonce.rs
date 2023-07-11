@@ -327,7 +327,7 @@ pub fn parse_withdraw_from_nonce_account(
     let nonce_account = pubkey_of_signer(matches, "nonce_account_pubkey", wallet_manager)?.unwrap();
     let destination_account_pubkey =
         pubkey_of_signer(matches, "destination_account_pubkey", wallet_manager)?.unwrap();
-    let lamports = lamports_of_sol(matches, "amount").unwrap();
+    let lamports = lamports_of_mln(matches, "amount").unwrap();
     let memo = matches.value_of(MEMO_ARG.name).map(String::from);
     let (nonce_authority, nonce_authority_pubkey) =
         signer_of(matches, NONCE_AUTHORITY_ARG.name, wallet_manager)?;
