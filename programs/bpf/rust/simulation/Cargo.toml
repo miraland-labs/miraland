@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-simulation"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 description = "Miraland BPF Program Simulation Differences"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,13 +16,13 @@ edition = "2021"
 test-bpf = []
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc6" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc7" }
 
 [dev-dependencies]
-miraland-logger = { path = "../../../../logger", version = "=1.14.17-rc6" }
-miraland-program-test = { path = "../../../../program-test", version = "=1.14.17-rc6" }
-miraland-sdk = { path = "../../../../sdk", version = "=1.14.17-rc6" }
-miraland-validator = { path = "../../../../validator", version = "=1.14.17-rc6" }
+miraland-logger = { path = "../../../../logger", version = "=1.14.17-rc7" }
+miraland-program-test = { path = "../../../../program-test", version = "=1.14.17-rc7" }
+miraland-sdk = { path = "../../../../sdk", version = "=1.14.17-rc7" }
+miraland-validator = { path = "../../../../validator", version = "=1.14.17-rc7" }
 
 [lib]
 crate-type = ["cdylib", "lib"]

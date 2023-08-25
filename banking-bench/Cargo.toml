@@ -5,7 +5,7 @@ authors = [
 ]
 edition = "2021"
 name = "miraland-banking-bench"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -15,18 +15,18 @@ publish = false
 clap = { version = "3.1.8", features = ["derive"] }
 crossbeam-channel = "0.5"
 log = "0.4.17"
-miraland-client = { path = "../client", version = "=1.14.17-rc6" }
-miraland-core = { path = "../core", version = "=1.14.17-rc6" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc6" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc6" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc6" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc6" }
-miraland-poh = { path = "../poh", version = "=1.14.17-rc6" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc6" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc6" }
-miraland-version = { path = "../version", version = "=1.14.17-rc6" }
+miraland-client = { path = "../client", version = "=1.14.17-rc7" }
+miraland-core = { path = "../core", version = "=1.14.17-rc7" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17-rc7" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17-rc7" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc7" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc7" }
+miraland-poh = { path = "../poh", version = "=1.14.17-rc7" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc7" }
+miraland-version = { path = "../version", version = "=1.14.17-rc7" }
 rand = "0.7.0"
 rayon = "1.5.3"
 

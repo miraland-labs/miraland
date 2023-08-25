@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-caller-access"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,7 +13,7 @@ documentation = "https://docs.rs/miraland-bpf-rust-caller-access"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc6" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc7" }
 
 [lib]
 crate-type = ["cdylib"]

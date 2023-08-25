@@ -1,7 +1,7 @@
 [package]
 name = "miraland-test-validator"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-test-validator"
 readme = "../README.md"
@@ -16,19 +16,19 @@ edition = "2021"
 [dependencies]
 base64 = "0.13.0"
 log = "0.4.17"
-miraland-cli-output = { path = "../cli-output", version = "=1.14.17-rc6" }
-miraland-client = { path = "../client", version = "=1.14.17-rc6" }
-miraland-core = { path = "../core", version = "=1.14.17-rc6" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc6" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc6" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc6" }
-miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc6" }
-miraland-program-test = { path = "../program-test", version = "=1.14.17-rc6" }
-miraland-rpc = { path = "../rpc", version = "=1.14.17-rc6" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc6" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc6" }
+miraland-cli-output = { path = "../cli-output", version = "=1.14.17-rc7" }
+miraland-client = { path = "../client", version = "=1.14.17-rc7" }
+miraland-core = { path = "../core", version = "=1.14.17-rc7" }
+miraland-gossip = { path = "../gossip", version = "=1.14.17-rc7" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17-rc7" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc7" }
+miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc7" }
+miraland-program-test = { path = "../program-test", version = "=1.14.17-rc7" }
+miraland-rpc = { path = "../rpc", version = "=1.14.17-rc7" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc7" }
 serde_derive = "1.0.103"
 serde_json = "1.0.81"
 tokio = { version = "1", features = ["full"] }

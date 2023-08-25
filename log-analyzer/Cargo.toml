@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-log-analyzer"
 description = "The miraland cluster network analysis tool"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -15,8 +15,8 @@ publish = false
 [dependencies]
 byte-unit = "4.0.14"
 clap = { version = "3.1.5", features = ["cargo"] }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
-miraland-version = { path = "../version", version = "=1.14.17-rc6" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
+miraland-version = { path = "../version", version = "=1.14.17-rc7" }
 serde = "1.0.138"
 serde_json = "1.0.81"
 

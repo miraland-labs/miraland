@@ -1,6 +1,6 @@
 [package]
 name = "rbpf-cli"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 description = "CLI to test and analyze eBPF programs"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -14,10 +14,10 @@ publish = false
 
 [dependencies]
 clap = { version = "3.1.5", features = ["cargo"] }
-miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17-rc6" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
-miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc6" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
+miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "=1.14.17-rc7" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
+miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc7" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
 serde = "1.0.138"
 serde_json = "1.0.81"
 solana_rbpf = "=0.2.31"

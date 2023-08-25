@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-geyser-plugin-postgres"
 description = "The Miraland AccountsDb plugin for PostgreSQL database."
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -21,13 +21,13 @@ bytemuck = "1.11.0"
 chrono = { version = "0.4.11", features = ["serde"] }
 crossbeam-channel = "0.5"
 log = "0.4.17"
-miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "=1.14.17-rc6" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc6" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc6" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc6" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc6" }
+miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "=1.14.17-rc7" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc7" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc7" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
+miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc7" }
 openssl = { version = "0.10" }
 postgres = { version = "0.19.4", features = ["with-chrono-0_4"] }
 postgres-openssl = { version = "0.5.0" }
@@ -42,11 +42,11 @@ tokio-postgres = "0.7.7"
 libc = "0.2.126"
 libloading = "0.7.3"
 
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc6" }
-miraland-core = { path = "../core", version = "=1.14.17-rc6" }
-miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc6" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc6" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc6" }
+miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc7" }
+miraland-core = { path = "../core", version = "=1.14.17-rc7" }
+miraland-local-cluster = { path = "../local-cluster", version = "=1.14.17-rc7" }
+miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc7" }
+miraland-streamer = { path = "../streamer", version = "=1.14.17-rc7" }
 serial_test = "0.8.0"
 socket2 = { version = "0.4.4", features = ["all"] }
 tempfile = "3.3.0"

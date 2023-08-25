@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-sha"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -14,7 +14,7 @@ edition = "2021"
 
 [dependencies]
 blake3 = "1.0.0"
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc6" }
+miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc7" }
 
 [lib]
 crate-type = ["cdylib"]

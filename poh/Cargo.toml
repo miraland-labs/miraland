@@ -1,6 +1,6 @@
 [package]
 name = "miraland-poh"
-version = "1.14.17-rc6"
+version = "1.14.17-rc7"
 description = "Miraland PoH"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,20 +16,20 @@ edition = "2021"
 core_affinity = "0.5.10"
 crossbeam-channel = "0.5"
 log = "0.4.17"
-miraland-entry = { path = "../entry", version = "=1.14.17-rc6" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc6" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc6" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc6" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc6" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc6" }
-miraland-sys-tuner = { path = "../sys-tuner", version = "=1.14.17-rc6" }
+miraland-entry = { path = "../entry", version = "=1.14.17-rc7" }
+miraland-ledger = { path = "../ledger", version = "=1.14.17-rc7" }
+miraland-measure = { path = "../measure", version = "=1.14.17-rc7" }
+miraland-metrics = { path = "../metrics", version = "=1.14.17-rc7" }
+miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
+miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
+miraland-sys-tuner = { path = "../sys-tuner", version = "=1.14.17-rc7" }
 thiserror = "1.0"
 
 [dev-dependencies]
 bincode = "1.3.3"
 matches = "0.1.9"
-miraland-logger = { path = "../logger", version = "=1.14.17-rc6" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc6" }
+miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
+miraland-perf = { path = "../perf", version = "=1.14.17-rc7" }
 rand = "0.7.0"
 
 [lib]
