@@ -12,18 +12,18 @@ keywords:
   - affordable blockchain
 ---
 
-The small fees paid to process [instructions](./terminology.md#instruction) on the Solana blockchain are known as "_transaction fees_".
+The small fees paid to process [instructions](./terminology.md#instruction) on the Miraland blockchain are known as "_transaction fees_".
 
-As each transaction (which contains one or more instructions) is sent through the network, it gets processed by the current leader validation-client. Once confirmed as a global state transaction, this _transaction fee_ is paid to the network to help support the [economic design](#economic-design) of the Solana blockchain.
+As each transaction (which contains one or more instructions) is sent through the network, it gets processed by the current leader validation-client. Once confirmed as a global state transaction, this _transaction fee_ is paid to the network to help support the [economic design](#economic-design) of the Miraland blockchain.
 
 > **NOTE:** Transaction fees are different from [account rent](./terminology.md#rent)!
-> While transaction fees are paid to process instructions on the Solana network, rent is paid to store data on the blockchain.
+> While transaction fees are paid to process instructions on the Miraland network, rent is paid to store data on the blockchain.
 
 <!-- > You can learn more about rent here: [What is rent?](./developing/intro/rent.md) -->
 
 ## Why pay transaction fees?
 
-Transaction fees offer many benefits in the Solana [economic design](#basic-economic-design) described below. Mainly:
+Transaction fees offer many benefits in the Miraland [economic design](#basic-economic-design) described below. Mainly:
 
 - they provide compensation to the validator network for the CPU/GPU resources necessary to process transactions,
 - reduce network spam by introducing real cost to transactions,
@@ -35,12 +35,12 @@ Transaction fees offer many benefits in the Solana [economic design](#basic-econ
 
 Many current blockchain economies \(e.g. Bitcoin, Ethereum\), rely on _protocol-based rewards_ to support the economy in the short term. And when the protocol derived rewards expire, predict that the revenue generated through _transaction fees_ will support the economy in the long term.
 
-In an attempt to create a sustainable economy on Solana through _protocol-based rewards_ and _transaction fees_:
+In an attempt to create a sustainable economy on Miraland through _protocol-based rewards_ and _transaction fees_:
 
 - a fixed portion (initially 50%) of each transaction fee is _burned_ (aka destroyed),
 - with the remaining fee going to the current [leader](./terminology.md#leader) processing the transaction.
 
-A scheduled global inflation rate provides a source for [rewards](./implemented-proposals/staking-rewards.md) distributed to [Solana Validators](../src/running-validator.md).
+A scheduled global inflation rate provides a source for [rewards](./implemented-proposals/staking-rewards.md) distributed to [Miraland Validators](../src/running-validator.md).
 
 ### Why burn some fees?
 
@@ -71,7 +71,7 @@ The execution of each instruction within a transactions consumes a different num
 
 ## Prioritization fee
 
-Recently, Solana has introduced an optional fee called the "_[prioritization fee](./terminology.md#prioritization-fee)_". This additional fee can be paid to help boost how a transaction is prioritized against others, resulting in faster transaction execution times.
+Recently, Miraland has introduced an optional fee called the "_[prioritization fee](./terminology.md#prioritization-fee)_". This additional fee can be paid to help boost how a transaction is prioritized against others, resulting in faster transaction execution times.
 
 The prioritization fee is calculated by multiplying the requested maximum _compute units_ by the compute-unit price (specified in increments of 0.000001 lamports per compute unit) rounded up to the nearest lamport.
 

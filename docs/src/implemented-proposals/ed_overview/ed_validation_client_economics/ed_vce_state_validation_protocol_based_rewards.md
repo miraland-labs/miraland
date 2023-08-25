@@ -4,12 +4,12 @@ title: Inflation Schedule
 
 **Subject to change.**
 
-Validator-clients have two functional roles in the Solana network:
+Validator-clients have two functional roles in the Miraland network:
 
 - Validate \(vote\) the current global state of their observed PoH.
 - Be elected as ‘leader’ on a stake-weighted round-robin schedule during which time they are responsible for collecting outstanding transactions and incorporating them into their observed PoH, thus updating the global state of the network and providing chain continuity.
 
-Validator-client rewards for these services are to be distributed at the end of each Solana epoch. As previously discussed, compensation for validator-clients is provided via a commission charged on the protocol-based annual inflation rate dispersed in proportion to the stake-weight of each validator-node \(see below\) along with leader-claimed transaction fees available during each leader rotation. I.e. during the time a given validator-client is elected as leader, it has the opportunity to keep a portion of each transaction fee, less a protocol-specified amount that is destroyed \(see [Validation-client State Transaction Fees](ed_vce_state_validation_transaction_fees.md)\).
+Validator-client rewards for these services are to be distributed at the end of each Miraland epoch. As previously discussed, compensation for validator-clients is provided via a commission charged on the protocol-based annual inflation rate dispersed in proportion to the stake-weight of each validator-node \(see below\) along with leader-claimed transaction fees available during each leader rotation. I.e. during the time a given validator-client is elected as leader, it has the opportunity to keep a portion of each transaction fee, less a protocol-specified amount that is destroyed \(see [Validation-client State Transaction Fees](ed_vce_state_validation_transaction_fees.md)\).
 
 The effective protocol-based annual staking yield \(%\) per epoch received by validation-clients is to be a function of:
 
@@ -20,7 +20,7 @@ The effective protocol-based annual staking yield \(%\) per epoch received by va
 
 The first factor is a function of protocol parameters only \(i.e. independent of validator behavior in a given epoch\) and results in an inflation schedule designed to incentivize early participation, provide clear monetary stability and provide optimal security in the network.
 
-As a first step to understanding the impact of the _Inflation Schedule_ on the Solana economy, we’ve simulated the upper and lower ranges of what token issuance over time might look like given the current ranges of Inflation Schedule parameters under study.
+As a first step to understanding the impact of the _Inflation Schedule_ on the Miraland economy, we’ve simulated the upper and lower ranges of what token issuance over time might look like given the current ranges of Inflation Schedule parameters under study.
 
 Specifically:
 
@@ -53,7 +53,7 @@ The values of _% of Staked SOL_ range from 60% - 90%, which we feel covers the l
 
 ![](/img/p_ex_staked_yields.png)
 
-Again, the above shows an example _Staked Yield_ that a staker might expect over time on the Solana network with the _Inflation Schedule_ as specified. This is an idealized _Staked Yield_ as it neglects validator uptime impact on rewards, validator commissions, potential yield throttling and potential slashing incidents. It additionally ignores that _% of Staked SOL_ is dynamic by design - the economic incentives set up by this _Inflation Schedule_.
+Again, the above shows an example _Staked Yield_ that a staker might expect over time on the Miraland network with the _Inflation Schedule_ as specified. This is an idealized _Staked Yield_ as it neglects validator uptime impact on rewards, validator commissions, potential yield throttling and potential slashing incidents. It additionally ignores that _% of Staked SOL_ is dynamic by design - the economic incentives set up by this _Inflation Schedule_.
 
 ### Adjusted Staking Yield
 

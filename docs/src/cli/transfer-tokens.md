@@ -27,7 +27,7 @@ on devnet have **no** value, so don't worry if you lose them.
 First, _airdrop_ yourself some play tokens on the devnet.
 
 ```bash
-solana airdrop 1 <RECIPIENT_ACCOUNT_ADDRESS> --url https://api.devnet-mln.miraland.top
+miraland airdrop 1 <RECIPIENT_ACCOUNT_ADDRESS> --url https://api.devnet-mln.miraland.top
 ```
 
 where you replace the text `<RECIPIENT_ACCOUNT_ADDRESS>` with your base58-encoded
@@ -38,7 +38,7 @@ of the address does not change by the expected amount, run the following command
 for more information on what potentially went wrong:
 
 ```bash
-solana confirm -v <TRANSACTION_SIGNATURE>
+miraland confirm -v <TRANSACTION_SIGNATURE>
 ```
 
 #### Check your balance
@@ -47,7 +47,7 @@ Confirm the airdrop was successful by checking the account's balance.
 It should output `1 MLN`:
 
 ```bash
-solana balance <ACCOUNT_ADDRESS> --url https://api.devnet-mln.miraland.top
+miraland balance <ACCOUNT_ADDRESS> --url https://api.devnet-mln.miraland.top
 ```
 
 #### Create a second wallet address
@@ -74,22 +74,22 @@ or [hardware](../wallet-guide/hardware-wallets.md#multiple-addresses-on-a-single
 #### Transfer tokens from your first wallet to the second address
 
 Next, prove that you own the airdropped tokens by transferring them.
-The Solana cluster will only accept the transfer if you sign the transaction
+The Miraland cluster will only accept the transfer if you sign the transaction
 with the private keypair corresponding to the sender's public key in the
 transaction.
 
 ```bash
-solana transfer --from <KEYPAIR> <RECIPIENT_ACCOUNT_ADDRESS> 0.5 --allow-unfunded-recipient --url https://api.devnet-mln.miraland.top --fee-payer <KEYPAIR>
+miraland transfer --from <KEYPAIR> <RECIPIENT_ACCOUNT_ADDRESS> 0.5 --allow-unfunded-recipient --url https://api.devnet-mln.miraland.top --fee-payer <KEYPAIR>
 ```
 
 where you replace `<KEYPAIR>` with the path to a keypair in your first wallet,
 and replace `<RECIPIENT_ACCOUNT_ADDRESS>` with the address of your second
 wallet.
 
-Confirm the updated balances with `solana balance`:
+Confirm the updated balances with `miraland balance`:
 
 ```bash
-solana balance <ACCOUNT_ADDRESS> --url http://api.devnet.solana.com
+miraland balance <ACCOUNT_ADDRESS> --url http://api.devnet.miraland.top
 ```
 
 where `<ACCOUNT_ADDRESS>` is either the public key from your keypair or the
@@ -98,10 +98,10 @@ recipient's public key.
 #### Full example of test transfer
 
 ```bash
-$ miraland-keygen new --outfile my_solana_wallet.json   # Creating my first wallet, a file system wallet
+$ miraland-keygen new --outfile my_miraland_wallet.json   # Creating my first wallet, a file system wallet
 Generating a new keypair
 For added security, enter a passphrase (empty for no passphrase):
-Wrote new keypair to my_solana_wallet.json
+Wrote new keypair to my_miraland_wallet.json
 ==========================================================================
 pubkey: DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK                          # Here is the address of the first wallet
 ==========================================================================
@@ -109,11 +109,11 @@ Save this seed phrase to recover your new keypair:
 width enhance concert vacant ketchup eternal spy craft spy guard tag punch    # If this was a real wallet, never share these words on the internet like this!
 ==========================================================================
 
-$ solana airdrop 1 DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet-mln.miraland.top  # Airdropping 1 MLN to my wallet's address/pubkey
+$ miraland airdrop 1 DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet-mln.miraland.top  # Airdropping 1 MLN to my wallet's address/pubkey
 Requesting airdrop of 1 MLN from 35.233.193.70:9900
 1 MLN
 
-$ solana balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet-mln.miraland.top # Check the address's balance
+$ miraland balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet-mln.miraland.top # Check the address's balance
 1 MLN
 
 $ miraland-keygen new --no-outfile  # Creating a second wallet, a paper wallet
@@ -126,13 +126,13 @@ Save this seed phrase to recover your new keypair:
 clump panic cousin hurt coast charge engage fall eager urge win love   # If this was a real wallet, never share these words on the internet like this!
 ====================================================================
 
-$ solana transfer --from my_solana_wallet.json 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv 0.5 --allow-unfunded-recipient --url https://api.devnet-mln.miraland.top --fee-payer my_solana_wallet.json  # Transferring tokens to the public address of the paper wallet
+$ miraland transfer --from my_miraland_wallet.json 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv 0.5 --allow-unfunded-recipient --url https://api.devnet-mln.miraland.top --fee-payer my_miraland_wallet.json  # Transferring tokens to the public address of the paper wallet
 3gmXvykAd1nCQQ7MjosaHLf69Xyaqyq1qw2eu1mgPyYXd5G4v1rihhg1CiRw35b9fHzcftGKKEu4mbUeXY2pEX2z  # This is the transaction signature
 
-$ solana balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet-mln.miraland.top
+$ miraland balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK --url https://api.devnet-mln.miraland.top
 0.499995 MLN  # The sending account has slightly less than 0.5 MLN remaining due to the 0.000005 MLN transaction fee payment
 
-$ solana balance 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv --url https://api.devnet-mln.miraland.top
+$ miraland balance 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv --url https://api.devnet-mln.miraland.top
 0.5 MLN  # The second wallet has now received the 0.5 MLN transfer from the first wallet
 
 ```
@@ -140,7 +140,7 @@ $ solana balance 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv --url https://api.
 ## Receive Tokens
 
 To receive tokens, you will need an address for others to send tokens to. In
-Solana, the wallet address is the public key of a keypair. There are a variety
+Miraland, the wallet address is the public key of a keypair. There are a variety
 of techniques for generating keypairs. The method you choose will depend on how
 you choose to store keypairs. Keypairs are stored in wallets. Before receiving
 tokens, you will need to [create a wallet](../wallet-guide/cli.md).
@@ -153,14 +153,14 @@ characters. Its length varies from 32 to 44 characters.
 If you already hold MLN and want to send tokens to someone, you will need
 a path to your keypair, their base58-encoded public key, and a number of
 tokens to transfer. Once you have that collected, you can transfer tokens
-with the `solana transfer` command:
+with the `miraland transfer` command:
 
 ```bash
-solana transfer --from <KEYPAIR> <RECIPIENT_ACCOUNT_ADDRESS> <AMOUNT> --fee-payer <KEYPAIR>
+miraland transfer --from <KEYPAIR> <RECIPIENT_ACCOUNT_ADDRESS> <AMOUNT> --fee-payer <KEYPAIR>
 ```
 
-Confirm the updated balances with `solana balance`:
+Confirm the updated balances with `miraland balance`:
 
 ```bash
-solana balance <ACCOUNT_ADDRESS>
+miraland balance <ACCOUNT_ADDRESS>
 ```

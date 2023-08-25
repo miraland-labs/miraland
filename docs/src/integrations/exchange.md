@@ -1,8 +1,8 @@
 ---
-title: Add Solana to Your Exchange
+title: Add Miraland to Your Exchange
 ---
 
-This guide describes how to add Solana's native token MLN to your cryptocurrency
+This guide describes how to add Miraland's native token MLN to your cryptocurrency
 exchange.
 
 ## Node Setup
@@ -13,18 +13,18 @@ operations with a bundled monitoring tool.
 
 This setup enables you:
 
-- to have a self-administered gateway to the Solana mainnet-beta cluster to get
+- to have a self-administered gateway to the Miraland mainnet-beta cluster to get
   data and submit withdrawal transactions
 - to have full control over how much historical block data is retained
 - to maintain your service availability even if one node fails
 
-Solana nodes demand relatively high computing power to handle our fast blocks
+Miraland nodes demand relatively high computing power to handle our fast blocks
 and high TPS. For specific requirements, please see
 [hardware recommendations](../running-validator/validator-reqs.md).
 
 To run an api node:
 
-1. [Install the Solana command-line tool suite](../cli/install-miraland-cli-tools.md)
+1. [Install the Miraland command-line tool suite](../cli/install-miraland-cli-tools.md)
 2. Start the validator with at least the following parameters:
 
 ```bash
@@ -54,7 +54,7 @@ under 500GB. More or less disk usage may be requested by adding an argument to
 `--limit-ledger-size` if desired. Check `miraland-validator --help` for the
 default limit value used by `--limit-ledger-size`. More information about
 selecting a custom limit value is [available
-here](https://github.com/solana-labs/solana/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26).
+here](https://github.com/miraland-labs/miraland/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26).
 
 Specifying one or more `--known-validator` parameters can protect you from booting from a malicious snapshot. [More on the value of booting with known validators](../running-validator/validator-start.md#known-validators)
 
@@ -66,11 +66,11 @@ Optional parameters to consider:
 ### Automatic Restarts and Monitoring
 
 We recommend configuring each of your nodes to restart automatically on exit, to
-ensure you miss as little data as possible. Running the solana software as a
+ensure you miss as little data as possible. Running the miraland software as a
 systemd service is one great option.
 
 For monitoring, we provide
-[`miraland-watchtower`](https://github.com/solana-labs/solana/blob/master/watchtower/README.md),
+[`miraland-watchtower`](https://github.com/miraland-labs/miraland/blob/master/watchtower/README.md),
 which can monitor your validator and detect with the `miraland-validator` process
 is unhealthy. It can directly be configured to alert you via Slack, Telegram,
 Discord, or Twillio. For details, run `miraland-watchtower --help`.
@@ -118,9 +118,9 @@ historical ledger data that cannot be filled.
 ### Minimizing Validator Port Exposure
 
 The validator requires that various UDP and TCP ports be open for inbound
-traffic from all other Solana validators. While this is the most efficient mode of
+traffic from all other Miraland validators. While this is the most efficient mode of
 operation, and is strongly recommended, it is possible to restrict the
-validator to only require inbound traffic from one other Solana validator.
+validator to only require inbound traffic from one other Miraland validator.
 
 First add the `--restricted-repair-only-mode` argument. This will cause the
 validator to operate in a restricted mode where it will not receive pushes from
@@ -147,13 +147,13 @@ validators and only on the _Gossip_, _Repair_ and _ServeR_ ports.
 
 ## Setting up Deposit Accounts
 
-Solana accounts do not require any on-chain initialization; once they contain
+Miraland accounts do not require any on-chain initialization; once they contain
 some MLN, they exist. To set up a deposit account for your exchange, simply
-generate a Solana keypair using any of our [wallet tools](../wallet-guide/cli.md).
+generate a Miraland keypair using any of our [wallet tools](../wallet-guide/cli.md).
 
 We recommend using a unique deposit account for each of your users.
 
-Solana accounts must be made rent-exempt by containing 2-years worth of
+Miraland accounts must be made rent-exempt by containing 2-years worth of
 [rent](developing/programming-model/accounts.md#rent) in MLN. In order to find
 the minimum rent-exempt balance for your deposit accounts, query the
 [`getMinimumBalanceForRentExemption` endpoint](developing/clients/jsonrpc-api.md#getminimumbalanceforrentexemption):
@@ -216,7 +216,7 @@ lookup tables.
 
 To track all the deposit accounts for your exchange, poll for each confirmed
 block and inspect for addresses of interest, using the JSON-RPC service of your
-Solana API node.
+Miraland API node.
 
 - To identify which blocks are available, send a [`getBlocks` request](developing/clients/jsonrpc-api.md#getblocks),
   passing the last block you have already processed as the start-slot parameter:
@@ -342,8 +342,8 @@ transfer of 1040000000 - 1030000000 = 10,000,000 lamports = 0.01 MLN
 
 If you need more information about the transaction type or other specifics, you
 can request the block from RPC in binary format, and parse it using either our
-[Rust SDK](https://github.com/solana-labs/solana) or
-[Javascript SDK](https://github.com/solana-labs/solana-web3.js).
+[Rust SDK](https://github.com/miraland-labs/miraland) or
+[Javascript SDK](https://github.com/miraland-labs/miraland-web3.js).
 
 ### Address History
 
@@ -508,25 +508,25 @@ curl https://api.devnet-mln.miraland.top -X POST -H 'Content-Type: application/j
 
 ## Sending Withdrawals
 
-To accommodate a user's request to withdraw MLN, you must generate a Solana
+To accommodate a user's request to withdraw MLN, you must generate a Miraland
 transfer transaction, and send it to the api node to be forwarded to your
 cluster.
 
 ### Synchronous
 
-Sending a synchronous transfer to the Solana cluster allows you to easily ensure
+Sending a synchronous transfer to the Miraland cluster allows you to easily ensure
 that a transfer is successful and finalized by the cluster.
 
-Solana's command-line tool offers a simple command, `solana transfer`, to
+Miraland's command-line tool offers a simple command, `miraland transfer`, to
 generate, submit, and confirm transfer transactions. By default, this method
 will wait and track progress on stderr until the transaction has been finalized
 by the cluster. If the transaction fails, it will report any transaction errors.
 
 ```bash
-solana transfer <USER_ADDRESS> <AMOUNT> --allow-unfunded-recipient --keypair <KEYPAIR> --url http://localhost:8899
+miraland transfer <USER_ADDRESS> <AMOUNT> --allow-unfunded-recipient --keypair <KEYPAIR> --url http://localhost:8899
 ```
 
-The [Solana Javascript SDK](https://github.com/solana-labs/solana-web3.js)
+The [Miraland Javascript SDK](https://github.com/miraland-labs/miraland-web3.js)
 offers a similar approach for the JS ecosystem. Use the `SystemProgram` to build
 a transfer transaction, and submit it using the `sendAndConfirmTransaction`
 method.
@@ -548,14 +548,14 @@ First, get a recent blockhash using the [`getFees` endpoint](developing/clients/
 or the CLI command:
 
 ```bash
-solana fees --url http://localhost:8899
+miraland fees --url http://localhost:8899
 ```
 
 In the command-line tool, pass the `--no-wait` argument to send a transfer
 asynchronously, and include your recent blockhash with the `--blockhash` argument:
 
 ```bash
-solana transfer <USER_ADDRESS> <AMOUNT> --no-wait --allow-unfunded-recipient --blockhash <RECENT_BLOCKHASH> --keypair <KEYPAIR> --url http://localhost:8899
+miraland transfer <USER_ADDRESS> <AMOUNT> --no-wait --allow-unfunded-recipient --blockhash <RECENT_BLOCKHASH> --keypair <KEYPAIR> --url http://localhost:8899
 ```
 
 You can also build, sign, and serialize the transaction manually, and fire it off to
@@ -628,14 +628,14 @@ prevent accidental loss of user funds.
 
 #### Basic verification
 
-Solana addresses a 32-byte array, encoded with the bitcoin base58 alphabet. This
+Miraland addresses a 32-byte array, encoded with the bitcoin base58 alphabet. This
 results in an ASCII text string matching the following regular expression:
 
 ```
 [1-9A-HJ-NP-Za-km-z]{32,44}
 ```
 
-This check is insufficient on its own as Solana addresses are not checksummed, so
+This check is insufficient on its own as Miraland addresses are not checksummed, so
 typos cannot be detected. To further validate the user's input, the string can be
 decoded and the resulting byte array's length confirmed to be 32. However, there
 are some addresses that can decode to 32 bytes despite a typo such as a single
@@ -649,7 +649,7 @@ confirm their intentions if a non-zero balance is discovered.
 
 #### Valid ed25519 pubkey check
 
-The address of a normal account in Solana is a Base58-encoded string of a
+The address of a normal account in Miraland is a Base58-encoded string of a
 256-bit ed25519 public key. Not all bit patterns are valid public keys for the
 ed25519 curve, so it is possible to ensure user-supplied account addresses are
 at least correct ed25519 public keys.
@@ -734,8 +734,8 @@ curl localhost:8899 -X POST -H "Content-Type: application/json" -d '{
 
 ## Supporting the Solarti Token Standard
 
-[Solarti Token](https://spl.solana.com/token) is the standard for wrapped/synthetic
-token creation and exchange on the Solana blockchain.
+[Solarti Token](https://spl.miraland.top/token) is the standard for wrapped/synthetic
+token creation and exchange on the Miraland blockchain.
 
 The Solarti Token workflow is similar to that of native MLN tokens, but there are a
 few differences which will be discussed in this section.
@@ -827,7 +827,7 @@ solarti-token balance <TOKEN_ACCOUNT_ADDRESS>
 #### Example
 
 ```
-$ solana balance 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+$ miraland balance 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
 0
 ```
 
@@ -862,7 +862,7 @@ Signature: 3R6tsog17QM8KfzbcbdP4aoMfwgo6hBggJDVy7dZPVmH2xbCWjEj31JKD53NzMrf25ChF
 Since each `(wallet, mint)` pair requires a separate account on chain. It is
 recommended that the addresses for these accounts be derived from MLN deposit
 wallets using the
-[Associated Token Account](https://spl.solana.com/associated-token-account) (ATA)
+[Associated Token Account](https://spl.miraland.top/associated-token-account) (ATA)
 scheme and that _only_ deposits from ATA addresses be accepted.
 
 Monitoring for deposit transactions should follow the [block polling](#poll-for-blocks)
@@ -889,9 +889,9 @@ account data. If the address has no MLN balance, user confirmation should be
 obtained before proceeding with the withdrawal. All other withdrawal addresses
 must be rejected.
 
-From the withdrawal address, the [Associated Token Account](https://spl.solana.com/associated-token-account)
+From the withdrawal address, the [Associated Token Account](https://spl.miraland.top/associated-token-account)
 (ATA) for the correct mint is derived and the transfer issued to that account via a
-[TransferChecked](https://github.com/solana-labs/miraland-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L268)
+[TransferChecked](https://github.com/miraland-labs/miraland-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L268)
 instruction. Note that it is possible that the ATA address does not yet exist, at which point the
 exchange should fund the account on behalf of the user. For Solarti Token v2
 accounts, funding the withdrawal account will require 0.00203928 MLN (2,039,280
@@ -909,15 +909,15 @@ $ solarti-token transfer --fund-recipient <exchange token account> <withdrawal a
 
 For regulatory compliance reasons, an Solarti Token issuing entity may optionally
 choose to hold "Freeze Authority" over all accounts created in association with
-its mint. This allows them to [freeze](https://spl.solana.com/token#freezing-accounts)
+its mint. This allows them to [freeze](https://spl.miraland.top/token#freezing-accounts)
 the assets in a given account at will, rendering the account unusable until thawed.
 If this feature is in use, the freeze authority's pubkey will be registered in
 the Solarti Token's mint account.
 
 ## Testing the Integration
 
-Be sure to test your complete workflow on Solana devnet and testnet
+Be sure to test your complete workflow on Miraland devnet and testnet
 [clusters](../clusters.md) before moving to production on mainnet-beta. Devnet
 is the most open and flexible, and ideal for initial development, while testnet
 offers more realistic cluster configuration. Both devnet and testnet support a faucet,
-run `solana airdrop 1` to obtain some devnet or testnet MLN for development and testing.
+run `miraland airdrop 1` to obtain some devnet or testnet MLN for development and testing.

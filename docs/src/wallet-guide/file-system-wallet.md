@@ -3,7 +3,7 @@ title: File System Wallet
 ---
 
 This document describes how to create and use a file system wallet with the
-Solana CLI tools. A file system wallet exists as an unencrypted keypair file
+Miraland CLI tools. A file system wallet exists as an unencrypted keypair file
 on your computer system's filesystem.
 
 > File system wallets are the **least secure** method of storing MLN tokens. Storing large amounts of tokens in a file system wallet is **not recommended**.
@@ -11,16 +11,16 @@ on your computer system's filesystem.
 ## Before you Begin
 
 Make sure you have
-[installed the Solana Command Line Tools](../cli/install-miraland-cli-tools.md)
+[installed the Miraland Command Line Tools](../cli/install-miraland-cli-tools.md)
 
 ## Generate a File System Wallet Keypair
 
-Use Solana's command-line tool `miraland-keygen` to generate keypair files. For
+Use Miraland's command-line tool `miraland-keygen` to generate keypair files. For
 example, run the following from a command-line shell:
 
 ```bash
-mkdir ~/my-solana-wallet
-miraland-keygen new --outfile ~/my-solana-wallet/my-keypair.json
+mkdir ~/my-miraland-wallet
+miraland-keygen new --outfile ~/my-miraland-wallet/my-keypair.json
 ```
 
 This file contains your **unencrypted** keypair. In fact, even if you specify
@@ -30,7 +30,7 @@ to all tokens sent to its public key. Instead, you should share only its public
 key. To display its public key, run:
 
 ```bash
-miraland-keygen pubkey ~/my-solana-wallet/my-keypair.json
+miraland-keygen pubkey ~/my-miraland-wallet/my-keypair.json
 ```
 
 It will output a string of characters, such as:
@@ -40,7 +40,7 @@ ErRr1caKzK8L8nn4xmEWtimYRiTCAZXjBtVphuZ5vMKy
 ```
 
 This is the public key corresponding to the keypair in
-`~/my-solana-wallet/my-keypair.json`. The public key of the keypair file is
+`~/my-miraland-wallet/my-keypair.json`. The public key of the keypair file is
 your _wallet address_.
 
 ## Verify your Address against your Keypair file
@@ -49,7 +49,7 @@ To verify you hold the private key for a given address, use
 `miraland-keygen verify`:
 
 ```bash
-miraland-keygen verify <PUBKEY> ~/my-solana-wallet/my-keypair.json
+miraland-keygen verify <PUBKEY> ~/my-miraland-wallet/my-keypair.json
 ```
 
 where `<PUBKEY>` is replaced with your wallet address.

@@ -2,21 +2,21 @@
 title: Paper Wallet
 ---
 
-This document describes how to create and use a paper wallet with the Solana CLI
+This document describes how to create and use a paper wallet with the Miraland CLI
 tools.
 
 > We do not intend to advise on how to _securely_ create or manage paper wallets. Please research the security concerns carefully.
 
 ## Overview
 
-Solana provides a key generation tool to derive keys from
+Miraland provides a key generation tool to derive keys from
 [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)-compliant
-seed phrases. Solana CLI commands for running a validator and staking tokens all
+seed phrases. Miraland CLI commands for running a validator and staking tokens all
 support keypair input via seed phrases.
 
 ## Paper Wallet Usage
 
-Solana commands can be run without ever saving a keypair to disk on a machine.
+Miraland commands can be run without ever saving a keypair to disk on a machine.
 If avoiding writing a private key to disk is a security concern of yours, you've
 come to the right place.
 
@@ -24,7 +24,7 @@ come to the right place.
 
 ## Before You Begin
 
-- [Install the Solana command-line tools](../cli/install-miraland-cli-tools.md)
+- [Install the Miraland command-line tools](../cli/install-miraland-cli-tools.md)
 
 ### Check your installation
 
@@ -59,7 +59,7 @@ have not made any errors.
 miraland-keygen new --no-outfile
 ```
 
-> If the `--no-outfile` flag is **omitted**, the default behavior is to write the keypair to `~/.config/solana/id.json`, resulting in a [file system wallet](file-system-wallet.md).
+> If the `--no-outfile` flag is **omitted**, the default behavior is to write the keypair to `~/.config/miraland/id.json`, resulting in a [file system wallet](file-system-wallet.md).
 
 The output of this command will display a line like this:
 
@@ -87,7 +87,7 @@ Public keys can be derived from a seed phrase and a passphrase if you choose to
 use one. This is useful for using an offline-generated seed phrase to derive a
 valid public key. The `miraland-keygen pubkey` command will walk you through how
 to use your seed phrase (and a passphrase if you chose to use one) as a signer
-with the solana command-line tools using the `prompt` URI scheme.
+with the miraland command-line tools using the `prompt` URI scheme.
 
 ```bash
 miraland-keygen pubkey prompt://
@@ -106,7 +106,7 @@ miraland-keygen pubkey prompt:// --skip-seed-phrase-validation
 ```
 
 After entering your seed phrase with `miraland-keygen pubkey prompt://` the console
-will display a string of base-58 characters. This is the [derived](#hierarchical-derivation) solana BIP44 _wallet address_
+will display a string of base-58 characters. This is the [derived](#hierarchical-derivation) miraland BIP44 _wallet address_
 associated with your seed phrase.
 
 > Copy the derived address to a USB stick for easy usage on networked computers
@@ -133,20 +133,20 @@ The miraland-cli supports
 hierarchical derivation of private keys from your seed phrase and passphrase by
 adding either the `?key=` query string or the `?full-path=` query string.
 
-By default, `prompt:` will derive solana's base derivation path `m/44'/501'`. To
+By default, `prompt:` will derive miraland's base derivation path `m/44'/501'`. To
 derive a child key, supply the `?key=<ACCOUNT>/<CHANGE>` query string.
 
 ```bash
 miraland-keygen pubkey prompt://?key=0/1
 ```
 
-To use a derivation path other than solana's standard BIP44, you can supply `?full-path=m/<PURPOSE>/<COIN_TYPE>/<ACCOUNT>/<CHANGE>`.
+To use a derivation path other than miraland's standard BIP44, you can supply `?full-path=m/<PURPOSE>/<COIN_TYPE>/<ACCOUNT>/<CHANGE>`.
 
 ```bash
 miraland-keygen pubkey prompt://?full-path=m/44/2017/0/1
 ```
 
-Because Solana uses Ed25519 keypairs, as per
+Because Miraland uses Ed25519 keypairs, as per
 [SLIP-0010](https://github.com/satoshilabs/slips/blob/master/slip-0010.md) all
 derivation-path indexes will be promoted to hardened indexes -- eg.
 `?key=0'/0'`, `?full-path=m/44'/2017'/0'/1'` -- regardless of whether ticks are
@@ -177,17 +177,17 @@ To retrieve public keys securely from a paper wallet, follow the
 Public keys can then be typed manually or transferred via a USB stick to a
 networked machine.
 
-Next, configure the `solana` CLI tool to
+Next, configure the `miraland` CLI tool to
 [connect to a particular cluster](../cli/choose-a-cluster.md):
 
 ```bash
-solana config set --url <CLUSTER URL> # (i.e. https://api.mainnet-mln.miraland.top)
+miraland config set --url <CLUSTER URL> # (i.e. https://api.mainnet-mln.miraland.top)
 ```
 
 Finally, to check the balance, run the following command:
 
 ```bash
-solana balance <PUBKEY>
+miraland balance <PUBKEY>
 ```
 
 ## Creating Multiple Paper Wallet Addresses

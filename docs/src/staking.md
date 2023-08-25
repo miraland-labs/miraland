@@ -1,5 +1,5 @@
 ---
-title: Staking on Solana
+title: Staking on Miraland
 ---
 
 _Note before reading: All references to increases in values are in absolute
@@ -54,14 +54,14 @@ and do the delegation.
 
 #### Supported Wallets
 
-Many web and mobile wallets support Solana staking operations. Please check with
+Many web and mobile wallets support Miraland staking operations. Please check with
 your favorite wallet's maintainers regarding status
 
-#### Solana command line tools
-- Solana command line tools can perform all stake operations in conjunction
+#### Miraland command line tools
+- Miraland command line tools can perform all stake operations in conjunction
   with a CLI-generated keypair file wallet, a paper wallet, or with a connected
   Ledger Nano.
-  [Staking commands using the Solana Command Line Tools](cli/delegate-stake.md).
+  [Staking commands using the Miraland Command Line Tools](cli/delegate-stake.md).
 
 #### Create a Stake Account
 
@@ -72,21 +72,21 @@ will be of a different type than one used to simply send and receive tokens.
 
 Follow the wallet's instructions for selecting a validator.  You can get
 information about potentially performant validators from the links below.
-The Solana Foundation does not recommend any particular validator.
+The Miraland Foundation does not recommend any particular validator.
 
-The site solanabeach.io is built and maintained by one of our validators,
+The site miralandbeach.io is built and maintained by one of our validators,
 Staking Facilities. It provides a some high-level graphical information about
 the network as a whole, as well as a list of each validator and some recent
 performance statistics about each one.
 
-- https://solanabeach.io
+- https://miralandbeach.io
 
-To view block production statistics, use the Solana command-line tools:
+To view block production statistics, use the Miraland command-line tools:
 
-- `solana validators`
-- `solana block-production`
+- `miraland validators`
+- `miraland block-production`
 
-The Solana team does not make recommendations on how to interpret this
+The Miraland team does not make recommendations on how to interpret this
 information. Do your own due diligence.
 
 #### Delegate your Stake

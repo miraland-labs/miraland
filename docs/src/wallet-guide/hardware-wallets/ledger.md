@@ -2,19 +2,19 @@
 title: Ledger Nano
 ---
 
-This page describes how to use a Ledger Nano S or Nano X to interact with Solana
+This page describes how to use a Ledger Nano S or Nano X to interact with Miraland
 using the command line tools.
 
 ## Before You Begin
 
-- [Set up a Nano with the Solana App](https://support.ledger.com/hc/en-us/articles/360016265659-Solana-MLN-?docs=true)
-- [Install the Solana command-line tools](../../cli/install-miraland-cli-tools.md)
+- [Set up a Nano with the Miraland App](https://support.ledger.com/hc/en-us/articles/360016265659-Miraland-MLN-?docs=true)
+- [Install the Miraland command-line tools](../../cli/install-miraland-cli-tools.md)
 
-## Use Ledger Nano with Solana CLI
+## Use Ledger Nano with Miraland CLI
 
 1. Ensure the Ledger Live application is closed
 2. Plug your Nano into your computer's USB port
-3. Enter your pin and start the Solana app on the Nano
+3. Enter your pin and start the Miraland app on the Nano
 4. Ensure the screen reads "Application is ready"
 
 ### View your Wallet ID
@@ -26,7 +26,7 @@ miraland-keygen pubkey usb://ledger
 ```
 
 This confirms your Ledger device is connected properly and in the correct state
-to interact with the Solana CLI. The command returns your Ledger's unique
+to interact with the Miraland CLI. The command returns your Ledger's unique
 _wallet ID_. When you have multiple Nano devices connected to the same
 computer, you can use your wallet ID to specify which Ledger hardware wallet
 you want to use. If you only plan to use a single Nano on your computer
@@ -58,7 +58,7 @@ miraland-keygen pubkey usb://ledger?key=2
   &nbsp;[see troubleshooting for more info](#troubleshooting)
 
 You can use other values for the number after `key=` as well.
-Any of the addresses displayed by these commands are valid Solana wallet
+Any of the addresses displayed by these commands are valid Miraland wallet
 addresses. The private portion associated with each address is stored securely
 on the Nano, and is used to sign transactions from this address.
 Just make a note of which keypair URL you used to derive any address you will be
@@ -79,26 +79,26 @@ associated keypair URL as the signer for transactions from that address.
 ### View your Balance
 
 To view the balance of any account, regardless of which wallet it uses, use the
-`solana balance` command:
+`miraland balance` command:
 
 ```bash
-solana balance SOME_WALLET_ADDRESS
+miraland balance SOME_WALLET_ADDRESS
 ```
 
 For example, if your address is `7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri`,
 then enter the following command to view the balance:
 
 ```bash
-solana balance 7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri
+miraland balance 7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri
 ```
 
 You can also view the balance of any account address on the Accounts tab in the
-[Explorer](https://explorer.solana.com/accounts)
+[Explorer](https://explorer.miraland.top/accounts)
 and paste the address in the box to view the balance in you web browser.
 
 Note: Any address with a balance of 0 MLN, such as a newly created one on your
 Ledger, will show as "Not Found" in the explorer. Empty accounts and non-existent
-accounts are treated the same in Solana. This will change when your account
+accounts are treated the same in Miraland. This will change when your account
 address has some MLN in it.
 
 ### Send MLN from a Nano
@@ -106,16 +106,16 @@ address has some MLN in it.
 To send some tokens from an address controlled by your Nano, you will
 need to use the device to sign a transaction, using the same keypair URL you
 used to derive the address. To do this, make sure your Nano is plugged in,
-unlocked with the PIN, Ledger Live is not running, and the Solana App is open
+unlocked with the PIN, Ledger Live is not running, and the Miraland App is open
 on the device, showing "Application is Ready".
 
-The `solana transfer` command is used to specify to which address to send tokens,
+The `miraland transfer` command is used to specify to which address to send tokens,
 how many tokens to send, and uses the `--keypair` argument to specify which
 keypair is sending the tokens, which will sign the transaction, and the balance
 from the associated address will decrease.
 
 ```bash
-solana transfer RECIPIENT_ADDRESS AMOUNT --keypair KEYPAIR_URL_OF_SENDER
+miraland transfer RECIPIENT_ADDRESS AMOUNT --keypair KEYPAIR_URL_OF_SENDER
 ```
 
 Below is a full example. First, an address is viewed at a certain keypair URL.
@@ -131,10 +131,10 @@ screen.
 ~$ miraland-keygen pubkey usb://ledger?key=42
 CjeqzArkZt6xwdnZ9NZSf8D1CNJN1rjeFiyd8q7iLWAV
 
-~$ solana balance CjeqzArkZt6xwdnZ9NZSf8D1CNJN1rjeFiyd8q7iLWAV
+~$ miraland balance CjeqzArkZt6xwdnZ9NZSf8D1CNJN1rjeFiyd8q7iLWAV
 1.000005 MLN
 
-~$ solana transfer 7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri 1 --keypair usb://ledger?key=42
+~$ miraland transfer 7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri 1 --keypair usb://ledger?key=42
 Waiting for your approval on Ledger hardware wallet usb://ledger/2JT2Xvy6T8hSmT8g6WdeDbHUgoeGdj6bE2VueCZUJmyN
 ✅ Approved
 
@@ -144,9 +144,9 @@ Signature: kemu9jDEuPirKNRKiHan7ycybYsZp7pFefAdvWZRq5VRHCLgXTXaFVw3pfh87MQcWX4kQ
 After approving the transaction on your device, the program will display the
 transaction signature, and wait for the maximum number of confirmations (32)
 before returning. This only takes a few seconds, and then the transaction is
-finalized on the Solana network. You can view details of this or any other
+finalized on the Miraland network. You can view details of this or any other
 transaction by going to the Transaction tab in the
-[Explorer](https://explorer.solana.com/transactions)
+[Explorer](https://explorer.miraland.top/transactions)
 and paste in the transaction signature.
 
 ## Advanced Operations
@@ -155,17 +155,17 @@ and paste in the transaction signature.
 
 It is sometimes useful to sign a transaction with keys from multiple hardware
 wallets. Signing with multiple wallets requires _fully qualified keypair URLs_.
-When the URL is not fully qualified, the Solana CLI will prompt you with
+When the URL is not fully qualified, the Miraland CLI will prompt you with
 the fully qualified URLs of all connected hardware wallets, and ask you to
 choose which wallet to use for each signature.
 
 Instead of using the interactive prompts, you can generate fully qualified
-URLs using the Solana CLI `resolve-signer` command. For example, try
+URLs using the Miraland CLI `resolve-signer` command. For example, try
 connecting a Nano to USB, unlock it with your pin, and running the
 following command:
 
 ```text
-solana resolve-signer usb://ledger?key=0/0
+miraland resolve-signer usb://ledger?key=0/0
 ```
 
 You will see output similar to:
@@ -178,7 +178,7 @@ but where `BsNsvfXqQTtJnagwFWdBS7FBXgnsK8VZ5CmuznN85swK` is your `WALLET_ID`.
 
 With your fully qualified URL, you can connect multiple hardware wallets to
 the same computer and uniquely identify a keypair from any of them.
-Use the output from the `resolve-signer` command anywhere a `solana` command
+Use the output from the `resolve-signer` command anywhere a `miraland` command
 expects a `<KEYPAIR>` entry to use that resolved path as the signer for that
 part of the given transaction.
 

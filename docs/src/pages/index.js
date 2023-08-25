@@ -9,7 +9,7 @@ function Home() {
   const { siteConfig = {} } = context;
 
   return (
-    <Layout title="Homepage" description="Solana Documentation">
+    <Layout title="Homepage" description="Miraland Documentation">
       <main>
         <section className={styles.features}>
           <div className="container">
@@ -22,7 +22,7 @@ function Home() {
                 }}
                 body={{
                   label:
-                    "Get started building your decentralized app or marketplace with Solana.",
+                    "Get started building your decentralized app or marketplace with Miraland.",
                   translateId: "get-started-building",
                 }}
               />
@@ -41,14 +41,14 @@ function Home() {
               />
 
               <Card
-                to="https://spl.solana.com/token"
+                to="https://spl.miraland.top/token"
                 header={{
                   label: "🏛 Create an Solarti Token",
                   translateId: "create-spl",
                 }}
                 body={{
                   label:
-                    "Launch your own Solarti Token, Solana's equivalent of ERC-20.",
+                    "Launch your own Solarti Token, Miraland's equivalent of ERC-20.",
                   translateId: "erc-20",
                 }}
               />
@@ -82,12 +82,12 @@ function Home() {
               <Card
                 to="introduction"
                 header={{
-                  label: "🤯 Learn How Solana Works",
+                  label: "🤯 Learn How Miraland Works",
                   translateId: "learn-how",
                 }}
                 body={{
                   label:
-                    "Get a high-level understanding of Solana's architecture.",
+                    "Get a high-level understanding of Miraland's architecture.",
                   translateId: "high-level",
                 }}
               />

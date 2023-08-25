@@ -1,41 +1,41 @@
 ---
-title: Install the Solana Tool Suite
+title: Install the Miraland Tool Suite
 ---
 
-There are multiple ways to install the Solana tools on your computer
+There are multiple ways to install the Miraland tools on your computer
 depending on your preferred workflow:
 
-- [Use Solana's Install Tool (Simplest option)](#use-solanas-install-tool)
+- [Use Miraland's Install Tool (Simplest option)](#use-miralands-install-tool)
 - [Download Prebuilt Binaries](#download-prebuilt-binaries)
 - [Build from Source](#build-from-source)
 - [Use Homebrew](#use-homebrew)
 
-## Use Solana's Install Tool
+## Use Miraland's Install Tool
 
 ### MacOS & Linux
 
 - Open your favorite Terminal application
 
-- Install the Solana release
-  [LATEST_SOLANA_RELEASE_VERSION](https://github.com/solana-labs/solana/releases/tag/LATEST_SOLANA_RELEASE_VERSION) on your
+- Install the Miraland release
+  [LATEST_MIRALAND_RELEASE_VERSION](https://github.com/miraland-labs/miraland/releases/tag/LATEST_MIRALAND_RELEASE_VERSION) on your
   machine by running:
 
 ```bash
-sh -c "$(curl -sSfL https://release.solana.com/LATEST_SOLANA_RELEASE_VERSION/install)"
+sh -c "$(curl -sSfL https://release.miraland.top/LATEST_MIRALAND_RELEASE_VERSION/install)"
 ```
 
-- You can replace `LATEST_SOLANA_RELEASE_VERSION` with the release tag matching
+- You can replace `LATEST_MIRALAND_RELEASE_VERSION` with the release tag matching
   the software version of your desired release, or use one of the three symbolic
   channel names: `stable`, `beta`, or `edge`.
 
 - The following output indicates a successful update:
 
 ```text
-downloading LATEST_SOLANA_RELEASE_VERSION installer
-Configuration: /home/solana/.config/solana/install/config.yml
-Active release directory: /home/solana/.local/share/solana/install/active_release
-* Release version: LATEST_SOLANA_RELEASE_VERSION
-* Release URL: https://github.com/solana-labs/solana/releases/download/LATEST_SOLANA_RELEASE_VERSION/miraland-release-x86_64-unknown-linux-gnu.tar.bz2
+downloading LATEST_MIRALAND_RELEASE_VERSION installer
+Configuration: /home/miraland/.config/miraland/install/config.yml
+Active release directory: /home/miraland/.local/share/miraland/install/active_release
+* Release version: LATEST_MIRALAND_RELEASE_VERSION
+* Release URL: https://github.com/miraland-labs/miraland/releases/download/LATEST_MIRALAND_RELEASE_VERSION/miraland-release-x86_64-unknown-linux-gnu.tar.bz2
 Update successful
 ```
 
@@ -43,19 +43,19 @@ Update successful
   to
 
 ```bash
-Please update your PATH environment variable to include the solana programs:
+Please update your PATH environment variable to include the miraland programs:
 ```
 
 - If you get the above message, copy and paste the recommended command below
   it to update `PATH`
-- Confirm you have the desired version of `solana` installed by running:
+- Confirm you have the desired version of `miraland` installed by running:
 
 ```bash
-solana --version
+miraland --version
 ```
 
 - After a successful install, `miraland-install update` may be used to easily
-  update the Solana software to a newer version at any time.
+  update the Miraland software to a newer version at any time.
 
 ---
 
@@ -68,19 +68,19 @@ solana --version
     If you are prompted by a pop-up window asking “Do you want to allow this app to
     make changes to your device?”, click Yes.
 
-- Copy and paste the following command, then press Enter to download the Solana
+- Copy and paste the following command, then press Enter to download the Miraland
   installer into a temporary directory:
 
 ```bash
-curl https://release.solana.com/LATEST_SOLANA_RELEASE_VERSION/miraland-install-init-x86_64-pc-windows-msvc.exe --output C:\miraland-install-tmp\miraland-install-init.exe --create-dirs
+curl https://release.miraland.top/LATEST_MIRALAND_RELEASE_VERSION/miraland-install-init-x86_64-pc-windows-msvc.exe --output C:\miraland-install-tmp\miraland-install-init.exe --create-dirs
 ```
 
 - Copy and paste the following command, then press Enter to install the latest
-  version of Solana. If you see a security pop-up by your system, please select
+  version of Miraland. If you see a security pop-up by your system, please select
   to allow the program to run.
 
 ```bash
-C:\miraland-install-tmp\miraland-install-init.exe LATEST_SOLANA_RELEASE_VERSION
+C:\miraland-install-tmp\miraland-install-init.exe LATEST_MIRALAND_RELEASE_VERSION
 ```
 
 - When the installer is finished, press Enter.
@@ -89,14 +89,14 @@ C:\miraland-install-tmp\miraland-install-init.exe LATEST_SOLANA_RELEASE_VERSION
   normal user
   - Search for "Command Prompt" in the search bar, then left click on the
     Command Prompt app icon, no need to run as Administrator)
-- Confirm you have the desired version of `solana` installed by entering:
+- Confirm you have the desired version of `miraland` installed by entering:
 
 ```bash
-solana --version
+miraland --version
 ```
 
 - After a successful install, `miraland-install update` may be used to easily
-  update the Solana software to a newer version at any time.
+  update the Miraland software to a newer version at any time.
 
 ## Download Prebuilt Binaries
 
@@ -106,7 +106,7 @@ manually download and install the binaries.
 ### Linux
 
 Download the binaries by navigating to
-[https://github.com/solana-labs/solana/releases/latest](https://github.com/solana-labs/solana/releases/latest),
+[https://github.com/miraland-labs/miraland/releases/latest](https://github.com/miraland-labs/miraland/releases/latest),
 download **miraland-release-x86_64-unknown-linux-msvc.tar.bz2**, then extract the
 archive:
 
@@ -119,7 +119,7 @@ export PATH=$PWD/bin:$PATH
 ### MacOS
 
 Download the binaries by navigating to
-[https://github.com/solana-labs/solana/releases/latest](https://github.com/solana-labs/solana/releases/latest),
+[https://github.com/miraland-labs/miraland/releases/latest](https://github.com/miraland-labs/miraland/releases/latest),
 download **miraland-release-x86_64-apple-darwin.tar.bz2**, then extract the
 archive:
 
@@ -132,7 +132,7 @@ export PATH=$PWD/bin:$PATH
 ### Windows
 
 - Download the binaries by navigating to
-  [https://github.com/solana-labs/solana/releases/latest](https://github.com/solana-labs/solana/releases/latest),
+  [https://github.com/miraland-labs/miraland/releases/latest](https://github.com/miraland-labs/miraland/releases/latest),
   download **miraland-release-x86_64-pc-windows-msvc.tar.bz2**, then extract the
   archive using WinZip or similar.
 
@@ -148,7 +148,7 @@ set PATH=%cd%/bin;%PATH%
 
 If you are unable to use the prebuilt binaries or prefer to build it yourself
 from source, navigate to
-[https://github.com/solana-labs/solana/releases/latest](https://github.com/solana-labs/solana/releases/latest),
+[https://github.com/miraland-labs/miraland/releases/latest](https://github.com/miraland-labs/miraland/releases/latest),
 and download the **Source Code** archive. Extract the code and build the
 binaries with:
 
@@ -170,14 +170,14 @@ This option requires you to have [Homebrew](https://brew.sh/) package manager on
 
 ### MacOS & Linux
 
-- Follow instructions at: https://formulae.brew.sh/formula/solana
+- Follow instructions at: https://formulae.brew.sh/formula/miraland
 
-[Homebrew formulae](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/solana.rb)
-is updated after each `solana` release, however it is possible that
+[Homebrew formulae](https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/miraland.rb)
+is updated after each `miraland` release, however it is possible that
 the Homebrew version is outdated.
 
-- Confirm you have the desired version of `solana` installed by entering:
+- Confirm you have the desired version of `miraland` installed by entering:
 
 ```bash
-solana --version
+miraland --version
 ```

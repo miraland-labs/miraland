@@ -1,20 +1,20 @@
 ---
-title: Using Solana CLI
+title: Using Miraland CLI
 ---
 
-Before running any Solana CLI commands, let's go over some conventions that
-you will see across all commands. First, the Solana CLI is actually a collection
+Before running any Miraland CLI commands, let's go over some conventions that
+you will see across all commands. First, the Miraland CLI is actually a collection
 of different commands for each action you might want to take. You can view the list
 of all possible commands by running:
 
 ```bash
-solana --help
+miraland --help
 ```
 
 To zoom in on how to use a particular command, run:
 
 ```bash
-solana <COMMAND> --help
+miraland <COMMAND> --help
 ```
 
 where you replace the text `<COMMAND>` with the name of the command you want
@@ -63,10 +63,10 @@ With a file system wallet, the keypair is stored in a file on your computer.
 Replace `<KEYPAIR>` with the complete file path to the keypair file.
 
 For example, if the file system keypair file location is
-`/home/solana/my_wallet.json`, to display the address, do:
+`/home/miraland/my_wallet.json`, to display the address, do:
 
 ```bash
-miraland-keygen pubkey /home/solana/my_wallet.json
+miraland-keygen pubkey /home/miraland/my_wallet.json
 ```
 
 #### Hardware Wallet

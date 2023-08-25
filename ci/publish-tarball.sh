@@ -116,10 +116,14 @@ for file in "${TARBALL_BASENAME}"-$TARGET.tar.bz2 "${TARBALL_BASENAME}"-$TARGET.
   fi
 
   if [[ -n $BUILDKITE ]]; then
-    # echo --- AWS S3 Store: "$file"
+    echo --- AWS S3 Store: "$file"
+    # MI: this s3 bucket[release.miraland.top] is for formal production use
     # upload-s3-artifact "/miraland/$file" s3://release.miraland.top/"$CHANNEL_OR_TAG"/"$file"
-    # echo Published to:
+    # MI: this s3 bucket[rc1.miraland.top] is for temp/test use
+    upload-s3-artifact "$file" s3://rc1.miraland.top/"$CHANNEL_OR_TAG"/"$file"
+    echo Published to:
     # $DRYRUN ci/format-url.sh https://release.miraland.top/"$CHANNEL_OR_TAG"/"$file"
+    $DRYRUN ci/format-url.sh https://rc1.miraland.top/"$CHANNEL_OR_TAG"/"$file"
 
     echo --- Aliyun OSS Store: "$file"
     # upload-oss-artifact "/miraland/$file" oss://release-miraland-top/"$CHANNEL_OR_TAG"/"$file"

@@ -2,10 +2,10 @@
 title: Command Line Wallets
 ---
 
-Solana supports several different types of wallets that can be used to interface
-directly with the Solana command-line tools.
+Miraland supports several different types of wallets that can be used to interface
+directly with the Miraland command-line tools.
 
-To use a Command Line Wallet, you must first [install the Solana CLI tools](../cli/install-miraland-cli-tools.md)
+To use a Command Line Wallet, you must first [install the Miraland CLI tools](../cli/install-miraland-cli-tools.md)
 
 ## File System Wallet
 

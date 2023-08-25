@@ -1,11 +1,11 @@
 ---
-title: What are Solana Programs?
-description: "A Solana Program, aka smart contract, is the executable code that interprets the instructions on the blockchain. There are two types: Native and on chain."
+title: What are Miraland Programs?
+description: "A Miraland Program, aka smart contract, is the executable code that interprets the instructions on the blockchain. There are two types: Native and on chain."
 ---
 
-Solana Programs, often referred to as "_smart contracts_" on other blockchains, are the executable code that interprets the instructions sent inside of each transaction on the blockchain. They can be deployed directly into the core of the network as [Native Programs](#native-programs), or published by anyone as [On Chain Programs](#on-chain-programs). Programs are the core building blocks of the network and handle everything from sending tokens between wallets, to accepting votes of a DAOs, to tracking ownership of NFTs.
+Miraland Programs, often referred to as "_smart contracts_" on other blockchains, are the executable code that interprets the instructions sent inside of each transaction on the blockchain. They can be deployed directly into the core of the network as [Native Programs](#native-programs), or published by anyone as [On Chain Programs](#on-chain-programs). Programs are the core building blocks of the network and handle everything from sending tokens between wallets, to accepting votes of a DAOs, to tracking ownership of NFTs.
 
-Both types of programs run on top of the [Sealevel runtime](https://medium.com/solana-labs/sealevel-parallel-processing-thousands-of-smart-contracts-d814b378192), which is Solana's _parallel processing_ model that helps to enable the high transactions speeds of the blockchain.
+Both types of programs run on top of the [Sealevel runtime](https://medium.com/miraland-labs/sealevel-parallel-processing-thousands-of-smart-contracts-d814b378192), which is Miraland's _parallel processing_ model that helps to enable the high transactions speeds of the blockchain.
 
 ## Key points
 
@@ -18,7 +18,7 @@ Both types of programs run on top of the [Sealevel runtime](https://medium.com/s
 
 ## Types of programs
 
-The Solana blockchain has two types of programs:
+The Miraland blockchain has two types of programs:
 
 - Native programs
 - On chain programs
@@ -27,15 +27,15 @@ The Solana blockchain has two types of programs:
 
 These user written programs, often referred to as "_smart contracts_" on other blockchains, are deployed directly to the blockchain for anyone to interact with and execute. Hence the name "on chain"!
 
-In effect, "on chain programs" are any program that is not baked directly into the Solana cluster's core code (like the native programs discussed below).
+In effect, "on chain programs" are any program that is not baked directly into the Miraland cluster's core code (like the native programs discussed below).
 
-And even though Solana Labs maintains a small subset of these on chain programs (collectively known as the [Solana Program Library](https://spl.solana.com/)), anyone can create or publish one. On chain programs can also be updated directly on the blockchain by the respective program's Account owner.
+And even though Miraland Labs maintains a small subset of these on chain programs (collectively known as the [Miraland Program Library](https://spl.miraland.top/)), anyone can create or publish one. On chain programs can also be updated directly on the blockchain by the respective program's Account owner.
 
 ### Native programs
 
-_Native programs_ are programs that are built directly into the core of the Solana blockchain.
+_Native programs_ are programs that are built directly into the core of the Miraland blockchain.
 
-Similar to other "on chain" programs in Solana, native programs can be called by any other program/user. However, they can only be upgraded as part of the core blockchain and cluster updates. These native program upgrades are controlled via the releases to the [different clusters](../../cluster/overview.md).
+Similar to other "on chain" programs in Miraland, native programs can be called by any other program/user. However, they can only be upgraded as part of the core blockchain and cluster updates. These native program upgrades are controlled via the releases to the [different clusters](../../cluster/overview.md).
 
 #### Examples of native programs include:
 
@@ -45,12 +45,12 @@ Similar to other "on chain" programs in Solana, native programs can be called by
 
 ## Executable
 
-When a Solana program is deployed onto the network, it is marked as "executable" by the [BPF Loader Program](../runtime-facilities/programs.md#bpf-loader). This allows the Solana runtime to efficiently and properly execute the compiled program code.
+When a Miraland program is deployed onto the network, it is marked as "executable" by the [BPF Loader Program](../runtime-facilities/programs.md#bpf-loader). This allows the Miraland runtime to efficiently and properly execute the compiled program code.
 
 ## Upgradable
 
-Unlike other blockchains, Solana programs can be upgraded after they are deployed to the network.
+Unlike other blockchains, Miraland programs can be upgraded after they are deployed to the network.
 
 Native programs can only be upgraded as part of cluster updates when new software releases are made.
 
-On chain programs can be upgraded by the account that is marked as the "_Upgrade Authority_", which is usually the Solana account/address that deployed the program to begin with.
+On chain programs can be upgraded by the account that is marked as the "_Upgrade Authority_", which is usually the Miraland account/address that deployed the program to begin with.

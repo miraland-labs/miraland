@@ -2,17 +2,17 @@
 title: Starting a Validator
 ---
 
-## Configure Solana CLI
+## Configure Miraland CLI
 
-The solana cli includes `get` and `set` configuration commands to automatically
+The miraland cli includes `get` and `set` configuration commands to automatically
 set the `--url` argument for cli commands. For example:
 
 ```bash
-solana config set --url http://api.devnet.solana.com
+miraland config set --url http://api.devnet.miraland.top
 ```
 
 While this section demonstrates how to connect to the Devnet cluster, the steps
-are similar for the other [Solana Clusters](../clusters.md).
+are similar for the other [Miraland Clusters](../clusters.md).
 
 ## Confirm The Cluster Is Reachable
 
@@ -20,10 +20,10 @@ Before attaching a validator node, sanity check that the cluster is accessible
 to your machine by fetching the transaction count:
 
 ```bash
-solana transaction-count
+miraland transaction-count
 ```
 
-View the [metrics dashboard](https://metrics.solana.com:3000/d/monitor/cluster-telemetry) for more
+View the [metrics dashboard](https://metrics.miraland.top:3000/d/monitor/cluster-telemetry) for more
 detail on cluster activity.
 
 ## Enabling CUDA
@@ -32,7 +32,7 @@ If your machine has a GPU with CUDA installed \(Linux-only currently\), include
 the `--cuda` argument to `miraland-validator`.
 
 When your validator is started look for the following log message to indicate
-that CUDA is enabled: `"[<timestamp> solana::validator] CUDA is enabled"`
+that CUDA is enabled: `"[<timestamp> miraland::validator] CUDA is enabled"`
 
 ## System Tuning
 
@@ -40,10 +40,10 @@ that CUDA is enabled: `"[<timestamp> solana::validator] CUDA is enabled"`
 
 #### Automatic
 
-The solana repo includes a daemon to adjust system settings to optimize performance
+The miraland repo includes a daemon to adjust system settings to optimize performance
 (namely by increasing the OS UDP buffer and file mapping limits).
 
-The daemon (`miraland-sys-tuner`) is included in the solana binary release. Restart
+The daemon (`miraland-sys-tuner`) is included in the miraland binary release. Restart
 it, _before_ restarting your validator, after each software upgrade to ensure that
 the latest recommended settings are applied.
 
@@ -101,7 +101,7 @@ sudo systemctl daemon-reload
 ```
 
 ```bash
-sudo bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
+sudo bash -c "cat >/etc/security/limits.d/90-miraland-nofiles.conf <<EOF
 # Increase process file descriptor count limit
 * - nofile 1000000
 EOF"
@@ -179,22 +179,22 @@ ALLOCATION OF MLN TOO.
 To back-up your validator identify keypair, **back-up your
 "validator-keypair.json” file or your seed phrase to a secure location.**
 
-## More Solana CLI Configuration
+## More Miraland CLI Configuration
 
-Now that you have a keypair, set the solana configuration to use your validator
+Now that you have a keypair, set the miraland configuration to use your validator
 keypair for all following commands:
 
 ```bash
-solana config set --keypair ~/validator-keypair.json
+miraland config set --keypair ~/validator-keypair.json
 ```
 
 You should see the following output:
 
 ```text
-Config File: /home/solana/.config/solana/cli/config.yml
-RPC URL: http://api.devnet.solana.com
-WebSocket URL: ws://api.devnet.solana.com/ (computed)
-Keypair Path: /home/solana/validator-keypair.json
+Config File: /home/miraland/.config/miraland/cli/config.yml
+RPC URL: http://api.devnet.miraland.top
+WebSocket URL: ws://api.devnet.miraland.top/ (computed)
+Keypair Path: /home/miraland/validator-keypair.json
 Commitment: confirmed
 ```
 
@@ -203,7 +203,7 @@ Commitment: confirmed
 Airdrop yourself some MLN to get started:
 
 ```bash
-solana airdrop 1
+miraland airdrop 1
 ```
 
 Note that airdrops are only available on Devnet and Testnet. Both are limited
@@ -212,13 +212,13 @@ to 1 MLN per request.
 To view your current balance:
 
 ```text
-solana balance
+miraland balance
 ```
 
 Or to see in finer detail:
 
 ```text
-solana balance --lamports
+miraland balance --lamports
 ```
 
 Read more about the [difference between MLN and lamports here](../introduction.md#what-are-sols).
@@ -244,7 +244,7 @@ miraland-keygen new -o ~/authorized-withdrawer-keypair.json
 
 If you haven’t already done so, create a vote-account keypair and create the
 vote account on the network. If you have completed this step, you should see the
-“vote-account-keypair.json” in your Solana runtime directory:
+“vote-account-keypair.json” in your Miraland runtime directory:
 
 ```bash
 miraland-keygen new -o ~/vote-account-keypair.json
@@ -254,7 +254,7 @@ The following command can be used to create your vote account on the blockchain
 with all the default options:
 
 ```bash
-solana create-vote-account ~/vote-account-keypair.json ~/validator-keypair.json ~/authorized-withdrawer-keypair.json
+miraland create-vote-account ~/vote-account-keypair.json ~/validator-keypair.json ~/authorized-withdrawer-keypair.json
 ```
 
 Remember to move your authorized withdrawer keypair into a very secure location after running the above command.
@@ -284,7 +284,7 @@ miraland-validator \
   --identity ~/validator-keypair.json \
   --vote-account ~/vote-account-keypair.json \
   --rpc-port 8899 \
-  --entrypoint entrypoint.devnet.solana.com:8001 \
+  --entrypoint entrypoint.devnet.miraland.top:8001 \
   --limit-ledger-size \
   --log ~/miraland-validator.log
 ```
@@ -306,7 +306,7 @@ Confirm your validator is connected to the network by opening a new terminal and
 running:
 
 ```bash
-solana gossip
+miraland gossip
 ```
 
 If your validator is connected, its public key and IP address will appear in the list.
@@ -330,7 +330,7 @@ less disk usage may be requested by adding an argument to `--limit-ledger-size`
 if desired. Check `miraland-validator --help` for the default limit value used by
 `--limit-ledger-size`. More information about
 selecting a custom limit value is [available
-here](https://github.com/solana-labs/solana/blob/36167b032c03fc7d1d8c288bb621920aaf903311/core/src/ledger_cleanup_service.rs#L23-L34).
+here](https://github.com/miraland-labs/miraland/blob/36167b032c03fc7d1d8c288bb621920aaf903311/core/src/ledger_cleanup_service.rs#L23-L34).
 
 ### Systemd Unit
 
@@ -342,7 +342,7 @@ the following:
 
 ```
 [Unit]
-Description=Solana Validator
+Description=Miraland Validator
 After=network.target
 Wants=miraland-sys-tuner.service
 StartLimitIntervalSec=0
@@ -354,7 +354,7 @@ RestartSec=1
 User=sol
 LimitNOFILE=1000000
 LogRateLimitIntervalSec=0
-Environment="PATH=/bin:/usr/bin:/home/sol/.local/share/solana/install/active_release/bin"
+Environment="PATH=/bin:/usr/bin:/home/sol/.local/share/miraland/install/active_release/bin"
 ExecStart=/home/sol/bin/validator.sh
 
 [Install]
@@ -425,7 +425,7 @@ systemctl restart logrotate.service
 ```
 
 As mentioned earlier, be sure that if you use logrotate, any script you create
-which starts the solana validator process uses "exec" to do so (example: "exec
+which starts the miraland validator process uses "exec" to do so (example: "exec
 miraland-validator ..."); otherwise, when logrotate sends its signal to the
 validator, the enclosing script will die and take the validator process with
 it.
@@ -444,8 +444,8 @@ partition.
 
 Example configuration:
 
-1. `sudo mkdir /mnt/solana-accounts`
-2. Add a 300GB tmpfs parition by adding a new line containing `tmpfs /mnt/solana-accounts tmpfs rw,size=300G,user=sol 0 0` to `/etc/fstab`
+1. `sudo mkdir /mnt/miraland-accounts`
+2. Add a 300GB tmpfs parition by adding a new line containing `tmpfs /mnt/miraland-accounts tmpfs rw,size=300G,user=sol 0 0` to `/etc/fstab`
    (assuming your validator is running under the user "sol"). **CAREFUL: If you
    incorrectly edit /etc/fstab your machine may no longer boot**
 3. Create at least 250GB of swap space
@@ -458,10 +458,10 @@ Example configuration:
 - Format the device for usage as swap with `sudo mkswap SWAPDEV`
 
 4. Add the swap file to `/etc/fstab` with a new line containing `SWAPDEV swap swap defaults 0 0`
-5. Enable swap with `sudo swapon -a` and mount the tmpfs with `sudo mount /mnt/solana-accounts/`
+5. Enable swap with `sudo swapon -a` and mount the tmpfs with `sudo mount /mnt/miraland-accounts/`
 6. Confirm swap is active with `free -g` and the tmpfs is mounted with `mount`
 
-Now add the `--accounts /mnt/solana-accounts` argument to your `miraland-validator`
+Now add the `--accounts /mnt/miraland-accounts` argument to your `miraland-validator`
 command-line arguments and restart the validator.
 
 ### Account indexing

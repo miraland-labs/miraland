@@ -4,7 +4,7 @@ title: Validator Requirements
 
 ## Minimum MLN requirements
 
-There is no strict minimum amount of MLN required to run a validator on Solana.
+There is no strict minimum amount of MLN required to run a validator on Miraland.
 
 However in order to participate in consensus, a vote account is required which
 has a rent-exempt reserve of 0.02685864 MLN. Voting also requires sending a vote
@@ -59,7 +59,7 @@ be cost-efficient over the long term.
 
 However, it may be convenient to run non-voting api nodes on VM instances for
 your own internal usage. This use case includes exchanges and services built on
-Solana.
+Miraland.
 
 In fact, the mainnet-beta validators operated by the team are currently
 (Mar. 2021) run on GCE `n2-standard-32` (32 vCPUs, 128 GB memory) instances with
@@ -78,12 +78,12 @@ Docker's containerzation overhead and resultant performance degradation unless
 specially configured.
 
 We use Docker only for development purposes. Docker Hub contains images for all
-releases at [solanalabs/solana](https://hub.docker.com/r/solanalabs/solana).
+releases at [miralandlabs/miraland](https://hub.docker.com/r/miralandlabs/miraland).
 
 ## Software
 
 - We build and run on Ubuntu 20.04.
-- See [Installing Solana](../cli/install-miraland-cli-tools.md) for the current Solana software release.
+- See [Installing Miraland](../cli/install-miraland-cli-tools.md) for the current Miraland software release.
 
 Prebuilt binaries are available for Linux x86_64 on CPUs supporting AVX2 \(Ubuntu 20.04 recommended\).
 MacOS or WSL users may build from source.
@@ -110,6 +110,6 @@ the internet on staked, mainnet-beta validators.
 
 ## GPU Requirements
 
-CUDA is required to make use of the GPU on your system. The provided Solana
+CUDA is required to make use of the GPU on your system. The provided Miraland
 release binaries are built on Ubuntu 20.04 with [CUDA Toolkit 10.1 update 1](https://developer.nvidia.com/cuda-toolkit-archive). If your machine is using
 a different CUDA version then you will need to rebuild from source.

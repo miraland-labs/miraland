@@ -1,5 +1,5 @@
 ---
-title: Solana Test Validator
+title: Miraland Test Validator
 ---
 
 During early stage development, it is often convenient to target a cluster with
@@ -21,7 +21,7 @@ starts a full-featured, single-node cluster on the developer's workstation.
 
 ## Installation
 
-The `miraland-test-validator` binary ships with the Solana CLI Tool Suite.
+The `miraland-test-validator` binary ships with the Miraland CLI Tool Suite.
 [Install](/cli/install-miraland-cli-tools) before continuing.
 
 ## Running
@@ -60,19 +60,19 @@ needed, it can be stopped with ctrl-c.
 ## Interacting
 
 Open a new terminal to interact with a [running](#running) `miraland-test-validator`
-instance using other binaries from the Solana CLI Tool Suite or your own client
+instance using other binaries from the Miraland CLI Tool Suite or your own client
 software.
 
 #### Configure the CLI Tool Suite to target a local cluster by default
 
 ```
-solana config set --url http://127.0.0.1:8899
+miraland config set --url http://127.0.0.1:8899
 ```
 
 #### Verify the CLI Tool Suite configuration
 
 ```
-solana genesis-hash
+miraland genesis-hash
 ```
 
 - **NOTE:** The result should match the `Genesis Hash:` field in the
@@ -81,24 +81,24 @@ solana genesis-hash
 #### Check the wallet balance
 
 ```
-solana balance
+miraland balance
 ```
 
 - **NOTE:** `Error: No such file or directory (os error 2)` means that the default
   wallet does not yet exist. Create it with `miraland-keygen new`.
 - **NOTE:** If the wallet has a zero MLN balance, airdrop some localnet MLN with
-  `solana airdrop 10`
+  `miraland airdrop 10`
 
 #### Perform a basic transfer transaction
 
 ```
-solana transfer EPhgPANa5Rh2wa4V2jxt7YbtWa3Uyw4sTeZ13cQjDDB8 1
+miraland transfer EPhgPANa5Rh2wa4V2jxt7YbtWa3Uyw4sTeZ13cQjDDB8 1
 ```
 
 #### Monitor `msg!()` output from on-chain programs
 
 ```
-solana logs
+miraland logs
 ```
 
 - **NOTE:** This command needs to be running when the target transaction is
@@ -156,10 +156,10 @@ JSON RPC URL: http://127.0.0.1:8899
 
 By default, the test validator runs with all [runtime features](programming-model/runtime#features) activated.
 
-You can verify this using the [Solana command-line tools](cli/install-miraland-cli-tools.md):
+You can verify this using the [Miraland command-line tools](cli/install-miraland-cli-tools.md):
 
 ```bash
-solana feature status -ul
+miraland feature status -ul
 ```
 
 Since this may not always be desired, especially when testing programs meant for deployment to mainnet, the CLI provides an option to deactivate specific features:

@@ -1,14 +1,14 @@
 const math = require("remark-math");
 const katex = require("rehype-katex");
 module.exports = {
-  title: "Solana Docs",
+  title: "Miraland Docs",
   tagline:
-    "Solana is an open source project implementing a new, high-performance, permissionless blockchain.",
-  url: "https://docs.solana.com",
+    "Miraland is an open source project implementing a new, high-performance, permissionless blockchain.",
+  url: "https://docs.miraland.top",
   baseUrl: "/",
   favicon: "img/favicon.ico",
-  organizationName: "solana-labs", // Usually your GitHub org/user name.
-  projectName: "solana", // Usually your repo name.
+  organizationName: "miraland-labs", // Usually your GitHub org/user name.
+  projectName: "miraland", // Usually your repo name.
   onBrokenLinks: "throw",
   stylesheets: [
     {
@@ -42,6 +42,9 @@ module.exports = {
       ko: {
         label: "한국어",
       },
+      zh: {
+        label: "简体中文",
+      },
     },
   },
   themeConfig: {
@@ -50,7 +53,7 @@ module.exports = {
     },
     navbar: {
       logo: {
-        alt: "Solana Logo",
+        alt: "Miraland Logo",
         src: "img/logo-horizontal.svg",
         srcDark: "img/logo-horizontal-dark.svg",
       },
@@ -90,8 +93,8 @@ module.exports = {
             { label: "Economics", to: "economics_overview" },
             { label: "Proposals", to: "proposals" },
             {
-              href: "https://spl.solana.com",
-              label: "Solana Program Library »",
+              href: "https://spl.miraland.top",
+              label: "Miraland Program Library »",
             },
           ],
         },
@@ -103,11 +106,11 @@ module.exports = {
           href: "https://discordapp.com/invite/pquxPsq",
           // label: "Discord",
           className: "header-link-icon header-discord-link",
-          "aria-label": "Solana Discord",
+          "aria-label": "Miraland Discord",
           position: "right",
         },
         {
-          href: "https://github.com/solana-labs/solana",
+          href: "https://github.com/miraland-labs/miraland",
           // label: "GitHub",
           className: "header-link-icon header-github-link",
           "aria-label": "GitHub repository",
@@ -119,7 +122,7 @@ module.exports = {
       // This API key is "search-only" and safe to be published
       apiKey: "011e01358301f5023b02da5db6af7f4d",
       appId: "FQ12ISJR4B",
-      indexName: "solana",
+      indexName: "miraland",
       contextualSearch: true,
     },
     footer: {
@@ -155,23 +158,23 @@ module.exports = {
           items: [
             {
               label: "Stack Exchange »",
-              href: "https://solana.stackexchange.com/",
+              href: "https://miraland.stackexchange.com/",
             },
             {
               label: "GitHub »",
-              href: "https://github.com/solana-labs/solana",
+              href: "https://github.com/miraland-labs/miraland",
             },
             {
               label: "Discord »",
-              href: "https://discordapp.com/invite/pquxPsq",
+              href: "https://discord.gg/jJUGKcKNz5",
             },
             {
               label: "Twitter »",
-              href: "https://twitter.com/solana",
+              href: "https://twitter.com/miracleland6",
             },
             {
               label: "Forum »",
-              href: "https://forum.solana.com",
+              href: "https://forum.miraland.top",
             },
           ],
         },
@@ -187,13 +190,13 @@ module.exports = {
               to: "integrations/exchange",
             },
             {
-              href: "https://spl.solana.com",
-              label: "Solana Program Library »",
+              href: "https://spl.miraland.top",
+              label: "Miraland Program Library »",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Solana Foundation`,
+      copyright: `Copyright © ${new Date().getFullYear()} Miraland Foundation`,
     },
   },
   presets: [
