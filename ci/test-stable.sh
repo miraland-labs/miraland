@@ -37,6 +37,8 @@ fi
 NPROC=$(nproc)
 JOBS=$((JOBS>NPROC ? NPROC : JOBS))
 
+# MI, added for test-stable link cc error caused by OOM
+JOBS=$((JOBS>6 ? JOBS - 2 : JOBS))
 
 # get channel info
 eval "$(ci/channel-info.sh)"
