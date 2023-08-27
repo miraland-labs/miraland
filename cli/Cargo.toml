@@ -21,6 +21,7 @@ const_format = "0.2.25"
 criterion-stats = "0.3.0"
 crossbeam-channel = "0.5"
 ctrlc = { version = "3.2.2", features = ["termination"] }
+h2 = "=0.3.20"
 humantime = "2.0.1"
 log = "0.4.17"
 miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc7" }
