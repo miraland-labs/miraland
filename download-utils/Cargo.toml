@@ -18,7 +18,7 @@ indicatif = "0.16.2"
 log = "0.4.17"
 miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
 miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
-reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
+reqwest = { version = "=0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 
 [lib]
 crate-type = ["lib"]
