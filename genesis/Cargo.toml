@@ -28,7 +28,7 @@ miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc7" }
 serde = "1.0.138"
 serde_json = "1.0.81"
 serde_yaml = "0.8.26"
-tempfile = "3.3.0"
+tempfile = "=3.6.0"
 
 [[bin]]
 name = "miraland-genesis"

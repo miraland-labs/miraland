@@ -36,7 +36,7 @@ semver = "1.0.10"
 serde = { version = "1.0.138", features = ["derive"] }
 serde_yaml = "0.8.26"
 tar = "0.4.38"
-tempfile = "3.3.0"
+tempfile = "=3.6.0"
 url = "2.2.2"
 
 [target."cfg(windows)".dependencies]

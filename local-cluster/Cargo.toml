@@ -30,7 +30,7 @@ miraland-streamer = { path = "../streamer", version = "=1.14.17-rc7" }
 miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc7" }
 rand = "0.7.0"
 rayon = "1.5.3"
-tempfile = "3.3.0"
+tempfile = "=3.6.0"
 
 [dev-dependencies]
 assert_matches = "1.5.0"

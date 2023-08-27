@@ -32,7 +32,7 @@ pickledb = { version = "0.5.1", default-features = false, features = ["yaml"] }
 serde = { version = "1.0", features = ["derive"] }
 solarti-associated-token-account = { version = "1.1" }
 solarti-token = { version = "3.5", features = ["no-entrypoint"] }
-tempfile = "3.3.0"
+tempfile = "=3.6.0"
 thiserror = "1.0"
 
 [dev-dependencies]
