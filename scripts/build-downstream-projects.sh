@@ -56,7 +56,8 @@ spl() {
     )
     set -x
     rm -rf spl
-    git clone https://github.com/miraland-labs/solarti-program-library.git spl
+    # MI: explicitly specify branch for solarti
+    git clone --branch solarti-token-3.5 https://github.com/miraland-labs/solarti-program-library.git spl
     cd spl
 
     project_used_miraland_version=$(sed -nE 's/miraland-sdk = \"[>=<~]*(.*)\"/\1/p' <"token/program/Cargo.toml")
@@ -109,4 +110,5 @@ EOF
 
 _ example_helloworld
 _ spl
-_ serum_dex
+# MI, comment out since serum_dex has not been adapted.
+# _ serum_dex

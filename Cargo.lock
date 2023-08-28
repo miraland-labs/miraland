@@ -4540,6 +4540,7 @@ dependencies = [
  "miraland-account-decoder",
  "miraland-sdk 1.14.17-rc7",
  "miraland-transaction-status",
+ "petgraph",
  "prost 0.11.9",
  "protobuf-src",
  "serde",
