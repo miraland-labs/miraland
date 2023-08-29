@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-validator"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc7"
+version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -27,30 +27,30 @@ jsonrpc-derive = "18.0.0"
 jsonrpc-ipc-server = "18.0.0"
 jsonrpc-server-utils = "18.0.0"
 log = "0.4.17"
-miraland-clap-utils = { path = "../clap-utils", version = "=1.14.17-rc7" }
-miraland-cli-config = { path = "../cli-config", version = "=1.14.17-rc7" }
-miraland-client = { path = "../client", version = "=1.14.17-rc7" }
-miraland-core = { path = "../core", version = "=1.14.17-rc7" }
-miraland-download-utils = { path = "../download-utils", version = "=1.14.17-rc7" }
-miraland-entry = { path = "../entry", version = "=1.14.17-rc7" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17-rc7" }
-miraland-genesis-utils = { path = "../genesis-utils", version = "=1.14.17-rc7" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc7" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc7" }
-miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc7" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc7" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc7" }
-miraland-poh = { path = "../poh", version = "=1.14.17-rc7" }
-miraland-rpc = { path = "../rpc", version = "=1.14.17-rc7" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
-miraland-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17-rc7" }
-miraland-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17-rc7" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc7" }
-miraland-test-validator = { path = "../test-validator", version = "=1.14.17-rc7" }
-miraland-version = { path = "../version", version = "=1.14.17-rc7" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc7" }
+miraland-clap-utils = { path = "../clap-utils", version = "1.14.17" }
+miraland-cli-config = { path = "../cli-config", version = "1.14.17" }
+miraland-client = { path = "../client", version = "1.14.17" }
+miraland-core = { path = "../core", version = "1.14.17" }
+miraland-download-utils = { path = "../download-utils", version = "1.14.17" }
+miraland-entry = { path = "../entry", version = "1.14.17" }
+miraland-faucet = { path = "../faucet", version = "1.14.17" }
+miraland-genesis-utils = { path = "../genesis-utils", version = "1.14.17" }
+miraland-gossip = { path = "../gossip", version = "1.14.17" }
+miraland-ledger = { path = "../ledger", version = "1.14.17" }
+miraland-logger = { path = "../logger", version = "1.14.17" }
+miraland-metrics = { path = "../metrics", version = "1.14.17" }
+miraland-net-utils = { path = "../net-utils", version = "1.14.17" }
+miraland-perf = { path = "../perf", version = "1.14.17" }
+miraland-poh = { path = "../poh", version = "1.14.17" }
+miraland-rpc = { path = "../rpc", version = "1.14.17" }
+miraland-runtime = { path = "../runtime", version = "1.14.17" }
+miraland-sdk = { path = "../sdk", version = "1.14.17" }
+miraland-send-transaction-service = { path = "../send-transaction-service", version = "1.14.17" }
+miraland-storage-bigtable = { path = "../storage-bigtable", version = "1.14.17" }
+miraland-streamer = { path = "../streamer", version = "1.14.17" }
+miraland-test-validator = { path = "../test-validator", version = "1.14.17" }
+miraland-version = { path = "../version", version = "1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "1.14.17" }
 num_cpus = "1.13.1"
 rand = "0.7.0"
 serde = "1.0.138"

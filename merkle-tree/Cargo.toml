@@ -1,6 +1,6 @@
 [package]
 name = "miraland-merkle-tree"
-version = "1.14.17-rc7"
+version = "1.14.17"
 description = "Miraland Merkle Tree"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -14,7 +14,7 @@ edition = "2021"
 
 [dependencies]
 fast-math = "0.1"
-miraland-program = { path = "../sdk/program", version = "=1.14.17-rc7" }
+miraland-program = { path = "../sdk/program", version = "1.14.17" }
 
 # This can go once the BPF toolchain target Rust 1.42.0+
 [target.bpfel-unknown-unknown.dependencies]

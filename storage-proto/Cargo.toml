@@ -1,6 +1,6 @@
 [package]
 name = "miraland-storage-proto"
-version = "1.14.17-rc7"
+version = "1.14.17"
 description = "Miraland Storage Protobuf Definitions"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,9 +15,9 @@ edition = "2021"
 [dependencies]
 bincode = "1.3.3"
 bs58 = "0.4.0"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc7" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc7" }
+miraland-account-decoder = { path = "../account-decoder", version = "1.14.17" }
+miraland-sdk = { path = "../sdk", version = "1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "1.14.17" }
 prost = "0.11.0"
 serde = "1.0.138"
 

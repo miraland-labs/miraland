@@ -1,7 +1,7 @@
 [package]
 name = "miraland-core"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.17-rc7"
+version = "1.14.17"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-core"
 readme = "../README.md"
@@ -37,30 +37,30 @@ lazy_static = "1.4.0"
 log = "0.4.17"
 lru = "0.7.7"
 min-max-heap = "1.3.0"
-miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17-rc7" }
-miraland-bloom = { path = "../bloom", version = "=1.14.17-rc7" }
-miraland-client = { path = "../client", version = "=1.14.17-rc7" }
-miraland-entry = { path = "../entry", version = "=1.14.17-rc7" }
-miraland-frozen-abi = { path = "../frozen-abi", version = "=1.14.17-rc7" }
-miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "=1.14.17-rc7" }
-miraland-geyser-plugin-manager = { path = "../geyser-plugin-manager", version = "=1.14.17-rc7" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc7" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc7" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc7" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc7" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc7" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc7" }
-miraland-poh = { path = "../poh", version = "=1.14.17-rc7" }
-miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc7" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc7" }
-miraland-rpc = { path = "../rpc", version = "=1.14.17-rc7" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
-miraland-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17-rc7" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc7" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc7" }
-miraland-version = { path = "../version", version = "=1.14.17-rc7" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc7" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "1.14.17" }
+miraland-bloom = { path = "../bloom", version = "1.14.17" }
+miraland-client = { path = "../client", version = "1.14.17" }
+miraland-entry = { path = "../entry", version = "1.14.17" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "1.14.17" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "1.14.17" }
+miraland-geyser-plugin-manager = { path = "../geyser-plugin-manager", version = "1.14.17" }
+miraland-gossip = { path = "../gossip", version = "1.14.17" }
+miraland-ledger = { path = "../ledger", version = "1.14.17" }
+miraland-measure = { path = "../measure", version = "1.14.17" }
+miraland-metrics = { path = "../metrics", version = "1.14.17" }
+miraland-net-utils = { path = "../net-utils", version = "1.14.17" }
+miraland-perf = { path = "../perf", version = "1.14.17" }
+miraland-poh = { path = "../poh", version = "1.14.17" }
+miraland-program-runtime = { path = "../program-runtime", version = "1.14.17" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "1.14.17" }
+miraland-rpc = { path = "../rpc", version = "1.14.17" }
+miraland-runtime = { path = "../runtime", version = "1.14.17" }
+miraland-sdk = { path = "../sdk", version = "1.14.17" }
+miraland-send-transaction-service = { path = "../send-transaction-service", version = "1.14.17" }
+miraland-streamer = { path = "../streamer", version = "1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "1.14.17" }
+miraland-version = { path = "../version", version = "1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "1.14.17" }
 num_enum = "0.5.7"
 rand = "0.7.0"
 rand_chacha = "0.2.2"
@@ -75,9 +75,9 @@ trees = "0.4.2"
 
 [dev-dependencies]
 matches = "0.1.9"
-miraland-logger = { path = "../logger", version = "=1.14.17-rc7" }
-miraland-program-runtime = { path = "../program-runtime", version = "=1.14.17-rc7" }
-miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc7" }
+miraland-logger = { path = "../logger", version = "1.14.17" }
+miraland-program-runtime = { path = "../program-runtime", version = "1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "1.14.17" }
 raptorq = "1.7.0"
 serde_json = "1.0.81"
 serial_test = "0.8.0"

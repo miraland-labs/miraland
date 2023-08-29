@@ -1,6 +1,6 @@
 [package]
 name = "miraland-download-utils"
-version = "1.14.17-rc7"
+version = "1.14.17"
 description = "Miraland Download Utils"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -17,8 +17,8 @@ console = "0.15.0"
 h2 = "=0.3.20"
 indicatif = "0.16.2"
 log = "0.4.17"
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
+miraland-runtime = { path = "../runtime", version = "1.14.17" }
+miraland-sdk = { path = "../sdk", version = "1.14.17" }
 reqwest = { version = "=0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 
 [lib]

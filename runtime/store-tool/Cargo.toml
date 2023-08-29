@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-store-tool"
 description = "Tool to inspect append vecs"
-version = "1.14.17-rc7"
+version = "1.14.17"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -15,9 +15,9 @@ publish = false
 [dependencies]
 clap = "2.33.1"
 log = { version = "0.4.17" }
-miraland-logger = { path = "../../logger", version = "=1.14.17-rc7" }
-miraland-runtime = { path = "..", version = "=1.14.17-rc7" }
-miraland-version = { path = "../../version", version = "=1.14.17-rc7" }
+miraland-logger = { path = "../../logger", version = "1.14.17" }
+miraland-runtime = { path = "..", version = "1.14.17" }
+miraland-version = { path = "../../version", version = "1.14.17" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

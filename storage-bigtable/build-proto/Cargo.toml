@@ -10,7 +10,7 @@ license = "Apache-2.0"
 name = "proto"
 publish = false
 repository = "https://github.com/miraland-labs/miraland"
-version = "1.14.17-rc7"
+version = "1.14.17"
 
 [workspace]
 

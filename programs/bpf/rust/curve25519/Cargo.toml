@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-curve25519"
-version = "1.14.17-rc7"
+version = "1.14.17"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,8 +13,8 @@ documentation = "https://docs.rs/miraland-bpf-rust-zktoken_crypto"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "=1.14.17-rc7" }
-miraland-zk-token-sdk = { path = "../../../../zk-token-sdk", version = "=1.14.17-rc7" }
+miraland-program = { path = "../../../../sdk/program", version = "1.14.17" }
+miraland-zk-token-sdk = { path = "../../../../zk-token-sdk", version = "1.14.17" }
 
 [lib]
 crate-type = ["cdylib"]

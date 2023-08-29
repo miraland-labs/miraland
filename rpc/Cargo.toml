@@ -1,6 +1,6 @@
 [package]
 name = "miraland-rpc"
-version = "1.14.17-rc7"
+version = "1.14.17"
 description = "Miraland RPC"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -26,26 +26,26 @@ jsonrpc-http-server = "18.0.0"
 jsonrpc-pubsub = "18.0.0"
 libc = "0.2.126"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "=1.14.17-rc7" }
-miraland-client = { path = "../client", version = "=1.14.17-rc7" }
-miraland-entry = { path = "../entry", version = "=1.14.17-rc7" }
-miraland-faucet = { path = "../faucet", version = "=1.14.17-rc7" }
-miraland-gossip = { path = "../gossip", version = "=1.14.17-rc7" }
-miraland-ledger = { path = "../ledger", version = "=1.14.17-rc7" }
-miraland-measure = { path = "../measure", version = "=1.14.17-rc7" }
-miraland-metrics = { path = "../metrics", version = "=1.14.17-rc7" }
-miraland-perf = { path = "../perf", version = "=1.14.17-rc7" }
-miraland-poh = { path = "../poh", version = "=1.14.17-rc7" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "=1.14.17-rc7" }
-miraland-runtime = { path = "../runtime", version = "=1.14.17-rc7" }
-miraland-sdk = { path = "../sdk", version = "=1.14.17-rc7" }
-miraland-send-transaction-service = { path = "../send-transaction-service", version = "=1.14.17-rc7" }
-miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc7" }
-miraland-storage-bigtable = { path = "../storage-bigtable", version = "=1.14.17-rc7" }
-miraland-streamer = { path = "../streamer", version = "=1.14.17-rc7" }
-miraland-transaction-status = { path = "../transaction-status", version = "=1.14.17-rc7" }
-miraland-version = { path = "../version", version = "=1.14.17-rc7" }
-miraland-vote-program = { path = "../programs/vote", version = "=1.14.17-rc7" }
+miraland-account-decoder = { path = "../account-decoder", version = "1.14.17" }
+miraland-client = { path = "../client", version = "1.14.17" }
+miraland-entry = { path = "../entry", version = "1.14.17" }
+miraland-faucet = { path = "../faucet", version = "1.14.17" }
+miraland-gossip = { path = "../gossip", version = "1.14.17" }
+miraland-ledger = { path = "../ledger", version = "1.14.17" }
+miraland-measure = { path = "../measure", version = "1.14.17" }
+miraland-metrics = { path = "../metrics", version = "1.14.17" }
+miraland-perf = { path = "../perf", version = "1.14.17" }
+miraland-poh = { path = "../poh", version = "1.14.17" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "1.14.17" }
+miraland-runtime = { path = "../runtime", version = "1.14.17" }
+miraland-sdk = { path = "../sdk", version = "1.14.17" }
+miraland-send-transaction-service = { path = "../send-transaction-service", version = "1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "1.14.17" }
+miraland-storage-bigtable = { path = "../storage-bigtable", version = "1.14.17" }
+miraland-streamer = { path = "../streamer", version = "1.14.17" }
+miraland-transaction-status = { path = "../transaction-status", version = "1.14.17" }
+miraland-version = { path = "../version", version = "1.14.17" }
+miraland-vote-program = { path = "../programs/vote", version = "1.14.17" }
 rayon = "1.5.3"
 regex = "1.5.6"
 serde = "1.0.138"
@@ -60,9 +60,9 @@ tokio = { version = "~1.14.1", features = ["full"] }
 tokio-util = { version = "0.6", features = ["codec", "compat"] }
 
 [dev-dependencies]
-miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "=1.14.17-rc7" }
-miraland-net-utils = { path = "../net-utils", version = "=1.14.17-rc7" }
-miraland-stake-program = { path = "../programs/stake", version = "=1.14.17-rc7" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "1.14.17" }
+miraland-net-utils = { path = "../net-utils", version = "1.14.17" }
+miraland-stake-program = { path = "../programs/stake", version = "1.14.17" }
 serial_test = "0.8.0"
 symlink = "0.1.0"
 
