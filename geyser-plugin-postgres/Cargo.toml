@@ -18,7 +18,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 bs58 = "0.4.0"
 bytemuck = "1.11.0"
-chrono = { version = "0.4.11", features = ["serde"] }
+chrono = { version = "=0.4.26", features = ["serde"] }
 crossbeam-channel = "0.5"
 log = "0.4.17"
 miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "1.14.17" }

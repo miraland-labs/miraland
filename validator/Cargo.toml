@@ -14,7 +14,7 @@ documentation = "https://docs.rs/miraland-validator"
 default-run = "miraland-validator"
 
 [dependencies]
-chrono = { version = "0.4.11", features = ["serde"] }
+chrono = { version = "=0.4.26", features = ["serde"] }
 clap = "2.33.1"
 console = "0.15.0"
 core_affinity = "0.5.10"

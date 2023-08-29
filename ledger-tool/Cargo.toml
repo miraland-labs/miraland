@@ -14,7 +14,7 @@ documentation = "https://docs.rs/miraland-ledger-tool"
 
 [dependencies]
 base64 = "0.13.0"
-chrono = "0.4.11"
+chrono = "=0.4.26"
 clap = "2.33.1"
 crossbeam-channel = "0.5"
 csv = "1.1.6"
