@@ -20,7 +20,7 @@ chrono = { version = "0.4.11", features = ["serde"] }
 clap = { version = "2.33.1" }
 console = "0.15.0"
 crossbeam-channel = "0.5"
-ctrlc = { version = "3.2.2", features = ["termination"] }
+ctrlc = { version = "~3.2", features = ["termination"] }
 dirs-next = "2.0.0"
 h2 = "=0.3.20"
 indicatif = "0.16.2"
