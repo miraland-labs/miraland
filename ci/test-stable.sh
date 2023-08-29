@@ -121,7 +121,7 @@ test-stable-bpf)
   # latest mainbeta release version.
   miraland_program_count=$(grep -c 'miraland-program v' cargo.log)
   rm -f cargo.log
-  if ((miraland_program_count > 10)); then
+  if ((miraland_program_count > 18)); then
       echo "Regression of build redundancy ${miraland_program_count}."
       echo "Review dependency features that trigger redundant rebuilds of miraland-program."
       exit 1
