@@ -311,6 +311,8 @@ dependencies = [
  "percent-encoding 2.3.0",
  "pin-project-lite",
  "serde",
+ "serde_json",
+ "serde_urlencoded",
  "sync_wrapper",
  "tokio",
  "tower",
@@ -2578,9 +2580,9 @@ dependencies = [
 
 [[package]]
 name = "memchr"
-version = "2.6.0"
+version = "2.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "76fc44e2588d5b436dbc3c6cf62aef290f90dab6235744a93dfe1cc18f451e2c"
+checksum = "2dffe52ecf27772e601905b7522cb4ef790d2cc203488bbd0e2fe85fcb74566d"
 
 [[package]]
 name = "memmap2"
@@ -4477,6 +4479,7 @@ dependencies = [
 name = "miraland-storage-bigtable"
 version = "1.14.17"
 dependencies = [
+ "axum",
  "backoff",
  "bincode",
  "bytes",
@@ -4489,6 +4492,7 @@ dependencies = [
  "hyper",
  "hyper-proxy",
  "log",
+ "memchr",
  "miraland-metrics",
  "miraland-sdk 1.14.17",
  "miraland-storage-proto",
