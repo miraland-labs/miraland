@@ -39,7 +39,10 @@ thiserror = "1.0"
 time = "=0.3.9"
 tokio = "1"
 tonic = { version = "=0.8.0", features = ["tls", "transport"] }
-# axum = "=0.6.18"
+# axum = "=0.6.18" # MI, since 0.6.20 requires rustc 1.63+
+# axum = "=0.5.17" # MI, should work, no need here
+# solarti needs axum = "=0.5.17" as 0.6.0+ requires tokio ^1.21, 
+# which not compatible with tokio ~1.14.1 in miraland 1.14
 zstd = "0.11.2"
 
 # openssl is a dependency of the goauth and smpl_jwt crates, but explicitly
