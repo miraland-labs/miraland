@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://solana.com">
-    <img alt="Solana" src="https://i.imgur.com/IKyzQ6T.png" width="250" />
+  <a href="https://miraland.top">
+    <img alt="Miraland" src="https://www.arcaps.com/shared/miraland/logo.png" width="250" />
   </a>
 </p>
 
