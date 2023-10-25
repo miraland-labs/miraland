@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://miraland.top">
-    <img alt="Miraland" src="https://www.arcaps.com/shared/miraland/logo.png" width="250" />
+    <img alt="Miraland" src="https://www.arcaps.com/shared/miraland/miraland-dark-background.png" width="250" />
   </a>
 </p>
 
