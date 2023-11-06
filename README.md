@@ -9,7 +9,8 @@
 [![Build status](https://badge.buildkite.com/8cc350de251d61483db98bdfc895b9ea0ac8ffa4a32ee850ed.svg?branch=master)](https://buildkite.com/miraland-labs/miraland/builds?branch=main)
 [![codecov](https://codecov.io/gh/miraland-labs/miraland/branch/main/graph/badge.svg)](https://codecov.io/gh/miraland-labs/miraland)
 
-# Miraland is derived/forked from Miraland
+# Inspiration
+Miraland is inspired by Solana and initial code base is derived/forked from Solana.
 
 # Building
 
