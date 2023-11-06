@@ -4,10 +4,12 @@
   </a>
 </p>
 
-[![Solana crate](https://img.shields.io/crates/v/miraland-core.svg)](https://crates.io/crates/miraland-core)
-[![Solana documentation](https://docs.rs/miraland-core/badge.svg)](https://docs.rs/miraland-core)
-[![Build status](https://badge.buildkite.com/8cc350de251d61483db98bdfc895b9ea0ac8ffa4a32ee850ed.svg?branch=master)](https://buildkite.com/solana-labs/solana/builds?branch=master)
-[![codecov](https://codecov.io/gh/solana-labs/solana/branch/master/graph/badge.svg)](https://codecov.io/gh/solana-labs/solana)
+[![Miraland crate](https://img.shields.io/crates/v/miraland-core.svg)](https://crates.io/crates/miraland-core)
+[![Miraland documentation](https://docs.rs/miraland-core/badge.svg)](https://docs.rs/miraland-core)
+[![Build status](https://badge.buildkite.com/8cc350de251d61483db98bdfc895b9ea0ac8ffa4a32ee850ed.svg?branch=master)](https://buildkite.com/miraland-labs/miraland/builds?branch=main)
+[![codecov](https://codecov.io/gh/miraland-labs/miraland/branch/main/graph/badge.svg)](https://codecov.io/gh/miraland-labs/miraland)
+
+# Miraland is derived/forked from Miraland
 
 # Building
 
@@ -41,8 +43,8 @@ $ sudo apt-get install libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang c
 ## **2. Download the source code.**
 
 ```bash
-$ git clone https://github.com/solana-labs/solana.git
-$ cd solana
+$ git clone https://github.com/miraland-labs/miraland.git
+$ cd miraland
 ```
 
 ## **3. Build.**
@@ -60,11 +62,11 @@ $ cargo test
 ```
 
 ### Starting a local testnet
-Start your own testnet locally, instructions are in the [online docs](https://docs.solana.com/cluster/bench-tps).
+Start your own testnet locally, instructions are in the [online docs](https://docs.miraland.top/cluster/bench-tps).
 
 ### Accessing the remote development cluster
 * `devnet` - stable public cluster for development accessible via
-devnet.solana.com. Runs 24/7. Learn more about the [public clusters](https://docs.solana.com/clusters)
+devnet-mln.miraland.top. Runs 24/7. Learn more about the [public clusters](https://docs.miraland.top/clusters)
 
 # Benchmarking
 
@@ -110,7 +112,7 @@ send us that patch!
 
 All claims, content, designs, algorithms, estimates, roadmaps,
 specifications, and performance measurements described in this project
-are done with the Solana Foundation's ("SF") good faith efforts. It is up to
+are done with the Miraland Foundation's ("MF") good faith efforts. It is up to
 the reader to check and validate their accuracy and truthfulness.
 Furthermore, nothing in this project constitutes a solicitation for
 investment.
@@ -118,7 +120,7 @@ investment.
 Any content produced by SF or developer resources that SF provides are
 for educational and inspirational purposes only. SF does not encourage,
 induce or sanction the deployment, integration or use of any such
-applications (including the code comprising the Solana blockchain
+applications (including the code comprising the Miraland blockchain
 protocol) in violation of applicable laws or regulations and hereby
 prohibits any such deployment, integration or use. This includes the use of
 any such applications by the reader (a) in violation of export control
@@ -135,14 +137,14 @@ prohibit U.S. persons (and other persons that are subject to such laws)
 from transacting with persons in certain countries and territories or
 that are on the SDN list. As a project-based primarily on open-source
 software, it is possible that such sanctioned persons may nevertheless
-bypass prohibitions, obtain the code comprising the Solana blockchain
+bypass prohibitions, obtain the code comprising the Miraland blockchain
 protocol (or other project code or applications) and deploy, integrate,
 or otherwise use it. Accordingly, there is a risk to individuals that
-other persons using the Solana blockchain protocol may be sanctioned
+other persons using the Miraland blockchain protocol may be sanctioned
 persons and that transactions with such persons would be a violation of
 U.S. export controls and sanctions law. This risk applies to
 individuals, organizations, and other ecosystem participants that
-deploy, integrate, or use the Solana blockchain protocol code directly
-(e.g., as a node operator), and individuals that transact on the Solana
+deploy, integrate, or use the Miraland blockchain protocol code directly
+(e.g., as a node operator), and individuals that transact on the Miraland
 blockchain through light clients, third party interfaces, and/or wallet
 software.
