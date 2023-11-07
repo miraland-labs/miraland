@@ -39,7 +39,7 @@ thiserror = "1.0.31"
 tokio-postgres = "0.7.7"
 
 [dev-dependencies]
-libc = "=0.2.126"
+libc = "=0.2.141"
 libloading = "0.7.3"
 
 miraland-account-decoder = { path = "../account-decoder", version = "1.14.17" }
