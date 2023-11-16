@@ -1,6 +1,6 @@
 [package]
 name = "miraland-entry"
-version = "1.14.17"
+version = "1.14.18"
 description = "Miraland Entry"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -19,19 +19,19 @@ dlopen = "0.1.8"
 dlopen_derive = "0.1.4"
 lazy_static = "1.4.0"
 log = "0.4.17"
-miraland-measure = { path = "../measure", version = "1.14.17" }
-miraland-merkle-tree = { path = "../merkle-tree", version = "1.14.17" }
-miraland-metrics = { path = "../metrics", version = "1.14.17" }
-miraland-perf = { path = "../perf", version = "1.14.17" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "1.14.17" }
-miraland-sdk = { path = "../sdk", version = "1.14.17" }
+miraland-measure = { path = "../measure", version = "1.14.18" }
+miraland-merkle-tree = { path = "../merkle-tree", version = "1.14.18" }
+miraland-metrics = { path = "../metrics", version = "1.14.18" }
+miraland-perf = { path = "../perf", version = "1.14.18" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "1.14.18" }
+miraland-sdk = { path = "../sdk", version = "1.14.18" }
 rand = "0.7.0"
 rayon = "1.5.3"
 serde = "1.0.138"
 
 [dev-dependencies]
 matches = "0.1.9"
-miraland-logger = { path = "../logger", version = "1.14.17" }
+miraland-logger = { path = "../logger", version = "1.14.18" }
 
 [lib]
 crate-type = ["lib"]

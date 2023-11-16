@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-geyser-plugin-manager"
 description = "The Solana Geyser plugin manager."
-version = "1.14.17"
+version = "1.14.18"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -18,13 +18,13 @@ crossbeam-channel = "0.5"
 json5 = "0.4.1"
 libloading = "0.7.3"
 log = "0.4.17"
-miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "1.14.17" }
-miraland-measure = { path = "../measure", version = "1.14.17" }
-miraland-metrics = { path = "../metrics", version = "1.14.17" }
-miraland-rpc = { path = "../rpc", version = "1.14.17" }
-miraland-runtime = { path = "../runtime", version = "1.14.17" }
-miraland-sdk = { path = "../sdk", version = "1.14.17" }
-miraland-transaction-status = { path = "../transaction-status", version = "1.14.17" }
+miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "1.14.18" }
+miraland-measure = { path = "../measure", version = "1.14.18" }
+miraland-metrics = { path = "../metrics", version = "1.14.18" }
+miraland-rpc = { path = "../rpc", version = "1.14.18" }
+miraland-runtime = { path = "../runtime", version = "1.14.18" }
+miraland-sdk = { path = "../sdk", version = "1.14.18" }
+miraland-transaction-status = { path = "../transaction-status", version = "1.14.18" }
 serde_json = "1.0.81"
 thiserror = "1.0.31"
 

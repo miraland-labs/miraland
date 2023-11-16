@@ -1,6 +1,6 @@
 [package]
 name = "noop"
-version = "1.14.17"
+version = "1.14.18"
 description = "Miraland SBF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,7 +13,7 @@ edition = "2021"
 publish = false
 
 [dependencies]
-miraland-program = { path = "../../../../program", version = "1.14.17" }
+miraland-program = { path = "../../../../program", version = "1.14.18" }
 
 [lib]
 crate-type = ["cdylib"]

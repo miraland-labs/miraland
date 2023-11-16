@@ -1,6 +1,6 @@
 [package]
 name = "miraland-keygen"
-version = "1.14.17"
+version = "1.14.18"
 description = "Miraland key generation utility"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -16,11 +16,11 @@ edition = "2021"
 bs58 = "0.4.0"
 clap = { version = "3.1.5", features = ["cargo"] }
 dirs-next = "2.0.0"
-miraland-clap-v3-utils = { path = "../clap-v3-utils", version = "1.14.17" }
-miraland-cli-config = { path = "../cli-config", version = "1.14.17" }
-miraland-remote-wallet = { path = "../remote-wallet", version = "1.14.17" }
-miraland-sdk = { path = "../sdk", version = "1.14.17" }
-miraland-version = { path = "../version", version = "1.14.17" }
+miraland-clap-v3-utils = { path = "../clap-v3-utils", version = "1.14.18" }
+miraland-cli-config = { path = "../cli-config", version = "1.14.18" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "1.14.18" }
+miraland-sdk = { path = "../sdk", version = "1.14.18" }
+miraland-version = { path = "../version", version = "1.14.18" }
 num_cpus = "1.13.1"
 tiny-bip39 = "0.8.2"
 

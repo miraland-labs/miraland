@@ -1,6 +1,6 @@
 [package]
 name = "miraland-storage-bigtable"
-version = "1.14.17"
+version = "1.14.18"
 description = "Miraland Storage BigTable"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -31,10 +31,10 @@ hyper = "0.14.20"
 hyper-proxy = "0.9.1"
 log = "0.4.17"
 memchr = "=2.5.0"
-miraland-metrics = { path = "../metrics", version = "1.14.17" }
-miraland-sdk = { path = "../sdk", version = "1.14.17" }
-miraland-storage-proto = { path = "../storage-proto", version = "1.14.17" }
-miraland-transaction-status = { path = "../transaction-status", version = "1.14.17" }
+miraland-metrics = { path = "../metrics", version = "1.14.18" }
+miraland-sdk = { path = "../sdk", version = "1.14.18" }
+miraland-storage-proto = { path = "../storage-proto", version = "1.14.18" }
+miraland-transaction-status = { path = "../transaction-status", version = "1.14.18" }
 openssl-src = "=111.25.0+1.1.1t"
 prost = "0.11.0"
 prost-types = "0.11.0"

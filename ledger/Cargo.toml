@@ -1,6 +1,6 @@
 [package]
 name = "miraland-ledger"
-version = "1.14.17"
+version = "1.14.18"
 description = "Miraland ledger"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -28,23 +28,23 @@ lazy_static = "1.4.0"
 libc = "=0.2.141"
 log = { version = "0.4.17" }
 lru = "0.7.7"
-miraland-account-decoder = { path = "../account-decoder", version = "1.14.17" }
-miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "1.14.17" }
-miraland-entry = { path = "../entry", version = "1.14.17" }
-miraland-frozen-abi = { path = "../frozen-abi", version = "1.14.17" }
-miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "1.14.17" }
-miraland-measure = { path = "../measure", version = "1.14.17" }
-miraland-metrics = { path = "../metrics", version = "1.14.17" }
-miraland-perf = { path = "../perf", version = "1.14.17" }
-miraland-program-runtime = { path = "../program-runtime", version = "1.14.17" }
-miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "1.14.17" }
-miraland-runtime = { path = "../runtime", version = "1.14.17" }
-miraland-sdk = { path = "../sdk", version = "1.14.17" }
-miraland-stake-program = { path = "../programs/stake", version = "1.14.17" }
-miraland-storage-bigtable = { path = "../storage-bigtable", version = "1.14.17" }
-miraland-storage-proto = { path = "../storage-proto", version = "1.14.17" }
-miraland-transaction-status = { path = "../transaction-status", version = "1.14.17" }
-miraland-vote-program = { path = "../programs/vote", version = "1.14.17" }
+miraland-account-decoder = { path = "../account-decoder", version = "1.14.18" }
+miraland-bpf-loader-program = { path = "../programs/bpf_loader", version = "1.14.18" }
+miraland-entry = { path = "../entry", version = "1.14.18" }
+miraland-frozen-abi = { path = "../frozen-abi", version = "1.14.18" }
+miraland-frozen-abi-macro = { path = "../frozen-abi/macro", version = "1.14.18" }
+miraland-measure = { path = "../measure", version = "1.14.18" }
+miraland-metrics = { path = "../metrics", version = "1.14.18" }
+miraland-perf = { path = "../perf", version = "1.14.18" }
+miraland-program-runtime = { path = "../program-runtime", version = "1.14.18" }
+miraland-rayon-threadlimit = { path = "../rayon-threadlimit", version = "1.14.18" }
+miraland-runtime = { path = "../runtime", version = "1.14.18" }
+miraland-sdk = { path = "../sdk", version = "1.14.18" }
+miraland-stake-program = { path = "../programs/stake", version = "1.14.18" }
+miraland-storage-bigtable = { path = "../storage-bigtable", version = "1.14.18" }
+miraland-storage-proto = { path = "../storage-proto", version = "1.14.18" }
+miraland-transaction-status = { path = "../transaction-status", version = "1.14.18" }
+miraland-vote-program = { path = "../programs/vote", version = "1.14.18" }
 num_cpus = "1.13.1"
 num_enum = "0.5.7"
 prost = "0.11.0"
@@ -74,8 +74,8 @@ features = ["lz4"]
 [dev-dependencies]
 bs58 = "0.4.0"
 matches = "0.1.9"
-miraland-account-decoder = { path = "../account-decoder", version = "1.14.17" }
-miraland-logger = { path = "../logger", version = "1.14.17" }
+miraland-account-decoder = { path = "../account-decoder", version = "1.14.18" }
+miraland-logger = { path = "../logger", version = "1.14.18" }
 test-case = "2.1.0"
 
 [build-dependencies]

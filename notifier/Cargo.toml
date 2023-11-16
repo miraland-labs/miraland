@@ -1,6 +1,6 @@
 [package]
 name = "miraland-notifier"
-version = "1.14.17"
+version = "1.14.18"
 description = "Miraland Notifier"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",

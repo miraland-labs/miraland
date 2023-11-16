@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bucket-map"
-version = "1.14.17"
+version = "1.14.18"
 description = "miraland-bucket-map"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-bucket-map"
@@ -16,15 +16,15 @@ edition = "2021"
 [dependencies]
 log = { version = "0.4.17" }
 memmap2 = "0.5.3"
-miraland-measure = { path = "../measure", version = "1.14.17" }
-miraland-sdk = { path = "../sdk", version = "1.14.17" }
+miraland-measure = { path = "../measure", version = "1.14.18" }
+miraland-sdk = { path = "../sdk", version = "1.14.18" }
 modular-bitfield = "0.11.2"
 rand = "0.7.0"
 tempfile = "=3.6.0"
 
 [dev-dependencies]
 fs_extra = "1.2.0"
-miraland-logger = { path = "../logger", version = "1.14.17" }
+miraland-logger = { path = "../logger", version = "1.14.18" }
 rayon = "1.5.3"
 
 [lib]
