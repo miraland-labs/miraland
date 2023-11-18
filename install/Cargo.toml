@@ -16,13 +16,13 @@ documentation = "https://docs.rs/miraland-install"
 atty = "0.2.11"
 bincode = "1.3.3"
 bzip2 = "0.4.4"
-chrono = { version = "=0.4.26", features = ["serde"] }
+chrono = { version = "0.4.26", features = ["serde"] }
 clap = { version = "2.33.1" }
 console = "0.15.0"
 crossbeam-channel = "0.5"
 ctrlc = { version = "~3.2", features = ["termination"] }
 dirs-next = "2.0.0"
-h2 = "=0.3.20"
+h2 = "0.3.20"
 indicatif = "0.16.2"
 lazy_static = "1.4.0"
 miraland-clap-utils = { path = "../clap-utils", version = "1.14.18" }
@@ -32,12 +32,12 @@ miraland-logger = { path = "../logger", version = "1.14.18" }
 miraland-sdk = { path = "../sdk", version = "1.14.18" }
 miraland-version = { path = "../version", version = "1.14.18" }
 nix = "0.24.2"
-reqwest = { version = "=0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
+reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 semver = "1.0.10"
 serde = { version = "1.0.138", features = ["derive"] }
 serde_yaml = "0.8.26"
 tar = "0.4.38"
-tempfile = "=3.6.0"
+tempfile = "3.6.0"
 url = "2.2.2"
 
 [target."cfg(windows)".dependencies]

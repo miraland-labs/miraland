@@ -41,7 +41,7 @@ net2 = "0.2.37"
 miraland-bpf-rust-invoke = { path = "rust/invoke", version = "1.14.18" }
 miraland-bpf-rust-realloc = { path = "rust/realloc", version = "1.14.18" }
 miraland-bpf-rust-realloc-invoke = { path = "rust/realloc_invoke", version = "1.14.18" }
-solana_rbpf = "=0.2.31"
+solana_rbpf = "0.2.31"
 
 [dev-dependencies]
 miraland-ledger = { path = "../../ledger", version = "1.14.18" }

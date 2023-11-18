@@ -18,7 +18,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 bs58 = "0.4.0"
 bytemuck = "1.11.0"
-chrono = { version = "=0.4.26", features = ["serde"] }
+chrono = { version = "0.4.26", features = ["serde"] }
 crossbeam-channel = "0.5"
 log = "0.4.17"
 miraland-geyser-plugin-interface = { path = "../geyser-plugin-interface", version = "1.14.18" }
@@ -39,7 +39,7 @@ thiserror = "1.0.31"
 tokio-postgres = "0.7.7"
 
 [dev-dependencies]
-libc = "=0.2.141"
+libc = "0.2.141"
 libloading = "0.7.3"
 
 miraland-account-decoder = { path = "../account-decoder", version = "1.14.18" }
@@ -49,7 +49,7 @@ miraland-net-utils = { path = "../net-utils", version = "1.14.18" }
 miraland-streamer = { path = "../streamer", version = "1.14.18" }
 serial_test = "0.8.0"
 socket2 = { version = "0.4.4", features = ["all"] }
-tempfile = "=3.6.0"
+tempfile = "3.6.0"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

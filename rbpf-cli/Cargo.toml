@@ -20,4 +20,4 @@ miraland-program-runtime = { path = "../program-runtime", version = "1.14.18" }
 miraland-sdk = { path = "../sdk", version = "1.14.18" }
 serde = "1.0.138"
 serde_json = "1.0.81"
-solana_rbpf = "=0.2.31"
+solana_rbpf = "0.2.31"

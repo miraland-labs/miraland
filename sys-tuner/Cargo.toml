@@ -15,7 +15,7 @@ publish = true
 
 [dependencies]
 clap = "2.33.1"
-libc = "=0.2.141"
+libc = "0.2.141"
 log = "0.4.17"
 miraland-logger = { path = "../logger", version = "1.14.18" }
 miraland-version = { path = "../version", version = "1.14.18" }

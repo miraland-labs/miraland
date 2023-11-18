@@ -22,7 +22,7 @@ miraland-metrics = { path = "../../metrics", version = "1.14.18" }
 miraland-program-runtime = { path = "../../program-runtime", version = "1.14.18" }
 miraland-sdk = { path = "../../sdk", version = "1.14.18" }
 miraland-zk-token-sdk = { path = "../../zk-token-sdk", version = "1.14.18" }
-solana_rbpf = "=0.2.31"
+solana_rbpf = "0.2.31"
 thiserror = "1.0"
 
 [dev-dependencies]

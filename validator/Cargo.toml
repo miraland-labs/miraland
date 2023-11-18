@@ -14,12 +14,12 @@ documentation = "https://docs.rs/miraland-validator"
 default-run = "miraland-validator"
 
 [dependencies]
-chrono = { version = "=0.4.26", features = ["serde"] }
+chrono = { version = "0.4.26", features = ["serde"] }
 clap = "2.33.1"
 console = "0.15.0"
 core_affinity = "0.5.10"
 crossbeam-channel = "0.5"
-fd-lock = "=3.0.12"
+fd-lock = "3.0.12"
 indicatif = "0.16.2"
 jsonrpc-core = "18.0.0"
 jsonrpc-core-client = { version = "18.0.0", features = ["ipc"] }
@@ -53,7 +53,7 @@ miraland-version = { path = "../version", version = "1.14.18" }
 miraland-vote-program = { path = "../programs/vote", version = "1.14.18" }
 num_cpus = "1.13.1"
 rand = "0.7.0"
-# rustix = "=0.37.23" # MI
+# rustix = "0.37.23" # MI
 serde = "1.0.138"
 serde_json = "1.0.81"
 symlink = "0.1.0"
@@ -62,7 +62,7 @@ symlink = "0.1.0"
 jemallocator = { package = "tikv-jemallocator", version = "0.4.1", features = ["unprefixed_malloc_on_supported_platforms"] }
 
 [target."cfg(unix)".dependencies]
-libc = "=0.2.141"
+libc = "0.2.141"
 signal-hook = "0.3.14"
 
 [package.metadata.docs.rs]

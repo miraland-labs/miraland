@@ -13,7 +13,7 @@ homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-tokens"
 
 [dependencies]
-chrono = { version = "=0.4.26", features = ["serde"] }
+chrono = { version = "0.4.26", features = ["serde"] }
 clap = "2.33.0"
 console = "0.15.0"
 csv = "1.1.6"
@@ -32,7 +32,7 @@ pickledb = { version = "0.5.1", default-features = false, features = ["yaml"] }
 serde = { version = "1.0", features = ["derive"] }
 solarti-associated-token-account = { version = "1.1" }
 solarti-token = { version = "3.5", features = ["no-entrypoint"] }
-tempfile = "=3.6.0"
+tempfile = "3.6.0"
 thiserror = "1.0"
 
 [dev-dependencies]

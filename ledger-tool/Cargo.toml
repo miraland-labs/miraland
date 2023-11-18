@@ -14,7 +14,7 @@ documentation = "https://docs.rs/miraland-ledger-tool"
 
 [dependencies]
 base64 = "0.13.0"
-chrono = "=0.4.26"
+chrono = "0.4.26"
 clap = "2.33.1"
 crossbeam-channel = "0.5"
 csv = "1.1.6"
@@ -45,10 +45,10 @@ tokio = { version = "1", features = ["full"] }
 jemallocator = { package = "tikv-jemallocator", version = "0.4.1", features = ["unprefixed_malloc_on_supported_platforms"] }
 
 [dev-dependencies]
-assert_cmd = "=2.0"
+assert_cmd = "2.0"
 bytecount = "0.6.2"
-predicates-core = "=1.0.5"
-predicates-tree = "=1.0.7"
+predicates-core = "1.0.5"
+predicates-tree = "1.0.7"
 
 [target."cfg(unix)".dependencies]
 signal-hook = "0.3.14"

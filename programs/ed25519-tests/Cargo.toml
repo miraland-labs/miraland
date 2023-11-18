@@ -13,7 +13,7 @@ publish = false
 
 [dev-dependencies]
 assert_matches = "1.5.0"
-ed25519-dalek = "=1.0.1"
+ed25519-dalek = "1.0.1"
 miraland-program-test = { path = "../../program-test", version = "1.14.18" }
 miraland-sdk = { path = "../../sdk", version = "1.14.18" }
 rand = "0.7.0"
