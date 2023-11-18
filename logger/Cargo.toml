@@ -1,6 +1,6 @@
 [package]
 name = "miraland-logger"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland Logger"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",

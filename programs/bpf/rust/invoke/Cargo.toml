@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-invoke"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -17,7 +17,7 @@ default = ["program"]
 program = []
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "1.14.18" }
+miraland-program = { path = "../../../../sdk/program", version = "1.14.19" }
 miraland-bpf-rust-invoked = { path = "../invoked", default-features = false }
 
 [lib]

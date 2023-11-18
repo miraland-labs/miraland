@@ -1,6 +1,6 @@
 [package]
 name = "miraland-transaction-status"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland transaction status types"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -22,12 +22,12 @@ borsh0-9 = { package = "borsh", version = "0.9.3" }
 bs58 = "0.4.0"
 lazy_static = "1.4.0"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "1.14.18" }
-miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "1.14.18" }
-miraland-measure = { path = "../measure", version = "1.14.18" }
-miraland-metrics = { path = "../metrics", version = "1.14.18" }
-miraland-sdk = { path = "../sdk", version = "1.14.18" }
-miraland-vote-program = { path = "../programs/vote", version = "1.14.18" }
+miraland-account-decoder = { path = "../account-decoder", version = "1.14.19" }
+miraland-address-lookup-table-program = { path = "../programs/address-lookup-table", version = "1.14.19" }
+miraland-measure = { path = "../measure", version = "1.14.19" }
+miraland-metrics = { path = "../metrics", version = "1.14.19" }
+miraland-sdk = { path = "../sdk", version = "1.14.19" }
+miraland-vote-program = { path = "../programs/vote", version = "1.14.19" }
 serde = "1.0.138"
 serde_derive = "1.0.103"
 serde_json = "1.0.81"

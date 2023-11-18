@@ -1,6 +1,6 @@
 [package]
 name = "miraland-frozen-abi-macro"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland Frozen ABI Macro"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",

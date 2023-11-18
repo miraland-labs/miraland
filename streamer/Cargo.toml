@@ -1,6 +1,6 @@
 [package]
 name = "miraland-streamer"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland Streamer"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -20,9 +20,9 @@ indexmap = "1.9.1"
 itertools = "0.10.3"
 libc = "0.2.141"
 log = "0.4.17"
-miraland-metrics = { path = "../metrics", version = "1.14.18" }
-miraland-perf = { path = "../perf", version = "1.14.18" }
-miraland-sdk = { path = "../sdk", version = "1.14.18" }
+miraland-metrics = { path = "../metrics", version = "1.14.19" }
+miraland-perf = { path = "../perf", version = "1.14.19" }
+miraland-sdk = { path = "../sdk", version = "1.14.19" }
 nix = "0.24.2"
 pem = "1.0.2"
 percentage = "0.1.0"
@@ -37,7 +37,7 @@ tokio = { version = "1", features = ["full"] }
 x509-parser = "0.14.0"
 
 [dev-dependencies]
-miraland-logger = { path = "../logger", version = "1.14.18" }
+miraland-logger = { path = "../logger", version = "1.14.19" }
 
 [lib]
 crate-type = ["lib"]

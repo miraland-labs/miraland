@@ -1,6 +1,6 @@
 [package]
 name = "miraland-genesis-utils"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland Genesis Utils"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,9 +13,9 @@ documentation = "https://docs.rs/miraland-genesis-utils"
 edition = "2021"
 
 [dependencies]
-miraland-download-utils = { path = "../download-utils", version = "1.14.18" }
-miraland-runtime = { path = "../runtime", version = "1.14.18" }
-miraland-sdk = { path = "../sdk", version = "1.14.18" }
+miraland-download-utils = { path = "../download-utils", version = "1.14.19" }
+miraland-runtime = { path = "../runtime", version = "1.14.19" }
+miraland-sdk = { path = "../sdk", version = "1.14.19" }
 
 [lib]
 crate-type = ["lib"]

@@ -1,6 +1,6 @@
 [package]
 name = "miraland-ed25519-program-tests"
-version = "1.14.18"
+version = "1.14.19"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
   "Solana Maintainers <maintainers@solana.foundation>"
@@ -14,8 +14,8 @@ publish = false
 [dev-dependencies]
 assert_matches = "1.5.0"
 ed25519-dalek = "1.0.1"
-miraland-program-test = { path = "../../program-test", version = "1.14.18" }
-miraland-sdk = { path = "../../sdk", version = "1.14.18" }
+miraland-program-test = { path = "../../program-test", version = "1.14.19" }
+miraland-sdk = { path = "../../sdk", version = "1.14.19" }
 rand = "0.7.0"
 
 [package.metadata.docs.rs]

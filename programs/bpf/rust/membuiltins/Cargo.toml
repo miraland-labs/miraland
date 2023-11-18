@@ -1,6 +1,6 @@
 [package]
 name = "miraland-bpf-rust-membuiltins"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland BPF test program written in Rust"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -13,8 +13,8 @@ documentation = "https://docs.rs/miraland-bpf-rust-mem"
 edition = "2021"
 
 [dependencies]
-miraland-program = { path = "../../../../sdk/program", version = "1.14.18" }
-miraland-bpf-rust-mem = { path = "../mem", version = "1.14.18", features = [ "no-entrypoint" ] }
+miraland-program = { path = "../../../../sdk/program", version = "1.14.19" }
+miraland-bpf-rust-mem = { path = "../mem", version = "1.14.19", features = [ "no-entrypoint" ] }
 
 [lib]
 crate-type = ["cdylib"]

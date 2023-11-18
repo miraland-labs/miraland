@@ -6,7 +6,7 @@ authors = [
 edition = "2021"
 name = "miraland-watchtower"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.18"
+version = "1.14.19"
 repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
 homepage = "https://miraland.top/"
@@ -16,15 +16,15 @@ documentation = "https://docs.rs/miraland-watchtower"
 clap = "2.33.1"
 humantime = "2.0.1"
 log = "0.4.17"
-miraland-clap-utils = { path = "../clap-utils", version = "1.14.18" }
-miraland-cli-config = { path = "../cli-config", version = "1.14.18" }
-miraland-cli-output = { path = "../cli-output", version = "1.14.18" }
-miraland-client = { path = "../client", version = "1.14.18" }
-miraland-logger = { path = "../logger", version = "1.14.18" }
-miraland-metrics = { path = "../metrics", version = "1.14.18" }
-miraland-notifier = { path = "../notifier", version = "1.14.18" }
-miraland-sdk = { path = "../sdk", version = "1.14.18" }
-miraland-version = { path = "../version", version = "1.14.18" }
+miraland-clap-utils = { path = "../clap-utils", version = "1.14.19" }
+miraland-cli-config = { path = "../cli-config", version = "1.14.19" }
+miraland-cli-output = { path = "../cli-output", version = "1.14.19" }
+miraland-client = { path = "../client", version = "1.14.19" }
+miraland-logger = { path = "../logger", version = "1.14.19" }
+miraland-metrics = { path = "../metrics", version = "1.14.19" }
+miraland-notifier = { path = "../notifier", version = "1.14.19" }
+miraland-sdk = { path = "../sdk", version = "1.14.19" }
+miraland-version = { path = "../version", version = "1.14.19" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

@@ -1,6 +1,6 @@
 [package]
 name = "miraland-rpc-test"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland RPC Test"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -20,20 +20,20 @@ crossbeam-channel = "0.5"
 futures-util = "0.3.21"
 h2 = "0.3.20"
 log = "0.4.17"
-miraland-account-decoder = { path = "../account-decoder", version = "1.14.18" }
-miraland-client = { path = "../client", version = "1.14.18" }
-miraland-rpc = { path = "../rpc", version = "1.14.18" }
-miraland-sdk = { path = "../sdk", version = "1.14.18" }
-miraland-streamer = { path = "../streamer", version = "1.14.18" }
-miraland-test-validator = { path = "../test-validator", version = "1.14.18" }
-miraland-transaction-status = { path = "../transaction-status", version = "1.14.18" }
+miraland-account-decoder = { path = "../account-decoder", version = "1.14.19" }
+miraland-client = { path = "../client", version = "1.14.19" }
+miraland-rpc = { path = "../rpc", version = "1.14.19" }
+miraland-sdk = { path = "../sdk", version = "1.14.19" }
+miraland-streamer = { path = "../streamer", version = "1.14.19" }
+miraland-test-validator = { path = "../test-validator", version = "1.14.19" }
+miraland-transaction-status = { path = "../transaction-status", version = "1.14.19" }
 reqwest = { version = "0.11.11", default-features = false, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 serde = "1.0.138"
 serde_json = "1.0.81"
 tokio = { version = "~1.14.1", features = ["full"] }
 
 [dev-dependencies]
-miraland-logger = { path = "../logger", version = "1.14.18" }
+miraland-logger = { path = "../logger", version = "1.14.19" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

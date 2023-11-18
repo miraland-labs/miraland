@@ -1,6 +1,6 @@
 [package]
 name = "miraland-rayon-threadlimit"
-version = "1.14.18"
+version = "1.14.19"
 description = "miraland-rayon-threadlimit"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-rayon-threadlimit"

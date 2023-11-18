@@ -1,6 +1,6 @@
 [package]
 name = "miraland-clap-utils"
-version = "1.14.18"
+version = "1.14.19"
 description = "Miraland utilities for the clap"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
@@ -15,9 +15,9 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.26"
 clap = "2.33.0"
-miraland-perf = { path = "../perf", version = "1.14.18" }
-miraland-remote-wallet = { path = "../remote-wallet", version = "1.14.18", default-features = false }
-miraland-sdk = { path = "../sdk", version = "1.14.18" }
+miraland-perf = { path = "../perf", version = "1.14.19" }
+miraland-remote-wallet = { path = "../remote-wallet", version = "1.14.19", default-features = false }
+miraland-sdk = { path = "../sdk", version = "1.14.19" }
 rpassword = "6.0"
 thiserror = "1.0.31"
 tiny-bip39 = "0.8.2"
