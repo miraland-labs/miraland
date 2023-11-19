@@ -6945,9 +6945,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-memo"
-version = "3.0.6"
+version = "3.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2a0ab3cbfa8c9cf60921b16fc407fb31dbae0e88a514470f04c45159af66ea7"
+checksum = "a4ecdadda1f3b90e33d2d2c1f4fded247f76f3388d2d3745d53b1ee1cce7f702"
 dependencies = [
  "miraland-program 1.14.18",
 ]
