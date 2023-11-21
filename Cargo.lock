@@ -3019,7 +3019,7 @@ dependencies = [
  "miraland-program-runtime",
  "miraland-runtime",
  "miraland-sdk 1.14.20",
- "miraland-zk-token-sdk 1.14.20",
+ "miraland-zk-token-sdk 1.14.21",
  "rand 0.7.3",
  "solana_rbpf",
  "thiserror",
@@ -4386,7 +4386,7 @@ dependencies = [
  "miraland-stake-program",
  "miraland-vote-program",
  "miraland-zk-token-proof-program",
- "miraland-zk-token-sdk 1.14.20",
+ "miraland-zk-token-sdk 1.14.21",
  "num-derive",
  "num-traits",
  "num_cpus",
@@ -4928,7 +4928,7 @@ dependencies = [
  "getrandom 0.1.16",
  "miraland-program-runtime",
  "miraland-sdk 1.14.20",
- "miraland-zk-token-sdk 1.14.20",
+ "miraland-zk-token-sdk 1.14.21",
  "num-derive",
  "num-traits",
 ]
@@ -4966,7 +4966,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-sdk"
-version = "1.14.20"
+version = "1.14.21"
 dependencies = [
  "aes-gcm-siv",
  "arrayref",
