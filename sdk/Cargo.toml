@@ -1,6 +1,6 @@
 [package]
 name = "miraland-sdk"
-version = "1.14.19"
+version = "1.14.20"
 description = "Miraland SDK"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",

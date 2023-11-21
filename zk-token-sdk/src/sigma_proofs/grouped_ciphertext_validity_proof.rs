@@ -16,6 +16,8 @@ use {
             pedersen::{PedersenCommitment, PedersenOpening, G, H},
         },
         errors::ProofVerificationError,
+        sigma_proofs::{canonical_scalar_from_optional_slice, ristretto_point_from_optional_slice},
+        UNIT_LEN,
     },
     curve25519_dalek::traits::MultiscalarMul,
     rand::rngs::OsRng,
@@ -23,7 +25,6 @@ use {
 };
 use {
     crate::{sigma_proofs::errors::ValidityProofError, transcript::TranscriptProtocol},
-    arrayref::{array_ref, array_refs},
     curve25519_dalek::{
         ristretto::{CompressedRistretto, RistrettoPoint},
         scalar::Scalar,
@@ -32,12 +33,15 @@ use {
     merlin::Transcript,
 };
 
-/// The ciphertext validity proof.
+/// Byte length of a grouped ciphertext validity proof for 2 handles
+const GROUPED_CIPHERTEXT_2_HANDLES_VALIDITY_PROOF_LEN: usize = UNIT_LEN * 5;
+
+/// The grouped ciphertext validity proof for 2 handles.
 ///
 /// Contains all the elliptic curve and scalar components that make up the sigma protocol.
 #[allow(non_snake_case)]
 #[derive(Clone)]
-pub struct ValidityProof {
+pub struct GroupedCiphertext2HandlesValidityProof {
     Y_0: CompressedRistretto,
     Y_1: CompressedRistretto,
     Y_2: CompressedRistretto,
@@ -47,8 +51,8 @@ pub struct ValidityProof {
 
 #[allow(non_snake_case)]
 #[cfg(not(target_os = "solana"))]
-impl ValidityProof {
-    /// The ciphertext validity proof constructor.
+impl GroupedCiphertext2HandlesValidityProof {
+    /// Creates a grouped ciphertext validity proof for 2 handles.
     ///
     /// The function does *not* hash the public keys, commitment, or decryption handles into the
     /// transcript. For security, the caller (the main protocol) should hash these public
@@ -70,7 +74,7 @@ impl ValidityProof {
         opening: &PedersenOpening,
         transcript: &mut Transcript,
     ) -> Self {
-        transcript.validity_proof_domain_sep();
+        transcript.grouped_ciphertext_validity_proof_domain_separator();
 
         // extract the relevant scalar and Ristretto points from the inputs
         let P_dest = destination_pubkey.get_point();
@@ -111,7 +115,7 @@ impl ValidityProof {
         }
     }
 
-    /// The ciphertext validity proof verifier.
+    /// Verifies a grouped ciphertext validity proof for 2 handles.
     ///
     /// * `commitment` - The Pedersen commitment
     /// * `(destination_pubkey, auditor_pubkey)` - The ElGamal pubkeys associated with the decryption
@@ -125,12 +129,13 @@ impl ValidityProof {
         (destination_handle, auditor_handle): (&DecryptHandle, &DecryptHandle),
         transcript: &mut Transcript,
     ) -> Result<(), ValidityProofError> {
-        transcript.validity_proof_domain_sep();
+        transcript.grouped_ciphertext_validity_proof_domain_separator();
 
         // include Y_0, Y_1, Y_2 to transcript and extract challenges
         transcript.validate_and_append_point(b"Y_0", &self.Y_0)?;
         transcript.validate_and_append_point(b"Y_1", &self.Y_1)?;
-        transcript.validate_and_append_point(b"Y_2", &self.Y_2)?;
+        // Y_2 can be an all zero point if the auditor public key is all zero
+        transcript.append_point(b"Y_2", &self.Y_2);
 
         let c = transcript.challenge_scalar(b"c");
         let w = transcript.challenge_scalar(b"w");
@@ -194,123 +199,32 @@ impl ValidityProof {
         }
     }
 
-    pub fn to_bytes(&self) -> [u8; 160] {
-        let mut buf = [0_u8; 160];
-        buf[..32].copy_from_slice(self.Y_0.as_bytes());
-        buf[32..64].copy_from_slice(self.Y_1.as_bytes());
-        buf[64..96].copy_from_slice(self.Y_2.as_bytes());
-        buf[96..128].copy_from_slice(self.z_r.as_bytes());
-        buf[128..160].copy_from_slice(self.z_x.as_bytes());
+    pub fn to_bytes(&self) -> [u8; GROUPED_CIPHERTEXT_2_HANDLES_VALIDITY_PROOF_LEN] {
+        let mut buf = [0_u8; GROUPED_CIPHERTEXT_2_HANDLES_VALIDITY_PROOF_LEN];
+        let mut chunks = buf.chunks_mut(UNIT_LEN);
+        chunks.next().unwrap().copy_from_slice(self.Y_0.as_bytes());
+        chunks.next().unwrap().copy_from_slice(self.Y_1.as_bytes());
+        chunks.next().unwrap().copy_from_slice(self.Y_2.as_bytes());
+        chunks.next().unwrap().copy_from_slice(self.z_r.as_bytes());
+        chunks.next().unwrap().copy_from_slice(self.z_x.as_bytes());
         buf
     }
 
     pub fn from_bytes(bytes: &[u8]) -> Result<Self, ValidityProofError> {
-        if bytes.len() != 160 {
-            return Err(ProofVerificationError::Deserialization.into());
-        }
+        let mut chunks = bytes.chunks(UNIT_LEN);
+        let Y_0 = ristretto_point_from_optional_slice(chunks.next())?;
+        let Y_1 = ristretto_point_from_optional_slice(chunks.next())?;
+        let Y_2 = ristretto_point_from_optional_slice(chunks.next())?;
+        let z_r = canonical_scalar_from_optional_slice(chunks.next())?;
+        let z_x = canonical_scalar_from_optional_slice(chunks.next())?;
 
-        let bytes = array_ref![bytes, 0, 160];
-        let (Y_0, Y_1, Y_2, z_r, z_x) = array_refs![bytes, 32, 32, 32, 32, 32];
-
-        let Y_0 = CompressedRistretto::from_slice(Y_0);
-        let Y_1 = CompressedRistretto::from_slice(Y_1);
-        let Y_2 = CompressedRistretto::from_slice(Y_2);
-
-        let z_r =
-            Scalar::from_canonical_bytes(*z_r).ok_or(ProofVerificationError::Deserialization)?;
-        let z_x =
-            Scalar::from_canonical_bytes(*z_x).ok_or(ProofVerificationError::Deserialization)?;
-
-        Ok(ValidityProof {
+        Ok(GroupedCiphertext2HandlesValidityProof {
             Y_0,
             Y_1,
             Y_2,
             z_r,
             z_x,
         })
-    }
-}
-
-/// Aggregated ciphertext validity proof.
-///
-/// An aggregated ciphertext validity proof certifies the validity of two instances of a standard
-/// ciphertext validity proof. An instance of a standard validity proof consist of one ciphertext
-/// and two decryption handles `(commitment, destination_handle, auditor_handle)`. An instance of an
-/// aggregated ciphertext validity proof is a pair `(commitment_0, destination_handle_0,
-/// auditor_handle_0)` and `(commitment_1, destination_handle_1, auditor_handle_1)`. The proof certifies
-/// the analogous decryptable properties for each one of these pair of commitment and decryption
-/// handles.
-#[allow(non_snake_case)]
-#[derive(Clone)]
-pub struct AggregatedValidityProof(ValidityProof);
-
-#[allow(non_snake_case)]
-#[cfg(not(target_os = "solana"))]
-impl AggregatedValidityProof {
-    /// Aggregated ciphertext validity proof constructor.
-    ///
-    /// The function simples aggregates the input openings and invokes the standard ciphertext
-    /// validity proof constructor.
-    pub fn new<T: Into<Scalar>>(
-        (destination_pubkey, auditor_pubkey): (&ElGamalPubkey, &ElGamalPubkey),
-        (amount_lo, amount_hi): (T, T),
-        (opening_lo, opening_hi): (&PedersenOpening, &PedersenOpening),
-        transcript: &mut Transcript,
-    ) -> Self {
-        transcript.aggregated_validity_proof_domain_sep();
-
-        let t = transcript.challenge_scalar(b"t");
-
-        let aggregated_message = amount_lo.into() + amount_hi.into() * t;
-        let aggregated_opening = opening_lo + &(opening_hi * &t);
-
-        AggregatedValidityProof(ValidityProof::new(
-            (destination_pubkey, auditor_pubkey),
-            aggregated_message,
-            &aggregated_opening,
-            transcript,
-        ))
-    }
-
-    /// Aggregated ciphertext validity proof verifier.
-    ///
-    /// The function does *not* hash the public keys, commitment, or decryption handles into the
-    /// transcript. For security, the caller (the main protocol) should hash these public
-    /// components prior to invoking this constructor.
-    ///
-    /// This function is randomized. It uses `OsRng` internally to generate random scalars.
-    pub fn verify(
-        self,
-        (destination_pubkey, auditor_pubkey): (&ElGamalPubkey, &ElGamalPubkey),
-        (commitment_lo, commitment_hi): (&PedersenCommitment, &PedersenCommitment),
-        (destination_handle_lo, destination_handle_hi): (&DecryptHandle, &DecryptHandle),
-        (auditor_handle_lo, auditor_handle_hi): (&DecryptHandle, &DecryptHandle),
-        transcript: &mut Transcript,
-    ) -> Result<(), ValidityProofError> {
-        transcript.aggregated_validity_proof_domain_sep();
-
-        let t = transcript.challenge_scalar(b"t");
-
-        let aggregated_commitment = commitment_lo + commitment_hi * t;
-        let destination_aggregated_handle = destination_handle_lo + destination_handle_hi * t;
-        let auditor_aggregated_handle = auditor_handle_lo + auditor_handle_hi * t;
-
-        let AggregatedValidityProof(validity_proof) = self;
-
-        validity_proof.verify(
-            &aggregated_commitment,
-            (destination_pubkey, auditor_pubkey),
-            (&destination_aggregated_handle, &auditor_aggregated_handle),
-            transcript,
-        )
-    }
-
-    pub fn to_bytes(&self) -> [u8; 160] {
-        self.0.to_bytes()
-    }
-
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self, ValidityProofError> {
-        ValidityProof::from_bytes(bytes).map(Self)
     }
 }
 
@@ -322,9 +236,12 @@ mod test {
     };
 
     #[test]
-    fn test_validity_proof_correctness() {
-        let destination_pubkey = ElGamalKeypair::new_rand().public;
-        let auditor_pubkey = ElGamalKeypair::new_rand().public;
+    fn test_grouped_ciphertext_validity_proof_correctness() {
+        let destination_keypair = ElGamalKeypair::new_rand();
+        let destination_pubkey = destination_keypair.pubkey();
+
+        let auditor_keypair = ElGamalKeypair::new_rand();
+        let auditor_pubkey = auditor_keypair.pubkey();
 
         let amount: u64 = 55;
         let (commitment, opening) = Pedersen::new(amount);
@@ -335,8 +252,8 @@ mod test {
         let mut prover_transcript = Transcript::new(b"Test");
         let mut verifier_transcript = Transcript::new(b"Test");
 
-        let proof = ValidityProof::new(
-            (&destination_pubkey, &auditor_pubkey),
+        let proof = GroupedCiphertext2HandlesValidityProof::new(
+            (destination_pubkey, auditor_pubkey),
             amount,
             &opening,
             &mut prover_transcript,
@@ -345,7 +262,7 @@ mod test {
         assert!(proof
             .verify(
                 &commitment,
-                (&destination_pubkey, &auditor_pubkey),
+                (destination_pubkey, auditor_pubkey),
                 (&destination_handle, &auditor_handle),
                 &mut verifier_transcript,
             )
@@ -353,10 +270,12 @@ mod test {
     }
 
     #[test]
-    fn test_validity_proof_edge_cases() {
+    fn test_grouped_ciphertext_validity_proof_edge_cases() {
         // if destination public key zeroed, then the proof should always reject
         let destination_pubkey = ElGamalPubkey::from_bytes(&[0u8; 32]).unwrap();
-        let auditor_pubkey = ElGamalKeypair::new_rand().public;
+
+        let auditor_keypair = ElGamalKeypair::new_rand();
+        let auditor_pubkey = auditor_keypair.pubkey();
 
         let amount: u64 = 55;
         let (commitment, opening) = Pedersen::new(amount);
@@ -367,8 +286,8 @@ mod test {
         let mut prover_transcript = Transcript::new(b"Test");
         let mut verifier_transcript = Transcript::new(b"Test");
 
-        let proof = ValidityProof::new(
-            (&destination_pubkey, &auditor_pubkey),
+        let proof = GroupedCiphertext2HandlesValidityProof::new(
+            (&destination_pubkey, auditor_pubkey),
             amount,
             &opening,
             &mut prover_transcript,
@@ -377,44 +296,18 @@ mod test {
         assert!(proof
             .verify(
                 &commitment,
-                (&destination_pubkey, &auditor_pubkey),
-                (&destination_handle, &auditor_handle),
-                &mut verifier_transcript,
-            )
-            .is_err());
-
-        // if auditor public key zeroed, then the proof should always reject
-        let destination_pubkey = ElGamalKeypair::new_rand().public;
-        let auditor_pubkey = ElGamalPubkey::from_bytes(&[0u8; 32]).unwrap();
-
-        let amount: u64 = 55;
-        let (commitment, opening) = Pedersen::new(amount);
-
-        let destination_handle = destination_pubkey.decrypt_handle(&opening);
-        let auditor_handle = auditor_pubkey.decrypt_handle(&opening);
-
-        let mut prover_transcript = Transcript::new(b"Test");
-        let mut verifier_transcript = Transcript::new(b"Test");
-
-        let proof = ValidityProof::new(
-            (&destination_pubkey, &auditor_pubkey),
-            amount,
-            &opening,
-            &mut prover_transcript,
-        );
-
-        assert!(proof
-            .verify(
-                &commitment,
-                (&destination_pubkey, &auditor_pubkey),
+                (&destination_pubkey, auditor_pubkey),
                 (&destination_handle, &auditor_handle),
                 &mut verifier_transcript,
             )
             .is_err());
 
         // all zeroed ciphertext should still be valid
-        let destination_pubkey = ElGamalKeypair::new_rand().public;
-        let auditor_pubkey = ElGamalKeypair::new_rand().public;
+        let destination_keypair = ElGamalKeypair::new_rand();
+        let destination_pubkey = destination_keypair.pubkey();
+
+        let auditor_keypair = ElGamalKeypair::new_rand();
+        let auditor_pubkey = auditor_keypair.pubkey();
 
         let amount: u64 = 0;
         let commitment = PedersenCommitment::from_bytes(&[0u8; 32]).unwrap();
@@ -426,8 +319,8 @@ mod test {
         let mut prover_transcript = Transcript::new(b"Test");
         let mut verifier_transcript = Transcript::new(b"Test");
 
-        let proof = ValidityProof::new(
-            (&destination_pubkey, &auditor_pubkey),
+        let proof = GroupedCiphertext2HandlesValidityProof::new(
+            (destination_pubkey, auditor_pubkey),
             amount,
             &opening,
             &mut prover_transcript,
@@ -436,15 +329,18 @@ mod test {
         assert!(proof
             .verify(
                 &commitment,
-                (&destination_pubkey, &auditor_pubkey),
+                (destination_pubkey, auditor_pubkey),
                 (&destination_handle, &auditor_handle),
                 &mut verifier_transcript,
             )
             .is_ok());
 
         // decryption handles can be zero as long as the Pedersen commitment is valid
-        let destination_pubkey = ElGamalKeypair::new_rand().public;
-        let auditor_pubkey = ElGamalKeypair::new_rand().public;
+        let destination_keypair = ElGamalKeypair::new_rand();
+        let destination_pubkey = destination_keypair.pubkey();
+
+        let auditor_keypair = ElGamalKeypair::new_rand();
+        let auditor_pubkey = auditor_keypair.pubkey();
 
         let amount: u64 = 55;
         let (commitment, opening) = Pedersen::new(amount);
@@ -455,8 +351,8 @@ mod test {
         let mut prover_transcript = Transcript::new(b"Test");
         let mut verifier_transcript = Transcript::new(b"Test");
 
-        let proof = ValidityProof::new(
-            (&destination_pubkey, &auditor_pubkey),
+        let proof = GroupedCiphertext2HandlesValidityProof::new(
+            (destination_pubkey, auditor_pubkey),
             amount,
             &opening,
             &mut prover_transcript,
@@ -465,46 +361,8 @@ mod test {
         assert!(proof
             .verify(
                 &commitment,
-                (&destination_pubkey, &auditor_pubkey),
+                (destination_pubkey, auditor_pubkey),
                 (&destination_handle, &auditor_handle),
-                &mut verifier_transcript,
-            )
-            .is_ok());
-    }
-
-    #[test]
-    fn test_aggregated_validity_proof() {
-        let destination_pubkey = ElGamalKeypair::new_rand().public;
-        let auditor_pubkey = ElGamalKeypair::new_rand().public;
-
-        let amount_lo: u64 = 55;
-        let amount_hi: u64 = 77;
-
-        let (commitment_lo, open_lo) = Pedersen::new(amount_lo);
-        let (commitment_hi, open_hi) = Pedersen::new(amount_hi);
-
-        let destination_handle_lo = destination_pubkey.decrypt_handle(&open_lo);
-        let destination_handle_hi = destination_pubkey.decrypt_handle(&open_hi);
-
-        let auditor_handle_lo = auditor_pubkey.decrypt_handle(&open_lo);
-        let auditor_handle_hi = auditor_pubkey.decrypt_handle(&open_hi);
-
-        let mut prover_transcript = Transcript::new(b"Test");
-        let mut verifier_transcript = Transcript::new(b"Test");
-
-        let proof = AggregatedValidityProof::new(
-            (&destination_pubkey, &auditor_pubkey),
-            (amount_lo, amount_hi),
-            (&open_lo, &open_hi),
-            &mut prover_transcript,
-        );
-
-        assert!(proof
-            .verify(
-                (&destination_pubkey, &auditor_pubkey),
-                (&commitment_lo, &commitment_hi),
-                (&destination_handle_lo, &destination_handle_hi),
-                (&auditor_handle_lo, &auditor_handle_hi),
                 &mut verifier_transcript,
             )
             .is_ok());

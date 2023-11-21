@@ -17,7 +17,7 @@
 #![cfg(not(target_os = "solana"))]
 
 use {
-    crate::encryption::errors::DiscreteLogError,
+    crate::RISTRETTO_POINT_LEN,
     curve25519_dalek::{
         constants::RISTRETTO_BASEPOINT_POINT as G,
         ristretto::RistrettoPoint,
@@ -27,10 +27,22 @@ use {
     itertools::Itertools,
     serde::{Deserialize, Serialize},
     std::{collections::HashMap, thread},
+    thiserror::Error,
 };
 
 const TWO16: u64 = 65536; // 2^16
 const TWO17: u64 = 131072; // 2^17
+
+/// Maximum number of threads permitted for discrete log computation
+const MAX_THREAD: usize = 65536;
+
+#[derive(Error, Clone, Debug, Eq, PartialEq)]
+pub enum DiscreteLogError {
+    #[error("discrete log number of threads not power-of-two")]
+    DiscreteLogThreads,
+    #[error("discrete log batch size too large")]
+    DiscreteLogBatchSize,
+}
 
 /// Type that captures a discrete log challenge.
 ///
@@ -53,7 +65,7 @@ pub struct DiscreteLog {
 }
 
 #[derive(Serialize, Deserialize, Default)]
-pub struct DecodePrecomputation(HashMap<[u8; 32], u16>);
+pub struct DecodePrecomputation(HashMap<[u8; RISTRETTO_POINT_LEN], u16>);
 
 /// Builds a HashMap of 2^16 elements
 #[allow(dead_code)]
@@ -102,7 +114,7 @@ impl DiscreteLog {
     /// Adjusts number of threads in a discrete log instance.
     pub fn num_threads(&mut self, num_threads: usize) -> Result<(), DiscreteLogError> {
         // number of threads must be a positive power-of-two integer
-        if num_threads == 0 || (num_threads & (num_threads - 1)) != 0 || num_threads > 65536 {
+        if num_threads == 0 || (num_threads & (num_threads - 1)) != 0 || num_threads > MAX_THREAD {
             return Err(DiscreteLogError::DiscreteLogThreads);
         }
 
@@ -118,7 +130,7 @@ impl DiscreteLog {
         &mut self,
         compression_batch_size: usize,
     ) -> Result<(), DiscreteLogError> {
-        if compression_batch_size >= TWO16 as usize {
+        if compression_batch_size >= TWO16 as usize || compression_batch_size == 0 {
             return Err(DiscreteLogError::DiscreteLogBatchSize);
         }
         self.compression_batch_size = compression_batch_size;
@@ -131,7 +143,6 @@ impl DiscreteLog {
     pub fn decode_u32(self) -> Option<u64> {
         let mut starting_point = self.target;
         let handles = (0..self.num_threads)
-            .into_iter()
             .map(|i| {
                 let ristretto_iterator = RistrettoIterator::new(
                     (starting_point, i as u64),
@@ -260,10 +271,7 @@ mod tests {
 
         assert_eq!(amount, decoded.unwrap());
 
-        println!(
-            "single thread discrete log computation secs: {:?} sec",
-            computation_secs
-        );
+        println!("single thread discrete log computation secs: {computation_secs:?} sec");
     }
 
     #[test]
@@ -281,10 +289,7 @@ mod tests {
 
         assert_eq!(amount, decoded.unwrap());
 
-        println!(
-            "4 thread discrete log computation: {:?} sec",
-            computation_secs
-        );
+        println!("4 thread discrete log computation: {computation_secs:?} sec");
 
         // amount 0
         let amount: u64 = 0;
@@ -319,7 +324,7 @@ mod tests {
         assert_eq!(amount, decoded.unwrap());
 
         // max amount
-        let amount: u64 = ((1_u64 << 32) - 1) as u64;
+        let amount: u64 = (1_u64 << 32) - 1;
 
         let instance = DiscreteLog::new(G, Scalar::from(amount) * G);
 

@@ -6,12 +6,13 @@ authors = [
   "Solana Maintainers <maintainers@solana.foundation>"
 ]
 repository = "https://github.com/miraland-labs/miraland"
-version = "1.14.19"
+version = "1.14.20"
 license = "Apache-2.0"
 edition = "2021"
 
 [dependencies]
-base64 = "0.13"
+# base64 = "0.13" # MI
+base64 = "0.21.5"
 bytemuck = { version = "1.11.0", features = ["derive"] }
 miraland-program = { path = "../sdk/program", version = "1.14.19" }
 num-derive = "0.3"

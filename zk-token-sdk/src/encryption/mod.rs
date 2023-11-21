@@ -1,4 +1,4 @@
-//! Collection of encryption-related data structures and algorithms used in the Solana zk-token
+//! Collection of encryption-related data structures and algorithms used in the Miraland zk-token
 //! protocol.
 //!
 //! The module contains implementations of the following cryptographic objects:
@@ -13,5 +13,5 @@
 pub mod auth_encryption;
 pub mod discrete_log;
 pub mod elgamal;
-pub mod errors;
+pub mod grouped_elgamal;
 pub mod pedersen;

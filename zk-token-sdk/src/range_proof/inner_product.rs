@@ -35,7 +35,7 @@ impl InnerProductProof {
     /// protocols).
     ///
     /// The lengths of the vectors must all be the same, and must all be
-    /// either 0 or a power of 2.
+    /// a power of 2.
     #[allow(clippy::too_many_arguments)]
     pub fn new(
         Q: &RistrettoPoint,
@@ -68,7 +68,7 @@ impl InnerProductProof {
         // All of the input vectors must have a length that is a power of two.
         assert!(n.is_power_of_two());
 
-        transcript.innerproduct_domain_sep(n as u64);
+        transcript.innerproduct_domain_separator(n as u64);
 
         let lg_n = n.next_power_of_two().trailing_zeros() as usize;
         let mut L_vec = Vec::with_capacity(lg_n);
@@ -215,7 +215,7 @@ impl InnerProductProof {
             return Err(ProofVerificationError::InvalidBitSize.into());
         }
 
-        transcript.innerproduct_domain_sep(n as u64);
+        transcript.innerproduct_domain_separator(n as u64);
 
         // 1. Recompute x_k,...,x_1 based on the proof transcript
 
