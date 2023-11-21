@@ -16,17 +16,17 @@ keywords:
 ---
 
 The small fees paid to process [instructions](./terminology.md#instruction) on
-the Solana blockchain are known as "_transaction fees_".
+the Miraland blockchain are known as "_transaction fees_".
 
 As each transaction (which contains one or more instructions) is sent through
 the network, it gets processed by the current leader validation-client. Once
 confirmed as a global state transaction, this _transaction fee_ is paid to the
-network to help support the [economic design](#economic-design) of the Solana
+network to help support the [economic design](#economic-design) of the Miraland
 blockchain.
 
 > **NOTE:** Transaction fees are different from
 > [account rent](./terminology.md#rent)! While transaction fees are paid to
-> process instructions on the Solana network, rent is paid to store data on the
+> process instructions on the Miraland network, rent is paid to store data on the
 > blockchain.
 
 > You can learn more about rent here:
@@ -34,7 +34,7 @@ blockchain.
 
 ## Why pay transaction fees?
 
-Transaction fees offer many benefits in the Solana
+Transaction fees offer many benefits in the Miraland
 [economic design](#basic-economic-design) described below. Mainly:
 
 - they provide compensation to the validator network for the CPU/GPU resources
@@ -53,19 +53,19 @@ _protocol-based rewards_ to secure the network in the short-term. Over the
 long-term, these networks will increasingly rely on _transaction fees_ to
 sustain security.
 
-The same is true on Solana. Specifically:
+The same is true on Miraland. Specifically:
 
 - A fixed proportion (initially 50%) of each transaction fee is _burned_
   (destroyed), with the remaining going to the current
   [leader](./terminology.md#leader) processing the transaction.
 - A scheduled global inflation rate provides a source for
   [rewards](./implemented-proposals/staking-rewards.md) distributed to
-  [Solana Validators](../src/running-validator.md).
+  [Miraland Validators](../src/running-validator.md).
 
 ### Why burn some fees?
 
 As mentioned above, a fixed proportion of each transaction fee is _burned_
-(destroyed). This is intended to cement the economic value of SOL and thus
+(destroyed). This is intended to cement the economic value of MLN and thus
 sustain the network's security. Unlike a scheme where transactions fees are
 completely burned, leaders are still incentivized to include as many
 transactions as possible in their slots.
@@ -108,7 +108,7 @@ and return an error. This results in a failed transaction.
 
 ## Prioritization fee
 
-A Solana transaction can include an **optional** fee to prioritize itself
+A Miraland transaction can include an **optional** fee to prioritize itself
 against others known as a
 "_[prioritization fee](./terminology.md#prioritization-fee)_". Paying this
 additional fee helps boost how a transaction is prioritized against others,
@@ -125,13 +125,13 @@ consume and the compute unit price by including a `SetComputeUnitLimit` and
 `SetComputeUnitPrice` compute budget instruction respectively.
 
 :::info
-[Compute Budget instructions](https://github.com/solana-labs/solana/blob/master/sdk/src/compute_budget.rs)
+[Compute Budget instructions](https://github.com/miraland-labs/miraland/blob/master/sdk/src/compute_budget.rs)
 do **not** require any accounts. :::
 
 If no `SetComputeUnitLimit` instruction is provided, the limit will be
 calculated as the product of the number of instructions in the transaction and
 the default per-instruction units, which is currently
-[200k](https://github.com/solana-labs/solana/blob/4293f11cf13fc1e83f1baa2ca3bb2f8ea8f9a000/program-runtime/src/compute_budget.rs#L13).
+[200k](https://github.com/miraland-labs/miraland/blob/4293f11cf13fc1e83f1baa2ca3bb2f8ea8f9a000/program-runtime/src/compute_budget.rs#L13).
 
 If no `SetComputeUnitPrice` instruction is provided, the transaction will
 default to no additional elevated fee and the lowest priority.
@@ -143,20 +143,20 @@ instruction, and optionally a `SetComputeUnitLimit` instruction. The runtime
 will use these values to calculate the prioritization fee, which will be used to
 prioritize the given transaction within the block.
 
-You can craft each of these instructions via their `rust` or `@solana/web3.js`
+You can craft each of these instructions via their `rust` or `@miraland/web3.js`
 functions. Each of these instructions can then be included in the transaction
 and sent to the cluster like normal. See also the
 [best practices](#prioritization-fee-best-practices) below.
 
 :::caution Transactions can only contain **one of each type** of compute budget
 instruction. Duplicate types will result in an
-[`TransactionError::DuplicateInstruction`](https://github.com/solana-labs/solana/blob/master/sdk/src/transaction/error.rs#L144-145)
+[`TransactionError::DuplicateInstruction`](https://github.com/miraland-labs/miraland/blob/master/sdk/src/transaction/error.rs#L144-145)
 error, and ultimately transaction failure. :::
 
 #### Rust
 
-The rust `solana-sdk` crate includes functions within
-[`ComputeBudgetInstruction`](https://docs.rs/solana-sdk/latest/solana_sdk/compute_budget/enum.ComputeBudgetInstruction.html)
+The rust `miraland-sdk` crate includes functions within
+[`ComputeBudgetInstruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/enum.ComputeBudgetInstruction.html)
 to craft instructions for setting the _compute unit limit_ and _compute unit
 price_:
 
@@ -170,8 +170,8 @@ let instruction = ComputeBudgetInstruction::set_compute_unit_price(1);
 
 #### Javascript
 
-The `@solana/web3.js` library includes functions within the
-[`ComputeBudgetProgram`](https://solana-labs.github.io/solana-web3.js/classes/ComputeBudgetProgram.html)
+The `@miraland/web3.js` library includes functions within the
+[`ComputeBudgetProgram`](https://miraland-labs.github.io/miraland-web3.js/classes/ComputeBudgetProgram.html)
 class to craft instructions for setting the _compute unit limit_ and _compute
 unit price_:
 

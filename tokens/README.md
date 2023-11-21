@@ -1,4 +1,4 @@
-# Distribute Solana tokens
+# Distribute Miraland tokens
 
 A user may want to make payments to multiple accounts over multiple iterations.
 The user will have a spreadsheet listing public keys and token amounts, and
@@ -18,7 +18,7 @@ CYRJWqiSjLitBAcRxPvWpgX3s5TvmN2SuRY3eEYypFvT,43.0,
 ```
 
 ```bash
-solana-tokens distribute-tokens --from <KEYPAIR> --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
+miraland-tokens distribute-tokens --from <KEYPAIR> --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
 ```
 
 Example transaction log before:
@@ -32,7 +32,7 @@ Send tokens to the recipients in `<RECIPIENTS_CSV>` if the distribution is
 not already recorded in the transaction log.
 
 ```bash
-solana-tokens distribute-tokens --from <KEYPAIR> --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
+miraland-tokens distribute-tokens --from <KEYPAIR> --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
 ```
 
 Example output:
@@ -47,7 +47,7 @@ UKUcTXgbeTYh65RaVV5gSf6xBHevqHvAXMo3e8Q6np8k  43
 Example transaction log after:
 
 ```bash
-solana-tokens transaction-log --output-path transactions.csv
+miraland-tokens transaction-log --output-path transactions.csv
 ```
 
 ```text
@@ -63,7 +63,7 @@ List the differences between a list of expected distributions and the record of 
 transactions have already been sent.
 
 ```bash
-solana-tokens distribute-tokens --dry-run --input-csv <RECIPIENTS_CSV>
+miraland-tokens distribute-tokens --dry-run --input-csv <RECIPIENTS_CSV>
 ```
 
 Example recipients.csv:
@@ -96,7 +96,7 @@ CYRJWqiSjLitBAcRxPvWpgX3s5TvmN2SuRY3eEYypFvT
 ```
 
 ```bash
-solana-tokens distribute-tokens --transfer-amount 10 --from <KEYPAIR> --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
+miraland-tokens distribute-tokens --transfer-amount 10 --from <KEYPAIR> --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
 ```
 
 Example output:
@@ -115,27 +115,27 @@ big difference is that new stake accounts are split from existing ones. By split
 the new accounts inherit any lockup or custodian settings of the original.
 
 ```bash
-solana-tokens distribute-stake --stake-account-address <ACCOUNT_ADDRESS> \
+miraland-tokens distribute-stake --stake-account-address <ACCOUNT_ADDRESS> \
     --input-csv <ALLOCATIONS_CSV> \
     --stake-authority <KEYPAIR> --withdraw-authority <KEYPAIR> --fee-payer <KEYPAIR>
 ```
 
-Currently, this will subtract 1 SOL from each allocation and store it the
-recipient address. That SOL can be used to pay transaction fees on staking
+Currently, this will subtract 1 MLN from each allocation and store it the
+recipient address. That MLN can be used to pay transaction fees on staking
 operations such as delegating stake. The rest of the allocation is put in
 a stake account. The new stake account address is output in the transaction
 log.
 
-## Distribute SPL tokens
+## Distribute Solarti tokens
 
-Distributing SPL Tokens works very similarly to distributing SOL, but requires
+Distributing Solarti Tokens works very similarly to distributing MLN, but requires
 the `--owner` parameter to sign transactions. Each recipient account must be an
-system account that will own an Associated Token Account for the SPL Token mint.
+system account that will own an Associated Token Account for the Solarti Token mint.
 The Associated Token Account will be created, and funded by the fee_payer, if it
 does not already exist.
 
-Send SPL tokens to the recipients in `<RECIPIENTS_CSV>`.
-*NOTE:* the CSV expects SPL-token amounts in raw format (no decimals)
+Send Solarti tokens to the recipients in `<RECIPIENTS_CSV>`.
+*NOTE:* the CSV expects Solarti-token amounts in raw format (no decimals)
 
 Example recipients.csv:
 
@@ -148,10 +148,10 @@ C56nwrDVFpPrqwGYsTgQxv1ZraTh81H14PV4RHvZe36s,10000
 ```
 
 You can check the status of the recipients before beginning a distribution. You
-must include the SPL Token mint address:
+must include the Solarti Token mint address:
 
 ```bash
-solana-tokens spl-token-balances --mint <ADDRESS> --input-csv <RECIPIENTS_CSV>
+miraland-tokens solarti-token-balances --mint <ADDRESS> --input-csv <RECIPIENTS_CSV>
 ```
 
 Example output:
@@ -168,7 +168,7 @@ C56nwrDVFpPrqwGYsTgQxv1ZraTh81H14PV4RHvZe36s                    10.000  Associat
 To run the distribution:
 
 ```bash
-solana-tokens distribute-spl-tokens --from <ADDRESS> --owner <KEYPAIR> \
+miraland-tokens distribute-solarti-tokens --from <ADDRESS> --owner <KEYPAIR> \
     --input-csv <RECIPIENTS_CSV> --fee-payer <KEYPAIR>
 ```
 
@@ -188,9 +188,9 @@ C56nwrDVFpPrqwGYsTgQxv1ZraTh81H14PV4RHvZe36s                    10.000
 
 ### Calculate what tokens should be sent
 
-As with SOL, you can List the differences between a list of expected
+As with MLN, you can List the differences between a list of expected
 distributions and the record of what transactions have already been sent using
-the `--dry-run` parameter, or `solana-tokens balances`.
+the `--dry-run` parameter, or `miraland-tokens balances`.
 
 Example updated recipients.csv:
 
@@ -205,7 +205,7 @@ C56nwrDVFpPrqwGYsTgQxv1ZraTh81H14PV4RHvZe36s,100000
 Using dry-run:
 
 ```bash
-solana-tokens distribute-tokens --dry-run --input-csv <RECIPIENTS_CSV>
+miraland-tokens distribute-tokens --dry-run --input-csv <RECIPIENTS_CSV>
 ```
 
 Example output:
@@ -225,7 +225,7 @@ C56nwrDVFpPrqwGYsTgQxv1ZraTh81H14PV4RHvZe36s                    90.000
 Or:
 
 ```bash
-solana-tokens balances --mint <ADDRESS> --input-csv <RECIPIENTS_CSV>
+miraland-tokens balances --mint <ADDRESS> --input-csv <RECIPIENTS_CSV>
 ```
 
 Example output:

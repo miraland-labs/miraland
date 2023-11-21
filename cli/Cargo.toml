@@ -1,7 +1,7 @@
 [package]
-name = "solana-cli"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-cli"
+name = "miraland-cli"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-cli"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -28,40 +28,40 @@ semver = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-bpf-loader-program = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-cli-config = { workspace = true }
-solana-cli-output = { workspace = true }
-solana-client = { workspace = true }
-solana-config-program = { workspace = true }
-solana-faucet = { workspace = true }
-solana-loader-v4-program = { workspace = true }
-solana-logger = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-pubsub-client = { workspace = true }
-solana-remote-wallet = { workspace = true, features = ["default"] }
-solana-rpc-client = { workspace = true, features = ["default"] }
-solana-rpc-client-api = { workspace = true }
-solana-rpc-client-nonce-utils = { workspace = true }
-solana-sdk = { workspace = true }
-solana-tpu-client = { workspace = true, features = ["default"] }
-solana-transaction-status = { workspace = true }
-solana-version = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-bpf-loader-program = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-cli-config = { workspace = true }
+miraland-cli-output = { workspace = true }
+miraland-client = { workspace = true }
+miraland-config-program = { workspace = true }
+miraland-faucet = { workspace = true }
+miraland-loader-v4-program = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-pubsub-client = { workspace = true }
+miraland-remote-wallet = { workspace = true, features = ["default"] }
+miraland-rpc-client = { workspace = true, features = ["default"] }
+miraland-rpc-client-api = { workspace = true }
+miraland-rpc-client-nonce-utils = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-tpu-client = { workspace = true, features = ["default"] }
+miraland-transaction-status = { workspace = true }
+miraland-version = { workspace = true }
+miraland-vote-program = { workspace = true }
 solana_rbpf = { workspace = true }
-spl-memo = { workspace = true, features = ["no-entrypoint"] }
+solarti-memo = { workspace = true, features = ["no-entrypoint"] }
 thiserror = { workspace = true }
 tiny-bip39 = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-solana-streamer = { workspace = true }
-solana-test-validator = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-test-validator = { workspace = true }
 tempfile = { workspace = true }
 
 [[bin]]
-name = "solana"
+name = "miraland"
 path = "src/main.rs"
 
 [package.metadata.docs.rs]

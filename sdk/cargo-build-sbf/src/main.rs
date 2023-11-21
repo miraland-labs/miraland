@@ -5,7 +5,7 @@ use {
     itertools::Itertools,
     log::*,
     regex::Regex,
-    solana_download_utils::download_file,
+    miraland_download_utils::download_file,
     solana_sdk::signature::{write_keypair_file, Keypair},
     std::{
         borrow::Cow,
@@ -569,7 +569,7 @@ fn build_solana_package(
         }
     };
 
-    let legacy_program_feature_present = package.name == "solana-sdk";
+    let legacy_program_feature_present = package.name == "miraland-sdk";
     let root_package_dir = &package.manifest_path.parent().unwrap_or_else(|| {
         error!("Unable to get directory of {}", package.manifest_path);
         exit(1);
@@ -591,7 +591,7 @@ fn build_solana_package(
         exit(1);
     });
 
-    info!("Solana SDK: {}", config.sbf_sdk.display());
+    info!("Miraland SDK: {}", config.sbf_sdk.display());
     if config.no_default_features {
         info!("No default features");
     }
@@ -654,7 +654,7 @@ fn build_solana_package(
 
     // RUSTC variable overrides cargo +<toolchain> mechanism of
     // selecting the rust compiler and makes cargo run a rust compiler
-    // other than the one linked in Solana toolchain. We have to prevent
+    // other than the one linked in Miraland toolchain. We have to prevent
     // this by removing RUSTC from the child process environment.
     if env::var("RUSTC").is_ok() {
         warn!(
@@ -898,7 +898,7 @@ fn build_solana(config: Config, manifest_path: Option<PathBuf>) {
 }
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let default_config = Config::default();
     let default_sbf_sdk = format!("{}", default_config.sbf_sdk.display());
 
@@ -939,7 +939,7 @@ fn main() {
                 .value_name("PATH")
                 .takes_value(true)
                 .default_value(&default_sbf_sdk)
-                .help("Path to the Solana SBF SDK"),
+                .help("Path to the Miraland SBF SDK"),
         )
         .arg(
             Arg::new("cargo_args")
@@ -1028,7 +1028,7 @@ fn main() {
                 .long("workspace")
                 .takes_value(false)
                 .alias("all")
-                .help("Build all Solana packages in the workspace"),
+                .help("Build all Miraland packages in the workspace"),
         )
         .arg(
             Arg::new("jobs")
@@ -1091,7 +1091,7 @@ fn main() {
         target_directory,
         sbf_sdk: fs::canonicalize(&sbf_sdk).unwrap_or_else(|err| {
             error!(
-                "Solana SDK path does not exist: {}: {}",
+                "Miraland SDK path does not exist: {}: {}",
                 sbf_sdk.display(),
                 err
             );

@@ -18,10 +18,10 @@ use {
     log::*,
     rand::{thread_rng, Rng},
     rayon::iter::{IntoParallelIterator, ParallelIterator},
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::CalcAccountsHashDataSource, accounts_hash::CalcAccountsHashConfig,
     },
-    solana_measure::{measure::Measure, measure_us},
+    miraland_measure::{measure::Measure, measure_us},
     solana_sdk::clock::{BankId, Slot},
     stats::StatsManager,
     std::{
@@ -45,7 +45,7 @@ const CLEAN_INTERVAL_BLOCKS: u64 = 100;
 // (Anyway, the dropping part is outside the AccountsDb::recycle_stores lock
 // and dropped in this AccountsBackgroundServe, so this shouldn't matter much)
 const RECYCLE_STORE_EXPIRATION_INTERVAL_SECS: u64 =
-    solana_accounts_db::accounts_db::EXPIRATION_TTL_SECONDS / 3;
+    miraland_accounts_db::accounts_db::EXPIRATION_TTL_SECONDS / 3;
 
 pub type SnapshotRequestSender = Sender<SnapshotRequest>;
 pub type SnapshotRequestReceiver = Receiver<SnapshotRequest>;
@@ -607,7 +607,7 @@ impl AccountsBackgroundService {
         let mut total_remove_slots_time = 0;
         let mut last_expiration_check_time = Instant::now();
         let t_background = Builder::new()
-            .name("solBgAccounts".to_string())
+            .name("mlnBgAccounts".to_string())
             .spawn(move || {
                 info!("AccountsBackgroundService has started");
                 let mut stats = StatsManager::new();
@@ -871,7 +871,7 @@ mod test {
         super::*,
         crate::{bank::epoch_accounts_hash_utils, genesis_utils::create_genesis_config},
         crossbeam_channel::unbounded,
-        solana_accounts_db::epoch_accounts_hash::EpochAccountsHash,
+        miraland_accounts_db::epoch_accounts_hash::EpochAccountsHash,
         solana_sdk::{
             account::AccountSharedData, epoch_schedule::EpochSchedule, hash::Hash, pubkey::Pubkey,
         },

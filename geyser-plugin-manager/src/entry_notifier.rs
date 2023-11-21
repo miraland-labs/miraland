@@ -2,13 +2,13 @@
 use {
     crate::geyser_plugin_manager::GeyserPluginManager,
     log::*,
-    solana_entry::entry::EntrySummary,
-    solana_geyser_plugin_interface::geyser_plugin_interface::{
+    miraland_entry::entry::EntrySummary,
+    miraland_geyser_plugin_interface::geyser_plugin_interface::{
         ReplicaEntryInfo, ReplicaEntryInfoVersions,
     },
-    solana_ledger::entry_notifier_interface::EntryNotifier,
-    solana_measure::measure::Measure,
-    solana_metrics::*,
+    miraland_ledger::entry_notifier_interface::EntryNotifier,
+    miraland_measure::measure::Measure,
+    miraland_metrics::*,
     solana_sdk::clock::Slot,
     std::sync::{Arc, RwLock},
 };

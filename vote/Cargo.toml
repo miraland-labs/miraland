@@ -1,7 +1,7 @@
 [package]
-name = "solana-vote"
-description = "Solana vote"
-documentation = "https://docs.rs/solana-vote"
+name = "miraland-vote"
+description = "Miraland vote"
+documentation = "https://docs.rs/miraland-vote"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -15,10 +15,10 @@ itertools = { workspace = true }
 log = { workspace = true }
 serde = { workspace = true, features = ["rc"] }
 serde_derive = { workspace = true }
-solana-frozen-abi = { workspace = true }
-solana-frozen-abi-macro = { workspace = true }
-solana-sdk = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-vote-program = { workspace = true }
 thiserror = { workspace = true }
 
 [lib]

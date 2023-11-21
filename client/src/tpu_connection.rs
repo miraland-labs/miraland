@@ -1,6 +1,6 @@
 #[deprecated(
     since = "1.15.0",
-    note = "Please use `solana_connection_cache::client_connection::ClientConnection` instead."
+    note = "Please use `miraland_connection_cache::client_connection::ClientConnection` instead."
 )]
-pub use solana_connection_cache::client_connection::ClientConnection as TpuConnection;
-pub use solana_connection_cache::client_connection::ClientStats;
+pub use miraland_connection_cache::client_connection::ClientConnection as TpuConnection;
+pub use miraland_connection_cache::client_connection::ClientStats;

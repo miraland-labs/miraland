@@ -1,9 +1,9 @@
 use {
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
-    solana_accounts_db::stake_rewards::RewardInfo,
-    solana_ledger::blockstore::Blockstore,
+    miraland_accounts_db::stake_rewards::RewardInfo,
+    miraland_ledger::blockstore::Blockstore,
     solana_sdk::{clock::Slot, pubkey::Pubkey},
-    solana_transaction_status::Reward,
+    miraland_transaction_status::Reward,
     std::{
         sync::{
             atomic::{AtomicBool, AtomicU64, Ordering},
@@ -35,7 +35,7 @@ impl RewardsRecorderService {
         exit: Arc<AtomicBool>,
     ) -> Self {
         let thread_hdl = Builder::new()
-            .name("solRewardsWritr".to_string())
+            .name("mlnRewardsWritr".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     break;

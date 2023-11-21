@@ -6,17 +6,17 @@ use {
     clap::{
         crate_description, crate_name, value_t, value_t_or_exit, App, Arg, ArgMatches, SubCommand,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::unix_timestamp_from_rfc3339_datetime,
         input_validators::{is_amount, is_rfc3339_datetime, is_valid_pubkey, is_valid_signer},
     },
-    solana_cli_config::CONFIG_FILE,
-    solana_sdk::native_token::sol_to_lamports,
+    miraland_cli_config::CONFIG_FILE,
+    solana_sdk::native_token::mln_to_lamports,
     std::{ffi::OsString, process::exit},
 };
 
 fn fee_payer_arg<'a, 'b>() -> Arg<'a, 'b> {
-    solana_clap_utils::fee_payer::fee_payer_arg().required(true)
+    miraland_clap_utils::fee_payer::fee_payer_arg().required(true)
 }
 
 fn funding_keypair_arg<'a, 'b>() -> Arg<'a, 'b> {
@@ -137,7 +137,7 @@ where
     let default_config_file = CONFIG_FILE.as_ref().unwrap();
     App::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .arg(
             Arg::with_name("config_file")
                 .long("config")
@@ -152,7 +152,7 @@ where
                 .global(true)
                 .takes_value(true)
                 .value_name("URL")
-                .help("RPC entrypoint address. i.e. http://api.devnet.solana.com"),
+                .help("RPC entrypoint address. i.e. http://api.devnet-mln.miraland.top"),
         )
         .subcommand(
             SubCommand::with_name("new")
@@ -175,7 +175,7 @@ where
                         .takes_value(true)
                         .value_name("AMOUNT")
                         .validator(is_amount)
-                        .help("Amount to move into the new stake accounts, in SOL"),
+                        .help("Amount to move into the new stake accounts, in MLN"),
                 )
                 .arg(
                     Arg::with_name("stake_authority")
@@ -283,7 +283,7 @@ fn parse_new_args(matches: &ArgMatches<'_>) -> NewArgs<String, String> {
     NewArgs {
         fee_payer: value_t_or_exit!(matches, "fee_payer", String),
         funding_keypair: value_t_or_exit!(matches, "funding_keypair", String),
-        lamports: sol_to_lamports(value_t_or_exit!(matches, "amount", f64)),
+        lamports: mln_to_lamports(value_t_or_exit!(matches, "amount", f64)),
         base_keypair: value_t_or_exit!(matches, "base_keypair", String),
         stake_authority: value_t_or_exit!(matches, "stake_authority", String),
         withdraw_authority: value_t_or_exit!(matches, "withdraw_authority", String),

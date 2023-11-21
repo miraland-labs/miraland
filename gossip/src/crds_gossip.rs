@@ -20,7 +20,7 @@ use {
     itertools::Itertools,
     rand::{CryptoRng, Rng},
     rayon::ThreadPool,
-    solana_ledger::shred::Shred,
+    miraland_ledger::shred::Shred,
     solana_sdk::{
         clock::Slot,
         hash::Hash,
@@ -28,7 +28,7 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         net::SocketAddr,

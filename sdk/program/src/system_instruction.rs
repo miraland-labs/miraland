@@ -33,7 +33,7 @@
 //! for the [`SystemInstruction`] variants for each system program instruction,
 //! and these variants are linked from the documentation for their constructors.
 //!
-//! [`RpcClient`]: https://docs.rs/solana-client/latest/solana_client/rpc_client/struct.RpcClient.html
+//! [`RpcClient`]: https://docs.rs/miraland-client/latest/miraland_client/rpc_client/struct.RpcClient.html
 //! [cpi]: crate::program
 //! [`invoke`]: crate::program::invoke
 //! [`invoke_signed`]: crate::program::invoke_signed
@@ -57,7 +57,7 @@ use {
 pub enum SystemError {
     #[error("an account with the same address already exists")]
     AccountAlreadyInUse,
-    #[error("account does not have enough SOL to perform the operation")]
+    #[error("account does not have enough MLN to perform the operation")]
     ResultWithNegativeLamports,
     #[error("cannot assign account to this program id")]
     InvalidProgramId,
@@ -281,7 +281,7 @@ pub enum SystemInstruction {
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::CreateAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Account creation typically involves three steps: [`allocate`] space,
@@ -305,8 +305,8 @@ pub enum SystemInstruction {
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, solana_rpc_client};
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
@@ -353,7 +353,7 @@ pub enum SystemInstruction {
 ///
 /// ## Example: on-chain program
 ///
-/// This example submits the instruction from an on-chain Solana program. The
+/// This example submits the instruction from an on-chain Miraland program. The
 /// created account is a [program derived address][pda]. The `payer` and
 /// `new_account_pda` are signers, with `new_account_pda` being signed for
 /// virtually by the program itself via [`invoke_signed`], `payer` being signed
@@ -491,7 +491,7 @@ pub fn create_account_with_seed(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::Assign`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// # Required signers
@@ -510,8 +510,8 @@ pub fn create_account_with_seed(
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, solana_rpc_client};
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
@@ -568,7 +568,7 @@ pub fn create_account_with_seed(
 ///
 /// ## Example: on-chain program
 ///
-/// This example submits the instructions from an on-chain Solana program. The
+/// This example submits the instructions from an on-chain Miraland program. The
 /// created account is a [program derived address][pda], funded by `payer`, and
 /// assigned to the running program. The `payer` and `new_account_pda` are
 /// signers, with `new_account_pda` being signed for virtually by the program
@@ -701,7 +701,7 @@ pub fn assign_with_seed(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::Transfer`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// # Required signers
@@ -720,8 +720,8 @@ pub fn assign_with_seed(
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, solana_rpc_client};
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
@@ -778,7 +778,7 @@ pub fn assign_with_seed(
 ///
 /// ## Example: on-chain program
 ///
-/// This example submits the instructions from an on-chain Solana program. The
+/// This example submits the instructions from an on-chain Miraland program. The
 /// created account is a [program derived address][pda], funded by `payer`, and
 /// assigned to the running program. The `payer` and `new_account_pda` are
 /// signers, with `new_account_pda` being signed for virtually by the program
@@ -917,7 +917,7 @@ pub fn transfer_with_seed(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::Allocate`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// The transaction will fail if the account already has size greater than 0,
@@ -939,8 +939,8 @@ pub fn transfer_with_seed(
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, solana_rpc_client};
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
@@ -997,7 +997,7 @@ pub fn transfer_with_seed(
 ///
 /// ## Example: on-chain program
 ///
-/// This example submits the instructions from an on-chain Solana program. The
+/// This example submits the instructions from an on-chain Miraland program. The
 /// created account is a [program derived address][pda], funded by `payer`, and
 /// assigned to the running program. The `payer` and `new_account_pda` are
 /// signers, with `new_account_pda` being signed for virtually by the program
@@ -1132,7 +1132,7 @@ pub fn allocate_with_seed(
 /// in a [`Transaction`] or [invoked] to take effect, containing serialized
 /// [`SystemInstruction::Transfer`]s.
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// # Required signers
@@ -1146,8 +1146,8 @@ pub fn allocate_with_seed(
 /// This example performs multiple transfers in a single transaction.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, solana_rpc_client};
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
@@ -1191,7 +1191,7 @@ pub fn allocate_with_seed(
 ///
 /// This example makes multiple transfers out of a "bank" account,
 /// a [program derived address][pda] owned by the calling program.
-/// This example submits the instructions from an on-chain Solana program. The
+/// This example submits the instructions from an on-chain Miraland program. The
 /// created account is a [program derived address][pda], and it is assigned to
 /// the running program. The `payer` and `new_account_pda` are signers, with
 /// `new_account_pda` being signed for virtually by the program itself via
@@ -1311,14 +1311,14 @@ pub fn create_nonce_account_with_seed(
 /// [`SystemInstruction::CreateAccount`] and
 /// [`SystemInstruction::InitializeNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// A [durable transaction nonce][dtn] is a special account that enables
 /// execution of transactions that have been signed in the past.
 ///
-/// Standard Solana transactions include a [recent blockhash][rbh] (sometimes
-/// referred to as a _[nonce]_). During execution the Solana runtime verifies
+/// Standard Miraland transactions include a [recent blockhash][rbh] (sometimes
+/// referred to as a _[nonce]_). During execution the Miraland runtime verifies
 /// the recent blockhash is approximately less than two minutes old, and that in
 /// those two minutes no other identical transaction with the same blockhash has
 /// been executed. These checks prevent accidental replay of transactions.
@@ -1373,8 +1373,8 @@ pub fn create_nonce_account_with_seed(
 ///
 /// ```
 /// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::solana_rpc_client;
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::miraland_rpc_client;
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 /// #   pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
@@ -1448,13 +1448,13 @@ pub fn create_nonce_account(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::AdvanceNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Every transaction that relies on a durable transaction nonce must contain a
 /// [`SystemInstruction::AdvanceNonceAccount`] instruction as the first
 /// instruction in the [`Message`], as created by this function. When included
-/// in the first position, the Solana runtime recognizes the transaction as one
+/// in the first position, the Miraland runtime recognizes the transaction as one
 /// that relies on a durable transaction nonce and processes it accordingly. The
 /// [`Message::new_with_nonce`] function can be used to construct a `Message` in
 /// the correct format without calling `advance_nonce_account` directly.
@@ -1464,7 +1464,7 @@ pub fn create_nonce_account(
 /// setting it to a recent blockhash, the value of the nonce must be retrieved
 /// and deserialized from the nonce account, and that value specified as the
 /// "recent blockhash". A nonce account can be deserialized with the
-/// [`solana_rpc_client_nonce_utils::data_from_account`][dfa] function.
+/// [`miraland_rpc_client_nonce_utils::data_from_account`][dfa] function.
 ///
 /// For further description of durable transaction nonces see
 /// [`create_nonce_account`].
@@ -1472,7 +1472,7 @@ pub fn create_nonce_account(
 /// [`Message`]: crate::message::Message
 /// [`Message::new_with_nonce`]: crate::message::Message::new_with_nonce
 /// [`recent_blockhash`]: crate::message::Message::recent_blockhash
-/// [dfa]: https://docs.rs/solana-rpc-client-nonce-utils/latest/solana_rpc_client_nonce_utils/fn.data_from_account.html
+/// [dfa]: https://docs.rs/miraland-rpc-client-nonce-utils/latest/miraland_rpc_client_nonce_utils/fn.data_from_account.html
 ///
 /// # Required signers
 ///
@@ -1484,9 +1484,9 @@ pub fn create_nonce_account(
 ///
 /// ```
 /// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::solana_rpc_client;
-/// # use solana_program::example_mocks::solana_rpc_client_nonce_utils;
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::miraland_rpc_client;
+/// # use solana_program::example_mocks::miraland_rpc_client_nonce_utils;
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     message::Message,
 ///     pubkey::Pubkey,
@@ -1542,7 +1542,7 @@ pub fn create_nonce_account(
 ///     #   rent_epoch: 1,
 ///     # });
 ///     let nonce_account = client.get_account(nonce_account_pubkey)?;
-///     let nonce_data = solana_rpc_client_nonce_utils::data_from_account(&nonce_account)?;
+///     let nonce_data = miraland_rpc_client_nonce_utils::data_from_account(&nonce_account)?;
 ///     let blockhash = nonce_data.blockhash();
 ///
 ///     tx.try_sign(&[payer], blockhash)?;
@@ -1585,7 +1585,7 @@ pub fn advance_nonce_account(nonce_pubkey: &Pubkey, authorized_pubkey: &Pubkey) 
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::WithdrawNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Withdrawing the entire balance of a nonce account will cause the runtime to
@@ -1609,8 +1609,8 @@ pub fn advance_nonce_account(nonce_pubkey: &Pubkey, authorized_pubkey: &Pubkey) 
 ///
 /// ```
 /// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::solana_rpc_client;
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::miraland_rpc_client;
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
@@ -1678,7 +1678,7 @@ pub fn withdraw_nonce_account(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::AuthorizeNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// This constructor creates a [`SystemInstruction::AuthorizeNonceAccount`]
@@ -1692,8 +1692,8 @@ pub fn withdraw_nonce_account(
 ///
 /// ```
 /// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::solana_rpc_client;
-/// use solana_rpc_client::rpc_client::RpcClient;
+/// # use solana_program::example_mocks::miraland_rpc_client;
+/// use miraland_rpc_client::rpc_client::RpcClient;
 /// use solana_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},

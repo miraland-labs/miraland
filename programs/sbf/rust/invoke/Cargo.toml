@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-invoke"
-documentation = "https://docs.rs/solana-sbf-rust-invoke"
+name = "miraland-sbf-rust-invoke"
+documentation = "https://docs.rs/miraland-sbf-rust-invoke"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -15,9 +15,9 @@ program = []
 
 [dependencies]
 rustversion = { workspace = true }
-solana-program = { workspace = true }
-solana-sbf-rust-invoked = { workspace = true }
-solana-sbf-rust-realloc = { workspace = true }
+miraland-program = { workspace = true }
+miraland-sbf-rust-invoked = { workspace = true }
+miraland-sbf-rust-realloc = { workspace = true }
 
 [lib]
 crate-type = ["lib", "cdylib"]

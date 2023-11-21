@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-dep-crate"
-documentation = "https://docs.rs/solana-sbf-rust-dep-crate"
+name = "miraland-sbf-rust-dep-crate"
+documentation = "https://docs.rs/miraland-sbf-rust-dep-crate"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -12,7 +12,7 @@ edition = { workspace = true }
 [dependencies]
 byteorder = { workspace = true }
 # list of crates which must be buildable for bpf programs
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["cdylib"]

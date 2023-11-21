@@ -8,8 +8,8 @@ use {
     log::*,
     rand::distributions::{Distribution, Uniform},
     rayon::prelude::*,
-    solana_client::{nonce_utils, rpc_request::MAX_MULTIPLE_ACCOUNTS},
-    solana_metrics::{self, datapoint_info},
+    miraland_client::{nonce_utils, rpc_request::MAX_MULTIPLE_ACCOUNTS},
+    miraland_metrics::{self, datapoint_info},
     solana_sdk::{
         account::Account,
         clock::{DEFAULT_MS_PER_SLOT, DEFAULT_S_PER_SLOT, MAX_PROCESSING_AGE},
@@ -17,7 +17,7 @@ use {
         hash::Hash,
         instruction::{AccountMeta, Instruction},
         message::Message,
-        native_token::Sol,
+        native_token::Mln,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         system_instruction,
@@ -284,7 +284,7 @@ where
     let maxes = maxes.clone();
     let client = client.clone();
     Builder::new()
-        .name("solana-client-sample".to_string())
+        .name("miraland-client-sample".to_string())
         .spawn(move || {
             sample_txs(exit_signal, &maxes, sample_period, &client);
         })
@@ -363,7 +363,7 @@ where
             let total_tx_sent_count = total_tx_sent_count.clone();
             let client = client.clone();
             Builder::new()
-                .name("solana-client-sender".to_string())
+                .name("miraland-client-sender".to_string())
                 .spawn(move || {
                     do_tx_transfers(
                         &exit_signal,
@@ -447,7 +447,7 @@ where
         let id = id.pubkey();
         Some(
             Builder::new()
-                .name("solana-blockhash-poller".to_string())
+                .name("miraland-blockhash-poller".to_string())
                 .spawn(move || {
                     poll_blockhash(&exit_signal, &blockhash, &client, &id);
                 })
@@ -1079,7 +1079,7 @@ pub fn fund_keypairs<T: 'static + BenchTpsClient + Send + Sync + ?Sized>(
     let rent = client.get_minimum_balance_for_rent_exemption(0)?;
     info!("Get lamports...");
 
-    // Sample the first keypair, to prevent lamport loss on repeated solana-bench-tps executions
+    // Sample the first keypair, to prevent lamport loss on repeated miraland-bench-tps executions
     let first_key = keypairs[0].pubkey();
     let first_keypair_balance = client.get_balance(&first_key).unwrap_or(0);
 
@@ -1116,8 +1116,8 @@ pub fn fund_keypairs<T: 'static + BenchTpsClient + Send + Sync + ?Sized>(
         if funding_key_balance < total + rent {
             error!(
                 "funder has {}, needed {}",
-                Sol(funding_key_balance),
-                Sol(total)
+                Mln(funding_key_balance),
+                Mln(total)
             );
             let latest_blockhash = get_latest_blockhash(client.as_ref());
             if client
@@ -1155,7 +1155,7 @@ mod tests {
             feature_set::FeatureSet,
             fee_calculator::FeeRateGovernor,
             genesis_config::{create_genesis_config, GenesisConfig},
-            native_token::sol_to_lamports,
+            native_token::mln_to_lamports,
             nonce::State,
         },
     };
@@ -1168,7 +1168,7 @@ mod tests {
 
     #[test]
     fn test_bench_tps_bank_client() {
-        let (genesis_config, id) = create_genesis_config(sol_to_lamports(10_000.0));
+        let (genesis_config, id) = create_genesis_config(mln_to_lamports(10_000.0));
         let bank = bank_with_all_features(&genesis_config);
         let client = Arc::new(BankClient::new(bank));
 
@@ -1189,7 +1189,7 @@ mod tests {
 
     #[test]
     fn test_bench_tps_fund_keys() {
-        let (genesis_config, id) = create_genesis_config(sol_to_lamports(10_000.0));
+        let (genesis_config, id) = create_genesis_config(mln_to_lamports(10_000.0));
         let bank = bank_with_all_features(&genesis_config);
         let client = Arc::new(BankClient::new(bank));
         let keypair_count = 20;
@@ -1212,7 +1212,7 @@ mod tests {
 
     #[test]
     fn test_bench_tps_fund_keys_with_fees() {
-        let (mut genesis_config, id) = create_genesis_config(sol_to_lamports(10_000.0));
+        let (mut genesis_config, id) = create_genesis_config(mln_to_lamports(10_000.0));
         let fee_rate_governor = FeeRateGovernor::new(11, 0);
         genesis_config.fee_rate_governor = fee_rate_governor;
         let bank = bank_with_all_features(&genesis_config);
@@ -1232,7 +1232,7 @@ mod tests {
 
     #[test]
     fn test_bench_tps_create_durable_nonce() {
-        let (genesis_config, id) = create_genesis_config(sol_to_lamports(10_000.0));
+        let (genesis_config, id) = create_genesis_config(mln_to_lamports(10_000.0));
         let bank = bank_with_all_features(&genesis_config);
         let client = Arc::new(BankClient::new(bank));
         let keypair_count = 10;

@@ -1,7 +1,7 @@
 [package]
-name = "solana-gossip"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-gossip"
+name = "miraland-gossip"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-gossip"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -28,27 +28,27 @@ rustversion = { workspace = true }
 serde = { workspace = true }
 serde_bytes = { workspace = true }
 serde_derive = { workspace = true }
-solana-bloom = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-client = { workspace = true }
-solana-entry = { workspace = true }
-solana-frozen-abi = { workspace = true }
-solana-frozen-abi-macro = { workspace = true }
-solana-ledger = { workspace = true }
-solana-logger = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-net-utils = { workspace = true }
-solana-perf = { workspace = true }
-solana-rayon-threadlimit = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
-solana-thin-client = { workspace = true }
-solana-tpu-client = { workspace = true }
-solana-version = { workspace = true }
-solana-vote = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-bloom = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-client = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-net-utils = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-rayon-threadlimit = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-thin-client = { workspace = true }
+miraland-tpu-client = { workspace = true }
+miraland-version = { workspace = true }
+miraland-vote = { workspace = true }
+miraland-vote-program = { workspace = true }
 static_assertions = { workspace = true }
 thiserror = { workspace = true }
 
@@ -70,7 +70,7 @@ name = "crds_gossip_pull"
 name = "crds_shards"
 
 [[bin]]
-name = "solana-gossip"
+name = "miraland-gossip"
 path = "src/main.rs"
 
 [package.metadata.docs.rs]

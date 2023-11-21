@@ -5,7 +5,7 @@ extern crate test;
 use {
     log::*,
     rand::distributions::{Distribution, Uniform},
-    solana_metrics::{
+    miraland_metrics::{
         counter::CounterPoint,
         datapoint::DataPoint,
         metrics::{serialize_points, test_mocks::MockMetricsWriter, MetricsAgent},

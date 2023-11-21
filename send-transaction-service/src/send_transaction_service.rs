@@ -2,12 +2,12 @@ use {
     crate::tpu_info::TpuInfo,
     crossbeam_channel::{Receiver, RecvTimeoutError},
     log::*,
-    solana_client::{
+    miraland_client::{
         connection_cache::{ConnectionCache, Protocol},
         tpu_connection::TpuConnection,
     },
-    solana_measure::measure::Measure,
-    solana_metrics::datapoint_warn,
+    miraland_measure::measure::Measure,
+    miraland_metrics::datapoint_warn,
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{
         clock::Slot, hash::Hash, nonce_account, pubkey::Pubkey, saturating_add_assign,
@@ -415,7 +415,7 @@ impl SendTransactionService {
             config
         );
         Builder::new()
-            .name("solStxReceive".to_string())
+            .name("mlnStxReceive".to_string())
             .spawn(move || loop {
                 let recv_timeout_ms = config.batch_send_rate_ms;
                 let stats = &stats_report.stats;
@@ -519,7 +519,7 @@ impl SendTransactionService {
             config
         );
         Builder::new()
-            .name("solStxRetry".to_string())
+            .name("mlnStxRetry".to_string())
             .spawn(move || loop {
                 let retry_interval_ms = config.retry_rate_ms;
                 let stats = &stats_report.stats;
@@ -889,7 +889,7 @@ mod test {
 
     #[test]
     fn process_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let (genesis_config, mint_keypair) = create_genesis_config(4);
         let bank = Bank::new_for_tests(&genesis_config);
@@ -1155,7 +1155,7 @@ mod test {
 
     #[test]
     fn test_retry_durable_nonce_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let (genesis_config, mint_keypair) = create_genesis_config(4);
         let bank = Bank::new_for_tests(&genesis_config);

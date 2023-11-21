@@ -1,7 +1,7 @@
 [package]
-name = "solana-watchtower"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-watchtower"
+name = "miraland-watchtower"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-watchtower"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -13,16 +13,16 @@ edition = { workspace = true }
 clap = { workspace = true }
 humantime = { workspace = true }
 log = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-cli-config = { workspace = true }
-solana-cli-output = { workspace = true }
-solana-logger = { workspace = true }
-solana-metrics = { workspace = true }
-solana-notifier = { workspace = true }
-solana-rpc-client = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-sdk = { workspace = true }
-solana-version = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-cli-config = { workspace = true }
+miraland-cli-output = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-notifier = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-version = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

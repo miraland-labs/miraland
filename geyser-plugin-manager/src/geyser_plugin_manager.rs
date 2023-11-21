@@ -3,7 +3,7 @@ use {
     jsonrpc_server_utils::tokio::sync::oneshot::Sender as OneShotSender,
     libloading::Library,
     log::*,
-    solana_geyser_plugin_interface::geyser_plugin_interface::GeyserPlugin,
+    miraland_geyser_plugin_interface::geyser_plugin_interface::GeyserPlugin,
     std::path::Path,
 };
 
@@ -378,7 +378,7 @@ mod tests {
             GeyserPluginManager, TESTPLUGIN2_CONFIG, TESTPLUGIN_CONFIG,
         },
         libloading::Library,
-        solana_geyser_plugin_interface::geyser_plugin_interface::GeyserPlugin,
+        miraland_geyser_plugin_interface::geyser_plugin_interface::GeyserPlugin,
         std::sync::{Arc, RwLock},
     };
 

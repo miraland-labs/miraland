@@ -1,6 +1,6 @@
 //! The `validator` module hosts all the validator microservices.
 
-pub use solana_perf::report_target_features;
+pub use miraland_perf::report_target_features;
 use {
     crate::{
         accounts_hash_verifier::{AccountsHashFaultInjector, AccountsHashVerifier},
@@ -30,18 +30,18 @@ use {
     crossbeam_channel::{bounded, unbounded, Receiver},
     lazy_static::lazy_static,
     quinn::Endpoint,
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::{AccountShrinkThreshold, AccountsDbConfig},
         accounts_index::AccountSecondaryIndexes,
         accounts_update_notifier_interface::AccountsUpdateNotifier,
         hardened_unpack::{open_genesis_config, MAX_GENESIS_ARCHIVE_UNPACKED_SIZE},
     },
-    solana_client::connection_cache::{ConnectionCache, Protocol},
-    solana_entry::poh::compute_hash_time_ns,
-    solana_geyser_plugin_manager::{
+    miraland_client::connection_cache::{ConnectionCache, Protocol},
+    miraland_entry::poh::compute_hash_time_ns,
+    miraland_geyser_plugin_manager::{
         geyser_plugin_service::GeyserPluginService, GeyserPluginManagerRequest,
     },
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::{
             ClusterInfo, Node, DEFAULT_CONTACT_DEBUG_INTERVAL_MILLIS,
             DEFAULT_CONTACT_SAVE_INTERVAL_MILLIS,
@@ -50,7 +50,7 @@ use {
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_ledger::{
+    miraland_ledger::{
         bank_forks_utils,
         blockstore::{
             Blockstore, BlockstoreError, BlockstoreSignals, CompletedSlotsReceiver, PurgeType,
@@ -64,15 +64,15 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
         use_snapshot_archives_at_startup::UseSnapshotArchivesAtStartup,
     },
-    solana_measure::measure::Measure,
-    solana_metrics::{
+    miraland_measure::measure::Measure,
+    miraland_metrics::{
         datapoint_info, metrics::metrics_config_sanity_check, poh_timing_point::PohTimingSender,
     },
-    solana_poh::{
+    miraland_poh::{
         poh_recorder::PohRecorder,
         poh_service::{self, PohService},
     },
-    solana_rpc::{
+    miraland_rpc::{
         max_slots::MaxSlots,
         optimistically_confirmed_bank_tracker::{
             BankNotificationSenderConfig, OptimisticallyConfirmedBank,
@@ -115,11 +115,11 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    solana_send_transaction_service::send_transaction_service,
-    solana_streamer::{socket::SocketAddrSpace, streamer::StakedNodes},
-    solana_turbine::{self, broadcast_stage::BroadcastStageType},
+    miraland_send_transaction_service::send_transaction_service,
+    miraland_streamer::{socket::SocketAddrSpace, streamer::StakedNodes},
+    miraland_turbine::{self, broadcast_stage::BroadcastStageType},
     solana_vote_program::vote_state,
-    solana_wen_restart::wen_restart::wait_for_wen_restart,
+    miraland_wen_restart::wen_restart::wait_for_wen_restart,
     std::{
         collections::{HashMap, HashSet},
         net::SocketAddr,
@@ -407,7 +407,7 @@ impl BlockstoreRootScan {
         {
             Some(
                 Builder::new()
-                    .name("solBStoreRtScan".to_string())
+                    .name("mlnBStoreRtScan".to_string())
                     .spawn(move || blockstore.scan_and_fix_roots(None, None, &exit))
                     .unwrap(),
             )
@@ -460,7 +460,7 @@ pub struct Validator {
     poh_service: PohService,
     tpu: Tpu,
     tvu: Tvu,
-    ip_echo_server: Option<solana_net_utils::IpEchoServer>,
+    ip_echo_server: Option<miraland_net_utils::IpEchoServer>,
     pub cluster_info: Arc<ClusterInfo>,
     pub bank_forks: Arc<RwLock<BankForks>>,
     pub blockstore: Arc<Blockstore>,
@@ -470,7 +470,7 @@ pub struct Validator {
     accounts_hash_verifier: AccountsHashVerifier,
     turbine_quic_endpoint: Endpoint,
     turbine_quic_endpoint_runtime: Option<TokioRuntime>,
-    turbine_quic_endpoint_join_handle: solana_turbine::quic_endpoint::AsyncTryJoinHandle,
+    turbine_quic_endpoint_join_handle: miraland_turbine::quic_endpoint::AsyncTryJoinHandle,
     repair_quic_endpoint: Endpoint,
     repair_quic_endpoint_runtime: Option<TokioRuntime>,
     repair_quic_endpoint_join_handle: repair::quic_endpoint::AsyncTryJoinHandle,
@@ -542,14 +542,14 @@ impl Validator {
         }
 
         if rayon::ThreadPoolBuilder::new()
-            .thread_name(|i| format!("solRayonGlob{i:02}"))
+            .thread_name(|i| format!("mlnRayonGlob{i:02}"))
             .build_global()
             .is_err()
         {
             warn!("Rayon global thread pool already initialized");
         }
 
-        if solana_perf::perf_libs::api().is_some() {
+        if miraland_perf::perf_libs::api().is_some() {
             info!("Initializing sigverify, this could take a while...");
         } else {
             info!("Initializing sigverify...");
@@ -1046,7 +1046,7 @@ impl Validator {
         }
         let ip_echo_server = match node.sockets.ip_echo {
             None => None,
-            Some(tcp_listener) => Some(solana_net_utils::ip_echo_server(
+            Some(tcp_listener) => Some(miraland_net_utils::ip_echo_server(
                 tcp_listener,
                 Some(node.info.shred_version()),
             )),
@@ -1165,7 +1165,7 @@ impl Validator {
         let turbine_quic_endpoint_runtime = current_runtime_handle.is_err().then(|| {
             tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
-                .thread_name("solTurbineQuic")
+                .thread_name("mlnTurbineQuic")
                 .build()
                 .unwrap()
         });
@@ -1174,7 +1174,7 @@ impl Validator {
             turbine_quic_endpoint,
             turbine_quic_endpoint_sender,
             turbine_quic_endpoint_join_handle,
-        ) = solana_turbine::quic_endpoint::new_quic_endpoint(
+        ) = miraland_turbine::quic_endpoint::new_quic_endpoint(
             turbine_quic_endpoint_runtime
                 .as_ref()
                 .map(TokioRuntime::handle)
@@ -1194,7 +1194,7 @@ impl Validator {
         let repair_quic_endpoint_runtime = current_runtime_handle.is_err().then(|| {
             tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
-                .thread_name("solRepairQuic")
+                .thread_name("mlnRepairQuic")
                 .build()
                 .unwrap()
         });
@@ -1346,7 +1346,7 @@ impl Validator {
         datapoint_info!(
             "validator-new",
             ("id", id.to_string(), String),
-            ("version", solana_version::version!(), String),
+            ("version", miraland_version::version!(), String),
             ("cluster_type", genesis_config.cluster_type as u32, i64),
         );
 
@@ -1516,7 +1516,7 @@ impl Validator {
         self.accounts_hash_verifier
             .join()
             .expect("accounts_hash_verifier");
-        solana_turbine::quic_endpoint::close_quic_endpoint(&self.turbine_quic_endpoint);
+        miraland_turbine::quic_endpoint::close_quic_endpoint(&self.turbine_quic_endpoint);
         self.tpu.join().expect("tpu");
         self.tvu.join().expect("tvu");
         self.turbine_quic_endpoint_runtime
@@ -1912,7 +1912,7 @@ impl<'a> ProcessBlockStore<'a> {
                 let start_progress = self.start_progress.clone();
 
                 let _ = Builder::new()
-                    .name("solRptLdgrStat".to_string())
+                    .name("mlnRptLdgrStat".to_string())
                     .spawn(move || {
                         while !exit.load(Ordering::Relaxed) {
                             let slot = bank_forks.read().unwrap().working_bank().slot();
@@ -2023,7 +2023,7 @@ fn maybe_warp_slot(
             root_bank,
             &Pubkey::default(),
             warp_slot,
-            solana_accounts_db::accounts_db::CalcAccountsHashDataSource::Storages,
+            miraland_accounts_db::accounts_db::CalcAccountsHashDataSource::Storages,
         ));
         bank_forks.set_root(
             warp_slot,
@@ -2446,14 +2446,14 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::{bounded, RecvTimeoutError},
-        solana_entry::entry,
-        solana_gossip::contact_info::{ContactInfo, LegacyContactInfo},
-        solana_ledger::{
+        miraland_entry::entry,
+        miraland_gossip::contact_info::{ContactInfo, LegacyContactInfo},
+        miraland_ledger::{
             blockstore, create_new_tmp_ledger, genesis_utils::create_genesis_config_with_leader,
             get_tmp_ledger_path_auto_delete,
         },
         solana_sdk::{genesis_config::create_genesis_config, poh_config::PohConfig},
-        solana_tpu_client::tpu_client::{
+        miraland_tpu_client::tpu_client::{
             DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_ENABLE_UDP, DEFAULT_TPU_USE_QUIC,
         },
         std::{fs::remove_dir_all, thread, time::Duration},
@@ -2461,7 +2461,7 @@ mod tests {
 
     #[test]
     fn validator_exit() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let leader_keypair = Keypair::new();
         let leader_node = Node::new_localhost_with_pubkey(&leader_keypair.pubkey());
 
@@ -2509,7 +2509,7 @@ mod tests {
 
     #[test]
     fn test_backup_and_clear_blockstore() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let validator_config = ValidatorConfig::default_for_test();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
@@ -2611,7 +2611,7 @@ mod tests {
 
     #[test]
     fn test_wait_for_supermajority() {
-        solana_logger::setup();
+        miraland_logger::setup();
         use solana_sdk::hash::hash;
         let node_keypair = Arc::new(Keypair::new());
         let cluster_info = ClusterInfo::new(
@@ -2783,7 +2783,7 @@ mod tests {
 
     #[test]
     fn test_poh_speed() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let poh_config = PohConfig {
             target_tick_duration: Duration::from_millis(solana_sdk::clock::MS_PER_TICK),
             // make PoH rate really fast to cause the panic condition

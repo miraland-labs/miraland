@@ -7,7 +7,7 @@
 //! [`EpochSchedule`] implements [`Sysvar::get`] and can be loaded efficiently without
 //! passing the sysvar account ID to the program.
 //!
-//! See also the Solana [documentation on the epoch schedule sysvar][sdoc].
+//! See also the Miraland [documentation on the epoch schedule sysvar][sdoc].
 //!
 //! [sdoc]: https://docs.solana.com/developing/runtime-facilities/sysvars#epochschedule
 //!
@@ -99,9 +99,9 @@
 //!
 //! ```
 //! # use solana_program::example_mocks::solana_sdk;
-//! # use solana_program::example_mocks::solana_rpc_client;
+//! # use solana_program::example_mocks::miraland_rpc_client;
 //! # use solana_sdk::account::Account;
-//! # use solana_rpc_client::rpc_client::RpcClient;
+//! # use miraland_rpc_client::rpc_client::RpcClient;
 //! # use solana_sdk::sysvar::epoch_schedule::{self, EpochSchedule};
 //! # use anyhow::Result;
 //! #

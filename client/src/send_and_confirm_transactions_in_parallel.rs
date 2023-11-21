@@ -6,9 +6,9 @@ use {
     bincode::serialize,
     dashmap::DashMap,
     futures_util::future::{join_all, TryFutureExt},
-    solana_quic_client::{QuicConfig, QuicConnectionManager, QuicPool},
-    solana_rpc_client::spinner::{self, SendTransactionProgress},
-    solana_rpc_client_api::{
+    miraland_quic_client::{QuicConfig, QuicConnectionManager, QuicPool},
+    miraland_rpc_client::spinner::{self, SendTransactionProgress},
+    miraland_rpc_client_api::{
         client_error::ErrorKind,
         request::{RpcError, RpcResponseErrorData, MAX_GET_SIGNATURE_STATUSES_QUERY_ITEMS},
         response::RpcSimulateTransactionResult,
@@ -20,7 +20,7 @@ use {
         signers::Signers,
         transaction::{Transaction, TransactionError},
     },
-    solana_tpu_client::tpu_client::{Result, TpuSenderError},
+    miraland_tpu_client::tpu_client::{Result, TpuSenderError},
     std::{
         sync::{
             atomic::{AtomicU64, AtomicUsize, Ordering},

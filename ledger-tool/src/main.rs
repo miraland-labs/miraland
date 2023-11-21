@@ -15,12 +15,12 @@ use {
         Serialize,
     },
     serde_json::json,
-    solana_account_decoder::{UiAccount, UiAccountData, UiAccountEncoding},
-    solana_accounts_db::{
+    miraland_account_decoder::{UiAccount, UiAccountData, UiAccountEncoding},
+    miraland_accounts_db::{
         accounts::Accounts, accounts_db::CalcAccountsHashDataSource, accounts_index::ScanConfig,
         hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         hidden_unless_forced,
         input_parsers::{cluster_type_of, pubkey_of, pubkeys_of},
         input_validators::{
@@ -29,14 +29,14 @@ use {
             validate_maximum_incremental_snapshot_archives_to_retain,
         },
     },
-    solana_cli_output::{CliAccount, CliAccountNewConfig, OutputFormat},
-    solana_core::{
+    miraland_cli_output::{CliAccount, CliAccountNewConfig, OutputFormat},
+    miraland_core::{
         system_monitor_service::{SystemMonitorService, SystemMonitorStatsReportConfig},
         validator::BlockVerificationMethod,
     },
-    solana_cost_model::{cost_model::CostModel, cost_tracker::CostTracker},
-    solana_entry::entry::Entry,
-    solana_ledger::{
+    miraland_cost_model::{cost_model::CostModel, cost_tracker::CostTracker},
+    miraland_entry::entry::Entry,
+    miraland_ledger::{
         ancestor_iterator::AncestorIterator,
         blockstore::{create_new_ledger, Blockstore, PurgeType},
         blockstore_db::{self, columns as cf, Column, ColumnName, Database},
@@ -48,7 +48,7 @@ use {
         shred::Shred,
         use_snapshot_archives_at_startup::{self, UseSnapshotArchivesAtStartup},
     },
-    solana_measure::{measure, measure::Measure},
+    miraland_measure::{measure, measure::Measure},
     solana_runtime::{
         bank::{bank_hash_details, Bank, RewardCalculationEvent, TotalAccountsStats},
         bank_forks::BankForks,
@@ -70,7 +70,7 @@ use {
         genesis_config::ClusterType,
         hash::Hash,
         inflation::Inflation,
-        native_token::{lamports_to_sol, sol_to_lamports, Sol},
+        native_token::{lamports_to_mln, mln_to_lamports, Mln},
         pubkey::Pubkey,
         rent::Rent,
         shred_version::compute_shred_version,
@@ -148,7 +148,7 @@ fn output_slot_rewards(blockstore: &Blockstore, slot: Slot, method: &LedgerOutpu
                 for reward in rewards {
                     let sign = if reward.lamports < 0 { "-" } else { "" };
                     println!(
-                        "    {:<44}  {:^15}  {}◎{:<14.9}  ◎{:<18.9}   {}",
+                        "    {:<44}  {:^15}  {}𝇊{:<14.9}  𝇊{:<18.9}   {}",
                         reward.pubkey,
                         if let Some(reward_type) = reward.reward_type {
                             format!("{reward_type}")
@@ -156,8 +156,8 @@ fn output_slot_rewards(blockstore: &Blockstore, slot: Slot, method: &LedgerOutpu
                             "-".to_string()
                         },
                         sign,
-                        lamports_to_sol(reward.lamports.unsigned_abs()),
-                        lamports_to_sol(reward.post_balance),
+                        lamports_to_mln(reward.lamports.unsigned_abs()),
+                        lamports_to_mln(reward.post_balance),
                         reward
                             .commission
                             .map(|commission| format!("{commission:>9}%"))
@@ -199,7 +199,7 @@ fn output_entry(
                     })
                     .map(|meta| meta.into());
 
-                solana_cli_output::display::println_transaction(
+                miraland_cli_output::display::println_transaction(
                     &transaction,
                     tx_status_meta.as_ref(),
                     "      ",
@@ -374,7 +374,7 @@ fn output_account(
     encoding: UiAccountEncoding,
 ) {
     println!("{pubkey}:");
-    println!("  balance: {} SOL", lamports_to_sol(account.lamports()));
+    println!("  balance: {} MLN", lamports_to_mln(account.lamports()));
     println!("  owner: '{}'", account.owner());
     println!("  executable: {}", account.executable());
     if let Some(slot) = modified_slot {
@@ -574,9 +574,9 @@ fn graph_forks(bank_forks: &BankForks, config: &GraphConfig) -> String {
                         slot_stake_and_vote_count.get(&bank.slot())
                     {
                         format!(
-                            "\nvotes: {}, stake: {:.1} SOL ({:.1}%)",
+                            "\nvotes: {}, stake: {:.1} MLN ({:.1}%)",
                             votes,
-                            lamports_to_sol(*stake),
+                            lamports_to_mln(*stake),
                             *stake as f64 / *total_stake as f64 * 100.,
                         )
                     } else {
@@ -671,10 +671,10 @@ fn graph_forks(bank_forks: &BankForks, config: &GraphConfig) -> String {
                     )
                 };
             dot.push(format!(
-                r#"  "last vote {}"[shape=box,label="Latest validator vote: {}\nstake: {} SOL\nroot slot: {}\n{}"];"#,
+                r#"  "last vote {}"[shape=box,label="Latest validator vote: {}\nstake: {} MLN\nroot slot: {}\n{}"];"#,
                 node_pubkey,
                 node_pubkey,
-                lamports_to_sol(*stake),
+                lamports_to_mln(*stake),
                 vote_state.root_slot.unwrap_or(0),
                 vote_history,
             ));
@@ -694,9 +694,9 @@ fn graph_forks(bank_forks: &BankForks, config: &GraphConfig) -> String {
     // Annotate the final "..." node with absent vote and stake information
     if absent_votes > 0 {
         dot.push(format!(
-            r#"    "..."[label="...\nvotes: {}, stake: {:.1} SOL {:.1}%"];"#,
+            r#"    "..."[label="...\nvotes: {}, stake: {:.1} MLN {:.1}%"];"#,
             absent_votes,
-            lamports_to_sol(absent_stake),
+            lamports_to_mln(absent_stake),
             absent_stake as f64 / lowest_total_stake as f64 * 100.,
         ));
     }
@@ -738,7 +738,7 @@ fn graph_forks(bank_forks: &BankForks, config: &GraphConfig) -> String {
 }
 
 fn analyze_column<
-    C: solana_ledger::blockstore_db::Column + solana_ledger::blockstore_db::ColumnName,
+    C: miraland_ledger::blockstore_db::Column + miraland_ledger::blockstore_db::ColumnName,
 >(
     db: &Database,
     name: &str,
@@ -1083,7 +1083,7 @@ fn main() {
     const DEFAULT_MAX_FULL_SNAPSHOT_ARCHIVES_TO_RETAIN: usize = std::usize::MAX;
     const DEFAULT_MAX_INCREMENTAL_SNAPSHOT_ARCHIVES_TO_RETAIN: usize = std::usize::MAX;
 
-    solana_logger::setup_with_default("solana=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
 
     let starting_slot_arg = Arg::with_name("starting_slot")
         .long("starting-slot")
@@ -1301,10 +1301,10 @@ fn main() {
         .help("Print account data in specified format when printing account contents.");
 
     let rent = Rent::default();
-    let default_bootstrap_validator_lamports = &sol_to_lamports(500.0)
+    let default_bootstrap_validator_lamports = &mln_to_lamports(500.0)
         .max(VoteState::get_rent_exempt_reserve(&rent))
         .to_string();
-    let default_bootstrap_validator_stake_lamports = &sol_to_lamports(0.5)
+    let default_bootstrap_validator_stake_lamports = &mln_to_lamports(0.5)
         .max(rent.minimum_balance(StakeStateV2::size_of()))
         .to_string();
     let default_graph_vote_account_mode = GraphVoteAccountMode::default();
@@ -1313,7 +1313,7 @@ fn main() {
 
     let matches = App::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .setting(AppSettings::InferSubcommands)
         .setting(AppSettings::SubcommandRequiredElseHelp)
         .setting(AppSettings::VersionlessSubcommands)
@@ -2184,7 +2184,7 @@ fn main() {
         .program_subcommand()
         .get_matches();
 
-    info!("{} {}", crate_name!(), solana_version::version!());
+    info!("{} {}", crate_name!(), miraland_version::version!());
 
     let ledger_path = PathBuf::from(value_t_or_exit!(matches, "ledger_path", String));
     let snapshot_archive_path = value_t!(matches, "snapshot_archive_path", String)
@@ -2315,7 +2315,7 @@ fn main() {
 
                 if let Some(hashes_per_tick) = arg_matches.value_of("hashes_per_tick") {
                     genesis_config.poh_config.hashes_per_tick = match hashes_per_tick {
-                        // Note: Unlike `solana-genesis`, "auto" is not supported here.
+                        // Note: Unlike `miraland-genesis`, "auto" is not supported here.
                         "sleep" => None,
                         _ => Some(value_t_or_exit!(arg_matches, "hashes_per_tick", u64)),
                     }
@@ -2324,7 +2324,7 @@ fn main() {
                 create_new_ledger(
                     &output_directory,
                     &genesis_config,
-                    solana_accounts_db::hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
+                    miraland_accounts_db::hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
                     LedgerColumnOptions::default(),
                 )
                 .unwrap_or_else(|err| {
@@ -2966,7 +2966,7 @@ fn main() {
 
                             if let Some(hashes_per_tick) = hashes_per_tick {
                                 child_bank.set_hashes_per_tick(match hashes_per_tick {
-                                    // Note: Unlike `solana-genesis`, "auto" is not supported here.
+                                    // Note: Unlike `miraland-genesis`, "auto" is not supported here.
                                     "sleep" => None,
                                     _ => {
                                         Some(value_t_or_exit!(arg_matches, "hashes_per_tick", u64))
@@ -3419,7 +3419,7 @@ fn main() {
                             if old_capitalization == bank.capitalization() {
                                 eprintln!(
                                     "Capitalization was identical: {}",
-                                    Sol(old_capitalization)
+                                    Mln(old_capitalization)
                                 );
                             }
                         }
@@ -3666,9 +3666,9 @@ fn main() {
                                 / warped_bank.epoch_duration_in_years(base_bank.epoch());
                             println!(
                                 "Capitalization: {} => {} (+{} {}%; annualized {}%)",
-                                Sol(base_bank.capitalization()),
-                                Sol(warped_bank.capitalization()),
-                                Sol(warped_bank.capitalization() - base_bank.capitalization()),
+                                Mln(base_bank.capitalization()),
+                                Mln(warped_bank.capitalization()),
+                                Mln(warped_bank.capitalization() - base_bank.capitalization()),
                                 interest_per_epoch,
                                 interest_per_year,
                             );
@@ -3739,9 +3739,9 @@ fn main() {
                                         "{:<45}({}): {} => {} (+{} {:>4.9}%) {:?}",
                                         format!("{pubkey}"), // format! is needed to pad/justify correctly.
                                         base_account.owner(),
-                                        Sol(base_account.lamports()),
-                                        Sol(warped_account.lamports()),
-                                        Sol(delta),
+                                        Mln(base_account.lamports()),
+                                        Mln(warped_account.lamports()),
+                                        Mln(delta),
                                         ((warped_account.lamports() as f64)
                                             / (base_account.lamports() as f64)
                                             * 100_f64)
@@ -3885,7 +3885,7 @@ fn main() {
                                 }
                             }
                             if overall_delta > 0 {
-                                println!("Sum of lamports changes: {}", Sol(overall_delta));
+                                println!("Sum of lamports changes: {}", Mln(overall_delta));
                             }
                         } else {
                             if arg_matches.is_present("recalculate_capitalization") {
@@ -3902,7 +3902,7 @@ fn main() {
                             assert_capitalization(&bank);
                             println!("Inflation: {:?}", bank.inflation());
                             println!("RentCollector: {:?}", bank.rent_collector());
-                            println!("Capitalization: {}", Sol(bank.capitalization()));
+                            println!("Capitalization: {}", Mln(bank.capitalization()));
                         }
                     }
                     Err(err) => {
@@ -4242,7 +4242,7 @@ fn main() {
 pub mod tests {
     use {
         super::*,
-        solana_ledger::{blockstore::make_many_slot_entries, get_tmp_ledger_path_auto_delete},
+        miraland_ledger::{blockstore::make_many_slot_entries, get_tmp_ledger_path_auto_delete},
     };
 
     #[test]

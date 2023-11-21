@@ -5,21 +5,21 @@ use {
     log::*,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_client::connection_cache::ConnectionCache,
-    solana_core::{
+    miraland_client::connection_cache::ConnectionCache,
+    miraland_core::{
         banking_stage::BankingStage,
         banking_trace::{BankingPacketBatch, BankingTracer, BANKING_TRACE_DIR_DEFAULT_BYTE_LIMIT},
     },
-    solana_gossip::cluster_info::{ClusterInfo, Node},
-    solana_ledger::{
+    miraland_gossip::cluster_info::{ClusterInfo, Node},
+    miraland_ledger::{
         blockstore::Blockstore,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         get_tmp_ledger_path_auto_delete,
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_measure::measure::Measure,
-    solana_perf::packet::{to_packet_batches, PacketBatch},
-    solana_poh::poh_recorder::{create_test_recorder, PohRecorder, WorkingBankEntry},
+    miraland_measure::measure::Measure,
+    miraland_perf::packet::{to_packet_batches, PacketBatch},
+    miraland_poh::poh_recorder::{create_test_recorder, PohRecorder, WorkingBankEntry},
     solana_runtime::{
         bank::Bank, bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache,
     },
@@ -33,8 +33,8 @@ use {
         timing::{duration_as_us, timestamp},
         transaction::Transaction,
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_tpu_client::tpu_client::DEFAULT_TPU_CONNECTION_POOL_SIZE,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_tpu_client::tpu_client::DEFAULT_TPU_CONNECTION_POOL_SIZE,
     std::{
         sync::{atomic::Ordering, Arc, RwLock},
         thread::sleep,
@@ -229,11 +229,11 @@ impl PacketsPerIteration {
 
 #[allow(clippy::cognitive_complexity)]
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let matches = Command::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .arg(
             Arg::new("iterations")
                 .long("iterations")

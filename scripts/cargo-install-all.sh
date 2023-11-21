@@ -89,28 +89,28 @@ if [[ $CI_OS_NAME = windows ]]; then
     cargo-build-sbf
     cargo-test-bpf
     cargo-test-sbf
-    solana
-    solana-install
-    solana-install-init
-    solana-keygen
-    solana-stake-accounts
-    solana-test-validator
-    solana-tokens
+    miraland
+    miraland-install
+    miraland-install-init
+    miraland-keygen
+    miraland-stake-accounts
+    miraland-test-validator
+    miraland-tokens
   )
 else
   ./fetch-perf-libs.sh
 
   BINS=(
-    solana
-    solana-bench-tps
-    solana-faucet
-    solana-gossip
-    solana-install
-    solana-keygen
-    solana-ledger-tool
-    solana-log-analyzer
-    solana-net-shaper
-    solana-validator
+    miraland
+    miraland-bench-tps
+    miraland-faucet
+    miraland-gossip
+    miraland-install
+    miraland-keygen
+    miraland-ledger-tool
+    miraland-log-analyzer
+    miraland-net-shaper
+    miraland-validator
     rbpf-cli
   )
 
@@ -121,18 +121,18 @@ else
       cargo-build-sbf
       cargo-test-bpf
       cargo-test-sbf
-      solana-dos
-      solana-install-init
-      solana-stake-accounts
-      solana-test-validator
-      solana-tokens
-      solana-watchtower
+      miraland-dos
+      miraland-install-init
+      miraland-stake-accounts
+      miraland-test-validator
+      miraland-tokens
+      miraland-watchtower
     )
   fi
 
-  #XXX: Ensure `solana-genesis` is built LAST!
-  # See https://github.com/solana-labs/solana/issues/5826
-  BINS+=(solana-genesis)
+  #XXX: Ensure `miraland-genesis` is built LAST!
+  # See https://github.com/miraland-labs/miraland/issues/5826
+  BINS+=(miraland-genesis)
 fi
 
 binArgs=()
@@ -147,14 +147,14 @@ mkdir -p "$installDir/bin"
   # shellcheck disable=SC2086 # Don't want to double quote $rust_version
   "$cargo" $maybeRustVersion build $buildProfileArg "${binArgs[@]}"
 
-  # Exclude `spl-token` binary for net.sh builds
+  # Exclude `solarti-token` binary for net.sh builds
   if [[ -z "$validatorOnly" ]]; then
     # the patch-related configs are needed for rust 1.69+ on Windows; see Cargo.toml
     # shellcheck disable=SC2086 # Don't want to double quote $rust_version
     "$cargo" $maybeRustVersion \
-      --config 'patch.crates-io.ntapi.git="https://github.com/solana-labs/ntapi"' \
+      --config 'patch.crates-io.ntapi.git="https://github.com/miraland-labs/ntapi"' \
       --config 'patch.crates-io.ntapi.rev="97ede981a1777883ff86d142b75024b023f04fad"' \
-      install --locked spl-token-cli --root "$installDir"
+      install --locked solarti-token-cli --root "$installDir"
   fi
 )
 

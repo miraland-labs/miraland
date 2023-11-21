@@ -35,6 +35,6 @@ loadConfigFile
 PATH="$HOME"/.cargo/bin:"$PATH"
 
 set -x
-scripts/solana-install-deploy.sh \
+scripts/miraland-install-deploy.sh \
   --keypair config/faucet.json \
   localhost "$releaseChannel" "$updatePlatform"

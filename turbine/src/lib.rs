@@ -10,7 +10,7 @@ pub mod sigverify_shreds;
 extern crate log;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 #[cfg(test)]
 #[macro_use]

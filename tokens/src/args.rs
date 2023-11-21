@@ -22,12 +22,12 @@ pub struct DistributeTokensArgs {
     pub sender_keypair: Box<dyn Signer>,
     pub fee_payer: Box<dyn Signer>,
     pub stake_args: Option<StakeArgs>,
-    pub spl_token_args: Option<SplTokenArgs>,
+    pub spl_token_args: Option<SolartiTokenArgs>,
     pub transfer_amount: Option<u64>,
 }
 
 #[derive(Default)]
-pub struct SplTokenArgs {
+pub struct SolartiTokenArgs {
     pub token_account_address: Pubkey,
     pub mint: Pubkey,
     pub decimals: u8,
@@ -35,7 +35,7 @@ pub struct SplTokenArgs {
 
 pub struct BalancesArgs {
     pub input_csv: String,
-    pub spl_token_args: Option<SplTokenArgs>,
+    pub spl_token_args: Option<SolartiTokenArgs>,
 }
 
 pub struct TransactionLogArgs {

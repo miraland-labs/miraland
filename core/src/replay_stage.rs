@@ -35,10 +35,10 @@ use {
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     lazy_static::lazy_static,
     rayon::{prelude::*, ThreadPool},
-    solana_entry::entry::VerifyRecyclers,
-    solana_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierArc,
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_ledger::{
+    miraland_entry::entry::VerifyRecyclers,
+    miraland_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierArc,
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_ledger::{
         block_error::BlockError,
         blockstore::Blockstore,
         blockstore_processor::{
@@ -49,14 +49,14 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
         leader_schedule_utils::first_of_consecutive_leader_slots,
     },
-    solana_measure::measure::Measure,
-    solana_poh::poh_recorder::{PohLeaderStatus, PohRecorder, GRACE_TICKS_FACTOR, MAX_GRACE_SLOTS},
+    miraland_measure::measure::Measure,
+    miraland_poh::poh_recorder::{PohLeaderStatus, PohRecorder, GRACE_TICKS_FACTOR, MAX_GRACE_SLOTS},
     solana_program_runtime::timings::ExecuteTimings,
-    solana_rpc::{
+    miraland_rpc::{
         optimistically_confirmed_bank_tracker::{BankNotification, BankNotificationSenderConfig},
         rpc_subscriptions::RpcSubscriptions,
     },
-    solana_rpc_client_api::response::SlotUpdate,
+    miraland_rpc_client_api::response::SlotUpdate,
     solana_runtime::{
         accounts_background_service::AbsRequestSender,
         bank::{bank_hash_details, Bank, NewBankOptions},
@@ -104,7 +104,7 @@ const MAX_REPAIR_RETRY_LOOP_ATTEMPTS: usize = 10;
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(MAX_CONCURRENT_FORKS_TO_REPLAY)
-        .thread_name(|i| format!("solReplay{i:02}"))
+        .thread_name(|i| format!("mlnReplay{i:02}"))
         .build()
         .unwrap();
 }
@@ -1096,7 +1096,7 @@ impl ReplayStage {
             }
         };
         let t_replay = Builder::new()
-            .name("solReplayStage".to_string())
+            .name("mlnReplayStage".to_string())
             .spawn(run_replay)
             .unwrap();
 
@@ -4105,16 +4105,16 @@ pub(crate) mod tests {
         },
         crossbeam_channel::unbounded,
         itertools::Itertools,
-        solana_entry::entry::{self, Entry},
-        solana_gossip::{cluster_info::Node, crds::Cursor},
-        solana_ledger::{
+        miraland_entry::entry::{self, Entry},
+        miraland_gossip::{cluster_info::Node, crds::Cursor},
+        miraland_ledger::{
             blockstore::{entries_to_test_shreds, make_slot_entries, BlockstoreError},
             create_new_tmp_ledger,
             genesis_utils::{create_genesis_config, create_genesis_config_with_leader},
             get_tmp_ledger_path, get_tmp_ledger_path_auto_delete,
             shred::{Shred, ShredFlags, LEGACY_SHRED_DATA_CAPACITY},
         },
-        solana_rpc::{
+        miraland_rpc::{
             optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
             rpc::{create_test_transaction_entries, populate_blockstore_for_tests},
         },
@@ -4133,8 +4133,8 @@ pub(crate) mod tests {
             system_transaction,
             transaction::TransactionError,
         },
-        solana_streamer::socket::SocketAddrSpace,
-        solana_transaction_status::VersionedTransactionWithStatusMeta,
+        miraland_streamer::socket::SocketAddrSpace,
+        miraland_transaction_status::VersionedTransactionWithStatusMeta,
         solana_vote_program::{
             vote_state::{self, VoteStateVersions},
             vote_transaction,
@@ -4643,7 +4643,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_dead_fork_invalid_slot_tick_count() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // Too many ticks per slot
         let res = check_dead_fork(|_keypair, bank| {
             let blockhash = bank.last_blockhash();
@@ -4993,7 +4993,7 @@ pub(crate) mod tests {
             mut genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config(solana_sdk::native_token::sol_to_lamports(1000.0));
+        } = create_genesis_config(solana_sdk::native_token::mln_to_lamports(1000.0));
         genesis_config.rent.lamports_per_byte_year = 50;
         genesis_config.rent.exemption_threshold = 2.0;
         let (ledger_path, _) = create_new_tmp_ledger!(&genesis_config);
@@ -7563,7 +7563,7 @@ pub(crate) mod tests {
 
     #[test]
     fn test_replay_stage_last_vote_outside_slot_hashes() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let ReplayBlockstoreComponents {
             cluster_info,
             poh_recorder,
@@ -8189,8 +8189,8 @@ pub(crate) mod tests {
 
     #[test]
     fn test_tower_sync_from_bank_failed_switch() {
-        solana_logger::setup_with_default(
-            "error,solana_core::replay_stage=info,solana_core::consensus=info",
+        miraland_logger::setup_with_default(
+            "error,miraland_core::replay_stage=info,miraland_core::consensus=info",
         );
         /*
             Fork structure:
@@ -8270,8 +8270,8 @@ pub(crate) mod tests {
 
     #[test]
     fn test_tower_sync_from_bank_failed_lockout() {
-        solana_logger::setup_with_default(
-            "error,solana_core::replay_stage=info,solana_core::consensus=info",
+        miraland_logger::setup_with_default(
+            "error,miraland_core::replay_stage=info,miraland_core::consensus=info",
         );
         /*
             Fork structure:

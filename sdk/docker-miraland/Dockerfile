@@ -38,5 +38,5 @@ RUN apt update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY usr/bin /usr/bin/
-ENTRYPOINT [ "/usr/bin/solana-run.sh" ]
+ENTRYPOINT [ "/usr/bin/miraland-run.sh" ]
 CMD [""]

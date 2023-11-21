@@ -26,7 +26,7 @@ cargo_audit_ignores=(
   # tokio: vulnerability affecting named pipes on Windows
   #
   # Exception is a stopgap to unblock CI
-  # https://github.com/solana-labs/solana/issues/29586
+  # https://github.com/miraland-labs/miraland/issues/29586
   --ignore RUSTSEC-2023-0001
 
   --ignore RUSTSEC-2022-0093

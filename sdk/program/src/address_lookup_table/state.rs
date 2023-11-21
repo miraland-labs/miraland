@@ -1,6 +1,6 @@
 use {
     serde::{Deserialize, Serialize},
-    solana_frozen_abi_macro::{AbiEnumVisitor, AbiExample},
+    miraland_frozen_abi_macro::{AbiEnumVisitor, AbiExample},
     solana_program::{
         address_lookup_table::error::AddressLookupError,
         clock::Slot,

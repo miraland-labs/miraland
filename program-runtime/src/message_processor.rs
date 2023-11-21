@@ -8,7 +8,7 @@ use {
         timings::{ExecuteDetailsTimings, ExecuteTimings},
     },
     serde::{Deserialize, Serialize},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_sdk::{
         account::WritableAccount,
         feature_set::FeatureSet,
@@ -27,7 +27,7 @@ use {
 pub struct MessageProcessor {}
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl ::solana_frozen_abi::abi_example::AbiExample for MessageProcessor {
+impl ::miraland_frozen_abi::abi_example::AbiExample for MessageProcessor {
     fn example() -> Self {
         // MessageProcessor's fields are #[serde(skip)]-ed and not Serialize
         // so, just rely on Default anyway.

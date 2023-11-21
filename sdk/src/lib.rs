@@ -1,31 +1,31 @@
-//! The Solana host and client SDK.
+//! The Miraland host and client SDK.
 //!
 //! This is the base library for all off-chain programs that interact with
-//! Solana or otherwise operate on Solana data structures. On-chain programs
-//! instead use the [`solana-program`] crate, the modules of which are
+//! Miraland or otherwise operate on Miraland data structures. On-chain programs
+//! instead use the [`miraland-program`] crate, the modules of which are
 //! re-exported by this crate, like the relationship between the Rust
 //! `core` and `std` crates. As much of the functionality of this crate is
-//! provided by `solana-program`, see that crate's documentation for an
+//! provided by `miraland-program`, see that crate's documentation for an
 //! overview.
 //!
-//! [`solana-program`]: https://docs.rs/solana-program
+//! [`miraland-program`]: https://docs.rs/miraland-program
 //!
-//! Many of the modules in this crate are primarily of use to the Solana runtime
-//! itself. Additional crates provide capabilities built on `solana-sdk`, and
+//! Many of the modules in this crate are primarily of use to the Miraland runtime
+//! itself. Additional crates provide capabilities built on `miraland-sdk`, and
 //! many programs will need to link to those crates as well, particularly for
-//! clients communicating with Solana nodes over RPC.
+//! clients communicating with Miraland nodes over RPC.
 //!
 //! Such crates include:
 //!
-//! - [`solana-client`] - For interacting with a Solana node via the [JSON-RPC API][json].
-//! - [`solana-cli-config`] - Loading and saving the Solana CLI configuration file.
-//! - [`solana-clap-utils`] - Routines for setting up the CLI using [`clap`], as
-//!   used by the Solana CLI. Includes functions for loading all types of
+//! - [`miraland-client`] - For interacting with a Miraland node via the [JSON-RPC API][json].
+//! - [`miraland-cli-config`] - Loading and saving the Miraland CLI configuration file.
+//! - [`miraland-clap-utils`] - Routines for setting up the CLI using [`clap`], as
+//!   used by the Miraland CLI. Includes functions for loading all types of
 //!   signers supported by the CLI.
 //!
-//! [`solana-client`]: https://docs.rs/solana-client
-//! [`solana-cli-config`]: https://docs.rs/solana-cli-config
-//! [`solana-clap-utils`]: https://docs.rs/solana-clap-utils
+//! [`miraland-client`]: https://docs.rs/miraland-client
+//! [`miraland-cli-config`]: https://docs.rs/miraland-cli-config
+//! [`miraland-clap-utils`]: https://docs.rs/miraland-clap-utils
 //! [json]: https://docs.solana.com/developing/clients/jsonrpc-api
 //! [`clap`]: https://docs.rs/clap
 
@@ -95,6 +95,7 @@ pub mod secp256k1_instruction;
 pub mod shred_version;
 pub mod signature;
 pub mod signer;
+pub mod simple_vote_transaction_checker;
 pub mod system_transaction;
 pub mod timing;
 pub mod transaction;
@@ -172,7 +173,7 @@ pub extern crate bs58;
 extern crate log as logger;
 
 #[macro_use]
-extern crate solana_frozen_abi_macro;
+extern crate miraland_frozen_abi_macro;
 
 #[cfg(test)]
 mod tests {

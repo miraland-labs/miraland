@@ -1,12 +1,12 @@
 use {
     crate::nonblocking,
     clap::ArgMatches,
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::{pubkey_of, value_of},
         nonce::*,
         offline::*,
     },
-    solana_rpc_client::nonblocking::rpc_client::RpcClient,
+    miraland_rpc_client::nonblocking::rpc_client::RpcClient,
     solana_sdk::{commitment_config::CommitmentConfig, hash::Hash, pubkey::Pubkey},
 };
 
@@ -119,8 +119,8 @@ mod tests {
         crate::nonblocking::blockhash_query,
         clap::App,
         serde_json::{self, json},
-        solana_account_decoder::{UiAccount, UiAccountEncoding},
-        solana_rpc_client_api::{
+        miraland_account_decoder::{UiAccount, UiAccountEncoding},
+        miraland_rpc_client_api::{
             request::RpcRequest,
             response::{Response, RpcBlockhash, RpcResponseContext},
         },

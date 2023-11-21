@@ -22,11 +22,11 @@ There are a number of options for withdrawer key management.  Some operators cho
 
 To reiterate, the withdrawer keypair should never be stored on your validator at any time.
 
-## DO NOT Run The Solana Validator as a Root User
+## DO NOT Run The Miraland Validator as a Root User
 
 It may be easier to get started by running your application as root, but it is a bad practice.
 
-If there is an exploit in your system, a hacker could have full access if your Solana application is running as the `root` user. Instead, see the [setup instructions](../get-started/setup-a-validator.md#sol-user) for creating a user called `sol` and running the application as the `sol` user.
+If there is an exploit in your system, a hacker could have full access if your Miraland application is running as the `root` user. Instead, see the [setup instructions](../get-started/setup-a-validator.md#mln-user) for creating a user called `mln` and running the application as the `mln` user.
 
 ## Close Ports That Are Not In Use
 

@@ -3,7 +3,7 @@ set -e
 
 here="$(dirname "$0")"
 
-export RUST_LOG="solana_metrics=warn,info,$RUST_LOG"
+export RUST_LOG="miraland_metrics=warn,info,$RUST_LOG"
 
 echo --- ci/localnet-sanity.sh
 "$here"/../localnet-sanity.sh -x

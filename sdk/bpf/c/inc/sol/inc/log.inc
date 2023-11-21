@@ -1,11 +1,11 @@
 #pragma once
 /**
- * @brief Solana logging utilities
+ * @brief Miraland logging utilities
  */
 
-#include <sol/types.h>
-#include <sol/string.h>
-#include <sol/entrypoint.h>
+#include <mln/types.h>
+#include <mln/string.h>
+#include <mln/entrypoint.h>
 
 #ifdef __cplusplus
 extern "C" {

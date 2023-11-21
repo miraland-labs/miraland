@@ -108,6 +108,8 @@ pub fn parse_extension<S: BaseState>(
             .get_extension::<extension::transfer_hook::TransferHookAccount>()
             .map(|&extension| UiExtension::TransferHookAccount(extension.into()))
             .unwrap_or(UiExtension::UnparseableExtension),
+        ExtensionType::GroupPointer => todo!(), // MI
+        ExtensionType::TokenGroup => todo!(), // MI
     }
 }
 

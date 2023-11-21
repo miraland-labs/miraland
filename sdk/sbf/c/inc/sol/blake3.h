@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana Blake3 system call
+ * @brief Miraland Blake3 system call
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,7 +21,7 @@ extern "C" {
  * @param bytes_len Number of byte arrays
  * @param result 32 byte array to hold the result
  */
-/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/sol/inc/blake3.inc AND RUN `cargo run --bin gen-headers` */
+/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/mln/inc/blake3.inc AND RUN `cargo run --bin gen-headers` */
 #ifndef SOL_SBFV2
 uint64_t sol_blake3(const SolBytes *, int, const uint8_t *);
 #else

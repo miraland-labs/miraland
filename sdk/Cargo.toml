@@ -1,7 +1,7 @@
 [package]
-name = "solana-sdk"
-description = "Solana SDK"
-documentation = "https://docs.rs/solana-sdk"
+name = "miraland-sdk"
+description = "Miraland SDK"
+documentation = "https://docs.rs/miraland-sdk"
 readme = "README.md"
 version = { workspace = true }
 authors = { workspace = true }
@@ -13,7 +13,7 @@ edition = { workspace = true }
 [features]
 # "program" feature is a legacy feature retained to support v1.3 and older
 # programs.  New development should not use this feature.  Instead use the
-# solana-program crate
+# miraland-program crate
 program = []
 
 default = [
@@ -30,7 +30,7 @@ full = [
     "serde_json",
     "ed25519-dalek",
     "ed25519-dalek-bip32",
-    "solana-logger",
+    "miraland-logger",
     "libsecp256k1",
     "sha3",
     "digest",
@@ -75,11 +75,11 @@ serde_json = { workspace = true, optional = true }
 serde_with = { workspace = true, features = ["macros"] }
 sha2 = { workspace = true }
 sha3 = { workspace = true, optional = true }
-solana-frozen-abi = { workspace = true }
-solana-frozen-abi-macro = { workspace = true }
-solana-logger = { workspace = true, optional = true }
-solana-program = { workspace = true }
-solana-sdk-macro = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-logger = { workspace = true, optional = true }
+miraland-program = { workspace = true }
+miraland-sdk-macro = { workspace = true }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
 wasm-bindgen = { workspace = true }
@@ -91,7 +91,7 @@ js-sys = { workspace = true }
 anyhow = { workspace = true }
 curve25519-dalek = { workspace = true }
 hex = { workspace = true }
-solana-sdk = { path = ".", features = ["dev-context-only-utils"] }
+miraland-sdk = { path = ".", features = ["dev-context-only-utils"] }
 static_assertions = { workspace = true }
 tiny-bip39 = { workspace = true }
 
@@ -103,3 +103,4 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
+name = "solana_sdk"

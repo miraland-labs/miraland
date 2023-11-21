@@ -1,11 +1,11 @@
 use {
-    solana_gossip::{cluster_info::ClusterInfo, contact_info::Protocol},
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_gossip::{cluster_info::ClusterInfo, contact_info::Protocol},
+    miraland_poh::poh_recorder::PohRecorder,
     solana_sdk::{
         clock::{Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
         pubkey::Pubkey,
     },
-    solana_send_transaction_service::tpu_info::TpuInfo,
+    miraland_send_transaction_service::tpu_info::TpuInfo,
     std::{
         collections::HashMap,
         net::SocketAddr,
@@ -106,8 +106,8 @@ impl TpuInfo for ClusterTpuInfo {
 mod test {
     use {
         super::*,
-        solana_gossip::contact_info::ContactInfo,
-        solana_ledger::{
+        miraland_gossip::contact_info::ContactInfo,
+        miraland_ledger::{
             blockstore::Blockstore, get_tmp_ledger_path_auto_delete,
             leader_schedule_cache::LeaderScheduleCache,
         },
@@ -123,7 +123,7 @@ mod test {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::{net::Ipv4Addr, sync::atomic::AtomicBool},
     };
 
@@ -204,13 +204,13 @@ mod test {
 
         let slot = bank.slot();
         let first_leader =
-            solana_ledger::leader_schedule_utils::slot_leader_at(slot, &bank).unwrap();
+            miraland_ledger::leader_schedule_utils::slot_leader_at(slot, &bank).unwrap();
         assert_eq!(
             leader_info.get_leader_tpus(1, Protocol::UDP),
             vec![&recent_peers.get(&first_leader).unwrap().0]
         );
 
-        let second_leader = solana_ledger::leader_schedule_utils::slot_leader_at(
+        let second_leader = miraland_ledger::leader_schedule_utils::slot_leader_at(
             slot + NUM_CONSECUTIVE_LEADER_SLOTS,
             &bank,
         )
@@ -225,7 +225,7 @@ mod test {
             expected_leader_sockets
         );
 
-        let third_leader = solana_ledger::leader_schedule_utils::slot_leader_at(
+        let third_leader = miraland_ledger::leader_schedule_utils::slot_leader_at(
             slot + (2 * NUM_CONSECUTIVE_LEADER_SLOTS),
             &bank,
         )

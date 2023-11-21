@@ -1,10 +1,10 @@
 #pragma once
 /**
- * @brief Solana return data system calls
+ * @brief Miraland return data system calls
 **/
 
-#include <sol/types.h>
-#include <sol/pubkey.h>
+#include <mln/types.h>
+#include <mln/pubkey.h>
 
 #ifdef __cplusplus
 extern "C"

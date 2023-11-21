@@ -1,7 +1,7 @@
 [package]
-name = "solana-account-decoder"
-description = "Solana account decoder"
-documentation = "https://docs.rs/solana-account-decoder"
+name = "miraland-account-decoder"
+description = "Miraland account decoder"
+documentation = "https://docs.rs/miraland-account-decoder"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -19,17 +19,17 @@ lazy_static = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-solana-config-program = { workspace = true }
-solana-sdk = { workspace = true }
-spl-token = { workspace = true, features = ["no-entrypoint"] }
-spl-token-2022 = { workspace = true, features = ["no-entrypoint"] }
-spl-token-metadata-interface = { workspace = true }
+miraland-config-program = { workspace = true }
+miraland-sdk = { workspace = true }
+solarti-token = { workspace = true, features = ["no-entrypoint"] }
+solarti-token-2022 = { workspace = true, features = ["no-entrypoint"] }
+solarti-token-metadata-interface = { workspace = true }
 thiserror = { workspace = true }
 zstd = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-spl-pod = { workspace = true }
+solarti-pod = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

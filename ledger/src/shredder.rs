@@ -10,9 +10,9 @@ use {
         galois_8::ReedSolomon,
         Error::{InvalidIndex, TooFewDataShards, TooFewShardsPresent},
     },
-    solana_entry::entry::Entry,
-    solana_measure::measure::Measure,
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_entry::entry::Entry,
+    miraland_measure::measure::Measure,
+    miraland_rayon_threadlimit::get_thread_count,
     solana_sdk::{clock::Slot, signature::Keypair},
     std::{
         borrow::Borrow,
@@ -24,7 +24,7 @@ use {
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(get_thread_count())
-        .thread_name(|i| format!("solShredder{i:02}"))
+        .thread_name(|i| format!("mlnShredder{i:02}"))
         .build()
         .unwrap();
 }

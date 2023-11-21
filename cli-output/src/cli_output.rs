@@ -16,12 +16,12 @@ use {
     inflector::cases::titlecase::to_title_case,
     serde::{Deserialize, Serialize},
     serde_json::{Map, Value},
-    solana_account_decoder::{
+    miraland_account_decoder::{
         parse_account_data::AccountAdditionalData, parse_token::UiTokenAccount, UiAccount,
         UiAccountEncoding, UiDataSliceConfig,
     },
-    solana_clap_utils::keypair::SignOnly,
-    solana_rpc_client_api::response::{
+    miraland_clap_utils::keypair::SignOnly,
+    miraland_rpc_client_api::response::{
         RpcAccountBalance, RpcContactInfo, RpcInflationGovernor, RpcInflationRate, RpcKeyedAccount,
         RpcSupply, RpcVoteAccountInfo,
     },
@@ -30,14 +30,14 @@ use {
         clock::{Epoch, Slot, UnixTimestamp},
         epoch_info::EpochInfo,
         hash::Hash,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
         pubkey::Pubkey,
         signature::Signature,
         stake::state::{Authorized, Lockup},
         stake_history::StakeHistoryEntry,
         transaction::{Transaction, TransactionError, VersionedTransaction},
     },
-    solana_transaction_status::{
+    miraland_transaction_status::{
         EncodedConfirmedBlock, EncodedTransaction, TransactionConfirmationStatus,
         UiTransactionStatusMeta,
     },
@@ -1019,10 +1019,10 @@ impl fmt::Display for CliKeyedEpochRewards {
                 Some(reward) => {
                     writeln!(
                         f,
-                        "  {:<44}  ◎{:<17.9}  ◎{:<17.9}  {:>13.9}%  {:>14}  {:>10}",
+                        "  {:<44}  𝇊{:<17.9}  𝇊{:<17.9}  {:>13.9}%  {:>14}  {:>10}",
                         keyed_reward.address,
-                        lamports_to_sol(reward.amount),
-                        lamports_to_sol(reward.post_balance),
+                        lamports_to_mln(reward.amount),
+                        lamports_to_mln(reward.post_balance),
                         reward.percent_change,
                         reward
                             .apr
@@ -1196,13 +1196,13 @@ fn show_epoch_rewards(
             format_as!(
                 f,
                 "{},{},{},{},{},{}%,{},{}",
-                "  {:<6}  {:<11}  {:<26}  ◎{:<17.9}  ◎{:<17.9}  {:>13.3}%  {:>14}  {:>10}",
+                "  {:<6}  {:<11}  {:<26}  𝇊{:<17.9}  𝇊{:<17.9}  {:>13.3}%  {:>14}  {:>10}",
                 fmt,
                 reward.epoch,
                 reward.effective_slot,
                 Utc.timestamp_opt(reward.block_time, 0).unwrap(),
-                lamports_to_sol(reward.amount),
-                lamports_to_sol(reward.post_balance),
+                lamports_to_mln(reward.amount),
+                lamports_to_mln(reward.post_balance),
                 reward.percent_change,
                 reward
                     .apr
@@ -1467,7 +1467,7 @@ impl fmt::Display for CliStakeHistory {
                 if self.use_lamports_unit {
                     "lamports"
                 } else {
-                    "SOL"
+                    "MLN"
                 }
             )?;
         }
@@ -1899,7 +1899,7 @@ impl fmt::Display for CliAccountBalances {
                 f,
                 "{:<44}  {}",
                 account.address,
-                &format!("{} SOL", lamports_to_sol(account.lamports))
+                &format!("{} MLN", lamports_to_mln(account.lamports))
             )?;
         }
         Ok(())
@@ -1934,16 +1934,16 @@ impl VerboseDisplay for CliSupply {}
 
 impl fmt::Display for CliSupply {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        writeln_name_value(f, "Total:", &format!("{} SOL", lamports_to_sol(self.total)))?;
+        writeln_name_value(f, "Total:", &format!("{} MLN", lamports_to_mln(self.total)))?;
         writeln_name_value(
             f,
             "Circulating:",
-            &format!("{} SOL", lamports_to_sol(self.circulating)),
+            &format!("{} MLN", lamports_to_mln(self.circulating)),
         )?;
         writeln_name_value(
             f,
             "Non-Circulating:",
-            &format!("{} SOL", lamports_to_sol(self.non_circulating)),
+            &format!("{} MLN", lamports_to_mln(self.non_circulating)),
         )?;
         if self.print_accounts {
             writeln!(f)?;
@@ -2662,16 +2662,16 @@ impl fmt::Display for CliBlock {
                         "-".to_string()
                     },
                     format!(
-                        "{}◎{:<14.9}",
+                        "{}𝇊{:<14.9}",
                         sign,
-                        lamports_to_sol(reward.lamports.unsigned_abs())
+                        lamports_to_mln(reward.lamports.unsigned_abs())
                     ),
                     if reward.post_balance == 0 {
                         "          -                 -".to_string()
                     } else {
                         format!(
-                            "◎{:<19.9}  {:>13.9}%",
-                            lamports_to_sol(reward.post_balance),
+                            "𝇊{:<19.9}  {:>13.9}%",
+                            lamports_to_mln(reward.post_balance),
                             (reward.lamports.abs() as f64
                                 / (reward.post_balance as f64 - reward.lamports as f64))
                                 * 100.0
@@ -2687,9 +2687,9 @@ impl fmt::Display for CliBlock {
             let sign = if total_rewards < 0 { "-" } else { "" };
             writeln!(
                 f,
-                "Total Rewards: {}◎{:<12.9}",
+                "Total Rewards: {}𝇊{:<12.9}",
                 sign,
-                lamports_to_sol(total_rewards.unsigned_abs())
+                lamports_to_mln(total_rewards.unsigned_abs())
             )?;
         }
         for (index, transaction_with_meta) in
@@ -3353,12 +3353,12 @@ mod tests {
             ..CliVoteAccount::default()
         };
         let s = format!("{c}");
-        assert_eq!(s, "Account Balance: 0.00001 SOL\nValidator Identity: 11111111111111111111111111111111\nVote Authority: {}\nWithdraw Authority: \nCredits: 0\nCommission: 0%\nRoot Slot: ~\nRecent Timestamp: 1970-01-01T00:00:00Z from slot 0\nEpoch Rewards:\n  Epoch   Reward Slot  Time                        Amount              New Balance         Percent Change             APR  Commission\n  1       100          1970-01-01 00:00:00 UTC  ◎0.000000010        ◎0.000000100               11.000%          10.00%          1%\n  2       200          1970-01-12 13:46:40 UTC  ◎0.000000012        ◎0.000000100               11.000%          13.00%          1%\n");
+        assert_eq!(s, "Account Balance: 0.00001 MLN\nValidator Identity: 11111111111111111111111111111111\nVote Authority: {}\nWithdraw Authority: \nCredits: 0\nCommission: 0%\nRoot Slot: ~\nRecent Timestamp: 1970-01-01T00:00:00Z from slot 0\nEpoch Rewards:\n  Epoch   Reward Slot  Time                        Amount              New Balance         Percent Change             APR  Commission\n  1       100          1970-01-01 00:00:00 UTC  𝇊0.000000010        𝇊0.000000100               11.000%          10.00%          1%\n  2       200          1970-01-12 13:46:40 UTC  𝇊0.000000012        𝇊0.000000100               11.000%          13.00%          1%\n");
         println!("{s}");
 
         c.use_csv = true;
         let s = format!("{c}");
-        assert_eq!(s, "Account Balance: 0.00001 SOL\nValidator Identity: 11111111111111111111111111111111\nVote Authority: {}\nWithdraw Authority: \nCredits: 0\nCommission: 0%\nRoot Slot: ~\nRecent Timestamp: 1970-01-01T00:00:00Z from slot 0\nEpoch Rewards:\nEpoch,Reward Slot,Time,Amount,New Balance,Percent Change,APR,Commission\n1,100,1970-01-01 00:00:00 UTC,0.00000001,0.0000001,11%,10.00%,1%\n2,200,1970-01-12 13:46:40 UTC,0.000000012,0.0000001,11%,13.00%,1%\n");
+        assert_eq!(s, "Account Balance: 0.00001 MLN\nValidator Identity: 11111111111111111111111111111111\nVote Authority: {}\nWithdraw Authority: \nCredits: 0\nCommission: 0%\nRoot Slot: ~\nRecent Timestamp: 1970-01-01T00:00:00Z from slot 0\nEpoch Rewards:\nEpoch,Reward Slot,Time,Amount,New Balance,Percent Change,APR,Commission\n1,100,1970-01-01 00:00:00 UTC,0.00000001,0.0000001,11%,10.00%,1%\n2,200,1970-01-12 13:46:40 UTC,0.000000012,0.0000001,11%,13.00%,1%\n");
         println!("{s}");
     }
 }

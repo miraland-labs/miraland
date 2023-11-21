@@ -1,7 +1,7 @@
 [package]
-name = "solana-notifier"
-description = "Solana Notifier"
-documentation = "https://docs.rs/solana-notifier"
+name = "miraland-notifier"
+description = "Miraland Notifier"
+documentation = "https://docs.rs/miraland-notifier"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -13,10 +13,10 @@ edition = { workspace = true }
 log = { workspace = true }
 reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 serde_json = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [lib]
-name = "solana_notifier"
+name = "miraland_notifier"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

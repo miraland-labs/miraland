@@ -15,7 +15,7 @@
 //! [BankForks](crate::bank_forks::BankForks)'s pruning for scheduler lifecycle management as the
 //! common place both for `ReplayStage` and `BankingStage` and the resultant need of invoking
 //! actual implementations provided by the dependent crate (`solana-unified-scheduler-pool`, which
-//! in turn depends on `solana-ledger`, which in turn depends on `solana-runtime`), avoiding a
+//! in turn depends on `miraland-ledger`, which in turn depends on `miraland-runtime`), avoiding a
 //! cyclic dependency.
 //!
 //! See [InstalledScheduler] for visualized interaction.
@@ -52,7 +52,7 @@ pub trait InstalledSchedulerPool: Send + Sync + Debug {
 /// graph TD
 ///     Bank["Arc#lt;Bank#gt;"]
 ///
-///     subgraph solana-runtime
+///     subgraph miraland-runtime
 ///         BankForks;
 ///         BankWithScheduler;
 ///         Bank;
@@ -68,7 +68,7 @@ pub trait InstalledSchedulerPool: Send + Sync + Debug {
 ///         ScheduleExecution(["schedule_execution()"]);
 ///     end
 ///
-///     subgraph solana-ledger
+///     subgraph miraland-ledger
 ///         ExecuteBatch(["execute_batch()"]);
 ///     end
 ///
@@ -463,7 +463,7 @@ mod tests {
 
     #[test]
     fn test_scheduler_normal_termination() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let bank = Arc::new(Bank::default_for_tests());
         let bank = BankWithScheduler::new(
@@ -484,7 +484,7 @@ mod tests {
 
     #[test]
     fn test_no_scheduler_termination() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let bank = Arc::new(Bank::default_for_tests());
         let bank = BankWithScheduler::new_without_scheduler(bank);
@@ -496,7 +496,7 @@ mod tests {
 
     #[test]
     fn test_scheduler_termination_from_drop() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let bank = Arc::new(Bank::default_for_tests());
         let bank = BankWithScheduler::new(
@@ -511,7 +511,7 @@ mod tests {
 
     #[test]
     fn test_scheduler_pause() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let bank = Arc::new(crate::bank::tests::create_simple_test_bank(42));
         let bank = BankWithScheduler::new(
@@ -531,7 +531,7 @@ mod tests {
 
     #[test]
     fn test_schedule_executions() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,

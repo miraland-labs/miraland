@@ -1,6 +1,6 @@
 use {
-    solana_entry::entry,
-    solana_ledger::{
+    miraland_entry::entry,
+    miraland_ledger::{
         blockstore::{self, make_many_slot_entries, test_all_empty_or_min, Blockstore},
         get_tmp_ledger_path_auto_delete,
     },

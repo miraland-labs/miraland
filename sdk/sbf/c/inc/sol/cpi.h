@@ -1,11 +1,11 @@
 #pragma once
 /**
- * @brief Solana Cross-Program Invocation
+ * @brief Miraland Cross-Program Invocation
  */
 
-#include <sol/types.h>
-#include <sol/pubkey.h>
-#include <sol/entrypoint.h>
+#include <mln/types.h>
+#include <mln/pubkey.h>
+#include <mln/entrypoint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -56,7 +56,7 @@ typedef struct {
 /**
  * Internal cross-program invocation function
  */
-/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/sol/inc/cpi.inc AND RUN `cargo run --bin gen-headers` */
+/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/mln/inc/cpi.inc AND RUN `cargo run --bin gen-headers` */
 #ifndef SOL_SBFV2
 uint64_t sol_invoke_signed_c(
   const SolInstruction *,

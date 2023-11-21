@@ -5,7 +5,7 @@ extern crate test;
 use {
     rand::{Rng, SeedableRng},
     rand_chacha::ChaChaRng,
-    solana_gossip::weighted_shuffle::WeightedShuffle,
+    miraland_gossip::weighted_shuffle::WeightedShuffle,
     std::iter::repeat_with,
     test::Bencher,
 };

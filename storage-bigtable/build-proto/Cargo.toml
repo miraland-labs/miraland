@@ -1,5 +1,5 @@
 [package]
-description = "Blockchain, Rebuilt for Scale"
+description = "Blockchain for community beyond the horizon"
 name = "proto"
 publish = false
 version = { workspace = true }

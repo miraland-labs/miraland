@@ -9,7 +9,7 @@ use {
         clock::UnixTimestamp,
         commitment_config::CommitmentConfig,
         genesis_config::ClusterType,
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         pubkey::{Pubkey, MAX_SEED_LEN},
         signature::{read_keypair_file, Keypair, Signer},
     },
@@ -19,7 +19,7 @@ use {
 pub mod signer;
 #[deprecated(
     since = "1.17.0",
-    note = "Please use the functions in `solana_clap_v3_utils::input_parsers::signer` directly instead"
+    note = "Please use the functions in `miraland_clap_v3_utils::input_parsers::signer` directly instead"
 )]
 pub use signer::{
     pubkey_of_signer, pubkeys_of_multiple_signers, pubkeys_sigs_of, resolve_signer, signer_of,
@@ -63,8 +63,8 @@ pub fn unix_timestamp_from_rfc3339_datetime(
     since = "1.17.0",
     note = "please use `Amount::parse_decimal` and `Amount::sol_to_lamport` instead"
 )]
-pub fn lamports_of_sol(matches: &ArgMatches, name: &str) -> Option<u64> {
-    value_of(matches, name).map(sol_to_lamports)
+pub fn lamports_of_mln(matches: &ArgMatches, name: &str) -> Option<u64> {
+    value_of(matches, name).map(mln_to_lamports)
 }
 
 pub fn cluster_type_of(matches: &ArgMatches, name: &str) -> Option<ClusterType> {
@@ -486,7 +486,7 @@ mod tests {
     }
 
     #[test]
-    fn test_sol_to_lamports() {
+    fn test_mln_to_lamports() {
         let command = Command::new("test").arg(
             Arg::new("amount")
                 .long("amount")

@@ -67,7 +67,7 @@ use {
         slice::ParallelSlice,
         ThreadPool, ThreadPoolBuilder,
     },
-    solana_accounts_db::{
+    miraland_accounts_db::{
         account_overrides::AccountOverrides,
         accounts::{
             AccountAddressFilter, Accounts, LoadedTransaction, PubkeyAccountSlot, RewardInterval,
@@ -102,10 +102,10 @@ use {
         },
     },
     solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
-    solana_cost_model::cost_tracker::CostTracker,
-    solana_loader_v4_program::create_program_runtime_environment_v2,
-    solana_measure::{measure, measure::Measure, measure_us},
-    solana_perf::perf_libs,
+    miraland_cost_model::cost_tracker::CostTracker,
+    miraland_loader_v4_program::create_program_runtime_environment_v2,
+    miraland_measure::{measure, measure::Measure, measure_us},
+    miraland_perf::perf_libs,
     solana_program_runtime::{
         accounts_data_meter::MAX_ACCOUNTS_DATA_LEN,
         compute_budget::ComputeBudget,
@@ -153,7 +153,7 @@ use {
         loader_v4::{self, LoaderV4State, LoaderV4Status},
         message::{AccountKeys, SanitizedMessage},
         native_loader,
-        native_token::LAMPORTS_PER_SOL,
+        native_token::LAMPORTS_PER_MLN,
         nonce::{self, state::DurableNonce, NONCED_TX_MARKER_IX_INDEX},
         nonce_account,
         packet::PACKET_DATA_SIZE,
@@ -277,7 +277,7 @@ pub struct BankRc {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-use solana_frozen_abi::abi_example::AbiExample;
+use miraland_frozen_abi::abi_example::AbiExample;
 use solana_program_runtime::loaded_programs::ExtractedPrograms;
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
@@ -1265,7 +1265,7 @@ impl Bank {
             1
         } else {
             const MAX_FACTOR_OF_REWARD_BLOCKS_IN_EPOCH: u64 = 10;
-            let num_chunks = solana_accounts_db::accounts_hash::AccountsHasher::div_ceil(
+            let num_chunks = miraland_accounts_db::accounts_hash::AccountsHasher::div_ceil(
                 total_stake_accounts,
                 self.partitioned_rewards_stake_account_stores_per_block() as usize,
             ) as u64;
@@ -2680,7 +2680,7 @@ impl Bank {
             let num_stake_delegations = stakes.stake_delegations().len();
             let min_stake_delegation =
                 solana_stake_program::get_minimum_delegation(&self.feature_set)
-                    .max(LAMPORTS_PER_SOL);
+                    .max(LAMPORTS_PER_MLN);
 
             let (stake_delegations, filter_timer) = measure!(stakes
                 .stake_delegations()
@@ -4206,7 +4206,7 @@ impl Bank {
     }
 
     // gating this under #[cfg(feature = "dev-context-only-utils")] isn't easy due to
-    // solana-program-test's usage...
+    // miraland-program-test's usage...
     pub fn register_unique_recent_blockhash_for_test(&self) {
         self.register_recent_blockhash(
             &Hash::new_unique(),
@@ -4647,7 +4647,7 @@ impl Bank {
             }
             Err(TransactionError::ProgramAccountNotFound)
         } else if loader_v4::check_id(program.owner()) {
-            let state = solana_loader_v4_program::get_state(program.data())
+            let state = miraland_loader_v4_program::get_state(program.data())
                 .map_err(|_| TransactionError::ProgramAccountNotFound)?;
             Ok(state.slot)
         } else {
@@ -4666,7 +4666,7 @@ impl Bank {
         ));
 
         if loader_v4::check_id(program_account.owner()) {
-            return solana_loader_v4_program::get_state(program_account.data())
+            return miraland_loader_v4_program::get_state(program_account.data())
                 .ok()
                 .and_then(|state| {
                     (!matches!(state.status, LoaderV4Status::Retracted)).then_some(state.slot)
@@ -6067,7 +6067,7 @@ impl Bank {
             // divide the range into num_threads smaller ranges and process in parallel
             // Note that 'pubkey_range_from_partition' cannot easily be re-used here to break the range smaller.
             // It has special handling of 0..0 and partition_count changes affect all ranges unevenly.
-            let num_threads = solana_accounts_db::accounts_db::quarter_thread_count() as u64;
+            let num_threads = miraland_accounts_db::accounts_db::quarter_thread_count() as u64;
             let sz = std::mem::size_of::<u64>();
             let start_prefix = accounts_partition::prefix_from_pubkey(subrange_full.start());
             let end_prefix_inclusive = accounts_partition::prefix_from_pubkey(subrange_full.end());
@@ -7163,7 +7163,7 @@ impl Bank {
             let accounts_ = Arc::clone(&accounts);
             accounts.accounts_db.verify_accounts_hash_in_bg.start(|| {
                 Builder::new()
-                    .name("solBgHashVerify".into())
+                    .name("mlnBgHashVerify".into())
                     .spawn(move || {
                         info!("Initial background accounts hash verification has started");
                         let result = accounts_.verify_accounts_hash_and_lamports(

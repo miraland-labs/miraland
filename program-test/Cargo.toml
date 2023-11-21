@@ -1,6 +1,6 @@
 [package]
-description = "Solana Program Test Framework"
-name = "solana-program-test"
+description = "Miraland Program Test Framework"
+name = "miraland-program-test"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -17,20 +17,23 @@ chrono-humanize = { workspace = true }
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
 serde = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-banks-client = { workspace = true }
-solana-banks-interface = { workspace = true }
-solana-banks-server = { workspace = true }
-solana-bpf-loader-program = { workspace = true }
-solana-logger = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-banks-client = { workspace = true }
+miraland-banks-interface = { workspace = true }
+miraland-banks-server = { workspace = true }
+miraland-bpf-loader-program = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-vote-program = { workspace = true }
 solana_rbpf = { workspace = true }
 test-case = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [dev-dependencies]
-solana-stake-program = { workspace = true }
+miraland-stake-program = { workspace = true }
+
+[lib]
+name = "solana_program_test"

@@ -3,17 +3,17 @@
 use {
     crate::result::{Error, Result},
     crossbeam_channel::{unbounded, RecvTimeoutError},
-    solana_metrics::{inc_new_counter_debug, inc_new_counter_info},
-    solana_perf::{packet::PacketBatchRecycler, recycler::Recycler},
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_metrics::{inc_new_counter_debug, inc_new_counter_info},
+    miraland_perf::{packet::PacketBatchRecycler, recycler::Recycler},
+    miraland_poh::poh_recorder::PohRecorder,
     solana_sdk::{
         clock::{DEFAULT_TICKS_PER_SLOT, HOLD_TRANSACTIONS_SLOT_OFFSET},
         packet::{Packet, PacketFlags},
     },
-    solana_streamer::streamer::{
+    miraland_streamer::streamer::{
         self, PacketBatchReceiver, PacketBatchSender, StreamerReceiveStats,
     },
-    solana_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
+    miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
     std::{
         net::UdpSocket,
         sync::{
@@ -218,7 +218,7 @@ impl FetchStage {
         let poh_recorder = poh_recorder.clone();
 
         let fwd_thread_hdl = Builder::new()
-            .name("solFetchStgFwRx".to_string())
+            .name("mlnFetchStgFwRx".to_string())
             .spawn(move || loop {
                 if let Err(e) =
                     Self::handle_forwarded_packets(&forward_receiver, &sender, &poh_recorder)
@@ -235,7 +235,7 @@ impl FetchStage {
             .unwrap();
 
         let metrics_thread_hdl = Builder::new()
-            .name("solFetchStgMetr".to_string())
+            .name("mlnFetchStgMetr".to_string())
             .spawn(move || loop {
                 sleep(Duration::from_secs(1));
 

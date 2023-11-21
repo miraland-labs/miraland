@@ -12,7 +12,7 @@ pub(in crate::parse_token) fn parse_default_account_state_instruction(
 ) -> Result<ParsedInstructionEnum, ParseInstructionError> {
     let (default_account_state_instruction, account_state) = decode_instruction(instruction_data)
         .map_err(|_| {
-        ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+        ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
     })?;
     let instruction_type = "DefaultAccountState";
     match default_account_state_instruction {

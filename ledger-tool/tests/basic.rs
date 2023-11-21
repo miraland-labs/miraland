@@ -1,7 +1,7 @@
 use {
     assert_cmd::prelude::*,
-    solana_entry::entry,
-    solana_ledger::{
+    miraland_entry::entry,
+    miraland_ledger::{
         blockstore, blockstore::Blockstore, blockstore_options::ShredStorageType,
         create_new_tmp_ledger, create_new_tmp_ledger_fifo, genesis_utils::create_genesis_config,
         get_tmp_ledger_path_auto_delete,

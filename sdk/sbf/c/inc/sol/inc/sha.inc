@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana sha system call
+ * @brief Miraland sha system call
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

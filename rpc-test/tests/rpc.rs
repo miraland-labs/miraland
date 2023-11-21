@@ -5,14 +5,14 @@ use {
     log::*,
     reqwest::{self, header::CONTENT_TYPE},
     serde_json::{json, Value},
-    solana_account_decoder::UiAccount,
-    solana_client::{
+    miraland_account_decoder::UiAccount,
+    miraland_client::{
         connection_cache::ConnectionCache,
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    solana_pubsub_client::nonblocking::pubsub_client::PubsubClient,
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{
+    miraland_pubsub_client::nonblocking::pubsub_client::PubsubClient,
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{
         client_error::{ErrorKind as ClientErrorKind, Result as ClientResult},
         config::{RpcAccountInfoConfig, RpcSignatureSubscribeConfig},
         request::RpcError,
@@ -27,10 +27,10 @@ use {
         system_transaction,
         transaction::Transaction,
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_test_validator::TestValidator,
-    solana_tpu_client::tpu_client::DEFAULT_TPU_CONNECTION_POOL_SIZE,
-    solana_transaction_status::TransactionStatus,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::TestValidator,
+    miraland_tpu_client::tpu_client::DEFAULT_TPU_CONNECTION_POOL_SIZE,
+    miraland_transaction_status::TransactionStatus,
     std::{
         collections::HashSet,
         net::UdpSocket,
@@ -68,7 +68,7 @@ fn post_rpc(request: Value, rpc_url: &str) -> Value {
 
 #[test]
 fn test_rpc_send_tx() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let test_validator =
@@ -122,8 +122,8 @@ fn test_rpc_send_tx() {
     assert!(confirmed_tx);
 
     use {
-        solana_account_decoder::UiAccountEncoding,
-        solana_rpc_client_api::config::RpcAccountInfoConfig,
+        miraland_account_decoder::UiAccountEncoding,
+        miraland_rpc_client_api::config::RpcAccountInfoConfig,
     };
     let config = RpcAccountInfoConfig {
         encoding: Some(UiAccountEncoding::Base64),
@@ -141,7 +141,7 @@ fn test_rpc_send_tx() {
 
 #[test]
 fn test_rpc_invalid_requests() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let test_validator =
@@ -174,7 +174,7 @@ fn test_rpc_invalid_requests() {
 
 #[test]
 fn test_rpc_slot_updates() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let test_validator =
         TestValidator::with_no_fees(Pubkey::new_unique(), None, SocketAddrSpace::Unspecified);
@@ -242,7 +242,7 @@ fn test_rpc_slot_updates() {
 
 #[test]
 fn test_rpc_subscriptions() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let test_validator =
@@ -514,7 +514,7 @@ fn test_tpu_send_transaction_with_quic() {
 
 #[test]
 fn deserialize_rpc_error() -> ClientResult<()> {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let validator = TestValidator::with_no_fees(alice.pubkey(), None, SocketAddrSpace::Unspecified);

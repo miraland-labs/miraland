@@ -3,12 +3,12 @@
 
 use {
     rand::{thread_rng, Rng},
-    solana_client::{
+    miraland_client::{
         connection_cache::{ConnectionCache, Protocol},
         tpu_connection::TpuConnection,
     },
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_poh::poh_recorder::PohRecorder,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -36,7 +36,7 @@ impl WarmQuicCacheService {
     ) -> Self {
         assert!(matches!(*connection_cache, ConnectionCache::Quic(_)));
         let thread_hdl = Builder::new()
-            .name("solWarmQuicSvc".to_string())
+            .name("mlnWarmQuicSvc".to_string())
             .spawn(move || {
                 let slot_jitter = thread_rng().gen_range(-CACHE_JITTER_SLOT..CACHE_JITTER_SLOT);
                 let mut maybe_last_leader = None;

@@ -7,18 +7,18 @@ use {
     log::*,
     num_traits::FromPrimitive,
     serde_json::{self, Value},
-    solana_clap_utils::{self, input_parsers::*, keypair::*},
-    solana_cli_config::ConfigInput,
-    solana_cli_output::{
+    miraland_clap_utils::{self, input_parsers::*, keypair::*},
+    miraland_cli_config::ConfigInput,
+    miraland_cli_output::{
         display::println_name_value, CliSignature, CliValidatorsSortOrder, OutputFormat,
     },
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{
         client_error::{Error as ClientError, Result as ClientResult},
         config::{RpcLargestAccountsFilter, RpcSendTransactionConfig, RpcTransactionLogsFilter},
     },
-    solana_rpc_client_nonce_utils::blockhash_query::BlockhashQuery,
+    miraland_rpc_client_nonce_utils::blockhash_query::BlockhashQuery,
     solana_sdk::{
         clock::{Epoch, Slot},
         commitment_config::CommitmentConfig,
@@ -31,7 +31,7 @@ use {
         stake::{instruction::LockupArgs, state::Lockup},
         transaction::{TransactionError, VersionedTransaction},
     },
-    solana_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
+    miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
     solana_vote_program::vote_state::VoteAuthorize,
     std::{
         collections::HashMap, error, io::stdout, rc::Rc, str::FromStr, sync::Arc, time::Duration,
@@ -469,14 +469,14 @@ pub enum CliError {
     ClientError(#[from] ClientError),
     #[error("Command not recognized: {0}")]
     CommandNotRecognized(String),
-    #[error("Account {1} has insufficient funds for fee ({0} SOL)")]
+    #[error("Account {1} has insufficient funds for fee ({0} MLN)")]
     InsufficientFundsForFee(f64, Pubkey),
-    #[error("Account {1} has insufficient funds for spend ({0} SOL)")]
+    #[error("Account {1} has insufficient funds for spend ({0} MLN)")]
     InsufficientFundsForSpend(f64, Pubkey),
-    #[error("Account {2} has insufficient funds for spend ({0} SOL) + fee ({1} SOL)")]
+    #[error("Account {2} has insufficient funds for spend ({0} MLN) + fee ({1} MLN)")]
     InsufficientFundsForSpendAndFee(f64, f64, Pubkey),
     #[error(transparent)]
-    InvalidNonce(solana_rpc_client_nonce_utils::Error),
+    InvalidNonce(miraland_rpc_client_nonce_utils::Error),
     #[error("Dynamic program error: {0}")]
     DynamicProgramError(String),
     #[error("RPC request error: {0}")]
@@ -493,10 +493,10 @@ impl From<Box<dyn error::Error>> for CliError {
     }
 }
 
-impl From<solana_rpc_client_nonce_utils::Error> for CliError {
-    fn from(error: solana_rpc_client_nonce_utils::Error) -> Self {
+impl From<miraland_rpc_client_nonce_utils::Error> for CliError {
+    fn from(error: miraland_rpc_client_nonce_utils::Error) -> Self {
         match error {
-            solana_rpc_client_nonce_utils::Error::Client(client_error) => {
+            miraland_rpc_client_nonce_utils::Error::Client(client_error) => {
                 Self::RpcRequestError(client_error)
             }
             _ => Self::InvalidNonce(error),
@@ -592,9 +592,9 @@ pub fn parse_command(
             get_clap_app(
                 crate_name!(),
                 crate_description!(),
-                solana_version::version!(),
+                miraland_version::version!(),
             )
-            .gen_completions_to("solana", shell_choice, &mut stdout());
+            .gen_completions_to("miraland", shell_choice, &mut stdout());
             std::process::exit(0);
         }
         // Cluster Query Commands
@@ -877,7 +877,7 @@ pub fn process_command(config: &CliConfig) -> ProcessResult {
         // Cluster Query Commands
         // Get address of this client
         CliCommand::Address => Ok(format!("{}", config.pubkey()?)),
-        // Return software version of solana-cli and cluster entrypoint node
+        // Return software version of miraland-cli and cluster entrypoint node
         CliCommand::Catchup {
             node_pubkey,
             node_json_rpc_url,
@@ -1589,7 +1589,7 @@ pub fn process_command(config: &CliConfig) -> ProcessResult {
 
         // Wallet Commands
 
-        // Request an airdrop from Solana Faucet;
+        // Request an airdrop from Miraland Faucet;
         CliCommand::Airdrop { pubkey, lamports } => {
             process_airdrop(&rpc_client, config, pubkey, *lamports)
         }
@@ -1736,12 +1736,12 @@ mod tests {
     use {
         super::*,
         serde_json::json,
-        solana_rpc_client::mock_sender_for_cli::SIGNATURE,
-        solana_rpc_client_api::{
+        miraland_rpc_client::mock_sender_for_cli::SIGNATURE,
+        miraland_rpc_client_api::{
             request::RpcRequest,
             response::{Response, RpcResponseContext},
         },
-        solana_rpc_client_nonce_utils::blockhash_query,
+        miraland_rpc_client_nonce_utils::blockhash_query,
         solana_sdk::{
             pubkey::Pubkey,
             signature::{
@@ -1750,7 +1750,7 @@ mod tests {
             stake, system_program,
             transaction::TransactionError,
         },
-        solana_transaction_status::TransactionConfirmationStatus,
+        miraland_transaction_status::TransactionConfirmationStatus,
     };
 
     fn make_tmp_path(name: &str) -> String {
@@ -2071,7 +2071,7 @@ mod tests {
             pubkey: None,
             use_lamports_unit: false,
         };
-        assert_eq!(process_command(&config).unwrap(), "0.00000005 SOL");
+        assert_eq!(process_command(&config).unwrap(), "0.00000005 MLN");
 
         let good_signature = bs58::decode(SIGNATURE)
             .into_vec()
@@ -2430,7 +2430,7 @@ mod tests {
         write_keypair_file(&default_keypair, &default_keypair_file).unwrap();
         let default_signer = DefaultSigner::new("", &default_keypair_file);
 
-        //Test Transfer Subcommand, SOL
+        //Test Transfer Subcommand, MLN
         let from_keypair = keypair_from_seed(&[0u8; 32]).unwrap();
         let from_pubkey = from_keypair.pubkey();
         let from_string = from_pubkey.to_string();

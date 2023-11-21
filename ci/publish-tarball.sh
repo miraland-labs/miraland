@@ -68,7 +68,7 @@ windows)
   ;;
 esac
 
-RELEASE_BASENAME="${RELEASE_BASENAME:=solana-release}"
+RELEASE_BASENAME="${RELEASE_BASENAME:=miraland-release}"
 TARBALL_BASENAME="${TARBALL_BASENAME:="$RELEASE_BASENAME"}"
 
 echo --- Creating release tarball
@@ -93,7 +93,7 @@ echo --- Creating release tarball
 
   tar cvf "${TARBALL_BASENAME}"-$TARGET.tar "${RELEASE_BASENAME}"
   bzip2 "${TARBALL_BASENAME}"-$TARGET.tar
-  cp "${RELEASE_BASENAME}"/bin/solana-install-init solana-install-init-$TARGET
+  cp "${RELEASE_BASENAME}"/bin/miraland-install-init miraland-install-init-$TARGET
   cp "${RELEASE_BASENAME}"/version.yml "${TARBALL_BASENAME}"-$TARGET.yml
 )
 
@@ -110,7 +110,7 @@ fi
 
 source ci/upload-ci-artifact.sh
 
-for file in "${TARBALL_BASENAME}"-$TARGET.tar.bz2 "${TARBALL_BASENAME}"-$TARGET.yml solana-install-init-"$TARGET"* $MAYBE_TARBALLS; do
+for file in "${TARBALL_BASENAME}"-$TARGET.tar.bz2 "${TARBALL_BASENAME}"-$TARGET.yml miraland-install-init-"$TARGET"* $MAYBE_TARBALLS; do
   if [[ -n $DO_NOT_PUBLISH_TAR ]]; then
     upload-ci-artifact "$file"
     echo "Skipped $file due to DO_NOT_PUBLISH_TAR"
@@ -119,16 +119,25 @@ for file in "${TARBALL_BASENAME}"-$TARGET.tar.bz2 "${TARBALL_BASENAME}"-$TARGET.
 
   if [[ -n $BUILDKITE ]]; then
     echo --- AWS S3 Store: "$file"
-    upload-s3-artifact "/solana/$file" s3://release.solana.com/"$CHANNEL_OR_TAG"/"$file"
-
+    # MI: this s3 bucket[release.miraland.top] is for formal production use
+    # upload-s3-artifact "/miraland/$file" s3://release.miraland.top/"$CHANNEL_OR_TAG"/"$file"
+    # MI: this s3 bucket[rc1.miraland.top] is for temp/test use
+    upload-s3-artifact "$file" s3://rc1.miraland.top/"$CHANNEL_OR_TAG"/"$file"
     echo Published to:
-    $DRYRUN ci/format-url.sh https://release.solana.com/"$CHANNEL_OR_TAG"/"$file"
+    # $DRYRUN ci/format-url.sh https://release.miraland.top/"$CHANNEL_OR_TAG"/"$file"
+    $DRYRUN ci/format-url.sh https://rc1.miraland.top/"$CHANNEL_OR_TAG"/"$file"
+
+    echo --- Aliyun OSS Store: "$file"
+    # upload-oss-artifact "/miraland/$file" oss://release-miraland-top/"$CHANNEL_OR_TAG"/"$file"
+    upload-oss-artifact "$file" oss://release-miraland-top/"$CHANNEL_OR_TAG"/"$file"
+    echo Published to:
+    $DRYRUN ci/format-url.sh https://release.miraland.top/"$CHANNEL_OR_TAG"/"$file"
 
     if [[ -n $TAG ]]; then
       ci/upload-github-release-asset.sh "$file"
     fi
   elif [[ -n $TRAVIS ]]; then
-    # .travis.yml uploads everything in the travis-s3-upload/ directory to release.solana.com
+    # .travis.yml uploads everything in the travis-s3-upload/ directory to release.miraland.top
     mkdir -p travis-s3-upload/"$CHANNEL_OR_TAG"
     cp -v "$file" travis-s3-upload/"$CHANNEL_OR_TAG"/
 

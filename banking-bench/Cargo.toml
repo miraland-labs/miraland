@@ -1,5 +1,5 @@
 [package]
-name = "solana-banking-bench"
+name = "miraland-banking-bench"
 publish = false
 version = { workspace = true }
 authors = { workspace = true }
@@ -14,19 +14,19 @@ crossbeam-channel = { workspace = true }
 log = { workspace = true }
 rand = { workspace = true }
 rayon = { workspace = true }
-solana-client = { workspace = true }
-solana-core = { workspace = true }
-solana-gossip = { workspace = true }
-solana-ledger = { workspace = true }
-solana-logger = { workspace = true }
-solana-measure = { workspace = true }
-solana-perf = { workspace = true }
-solana-poh = { workspace = true, features = ["dev-context-only-utils"] }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
-solana-tpu-client = { workspace = true }
-solana-version = { workspace = true }
+miraland-client = { workspace = true }
+miraland-core = { workspace = true }
+miraland-gossip = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-poh = { workspace = true, features = ["dev-context-only-utils"] }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-tpu-client = { workspace = true }
+miraland-version = { workspace = true }
 
 [features]
 dev-context-only-utils = []

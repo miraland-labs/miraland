@@ -27,7 +27,7 @@ cargo="$(readlink -f "./cargo")"
 reportName="lcov-${CI_COMMIT:0:9}"
 
 if [[ -z $1 ]]; then
-  packages=(--lib --all --exclude solana-local-cluster)
+  packages=(--lib --all --exclude miraland-local-cluster)
 else
   packages=("$@")
 fi
@@ -75,7 +75,7 @@ _ "$cargo" nightly test --jobs "$JOBS" --target-dir target/cov --no-run "${packa
 
 # most verbose log level (trace) is enabled for all solana code to make log!
 # macro code green always
-if RUST_LOG=solana=trace _ ci/intercept.sh "$cargo" nightly test --jobs "$JOBS" --target-dir target/cov "${packages[@]}" -- --nocapture; then
+if RUST_LOG=solana=trace,miraland=trace _ ci/intercept.sh "$cargo" nightly test --jobs "$JOBS" --target-dir target/cov "${packages[@]}" -- --nocapture; then
   test_status=0
 else
   test_status=$?

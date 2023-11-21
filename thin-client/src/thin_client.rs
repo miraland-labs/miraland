@@ -6,14 +6,14 @@
 use {
     log::*,
     rayon::iter::{IntoParallelIterator, ParallelIterator},
-    solana_connection_cache::{
+    miraland_connection_cache::{
         client_connection::ClientConnection,
         connection_cache::{
             ConnectionCache, ConnectionManager, ConnectionPool, NewConnectionConfig,
         },
     },
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{config::RpcProgramAccountsConfig, response::Response},
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{config::RpcProgramAccountsConfig, response::Response},
     solana_sdk::{
         account::Account,
         client::{AsyncClient, Client, SyncClient},
@@ -668,7 +668,7 @@ mod tests {
 
     #[test]
     fn test_client_optimizer() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         const NUM_CLIENTS: usize = 5;
         let optimizer = ClientOptimizer::new(NUM_CLIENTS);

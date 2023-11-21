@@ -6,19 +6,19 @@ use solana_sdk::{
 };
 
 mod spl_token {
-    solana_sdk::declare_id!("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
+    solana_sdk::declare_id!("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM");
 }
 mod spl_token_2022 {
-    solana_sdk::declare_id!("TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb");
+    solana_sdk::declare_id!("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89");
 }
 mod spl_memo_1_0 {
-    solana_sdk::declare_id!("Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo");
+    solana_sdk::declare_id!("MemojWWmbFiRdUEQtRpMkeeyNB181Mr9uWEzdrgHUnc");
 }
 mod spl_memo_3_0 {
-    solana_sdk::declare_id!("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
+    solana_sdk::declare_id!("MemoE5FsL5zWDjihivRfHTpkR8RdviRbziKsfGS9Ntd");
 }
 mod spl_associated_token_account {
-    solana_sdk::declare_id!("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
+    solana_sdk::declare_id!("ATAccPjxdgWfJKKN4PmfJ55FbEDEwD8zJUwVjuL9MuHy");
 }
 
 static SPL_PROGRAMS: &[(Pubkey, Pubkey, &[u8])] = &[

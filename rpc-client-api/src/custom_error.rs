@@ -3,7 +3,7 @@ use {
     crate::response::RpcSimulateTransactionResult,
     jsonrpc_core::{Error, ErrorCode},
     solana_sdk::clock::Slot,
-    solana_transaction_status::EncodeError,
+    miraland_transaction_status::EncodeError,
     thiserror::Error,
 };
 

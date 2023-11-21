@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: master
+          ref: main
           fetch-depth: 0
 
       - name: Setup Rust
@@ -72,9 +72,9 @@ jobs:
         run: |
           FOLDER_NAME=${{ steps.build.outputs.tag || steps.build.outputs.channel }}
           mkdir -p "github-action-s3-upload/$FOLDER_NAME"
-          cp -v "solana-release-x86_64-pc-windows-msvc.tar.bz2" "github-action-s3-upload/$FOLDER_NAME/"
-          cp -v "solana-release-x86_64-pc-windows-msvc.yml" "github-action-s3-upload/$FOLDER_NAME/"
-          cp -v "solana-install-init-x86_64-pc-windows-msvc"* "github-action-s3-upload/$FOLDER_NAME"
+          cp -v "miraland-release-x86_64-pc-windows-msvc.tar.bz2" "github-action-s3-upload/$FOLDER_NAME/"
+          cp -v "miraland-release-x86_64-pc-windows-msvc.yml" "github-action-s3-upload/$FOLDER_NAME/"
+          cp -v "miraland-install-init-x86_64-pc-windows-msvc"* "github-action-s3-upload/$FOLDER_NAME"
 
       - name: Upload Artifacts
         if: ${{ steps.build.outputs.channel != '' || steps.build.outputs.tag != '' }}

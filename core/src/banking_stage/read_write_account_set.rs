@@ -84,7 +84,7 @@ impl ReadWriteAccountSet {
 mod tests {
     use {
         super::ReadWriteAccountSet,
-        solana_ledger::genesis_utils::GenesisConfigInfo,
+        miraland_ledger::genesis_utils::GenesisConfigInfo,
         solana_runtime::{bank::Bank, genesis_utils::create_genesis_config},
         solana_sdk::{
             account::AccountSharedData,

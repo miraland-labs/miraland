@@ -1,6 +1,6 @@
 [package]
-name = "solana-bpf-rust-big-mod-exp"
-documentation = "https://docs.rs/solana-bpf-rust-big-mod-exp"
+name = "miraland-bpf-rust-big-mod-exp"
+documentation = "https://docs.rs/miraland-bpf-rust-big-mod-exp"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -13,7 +13,7 @@ edition = { workspace = true }
 array-bytes = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["cdylib"]

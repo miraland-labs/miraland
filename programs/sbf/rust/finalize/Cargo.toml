@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-finalize"
-documentation = "https://docs.rs/solana-sbf-rust-finalize"
+name = "miraland-sbf-rust-finalize"
+documentation = "https://docs.rs/miraland-sbf-rust-finalize"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -10,7 +10,7 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["cdylib"]

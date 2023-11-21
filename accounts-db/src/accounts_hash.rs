@@ -10,7 +10,7 @@ use {
     log::*,
     memmap2::MmapMut,
     rayon::prelude::*,
-    solana_measure::{measure::Measure, measure_us},
+    miraland_measure::{measure::Measure, measure_us},
     solana_sdk::{
         hash::{Hash, Hasher},
         pubkey::Pubkey,
@@ -1556,7 +1556,7 @@ mod tests {
 
     #[test]
     fn test_accountsdb_rest_of_hash_calculation() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut account_maps = Vec::new();
 
@@ -1654,7 +1654,7 @@ mod tests {
 
     #[test]
     fn test_accountsdb_de_dup_accounts_empty() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let dir_for_temp_cache_files = tempdir().unwrap();
         let accounts_hash = AccountsHasher::new(dir_for_temp_cache_files.path().to_path_buf());
 
@@ -1690,7 +1690,7 @@ mod tests {
 
     #[test]
     fn test_accountsdb_de_dup_accounts_from_stores() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let key_a = Pubkey::from([1u8; 32]);
         let key_b = Pubkey::from([2u8; 32]);
@@ -1858,7 +1858,7 @@ mod tests {
 
     #[test]
     fn test_accountsdb_compare_two_hash_entries() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let pubkey = Pubkey::new_unique();
         let hash = AccountHash(Hash::new_unique());
         let val = CalculateHashIntermediate {
@@ -1926,7 +1926,7 @@ mod tests {
 
     #[test]
     fn test_accountsdb_remove_zero_balance_accounts() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let pubkey = Pubkey::new_unique();
         let hash = AccountHash(Hash::new_unique());
@@ -2293,7 +2293,7 @@ mod tests {
 
     #[test]
     fn test_accountsdb_compute_merkle_root_large() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         // handle fanout^x -1, +0, +1 for a few 'x's
         const FANOUT: usize = 3;
@@ -2319,7 +2319,7 @@ mod tests {
 
     #[test]
     fn test_accountsdb_compute_merkle_root() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let expected_results = vec![
             (0, 0, "GKot5hBsd81kMupNCXHaqbhv3huEbxAFMLnpcX2hniwn", 0),
@@ -2398,7 +2398,7 @@ mod tests {
     #[test]
     #[should_panic(expected = "overflow is detected while summing capitalization")]
     fn test_accountsdb_lamport_overflow() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let offset = 2;
         let input = vec![
@@ -2432,7 +2432,7 @@ mod tests {
     #[test]
     #[should_panic(expected = "overflow is detected while summing capitalization")]
     fn test_accountsdb_lamport_overflow2() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let offset = 2;
         let input = vec![

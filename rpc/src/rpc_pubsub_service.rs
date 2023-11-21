@@ -11,7 +11,7 @@ use {
     dashmap::{mapref::entry::Entry, DashMap},
     jsonrpc_core::IoHandler,
     soketto::handshake::{server, Server},
-    solana_metrics::TokenCounter,
+    miraland_metrics::TokenCounter,
     solana_sdk::timing::AtomicInterval,
     std::{
         io,
@@ -89,7 +89,7 @@ impl PubSubService {
 
         let (trigger, tripwire) = Tripwire::new();
         let thread_hdl = Builder::new()
-            .name("solRpcPubSub".to_string())
+            .name("mlnRpcPubSub".to_string())
             .spawn(move || {
                 let runtime = tokio::runtime::Builder::new_multi_thread()
                     .worker_threads(pubsub_config.worker_threads)
@@ -505,6 +505,6 @@ mod tests {
         let (_trigger, pubsub_service) =
             PubSubService::new(PubSubConfig::default(), &subscriptions, pubsub_addr);
         let thread = pubsub_service.thread_hdl.thread();
-        assert_eq!(thread.name().unwrap(), "solRpcPubSub");
+        assert_eq!(thread.name().unwrap(), "mlnRpcPubSub");
     }
 }

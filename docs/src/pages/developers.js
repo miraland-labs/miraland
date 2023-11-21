@@ -9,17 +9,17 @@ function Developers() {
     <CardLayout
       sidebarKey="developerSidebar"
       title="Developers"
-      description="Solana Documentation"
+      description="Miraland Documentation"
       path="/developers"
     >
       <section className={styles.features}>
         <div className="container">
           <section>
-            <h1>Learn Solana Development</h1>
+            <h1>Learn Miraland Development</h1>
 
             <div className="container__spacer">
               <p>
-                Build and deploy your first on chain Solana program directly in
+                Build and deploy your first on chain Miraland program directly in
                 your browser.
               </p>
 
@@ -40,7 +40,7 @@ function Developers() {
                   translateId: "developer-programs",
                 }}
                 body={{
-                  label: "Discover what Solana programs are and how they work.",
+                  label: "Discover what Miraland programs are and how they work.",
                   translateId: "learn-programs",
                 }}
               />
@@ -66,7 +66,7 @@ function Developers() {
                 }}
                 body={{
                   label:
-                    "Understand how programs store data or state on the Solana blockchain.",
+                    "Understand how programs store data or state on the Miraland blockchain.",
                   translateId: "learn-accounts",
                 }}
               />
@@ -85,7 +85,7 @@ function Developers() {
                 }}
                 body={{
                   label:
-                    "Start developing on-chain Solana programs with Rust or C/C++.",
+                    "Start developing on-chain Miraland programs with Rust or C/C++.",
                   translateId: "start-building",
                 }}
               />
@@ -112,12 +112,12 @@ function Developers() {
               <Card
                 to="developing/test-validator"
                 header={{
-                  label: "Solana Test Validator",
+                  label: "Miraland Test Validator",
                   translateId: "developer-test-validator",
                 }}
                 body={{
                   label:
-                    "Quickly setup and run a self contained local Solana blockchain for faster development.",
+                    "Quickly setup and run a self contained local Miraland blockchain for faster development.",
                   translateId: "learn-test-validator",
                 }}
               />
@@ -130,7 +130,7 @@ function Developers() {
                 }}
                 body={{
                   label:
-                    "Interact with the Solana clusters via the JSON RPC API.",
+                    "Interact with the Miraland clusters via the JSON RPC API.",
                   translateId: "rpc-api-info",
                 }}
               />
@@ -143,7 +143,7 @@ function Developers() {
                 }}
                 body={{
                   label:
-                    "Explore the essential developer tools for building and deploying Solana programs.",
+                    "Explore the essential developer tools for building and deploying Miraland programs.",
                   translateId: "explore-tools",
                 }}
               /> */}

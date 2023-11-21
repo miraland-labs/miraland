@@ -3,35 +3,35 @@ use {
     base64::{prelude::BASE64_STANDARD, Engine},
     crossbeam_channel::Receiver,
     log::*,
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::{create_accounts_run_and_snapshot_dirs, AccountsDbConfig},
         accounts_index::AccountsIndexConfig,
         hardened_unpack::MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
     },
-    solana_cli_output::CliAccount,
-    solana_client::rpc_request::MAX_MULTIPLE_ACCOUNTS,
-    solana_core::{
+    miraland_cli_output::CliAccount,
+    miraland_client::rpc_request::MAX_MULTIPLE_ACCOUNTS,
+    miraland_core::{
         admin_rpc_post_init::AdminRpcRequestMetadataPostInit,
         consensus::tower_storage::TowerStorage,
         validator::{Validator, ValidatorConfig, ValidatorStartProgress},
     },
-    solana_geyser_plugin_manager::{
+    miraland_geyser_plugin_manager::{
         geyser_plugin_manager::GeyserPluginManager, GeyserPluginManagerRequest,
     },
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         contact_info::Protocol,
         gossip_service::discover_cluster,
         socketaddr,
     },
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions,
         create_new_tmp_ledger,
     },
-    solana_net_utils::PortRange,
+    miraland_net_utils::PortRange,
     solana_program_runtime::compute_budget::ComputeBudget,
-    solana_rpc::{rpc::JsonRpcConfig, rpc_pubsub_service::PubSubConfig},
-    solana_rpc_client::{nonblocking, rpc_client::RpcClient},
+    miraland_rpc::{rpc::JsonRpcConfig, rpc_pubsub_service::PubSubConfig},
+    miraland_rpc_client::{nonblocking, rpc_client::RpcClient},
     solana_runtime::{
         bank_forks::BankForks, genesis_utils::create_genesis_config_with_leader_ex,
         runtime_config::RuntimeConfig, snapshot_config::SnapshotConfig,
@@ -48,13 +48,13 @@ use {
         hash::Hash,
         instruction::{AccountMeta, Instruction},
         message::Message,
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         pubkey::Pubkey,
         rent::Rent,
         signature::{read_keypair_file, write_keypair_file, Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_tpu_client::tpu_client::{
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_tpu_client::tpu_client::{
         DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_ENABLE_UDP, DEFAULT_TPU_USE_QUIC,
     },
     std::{
@@ -707,9 +707,9 @@ impl TestValidator {
         let validator_identity = Keypair::new();
         let validator_vote_account = Keypair::new();
         let validator_stake_account = Keypair::new();
-        let validator_identity_lamports = sol_to_lamports(500.);
-        let validator_stake_lamports = sol_to_lamports(1_000_000.);
-        let mint_lamports = sol_to_lamports(500_000_000.);
+        let validator_identity_lamports = mln_to_lamports(500.);
+        let validator_stake_lamports = mln_to_lamports(1_000_000.);
+        let mint_lamports = mln_to_lamports(500_000_000.);
 
         let mut accounts = config.accounts.clone();
         for (address, account) in solana_program_test::programs::spl_programs(&config.rent) {

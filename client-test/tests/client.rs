@@ -2,16 +2,16 @@ use {
     futures_util::StreamExt,
     rand::Rng,
     serde_json::{json, Value},
-    solana_ledger::{blockstore::Blockstore, get_tmp_ledger_path_auto_delete},
-    solana_pubsub_client::{nonblocking, pubsub_client::PubsubClient},
-    solana_rpc::{
+    miraland_ledger::{blockstore::Blockstore, get_tmp_ledger_path_auto_delete},
+    miraland_pubsub_client::{nonblocking, pubsub_client::PubsubClient},
+    miraland_rpc::{
         optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         rpc::{create_test_transaction_entries, populate_blockstore_for_tests},
         rpc_pubsub_service::{PubSubConfig, PubSubService},
         rpc_subscriptions::RpcSubscriptions,
     },
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{
         config::{
             RpcAccountInfoConfig, RpcBlockSubscribeConfig, RpcBlockSubscribeFilter,
             RpcProgramAccountsConfig,
@@ -27,14 +27,14 @@ use {
     solana_sdk::{
         clock::Slot,
         commitment_config::{CommitmentConfig, CommitmentLevel},
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         system_program, system_transaction,
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_test_validator::TestValidator,
-    solana_transaction_status::{
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::TestValidator,
+    miraland_transaction_status::{
         BlockEncodingOptions, ConfirmedBlock, TransactionDetails, UiTransactionEncoding,
     },
     std::{
@@ -60,7 +60,7 @@ fn pubsub_addr() -> SocketAddr {
 
 #[test]
 fn test_rpc_client() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let test_validator =
@@ -71,8 +71,8 @@ fn test_rpc_client() {
     let client = RpcClient::new(test_validator.rpc_url());
 
     assert_eq!(
-        client.get_version().unwrap().solana_core,
-        solana_version::semver!()
+        client.get_version().unwrap().miraland_core,
+        miraland_version::semver!()
     );
 
     assert!(client.get_account(&bob_pubkey).is_err());
@@ -83,7 +83,7 @@ fn test_rpc_client() {
 
     let blockhash = client.get_latest_blockhash().unwrap();
 
-    let tx = system_transaction::transfer(&alice, &bob_pubkey, sol_to_lamports(20.0), blockhash);
+    let tx = system_transaction::transfer(&alice, &bob_pubkey, mln_to_lamports(20.0), blockhash);
     let signature = client.send_transaction(&tx).unwrap();
 
     let mut confirmed_tx = false;
@@ -109,14 +109,14 @@ fn test_rpc_client() {
             .get_balance_with_commitment(&bob_pubkey, CommitmentConfig::processed())
             .unwrap()
             .value,
-        sol_to_lamports(20.0)
+        mln_to_lamports(20.0)
     );
     assert_eq!(
         client
             .get_balance_with_commitment(&alice.pubkey(), CommitmentConfig::processed())
             .unwrap()
             .value,
-        original_alice_balance - sol_to_lamports(20.0)
+        original_alice_balance - mln_to_lamports(20.0)
     );
 }
 

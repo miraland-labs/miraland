@@ -238,7 +238,7 @@ mod tests {
     };
 
     fn test_setup() -> (Keypair, Hash) {
-        solana_logger::setup();
+        miraland_logger::setup();
         (Keypair::new(), Hash::new_unique())
     }
 

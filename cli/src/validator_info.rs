@@ -7,19 +7,19 @@ use {
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand},
     reqwest::blocking::Client,
     serde_json::{Map, Value},
-    solana_account_decoder::validator_info::{
+    miraland_account_decoder::validator_info::{
         self, ValidatorInfo, MAX_LONG_FIELD_LENGTH, MAX_SHORT_FIELD_LENGTH,
     },
-    solana_clap_utils::{
+    miraland_clap_utils::{
         hidden_unless_forced,
         input_parsers::pubkey_of,
         input_validators::{is_pubkey, is_url},
         keypair::DefaultSigner,
     },
-    solana_cli_output::{CliValidatorInfo, CliValidatorInfoVec},
+    miraland_cli_output::{CliValidatorInfo, CliValidatorInfoVec},
     solana_config_program::{config_instruction, get_config_data, ConfigKeys, ConfigState},
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::{
         account::Account,
         message::Message,
@@ -83,7 +83,7 @@ fn verify_keybase(
 ) -> Result<(), Box<dyn error::Error>> {
     if let Some(keybase_username) = keybase_username.as_str() {
         let url =
-            format!("https://keybase.pub/{keybase_username}/solana/validator-{validator_pubkey:?}");
+            format!("https://keybase.pub/{keybase_username}/miraland/validator-{validator_pubkey:?}");
         let client = Client::new();
         if client.head(&url).send()?.status().is_success() {
             Ok(())
@@ -146,11 +146,11 @@ impl ValidatorInfoSubCommands for App<'_, '_> {
     fn validator_info_subcommands(self) -> Self {
         self.subcommand(
             SubCommand::with_name("validator-info")
-                .about("Publish/get Validator info on Solana")
+                .about("Publish/get Validator info on Miraland")
                 .setting(AppSettings::SubcommandRequiredElseHelp)
                 .subcommand(
                     SubCommand::with_name("publish")
-                        .about("Publish Validator info on Solana")
+                        .about("Publish Validator info on Miraland")
                         .arg(
                             Arg::with_name("info_pubkey")
                                 .short("p")
@@ -216,7 +216,7 @@ impl ValidatorInfoSubCommands for App<'_, '_> {
                 )
                 .subcommand(
                     SubCommand::with_name("get")
-                        .about("Get and parse Solana Validator info")
+                        .about("Get and parse Miraland Validator info")
                         .arg(
                             Arg::with_name("info_pubkey")
                                 .index(1)

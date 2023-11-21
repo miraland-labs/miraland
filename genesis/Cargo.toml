@@ -1,7 +1,7 @@
 [package]
-name = "solana-genesis"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-genesis"
+name = "miraland-genesis"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-genesis"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -17,25 +17,25 @@ itertools = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-cli-config = { workspace = true }
-solana-entry = { workspace = true }
-solana-ledger = { workspace = true }
-solana-logger = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-stake-program = { workspace = true }
-solana-version = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-cli-config = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-stake-program = { workspace = true }
+miraland-version = { workspace = true }
+miraland-vote-program = { workspace = true }
 tempfile = { workspace = true }
 
 [[bin]]
-name = "solana-genesis"
+name = "miraland-genesis"
 path = "src/main.rs"
 
 [lib]
-name = "solana_genesis"
+name = "miraland_genesis"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

@@ -2,21 +2,21 @@
 #![allow(clippy::redundant_closure)]
 use {
     assert_matches::assert_matches,
-    solana_cli::{
+    miraland_cli::{
         check_balance,
         cli::{process_command, request_and_confirm_airdrop, CliCommand, CliConfig},
         spend_utils::SpendAmount,
         stake::StakeAuthorizationIndexed,
         test_utils::{check_ready, wait_for_next_epoch_plus_n_slots},
     },
-    solana_cli_output::{parse_sign_only_reply_string, OutputFormat},
-    solana_faucet::faucet::run_local_faucet,
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{
+    miraland_cli_output::{parse_sign_only_reply_string, OutputFormat},
+    miraland_faucet::faucet::run_local_faucet,
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{
         request::DELINQUENT_VALIDATOR_SLOT_DISTANCE,
         response::{RpcStakeActivation, StakeActivationState},
     },
-    solana_rpc_client_nonce_utils::blockhash_query::{self, BlockhashQuery},
+    miraland_rpc_client_nonce_utils::blockhash_query::{self, BlockhashQuery},
     solana_sdk::{
         account_utils::StateMut,
         commitment_config::CommitmentConfig,
@@ -33,8 +33,8 @@ use {
             state::{Lockup, StakeAuthorize, StakeStateV2},
         },
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_test_validator::{TestValidator, TestValidatorGenesis},
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::{TestValidator, TestValidatorGenesis},
 };
 
 #[test]
@@ -461,7 +461,7 @@ fn test_stake_delegation_force() {
 
 #[test]
 fn test_seed_stake_delegation_and_deactivation() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -557,7 +557,7 @@ fn test_seed_stake_delegation_and_deactivation() {
 
 #[test]
 fn test_stake_delegation_and_deactivation() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -649,7 +649,7 @@ fn test_stake_delegation_and_deactivation() {
 
 #[test]
 fn test_offline_stake_delegation_and_deactivation() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -810,7 +810,7 @@ fn test_offline_stake_delegation_and_deactivation() {
 
 #[test]
 fn test_nonced_stake_delegation_and_deactivation() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -875,12 +875,12 @@ fn test_nonced_stake_delegation_and_deactivation() {
     process_command(&config).unwrap();
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -907,12 +907,12 @@ fn test_nonced_stake_delegation_and_deactivation() {
     process_command(&config).unwrap();
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -939,7 +939,7 @@ fn test_nonced_stake_delegation_and_deactivation() {
 
 #[test]
 fn test_stake_authorize() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -1184,12 +1184,12 @@ fn test_stake_authorize() {
     process_command(&config).unwrap();
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -1254,12 +1254,12 @@ fn test_stake_authorize() {
     };
     assert_eq!(current_authority, online_authority_pubkey);
 
-    let new_nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let new_nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
     assert_ne!(nonce_hash, new_nonce_hash);
@@ -1267,7 +1267,7 @@ fn test_stake_authorize() {
 
 #[test]
 fn test_stake_authorize_with_fee_payer() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let fee_one_sig = FeeStructure::default().get_max_fee(1, 0);
     let fee_two_sig = FeeStructure::default().get_max_fee(2, 0);
 
@@ -1448,7 +1448,7 @@ fn test_stake_authorize_with_fee_payer() {
 
 #[test]
 fn test_stake_split() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -1543,12 +1543,12 @@ fn test_stake_split() {
     check_balance!(minimum_nonce_balance, &rpc_client, &nonce_account.pubkey());
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -1608,7 +1608,7 @@ fn test_stake_split() {
 
 #[test]
 fn test_stake_set_lockup() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -1827,12 +1827,12 @@ fn test_stake_set_lockup() {
     check_balance!(minimum_nonce_balance, &rpc_client, &nonce_account_pubkey);
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -1896,7 +1896,7 @@ fn test_stake_set_lockup() {
 
 #[test]
 fn test_offline_nonced_create_stake_account_and_withdraw() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();
@@ -1956,12 +1956,12 @@ fn test_offline_nonced_create_stake_account_and_withdraw() {
     process_command(&config).unwrap();
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -2019,12 +2019,12 @@ fn test_offline_nonced_create_stake_account_and_withdraw() {
     check_balance!(50_000_000_000, &rpc_client, &stake_pubkey);
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -2075,12 +2075,12 @@ fn test_offline_nonced_create_stake_account_and_withdraw() {
     check_balance!(50_000_000_000, &rpc_client, &recipient_pubkey);
 
     // Fetch nonce hash
-    let nonce_hash = solana_rpc_client_nonce_utils::get_account_with_commitment(
+    let nonce_hash = miraland_rpc_client_nonce_utils::get_account_with_commitment(
         &rpc_client,
         &nonce_account.pubkey(),
         CommitmentConfig::processed(),
     )
-    .and_then(|ref a| solana_rpc_client_nonce_utils::data_from_account(a))
+    .and_then(|ref a| miraland_rpc_client_nonce_utils::data_from_account(a))
     .unwrap()
     .blockhash();
 
@@ -2139,7 +2139,7 @@ fn test_offline_nonced_create_stake_account_and_withdraw() {
 
 #[test]
 fn test_stake_checked_instructions() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();

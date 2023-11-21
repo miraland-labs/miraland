@@ -1,12 +1,12 @@
 #pragma once
 /**
- * @brief Solana deprecated BPF loader deserializer to be used when deploying
+ * @brief Miraland deprecated BPF loader deserializer to be used when deploying
  * a program with `BPFLoader1111111111111111111111111111111111`
  */
 
- #include <sol/types.h>
- #include <sol/pubkey.h>
- #include <sol/entrypoint.h>
+ #include <mln/types.h>
+ #include <mln/pubkey.h>
+ #include <mln/entrypoint.h>
 
 #ifdef __cplusplus
 extern "C" {

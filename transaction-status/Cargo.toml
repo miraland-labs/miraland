@@ -1,7 +1,7 @@
 [package]
-name = "solana-transaction-status"
-description = "Solana transaction status types"
-documentation = "https://docs.rs/solana-transaction-status"
+name = "miraland-transaction-status"
+description = "Miraland transaction status types"
+documentation = "https://docs.rs/miraland-transaction-status"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -20,12 +20,12 @@ log = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-sdk = { workspace = true }
-spl-associated-token-account = { workspace = true, features = ["no-entrypoint"] }
-spl-memo = { workspace = true, features = ["no-entrypoint"] }
-spl-token = { workspace = true, features = ["no-entrypoint"] }
-spl-token-2022 = { workspace = true, features = ["no-entrypoint"] }
+miraland-account-decoder = { workspace = true }
+miraland-sdk = { workspace = true }
+solarti-associated-token-account = { workspace = true, features = ["no-entrypoint"] }
+solarti-memo = { workspace = true, features = ["no-entrypoint"] }
+solarti-token = { workspace = true, features = ["no-entrypoint"] }
+solarti-token-2022 = { workspace = true, features = ["no-entrypoint"] }
 thiserror = { workspace = true }
 
 [package.metadata.docs.rs]

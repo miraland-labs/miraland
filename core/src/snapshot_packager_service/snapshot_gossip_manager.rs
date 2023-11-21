@@ -1,5 +1,5 @@
 use {
-    solana_gossip::cluster_info::ClusterInfo,
+    miraland_gossip::cluster_info::ClusterInfo,
     solana_runtime::{
         snapshot_hash::{
             FullSnapshotHash, IncrementalSnapshotHash, SnapshotHash, StartingSnapshotHashes,

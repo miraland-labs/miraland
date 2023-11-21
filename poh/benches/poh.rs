@@ -1,11 +1,11 @@
-// This bench attempts to justify the value of `solana_core::poh_service::NUM_HASHES_PER_BATCH`
+// This bench attempts to justify the value of `miraland_core::poh_service::NUM_HASHES_PER_BATCH`
 
 #![feature(test)]
 extern crate test;
 
 use {
-    solana_entry::poh::Poh,
-    solana_poh::poh_service::DEFAULT_HASHES_PER_BATCH,
+    miraland_entry::poh::Poh,
+    miraland_poh::poh_service::DEFAULT_HASHES_PER_BATCH,
     solana_sdk::hash::Hash,
     std::sync::{
         atomic::{AtomicBool, Ordering},

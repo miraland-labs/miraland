@@ -4,7 +4,7 @@ use {
     chrono::{DateTime, Local},
     crossbeam_channel::{unbounded, Receiver, SendError, Sender, TryRecvError},
     rolling_file::{RollingCondition, RollingConditionBasic, RollingFileAppender},
-    solana_perf::packet::PacketBatch,
+    miraland_perf::packet::PacketBatch,
     solana_sdk::{hash::Hash, slot_history::Slot},
     std::{
         fs::{create_dir_all, remove_dir_all},
@@ -295,7 +295,7 @@ impl BankingTracer {
         mut file_appender: RollingFileAppender<RollingConditionGrouped>,
         exit: Arc<AtomicBool>,
     ) -> Result<JoinHandle<TracerThreadResult>, TraceError> {
-        let thread = thread::Builder::new().name("solBanknTracer".into()).spawn(
+        let thread = thread::Builder::new().name("mlnBanknTracer".into()).spawn(
             move || -> TracerThreadResult {
                 receiving_loop_with_minimized_sender_overhead::<_, _, TRACE_FILE_WRITE_INTERVAL_MS>(
                     exit,
@@ -359,7 +359,7 @@ impl TracedSender {
 pub mod for_test {
     use {
         super::*,
-        solana_perf::{packet::to_packet_batches, test_tx::test_tx},
+        miraland_perf::{packet::to_packet_batches, test_tx::test_tx},
         tempfile::TempDir,
     };
 

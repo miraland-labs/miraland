@@ -4,7 +4,7 @@ set -ex
 cd "$(dirname "$0")/.."
 source ci/_
 
-commit_range="$(git merge-base HEAD origin/master)..HEAD"
+commit_range="$(git merge-base HEAD origin/main)..HEAD"
 parsed_update_args="$(
   git log "$commit_range" --author "dependabot\[bot\]" --oneline -n1 |
     grep -o '[Bb]ump.*$' |

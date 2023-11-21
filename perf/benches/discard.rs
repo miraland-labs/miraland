@@ -3,7 +3,7 @@
 extern crate test;
 
 use {
-    solana_perf::{discard::discard_batches_randomly, packet::to_packet_batches, test_tx::test_tx},
+    miraland_perf::{discard::discard_batches_randomly, packet::to_packet_batches, test_tx::test_tx},
     test::Bencher,
 };
 
@@ -11,7 +11,7 @@ const NUM: usize = 1000;
 
 #[bench]
 fn bench_discard(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let tx = test_tx();
     let num_packets = NUM;
 

@@ -1,5 +1,5 @@
 [package]
-name = "solana-dos"
+name = "miraland-dos"
 publish = false
 description = "Tool to send various requests to cluster in order to evaluate the effect on performance"
 version = { workspace = true }
@@ -17,25 +17,25 @@ itertools = { workspace = true }
 log = { workspace = true }
 rand = { workspace = true }
 serde = { workspace = true }
-solana-bench-tps = { workspace = true }
-solana-client = { workspace = true }
-solana-core = { workspace = true }
-solana-faucet = { workspace = true }
-solana-gossip = { workspace = true }
-solana-logger = { workspace = true }
-solana-measure = { workspace = true }
-solana-net-utils = { workspace = true }
-solana-perf = { workspace = true }
-solana-rpc = { workspace = true }
-solana-rpc-client = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
-solana-tpu-client = { workspace = true }
-solana-version = { workspace = true }
+miraland-bench-tps = { workspace = true }
+miraland-client = { workspace = true }
+miraland-core = { workspace = true }
+miraland-faucet = { workspace = true }
+miraland-gossip = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-net-utils = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-rpc = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-tpu-client = { workspace = true }
+miraland-version = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dev-dependencies]
-solana-local-cluster = { workspace = true }
-solana-thin-client = { workspace = true }
+miraland-local-cluster = { workspace = true }
+miraland-thin-client = { workspace = true }

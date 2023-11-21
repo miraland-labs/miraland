@@ -1,13 +1,13 @@
 //! Collection of all runtime features.
 //!
 //! Steps to add a new feature are outlined below. Note that these steps only cover
-//! the process of getting a feature into the core Solana code.
+//! the process of getting a feature into the core Miraland code.
 //! - For features that are unambiguously good (ie bug fixes), these steps are sufficient.
 //! - For features that should go up for community vote (ie fee structure changes), more
 //!   information on the additional steps to follow can be found at:
 //!   <https://spl.solana.com/feature-proposal#feature-proposal-life-cycle>
 //!
-//! 1. Generate a new keypair with `solana-keygen new --outfile feature.json --no-passphrase`
+//! 1. Generate a new keypair with `miraland-keygen new --outfile feature.json --no-passphrase`
 //!    - Keypairs should be held by core contributors only. If you're a non-core contributor going
 //!      through these steps, the PR process will facilitate a keypair holder being picked. That
 //!      person will generate the keypair, provide pubkey for PR, and ultimately enable the feature.
@@ -731,11 +731,11 @@ lazy_static! {
         (deprecate_rewards_sysvar::id(), "deprecate unused rewards sysvar"),
         (pico_inflation::id(), "pico inflation"),
         (full_inflation::devnet_and_testnet::id(), "full inflation on devnet and testnet"),
-        (spl_token_v2_multisig_fix::id(), "spl-token multisig fix"),
+        (spl_token_v2_multisig_fix::id(), "solarti-token multisig fix"),
         (no_overflow_rent_distribution::id(), "no overflow rent distribution"),
         (filter_stake_delegation_accounts::id(), "filter stake_delegation_accounts #14062"),
         (require_custodian_for_locked_stake_authorize::id(), "require custodian to authorize withdrawer change for locked stake"),
-        (spl_token_v2_self_transfer_fix::id(), "spl-token self-transfer fix"),
+        (spl_token_v2_self_transfer_fix::id(), "solarti-token self-transfer fix"),
         (full_inflation::mainnet::certusone::enable::id(), "full inflation enabled by Certus One"),
         (full_inflation::mainnet::certusone::vote::id(), "community vote allowing Certus One to enable full inflation"),
         (warp_timestamp_again::id(), "warp timestamp again, adjust bounding to 25% fast 80% slow #15204"),
@@ -749,7 +749,7 @@ lazy_static! {
         (rent_for_sysvars::id(), "collect rent from accounts owned by sysvars"),
         (libsecp256k1_0_5_upgrade_enabled::id(), "upgrade libsecp256k1 to v0.5.0"),
         (tx_wide_compute_cap::id(), "transaction wide compute cap"),
-        (spl_token_v2_set_authority_fix::id(), "spl-token set_authority fix"),
+        (spl_token_v2_set_authority_fix::id(), "solarti-token set_authority fix"),
         (merge_nonce_error_into_system_error::id(), "merge NonceError into SystemError"),
         (disable_fees_sysvar::id(), "disable fees sysvar"),
         (stake_merge_with_unmatched_credits_observed::id(), "allow merging active stakes with unmatched credits_observed #18985"),
@@ -776,7 +776,7 @@ lazy_static! {
         (disable_fee_calculator::id(), "deprecate fee calculator"),
         (add_compute_budget_program::id(), "Add compute_budget_program"),
         (nonce_must_be_writable::id(), "nonce must be writable"),
-        (spl_token_v3_3_0_release::id(), "spl-token v3.3.0 release"),
+        (spl_token_v3_3_0_release::id(), "solarti-token v3.3.0 release"),
         (leave_nonce_on_success::id(), "leave nonce as is on success"),
         (reject_empty_instruction_without_program::id(), "fail instructions which have native_loader as program_id directly"),
         (fixed_memcpy_nonoverlapping_check::id(), "use correct check for nonoverlapping regions in memcpy syscall"),
@@ -811,12 +811,12 @@ lazy_static! {
         (fix_recent_blockhashes::id(), "stop adding hashes for skipped slots to recent blockhashes"),
         (update_rewards_from_cached_accounts::id(), "update rewards from cached accounts"),
         (enable_partitioned_epoch_reward::id(), "enable partitioned rewards at epoch boundary #32166"),
-        (spl_token_v3_4_0::id(), "SPL Token Program version 3.4.0 release #24740"),
+        (spl_token_v3_4_0::id(), "Solarti Token Program version 3.4.0 release #24740"),
         (spl_associated_token_account_v1_1_0::id(), "SPL Associated Token Account Program version 1.1.0 release #24741"),
         (default_units_per_instruction::id(), "Default max tx-wide compute units calculated per instruction"),
         (stake_allow_zero_undelegated_amount::id(), "Allow zero-lamport undelegated amount for initialized stakes #24670"),
         (require_static_program_ids_in_transaction::id(), "require static program ids in versioned transactions"),
-        (stake_raise_minimum_delegation_to_1_sol::id(), "Raise minimum stake delegation to 1.0 SOL #24357"),
+        (stake_raise_minimum_delegation_to_1_sol::id(), "Raise minimum stake delegation to 1.0 MLN #24357"),
         (stake_minimum_delegation_for_rewards::id(), "stakes must be at least the minimum delegation to earn rewards"),
         (add_set_compute_unit_price_ix::id(), "add compute budget ix for setting a compute unit price"),
         (disable_deploy_of_alloc_free_syscall::id(), "disable new deployments of deprecated sol_alloc_free_ syscall"),

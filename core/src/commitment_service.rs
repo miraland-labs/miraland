@@ -1,9 +1,9 @@
 use {
     crate::consensus::Stake,
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
-    solana_measure::measure::Measure,
-    solana_metrics::datapoint_info,
-    solana_rpc::rpc_subscriptions::RpcSubscriptions,
+    miraland_measure::measure::Measure,
+    miraland_metrics::datapoint_info,
+    miraland_rpc::rpc_subscriptions::RpcSubscriptions,
     solana_runtime::{
         bank::Bank,
         commitment::{BlockCommitment, BlockCommitmentCache, CommitmentSlots, VOTE_THRESHOLD_SIZE},
@@ -68,7 +68,7 @@ impl AggregateCommitmentService {
             sender,
             Self {
                 t_commitment: Builder::new()
-                    .name("solAggCommitSvc".to_string())
+                    .name("mlnAggCommitSvc".to_string())
                     .spawn(move || loop {
                         if exit.load(Ordering::Relaxed) {
                             break;
@@ -249,7 +249,7 @@ impl AggregateCommitmentService {
 mod tests {
     use {
         super::*,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_runtime::{
             accounts_background_service::AbsRequestSender,
             bank_forks::BankForks,

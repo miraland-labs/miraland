@@ -12,7 +12,7 @@ pub(in crate::parse_token) fn parse_transfer_hook_instruction(
     account_keys: &AccountKeys,
 ) -> Result<ParsedInstructionEnum, ParseInstructionError> {
     match decode_instruction_type(instruction_data)
-        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken))?
+        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken))?
     {
         TransferHookInstruction::Initialize => {
             check_num_token_accounts(account_indexes, 1)?;
@@ -20,7 +20,7 @@ pub(in crate::parse_token) fn parse_transfer_hook_instruction(
                 authority,
                 program_id,
             } = *decode_instruction_data(instruction_data).map_err(|_| {
-                ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
             })?;
             let mut value = json!({
                 "mint": account_keys[account_indexes[0] as usize].to_string(),
@@ -41,7 +41,7 @@ pub(in crate::parse_token) fn parse_transfer_hook_instruction(
             check_num_token_accounts(account_indexes, 2)?;
             let UpdateInstructionData { program_id } = *decode_instruction_data(instruction_data)
                 .map_err(|_| {
-                ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
             })?;
             let mut value = json!({
                 "mint": account_keys[account_indexes[0] as usize].to_string(),

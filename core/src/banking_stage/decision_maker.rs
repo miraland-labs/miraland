@@ -1,5 +1,5 @@
 use {
-    solana_poh::poh_recorder::{BankStart, PohRecorder},
+    miraland_poh::poh_recorder::{BankStart, PohRecorder},
     solana_sdk::{
         clock::{
             DEFAULT_TICKS_PER_SLOT, FORWARD_TRANSACTIONS_TO_LEADER_AT_SLOT_OFFSET,
@@ -116,8 +116,8 @@ mod tests {
     use {
         super::*,
         core::panic,
-        solana_ledger::{blockstore::Blockstore, genesis_utils::create_genesis_config},
-        solana_poh::poh_recorder::create_test_recorder,
+        miraland_ledger::{blockstore::Blockstore, genesis_utils::create_genesis_config},
+        miraland_poh::poh_recorder::create_test_recorder,
         solana_runtime::bank::Bank,
         solana_sdk::clock::NUM_CONSECUTIVE_LEADER_SLOTS,
         std::{

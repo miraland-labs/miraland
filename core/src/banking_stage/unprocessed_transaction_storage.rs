@@ -16,7 +16,7 @@ use {
     },
     itertools::Itertools,
     min_max_heap::MinMaxHeap,
-    solana_measure::{measure, measure_us},
+    miraland_measure::{measure, measure_us},
     solana_runtime::bank::Bank,
     solana_sdk::{
         clock::FORWARD_TRANSACTIONS_TO_LEADER_AT_SLOT_OFFSET, feature_set::FeatureSet, hash::Hash,
@@ -941,8 +941,8 @@ impl ThreadLocalUnprocessedPackets {
 mod tests {
     use {
         super::*,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
-        solana_perf::packet::{Packet, PacketFlags},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_perf::packet::{Packet, PacketFlags},
         solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
@@ -1008,7 +1008,7 @@ mod tests {
 
     #[test]
     fn test_filter_and_forward_with_account_limits() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -1213,7 +1213,7 @@ mod tests {
 
     #[test]
     fn test_prepare_packets_to_forward() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,

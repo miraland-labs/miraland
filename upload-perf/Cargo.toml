@@ -1,5 +1,5 @@
 [package]
-name = "solana-upload-perf"
+name = "miraland-upload-perf"
 description = "Metrics Upload Utility"
 publish = false
 version = { workspace = true }
@@ -11,10 +11,10 @@ edition = { workspace = true }
 
 [dependencies]
 serde_json = { workspace = true }
-solana-metrics = { workspace = true }
+miraland-metrics = { workspace = true }
 
 [[bin]]
-name = "solana-upload-perf"
+name = "miraland-upload-perf"
 path = "src/upload-perf.rs"
 
 [package.metadata.docs.rs]

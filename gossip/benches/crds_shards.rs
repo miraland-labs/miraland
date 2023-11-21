@@ -4,7 +4,7 @@ extern crate test;
 
 use {
     rand::{thread_rng, Rng},
-    solana_gossip::{
+    miraland_gossip::{
         crds::{Crds, GossipRoute, VersionedCrdsValue},
         crds_shards::CrdsShards,
         crds_value::CrdsValue,

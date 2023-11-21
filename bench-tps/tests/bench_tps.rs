@@ -2,23 +2,23 @@
 
 use {
     serial_test::serial,
-    solana_bench_tps::{
+    miraland_bench_tps::{
         bench::{do_bench_tps, generate_and_fund_keypairs},
         cli::{Config, InstructionPaddingConfig},
         send_batch::generate_durable_nonce_accounts,
     },
-    solana_client::{
+    miraland_client::{
         thin_client::ThinClient,
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    solana_core::validator::ValidatorConfig,
-    solana_faucet::faucet::run_local_faucet,
-    solana_local_cluster::{
+    miraland_core::validator::ValidatorConfig,
+    miraland_faucet::faucet::run_local_faucet,
+    miraland_local_cluster::{
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::make_identical_validator_configs,
     },
-    solana_rpc::rpc::JsonRpcConfig,
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_rpc::rpc::JsonRpcConfig,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::{
         account::{Account, AccountSharedData},
         commitment_config::CommitmentConfig,
@@ -26,8 +26,8 @@ use {
         rent::Rent,
         signature::{Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_test_validator::TestValidatorGenesis,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::TestValidatorGenesis,
     std::{sync::Arc, time::Duration},
 };
 
@@ -48,7 +48,7 @@ fn test_bench_tps_local_cluster(config: Config) {
         program_account(include_bytes!("fixtures/spl_instruction_padding.so")),
     )];
 
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let faucet_keypair = Keypair::new();
     let faucet_pubkey = faucet_keypair.pubkey();
@@ -106,7 +106,7 @@ fn test_bench_tps_local_cluster(config: Config) {
 }
 
 fn test_bench_tps_test_validator(config: Config) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mint_keypair = Keypair::new();
     let mint_pubkey = mint_keypair.pubkey();

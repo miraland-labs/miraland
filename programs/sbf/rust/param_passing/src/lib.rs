@@ -5,7 +5,7 @@ use {
     solana_program::{
         custom_heap_default, custom_panic_default, entrypoint::SUCCESS, log::sol_log_64,
     },
-    solana_sbf_rust_param_passing_dep::{Data, TestDep},
+    miraland_sbf_rust_param_passing_dep::{Data, TestDep},
 };
 
 #[no_mangle]

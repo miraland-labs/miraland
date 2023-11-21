@@ -64,9 +64,9 @@ case "$clientType" in
 esac
 
 case $clientToRun in
-solana-bench-tps)
+miraland-bench-tps)
   net/scripts/rsync-retry.sh -vPrc \
-    "$entrypointIp":~/solana/config/bench-tps"$clientIndex".yml ./client-accounts.yml
+    "$entrypointIp":~/miraland/config/bench-tps"$clientIndex".yml ./client-accounts.yml
 
   args=()
 
@@ -81,7 +81,7 @@ solana-bench-tps)
   fi
 
   clientCommand="\
-    solana-bench-tps \
+    miraland-bench-tps \
       --duration 7500 \
       --sustained \
       --threads $threadCount \
@@ -93,7 +93,7 @@ solana-bench-tps)
 idle)
   # Add the faucet keypair to idle clients for convenience
   net/scripts/rsync-retry.sh -vPrc \
-    "$entrypointIp":~/solana/config/faucet.json ~/solana/
+    "$entrypointIp":~/miraland/config/faucet.json ~/miraland/
   exit 0
   ;;
 *)
@@ -102,9 +102,9 @@ idle)
 esac
 
 
-cat > ~/solana/on-reboot <<EOF
+cat > ~/miraland/on-reboot <<EOF
 #!/usr/bin/env bash
-cd ~/solana
+cd ~/miraland
 
 PATH="$HOME"/.cargo/bin:"$PATH"
 export USE_INSTALL=1
@@ -112,7 +112,7 @@ export USE_INSTALL=1
 echo "$(date) | $0 $*" >> client.log
 
 (
-  sudo SOLANA_METRICS_CONFIG="$SOLANA_METRICS_CONFIG" scripts/oom-monitor.sh
+  sudo MIRALAND_METRICS_CONFIG="$MIRALAND_METRICS_CONFIG" scripts/oom-monitor.sh
 ) > oom-monitor.log 2>&1 &
 echo \$! > oom-monitor.pid
 scripts/fd-monitor.sh > fd-monitor.log 2>&1 &
@@ -131,10 +131,10 @@ tmux new -s "$clientToRun" -d "
   done
 "
 EOF
-chmod +x ~/solana/on-reboot
-echo "@reboot ~/solana/on-reboot" | crontab -
+chmod +x ~/miraland/on-reboot
+echo "@reboot ~/miraland/on-reboot" | crontab -
 
-~/solana/on-reboot
+~/miraland/on-reboot
 
 sleep 1
 tmux capture-pane -t "$clientToRun" -p -S -100

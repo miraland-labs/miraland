@@ -18,30 +18,30 @@ fi
 if [[ $(uname) != Linux ]]; then
   # Protect against unsupported configurations to prevent non-obvious errors
   # later. Arguably these should be fatal errors but for now prefer tolerance.
-  if [[ -n $SOLANA_CUDA ]]; then
+  if [[ -n $MIRALAND_CUDA ]]; then
     echo "Warning: CUDA is not supported on $(uname)"
-    SOLANA_CUDA=
+    MIRALAND_CUDA=
   fi
 fi
 
-if [[ -n $USE_INSTALL || ! -f "$SOLANA_ROOT"/Cargo.toml ]]; then
-  solana_program() {
+if [[ -n $USE_INSTALL || ! -f "$MIRALAND_ROOT"/Cargo.toml ]]; then
+  miraland_program() {
     declare program="$1"
     if [[ -z $program ]]; then
-      printf "solana"
+      printf "miraland"
     else
-      printf "solana-%s" "$program"
+      printf "miraland-%s" "$program"
     fi
   }
 else
-  solana_program() {
+  miraland_program() {
     declare program="$1"
     declare crate="$program"
     if [[ -z $program ]]; then
       crate="cli"
-      program="solana"
+      program="miraland"
     else
-      program="solana-$program"
+      program="miraland-$program"
     fi
 
     if [[ -n $NDEBUG ]]; then
@@ -61,15 +61,15 @@ else
   }
 fi
 
-solana_bench_tps=$(solana_program bench-tps)
-solana_faucet=$(solana_program faucet)
-solana_validator=$(solana_program validator)
-solana_validator_cuda="$solana_validator --cuda"
-solana_genesis=$(solana_program genesis)
-solana_gossip=$(solana_program gossip)
-solana_keygen=$(solana_program keygen)
-solana_ledger_tool=$(solana_program ledger-tool)
-solana_cli=$(solana_program)
+miraland_bench_tps=$(miraland_program bench-tps)
+miraland_faucet=$(miraland_program faucet)
+miraland_validator=$(miraland_program validator)
+miraland_validator_cuda="$miraland_validator --cuda"
+miraland_genesis=$(miraland_program genesis)
+miraland_gossip=$(miraland_program gossip)
+miraland_keygen=$(miraland_program keygen)
+miraland_ledger_tool=$(miraland_program ledger-tool)
+miraland_cli=$(miraland_program)
 
 export RUST_BACKTRACE=1
 

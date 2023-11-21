@@ -1,12 +1,12 @@
 #![allow(clippy::arithmetic_side_effects)]
 #![feature(test)]
-extern crate solana_ledger;
+extern crate miraland_ledger;
 extern crate test;
 
 use {
     rand::Rng,
-    solana_entry::entry::{create_ticks, Entry},
-    solana_ledger::{
+    miraland_entry::entry::{create_ticks, Entry},
+    miraland_ledger::{
         blockstore::{entries_to_test_shreds, Blockstore},
         get_tmp_ledger_path_auto_delete,
     },

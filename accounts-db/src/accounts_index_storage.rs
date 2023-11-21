@@ -74,7 +74,7 @@ impl BgThreads {
 
                     // note that using rayon here causes us to exhaust # rayon threads and many tests running in parallel deadlock
                     Builder::new()
-                        .name(format!("solIdxFlusher{idx:02}"))
+                        .name(format!("mlnIdxFlusher{idx:02}"))
                         .spawn(move || {
                             storage_.background(
                                 vec![local_exit, system_exit],

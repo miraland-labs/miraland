@@ -153,7 +153,7 @@ fn test_solana_package(
         config.generate_child_script_on_failure,
     );
 
-    // Pass --sbf-out-dir along to the solana-program-test crate
+    // Pass --sbf-out-dir along to the miraland-program-test crate
     env::set_var("SBF_OUT_DIR", sbf_out_dir);
 
     cargo_args.insert(0, "test");
@@ -246,7 +246,7 @@ fn test_solana(config: Config, manifest_path: Option<PathBuf>) {
 }
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let mut args = env::args().collect::<Vec<_>>();
     // When run as a cargo subcommand, the first program argument is the subcommand name.
     // Remove it
@@ -268,7 +268,7 @@ fn main() {
                 .long("sbf-sdk")
                 .value_name("PATH")
                 .takes_value(true)
-                .help("Path to the Solana SBF SDK"),
+                .help("Path to the Miraland SBF SDK"),
         )
         .arg(
             Arg::new("features")
@@ -346,7 +346,7 @@ fn main() {
                 .long("workspace")
                 .takes_value(false)
                 .alias("all")
-                .help("Test all Solana packages in the workspace"),
+                .help("Test all Miraland packages in the workspace"),
         )
         .arg(
             Arg::new("jobs")

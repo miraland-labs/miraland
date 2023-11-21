@@ -1,7 +1,7 @@
 [package]
-name = "solana-turbine"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-turbine"
+name = "miraland-turbine"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-turbine"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -23,26 +23,26 @@ rand_chacha = { workspace = true }
 rayon = { workspace = true }
 rcgen = { workspace = true }
 rustls = { workspace = true }
-solana-entry = { workspace = true }
-solana-gossip = { workspace = true }
-solana-ledger = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-perf = { workspace = true }
-solana-poh = { workspace = true }
-solana-quic-client = { workspace = true }
-solana-rayon-threadlimit = { workspace = true }
-solana-rpc = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-gossip = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-poh = { workspace = true }
+miraland-quic-client = { workspace = true }
+miraland-rayon-threadlimit = { workspace = true }
+miraland-rpc = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [[bench]]
 name = "cluster_info"

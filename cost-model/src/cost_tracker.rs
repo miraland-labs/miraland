@@ -5,7 +5,7 @@
 //!
 use {
     crate::{block_cost_limits::*, transaction_cost::TransactionCost},
-    solana_metrics::datapoint_info,
+    miraland_metrics::datapoint_info,
     solana_sdk::{
         clock::Slot, pubkey::Pubkey, saturating_add_assign, transaction::TransactionError,
     },
@@ -319,7 +319,7 @@ mod tests {
     }
 
     fn test_setup() -> (Keypair, Hash) {
-        solana_logger::setup();
+        miraland_logger::setup();
         (Keypair::new(), Hash::new_unique())
     }
 

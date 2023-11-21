@@ -30,7 +30,7 @@ source ci/env.sh
 # processes will all have the `init` process as their PPID:
 (
   victims=
-  for name in bash cargo docker solana; do
+  for name in bash cargo docker miraland; do
     victims="$victims $(pgrep -u "$(id -u)" -P 1 -d \  $name)"
   done
   for victim in $victims; do

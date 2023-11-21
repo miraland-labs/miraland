@@ -36,8 +36,8 @@ $NOPULL || docker pull "$IMAGE"
 shift
 
 ARGS=(
-  --workdir /solana
-  --volume "$PWD:/solana"
+  --workdir /miraland
+  --volume "$PWD:/miraland"
   --rm
 )
 
@@ -84,11 +84,11 @@ if [[ -n $CI ]]; then
 fi
 
 # Ensure files are created with the current host uid/gid
-if [[ -z "$SOLANA_DOCKER_RUN_NOSETUID" ]]; then
+if [[ -z "$MIRALAND_DOCKER_RUN_NOSETUID" ]]; then
   ARGS+=(--user "$(id -u):$(id -g)")
 fi
 
-if [[ -n $SOLANA_ALLOCATE_TTY ]]; then
+if [[ -n $MIRALAND_ALLOCATE_TTY ]]; then
   # Colored output, progress bar and Ctrl-C:
   # https://stackoverflow.com/a/41099052/10242004
   ARGS+=(--interactive --tty)

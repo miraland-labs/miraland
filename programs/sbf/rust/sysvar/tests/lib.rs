@@ -2,7 +2,7 @@
 
 use {
     solana_program_test::*,
-    solana_sbf_rust_sysvar::process_instruction,
+    miraland_sbf_rust_sysvar::process_instruction,
     solana_sdk::{
         feature_set::disable_fees_sysvar,
         instruction::{AccountMeta, Instruction},
@@ -21,7 +21,7 @@ async fn test_sysvars() {
     let program_id = Pubkey::new_unique();
 
     let mut program_test = ProgramTest::new(
-        "solana_sbf_rust_sysvar",
+        "miraland_sbf_rust_sysvar",
         program_id,
         processor!(process_instruction),
     );
@@ -61,7 +61,7 @@ async fn test_sysvars() {
     banks_client.process_transaction(transaction).await.unwrap();
 
     let mut program_test = ProgramTest::new(
-        "solana_sbf_rust_sysvar",
+        "miraland_sbf_rust_sysvar",
         program_id,
         processor!(process_instruction),
     );

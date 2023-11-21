@@ -1,7 +1,7 @@
 [package]
-name = "solana-send-transaction-service"
-description = "Solana send transaction service"
-documentation = "https://docs.rs/solana-send-transaction-service"
+name = "miraland-send-transaction-service"
+description = "Miraland send transaction service"
+documentation = "https://docs.rs/miraland-send-transaction-service"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -12,15 +12,15 @@ edition = { workspace = true }
 [dependencies]
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
-solana-client = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-tpu-client = { workspace = true }
+miraland-client = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-tpu-client = { workspace = true }
 
 [dev-dependencies]
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

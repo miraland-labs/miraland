@@ -1,7 +1,7 @@
 [package]
-name = "solana-sdk-macro"
-description = "Solana SDK Macro"
-documentation = "https://docs.rs/solana-sdk-macro"
+name = "miraland-sdk-macro"
+description = "Miraland SDK Macro"
+documentation = "https://docs.rs/miraland-sdk-macro"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -11,6 +11,7 @@ edition = { workspace = true }
 
 [lib]
 proc-macro = true
+name = "solana_sdk_macro"
 
 [dependencies]
 bs58 = { workspace = true }

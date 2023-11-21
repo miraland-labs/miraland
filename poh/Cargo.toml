@@ -1,7 +1,7 @@
 [package]
-name = "solana-poh"
-description = "Solana PoH"
-documentation = "https://docs.rs/solana-poh"
+name = "miraland-poh"
+description = "Miraland PoH"
+documentation = "https://docs.rs/miraland-poh"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -13,28 +13,28 @@ edition = { workspace = true }
 core_affinity = { workspace = true }
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
-solana-entry = { workspace = true }
-solana-ledger = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
 bincode = { workspace = true }
 rand = { workspace = true }
-solana-logger = { workspace = true }
-solana-perf = { workspace = true }
-solana-poh = { path = ".", features = ["dev-context-only-utils"] }
+miraland-logger = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-poh = { path = ".", features = ["dev-context-only-utils"] }
 
 [features]
 dev-context-only-utils = []
 
 [lib]
 crate-type = ["lib"]
-name = "solana_poh"
+name = "miraland_poh"
 
 [[bench]]
 name = "poh"

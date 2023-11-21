@@ -9,14 +9,14 @@ use {
     },
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand},
     log::*,
-    solana_account_decoder::{UiAccountEncoding, UiDataSliceConfig},
-    solana_clap_utils::{
+    miraland_account_decoder::{UiAccountEncoding, UiDataSliceConfig},
+    miraland_clap_utils::{
         input_parsers::{pubkey_of, pubkey_of_signer, signer_of},
         input_validators::{is_valid_pubkey, is_valid_signer},
         keypair::{DefaultSigner, SignerIndex},
     },
-    solana_cli_output::{CliProgramId, CliProgramV4, CliProgramsV4, OutputFormat},
-    solana_client::{
+    miraland_cli_output::{CliProgramId, CliProgramV4, CliProgramsV4, OutputFormat},
+    miraland_client::{
         connection_cache::ConnectionCache,
         send_and_confirm_transactions_in_parallel::{
             send_and_confirm_transactions_in_parallel_blocking, SendAndConfirmConfig,
@@ -25,9 +25,9 @@ use {
     },
     solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
     solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{
         config::{RpcAccountInfoConfig, RpcProgramAccountsConfig, RpcSendTransactionConfig},
         filter::{Memcmp, RpcFilterType},
     },
@@ -411,7 +411,7 @@ pub fn read_and_verify_elf(program_location: &str) -> Result<Vec<u8>, Box<dyn st
 
     // Verify the program
     let program_runtime_environment =
-        solana_loader_v4_program::create_program_runtime_environment_v2(
+        miraland_loader_v4_program::create_program_runtime_environment_v2(
             &ComputeBudget::default(),
             false,
         );
@@ -719,7 +719,7 @@ fn process_show(
             .value
         {
             if loader_v4::check_id(&account.owner) {
-                if let Ok(state) = solana_loader_v4_program::get_state(&account.data) {
+                if let Ok(state) = miraland_loader_v4_program::get_state(&account.data) {
                     let status = match state.status {
                         LoaderV4Status::Retracted => "retracted",
                         LoaderV4Status::Deployed => "deployed",
@@ -876,10 +876,10 @@ fn send_messages(
             ),
             ConnectionCache::Quic(cache) => {
                 let tpu_client_fut =
-                    solana_client::nonblocking::tpu_client::TpuClient::new_with_connection_cache(
+                    miraland_client::nonblocking::tpu_client::TpuClient::new_with_connection_cache(
                         rpc_client.get_inner_client().clone(),
                         config.websocket_url,
-                        solana_client::tpu_client::TpuClientConfig::default(),
+                        miraland_client::tpu_client::TpuClientConfig::default(),
                         cache,
                     );
                 let tpu_client = rpc_client
@@ -1105,7 +1105,7 @@ fn build_retract_instruction(
         slot: _,
         authority_address,
         status,
-    }) = solana_loader_v4_program::get_state(&account.data)
+    }) = miraland_loader_v4_program::get_state(&account.data)
     {
         if authority != authority_address {
             return Err(
@@ -1144,7 +1144,7 @@ fn build_truncate_instructions(
             slot: _,
             authority_address,
             status,
-        }) = solana_loader_v4_program::get_state(&account.data)
+        }) = miraland_loader_v4_program::get_state(&account.data)
         {
             if authority != authority_address {
                 return Err(
@@ -1242,7 +1242,7 @@ fn get_programs(
 
     let mut programs = vec![];
     for (program, account) in results.iter() {
-        if let Ok(state) = solana_loader_v4_program::get_state(&account.data) {
+        if let Ok(state) = miraland_loader_v4_program::get_state(&account.data) {
             let status = match state.status {
                 LoaderV4Status::Retracted => "retracted",
                 LoaderV4Status::Deployed => "deployed",
@@ -1272,7 +1272,7 @@ mod tests {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
         serde_json::json,
-        solana_rpc_client_api::{
+        miraland_rpc_client_api::{
             request::RpcRequest,
             response::{Response, RpcResponseContext},
         },

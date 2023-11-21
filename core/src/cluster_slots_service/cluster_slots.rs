@@ -1,6 +1,6 @@
 use {
     itertools::Itertools,
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::ClusterInfo, crds::Cursor, epoch_slots::EpochSlots,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },

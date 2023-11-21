@@ -1,7 +1,7 @@
 [package]
-name = "solana-bpf-loader-program"
-description = "Solana BPF loader"
-documentation = "https://docs.rs/solana-bpf-loader-program"
+name = "miraland-bpf-loader-program"
+description = "Miraland BPF loader"
+documentation = "https://docs.rs/miraland-bpf-loader-program"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -15,10 +15,10 @@ byteorder = { workspace = true }
 libsecp256k1 = { workspace = true }
 log = { workspace = true }
 scopeguard = { workspace = true }
-solana-measure = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-zk-token-sdk = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-zk-token-sdk = { workspace = true }
 solana_rbpf = { workspace = true }
 thiserror = { workspace = true }
 
@@ -26,7 +26,7 @@ thiserror = { workspace = true }
 assert_matches = { workspace = true }
 memoffset = { workspace = true }
 rand = { workspace = true }
-solana-sdk = { workspace = true, features = ["dev-context-only-utils"] }
+miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
 
 [lib]
 crate-type = ["lib"]

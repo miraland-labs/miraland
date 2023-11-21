@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-realloc"
-documentation = "https://docs.rs/solana-sbf-rust-realloc"
+name = "miraland-sbf-rust-realloc"
+documentation = "https://docs.rs/miraland-sbf-rust-realloc"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -14,7 +14,7 @@ default = ["program"]
 program = []
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["lib", "cdylib"]

@@ -1,7 +1,7 @@
 [package]
-name = "solana-local-cluster"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-local-cluster"
+name = "miraland-local-cluster"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-local-cluster"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -15,26 +15,26 @@ itertools = { workspace = true }
 log = { workspace = true }
 rand = { workspace = true }
 rayon = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-client = { workspace = true }
-solana-config-program = { workspace = true }
-solana-core = { workspace = true }
-solana-entry = { workspace = true }
-solana-gossip = { workspace = true }
-solana-ledger = { workspace = true }
-solana-logger = { workspace = true }
-solana-pubsub-client = { workspace = true }
-solana-rpc-client = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-stake-program = { workspace = true }
-solana-streamer = { workspace = true }
-solana-thin-client = { workspace = true }
-solana-tpu-client = { workspace = true }
-solana-turbine = { workspace = true }
-solana-vote = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-client = { workspace = true }
+miraland-config-program = { workspace = true }
+miraland-core = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-gossip = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-pubsub-client = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-stake-program = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-thin-client = { workspace = true }
+miraland-tpu-client = { workspace = true }
+miraland-turbine = { workspace = true }
+miraland-vote = { workspace = true }
+miraland-vote-program = { workspace = true }
 static_assertions = { workspace = true }
 tempfile = { workspace = true }
 trees = { workspace = true }
@@ -44,8 +44,8 @@ assert_matches = { workspace = true }
 fs_extra = { workspace = true }
 gag = { workspace = true }
 serial_test = { workspace = true }
-solana-download-utils = { workspace = true }
-solana-ledger = { workspace = true, features = ["dev-context-only-utils"] }
+miraland-download-utils = { workspace = true }
+miraland-ledger = { workspace = true, features = ["dev-context-only-utils"] }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

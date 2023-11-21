@@ -2,12 +2,12 @@ use {
     crate::transaction_notifier_interface::TransactionNotifierArc,
     crossbeam_channel::{Receiver, RecvTimeoutError},
     itertools::izip,
-    solana_accounts_db::transaction_results::{DurableNonceFee, TransactionExecutionDetails},
-    solana_ledger::{
+    miraland_accounts_db::transaction_results::{DurableNonceFee, TransactionExecutionDetails},
+    miraland_ledger::{
         blockstore::Blockstore,
         blockstore_processor::{TransactionStatusBatch, TransactionStatusMessage},
     },
-    solana_transaction_status::{
+    miraland_transaction_status::{
         extract_and_fmt_memos, InnerInstruction, InnerInstructions, Reward, TransactionStatusMeta,
     },
     std::{
@@ -35,7 +35,7 @@ impl TransactionStatusService {
         exit: Arc<AtomicBool>,
     ) -> Self {
         let thread_hdl = Builder::new()
-            .name("solTxStatusWrtr".to_string())
+            .name("mlnTxStatusWrtr".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     break;
@@ -225,12 +225,12 @@ pub(crate) mod tests {
         crate::transaction_notifier_interface::TransactionNotifier,
         crossbeam_channel::unbounded,
         dashmap::DashMap,
-        solana_account_decoder::parse_token::token_amount_to_ui_amount,
-        solana_accounts_db::{
+        miraland_account_decoder::parse_token::token_amount_to_ui_amount,
+        miraland_accounts_db::{
             nonce_info::{NonceFull, NoncePartial},
             rent_debits::RentDebits,
         },
-        solana_ledger::{genesis_utils::create_genesis_config, get_tmp_ledger_path_auto_delete},
+        miraland_ledger::{genesis_utils::create_genesis_config, get_tmp_ledger_path_auto_delete},
         solana_runtime::bank::{Bank, TransactionBalancesSet},
         solana_sdk::{
             account_utils::StateMut,
@@ -248,7 +248,7 @@ pub(crate) mod tests {
                 VersionedTransaction,
             },
         },
-        solana_transaction_status::{
+        miraland_transaction_status::{
             token_balances::TransactionTokenBalancesSet, TransactionStatusMeta,
             TransactionTokenBalance,
         },

@@ -1,7 +1,7 @@
 use {
     super::*,
-    solana_entry::entry::Entry,
-    solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
+    miraland_entry::entry::Entry,
+    miraland_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     solana_sdk::{hash::Hash, signature::Keypair},
 };
 
@@ -162,9 +162,9 @@ impl BroadcastRun for BroadcastFakeShredsRun {
 mod tests {
     use {
         super::*,
-        solana_gossip::contact_info::ContactInfo,
+        miraland_gossip::contact_info::ContactInfo,
         solana_sdk::signature::Signer,
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::net::{IpAddr, Ipv4Addr, SocketAddr},
     };
 

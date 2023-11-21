@@ -4,7 +4,7 @@ extern crate lazy_static;
 
 use {
     clap::{crate_description, crate_name, App, AppSettings, Arg, ArgMatches, SubCommand},
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::pubkey_of,
         input_validators::{is_pubkey, is_url},
     },
@@ -83,11 +83,11 @@ fn handle_init(matches: &ArgMatches<'_>, config_file: &str) -> Result<(), String
 }
 
 pub fn main() -> Result<(), String> {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let matches = App::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .setting(AppSettings::SubcommandRequiredElseHelp)
         .arg({
             let arg = Arg::with_name("config_file")
@@ -127,7 +127,7 @@ pub fn main() -> Result<(), String> {
                         .takes_value(true)
                         .default_value(defaults::JSON_RPC_URL)
                         .validator(is_url)
-                        .help("JSON RPC URL for the solana cluster"),
+                        .help("JSON RPC URL for the miraland cluster"),
                 )
                 .arg(
                     Arg::with_name("no_modify_path")
@@ -193,14 +193,14 @@ pub fn main() -> Result<(), String> {
                         .takes_value(true)
                         .default_value(defaults::JSON_RPC_URL)
                         .validator(is_url)
-                        .help("JSON RPC URL for the solana cluster"),
+                        .help("JSON RPC URL for the miraland cluster"),
                 )
                 .arg(
                     Arg::with_name("download_url")
                         .index(1)
                         .required(true)
                         .validator(is_url)
-                        .help("URL to the solana release archive"),
+                        .help("URL to the miraland release archive"),
                 )
                 .arg(
                     Arg::with_name("update_manifest_keypair_file")
@@ -279,11 +279,11 @@ pub fn main() -> Result<(), String> {
 }
 
 pub fn main_init() -> Result<(), String> {
-    solana_logger::setup();
+    miraland_logger::setup();
 
-    let matches = App::new("solana-install-init")
+    let matches = App::new("miraland-install-init")
         .about("Initializes a new installation")
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .arg({
             let arg = Arg::with_name("config_file")
                 .short("c")
@@ -317,7 +317,7 @@ pub fn main_init() -> Result<(), String> {
                 .takes_value(true)
                 .default_value(defaults::JSON_RPC_URL)
                 .validator(is_url)
-                .help("JSON RPC URL for the solana cluster"),
+                .help("JSON RPC URL for the miraland cluster"),
         )
         .arg(
             Arg::with_name("no_modify_path")

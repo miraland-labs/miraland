@@ -24,7 +24,7 @@ impl std::fmt::Debug for BuiltinPrototype {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl solana_frozen_abi::abi_example::AbiExample for BuiltinPrototype {
+impl miraland_frozen_abi::abi_example::AbiExample for BuiltinPrototype {
     fn example() -> Self {
         // BuiltinPrototype isn't serializable by definition.
         solana_program_runtime::declare_process_instruction!(MockBuiltin, 0, |_invoke_context| {
@@ -105,6 +105,6 @@ pub static BUILTINS: &[BuiltinPrototype] = &[
         feature_id: Some(feature_set::enable_program_runtime_v2_and_loader_v4::id()),
         program_id: solana_sdk::loader_v4::id(),
         name: "loader_v4",
-        entrypoint: solana_loader_v4_program::Entrypoint::vm,
+        entrypoint: miraland_loader_v4_program::Entrypoint::vm,
     },
 ];

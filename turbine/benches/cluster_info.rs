@@ -4,11 +4,11 @@ extern crate test;
 
 use {
     rand::{thread_rng, Rng},
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         contact_info::ContactInfo,
     },
-    solana_ledger::{
+    miraland_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         shred::{Shred, ShredFlags},
     },
@@ -18,8 +18,8 @@ use {
         signature::{Keypair, Signer},
         timing::{timestamp, AtomicInterval},
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_turbine::{
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_turbine::{
         broadcast_stage::{
             broadcast_metrics::TransmitShredsStats, broadcast_shreds, BroadcastStage,
         },
@@ -31,7 +31,7 @@ use {
 
 #[bench]
 fn broadcast_shreds_bench(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let leader_keypair = Arc::new(Keypair::new());
     let (quic_endpoint_sender, _quic_endpoint_receiver) =
         tokio::sync::mpsc::channel(/*capacity:*/ 128);

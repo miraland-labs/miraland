@@ -4,8 +4,8 @@ use {
     itertools::{izip, Itertools},
     rayon::{prelude::*, ThreadPool},
     sha2::{Digest, Sha512},
-    solana_metrics::inc_new_counter_debug,
-    solana_perf::{
+    miraland_metrics::inc_new_counter_debug,
+    miraland_perf::{
         cuda_runtime::PinnedVec,
         packet::{Packet, PacketBatch},
         perf_libs,
@@ -468,7 +468,7 @@ mod tests {
         assert_matches::assert_matches,
         rand::{seq::SliceRandom, Rng},
         rayon::ThreadPoolBuilder,
-        solana_entry::entry::Entry,
+        miraland_entry::entry::Entry,
         solana_sdk::{
             hash,
             hash::Hash,
@@ -480,7 +480,7 @@ mod tests {
     };
 
     fn run_test_sigverify_shred_cpu(slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut packet = Packet::default();
         let mut shred = Shred::new_from_data(
             slot,
@@ -516,7 +516,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_cpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut batches = [PacketBatch::default()];
         let mut shred = Shred::new_from_data(
             slot,
@@ -560,7 +560,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_gpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler_cache = RecyclerCache::default();
 
         let mut batches = [PacketBatch::default()];
@@ -611,7 +611,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_sign_gpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler_cache = RecyclerCache::default();
 
         let num_packets = 32;
@@ -662,7 +662,7 @@ mod tests {
     }
 
     fn run_test_sigverify_shreds_sign_cpu(thread_pool: &ThreadPool, slot: Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut batches = [PacketBatch::default()];
         let keypair = Keypair::new();

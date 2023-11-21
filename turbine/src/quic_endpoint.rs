@@ -10,10 +10,10 @@ use {
     },
     rcgen::RcgenError,
     rustls::{Certificate, PrivateKey},
-    solana_quic_client::nonblocking::quic_client::SkipServerVerification,
+    miraland_quic_client::nonblocking::quic_client::SkipServerVerification,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{pubkey::Pubkey, signature::Keypair},
-    solana_streamer::{
+    miraland_streamer::{
         quic::SkipClientVerification, tls_certificates::new_self_signed_tls_certificate,
     },
     std::{
@@ -40,8 +40,8 @@ use {
 const CLIENT_CHANNEL_BUFFER: usize = 1 << 14;
 const ROUTER_CHANNEL_BUFFER: usize = 64;
 const CONNECTION_CACHE_CAPACITY: usize = 3072;
-const ALPN_TURBINE_PROTOCOL_ID: &[u8] = b"solana-turbine";
-const CONNECT_SERVER_NAME: &str = "solana-turbine";
+const ALPN_TURBINE_PROTOCOL_ID: &[u8] = b"miraland-turbine";
+const CONNECT_SERVER_NAME: &str = "miraland-turbine";
 
 // Transport config.
 const DATAGRAM_RECEIVE_BUFFER_SIZE: usize = 256 * 1024 * 1024;
@@ -502,7 +502,7 @@ async fn make_connection(
 }
 
 fn get_remote_pubkey(connection: &Connection) -> Result<Pubkey, Error> {
-    match solana_streamer::nonblocking::quic::get_remote_pubkey(connection) {
+    match miraland_streamer::nonblocking::quic::get_remote_pubkey(connection) {
         Some(remote_pubkey) => Ok(remote_pubkey),
         None => {
             connection.close(
@@ -785,7 +785,7 @@ mod tests {
     use {
         super::*,
         itertools::{izip, multiunzip},
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_runtime::bank::Bank,
         solana_sdk::signature::Signer,
         std::{iter::repeat_with, net::Ipv4Addr, time::Duration},

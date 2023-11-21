@@ -1,7 +1,7 @@
 [package]
-name = "solana-entry"
-description = "Solana Entry"
-documentation = "https://docs.rs/solana-poh"
+name = "miraland-entry"
+description = "Miraland Entry"
+documentation = "https://docs.rs/miraland-poh"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -18,20 +18,20 @@ log = { workspace = true }
 rand = { workspace = true }
 rayon = { workspace = true }
 serde = { workspace = true }
-solana-measure = { workspace = true }
-solana-merkle-tree = { workspace = true }
-solana-metrics = { workspace = true }
-solana-perf = { workspace = true }
-solana-rayon-threadlimit = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-merkle-tree = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-rayon-threadlimit = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_entry"
+name = "miraland_entry"
 
 [[bench]]
 name = "entry_sigverify"

@@ -1,7 +1,7 @@
 [package]
-name = "solana-streamer"
-description = "Solana Streamer"
-documentation = "https://docs.rs/solana-streamer"
+name = "miraland-streamer"
+description = "Miraland Streamer"
+documentation = "https://docs.rs/miraland-streamer"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -28,20 +28,20 @@ quinn-proto = { workspace = true }
 rand = { workspace = true }
 rcgen = { workspace = true }
 rustls = { workspace = true, features = ["dangerous_configuration"] }
-solana-metrics = { workspace = true }
-solana-perf = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-sdk = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 x509-parser = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_streamer"
+name = "miraland_streamer"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

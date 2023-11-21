@@ -7,12 +7,12 @@
 
 pub use {
     crate::error::BanksClientError,
-    solana_banks_interface::{BanksClient as TarpcClient, TransactionStatus},
+    miraland_banks_interface::{BanksClient as TarpcClient, TransactionStatus},
 };
 use {
     borsh::BorshDeserialize,
     futures::{future::join_all, Future, FutureExt, TryFutureExt},
-    solana_banks_interface::{
+    miraland_banks_interface::{
         BanksRequest, BanksResponse, BanksTransactionResultWithMetadata,
         BanksTransactionResultWithSimulation,
     },
@@ -552,7 +552,7 @@ pub async fn start_tcp_client<T: ToSocketAddrs>(addr: T) -> Result<BanksClient, 
 mod tests {
     use {
         super::*,
-        solana_banks_server::banks_server::start_local_server,
+        miraland_banks_server::banks_server::start_local_server,
         solana_runtime::{
             bank::Bank, bank_forks::BankForks, commitment::BlockCommitmentCache,
             genesis_utils::create_genesis_config,

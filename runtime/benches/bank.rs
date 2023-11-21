@@ -116,7 +116,7 @@ fn do_bench_transactions(
     bench_work: &dyn Fn(&Bank, &BankClient, &[Transaction]),
     create_transactions: &dyn Fn(&BankClient, &Keypair) -> Vec<Transaction>,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let ns_per_s = 1_000_000_000;
     let (mut genesis_config, mint_keypair) = create_genesis_config(100_000_000_000_000);
     genesis_config.ticks_per_slot = 100;
@@ -132,7 +132,7 @@ fn do_bench_transactions(
 
     let mut bank = Bank::new_from_parent(Arc::new(bank), &Pubkey::default(), 1);
     bank.add_mockup_builtin(Pubkey::from(BUILTIN_PROGRAM_ID), MockBuiltin::vm);
-    bank.add_builtin_account("solana_noop_program", &Pubkey::from(NOOP_PROGRAM_ID), false);
+    bank.add_builtin_account("miraland_noop_program", &Pubkey::from(NOOP_PROGRAM_ID), false);
     let bank = Arc::new(bank);
     let bank_client = BankClient::new_shared(bank.clone());
     let transactions = create_transactions(&bank_client, &mint_keypair);

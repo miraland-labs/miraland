@@ -1,5 +1,5 @@
 [package]
-name = "solana-zk-token-proof-program-tests"
+name = "miraland-zk-token-proof-program-tests"
 publish = false
 version = { workspace = true }
 authors = { workspace = true }
@@ -10,7 +10,7 @@ edition = { workspace = true }
 [dev-dependencies]
 bytemuck = { workspace = true, features = ["derive"] }
 curve25519-dalek = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-program-test = { workspace = true }
-solana-sdk = { workspace = true }
-solana-zk-token-sdk = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-program-test = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-zk-token-sdk = { workspace = true }

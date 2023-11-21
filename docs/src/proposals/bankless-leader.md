@@ -56,4 +56,4 @@ Clients that transmit a large number of transactions per second should use a ded
 
 Once an account fee is used as Credit-Debit, it will fail the balance check until the balance cache is reset.
 
-### Check out the [SIMD here to contribute](https://github.com/solana-foundation/solana-improvement-documents/pull/5)
+### Check out the [SIMD here to contribute](https://github.com/miraland-foundation/miraland-improvement-documents/pull/5)

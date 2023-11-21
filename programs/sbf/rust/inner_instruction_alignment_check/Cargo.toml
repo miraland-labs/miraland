@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-inner_instruction_alignment_check"
-documentation = "https://docs.rs/solana-sbf-rust-inner_instruction_alignment_check"
+name = "miraland-sbf-rust-inner_instruction_alignment_check"
+documentation = "https://docs.rs/miraland-sbf-rust-inner_instruction_alignment_check"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -10,7 +10,7 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["cdylib"]

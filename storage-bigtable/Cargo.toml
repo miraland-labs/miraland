@@ -1,7 +1,7 @@
 [package]
-name = "solana-storage-bigtable"
-description = "Solana Storage BigTable"
-documentation = "https://docs.rs/solana-storage-bigtable"
+name = "miraland-storage-bigtable"
+description = "Miraland Storage BigTable"
+documentation = "https://docs.rs/miraland-storage-bigtable"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -27,10 +27,10 @@ prost-types = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 smpl_jwt = { workspace = true }
-solana-metrics = { workspace = true }
-solana-sdk = { workspace = true }
-solana-storage-proto = { workspace = true }
-solana-transaction-status = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-storage-proto = { workspace = true }
+miraland-transaction-status = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
 tonic = { workspace = true, features = ["tls", "transport"] }

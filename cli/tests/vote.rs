@@ -1,21 +1,21 @@
 #![allow(clippy::arithmetic_side_effects)]
 use {
-    solana_cli::{
+    miraland_cli::{
         check_balance,
         cli::{process_command, request_and_confirm_airdrop, CliCommand, CliConfig},
         spend_utils::SpendAmount,
     },
-    solana_cli_output::{parse_sign_only_reply_string, OutputFormat},
-    solana_faucet::faucet::run_local_faucet,
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_nonce_utils::blockhash_query::{self, BlockhashQuery},
+    miraland_cli_output::{parse_sign_only_reply_string, OutputFormat},
+    miraland_faucet::faucet::run_local_faucet,
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_nonce_utils::blockhash_query::{self, BlockhashQuery},
     solana_sdk::{
         account_utils::StateMut,
         commitment_config::CommitmentConfig,
         signature::{Keypair, NullSigner, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_test_validator::TestValidator,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::TestValidator,
     solana_vote_program::vote_state::{VoteAuthorize, VoteState, VoteStateVersions},
 };
 
@@ -71,7 +71,7 @@ fn test_vote_authorize_and_withdraw() {
         .max(1);
     check_balance!(expected_balance, &rpc_client, &vote_account_pubkey);
 
-    // Transfer in some more SOL
+    // Transfer in some more MLN
     config.signers = vec![&default_signer];
     config.command = CliCommand::Transfer {
         amount: SpendAmount::Some(10_000),
@@ -298,7 +298,7 @@ fn test_offline_vote_authorize_and_withdraw() {
         .max(1);
     check_balance!(expected_balance, &rpc_client, &vote_account_pubkey);
 
-    // Transfer in some more SOL
+    // Transfer in some more MLN
     config_payer.signers = vec![&default_signer];
     config_payer.command = CliCommand::Transfer {
         amount: SpendAmount::Some(10_000),

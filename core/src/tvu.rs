@@ -24,19 +24,19 @@ use {
     },
     bytes::Bytes,
     crossbeam_channel::{unbounded, Receiver, Sender},
-    solana_client::connection_cache::ConnectionCache,
-    solana_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierArc,
-    solana_gossip::{
+    miraland_client::connection_cache::ConnectionCache,
+    miraland_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierArc,
+    miraland_gossip::{
         cluster_info::ClusterInfo, duplicate_shred_handler::DuplicateShredHandler,
         duplicate_shred_listener::DuplicateShredListener,
     },
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::Blockstore, blockstore_cleanup_service::BlockstoreCleanupService,
         blockstore_processor::TransactionStatusSender, entry_notifier_service::EntryNotifierSender,
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_poh::poh_recorder::PohRecorder,
-    solana_rpc::{
+    miraland_poh::poh_recorder::PohRecorder,
+    miraland_rpc::{
         max_slots::MaxSlots, optimistically_confirmed_bank_tracker::BankNotificationSenderConfig,
         rpc_subscriptions::RpcSubscriptions,
     },
@@ -45,7 +45,7 @@ use {
         commitment::BlockCommitmentCache, prioritization_fee_cache::PrioritizationFeeCache,
     },
     solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Keypair},
-    solana_turbine::retransmit_stage::RetransmitStage,
+    miraland_turbine::retransmit_stage::RetransmitStage,
     solana_vote::vote_sender_types::ReplayVoteSender,
     std::{
         collections::HashSet,
@@ -168,7 +168,7 @@ impl Tvu {
 
         let (verified_sender, verified_receiver) = unbounded();
         let (retransmit_sender, retransmit_receiver) = unbounded();
-        let shred_sigverify = solana_turbine::sigverify_shreds::spawn_shred_sigverify(
+        let shred_sigverify = miraland_turbine::sigverify_shreds::spawn_shred_sigverify(
             cluster_info.clone(),
             bank_forks.clone(),
             leader_schedule_cache.clone(),
@@ -373,18 +373,18 @@ pub mod tests {
         super::*,
         crate::consensus::tower_storage::FileTowerStorage,
         serial_test::serial,
-        solana_gossip::cluster_info::{ClusterInfo, Node},
-        solana_ledger::{
+        miraland_gossip::cluster_info::{ClusterInfo, Node},
+        miraland_ledger::{
             blockstore::BlockstoreSignals,
             blockstore_options::BlockstoreOptions,
             create_new_tmp_ledger,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
         },
-        solana_poh::poh_recorder::create_test_recorder,
-        solana_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
+        miraland_poh::poh_recorder::create_test_recorder,
+        miraland_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         solana_runtime::bank::Bank,
         solana_sdk::signature::{Keypair, Signer},
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::sync::atomic::{AtomicU64, Ordering},
     };
 
@@ -392,7 +392,7 @@ pub mod tests {
     #[test]
     #[serial]
     fn test_tvu_exit() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let leader = Node::new_localhost();
         let target1_keypair = Keypair::new();
         let target1 = Node::new_localhost_with_pubkey(&target1_keypair.pubkey());

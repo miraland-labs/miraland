@@ -1,7 +1,7 @@
 [package]
-name = "solana-banks-client"
-description = "Solana banks client"
-documentation = "https://docs.rs/solana-banks-client"
+name = "miraland-banks-client"
+description = "Miraland banks client"
+documentation = "https://docs.rs/miraland-banks-client"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -12,21 +12,21 @@ edition = { workspace = true }
 [dependencies]
 borsh = { workspace = true }
 futures = { workspace = true }
-solana-banks-interface = { workspace = true }
-solana-program = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-banks-interface = { workspace = true }
+miraland-program = { workspace = true }
+miraland-sdk = { workspace = true }
 tarpc = { workspace = true, features = ["full"] }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 tokio-serde = { workspace = true, features = ["bincode"] }
 
 [dev-dependencies]
-solana-banks-server = { workspace = true }
-solana-runtime = { workspace = true }
+miraland-banks-server = { workspace = true }
+miraland-runtime = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_banks_client"
+name = "miraland_banks_client"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

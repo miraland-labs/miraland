@@ -1,7 +1,7 @@
 [package]
-name = "solana-merkle-tree"
-description = "Solana Merkle Tree"
-documentation = "https://docs.rs/solana-merkle-tree"
+name = "miraland-merkle-tree"
+description = "Miraland Merkle Tree"
+documentation = "https://docs.rs/miraland-merkle-tree"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -11,14 +11,14 @@ edition = { workspace = true }
 
 [dependencies]
 fast-math = { workspace = true }
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [dev-dependencies]
 hex = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_merkle_tree"
+name = "miraland_merkle_tree"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

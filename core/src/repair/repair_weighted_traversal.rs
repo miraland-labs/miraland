@@ -3,7 +3,7 @@ use {
         consensus::{heaviest_subtree_fork_choice::HeaviestSubtreeForkChoice, tree_diff::TreeDiff},
         repair::{repair_service::RepairService, serve_repair::ShredRepairType},
     },
-    solana_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
+    miraland_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
     solana_sdk::{clock::Slot, hash::Hash},
     std::collections::{HashMap, HashSet},
 };
@@ -137,7 +137,7 @@ pub mod test {
     use {
         super::*,
         crate::repair::repair_service::sleep_shred_deferment_period,
-        solana_ledger::{
+        miraland_ledger::{
             get_tmp_ledger_path,
             shred::{Shred, ShredFlags},
         },

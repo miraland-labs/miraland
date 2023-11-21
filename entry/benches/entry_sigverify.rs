@@ -1,8 +1,8 @@
 #![feature(test)]
 extern crate test;
 use {
-    solana_entry::entry::{self, VerifyRecyclers},
-    solana_perf::test_tx::test_tx,
+    miraland_entry::entry::{self, VerifyRecyclers},
+    miraland_perf::test_tx::test_tx,
     solana_sdk::{
         hash::Hash,
         transaction::{

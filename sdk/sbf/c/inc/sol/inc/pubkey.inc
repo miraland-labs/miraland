@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana Public key
+ * @brief Miraland Public key
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

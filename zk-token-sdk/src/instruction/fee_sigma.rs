@@ -1,6 +1,6 @@
 //! The fee sigma proof instruction.
 //!
-//! A fee sigma proof certifies that a Pedersen commitment to a transfer fee for SPL Token 2022 is
+//! A fee sigma proof certifies that a Pedersen commitment to a transfer fee for Solarti Token 2022 is
 //! well-formed.
 //!
 //! A formal documentation of how transfer fees and fee sigma proof are computed can be found in

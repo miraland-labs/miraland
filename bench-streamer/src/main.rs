@@ -3,7 +3,7 @@
 use {
     clap::{crate_description, crate_name, Arg, Command},
     crossbeam_channel::unbounded,
-    solana_streamer::{
+    miraland_streamer::{
         packet::{Packet, PacketBatch, PacketBatchRecycler, PACKET_DATA_SIZE},
         streamer::{receiver, PacketBatchReceiver, StreamerReceiveStats},
     },
@@ -62,7 +62,7 @@ fn main() -> Result<()> {
 
     let matches = Command::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .arg(
             Arg::new("num-recv-sockets")
                 .long("num-recv-sockets")
@@ -94,7 +94,7 @@ fn main() -> Result<()> {
     let mut read_channels = Vec::new();
     let mut read_threads = Vec::new();
     let recycler = PacketBatchRecycler::default();
-    let (_port, read_sockets) = solana_net_utils::multi_bind_in_range(
+    let (_port, read_sockets) = miraland_net_utils::multi_bind_in_range(
         ip_addr,
         (port, port + num_sockets as u16),
         num_sockets,

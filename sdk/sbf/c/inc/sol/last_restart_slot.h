@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana Last Restart Slot system call
+ * @brief Miraland Last Restart Slot system call
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,7 +12,7 @@ extern "C" {
 /**
  * Get Last Restart Slot
  */
-/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/sol/inc/last_restart_slot.inc AND RUN `cargo run --bin gen-headers` */
+/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/mln/inc/last_restart_slot.inc AND RUN `cargo run --bin gen-headers` */
 #ifndef SOL_SBFV2
 u64 sol_get_last_restart_slot(uint8_t *result);
 #else

@@ -12,4 +12,4 @@ pub mod tls_certificates;
 extern crate log;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;

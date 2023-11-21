@@ -9,7 +9,7 @@ use {
         sanitize::{Sanitize, SanitizeError},
         serde_varint, short_vec,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     static_assertions::const_assert_eq,
     std::{
         collections::HashSet,
@@ -19,7 +19,7 @@ use {
     thiserror::Error,
 };
 pub use {
-    crate::legacy_contact_info::LegacyContactInfo, solana_client::connection_cache::Protocol,
+    crate::legacy_contact_info::LegacyContactInfo, miraland_client::connection_cache::Protocol,
 };
 
 pub const SOCKET_ADDR_UNSPECIFIED: SocketAddr =
@@ -75,7 +75,7 @@ pub struct ContactInfo {
     // Identifies duplicate running instances.
     outset: u64,
     shred_version: u16,
-    version: solana_version::Version,
+    version: miraland_version::Version,
     // All IP addresses are unique and referenced at least once in sockets.
     #[serde(with = "short_vec")]
     addrs: Vec<IpAddr>,
@@ -110,7 +110,7 @@ struct ContactInfoLite {
     wallclock: u64,
     outset: u64,
     shred_version: u16,
-    version: solana_version::Version,
+    version: miraland_version::Version,
     #[serde(with = "short_vec")]
     addrs: Vec<IpAddr>,
     #[serde(with = "short_vec")]
@@ -187,7 +187,7 @@ impl ContactInfo {
                 u64::try_from(elapsed.as_micros()).unwrap()
             },
             shred_version,
-            version: solana_version::Version::default(),
+            version: miraland_version::Version::default(),
             addrs: Vec::<IpAddr>::default(),
             sockets: Vec::<SocketEntry>::default(),
             extensions: Vec::<Extension>::default(),
@@ -557,14 +557,14 @@ pub(crate) fn get_quic_socket(socket: &SocketAddr) -> Result<SocketAddr, Error> 
 }
 
 #[cfg(all(test, RUSTC_WITH_SPECIALIZATION))]
-impl solana_frozen_abi::abi_example::AbiExample for ContactInfo {
+impl miraland_frozen_abi::abi_example::AbiExample for ContactInfo {
     fn example() -> Self {
         Self {
             pubkey: Pubkey::example(),
             wallclock: u64::example(),
             outset: u64::example(),
             shred_version: u16::example(),
-            version: solana_version::Version::example(),
+            version: miraland_version::Version::example(),
             addrs: Vec::<IpAddr>::example(),
             sockets: Vec::<SocketEntry>::example(),
             extensions: vec![],
@@ -709,7 +709,7 @@ mod tests {
             wallclock: rng.gen(),
             outset: rng.gen(),
             shred_version: rng.gen(),
-            version: solana_version::Version::default(),
+            version: miraland_version::Version::default(),
             addrs: Vec::default(),
             sockets: Vec::default(),
             extensions: Vec::default(),

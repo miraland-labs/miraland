@@ -1,7 +1,7 @@
-//! The original and current Solana message format.
+//! The original and current Miraland message format.
 //!
 //! This crate defines two versions of `Message` in their own modules:
-//! [`legacy`] and [`v0`]. `legacy` is the current version as of Solana 1.10.0.
+//! [`legacy`] and [`v0`]. `legacy` is the current version as of Miraland 1.10.0.
 //! `v0` is a [future message format] that encodes more account keys into a
 //! transaction than the legacy format.
 //!
@@ -87,7 +87,7 @@ fn compile_instructions(ixs: &[Instruction], keys: &[Pubkey]) -> Vec<CompiledIns
     ixs.iter().map(|ix| compile_instruction(ix, keys)).collect()
 }
 
-/// A Solana transaction message (legacy).
+/// A Miraland transaction message (legacy).
 ///
 /// See the [`message`] module documentation for further description.
 ///
@@ -169,18 +169,18 @@ impl Message {
     ///
     /// # Examples
     ///
-    /// This example uses the [`solana_sdk`], [`solana_rpc_client`] and [`anyhow`] crates.
+    /// This example uses the [`solana_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
     ///
-    /// [`solana_sdk`]: https://docs.rs/solana-sdk
-    /// [`solana_rpc_client`]: https://docs.rs/solana-rpc-client
+    /// [`solana_sdk`]: https://docs.rs/miraland-sdk
+    /// [`miraland_rpc_client`]: https://docs.rs/miraland-rpc-client
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
     /// # use solana_program::example_mocks::solana_sdk;
-    /// # use solana_program::example_mocks::solana_rpc_client;
+    /// # use solana_program::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
-    /// use solana_rpc_client::rpc_client::RpcClient;
+    /// use miraland_rpc_client::rpc_client::RpcClient;
     /// use solana_sdk::{
     ///     instruction::Instruction,
     ///     message::Message,
@@ -240,18 +240,18 @@ impl Message {
     ///
     /// # Examples
     ///
-    /// This example uses the [`solana_sdk`], [`solana_rpc_client`] and [`anyhow`] crates.
+    /// This example uses the [`solana_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
     ///
-    /// [`solana_sdk`]: https://docs.rs/solana-sdk
-    /// [`solana_rpc_client`]: https://docs.rs/solana-rpc-client
+    /// [`solana_sdk`]: https://docs.rs/miraland-sdk
+    /// [`miraland_rpc_client`]: https://docs.rs/miraland-rpc-client
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
     /// # use solana_program::example_mocks::solana_sdk;
-    /// # use solana_program::example_mocks::solana_rpc_client;
+    /// # use solana_program::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
-    /// use solana_rpc_client::rpc_client::RpcClient;
+    /// use miraland_rpc_client::rpc_client::RpcClient;
     /// use solana_sdk::{
     ///     instruction::Instruction,
     ///     message::Message,
@@ -336,18 +336,18 @@ impl Message {
     ///
     /// # Examples
     ///
-    /// This example uses the [`solana_sdk`], [`solana_rpc_client`] and [`anyhow`] crates.
+    /// This example uses the [`solana_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
     ///
-    /// [`solana_sdk`]: https://docs.rs/solana-sdk
-    /// [`solana_rpc_client`]: https://docs.rs/solana-client
+    /// [`solana_sdk`]: https://docs.rs/miraland-sdk
+    /// [`miraland_rpc_client`]: https://docs.rs/miraland-client
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
     /// # use solana_program::example_mocks::solana_sdk;
-    /// # use solana_program::example_mocks::solana_rpc_client;
+    /// # use solana_program::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
-    /// use solana_rpc_client::rpc_client::RpcClient;
+    /// use miraland_rpc_client::rpc_client::RpcClient;
     /// use solana_sdk::{
     ///     hash::Hash,
     ///     instruction::Instruction,

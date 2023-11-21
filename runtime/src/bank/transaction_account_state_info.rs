@@ -1,6 +1,6 @@
 use {
     crate::bank::Bank,
-    solana_accounts_db::account_rent_state::{check_rent_state, RentState},
+    miraland_accounts_db::account_rent_state::{check_rent_state, RentState},
     solana_sdk::{
         account::ReadableAccount,
         message::SanitizedMessage,

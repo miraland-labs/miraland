@@ -11,7 +11,7 @@ mod serde_snapshot_tests {
         bincode::{serialize_into, Error},
         log::info,
         rand::{thread_rng, Rng},
-        solana_accounts_db::{
+        miraland_accounts_db::{
             account_storage::{AccountStorageMap, AccountStorageReference},
             accounts::Accounts,
             accounts_db::{
@@ -77,7 +77,7 @@ mod serde_snapshot_tests {
             None,
             AccountShrinkThreshold::default(),
             false,
-            Some(solana_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
+            Some(miraland_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
             None,
             Arc::default(),
             None,
@@ -221,7 +221,7 @@ mod serde_snapshot_tests {
     }
 
     fn test_accounts_serialize_style(serde_style: SerdeStyle) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (_accounts_dir, paths) = get_temp_accounts_paths(4).unwrap();
         let accounts = Accounts::new_with_config_for_tests(
             paths,
@@ -283,7 +283,7 @@ mod serde_snapshot_tests {
 
     #[test]
     fn test_remove_unrooted_slot_snapshot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let unrooted_slot = 9;
         let unrooted_bank_id = 9;
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
@@ -319,7 +319,7 @@ mod serde_snapshot_tests {
     #[test]
     fn test_accounts_db_serialize1() {
         for pass in 0..2 {
-            solana_logger::setup();
+            miraland_logger::setup();
             let accounts = AccountsDb::new_single_for_tests();
             let mut pubkeys: Vec<Pubkey> = vec![];
 
@@ -432,7 +432,7 @@ mod serde_snapshot_tests {
 
     #[test]
     fn test_accounts_db_serialize_zero_and_free() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let some_lamport = 223;
         let zero_lamport = 0;
@@ -560,7 +560,7 @@ mod serde_snapshot_tests {
 
     #[test]
     fn test_accounts_purge_chained_purge_before_snapshot_restore() {
-        solana_logger::setup();
+        miraland_logger::setup();
         with_chained_zero_lamport_accounts(|accounts, current_slot| {
             accounts.clean_accounts_for_tests();
             reconstruct_accounts_db_via_serialization(&accounts, current_slot)
@@ -569,7 +569,7 @@ mod serde_snapshot_tests {
 
     #[test]
     fn test_accounts_purge_chained_purge_after_snapshot_restore() {
-        solana_logger::setup();
+        miraland_logger::setup();
         with_chained_zero_lamport_accounts(|accounts, current_slot| {
             let accounts = reconstruct_accounts_db_via_serialization(&accounts, current_slot);
             accounts.print_accounts_stats("after_reconstruct");
@@ -580,7 +580,7 @@ mod serde_snapshot_tests {
 
     #[test]
     fn test_accounts_purge_long_chained_after_snapshot_restore() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let old_lamport = 223;
         let zero_lamport = 0;
         let no_data = 0;
@@ -648,7 +648,7 @@ mod serde_snapshot_tests {
 
     #[test]
     fn test_accounts_clean_after_snapshot_restore_then_old_revives() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let old_lamport = 223;
         let zero_lamport = 0;
         let no_data = 0;
@@ -782,7 +782,7 @@ mod serde_snapshot_tests {
 
     #[test]
     fn test_shrink_stale_slots_processed() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         for startup in &[false, true] {
             let accounts = AccountsDb::new_single_for_tests();

@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana poseidon system call
+ * @brief Miraland poseidon system call
 **/
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

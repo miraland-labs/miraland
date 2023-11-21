@@ -1,10 +1,10 @@
 #pragma once
 /**
- * @brief Solana string and memory system calls and utilities
+ * @brief Miraland string and memory system calls and utilities
  */
 
-#include <sol/constants.h>
-#include <sol/types.h>
+#include <mln/constants.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

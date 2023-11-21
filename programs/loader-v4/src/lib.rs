@@ -1,5 +1,5 @@
 use {
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_program_runtime::{
         compute_budget::ComputeBudget,
         ic_logger_msg,

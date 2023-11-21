@@ -184,12 +184,12 @@ mod tests {
         },
         crossbeam_channel::{unbounded, Receiver, Sender},
         itertools::Itertools,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::Blockstore, genesis_utils::GenesisConfigInfo,
             get_tmp_ledger_path_auto_delete, leader_schedule_cache::LeaderScheduleCache,
         },
-        solana_perf::packet::{to_packet_batches, PacketBatch, NUM_PACKETS},
-        solana_poh::poh_recorder::{PohRecorder, Record, WorkingBankEntry},
+        miraland_perf::packet::{to_packet_batches, PacketBatch, NUM_PACKETS},
+        miraland_poh::poh_recorder::{PohRecorder, Record, WorkingBankEntry},
         solana_runtime::{bank::Bank, bank_forks::BankForks},
         solana_sdk::{
             compute_budget::ComputeBudgetInstruction, hash::Hash, message::Message,

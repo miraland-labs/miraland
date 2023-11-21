@@ -2,7 +2,7 @@ use {
     log::*,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::{AccountsDb, LoadHint},
         ancestors::Ancestors,
     },
@@ -25,7 +25,7 @@ use {
 
 #[test]
 fn test_shrink_and_clean() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     // repeat the whole test scenario
     for _ in 0..5 {
@@ -80,7 +80,7 @@ fn test_shrink_and_clean() {
 
 #[test]
 fn test_bad_bank_hash() {
-    solana_logger::setup();
+    miraland_logger::setup();
     let db = AccountsDb::new_for_tests(Vec::new(), &ClusterType::Development);
 
     let some_slot: Slot = 0;

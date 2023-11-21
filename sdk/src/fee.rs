@@ -1,6 +1,6 @@
 //! Fee structures.
 
-use crate::native_token::sol_to_lamports;
+use crate::native_token::mln_to_lamports;
 #[cfg(not(target_os = "solana"))]
 use solana_program::message::SanitizedMessage;
 
@@ -41,14 +41,14 @@ impl FeeStructure {
     ) -> Self {
         let compute_fee_bins = compute_fee_bins
             .iter()
-            .map(|(limit, sol)| FeeBin {
+            .map(|(limit, mln)| FeeBin {
                 limit: *limit,
-                fee: sol_to_lamports(*sol),
+                fee: mln_to_lamports(*mln),
             })
             .collect::<Vec<_>>();
         FeeStructure {
-            lamports_per_signature: sol_to_lamports(sol_per_signature),
-            lamports_per_write_lock: sol_to_lamports(sol_per_write_lock),
+            lamports_per_signature: mln_to_lamports(sol_per_signature),
+            lamports_per_write_lock: mln_to_lamports(sol_per_write_lock),
             compute_fee_bins,
         }
     }
@@ -144,7 +144,7 @@ impl Default for FeeStructure {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl ::solana_frozen_abi::abi_example::AbiExample for FeeStructure {
+impl ::miraland_frozen_abi::abi_example::AbiExample for FeeStructure {
     fn example() -> Self {
         FeeStructure::default()
     }

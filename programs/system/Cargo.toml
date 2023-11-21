@@ -1,7 +1,7 @@
 [package]
-name = "solana-system-program"
-description = "Solana System program"
-documentation = "https://docs.rs/solana-system-program"
+name = "miraland-system-program"
+description = "Miraland System program"
+documentation = "https://docs.rs/miraland-system-program"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -14,12 +14,12 @@ bincode = { workspace = true }
 log = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [lib]
 crate-type = ["lib"]

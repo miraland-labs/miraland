@@ -11,8 +11,8 @@ use {
         recycler::Recycler,
     },
     rayon::{prelude::*, ThreadPool},
-    solana_metrics::inc_new_counter_debug,
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_metrics::inc_new_counter_debug,
+    miraland_rayon_threadlimit::get_thread_count,
     solana_sdk::{
         hash::Hash,
         message::{MESSAGE_HEADER_LENGTH, MESSAGE_VERSION_PREFIX},
@@ -36,7 +36,7 @@ pub const VERIFY_PACKET_CHUNK_SIZE: usize = 128;
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(get_thread_count())
-        .thread_name(|i| format!("solSigVerify{i:02}"))
+        .thread_name(|i| format!("mlnSigVerify{i:02}"))
         .build()
         .unwrap();
 }
@@ -843,7 +843,7 @@ mod tests {
 
     #[test]
     fn test_pubkey_too_small() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut tx = test_tx();
         let sig = tx.signatures[0];
         const NUM_SIG: usize = 18;
@@ -867,7 +867,7 @@ mod tests {
     fn test_pubkey_len() {
         // See that the verify cannot walk off the end of the packet
         // trying to index into the account_keys to access pubkey.
-        solana_logger::setup();
+        miraland_logger::setup();
 
         const NUM_SIG: usize = 17;
         let keypair1 = Keypair::new();
@@ -1180,7 +1180,7 @@ mod tests {
 
     #[test]
     fn test_verify_multisig() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let tx = test_multisig_tx();
         let mut packet = Packet::from_data(None, tx).unwrap();
@@ -1215,7 +1215,7 @@ mod tests {
 
     #[test]
     fn test_verify_fuzz() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let tx = test_multisig_tx();
         let packet = Packet::from_data(None, tx).unwrap();
@@ -1266,7 +1266,7 @@ mod tests {
 
     #[test]
     fn test_get_checked_scalar() {
-        solana_logger::setup();
+        miraland_logger::setup();
         if perf_libs::api().is_none() {
             return;
         }
@@ -1301,7 +1301,7 @@ mod tests {
 
     #[test]
     fn test_ge_small_order() {
-        solana_logger::setup();
+        miraland_logger::setup();
         if perf_libs::api().is_none() {
             return;
         }
@@ -1343,7 +1343,7 @@ mod tests {
 
     #[test]
     fn test_is_simple_vote_transaction() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut rng = rand::thread_rng();
 
         // tansfer tx is not
@@ -1425,7 +1425,7 @@ mod tests {
 
     #[test]
     fn test_is_simple_vote_transaction_with_offsets() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut rng = rand::thread_rng();
 
         // batch of legacy messages

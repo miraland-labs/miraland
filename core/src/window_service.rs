@@ -18,16 +18,16 @@ use {
     },
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
     rayon::{prelude::*, ThreadPool},
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_ledger::{
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_ledger::{
         blockstore::{Blockstore, BlockstoreInsertionMetrics, PossibleDuplicateShred},
         leader_schedule_cache::LeaderScheduleCache,
         shred::{self, Nonce, ReedSolomonCache, Shred},
     },
-    solana_measure::measure::Measure,
-    solana_metrics::inc_new_counter_error,
-    solana_perf::packet::{Packet, PacketBatch},
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_measure::measure::Measure,
+    miraland_metrics::inc_new_counter_error,
+    miraland_perf::packet::{Packet, PacketBatch},
+    miraland_rayon_threadlimit::get_thread_count,
     solana_sdk::clock::Slot,
     std::{
         cmp::Reverse,
@@ -394,10 +394,10 @@ impl WindowService {
         duplicate_slots_sender: DuplicateSlotSender,
     ) -> JoinHandle<()> {
         let handle_error = || {
-            inc_new_counter_error!("solana-check-duplicate-error", 1, 1);
+            inc_new_counter_error!("miraland-check-duplicate-error", 1, 1);
         };
         Builder::new()
-            .name("solWinCheckDup".to_string())
+            .name("mlnWinCheckDup".to_string())
             .spawn(move || {
                 while !exit.load(Ordering::Relaxed) {
                     if let Err(e) = run_check_duplicate(
@@ -426,16 +426,16 @@ impl WindowService {
         outstanding_requests: Arc<RwLock<OutstandingShredRepairs>>,
     ) -> JoinHandle<()> {
         let handle_error = || {
-            inc_new_counter_error!("solana-window-insert-error", 1, 1);
+            inc_new_counter_error!("miraland-window-insert-error", 1, 1);
         };
         let thread_pool = rayon::ThreadPoolBuilder::new()
             .num_threads(get_thread_count().min(8))
-            .thread_name(|i| format!("solWinInsert{i:02}"))
+            .thread_name(|i| format!("mlnWinInsert{i:02}"))
             .build()
             .unwrap();
         let reed_solomon_cache = ReedSolomonCache::default();
         Builder::new()
-            .name("solWinInsert".to_string())
+            .name("mlnWinInsert".to_string())
             .spawn(move || {
                 let handle_duplicate = |possible_duplicate_shred| {
                     let _ = check_duplicate_sender.send(possible_duplicate_shred);
@@ -503,9 +503,9 @@ mod test {
     use {
         super::*,
         crate::repair::serve_repair::ShredRepairType,
-        solana_entry::entry::{create_ticks, Entry},
-        solana_gossip::contact_info::ContactInfo,
-        solana_ledger::{
+        miraland_entry::entry::{create_ticks, Entry},
+        miraland_gossip::contact_info::ContactInfo,
+        miraland_ledger::{
             blockstore::{make_many_slot_entries, Blockstore},
             get_tmp_ledger_path_auto_delete,
             shred::{ProcessShredsStats, Shredder},
@@ -515,7 +515,7 @@ mod test {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
     };
 
     fn local_entries_to_shred(
@@ -672,7 +672,7 @@ mod test {
 
     #[test]
     fn test_prune_shreds() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let shred = Shred::new_from_parity_shard(
             5,   // slot
             5,   // index

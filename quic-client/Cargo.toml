@@ -1,7 +1,7 @@
 [package]
-name = "solana-quic-client"
-description = "Solana Quic Client"
-documentation = "https://docs.rs/solana-quic-client"
+name = "miraland-quic-client"
+description = "Miraland Quic Client"
+documentation = "https://docs.rs/miraland-quic-client"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -20,17 +20,17 @@ quinn = { workspace = true }
 quinn-proto = { workspace = true }
 rcgen = { workspace = true }
 rustls = { workspace = true, features = ["dangerous_configuration"] }
-solana-connection-cache = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-net-utils = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
+miraland-connection-cache = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-net-utils = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [dev-dependencies]
 crossbeam-channel = { workspace = true }
-solana-logger = { workspace = true }
-solana-perf = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-perf = { workspace = true }

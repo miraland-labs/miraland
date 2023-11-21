@@ -20,9 +20,9 @@ use {
     bincode::serialize,
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
     dashmap::{mapref::entry::Entry::Occupied, DashMap},
-    solana_gossip::{cluster_info::ClusterInfo, contact_info::Protocol, ping_pong::Pong},
-    solana_ledger::blockstore::Blockstore,
-    solana_perf::{
+    miraland_gossip::{cluster_info::ClusterInfo, contact_info::Protocol, ping_pong::Pong},
+    miraland_ledger::blockstore::Blockstore,
+    miraland_perf::{
         packet::{deserialize_from_with_limit, Packet, PacketBatch},
         recycler::Recycler,
     },
@@ -35,7 +35,7 @@ use {
         signer::keypair::Keypair,
         timing::timestamp,
     },
-    solana_streamer::streamer::{self, PacketBatchReceiver, StreamerReceiveStats},
+    miraland_streamer::streamer::{self, PacketBatchReceiver, StreamerReceiveStats},
     std::{
         collections::HashSet,
         io::{Cursor, Read},
@@ -243,7 +243,7 @@ impl AncestorHashesService {
         ancestor_socket: Arc<UdpSocket>,
     ) -> JoinHandle<()> {
         Builder::new()
-            .name("solAncHashesSvc".to_string())
+            .name("mlnAncHashesSvc".to_string())
             .spawn(move || {
                 let mut last_stats_report = Instant::now();
                 let mut stats = AncestorHashesResponsesStats::default();
@@ -612,7 +612,7 @@ impl AncestorHashesService {
         // to MAX_ANCESTOR_HASHES_SLOT_REQUESTS_PER_SECOND/second
         let mut request_throttle = vec![];
         Builder::new()
-            .name("solManAncReqs".to_string())
+            .name("mlnManAncReqs".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     return;
@@ -914,11 +914,11 @@ mod test {
             },
             vote_simulator::VoteSimulator,
         },
-        solana_gossip::{
+        miraland_gossip::{
             cluster_info::{ClusterInfo, Node},
             contact_info::{ContactInfo, Protocol},
         },
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::make_many_slot_entries, get_tmp_ledger_path,
             get_tmp_ledger_path_auto_delete, shred::Nonce,
         },
@@ -927,7 +927,7 @@ mod test {
             hash::Hash,
             signature::{Keypair, Signer},
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::collections::HashMap,
         trees::tr,
     };

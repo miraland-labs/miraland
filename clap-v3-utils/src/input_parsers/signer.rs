@@ -4,7 +4,7 @@ use {
         keypair::{pubkey_from_path, resolve_signer_from_path, signer_from_path},
     },
     clap::ArgMatches,
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{
         pubkey::Pubkey,
         signature::{Keypair, Signature, Signer},

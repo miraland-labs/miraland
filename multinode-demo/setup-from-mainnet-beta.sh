@@ -6,16 +6,16 @@ source "$here"/common.sh
 
 set -e
 
-rm -rf "$SOLANA_CONFIG_DIR"/latest-mainnet-beta-snapshot
-mkdir -p "$SOLANA_CONFIG_DIR"/latest-mainnet-beta-snapshot
+rm -rf "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot
+mkdir -p "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot
 (
-  cd "$SOLANA_CONFIG_DIR"/latest-mainnet-beta-snapshot || exit 1
+  cd "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot || exit 1
   set -x
-  wget http://api.mainnet-beta.solana.com/genesis.tar.bz2
-  wget --trust-server-names http://api.mainnet-beta.solana.com/snapshot.tar.bz2
+  wget http://api.mainnet-beta.miraland.top/genesis.tar.bz2
+  wget --trust-server-names http://api.mainnet-beta.miraland.top/snapshot.tar.bz2
 )
 
-snapshot=$(ls "$SOLANA_CONFIG_DIR"/latest-mainnet-beta-snapshot/snapshot-[0-9]*-*.tar.zst)
+snapshot=$(ls "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot/snapshot-[0-9]*-*.tar.zst)
 if [[ -z $snapshot ]]; then
   echo Error: Unable to find latest snapshot
   exit 1
@@ -28,37 +28,37 @@ fi
 
 snapshot_slot="${BASH_REMATCH[1]}"
 
-rm -rf "$SOLANA_CONFIG_DIR"/bootstrap-validator
-mkdir -p "$SOLANA_CONFIG_DIR"/bootstrap-validator
+rm -rf "$MIRALAND_CONFIG_DIR"/bootstrap-validator
+mkdir -p "$MIRALAND_CONFIG_DIR"/bootstrap-validator
 
 
 # Create genesis ledger
 if [[ -r $FAUCET_KEYPAIR ]]; then
-  cp -f "$FAUCET_KEYPAIR" "$SOLANA_CONFIG_DIR"/faucet.json
+  cp -f "$FAUCET_KEYPAIR" "$MIRALAND_CONFIG_DIR"/faucet.json
 else
-  $solana_keygen new --no-passphrase -fso "$SOLANA_CONFIG_DIR"/faucet.json
+  $miraland_keygen new --no-passphrase -fso "$MIRALAND_CONFIG_DIR"/faucet.json
 fi
 
 if [[ -f $BOOTSTRAP_VALIDATOR_IDENTITY_KEYPAIR ]]; then
-  cp -f "$BOOTSTRAP_VALIDATOR_IDENTITY_KEYPAIR" "$SOLANA_CONFIG_DIR"/bootstrap-validator/identity.json
+  cp -f "$BOOTSTRAP_VALIDATOR_IDENTITY_KEYPAIR" "$MIRALAND_CONFIG_DIR"/bootstrap-validator/identity.json
 else
-  $solana_keygen new --no-passphrase -so "$SOLANA_CONFIG_DIR"/bootstrap-validator/identity.json
+  $miraland_keygen new --no-passphrase -so "$MIRALAND_CONFIG_DIR"/bootstrap-validator/identity.json
 fi
 
-$solana_keygen new --no-passphrase -so "$SOLANA_CONFIG_DIR"/bootstrap-validator/vote-account.json
-$solana_keygen new --no-passphrase -so "$SOLANA_CONFIG_DIR"/bootstrap-validator/stake-account.json
+$miraland_keygen new --no-passphrase -so "$MIRALAND_CONFIG_DIR"/bootstrap-validator/vote-account.json
+$miraland_keygen new --no-passphrase -so "$MIRALAND_CONFIG_DIR"/bootstrap-validator/stake-account.json
 
-$solana_ledger_tool create-snapshot \
-  --ledger "$SOLANA_CONFIG_DIR"/latest-mainnet-beta-snapshot \
-  --faucet-pubkey "$SOLANA_CONFIG_DIR"/faucet.json \
+$miraland_ledger_tool create-snapshot \
+  --ledger "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot \
+  --faucet-pubkey "$MIRALAND_CONFIG_DIR"/faucet.json \
   --faucet-lamports 500000000000000000 \
-  --bootstrap-validator "$SOLANA_CONFIG_DIR"/bootstrap-validator/identity.json \
-                        "$SOLANA_CONFIG_DIR"/bootstrap-validator/vote-account.json \
-                        "$SOLANA_CONFIG_DIR"/bootstrap-validator/stake-account.json \
+  --bootstrap-validator "$MIRALAND_CONFIG_DIR"/bootstrap-validator/identity.json \
+                        "$MIRALAND_CONFIG_DIR"/bootstrap-validator/vote-account.json \
+                        "$MIRALAND_CONFIG_DIR"/bootstrap-validator/stake-account.json \
   --hashes-per-tick sleep \
-  "$snapshot_slot" "$SOLANA_CONFIG_DIR"/bootstrap-validator
+  "$snapshot_slot" "$MIRALAND_CONFIG_DIR"/bootstrap-validator
 
-$solana_ledger_tool modify-genesis \
-  --ledger "$SOLANA_CONFIG_DIR"/latest-mainnet-beta-snapshot \
+$miraland_ledger_tool modify-genesis \
+  --ledger "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot \
   --hashes-per-tick sleep \
-  "$SOLANA_CONFIG_DIR"/bootstrap-validator
+  "$MIRALAND_CONFIG_DIR"/bootstrap-validator

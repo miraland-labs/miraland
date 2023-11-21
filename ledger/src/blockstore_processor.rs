@@ -15,7 +15,7 @@ use {
     log::*,
     rayon::{prelude::*, ThreadPool},
     scopeguard::defer,
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::{AccountShrinkThreshold, AccountsDbConfig},
         accounts_index::AccountSecondaryIndexes,
         accounts_update_notifier_interface::AccountsUpdateNotifier,
@@ -25,14 +25,14 @@ use {
             TransactionExecutionDetails, TransactionExecutionResult, TransactionResults,
         },
     },
-    solana_cost_model::cost_model::CostModel,
-    solana_entry::entry::{
+    miraland_cost_model::cost_model::CostModel,
+    miraland_entry::entry::{
         self, create_ticks, Entry, EntrySlice, EntryType, EntryVerificationStatus, VerifyRecyclers,
     },
-    solana_measure::{measure, measure::Measure},
-    solana_metrics::datapoint_error,
+    miraland_measure::{measure, measure::Measure},
+    miraland_metrics::datapoint_error,
     solana_program_runtime::timings::{ExecuteTimingType, ExecuteTimings, ThreadExecuteTimings},
-    solana_rayon_threadlimit::{get_max_thread_count, get_thread_count},
+    miraland_rayon_threadlimit::{get_max_thread_count, get_thread_count},
     solana_runtime::{
         accounts_background_service::{AbsRequestSender, SnapshotRequestKind},
         bank::{Bank, TransactionBalancesSet},
@@ -58,7 +58,7 @@ use {
             VersionedTransaction,
         },
     },
-    solana_transaction_status::token_balances::TransactionTokenBalancesSet,
+    miraland_transaction_status::token_balances::TransactionTokenBalancesSet,
     solana_vote::{vote_account::VoteAccountsHashMap, vote_sender_types::ReplayVoteSender},
     std::{
         borrow::Cow,
@@ -89,7 +89,7 @@ struct ReplayEntry {
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(get_max_thread_count())
-        .thread_name(|i| format!("solBstoreProc{i:02}"))
+        .thread_name(|i| format!("mlnBstoreProc{i:02}"))
         .build()
         .unwrap();
 }
@@ -1939,7 +1939,7 @@ pub mod tests {
         },
         assert_matches::assert_matches,
         rand::{thread_rng, Rng},
-        solana_entry::entry::{create_ticks, next_entry, next_entry_mut},
+        miraland_entry::entry::{create_ticks, next_entry, next_entry_mut},
         solana_program_runtime::declare_process_instruction,
         solana_runtime::{
             genesis_utils::{
@@ -1952,7 +1952,7 @@ pub mod tests {
             epoch_schedule::EpochSchedule,
             hash::Hash,
             instruction::{Instruction, InstructionError},
-            native_token::LAMPORTS_PER_SOL,
+            native_token::LAMPORTS_PER_MLN,
             pubkey::Pubkey,
             signature::{Keypair, Signer},
             system_instruction::SystemError,
@@ -2025,7 +2025,7 @@ pub mod tests {
 
     // Intentionally make slot 1 faulty and ensure that processing sees it as dead
     fn do_test_process_blockstore_with_missing_hashes(blockstore_access_type: AccessType) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let hashes_per_tick = 2;
         let GenesisConfigInfo {
@@ -2081,7 +2081,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_invalid_slot_tick_count() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2143,7 +2143,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_slot_with_trailing_entry() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             mint_keypair,
@@ -2194,7 +2194,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_incomplete_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2281,7 +2281,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_two_forks_and_squash() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2361,7 +2361,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_two_forks() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2452,7 +2452,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_dead_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2499,7 +2499,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_with_dead_child() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2559,7 +2559,7 @@ pub mod tests {
 
     #[test]
     fn test_root_with_all_dead_children() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2592,7 +2592,7 @@ pub mod tests {
 
     #[test]
     fn test_process_blockstore_epoch_boundary_root() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let ticks_per_slot = genesis_config.ticks_per_slot;
@@ -2684,7 +2684,7 @@ pub mod tests {
 
     #[test]
     fn test_process_empty_entry_is_registered() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,
@@ -2714,7 +2714,7 @@ pub mod tests {
 
     #[test]
     fn test_process_ledger_simple() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let leader_pubkey = solana_sdk::pubkey::new_rand();
         let mint = 100;
         let hashes_per_tick = 10;
@@ -3030,7 +3030,7 @@ pub mod tests {
 
     #[test]
     fn test_transaction_result_does_not_affect_bankhash() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -3174,7 +3174,7 @@ pub mod tests {
 
     #[test]
     fn test_process_entries_2nd_entry_collision_with_self_and_error() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,
@@ -3735,7 +3735,7 @@ pub mod tests {
     fn test_process_entries_stress() {
         // this test throws lots of rayon threads at process_entries()
         //  finds bugs in very low-layer stuff
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -4071,7 +4071,7 @@ pub mod tests {
         blockstore_root: Option<Slot>,
         blockstore_access_type: AccessType,
     ) {
-        solana_logger::setup();
+        miraland_logger::setup();
         /*
             Build fork structure:
                  slot 0
@@ -4371,7 +4371,7 @@ pub mod tests {
             genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config(100 * LAMPORTS_PER_SOL);
+        } = create_genesis_config(100 * LAMPORTS_PER_MLN);
         let genesis_hash = genesis_config.hash();
         let bank = BankWithScheduler::new_without_scheduler(Arc::new(Bank::new_for_tests(
             &genesis_config,
@@ -4383,9 +4383,9 @@ pub mod tests {
         let keypair2 = Keypair::new();
         let keypair3 = Keypair::new();
         let keypair4 = Keypair::new();
-        bank.transfer(LAMPORTS_PER_SOL, &mint_keypair, &keypair1.pubkey())
+        bank.transfer(LAMPORTS_PER_MLN, &mint_keypair, &keypair1.pubkey())
             .unwrap();
-        bank.transfer(LAMPORTS_PER_SOL, &mint_keypair, &keypair2.pubkey())
+        bank.transfer(LAMPORTS_PER_MLN, &mint_keypair, &keypair2.pubkey())
             .unwrap();
 
         let (transaction_status_sender, transaction_status_receiver) =
@@ -4519,7 +4519,7 @@ pub mod tests {
 
     #[test]
     fn test_schedule_batches_for_execution() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let dummy_leader_pubkey = solana_sdk::pubkey::new_rand();
         let GenesisConfigInfo {
             genesis_config,

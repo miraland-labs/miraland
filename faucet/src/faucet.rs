@@ -1,6 +1,6 @@
-//! The `faucet` module provides an object for launching a Solana Faucet,
+//! The `faucet` module provides an object for launching a Miraland Faucet,
 //! which is the custodian of any remaining lamports in a mint.
-//! The Solana Faucet builds and sends airdrop transactions,
+//! The Miraland Faucet builds and sends airdrop transactions,
 //! checking requests against a single-request cap and a per-IP limit
 //! for a given time time_slice.
 
@@ -10,12 +10,12 @@ use {
     crossbeam_channel::{unbounded, Sender},
     log::*,
     serde_derive::{Deserialize, Serialize},
-    solana_metrics::datapoint_info,
+    miraland_metrics::datapoint_info,
     solana_sdk::{
         hash::Hash,
         instruction::Instruction,
         message::Message,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
         packet::PACKET_DATA_SIZE,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
@@ -68,10 +68,10 @@ pub enum FaucetError {
     #[error("transaction_length from faucet: 0")]
     NoDataReceived,
 
-    #[error("request too large; req: ◎{0}, cap: ◎{1}")]
+    #[error("request too large; req: 𝇊{0}, cap: 𝇊{1}")]
     PerRequestCapExceeded(f64, f64),
 
-    #[error("limit reached; req: ◎{0}, to: {1}, current: ◎{2}, cap: ◎{3}")]
+    #[error("limit reached; req: 𝇊{0}, to: {1}, current: 𝇊{2}, cap: 𝇊{3}")]
     PerTimeCapExceeded(f64, String, f64, f64),
 }
 
@@ -126,10 +126,10 @@ impl Faucet {
         if let Some((per_request_cap, per_time_cap)) = per_request_cap.zip(per_time_cap) {
             if per_time_cap < per_request_cap {
                 warn!(
-                    "per_time_cap {} SOL < per_request_cap {} SOL; \
+                    "per_time_cap {} MLN < per_request_cap {} MLN; \
                     maximum single requests will fail",
-                    lamports_to_sol(per_time_cap),
-                    lamports_to_sol(per_request_cap),
+                    lamports_to_mln(per_time_cap),
+                    lamports_to_mln(per_request_cap),
                 );
             }
         }
@@ -154,10 +154,10 @@ impl Faucet {
         if let Some(cap) = self.per_time_cap {
             if new_total > cap {
                 return Err(FaucetError::PerTimeCapExceeded(
-                    lamports_to_sol(request_amount),
+                    lamports_to_mln(request_amount),
                     to.to_string(),
-                    lamports_to_sol(new_total),
-                    lamports_to_sol(cap),
+                    lamports_to_mln(new_total),
+                    lamports_to_mln(cap),
                 ));
             }
         }
@@ -172,7 +172,7 @@ impl Faucet {
     /// Checks per-request and per-time-ip limits; if both pass, this method returns a signed
     /// SystemProgram::Transfer transaction from the faucet keypair to the requested recipient. If
     /// the request exceeds this per-request limit, this method returns a signed SPL Memo
-    /// transaction with the memo: `"request too large; req: <REQUEST> SOL cap: <CAP> SOL"`
+    /// transaction with the memo: `"request too large; req: <REQUEST> MLN cap: <CAP> MLN"`
     pub fn build_airdrop_transaction(
         &mut self,
         req: FaucetRequest,
@@ -187,8 +187,8 @@ impl Faucet {
             } => {
                 let mint_pubkey = self.faucet_keypair.pubkey();
                 info!(
-                    "Requesting airdrop of {} SOL to {:?}",
-                    lamports_to_sol(lamports),
+                    "Requesting airdrop of {} MLN to {:?}",
+                    lamports_to_mln(lamports),
                     to
                 );
 
@@ -197,8 +197,8 @@ impl Faucet {
                         let memo = format!(
                             "{}",
                             FaucetError::PerRequestCapExceeded(
-                                lamports_to_sol(lamports),
-                                lamports_to_sol(cap),
+                                lamports_to_mln(lamports),
+                                lamports_to_mln(cap),
                             )
                         );
                         let memo_instruction = Instruction {
@@ -270,7 +270,7 @@ impl Faucet {
 
 impl Drop for Faucet {
     fn drop(&mut self) {
-        solana_metrics::flush();
+        miraland_metrics::flush();
     }
 }
 
@@ -639,7 +639,7 @@ mod tests {
 
             assert_eq!(message.instructions.len(), 1);
             let parsed_memo = std::str::from_utf8(&message.instructions[0].data).unwrap();
-            let expected_memo = "request too large; req: ◎0.000000002, cap: ◎0.000000001";
+            let expected_memo = "request too large; req: 𝇊0.000000002, cap: 𝇊0.000000001";
             assert_eq!(parsed_memo, expected_memo);
             assert_eq!(memo, expected_memo);
         } else {

@@ -1,5 +1,5 @@
 use {
-    solana_gossip::{cluster_info::ClusterInfoError, contact_info},
+    miraland_gossip::{cluster_info::ClusterInfoError, contact_info},
     thiserror::Error,
 };
 

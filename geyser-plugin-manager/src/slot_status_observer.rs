@@ -1,7 +1,7 @@
 use {
     crate::slot_status_notifier::SlotStatusNotifier,
     crossbeam_channel::Receiver,
-    solana_rpc::optimistically_confirmed_bank_tracker::SlotNotification,
+    miraland_rpc::optimistically_confirmed_bank_tracker::SlotNotification,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -48,7 +48,7 @@ impl SlotStatusObserver {
         slot_status_notifier: SlotStatusNotifier,
     ) -> JoinHandle<()> {
         Builder::new()
-            .name("solBankNotif".to_string())
+            .name("mlnBankNotif".to_string())
             .spawn(move || {
                 while !exit.load(Ordering::Relaxed) {
                     if let Ok(slot) = bank_notification_receiver.recv() {

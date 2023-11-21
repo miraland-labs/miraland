@@ -4,24 +4,24 @@ title: Web3 API Reference
 
 ## Web3 API Reference Guide
 
-The `@solana/web3.js` library is a package that has coverage over the [Solana JSON RPC API](/api).
+The `@miraland/web3.js` library is a package that has coverage over the [Miraland JSON RPC API](/api).
 
-You can find the full documentation for the `@solana/web3.js` library [here](https://solana-labs.github.io/solana-web3.js/).
+You can find the full documentation for the `@miraland/web3.js` library [here](https://miraland-labs.github.io/miraland-web3.js/).
 
 ## General
 
 ### Connection
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/Connection.html)
 
-Connection is used to interact with the [Solana JSON RPC](/api). You can use Connection to confirm transactions, get account info, and more.
+Connection is used to interact with the [Miraland JSON RPC](/api). You can use Connection to confirm transactions, get account info, and more.
 
-You create a connection by defining the JSON RPC cluster endpoint and the desired commitment. Once this is complete, you can use this connection object to interact with any of the Solana JSON RPC API.
+You create a connection by defining the JSON RPC cluster endpoint and the desired commitment. Once this is complete, you can use this connection object to interact with any of the Miraland JSON RPC API.
 
 #### Example Usage
 
 ```javascript
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 
 let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
@@ -53,27 +53,27 @@ console.log(slotLeader);
 //49AqLYbpJYc2DrzGUAH1fhWJy62yxBxpLEkfJwjKy2jr
 ```
 
-The above example shows only a few of the methods on Connection. Please see the [source generated docs](https://solana-labs.github.io/solana-web3.js/classes/Connection.html) for the full list.
+The above example shows only a few of the methods on Connection. Please see the [source generated docs](https://miraland-labs.github.io/miraland-web3.js/classes/Connection.html) for the full list.
 
 ### Transaction
 
-[SourceDocumentation](https://solana-labs.github.io/solana-web3.js/classes/Transaction.html)
+[SourceDocumentation](https://miraland-labs.github.io/miraland-web3.js/classes/Transaction.html)
 
-A transaction is used to interact with programs on the Solana blockchain. These transactions are constructed with TransactionInstructions, containing all the accounts possible to interact with, as well as any needed data or program addresses. Each TransactionInstruction consists of keys, data, and a programId. You can do multiple instructions in a single transaction, interacting with multiple programs at once.
+A transaction is used to interact with programs on the Miraland blockchain. These transactions are constructed with TransactionInstructions, containing all the accounts possible to interact with, as well as any needed data or program addresses. Each TransactionInstruction consists of keys, data, and a programId. You can do multiple instructions in a single transaction, interacting with multiple programs at once.
 
 #### Example Usage
 
 ```javascript
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 const nacl = require("tweetnacl");
 
-// Airdrop SOL for paying transactions
+// Airdrop MLN for paying transactions
 let payer = web3.Keypair.generate();
 let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   payer.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -127,14 +127,14 @@ await web3.sendAndConfirmRawTransaction(connection, rawTransaction);
 
 ### Keypair
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/Keypair.html)
 
-The keypair is used to create an account with a public key and secret key within Solana. You can either generate, generate from a seed, or create from a secret key.
+The keypair is used to create an account with a public key and secret key within Miraland. You can either generate, generate from a seed, or create from a secret key.
 
 #### Example Usage
 
 ```javascript
-const { Keypair } = require("@solana/web3.js");
+const { Keypair } = require("@miraland/web3.js");
 
 let account = Keypair.generate();
 
@@ -186,15 +186,15 @@ console.log(accountFromSecret.secretKey);
 // ]
 ```
 
-Using `generate` generates a random Keypair for use as an account on Solana. Using `fromSeed`, you can generate a Keypair using a deterministic constructor. `fromSecret` creates a Keypair from a secret Uint8array. You can see that the publicKey for the `generate` Keypair and `fromSecret` Keypair are the same because the secret from the `generate` Keypair is used in `fromSecret`.
+Using `generate` generates a random Keypair for use as an account on Miraland. Using `fromSeed`, you can generate a Keypair using a deterministic constructor. `fromSecret` creates a Keypair from a secret Uint8array. You can see that the publicKey for the `generate` Keypair and `fromSecret` Keypair are the same because the secret from the `generate` Keypair is used in `fromSecret`.
 
 **Warning**: Do not use `fromSeed` unless you are creating a seed with high entropy. Do not share your seed. Treat the seed like you would a private key.
 
 ### PublicKey
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/PublicKey.html)
 
-PublicKey is used throughout `@solana/web3.js` in transactions, keypairs, and programs. You require publickey when listing each account in a transaction and as a general identifier on Solana.
+PublicKey is used throughout `@miraland/web3.js` in transactions, keypairs, and programs. You require publickey when listing each account in a transaction and as a general identifier on Miraland.
 
 A PublicKey can be created with a base58 encoded string, buffer, Uint8Array, number, and an array of numbers.
 
@@ -202,7 +202,7 @@ A PublicKey can be created with a base58 encoded string, buffer, Uint8Array, num
 
 ```javascript
 const { Buffer } = require("buffer");
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 const crypto = require("crypto");
 
 // Create a PublicKey with a base58 encoded string
@@ -235,22 +235,22 @@ console.log(`Valid Program Address: ${validProgramAddress}`);
 
 ### SystemProgram
 
-[SourceDocumentation](https://solana-labs.github.io/solana-web3.js/classes/SystemProgram.html)
+[SourceDocumentation](https://miraland-labs.github.io/miraland-web3.js/classes/SystemProgram.html)
 
 The SystemProgram grants the ability to create accounts, allocate account data, assign an account to programs, work with nonce accounts, and transfer lamports. You can use the SystemInstruction class to help with decoding and reading individual instructions
 
 #### Example Usage
 
 ```javascript
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 
-// Airdrop SOL for paying transactions
+// Airdrop MLN for paying transactions
 let payer = web3.Keypair.generate();
 let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   payer.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -330,7 +330,7 @@ await web3.sendAndConfirmTransaction(connection, assignTransaction, [
 
 ### Secp256k1Program
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/Secp256k1Program.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/Secp256k1Program.html)
 
 The Secp256k1Program is used to verify Secp256k1 signatures, which are used by both Bitcoin and Ethereum.
 
@@ -338,7 +338,7 @@ The Secp256k1Program is used to verify Secp256k1 signatures, which are used by b
 
 ```javascript
 const { keccak_256 } = require("js-sha3");
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 const secp256k1 = require("secp256k1");
 
 // Create a Ethereum Address from secp256k1
@@ -363,7 +363,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   fromPublicKey.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -392,7 +392,7 @@ await web3.sendAndConfirmTransaction(connection, transaction, [fromPublicKey]);
 
 ### Message
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/Message.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/Message.html)
 
 Message is used as another way to construct transactions. You can construct a message using the accounts, header, instructions, and recentBlockhash that are a part of a transaction. A [Transaction](javascript-api.md#Transaction) is a Message plus the list of required signatures required to execute the transaction.
 
@@ -401,7 +401,7 @@ Message is used as another way to construct transactions. You can construct a me
 ```javascript
 const { Buffer } = require("buffer");
 const bs58 = require("bs58");
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 
 let toPublicKey = web3.Keypair.generate().publicKey;
 let fromPublicKey = web3.Keypair.generate();
@@ -410,7 +410,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   fromPublicKey.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -454,7 +454,7 @@ await web3.sendAndConfirmTransaction(connection, transaction, [fromPublicKey]);
 
 ### Struct
 
-[SourceDocumentation](https://solana-labs.github.io/solana-web3.js/classes/Struct.html)
+[SourceDocumentation](https://miraland-labs.github.io/miraland-web3.js/classes/Struct.html)
 
 The struct class is used to create Rust compatible structs in javascript. This class is only compatible with Borsh encoded Rust structs.
 
@@ -473,7 +473,7 @@ Using web3:
 
 ```javascript
 import BN from "bn.js";
-import { Struct } from "@solana/web3.js";
+import { Struct } from "@miraland/web3.js";
 
 export class Fee extends Struct {
   denominator: BN;
@@ -483,7 +483,7 @@ export class Fee extends Struct {
 
 ### Enum
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/Enum.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/Enum.html)
 
 The Enum class is used to represent a Rust compatible Enum in javascript. The enum will just be a string representation if logged but can be properly encoded/decoded when used in conjunction with [Struct](javascript-api.md#Struct). This class is only compatible with Borsh encoded Rust enumerations.
 
@@ -502,14 +502,14 @@ pub enum AccountType {
 Web3:
 
 ```javascript
-import { Enum } from "@solana/web3.js";
+import { Enum } from "@miraland/web3.js";
 
 export class AccountType extends Enum {}
 ```
 
 ### NonceAccount
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/NonceAccount.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/NonceAccount.html)
 
 Normally a transaction is rejected if a transaction's `recentBlockhash` field is too old. To provide for certain custodial services, Nonce Accounts are used. Transactions which use a `recentBlockhash` captured on-chain by a Nonce Account do not expire as long at the Nonce Account is not advanced.
 
@@ -518,7 +518,7 @@ You can create a nonce account by first creating a normal account, then using `S
 #### Example Usage
 
 ```javascript
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 
 // Create connection
 let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
@@ -530,7 +530,7 @@ let nonceAccount = web3.Keypair.generate();
 // Fund account
 let airdropSignature = await connection.requestAirdrop(
   account.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 
 await connection.confirmTransaction({ signature: airdropSignature });
@@ -592,14 +592,14 @@ The above example shows both how to create a `NonceAccount` using `SystemProgram
 
 ### VoteAccount
 
-[SourceDocumentation](https://solana-labs.github.io/solana-web3.js/classes/VoteAccount.html)
+[SourceDocumentation](https://miraland-labs.github.io/miraland-web3.js/classes/VoteAccount.html)
 
 Vote account is an object that grants the capability of decoding vote accounts from the native vote account program on the network.
 
 #### Example Usage
 
 ```javascript
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 
 let voteAccountInfo = await connection.getProgramAccounts(web3.VOTE_PROGRAM_ID);
 let voteAccountFromData = web3.VoteAccount.fromAccountData(
@@ -665,14 +665,14 @@ VoteAccount {
 
 ### StakeProgram
 
-[SourceDocumentation](https://solana-labs.github.io/solana-web3.js/classes/StakeProgram.html)
+[SourceDocumentation](https://miraland-labs.github.io/miraland-web3.js/classes/StakeProgram.html)
 
-The StakeProgram facilitates staking SOL and delegating them to any validators on the network. You can use StakeProgram to create a stake account, stake some SOL, authorize accounts for withdrawal of your stake, deactivate your stake, and withdraw your funds. The StakeInstruction class is used to decode and read more instructions from transactions calling the StakeProgram
+The StakeProgram facilitates staking MLN and delegating them to any validators on the network. You can use StakeProgram to create a stake account, stake some MLN, authorize accounts for withdrawal of your stake, deactivate your stake, and withdraw your funds. The StakeInstruction class is used to decode and read more instructions from transactions calling the StakeProgram
 
 #### Example Usage
 
 ```javascript
-const web3 = require("@solana/web3.js");
+const web3 = require("@miraland/web3.js");
 
 // Fund a key to create transactions
 let fromPublicKey = web3.Keypair.generate();
@@ -680,7 +680,7 @@ let connection = new web3.Connection(web3.clusterApiUrl("devnet"), "confirmed");
 
 let airdropSignature = await connection.requestAirdrop(
   fromPublicKey.publicKey,
-  web3.LAMPORTS_PER_SOL,
+  web3.LAMPORTS_PER_MLN,
 );
 await connection.confirmTransaction({ signature: airdropSignature });
 
@@ -761,15 +761,15 @@ await web3.sendAndConfirmTransaction(connection, withdrawTransaction, [
 
 ### Authorized
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/Authorized.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/Authorized.html)
 
-Authorized is an object used when creating an authorized account for staking within Solana. You can designate a `staker` and `withdrawer` separately, allowing for a different account to withdraw other than the staker.
+Authorized is an object used when creating an authorized account for staking within Miraland. You can designate a `staker` and `withdrawer` separately, allowing for a different account to withdraw other than the staker.
 
 You can find more usage of the `Authorized` object under [`StakeProgram`](javascript-api.md#StakeProgram)
 
 ### Lockup
 
-[Source Documentation](https://solana-labs.github.io/solana-web3.js/classes/Lockup.html)
+[Source Documentation](https://miraland-labs.github.io/miraland-web3.js/classes/Lockup.html)
 
 Lockup is used in conjunction with the [StakeProgram](javascript-api.md#StakeProgram) to create an account. The Lockup is used to determine how long the stake will be locked, or unable to be retrieved. If the Lockup is set to 0 for both epoch and the Unix timestamp, the lockup will be disabled for the stake account.
 
@@ -781,7 +781,7 @@ const {
   Keypair,
   Lockup,
   StakeProgram,
-} = require("@solana/web3.js");
+} = require("@miraland/web3.js");
 
 let account = Keypair.generate();
 let stakeAccount = Keypair.generate();

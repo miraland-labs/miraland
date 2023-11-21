@@ -10,7 +10,7 @@ use {
         snapshot_config::SnapshotConfig,
     },
     log::*,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_program_runtime::loaded_programs::{BlockRelation, ForkGraph},
     solana_sdk::{
         clock::{Epoch, Slot},
@@ -736,7 +736,7 @@ mod tests {
             },
         },
         assert_matches::assert_matches,
-        solana_accounts_db::epoch_accounts_hash::EpochAccountsHash,
+        miraland_accounts_db::epoch_accounts_hash::EpochAccountsHash,
         solana_sdk::{
             clock::UnixTimestamp,
             epoch_schedule::EpochSchedule,
@@ -840,7 +840,7 @@ mod tests {
 
     #[test]
     fn test_bank_forks_different_set_root() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let leader_keypair = Keypair::new();
         let GenesisConfigInfo {
             mut genesis_config,

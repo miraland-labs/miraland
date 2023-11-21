@@ -1,11 +1,11 @@
 #pragma once
 /**
- * @brief Solana logging utilities
+ * @brief Miraland logging utilities
  */
 
-#include <sol/types.h>
-#include <sol/string.h>
-#include <sol/entrypoint.h>
+#include <mln/types.h>
+#include <mln/string.h>
+#include <mln/entrypoint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,7 +14,7 @@ extern "C" {
 /**
  * Prints a string to stdout
  */
-/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/sol/inc/compute_units.inc AND RUN `cargo run --bin gen-headers` */
+/* DO NOT MODIFY THIS GENERATED FILE. INSTEAD CHANGE sdk/sbf/c/inc/mln/inc/compute_units.inc AND RUN `cargo run --bin gen-headers` */
 #ifndef SOL_SBFV2
 uint64_t sol_remaining_compute_units();
 #else

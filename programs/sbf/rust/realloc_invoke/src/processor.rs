@@ -14,7 +14,7 @@ use {
         pubkey::Pubkey,
         system_instruction, system_program,
     },
-    solana_sbf_rust_realloc::instructions::*,
+    miraland_sbf_rust_realloc::instructions::*,
     std::convert::TryInto,
 };
 

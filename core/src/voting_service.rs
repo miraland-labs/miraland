@@ -4,9 +4,9 @@ use {
         next_leader::next_leader_tpu_vote,
     },
     crossbeam_channel::Receiver,
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_measure::measure::Measure,
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_measure::measure::Measure,
+    miraland_poh::poh_recorder::PohRecorder,
     solana_sdk::{clock::Slot, transaction::Transaction},
     std::{
         sync::{Arc, RwLock},
@@ -47,7 +47,7 @@ impl VotingService {
         tower_storage: Arc<dyn TowerStorage>,
     ) -> Self {
         let thread_hdl = Builder::new()
-            .name("solVoteService".to_string())
+            .name("mlnVoteService".to_string())
             .spawn(move || {
                 for vote_op in vote_receiver.iter() {
                     Self::handle_vote(

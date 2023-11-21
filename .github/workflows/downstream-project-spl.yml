@@ -3,11 +3,11 @@ name: Downstream Project - SPL
 on:
   push:
     branches:
-      - master
+      - main
       - v[0-9]+.[0-9]+
   pull_request:
     branches:
-      - master
+      - main
       - v[0-9]+.[0-9]+
     paths:
       - "**.rs"
@@ -24,7 +24,7 @@ on:
       branch:
         required: false
         type: string
-        default: "master"
+        default: "main"
 
 env:
   SHELL: /bin/bash

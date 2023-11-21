@@ -1,7 +1,7 @@
 //! PohTimingReportService module
 use {
     crate::poh_timing_reporter::PohTimingReporter,
-    solana_metrics::poh_timing_point::{PohTimingReceiver, SlotPohTimingInfo},
+    miraland_metrics::poh_timing_point::{PohTimingReceiver, SlotPohTimingInfo},
     std::{
         string::ToString,
         sync::{
@@ -27,7 +27,7 @@ impl PohTimingReportService {
     pub fn new(receiver: PohTimingReceiver, exit: Arc<AtomicBool>) -> Self {
         let mut poh_timing_reporter = PohTimingReporter::default();
         let t_poh_timing = Builder::new()
-            .name("solPohTimingRpt".to_string())
+            .name("mlnPohTimingRpt".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     break;
@@ -54,7 +54,7 @@ impl PohTimingReportService {
 #[cfg(test)]
 mod test {
     use {
-        super::*, crossbeam_channel::unbounded, solana_metrics::poh_timing_point::SlotPohTimingInfo,
+        super::*, crossbeam_channel::unbounded, miraland_metrics::poh_timing_point::SlotPohTimingInfo,
     };
 
     #[test]

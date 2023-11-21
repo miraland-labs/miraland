@@ -19,7 +19,7 @@ use {
     },
     rand::{thread_rng, Rng},
     rayon::prelude::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
-    solana_measure::measure_us,
+    miraland_measure::measure_us,
     solana_sdk::{account::ReadableAccount, clock::Slot, saturating_add_assign},
     std::{
         collections::HashMap,
@@ -1099,7 +1099,7 @@ pub mod tests {
         // n slots
         // m accounts per slot
         // divide into different ideal sizes so that we combine multiple slots sometimes and combine partial slots
-        solana_logger::setup();
+        miraland_logger::setup();
         let total_accounts_per_storage = 10;
         let account_size = 184;
         for num_slots in 0..4 {
@@ -1204,7 +1204,7 @@ pub mod tests {
         // each account has different size
         // divide into different ideal sizes so that we combine multiple slots sometimes and combine partial slots
         // compare at end that all accounts are in result exactly once
-        solana_logger::setup();
+        miraland_logger::setup();
         let total_accounts_per_storage = 10;
         let account_size = 184;
         for num_slots in 0..4 {
@@ -2991,7 +2991,7 @@ pub mod tests {
 
     #[test]
     fn test_shrink_packed_ancient() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         // When we pack ancient append vecs, the packed append vecs are recycled first if possible. This means they aren't dropped directly.
         // This test tests that we are releasing Arc refcounts for storages when we pack them into ancient append vecs.

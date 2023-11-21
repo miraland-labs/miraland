@@ -11,7 +11,7 @@
 use {
     crate::rpc_subscriptions::RpcSubscriptions,
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
-    solana_rpc_client_api::response::{SlotTransactionStats, SlotUpdate},
+    miraland_rpc_client_api::response::{SlotTransactionStats, SlotUpdate},
     solana_runtime::{
         bank::Bank, bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache,
     },
@@ -101,7 +101,7 @@ impl OptimisticallyConfirmedBankTracker {
         let mut highest_confirmed_slot: Slot = 0;
         let mut newest_root_slot: Slot = 0;
         let thread_hdl = Builder::new()
-            .name("solOpConfBnkTrk".to_string())
+            .name("mlnOpConfBnkTrk".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     break;
@@ -401,7 +401,7 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_runtime::{
             accounts_background_service::AbsRequestSender, commitment::BlockCommitmentCache,
         },

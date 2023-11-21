@@ -19,8 +19,8 @@ use {
         iter::{IntoParallelIterator, ParallelIterator},
         ThreadPool,
     },
-    solana_measure::measure::Measure,
-    solana_nohash_hasher::IntSet,
+    miraland_measure::measure::Measure,
+    miraland_nohash_hasher::IntSet,
     solana_sdk::{
         account::ReadableAccount,
         clock::{BankId, Slot},
@@ -164,15 +164,15 @@ enum ScanTypes<R: RangeBounds<Pubkey>> {
 #[derive(Debug, Clone, Copy)]
 pub enum IndexKey {
     ProgramId(Pubkey),
-    SplTokenMint(Pubkey),
-    SplTokenOwner(Pubkey),
+    SolartiTokenMint(Pubkey),
+    SolartiTokenOwner(Pubkey),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum AccountIndex {
     ProgramId,
-    SplTokenMint,
-    SplTokenOwner,
+    SolartiTokenMint,
+    SolartiTokenOwner,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -968,7 +968,7 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> AccountsIndex<T, U> {
                     config,
                 );
             }
-            ScanTypes::Indexed(IndexKey::SplTokenMint(mint_key)) => {
+            ScanTypes::Indexed(IndexKey::SolartiTokenMint(mint_key)) => {
                 self.do_scan_secondary_index(
                     ancestors,
                     func,
@@ -978,7 +978,7 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> AccountsIndex<T, U> {
                     config,
                 );
             }
-            ScanTypes::Indexed(IndexKey::SplTokenOwner(owner_key)) => {
+            ScanTypes::Indexed(IndexKey::SolartiTokenOwner(owner_key)) => {
                 self.do_scan_secondary_index(
                     ancestors,
                     func,
@@ -1483,7 +1483,7 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> AccountsIndex<T, U> {
         account_indexes: &AccountSecondaryIndexes,
     ) {
         if *account_owner == *token_id {
-            if account_indexes.contains(&AccountIndex::SplTokenOwner) {
+            if account_indexes.contains(&AccountIndex::SolartiTokenOwner) {
                 if let Some(owner_key) = G::unpack_account_owner(account_data) {
                     if account_indexes.include_key(owner_key) {
                         self.spl_token_owner_index.insert(owner_key, pubkey);
@@ -1491,7 +1491,7 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> AccountsIndex<T, U> {
                 }
             }
 
-            if account_indexes.contains(&AccountIndex::SplTokenMint) {
+            if account_indexes.contains(&AccountIndex::SolartiTokenMint) {
                 if let Some(mint_key) = G::unpack_account_mint(account_data) {
                     if account_indexes.include_key(mint_key) {
                         self.spl_token_mint_index.insert(mint_key, pubkey);
@@ -1504,12 +1504,12 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> AccountsIndex<T, U> {
     pub fn get_index_key_size(&self, index: &AccountIndex, index_key: &Pubkey) -> Option<usize> {
         match index {
             AccountIndex::ProgramId => self.program_id_index.index.get(index_key).map(|x| x.len()),
-            AccountIndex::SplTokenOwner => self
+            AccountIndex::SolartiTokenOwner => self
                 .spl_token_owner_index
                 .index
                 .get(index_key)
                 .map(|x| x.len()),
-            AccountIndex::SplTokenMint => self
+            AccountIndex::SolartiTokenMint => self
                 .spl_token_mint_index
                 .index
                 .get(index_key)
@@ -1524,11 +1524,11 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> AccountsIndex<T, U> {
             self.program_id_index.log_contents();
         }
         if !self.spl_token_mint_index.index.is_empty() {
-            info!("secondary index: {:?}", AccountIndex::SplTokenMint);
+            info!("secondary index: {:?}", AccountIndex::SolartiTokenMint);
             self.spl_token_mint_index.log_contents();
         }
         if !self.spl_token_owner_index.index.is_empty() {
-            info!("secondary index: {:?}", AccountIndex::SplTokenOwner);
+            info!("secondary index: {:?}", AccountIndex::SolartiTokenOwner);
             self.spl_token_owner_index.log_contents();
         }
     }
@@ -1802,11 +1802,11 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> AccountsIndex<T, U> {
             self.program_id_index.remove_by_inner_key(inner_key);
         }
 
-        if account_indexes.contains(&AccountIndex::SplTokenOwner) {
+        if account_indexes.contains(&AccountIndex::SolartiTokenOwner) {
             self.spl_token_owner_index.remove_by_inner_key(inner_key);
         }
 
-        if account_indexes.contains(&AccountIndex::SplTokenMint) {
+        if account_indexes.contains(&AccountIndex::SolartiTokenMint) {
             self.spl_token_mint_index.remove_by_inner_key(inner_key);
         }
     }
@@ -2065,7 +2065,7 @@ pub mod tests {
 
     pub fn spl_token_mint_index_enabled() -> AccountSecondaryIndexes {
         let mut account_indexes = HashSet::new();
-        account_indexes.insert(AccountIndex::SplTokenMint);
+        account_indexes.insert(AccountIndex::SolartiTokenMint);
         AccountSecondaryIndexes {
             indexes: account_indexes,
             keys: None,
@@ -2074,7 +2074,7 @@ pub mod tests {
 
     pub fn spl_token_owner_index_enabled() -> AccountSecondaryIndexes {
         let mut account_indexes = HashSet::new();
-        account_indexes.insert(AccountIndex::SplTokenOwner);
+        account_indexes.insert(AccountIndex::SolartiTokenOwner);
         AccountSecondaryIndexes {
             indexes: account_indexes,
             keys: None,
@@ -3166,7 +3166,7 @@ pub mod tests {
 
     #[test]
     fn test_update_new_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let key = solana_sdk::pubkey::new_rand();
         let index = AccountsIndex::<bool, bool>::default_for_tests();
         let ancestors = vec![(0, 0)].into_iter().collect();
@@ -4036,7 +4036,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_rooted_entries_return() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let value = true;
         let key = solana_sdk::pubkey::new_rand();
         let key_unknown = solana_sdk::pubkey::new_rand();

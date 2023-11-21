@@ -8,7 +8,7 @@ use {
         de::{self, Deserialize, Deserializer},
         ser::{Serialize, SerializeSeq, Serializer},
     },
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::PubkeyHashAccount,
         accounts_hash::{AccountHash, AccountsDeltaHash},
     },
@@ -46,7 +46,7 @@ impl BankHashDetails {
         accounts: BankHashAccounts,
     ) -> Self {
         Self {
-            version: solana_version::version!().to_string(),
+            version: miraland_version::version!().to_string(),
             account_data_encoding: "base64".to_string(),
             slot,
             bank_hash: bank_hash.to_string(),

@@ -9,16 +9,16 @@ use {
     jsonrpc_server_utils::tokio,
     log::*,
     serde::{de::Deserializer, Deserialize, Serialize},
-    solana_accounts_db::accounts_index::AccountIndex,
-    solana_core::{
+    miraland_accounts_db::accounts_index::AccountIndex,
+    miraland_core::{
         admin_rpc_post_init::AdminRpcRequestMetadataPostInit,
         consensus::{tower_storage::TowerStorage, Tower},
         validator::ValidatorStartProgress,
     },
-    solana_geyser_plugin_manager::GeyserPluginManagerRequest,
-    solana_gossip::contact_info::{ContactInfo, Protocol, SOCKET_ADDR_UNSPECIFIED},
-    solana_rpc::rpc::verify_pubkey,
-    solana_rpc_client_api::{config::RpcAccountIndex, custom_error::RpcCustomError},
+    miraland_geyser_plugin_manager::GeyserPluginManagerRequest,
+    miraland_gossip::contact_info::{ContactInfo, Protocol, SOCKET_ADDR_UNSPECIFIED},
+    miraland_rpc::rpc::verify_pubkey,
+    miraland_rpc_client_api::{config::RpcAccountIndex, custom_error::RpcCustomError},
     solana_sdk::{
         exit::Exit,
         pubkey::Pubkey,
@@ -243,7 +243,7 @@ impl AdminRpc for AdminRpcImpl {
         debug!("exit admin rpc request received");
 
         thread::Builder::new()
-            .name("solProcessExit".into())
+            .name("mlnProcessExit".into())
             .spawn(move || {
                 // Delay exit signal until this RPC request completes, otherwise the caller of `exit` might
                 // receive a confusing error as the validator shuts down before a response is sent back.
@@ -386,7 +386,7 @@ impl AdminRpc for AdminRpcImpl {
 
     fn set_log_filter(&self, filter: String) -> Result<()> {
         debug!("set_log_filter admin rpc request received");
-        solana_logger::setup_with(&filter);
+        miraland_logger::setup_with(&filter);
         Ok(())
     }
 
@@ -682,7 +682,7 @@ impl AdminRpcImpl {
                     })?;
             }
 
-            solana_metrics::set_host_id(identity_keypair.pubkey().to_string());
+            miraland_metrics::set_host_id(identity_keypair.pubkey().to_string());
             post_init
                 .cluster_info
                 .set_keypair(Arc::new(identity_keypair));
@@ -695,8 +695,8 @@ impl AdminRpcImpl {
 fn rpc_account_index_from_account_index(account_index: &AccountIndex) -> RpcAccountIndex {
     match account_index {
         AccountIndex::ProgramId => RpcAccountIndex::ProgramId,
-        AccountIndex::SplTokenOwner => RpcAccountIndex::SplTokenOwner,
-        AccountIndex::SplTokenMint => RpcAccountIndex::SplTokenMint,
+        AccountIndex::SolartiTokenOwner => RpcAccountIndex::SolartiTokenOwner,
+        AccountIndex::SolartiTokenMint => RpcAccountIndex::SolartiTokenMint,
     }
 }
 
@@ -705,14 +705,14 @@ pub fn run(ledger_path: &Path, metadata: AdminRpcRequestMetadata) {
     let admin_rpc_path = admin_rpc_path(ledger_path);
 
     let event_loop = tokio::runtime::Builder::new_multi_thread()
-        .thread_name("solAdminRpcEl")
+        .thread_name("mlnAdminRpcEl")
         .worker_threads(3) // Three still seems like a lot, and better than the default of available core count
         .enable_all()
         .build()
         .unwrap();
 
     Builder::new()
-        .name("solAdminRpc".to_string())
+        .name("mlnAdminRpc".to_string())
         .spawn(move || {
             let mut io = MetaIoHandler::default();
             io.extend_with(AdminRpcImpl.to_delegate());
@@ -819,11 +819,11 @@ mod tests {
     use {
         super::*,
         serde_json::Value,
-        solana_accounts_db::{accounts_index::AccountSecondaryIndexes, inline_spl_token},
-        solana_core::consensus::tower_storage::NullTowerStorage,
-        solana_gossip::cluster_info::ClusterInfo,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
-        solana_rpc::rpc::create_validator_exit,
+        miraland_accounts_db::{accounts_index::AccountSecondaryIndexes, inline_spl_token},
+        miraland_core::consensus::tower_storage::NullTowerStorage,
+        miraland_gossip::cluster_info::ClusterInfo,
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_rpc::rpc::create_validator_exit,
         solana_runtime::{
             bank::{Bank, BankTestConfig},
             bank_forks::BankForks,
@@ -833,7 +833,7 @@ mod tests {
             pubkey::Pubkey,
             system_program,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         spl_token_2022::{
             solana_program::{program_option::COption, program_pack::Pack},
             state::{Account as TokenAccount, AccountState as TokenAccountState, Mint},
@@ -928,8 +928,8 @@ mod tests {
                     keys: None,
                     indexes: HashSet::from([
                         AccountIndex::ProgramId,
-                        AccountIndex::SplTokenMint,
-                        AccountIndex::SplTokenOwner,
+                        AccountIndex::SolartiTokenMint,
+                        AccountIndex::SolartiTokenOwner,
                     ]),
                 }
             } else {
@@ -968,7 +968,7 @@ mod tests {
                     serde_json::from_value(result["result"].clone()).unwrap();
                 assert!(sizes.is_empty());
             } else {
-                // Count SPL Token Program Default Accounts
+                // Count Solarti Token Program Default Accounts
                 let req = format!(
                     r#"{{"jsonrpc":"2.0","id":1,"method":"getSecondaryIndexKeySize","params":["{}"]}}"#,
                     inline_spl_token::id(),
@@ -1137,7 +1137,7 @@ mod tests {
                     serde_json::from_value(result["result"].clone()).unwrap();
                 assert!(sizes.is_empty());
                 // --------------- Test Queries ---------------
-                // 1) Wallet1 - Owns 1 SPL Token
+                // 1) Wallet1 - Owns 1 Solarti Token
                 let req = format!(
                     r#"{{"jsonrpc":"2.0","id":1,"method":"getSecondaryIndexKeySize","params":["{wallet1_pubkey}"]}}"#,
                 );
@@ -1147,8 +1147,8 @@ mod tests {
                 let sizes: HashMap<RpcAccountIndex, usize> =
                     serde_json::from_value(result["result"].clone()).unwrap();
                 assert_eq!(sizes.len(), 1);
-                assert_eq!(*sizes.get(&RpcAccountIndex::SplTokenOwner).unwrap(), 1);
-                // 2) Wallet2 - Owns 2 SPL Tokens
+                assert_eq!(*sizes.get(&RpcAccountIndex::SolartiTokenOwner).unwrap(), 1);
+                // 2) Wallet2 - Owns 2 Solarti Tokens
                 let req = format!(
                     r#"{{"jsonrpc":"2.0","id":1,"method":"getSecondaryIndexKeySize","params":["{wallet2_pubkey}"]}}"#,
                 );
@@ -1158,7 +1158,7 @@ mod tests {
                 let sizes: HashMap<RpcAccountIndex, usize> =
                     serde_json::from_value(result["result"].clone()).unwrap();
                 assert_eq!(sizes.len(), 1);
-                assert_eq!(*sizes.get(&RpcAccountIndex::SplTokenOwner).unwrap(), 2);
+                assert_eq!(*sizes.get(&RpcAccountIndex::SolartiTokenOwner).unwrap(), 2);
                 // 3) Mint1 - Is in 2 SPL Accounts
                 let req = format!(
                     r#"{{"jsonrpc":"2.0","id":1,"method":"getSecondaryIndexKeySize","params":["{mint1_pubkey}"]}}"#,
@@ -1169,7 +1169,7 @@ mod tests {
                 let sizes: HashMap<RpcAccountIndex, usize> =
                     serde_json::from_value(result["result"].clone()).unwrap();
                 assert_eq!(sizes.len(), 1);
-                assert_eq!(*sizes.get(&RpcAccountIndex::SplTokenMint).unwrap(), 2);
+                assert_eq!(*sizes.get(&RpcAccountIndex::SolartiTokenMint).unwrap(), 2);
                 // 4) Mint2 - Is in 1 SPL Account
                 let req = format!(
                     r#"{{"jsonrpc":"2.0","id":1,"method":"getSecondaryIndexKeySize","params":["{mint2_pubkey}"]}}"#,
@@ -1180,8 +1180,8 @@ mod tests {
                 let sizes: HashMap<RpcAccountIndex, usize> =
                     serde_json::from_value(result["result"].clone()).unwrap();
                 assert_eq!(sizes.len(), 1);
-                assert_eq!(*sizes.get(&RpcAccountIndex::SplTokenMint).unwrap(), 1);
-                // 5) SPL Token Program Owns 6 Accounts - 1 Default, 5 created above.
+                assert_eq!(*sizes.get(&RpcAccountIndex::SolartiTokenMint).unwrap(), 1);
+                // 5) Solarti Token Program Owns 6 Accounts - 1 Default, 5 created above.
                 let req = format!(
                     r#"{{"jsonrpc":"2.0","id":1,"method":"getSecondaryIndexKeySize","params":["{}"]}}"#,
                     inline_spl_token::id(),

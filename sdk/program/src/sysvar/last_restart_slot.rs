@@ -7,7 +7,7 @@
 //! [`LastRestartSlot`] implements [`Sysvar::get`] and can be loaded efficiently without
 //! passing the sysvar account ID to the program.
 //!
-//! See also the Solana [SIMD proposal][simd].
+//! See also the Miraland [SIMD proposal][simd].
 //!
 //! [simd]: https://github.com/solana-foundation/solana-improvement-documents/blob/main/proposals/0047-syscall-and-sysvar-for-last-restart-slot.md
 //!

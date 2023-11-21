@@ -1,7 +1,7 @@
 [package]
-name = "solana-stake-program"
-description = "Solana Stake program"
-documentation = "https://docs.rs/solana-stake-program"
+name = "miraland-stake-program"
+description = "Miraland Stake program"
+documentation = "https://docs.rs/miraland-stake-program"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -12,15 +12,15 @@ edition = { workspace = true }
 [dependencies]
 bincode = { workspace = true }
 log = { workspace = true }
-solana-config-program = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-config-program = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-vote-program = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
 proptest = { workspace = true }
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 test-case = { workspace = true }
 
 [build-dependencies]

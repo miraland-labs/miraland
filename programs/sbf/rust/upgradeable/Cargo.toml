@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-upgradeable"
-documentation = "https://docs.rs/solana-sbf-rust-upgradeable"
+name = "miraland-sbf-rust-upgradeable"
+documentation = "https://docs.rs/miraland-sbf-rust-upgradeable"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -10,10 +10,10 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
-name = "solana_sbf_rust_upgradeable"
+name = "miraland_sbf_rust_upgradeable"
 crate-type = ["cdylib"]
 
 [package.metadata.docs.rs]

@@ -1,4 +1,4 @@
-//! The solana-program-test provides a BanksClient-based test framework SBF programs
+//! The miraland-program-test provides a BanksClient-based test framework SBF programs
 #![allow(clippy::arithmetic_side_effects)]
 
 // Export tokio for test clients
@@ -8,9 +8,9 @@ use {
     base64::{prelude::BASE64_STANDARD, Engine},
     chrono_humanize::{Accuracy, HumanTime, Tense},
     log::*,
-    solana_accounts_db::epoch_accounts_hash::EpochAccountsHash,
-    solana_banks_client::start_client,
-    solana_banks_server::banks_server::start_local_server,
+    miraland_accounts_db::epoch_accounts_hash::EpochAccountsHash,
+    miraland_banks_client::start_client,
+    miraland_banks_server::banks_server::start_local_server,
     solana_bpf_loader_program::serialization::serialize_parameters,
     solana_program_runtime::{
         compute_budget::ComputeBudget, ic_msg, invoke_context::BuiltinFunctionWithContext,
@@ -34,7 +34,7 @@ use {
         genesis_config::{ClusterType, GenesisConfig},
         hash::Hash,
         instruction::{Instruction, InstructionError},
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         poh_config::PohConfig,
         program_error::{ProgramError, UNSUPPORTED_SYSVAR},
         pubkey::Pubkey,
@@ -63,8 +63,8 @@ use {
 };
 // Export types so test clients can limit their solana crate dependencies
 pub use {
-    solana_banks_client::{BanksClient, BanksClientError},
-    solana_banks_interface::BanksTransactionResultWithMetadata,
+    miraland_banks_client::{BanksClient, BanksClientError},
+    miraland_banks_interface::BanksTransactionResultWithMetadata,
     solana_program_runtime::invoke_context::InvokeContext,
     solana_rbpf::{
         error::EbpfError,
@@ -177,7 +177,7 @@ pub fn invoke_builtin_function(
     Ok(0)
 }
 
-/// Converts a `solana-program`-style entrypoint into the runtime's entrypoint style, for
+/// Converts a `miraland-program`-style entrypoint into the runtime's entrypoint style, for
 /// use with `ProgramTest::add_program`
 #[macro_export]
 macro_rules! processor {
@@ -478,7 +478,7 @@ impl Default for ProgramTest {
     /// * the current working directory
     ///
     fn default() -> Self {
-        solana_logger::setup_with_default(
+        miraland_logger::setup_with_default(
             "solana_rbpf::vm=debug,\
              solana_runtime::message_processor=debug,\
              solana_runtime::system_instruction_processor=trace,\
@@ -763,13 +763,13 @@ impl ProgramTest {
         };
         let bootstrap_validator_pubkey = Pubkey::new_unique();
         let bootstrap_validator_stake_lamports =
-            rent.minimum_balance(VoteState::size_of()) + sol_to_lamports(1_000_000.0);
+            rent.minimum_balance(VoteState::size_of()) + mln_to_lamports(1_000_000.0);
 
         let mint_keypair = Keypair::new();
         let voting_keypair = Keypair::new();
 
         let mut genesis_config = create_genesis_config_with_leader_ex(
-            sol_to_lamports(1_000_000.0),
+            mln_to_lamports(1_000_000.0),
             &mint_keypair.pubkey(),
             &bootstrap_validator_pubkey,
             &voting_keypair.pubkey(),
@@ -898,7 +898,7 @@ impl ProgramTest {
     /// Start the test client
     ///
     /// Returns a `BanksClient` interface into the test environment as well as a payer `Keypair`
-    /// with SOL for sending transactions
+    /// with MLN for sending transactions
     pub async fn start_with_context(mut self) -> ProgramTestContext {
         let (bank_forks, block_commitment_cache, last_blockhash, gci) = self.setup_bank();
         let target_tick_duration = gci.genesis_config.poh_config.target_tick_duration;
@@ -1135,7 +1135,7 @@ impl ProgramTestContext {
                     &Pubkey::default(),
                     pre_warp_slot,
                     // some warping tests cannot use the append vecs because of the sequence of adding roots and flushing
-                    solana_accounts_db::accounts_db::CalcAccountsHashDataSource::IndexForTests,
+                    miraland_accounts_db::accounts_db::CalcAccountsHashDataSource::IndexForTests,
                 ))
                 .clone_without_scheduler()
         };

@@ -8,7 +8,7 @@ use {
         signature::Signature,
         transaction::SanitizedTransaction,
     },
-    solana_transaction_status::{Reward, TransactionStatusMeta},
+    miraland_transaction_status::{Reward, TransactionStatusMeta},
     std::{any::Any, error, io},
     thiserror::Error,
 };
@@ -179,7 +179,7 @@ pub struct ReplicaEntryInfo<'a> {
     /// The number of hashes since the previous Entry
     pub num_hashes: u64,
     /// The Entry's SHA-256 hash, generated from the previous Entry's hash with
-    /// `solana_entry::entry::next_hash()`
+    /// `miraland_entry::entry::next_hash()`
     pub hash: &'a [u8],
     /// The number of executed transactions in the Entry
     pub executed_transaction_count: u64,

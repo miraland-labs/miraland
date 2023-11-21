@@ -5,7 +5,7 @@ extern crate log;
 use {
     clap::{crate_description, crate_name, value_t, App, Arg},
     rayon::prelude::*,
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts::Accounts,
         accounts_db::{
             test_utils::{create_test_accounts, update_accounts_bench},
@@ -15,7 +15,7 @@ use {
         ancestors::Ancestors,
         rent_collector::RentCollector,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_sdk::{
         genesis_config::ClusterType, pubkey::Pubkey, sysvar::epoch_schedule::EpochSchedule,
     },
@@ -23,11 +23,11 @@ use {
 };
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let matches = App::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .arg(
             Arg::with_name("num_slots")
                 .long("num_slots")

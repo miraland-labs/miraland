@@ -40,9 +40,9 @@ pub mod transaction_batch;
 pub mod transaction_priority_details;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 #[macro_use]
 extern crate serde_derive;
 
 #[macro_use]
-extern crate solana_frozen_abi_macro;
+extern crate miraland_frozen_abi_macro;

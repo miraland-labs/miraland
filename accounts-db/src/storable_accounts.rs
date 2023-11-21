@@ -450,7 +450,7 @@ pub mod tests {
 
     #[test]
     fn test_storable_accounts_by_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // slots 0..4
         // each one containing a subset of the overall # of entries (0..4)
         for entries in 0..6 {

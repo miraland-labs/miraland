@@ -1,5 +1,5 @@
 [package]
-name = "solana-bench-streamer"
+name = "miraland-bench-streamer"
 publish = false
 version = { workspace = true }
 authors = { workspace = true }
@@ -11,9 +11,9 @@ edition = { workspace = true }
 [dependencies]
 clap = { version = "3.1.5", features = ["cargo"] }
 crossbeam-channel = { workspace = true }
-solana-net-utils = { workspace = true }
-solana-streamer = { workspace = true }
-solana-version = { workspace = true }
+miraland-net-utils = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-version = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

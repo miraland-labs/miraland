@@ -6,4 +6,4 @@ pub mod connection_cache_stats;
 pub mod nonblocking;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;

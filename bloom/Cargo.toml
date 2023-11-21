@@ -1,7 +1,7 @@
 [package]
-name = "solana-bloom"
-description = "Solana bloom filter"
-documentation = "https://docs.rs/solana-bloom"
+name = "miraland-bloom"
+description = "Miraland bloom filter"
+documentation = "https://docs.rs/miraland-bloom"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -17,13 +17,13 @@ rand = { workspace = true }
 rayon = { workspace = true }
 serde = { workspace = true, features = ["rc"] }
 serde_derive = { workspace = true }
-solana-frozen-abi = { workspace = true }
-solana-frozen-abi-macro = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_bloom"
+name = "miraland_bloom"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

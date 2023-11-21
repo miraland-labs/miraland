@@ -2,17 +2,17 @@
 title: State Compression
 description:
   'State Compression is the method of cheaply and securely storing
-  "fingerprints" of off-chain data in the Solana leger, instead of expensive
+  "fingerprints" of off-chain data in the Miraland leger, instead of expensive
   accounts.'
 ---
 
-On Solana, [State Compression](./state-compression.md) is the method of creating
+On Miraland, [State Compression](./state-compression.md) is the method of creating
 a "fingerprint" (or hash) of off-chain data and storing this fingerprint
-on-chain for secure verification. Effectively using the security of the Solana
+on-chain for secure verification. Effectively using the security of the Miraland
 ledger to securely validate off-chain data, verifying it has not been tampered
 with.
 
-This method of "compression" allows Solana programs and dApps to use cheap
+This method of "compression" allows Miraland programs and dApps to use cheap
 blockchain [ledger](./../terminology.md#ledger) space, instead of the more
 expensive [account](./../terminology.md#account) space, to securely store data.
 
@@ -45,7 +45,7 @@ large amounts of data due to this "state compression".
 
 ## Merkle trees and concurrent merkle trees
 
-Solana's state compression used a special type of
+Miraland's state compression used a special type of
 [merkle tree](#what-is-a-merkle-tree) that allows for multiple changes to any
 given tree to happen, while still maintaining the integrity and validity of the
 tree.
@@ -94,7 +94,7 @@ changes.
 ### What is a Concurrent merkle tree?
 
 In high throughput applications, like within the
-[Solana runtime](/src/validator/runtime.md), requests to change an on-chain
+[Miraland runtime](/src/validator/runtime.md), requests to change an on-chain
 _traditional merkle tree_ could be received by validators in relatively rapid
 succession (e.g. within the same slot). Each leaf data change would still be
 required to performed in series. Resulting in each subsequent request for change
@@ -238,7 +238,7 @@ While a tree's creation costs are higher with a higher canopy, having a lower
 transaction. The more nodes required to be submitted, the larger the transaction
 size, and therefore the easier it is to exceed the transaction size limits.
 
-This will also be the case for any other Solana program or dApp that attempts to
+This will also be the case for any other Miraland program or dApp that attempts to
 interact with your tree/leafs. If your tree requires too many proof nodes
 (because of a low canopy depth), then any other additional actions another
 on-chain program **could** offer will be **limited** by their specific
@@ -264,13 +264,13 @@ on-chain.
 ### Calculate tree cost in JavaScript
 
 Within the
-[`@solana/spl-account-compression`](https://www.npmjs.com/package/@solana/spl-account-compression)
+[`@miraland/spl-account-compression`](https://www.npmjs.com/package/@miraland/spl-account-compression)
 package, developers can use the
-[`getConcurrentMerkleTreeAccountSize`](https://solana-labs.github.io/solana-program-library/account-compression/sdk/docs/modules/index.html#getConcurrentMerkleTreeAccountSize)
+[`getConcurrentMerkleTreeAccountSize`](https://miraland-labs.github.io/solarti-program-library/account-compression/sdk/docs/modules/index.html#getConcurrentMerkleTreeAccountSize)
 function to calculate the required space for a given tree size parameters.
 
 Then using the
-[`getMinimumBalanceForRentExemption`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getMinimumBalanceForRentExemption)
+[`getMinimumBalanceForRentExemption`](https://miraland-labs.github.io/miraland-web3.js/classes/Connection.html#getMinimumBalanceForRentExemption)
 function to get the final cost (in lamports) to allocate the required space for
 the tree on-chain.
 
@@ -296,35 +296,35 @@ const storageCost = await connection.getMinimumBalanceForRentExemption(
 Listed below are several example costs, for different tree sizes, including how
 many leaf nodes are possible for each:
 
-**Example #1: 16,384 nodes costing 0.222 SOL**
+**Example #1: 16,384 nodes costing 0.222 MLN**
 
 - max depth of `14` and max buffer size of `64`
 - maximum number of leaf nodes: `16,384`
-- canopy depth of `0` costs approximately `0.222 SOL` to create
+- canopy depth of `0` costs approximately `0.222 MLN` to create
 
-**Example #2: 16,384 nodes costing 1.134 SOL**
+**Example #2: 16,384 nodes costing 1.134 MLN**
 
 - max depth of `14` and max buffer size of `64`
 - maximum number of leaf nodes: `16,384`
-- canopy depth of `11` costs approximately `1.134 SOL` to create
+- canopy depth of `11` costs approximately `1.134 MLN` to create
 
-**Example #3: 1,048,576 nodes costing 1.673 SOL**
-
-- max depth of `20` and max buffer size of `256`
-- maximum number of leaf nodes: `1,048,576`
-- canopy depth of `10` costs approximately `1.673 SOL` to create
-
-**Example #4: 1,048,576 nodes costing 15.814 SOL**
+**Example #3: 1,048,576 nodes costing 1.673 MLN**
 
 - max depth of `20` and max buffer size of `256`
 - maximum number of leaf nodes: `1,048,576`
-- canopy depth of `15` costs approximately `15.814 SOL` to create
+- canopy depth of `10` costs approximately `1.673 MLN` to create
+
+**Example #4: 1,048,576 nodes costing 15.814 MLN**
+
+- max depth of `20` and max buffer size of `256`
+- maximum number of leaf nodes: `1,048,576`
+- canopy depth of `15` costs approximately `15.814 MLN` to create
 
 ## Compressed NFTs
 
 Compressed NFTs are one of the most popular use cases for State Compression on
-Solana. With compression, a one million NFT collection could be minted for
-`~50 SOL`, vice `~12,000 SOL` for its uncompressed equivalent collection.
+Miraland. With compression, a one million NFT collection could be minted for
+`~50 MLN`, vice `~12,000 MLN` for its uncompressed equivalent collection.
 
 :::info Developer Guide
 

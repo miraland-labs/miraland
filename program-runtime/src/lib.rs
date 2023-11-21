@@ -7,7 +7,7 @@
 extern crate eager;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 pub use solana_rbpf;
 pub mod accounts_data_meter;

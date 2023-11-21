@@ -14,7 +14,7 @@ want=$(
         command: ". ci/rust-version.sh; ci/docker-run.sh $$rust_stable_docker_image ci/stable/run-partition.sh"
         timeout_in_minutes: 30
         agents:
-          queue: "solana"
+          queue: "miraland"
         parallelism: 3
         retry:
           automatic:
@@ -23,7 +23,7 @@ want=$(
         command: ". ci/rust-version.sh; ci/docker-run.sh $$rust_stable_docker_image ci/stable/run-localnet.sh"
         timeout_in_minutes: 30
         agents:
-          queue: "solana"
+          queue: "miraland"
 EOF
 )
 

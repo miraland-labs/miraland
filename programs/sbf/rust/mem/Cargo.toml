@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-mem"
-documentation = "https://docs.rs/solana-sbf-rust-mem"
+name = "miraland-sbf-rust-mem"
+documentation = "https://docs.rs/miraland-sbf-rust-mem"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -15,12 +15,12 @@ test-bpf = []
 dummy-for-ci-check = ["test-bpf"]
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [dev-dependencies]
-solana-program-runtime = { workspace = true }
-solana-program-test = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-program-test = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [lib]
 crate-type = ["cdylib", "lib"]

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
 # Basic empirical ABI system test - can validators on all supported versions of
-# Solana talk to each other?
+# Miraland talk to each other?
 #
 
 set -e
 cd "$(dirname "$0")"
-SOLANA_ROOT="$(cd ../..; pwd)"
+MIRALAND_ROOT="$(cd ../..; pwd)"
 
 logDir="$PWD"/logs
 ledgerDir="$PWD"/config
@@ -30,14 +30,14 @@ solanaInstallGlobalOpts=(
 bootstrapInstall() {
   declare v=$1
   if [[ ! -h $solanaInstallDataDir/active_release ]]; then
-    sh "$SOLANA_ROOT"/install/solana-install-init.sh "$v" "${solanaInstallGlobalOpts[@]}"
+    sh "$MIRALAND_ROOT"/install/miraland-install-init.sh "$v" "${solanaInstallGlobalOpts[@]}"
   fi
   export PATH="$solanaInstallDataDir/active_release/bin/:$PATH"
 }
 
 bootstrapInstall "$baselineVersion"
 for v in "${otherVersions[@]}"; do
-  solana-install-init "${solanaInstallGlobalOpts[@]}" "$v"
+  miraland-install-init "${solanaInstallGlobalOpts[@]}" "$v"
   solana -V
 done
 
@@ -46,8 +46,8 @@ ORIGINAL_PATH=$PATH
 solanaInstallUse() {
   declare version=$1
   echo "--- Now using solana $version"
-  SOLANA_BIN="$solanaInstallDataDir/releases/$version/solana-release/bin"
-  export PATH="$SOLANA_BIN:$ORIGINAL_PATH"
+  MIRALAND_BIN="$solanaInstallDataDir/releases/$version/miraland-release/bin"
+  export PATH="$MIRALAND_BIN:$ORIGINAL_PATH"
 }
 
 killSession() {
@@ -89,7 +89,7 @@ for v in "${otherVersions[@]}"; do
   echo "--- Looking for bootstrap validator on gossip"
   (
     set -x
-    "$SOLANA_BIN"/solana-gossip spy \
+    "$MIRALAND_BIN"/miraland-gossip spy \
       --entrypoint 127.0.0.1:8001 \
       --num-nodes-exactly 1 \
       --timeout 30
@@ -99,7 +99,7 @@ done
 
 # Start a validator for each version and look for it
 #
-# Once https://github.com/solana-labs/solana/issues/7738 is resolved, remove
+# Once https://github.com/miraland-labs/solana/issues/7738 is resolved, remove
 # `--no-snapshot-fetch` when starting the validators
 #
 nodeCount=1
@@ -113,13 +113,13 @@ for v in "${otherVersions[@]}"; do
   (
     set -x
     tmux new-window -t abi -n "$v" " \
-      $SOLANA_BIN/solana-validator \
+      $MIRALAND_BIN/miraland-validator \
       --ledger $ledger \
       --no-snapshot-fetch \
       --entrypoint 127.0.0.1:8001 \
       -o - 2>&1 | tee $logDir/$v.log \
     "
-    "$SOLANA_BIN"/solana-gossip spy \
+    "$MIRALAND_BIN"/miraland-gossip spy \
       --entrypoint 127.0.0.1:8001 \
       --num-nodes-exactly $nodeCount \
       --timeout 30

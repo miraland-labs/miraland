@@ -1,6 +1,6 @@
 use {
     crate::{args::StakeArgs, commands::Error},
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::stake::state::StakeStateV2,
 };
 

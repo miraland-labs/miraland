@@ -1,8 +1,8 @@
 use {
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_poh::poh_recorder::PohRecorder,
     solana_sdk::{clock::FORWARD_TRANSACTIONS_TO_LEADER_AT_SLOT_OFFSET, pubkey::Pubkey},
     std::{net::SocketAddr, sync::RwLock},
 };

@@ -2,7 +2,7 @@
 
 set -e
 cd "$(dirname "$0")"
-SOLANA_ROOT="$(cd ../..; pwd)"
+MIRALAND_ROOT="$(cd ../..; pwd)"
 
 logDir="$PWD"/logs
 rm -rf "$logDir"
@@ -19,37 +19,37 @@ solanaInstallGlobalOpts=(
 bootstrapInstall() {
   declare v=$1
   if [[ ! -h $solanaInstallDataDir/active_release ]]; then
-    sh "$SOLANA_ROOT"/install/solana-install-init.sh "$v" "${solanaInstallGlobalOpts[@]}"
+    sh "$MIRALAND_ROOT"/install/miraland-install-init.sh "$v" "${solanaInstallGlobalOpts[@]}"
   fi
   export PATH="$solanaInstallDataDir/active_release/bin/:$PATH"
 }
 
 bootstrapInstall "edge"
-solana-install-init --version
-solana-install-init edge
-solana-gossip --version
-solana-dos --version
+miraland-install-init --version
+miraland-install-init edge
+miraland-gossip --version
+miraland-dos --version
 
-killall solana-gossip || true
-solana-gossip spy --gossip-port 8001 > "$logDir"/gossip.log 2>&1 &
+killall miraland-gossip || true
+miraland-gossip spy --gossip-port 8001 > "$logDir"/gossip.log 2>&1 &
 solanaGossipPid=$!
-echo "solana-gossip pid: $solanaGossipPid"
+echo "miraland-gossip pid: $solanaGossipPid"
 sleep 5
-solana-dos --mode gossip --data-type random --data-size 1232 &
+miraland-dos --mode gossip --data-type random --data-size 1232 &
 dosPid=$!
-echo "solana-dos pid: $dosPid"
+echo "miraland-dos pid: $dosPid"
 
 pass=true
 
 SECONDS=
 while ((SECONDS < 600)); do
   if ! kill -0 $solanaGossipPid; then
-    echo "solana-gossip is no longer running after $SECONDS seconds"
+    echo "miraland-gossip is no longer running after $SECONDS seconds"
     pass=false
     break
   fi
   if ! kill -0 $dosPid; then
-    echo "solana-dos is no longer running after $SECONDS seconds"
+    echo "miraland-dos is no longer running after $SECONDS seconds"
     pass=false
     break
   fi

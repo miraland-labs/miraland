@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana Last Restart Slot system call
+ * @brief Miraland Last Restart Slot system call
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

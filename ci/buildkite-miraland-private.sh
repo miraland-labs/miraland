@@ -109,15 +109,15 @@ command_step() {
     timeout_in_minutes: $3
     artifact_paths: "log-*.txt"
     agents:
-      queue: "sol-private"
+      queue: "mln-private"
 EOF
 }
 
 
 # trigger_secondary_step() {
 #   cat  >> "$output_file" <<"EOF"
-#   - name: "Trigger Build on solana-secondary"
-#     trigger: "solana-secondary"
+#   - name: "Trigger Build on miraland-secondary"
+#     trigger: "miraland-secondary"
 #     branches: "!pull/*"
 #     async: true
 #     build:
@@ -138,7 +138,7 @@ all_test_steps() {
   wait_step
 
   # Full test suite
-  .buildkite/scripts/build-stable.sh sol-private >> "$output_file"
+  .buildkite/scripts/build-stable.sh mln-private >> "$output_file"
 
   # Docs tests
   if affects \
@@ -173,7 +173,7 @@ all_test_steps() {
     timeout_in_minutes: 35
     artifact_paths: "sbf-dumps.tar.bz2"
     agents:
-      queue: "sol-private"
+      queue: "mln-private"
 EOF
   else
     annotate --style info \
@@ -196,7 +196,7 @@ EOF
              ^ci/downstream-projects \
              .buildkite/scripts/build-downstream-projects.sh \
       ; then
-    .buildkite/scripts/build-downstream-projects.sh sol-private >> "$output_file"
+    .buildkite/scripts/build-downstream-projects.sh mln-private >> "$output_file"
   else
     annotate --style info \
       "downstream-projects skipped as no relevant files were modified"
@@ -223,7 +223,7 @@ EOF
              ^ci/test-coverage.sh \
              ^ci/test-bench.sh \
       ; then
-    .buildkite/scripts/build-bench.sh sol-private >> "$output_file"
+    .buildkite/scripts/build-bench.sh mln-private >> "$output_file"
   else
     annotate --style info --context test-bench \
       "Bench skipped as no .rs files were modified"
@@ -269,7 +269,7 @@ pull_or_push_steps() {
 #   start_pipeline "Tag pipeline for $BUILDKITE_TAG"
 
 #   annotate --style info --context release-tag \
-#     "https://github.com/solana-labs/solana/releases/$BUILDKITE_TAG"
+#     "https://github.com/miraland-labs/miraland/releases/$BUILDKITE_TAG"
 
 #   # Jump directly to the secondary build to publish release artifacts quickly
 #   trigger_secondary_step
@@ -287,7 +287,7 @@ if [[ $BUILDKITE_BRANCH =~ ^pull ]]; then
 
   # Add helpful link back to the corresponding Github Pull Request
   annotate --style info --context pr-backlink \
-    "Github Pull Request: https://github.com/solana-labs/solana/$BUILDKITE_BRANCH"
+    "Github Pull Request: https://github.com/miraland-labs/miraland/$BUILDKITE_BRANCH"
 
   if [[ $GITHUB_USER = "dependabot[bot]" ]]; then
     command_step dependabot "ci/dependabot-pr.sh" 5

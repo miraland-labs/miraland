@@ -23,7 +23,7 @@ pub fn parse_associated_token(
         _ => {
             // Runtime should prevent this from ever happening
             return Err(ParseInstructionError::InstructionKeyMismatch(
-                ParsableProgram::SplAssociatedTokenAccount,
+                ParsableProgram::SolartiAssociatedTokenAccount,
             ));
         }
     }
@@ -31,7 +31,7 @@ pub fn parse_associated_token(
         AssociatedTokenAccountInstruction::Create
     } else {
         AssociatedTokenAccountInstruction::try_from_slice(&instruction.data)
-            .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken))?
+            .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken))?
     };
 
     match ata_instruction {
@@ -85,7 +85,7 @@ fn check_num_associated_token_accounts(
     accounts: &[u8],
     num: usize,
 ) -> Result<(), ParseInstructionError> {
-    check_num_accounts(accounts, num, ParsableProgram::SplAssociatedTokenAccount)
+    check_num_accounts(accounts, num, ParsableProgram::SolartiAssociatedTokenAccount)
 }
 
 #[cfg(test)]

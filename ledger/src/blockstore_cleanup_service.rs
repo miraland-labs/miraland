@@ -10,7 +10,7 @@ use {
         blockstore_db::{Result as BlockstoreResult, DATA_SHRED_CF},
     },
     crossbeam_channel::{Receiver, RecvTimeoutError},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_sdk::clock::Slot,
     std::{
         string::ToString,
@@ -59,7 +59,7 @@ impl BlockstoreCleanupService {
         );
 
         let t_cleanup = Builder::new()
-            .name("solBstoreClean".to_string())
+            .name("mlnBstoreClean".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     break;
@@ -225,7 +225,7 @@ impl BlockstoreCleanupService {
             let blockstore = blockstore.clone();
             let purge_complete1 = purge_complete.clone();
             let _t_purge = Builder::new()
-                .name("solLedgerPurge".to_string())
+                .name("mlnLedgerPurge".to_string())
                 .spawn(move || {
                     let mut slot_update_time = Measure::start("slot_update");
                     *blockstore.lowest_cleanup_slot.write().unwrap() = lowest_cleanup_slot;
@@ -316,7 +316,7 @@ mod tests {
     fn test_find_slots_to_clean() {
         // BlockstoreCleanupService::find_slots_to_clean() does not modify the
         // Blockstore, so we can make repeated calls on the same slots
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Blockstore::open(ledger_path.path()).unwrap();
 
@@ -389,7 +389,7 @@ mod tests {
 
     #[test]
     fn test_cleanup1() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Blockstore::open(ledger_path.path()).unwrap();
         let (shreds, _) = make_many_slot_entries(0, 50, 5);
@@ -421,7 +421,7 @@ mod tests {
 
     #[test]
     fn test_cleanup_speed() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(Blockstore::open(ledger_path.path()).unwrap());
         let (sender, receiver) = unbounded();

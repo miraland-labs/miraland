@@ -3,7 +3,7 @@ name: release-artifacts-auto
 on:
   push:
     branches:
-      - master
+      - main
       - v[0-9]+.[0-9]+
     tags:
       - v[0-9]+.[0-9]+.[0-9]+
@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   release-artifacts:
-    if: github.repository == 'solana-labs/solana'
+    if: github.repository == 'miraland-labs/miraland'
     uses: ./.github/workflows/release-artifacts.yml
     with:
       commit: ${{ github.sha }}

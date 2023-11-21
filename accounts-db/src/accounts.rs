@@ -3056,7 +3056,7 @@ mod tests {
 
     #[test]
     fn huge_clean() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts = Accounts::new_with_config_for_tests(
             Vec::new(),
             &ClusterType::Development,
@@ -3112,7 +3112,7 @@ mod tests {
 
     #[test]
     fn test_instructions() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts = Accounts::new_with_config_for_tests(
             Vec::new(),
             &ClusterType::Development,
@@ -3138,7 +3138,7 @@ mod tests {
 
     #[test]
     fn test_overrides() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts = Accounts::new_with_config_for_tests(
             Vec::new(),
             &ClusterType::Development,
@@ -4025,7 +4025,7 @@ mod tests {
 
     #[test]
     fn test_load_accounts_too_high_prioritization_fee() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let lamports_per_signature = 5000_u64;
         let request_units = 1_000_000_u32;
         let request_unit_price = 2_000_000_000_u64;

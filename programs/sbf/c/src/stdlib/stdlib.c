@@ -8,7 +8,7 @@
  * to it as a parameter to a re-entrant function.  In this test
  * _atoi_r is a re-entrant version of the standard atoi function.
  */
-#include <sol/assert.h>
+#include <mln/assert.h>
 #include <stdlib.h>
 
 extern uint64_t entrypoint(const uint8_t *input) {

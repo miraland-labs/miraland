@@ -2,9 +2,9 @@ use {
     super::Result,
     bincode::serialized_size,
     crossbeam_channel::Receiver,
-    solana_entry::entry::Entry,
-    solana_ledger::shred::ShredData,
-    solana_poh::poh_recorder::WorkingBankEntry,
+    miraland_entry::entry::Entry,
+    miraland_ledger::shred::ShredData,
+    miraland_poh::poh_recorder::WorkingBankEntry,
     solana_runtime::bank::Bank,
     solana_sdk::clock::Slot,
     std::{
@@ -101,7 +101,7 @@ mod tests {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        solana_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         solana_sdk::{
             genesis_config::GenesisConfig, pubkey::Pubkey, system_transaction,
             transaction::Transaction,

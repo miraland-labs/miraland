@@ -28,11 +28,11 @@ pub enum MetricsError {
     VarError(#[from] env::VarError),
     #[error(transparent)]
     ReqwestError(#[from] reqwest::Error),
-    #[error("SOLANA_METRICS_CONFIG is invalid: '{0}'")]
+    #[error("MIRALAND_METRICS_CONFIG is invalid: '{0}'")]
     ConfigInvalid(String),
-    #[error("SOLANA_METRICS_CONFIG is incomplete")]
+    #[error("MIRALAND_METRICS_CONFIG is incomplete")]
     ConfigIncomplete,
-    #[error("SOLANA_METRICS_CONFIG database mismatch: {0}")]
+    #[error("MIRALAND_METRICS_CONFIG database mismatch: {0}")]
     DbMismatch(String),
 }
 
@@ -172,10 +172,10 @@ impl MetricsWriter for InfluxDbMetricsWriter {
 
 impl Default for MetricsAgent {
     fn default() -> Self {
-        let max_points_per_sec = env::var("SOLANA_METRICS_MAX_POINTS_PER_SECOND")
+        let max_points_per_sec = env::var("MIRALAND_METRICS_MAX_POINTS_PER_SECOND")
             .map(|x| {
                 x.parse()
-                    .expect("Failed to parse SOLANA_METRICS_MAX_POINTS_PER_SECOND")
+                    .expect("Failed to parse MIRALAND_METRICS_MAX_POINTS_PER_SECOND")
             })
             .unwrap_or(4000);
 
@@ -196,7 +196,7 @@ impl MetricsAgent {
         let (sender, receiver) = unbounded::<MetricsCommand>();
 
         thread::Builder::new()
-            .name("solMetricsAgent".into())
+            .name("mlnMetricsAgent".into())
             .spawn(move || Self::run(&receiver, &writer, write_frequency, max_points_per_sec))
             .unwrap();
 
@@ -404,7 +404,7 @@ impl MetricsConfig {
 
 fn get_metrics_config() -> Result<MetricsConfig, MetricsError> {
     let mut config = MetricsConfig::default();
-    let config_var = env::var("SOLANA_METRICS_CONFIG")?;
+    let config_var = env::var("MIRALAND_METRICS_CONFIG")?;
     if config_var.is_empty() {
         Err(env::VarError::NotPresent)?;
     }

@@ -1,7 +1,7 @@
 [package]
-name = "solana-client-test"
-description = "Solana RPC Test"
-documentation = "https://docs.rs/solana-client-test"
+name = "miraland-client-test"
+description = "Miraland RPC Test"
+documentation = "https://docs.rs/miraland-client-test"
 publish = false
 version = { workspace = true }
 authors = { workspace = true }
@@ -14,29 +14,29 @@ edition = { workspace = true }
 futures-util = { workspace = true }
 rand = { workspace = true }
 serde_json = { workspace = true }
-solana-client = { workspace = true }
-solana-ledger = { workspace = true }
-solana-measure = { workspace = true }
-solana-merkle-tree = { workspace = true }
-solana-metrics = { workspace = true }
-solana-perf = { workspace = true }
-solana-pubsub-client = { workspace = true }
-solana-rayon-threadlimit = { workspace = true }
-solana-rpc = { workspace = true }
-solana-rpc-client = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
-solana-test-validator = { workspace = true }
-solana-transaction-status = { workspace = true }
-solana-version = { workspace = true }
+miraland-client = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-merkle-tree = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-pubsub-client = { workspace = true }
+miraland-rayon-threadlimit = { workspace = true }
+miraland-rpc = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-test-validator = { workspace = true }
+miraland-transaction-status = { workspace = true }
+miraland-version = { workspace = true }
 systemstat = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
 
 [dev-dependencies]
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

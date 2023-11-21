@@ -8,21 +8,21 @@ use {
     futures::stream::FuturesUnordered,
     log::{debug, error, info},
     serde_json::json,
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::pubkey_of,
         input_validators::{is_slot, is_valid_pubkey},
     },
-    solana_cli_output::{
+    miraland_cli_output::{
         display::println_transaction, CliBlock, CliTransaction, CliTransactionConfirmation,
         OutputFormat,
     },
-    solana_ledger::{
+    miraland_ledger::{
         bigtable_upload::ConfirmedBlockUploadConfig, blockstore::Blockstore,
         blockstore_options::AccessType,
     },
     solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
     solana_storage_bigtable::CredentialType,
-    solana_transaction_status::{
+    miraland_transaction_status::{
         BlockEncodingOptions, ConfirmedBlock, EncodeError, TransactionDetails,
         UiTransactionEncoding, VersionedConfirmedBlock,
     },
@@ -70,7 +70,7 @@ async fn upload(
             ending_slot,
             starting_slot.saturating_add(config.max_num_slots_to_check as u64 * 2),
         );
-        let last_slot_checked = solana_ledger::bigtable_upload::upload_confirmed_blocks(
+        let last_slot_checked = miraland_ledger::bigtable_upload::upload_confirmed_blocks(
             blockstore.clone(),
             bigtable.clone(),
             starting_slot,
@@ -95,7 +95,7 @@ async fn delete_slots(
         .await
         .map_err(|err| format!("Failed to connect to storage: {err:?}"))?;
 
-    solana_ledger::bigtable_delete::delete_confirmed_blocks(bigtable, slots, dry_run).await
+    miraland_ledger::bigtable_delete::delete_confirmed_blocks(bigtable, slots, dry_run).await
 }
 
 async fn first_available_block(

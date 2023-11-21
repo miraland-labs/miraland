@@ -2,7 +2,7 @@ use {
     crate::repair::request_response::RequestResponse,
     lru::LruCache,
     rand::{thread_rng, Rng},
-    solana_ledger::shred::Nonce,
+    miraland_ledger::shred::Nonce,
 };
 
 pub const DEFAULT_REQUEST_EXPIRATION_MS: u64 = 60_000;
@@ -87,7 +87,7 @@ pub(crate) mod tests {
     use {
         super::*,
         crate::repair::serve_repair::ShredRepairType,
-        solana_ledger::shred::{Shred, ShredFlags},
+        miraland_ledger::shred::{Shred, ShredFlags},
         solana_sdk::timing::timestamp,
     };
 

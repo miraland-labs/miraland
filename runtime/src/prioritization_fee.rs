@@ -1,5 +1,5 @@
 use {
-    solana_measure::measure,
+    miraland_measure::measure,
     solana_sdk::{clock::Slot, pubkey::Pubkey, saturating_add_assign},
     std::collections::HashMap,
 };
@@ -270,7 +270,7 @@ mod tests {
 
     #[test]
     fn test_update_prioritization_fee() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let write_account_a = Pubkey::new_unique();
         let write_account_b = Pubkey::new_unique();
         let write_account_c = Pubkey::new_unique();

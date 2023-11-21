@@ -20,8 +20,8 @@ use {
         },
         system_instruction, system_program,
     },
-    solana_sbf_rust_invoked::instructions::*,
-    solana_sbf_rust_realloc::instructions::*,
+    miraland_sbf_rust_invoked::instructions::*,
+    miraland_sbf_rust_realloc::instructions::*,
     std::{cell::RefCell, mem, rc::Rc, slice},
 };
 

@@ -10,7 +10,7 @@ updates:
   schedule:
     interval: daily
     time: "01:00"
-    timezone: America/Los_Angeles
+    timezone: Asia/Shanghai
   #labels:
   #  - "automerge"
   open-pull-requests-limit: 6

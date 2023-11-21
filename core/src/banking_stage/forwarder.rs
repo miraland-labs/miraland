@@ -9,14 +9,14 @@ use {
         next_leader::{next_leader, next_leader_tpu_vote},
         tracer_packet_stats::TracerPacketStats,
     },
-    solana_client::{connection_cache::ConnectionCache, tpu_connection::TpuConnection},
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_measure::measure_us,
-    solana_perf::{data_budget::DataBudget, packet::Packet},
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_client::{connection_cache::ConnectionCache, tpu_connection::TpuConnection},
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_measure::measure_us,
+    miraland_perf::{data_budget::DataBudget, packet::Packet},
+    miraland_poh::poh_recorder::PohRecorder,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{pubkey::Pubkey, transport::TransportError},
-    solana_streamer::sendmmsg::batch_send,
+    miraland_streamer::sendmmsg::batch_send,
     std::{
         iter::repeat,
         net::{SocketAddr, UdpSocket},
@@ -276,16 +276,16 @@ mod tests {
             unprocessed_packet_batches::{DeserializedPacket, UnprocessedPacketBatches},
             unprocessed_transaction_storage::ThreadType,
         },
-        solana_gossip::cluster_info::Node,
-        solana_ledger::{blockstore::Blockstore, genesis_utils::GenesisConfigInfo},
-        solana_perf::packet::PacketFlags,
-        solana_poh::{poh_recorder::create_test_recorder, poh_service::PohService},
+        miraland_gossip::cluster_info::Node,
+        miraland_ledger::{blockstore::Blockstore, genesis_utils::GenesisConfigInfo},
+        miraland_perf::packet::PacketFlags,
+        miraland_poh::{poh_recorder::create_test_recorder, poh_service::PohService},
         solana_runtime::bank::Bank,
         solana_sdk::{
             hash::Hash, poh_config::PohConfig, signature::Keypair, signer::Signer,
             system_transaction, transaction::VersionedTransaction,
         },
-        solana_streamer::recvmmsg::recv_mmsg,
+        miraland_streamer::recvmmsg::recv_mmsg,
         std::sync::atomic::AtomicBool,
         tempfile::TempDir,
     };
@@ -342,7 +342,7 @@ mod tests {
     #[test]
     #[ignore]
     fn test_forwarder_budget() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let TestSetup {
             bank_forks,
             poh_recorder,
@@ -409,7 +409,7 @@ mod tests {
     #[test]
     #[ignore]
     fn test_handle_forwarding() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let TestSetup {
             bank_forks,
             poh_recorder,

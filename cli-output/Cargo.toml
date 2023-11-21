@@ -1,7 +1,7 @@
 [package]
-name = "solana-cli-output"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-cli-output"
+name = "miraland-cli-output"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-cli-output"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -21,14 +21,14 @@ pretty-hex = { workspace = true }
 semver = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-cli-config = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-sdk = { workspace = true }
-solana-transaction-status = { workspace = true }
-solana-vote-program = { workspace = true }
-spl-memo = { workspace = true, features = ["no-entrypoint"] }
+miraland-account-decoder = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-cli-config = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-transaction-status = { workspace = true }
+miraland-vote-program = { workspace = true }
+solarti-memo = { workspace = true, features = ["no-entrypoint"] }
 
 [dev-dependencies]
 ed25519-dalek = { workspace = true }

@@ -2,7 +2,7 @@ use {
     crate::blockstore::Blockstore,
     crossbeam_channel::{bounded, unbounded},
     log::*,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_sdk::clock::Slot,
     std::{
         cmp::{max, min},
@@ -168,7 +168,7 @@ pub async fn upload_confirmed_blocks(
                     let slot_receiver = slot_receiver.clone();
                     let exit = exit.clone();
                     std::thread::Builder::new()
-                        .name(format!("solBigTGetBlk{i:02}"))
+                        .name(format!("mlnBigTGetBlk{i:02}"))
                         .spawn(move || {
                             let start = Instant::now();
                             let mut num_blocks_read = 0;

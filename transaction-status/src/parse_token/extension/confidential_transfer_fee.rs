@@ -1,6 +1,6 @@
 use {
     super::*,
-    solana_account_decoder::parse_token_extension::UiConfidentialTransferFeeConfig,
+    miraland_account_decoder::parse_token_extension::UiConfidentialTransferFeeConfig,
     spl_token_2022::{
         extension::confidential_transfer_fee::{instruction::*, ConfidentialTransferFeeConfig},
         instruction::{decode_instruction_data, decode_instruction_type},
@@ -13,13 +13,13 @@ pub(in crate::parse_token) fn parse_confidential_transfer_fee_instruction(
     account_keys: &AccountKeys,
 ) -> Result<ParsedInstructionEnum, ParseInstructionError> {
     match decode_instruction_type(instruction_data)
-        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken))?
+        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken))?
     {
         ConfidentialTransferFeeInstruction::InitializeConfidentialTransferFeeConfig => {
             check_num_token_accounts(account_indexes, 1)?;
             let confidential_transfer_mint: ConfidentialTransferFeeConfig =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let confidential_transfer_mint: UiConfidentialTransferFeeConfig =
                 confidential_transfer_mint.into();
@@ -37,7 +37,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_fee_instruction(
             check_num_token_accounts(account_indexes, 4)?;
             let withdraw_withheld_data: WithdrawWithheldTokensFromMintData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let proof_instruction_offset: i8 = withdraw_withheld_data.proof_instruction_offset;
             let mut value = json!({
@@ -64,7 +64,7 @@ pub(in crate::parse_token) fn parse_confidential_transfer_fee_instruction(
         ConfidentialTransferFeeInstruction::WithdrawWithheldTokensFromAccounts => {
             let withdraw_withheld_data: WithdrawWithheldTokensFromAccountsData =
                 *decode_instruction_data(instruction_data).map_err(|_| {
-                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SplToken)
+                    ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
                 })?;
             let num_token_accounts = withdraw_withheld_data.num_token_accounts;
             check_num_token_accounts(account_indexes, 4 + num_token_accounts as usize)?;

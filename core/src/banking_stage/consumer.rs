@@ -9,13 +9,13 @@ use {
         BankingStageStats,
     },
     itertools::Itertools,
-    solana_accounts_db::{
+    miraland_accounts_db::{
         transaction_error_metrics::TransactionErrorMetrics,
         transaction_results::TransactionCheckResult,
     },
-    solana_ledger::token_balances::collect_token_balances,
-    solana_measure::{measure::Measure, measure_us},
-    solana_poh::poh_recorder::{
+    miraland_ledger::token_balances::collect_token_balances,
+    miraland_measure::{measure::Measure, measure_us},
+    miraland_poh::poh_recorder::{
         BankStart, PohRecorderError, RecordTransactionsSummary, RecordTransactionsTimings,
         TransactionRecorder,
     },
@@ -737,19 +737,19 @@ mod tests {
             unprocessed_transaction_storage::ThreadType,
         },
         crossbeam_channel::{unbounded, Receiver},
-        solana_cost_model::{cost_model::CostModel, transaction_cost::TransactionCost},
-        solana_entry::entry::{next_entry, next_versioned_entry},
-        solana_ledger::{
+        miraland_cost_model::{cost_model::CostModel, transaction_cost::TransactionCost},
+        miraland_entry::entry::{next_entry, next_versioned_entry},
+        miraland_ledger::{
             blockstore::{entries_to_test_shreds, Blockstore},
             blockstore_processor::TransactionStatusSender,
             genesis_utils::GenesisConfigInfo,
             get_tmp_ledger_path_auto_delete,
             leader_schedule_cache::LeaderScheduleCache,
         },
-        solana_perf::packet::Packet,
-        solana_poh::poh_recorder::{PohRecorder, WorkingBankEntry},
+        miraland_perf::packet::Packet,
+        miraland_poh::poh_recorder::{PohRecorder, WorkingBankEntry},
         solana_program_runtime::timings::ProgramTiming,
-        solana_rpc::transaction_status_service::TransactionStatusService,
+        miraland_rpc::transaction_status_service::TransactionStatusService,
         solana_runtime::prioritization_fee_cache::PrioritizationFeeCache,
         solana_sdk::{
             account::AccountSharedData,
@@ -770,7 +770,7 @@ mod tests {
             system_instruction, system_transaction,
             transaction::{MessageHash, Transaction, VersionedTransaction},
         },
-        solana_transaction_status::{TransactionStatusMeta, VersionedTransactionWithStatusMeta},
+        miraland_transaction_status::{TransactionStatusMeta, VersionedTransactionWithStatusMeta},
         std::{
             borrow::Cow,
             path::Path,
@@ -932,7 +932,7 @@ mod tests {
 
     #[test]
     fn test_bank_process_and_record_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -1061,7 +1061,7 @@ mod tests {
 
     #[test]
     fn test_bank_process_and_record_transactions_all_unexecuted() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -1154,7 +1154,7 @@ mod tests {
     fn bank_process_and_record_transactions_cost_tracker(
         apply_cost_tracker_during_replay_enabled: bool,
     ) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -1306,7 +1306,7 @@ mod tests {
 
     #[test]
     fn test_bank_process_and_record_transactions_account_in_use() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -1383,7 +1383,7 @@ mod tests {
 
     #[test]
     fn test_process_transactions_instruction_error() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let lamports = 10_000;
         let GenesisConfigInfo {
             genesis_config,
@@ -1445,7 +1445,7 @@ mod tests {
 
     #[test]
     fn test_process_transactions_account_in_use() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -1504,7 +1504,7 @@ mod tests {
 
     #[test]
     fn test_process_transactions_returns_unprocessed_txs() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -1584,12 +1584,12 @@ mod tests {
 
     #[test]
     fn test_write_persist_transaction_status() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             mut genesis_config,
             mint_keypair,
             ..
-        } = create_slow_genesis_config(solana_sdk::native_token::sol_to_lamports(1000.0));
+        } = create_slow_genesis_config(solana_sdk::native_token::mln_to_lamports(1000.0));
         genesis_config.rent.lamports_per_byte_year = 50;
         genesis_config.rent.exemption_threshold = 2.0;
         let bank = Arc::new(Bank::new_no_wallclock_throttle_for_tests(&genesis_config));
@@ -1717,7 +1717,7 @@ mod tests {
 
     #[test]
     fn test_write_persist_loaded_addresses() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,

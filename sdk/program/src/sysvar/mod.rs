@@ -30,7 +30,7 @@
 //! }
 //! ```
 //!
-//! Since Solana sysvars are accounts, if the `AccountInfo` is provided to the
+//! Since Miraland sysvars are accounts, if the `AccountInfo` is provided to the
 //! program, then the program can deserialize the sysvar with
 //! [`Sysvar::from_account_info`] to access its data, as in this example that
 //! again logs the [`clock`] sysvar.
@@ -77,7 +77,7 @@
 //!
 //! [`sysvar::ID`]: crate::sysvar::ID
 //!
-//! For more details see the Solana [documentation on sysvars][sysvardoc].
+//! For more details see the Miraland [documentation on sysvars][sysvardoc].
 //!
 //! [sysvardoc]: https://docs.solana.com/developing/runtime-facilities/sysvars
 

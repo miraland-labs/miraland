@@ -1,7 +1,7 @@
 [package]
-name = "solana-clap-v3-utils"
-description = "Solana utilities for the clap v3"
-documentation = "https://docs.rs/solana-clap-utils"
+name = "miraland-clap-v3-utils"
+description = "Miraland utilities for the clap v3"
+documentation = "https://docs.rs/miraland-clap-utils"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -13,9 +13,9 @@ edition = { workspace = true }
 chrono = { workspace = true, features = ["default"] }
 clap = { version = "3.2.23", features = ["cargo"] }
 rpassword = { workspace = true }
-solana-remote-wallet = { workspace = true }
-solana-sdk = { workspace = true }
-solana-zk-token-sdk = { workspace = true }
+miraland-remote-wallet = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-zk-token-sdk = { workspace = true }
 thiserror = { workspace = true }
 tiny-bip39 = { workspace = true }
 uriparse = { workspace = true }
@@ -26,7 +26,7 @@ assert_matches = { workspace = true }
 tempfile = { workspace = true }
 
 [lib]
-name = "solana_clap_v3_utils"
+name = "miraland_clap_v3_utils"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

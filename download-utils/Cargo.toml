@@ -1,7 +1,7 @@
 [package]
-name = "solana-download-utils"
-description = "Solana Download Utils"
-documentation = "https://docs.rs/solana-download-utils"
+name = "miraland-download-utils"
+description = "Miraland Download Utils"
+documentation = "https://docs.rs/miraland-download-utils"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -14,12 +14,12 @@ console = { workspace = true }
 indicatif = { workspace = true }
 log = { workspace = true }
 reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_download_utils"
+name = "miraland_download_utils"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

@@ -55,7 +55,7 @@ _ ci/check-ssh-keys.sh
 
 scripts/increment-cargo-version.sh check
 
-if ! [ -v SOLANA_CI_ALLOW_STALE_CARGO_LOCK ] ; then
+if ! [ -v MIRALAND_CI_ALLOW_STALE_CARGO_LOCK ] ; then
 # Disallow uncommitted Cargo.lock changes
 (
   _ scripts/cargo-for-all-lock-files.sh tree >/dev/null

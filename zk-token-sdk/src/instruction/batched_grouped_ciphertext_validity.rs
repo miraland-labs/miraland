@@ -6,7 +6,7 @@
 //! grouped-ciphertext validity proofs.
 //!
 //! Currently, the batched grouped-ciphertext validity proof is restricted to ciphertexts with two
-//! handles. In accordance with the SPL Token program application, the first decryption handle
+//! handles. In accordance with the Solarti Token program application, the first decryption handle
 //! associated with the proof is referred to as the "destination" handle and the second decryption
 //! handle is referred to as the "auditor" handle. Furthermore, the first grouped ciphertext is
 //! referred to as the "lo" ciphertext and the second grouped ciphertext is referred to as the "hi"

@@ -5,18 +5,18 @@ openbook_dex() {
     set -x
     rm -rf openbook-dex
     git clone https://github.com/openbook-dex/program.git openbook-dex
-    # copy toolchain file to use solana's rust version
-    cp "$SOLANA_DIR"/rust-toolchain.toml openbook-dex/
+    # copy toolchain file to use miraland's rust version
+    cp "$MIRALAND_DIR"/rust-toolchain.toml openbook-dex/
     cd openbook-dex || exit 1
 
-    update_solana_dependencies . "$SOLANA_VER"
-    patch_crates_io_solana Cargo.toml "$SOLANA_DIR"
+    update_miraland_dependencies . "$MIRALAND_VER"
+    patch_crates_io_miraland Cargo.toml "$MIRALAND_DIR"
     cat >> Cargo.toml <<EOF
-anchor-lang = { git = "https://github.com/coral-xyz/anchor.git", branch = "master" }
+anchor-lang = { git = "https://github.com/coral-xyz/anchor.git", branch = "main" }
 EOF
-    patch_crates_io_solana dex/Cargo.toml "$SOLANA_DIR"
+    patch_crates_io_miraland dex/Cargo.toml "$MIRALAND_DIR"
     cat >> dex/Cargo.toml <<EOF
-anchor-lang = { git = "https://github.com/coral-xyz/anchor.git", branch = "master" }
+anchor-lang = { git = "https://github.com/coral-xyz/anchor.git", branch = "main" }
 [workspace]
 exclude = [
     "crank",

@@ -23,18 +23,18 @@ if [[ $VERSION != "$(cat target/perf-libs/.version 2> /dev/null)" ]]; then
     set -x
     cd target/perf-libs
 
-    if [[ -r ~/.cache/solana-perf-$PERF_LIBS_VERSION.tgz ]]; then
-      cp ~/.cache/solana-perf-$PERF_LIBS_VERSION.tgz solana-perf.tgz
+    if [[ -r ~/.cache/miraland-perf-$PERF_LIBS_VERSION.tgz ]]; then
+      cp ~/.cache/miraland-perf-$PERF_LIBS_VERSION.tgz miraland-perf.tgz
     else
-      curl -L --retry 5 --retry-delay 2 --retry-connrefused -o solana-perf.tgz \
-        https://github.com/solana-labs/solana-perf-libs/releases/download/$PERF_LIBS_VERSION/solana-perf.tgz
+      curl -L --retry 5 --retry-delay 2 --retry-connrefused -o miraland-perf.tgz \
+        https://github.com/miraland-labs/miraland-perf-libs/releases/download/$PERF_LIBS_VERSION/miraland-perf.tgz
     fi
-    tar zxvf solana-perf.tgz
+    tar zxvf miraland-perf.tgz
 
-    if [[ ! -r ~/.cache/solana-perf-$PERF_LIBS_VERSION.tgz ]]; then
+    if [[ ! -r ~/.cache/miraland-perf-$PERF_LIBS_VERSION.tgz ]]; then
       # Save it for next time
       mkdir -p ~/.cache
-      mv solana-perf.tgz ~/.cache/solana-perf-$PERF_LIBS_VERSION.tgz
+      mv miraland-perf.tgz ~/.cache/miraland-perf-$PERF_LIBS_VERSION.tgz
     fi
     echo "$VERSION" > .version
   )

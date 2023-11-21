@@ -2,9 +2,9 @@ mod snapshot_gossip_manager;
 use {
     crossbeam_channel::{Receiver, Sender},
     snapshot_gossip_manager::SnapshotGossipManager,
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_measure::measure_us,
-    solana_perf::thread::renice_this_thread,
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_measure::measure_us,
+    miraland_perf::thread::renice_this_thread,
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_config::SnapshotConfig,
@@ -40,7 +40,7 @@ impl SnapshotPackagerService {
         enable_gossip_push: bool,
     ) -> Self {
         let t_snapshot_packager = Builder::new()
-            .name("solSnapshotPkgr".to_string())
+            .name("mlnSnapshotPkgr".to_string())
             .spawn(move || {
                 info!("SnapshotPackagerService has started");
                 renice_this_thread(snapshot_config.packager_thread_niceness_adj).unwrap();

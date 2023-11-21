@@ -1,7 +1,7 @@
-//! Logging utilities for Rust-based Solana programs.
+//! Logging utilities for Rust-based Miraland programs.
 //!
 //! Logging is the main mechanism for getting debugging information out of
-//! running Solana programs, and there are several functions available for doing
+//! running Miraland programs, and there are several functions available for doing
 //! so efficiently, depending on the type of data being logged.
 //!
 //! The most common way to emit logs is through the [`msg!`] macro, which logs
@@ -16,16 +16,16 @@
 //!   network. Note though that transactions that fail during pre-flight
 //!   simulation are not displayed here.
 //! - When submitting transactions via [`RpcClient`], if Rust's own logging is
-//!   active then the `solana_rpc_client` crate logs at the "debug" level any logs
+//!   active then the `miraland_rpc_client` crate logs at the "debug" level any logs
 //!   for transactions that failed during simulation. If using [`env_logger`]
-//!   these logs can be activated by setting `RUST_LOG=solana_rpc_client=debug`.
+//!   these logs can be activated by setting `RUST_LOG=miraland_rpc_client=debug`.
 //! - Logs can be retrieved from a finalized transaction by calling
 //!   [`RpcClient::get_transaction`].
 //! - Block explorers may display logs.
 //!
-//! [`RpcClient`]: https://docs.rs/solana-rpc-client/latest/solana_rpc_client/rpc_client/struct.RpcClient.html
+//! [`RpcClient`]: https://docs.rs/miraland-rpc-client/latest/miraland_rpc_client/rpc_client/struct.RpcClient.html
 //! [`env_logger`]: https://docs.rs/env_logger
-//! [`RpcClient::get_transaction`]: https://docs.rs/solana-rpc-client/latest/solana_rpc_client/rpc_client/struct.RpcClient.html#method.get_transaction
+//! [`RpcClient::get_transaction`]: https://docs.rs/miraland-rpc-client/latest/miraland_rpc_client/rpc_client/struct.RpcClient.html#method.get_transaction
 //!
 //! While most logging functions are defined in this module, [`Pubkey`]s can
 //! also be efficiently logged with the [`Pubkey::log`] function.
@@ -66,7 +66,7 @@ macro_rules! info {
 /// [`format!`]: https://doc.rust-lang.org/std/fmt/fn.format.html
 ///
 /// Note that Rust's formatting machinery is relatively CPU-intensive
-/// for constrained environments like the Solana VM.
+/// for constrained environments like the Miraland VM.
 ///
 /// # Examples
 ///

@@ -56,7 +56,7 @@ function analyze_packet_loss {
     done
 
     execution_step "Analyzing Packet Loss"
-    "${REPO_ROOT}"/solana-release/bin/solana-log-analyzer analyze -f ./iftop-logs/ | sort -k 2 -g
+    "${REPO_ROOT}"/miraland-release/bin/miraland-log-analyzer analyze -f ./iftop-logs/ | sort -k 2 -g
   )
 }
 
@@ -206,7 +206,7 @@ function upload_results_to_slack() {
 
   COMMIT=$(git rev-parse HEAD)
   COMMIT_BUTTON_TEXT="$(echo "$COMMIT" | head -c 8)"
-  COMMIT_URL="https://github.com/solana-labs/solana/commit/${COMMIT}"
+  COMMIT_URL="https://github.com/miraland-labs/solana/commit/${COMMIT}"
 
   if [[ -n $BUILDKITE_BUILD_URL ]] ; then
     BUILD_BUTTON_TEXT="Build Kite Job"
@@ -305,7 +305,7 @@ function upload_results_to_discord() {
 
   COMMIT=$(git rev-parse HEAD)
   COMMIT_BUTTON_TEXT="$(echo "$COMMIT" | head -c 8)"
-  COMMIT_URL="https://github.com/solana-labs/solana/commit/${COMMIT}"
+  COMMIT_URL="https://github.com/miraland-labs/solana/commit/${COMMIT}"
 
   if [[ -n $BUILDKITE_BUILD_URL ]] ; then
     BUILD_BUTTON_TEXT="Build Kite Job"

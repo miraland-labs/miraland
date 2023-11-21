@@ -1,5 +1,5 @@
 [package]
-name = "solana-transaction-dos"
+name = "miraland-transaction-dos"
 publish = false
 version = { workspace = true }
 authors = { workspace = true }
@@ -14,24 +14,24 @@ clap = { workspace = true }
 log = { workspace = true }
 rand = { workspace = true }
 rayon = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-cli = { workspace = true }
-solana-client = { workspace = true }
-solana-core = { workspace = true }
-solana-faucet = { workspace = true }
-solana-gossip = { workspace = true }
-solana-logger = { workspace = true }
-solana-measure = { workspace = true }
-solana-net-utils = { workspace = true }
-solana-rpc-client = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
-solana-transaction-status = { workspace = true }
-solana-version = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-cli = { workspace = true }
+miraland-client = { workspace = true }
+miraland-core = { workspace = true }
+miraland-faucet = { workspace = true }
+miraland-gossip = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-net-utils = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-transaction-status = { workspace = true }
+miraland-version = { workspace = true }
 
 [dev-dependencies]
-solana-local-cluster = { workspace = true }
+miraland-local-cluster = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

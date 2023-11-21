@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana bn128 elliptic curve compression and decompression
+ * @brief Miraland bn128 elliptic curve compression and decompression
 **/
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

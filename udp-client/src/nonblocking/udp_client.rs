@@ -3,9 +3,9 @@
 
 use {
     async_trait::async_trait, core::iter::repeat,
-    solana_connection_cache::nonblocking::client_connection::ClientConnection,
+    miraland_connection_cache::nonblocking::client_connection::ClientConnection,
     solana_sdk::transport::Result as TransportResult,
-    solana_streamer::nonblocking::sendmmsg::batch_send, std::net::SocketAddr,
+    miraland_streamer::nonblocking::sendmmsg::batch_send, std::net::SocketAddr,
     tokio::net::UdpSocket,
 };
 
@@ -48,7 +48,7 @@ mod tests {
     use {
         super::*,
         solana_sdk::packet::{Packet, PACKET_DATA_SIZE},
-        solana_streamer::nonblocking::recvmmsg::recv_mmsg,
+        miraland_streamer::nonblocking::recvmmsg::recv_mmsg,
         std::net::{IpAddr, Ipv4Addr},
         tokio::net::UdpSocket,
     };
@@ -74,7 +74,7 @@ mod tests {
         let addr_str = "0.0.0.0:50100";
         let addr = addr_str.parse().unwrap();
         let socket =
-            solana_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::UNSPECIFIED)).unwrap();
+            miraland_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::UNSPECIFIED)).unwrap();
         let connection = UdpClientConnection::new_from_addr(socket, addr);
         let reader = UdpSocket::bind(addr_str).await.expect("bind");
         check_send_one(&connection, &reader).await;

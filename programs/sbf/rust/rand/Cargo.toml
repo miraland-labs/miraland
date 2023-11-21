@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-rand"
-documentation = "https://docs.rs/solana-sbf-rust-rand"
+name = "miraland-sbf-rust-rand"
+documentation = "https://docs.rs/miraland-sbf-rust-rand"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -12,7 +12,7 @@ edition = { workspace = true }
 [dependencies]
 getrandom = { workspace = true, features = ["custom"] }
 rand = { workspace = true }
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["cdylib"]

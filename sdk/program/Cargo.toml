@@ -1,7 +1,7 @@
 [package]
-name = "solana-program"
-description = "Solana Program"
-documentation = "https://docs.rs/solana-program"
+name = "miraland-program"
+description = "Miraland Program"
+documentation = "https://docs.rs/miraland-program"
 readme = "README.md"
 version = { workspace = true }
 authors = { workspace = true }
@@ -32,9 +32,9 @@ serde_derive = { workspace = true }
 serde_json = { workspace = true }
 sha2 = { workspace = true }
 sha3 = { workspace = true }
-solana-frozen-abi = { workspace = true }
-solana-frozen-abi-macro = { workspace = true }
-solana-sdk-macro = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-sdk-macro = { workspace = true }
 thiserror = { workspace = true }
 
 # This is currently needed to build on-chain programs reliably.
@@ -43,6 +43,7 @@ thiserror = { workspace = true }
 # upgrades Borsh's dependency to hashbrown 0.13.
 # Remove this once borsh 0.11 or 1.0 is released, which correctly declares the
 # hashbrown dependency as optional.
+# MI: since borsh version now is 1.2.0 in workspace, comment out next 2 lines
 [target.'cfg(target_os = "solana")'.dependencies]
 getrandom = { workspace = true, features = ["custom"] }
 
@@ -65,7 +66,7 @@ wasm-bindgen = { workspace = true }
 zeroize = { workspace = true, features = ["default", "zeroize_derive"] }
 
 [target.'cfg(not(target_os = "solana"))'.dev-dependencies]
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 console_error_panic_hook = { workspace = true }
@@ -94,6 +95,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
+name = "solana_program"
 
 [features]
 default = []

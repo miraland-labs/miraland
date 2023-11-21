@@ -1,7 +1,7 @@
 [package]
-name = "solana-pubsub-client"
-description = "Solana Pubsub Client"
-documentation = "https://docs.rs/solana-pubsub-client"
+name = "miraland-pubsub-client"
+description = "Miraland Pubsub Client"
+documentation = "https://docs.rs/miraland-pubsub-client"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -18,9 +18,9 @@ semver = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-sdk = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 tokio-stream = { workspace = true }

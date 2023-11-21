@@ -6,17 +6,17 @@ use {
     fs_extra::dir::CopyOptions,
     itertools::Itertools,
     log::{info, trace},
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::{self, CalcAccountsHashDataSource, ACCOUNTS_DB_CONFIG_FOR_TESTING},
         accounts_hash::AccountsHash,
         accounts_index::AccountSecondaryIndexes,
         epoch_accounts_hash::EpochAccountsHash,
     },
-    solana_core::{
+    miraland_core::{
         accounts_hash_verifier::AccountsHashVerifier,
         snapshot_packager_service::SnapshotPackagerService,
     },
-    solana_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
+    miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService,
@@ -49,7 +49,7 @@ use {
         system_transaction,
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashSet,
         fs,
@@ -198,7 +198,7 @@ fn run_bank_forks_snapshot_n<F>(
 ) where
     F: Fn(&mut Bank, &Keypair),
 {
-    solana_logger::setup();
+    miraland_logger::setup();
     // Set up snapshotting config
     let snapshot_test_config = SnapshotTestConfig::new(
         snapshot_version,
@@ -341,7 +341,7 @@ fn test_concurrent_snapshot_packaging(
     snapshot_version: SnapshotVersion,
     cluster_type: ClusterType,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
     const MAX_BANK_SNAPSHOTS_TO_RETAIN: usize = 8;
 
     // Set up snapshotting config
@@ -598,7 +598,7 @@ fn test_concurrent_snapshot_packaging(
 #[test_case(V1_2_0, Testnet)]
 #[test_case(V1_2_0, MainnetBeta)]
 fn test_slots_to_snapshot(snapshot_version: SnapshotVersion, cluster_type: ClusterType) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let num_set_roots = MAX_CACHE_ENTRIES * 2;
 
     for add_root_interval in &[1, 3, 9] {
@@ -718,7 +718,7 @@ fn test_bank_forks_incremental_snapshot(
     snapshot_version: SnapshotVersion,
     cluster_type: ClusterType,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     const SET_ROOT_INTERVAL: Slot = 2;
     const INCREMENTAL_SNAPSHOT_ARCHIVE_INTERVAL_SLOTS: Slot = SET_ROOT_INTERVAL * 2;
@@ -944,7 +944,7 @@ fn test_snapshots_with_background_services(
     snapshot_version: SnapshotVersion,
     cluster_type: ClusterType,
 ) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     const SET_ROOT_INTERVAL_SLOTS: Slot = 2;
     const BANK_SNAPSHOT_INTERVAL_SLOTS: Slot = SET_ROOT_INTERVAL_SLOTS * 2;

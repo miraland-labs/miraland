@@ -369,7 +369,7 @@ impl<'de> Deserialize<'de> for Vote {
 pub struct LegacyVersion {
     pub from: Pubkey,
     pub wallclock: u64,
-    pub version: solana_version::LegacyVersion1,
+    pub version: miraland_version::LegacyVersion1,
 }
 
 impl Sanitize for LegacyVersion {
@@ -384,7 +384,7 @@ impl Sanitize for LegacyVersion {
 pub struct Version {
     pub from: Pubkey,
     pub wallclock: u64,
-    pub version: solana_version::LegacyVersion2,
+    pub version: miraland_version::LegacyVersion2,
 }
 
 impl Sanitize for Version {
@@ -400,7 +400,7 @@ impl Version {
         Self {
             from,
             wallclock: timestamp(),
-            version: solana_version::LegacyVersion2::default(),
+            version: miraland_version::LegacyVersion2::default(),
         }
     }
 
@@ -409,7 +409,7 @@ impl Version {
         Self {
             from: pubkey.unwrap_or_else(pubkey::new_rand),
             wallclock: new_rand_timestamp(rng),
-            version: solana_version::LegacyVersion2 {
+            version: miraland_version::LegacyVersion2 {
                 major: rng.gen(),
                 minor: rng.gen(),
                 patch: rng.gen(),
@@ -800,7 +800,7 @@ mod test {
         bincode::{deserialize, Options},
         rand::SeedableRng,
         rand_chacha::ChaChaRng,
-        solana_perf::test_tx::new_test_vote_tx,
+        miraland_perf::test_tx::new_test_vote_tx,
         solana_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,

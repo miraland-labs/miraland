@@ -6,9 +6,9 @@
 
 use {
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
-    solana_entry::entry::Entry,
-    solana_ledger::blockstore::{Blockstore, CompletedDataSetInfo},
-    solana_rpc::{max_slots::MaxSlots, rpc_subscriptions::RpcSubscriptions},
+    miraland_entry::entry::Entry,
+    miraland_ledger::blockstore::{Blockstore, CompletedDataSetInfo},
+    miraland_rpc::{max_slots::MaxSlots, rpc_subscriptions::RpcSubscriptions},
     solana_sdk::signature::Signature,
     std::{
         sync::{
@@ -36,7 +36,7 @@ impl CompletedDataSetsService {
         max_slots: Arc<MaxSlots>,
     ) -> Self {
         let thread_hdl = Builder::new()
-            .name("solComplDataSet".to_string())
+            .name("mlnComplDataSet".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     break;

@@ -5,7 +5,7 @@ extern crate test;
 use {
     log::*,
     rand::{thread_rng, Rng},
-    solana_perf::{
+    miraland_perf::{
         packet::{to_packet_batches, Packet, PacketBatch},
         recycler::Recycler,
         sigverify,
@@ -128,7 +128,7 @@ fn bench_sigverify_high_packets_large_batch(bencher: &mut Bencher) {
 #[bench]
 #[ignore]
 fn bench_sigverify_uneven(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let simple_tx = test_tx();
     let multi_tx = test_multisig_tx();
     let mut tx;

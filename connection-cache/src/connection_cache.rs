@@ -8,7 +8,7 @@ use {
     indexmap::map::IndexMap,
     log::*,
     rand::{thread_rng, Rng},
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_sdk::timing::AtomicInterval,
     std::{
         net::SocketAddr,
@@ -112,7 +112,7 @@ where
         stats: Arc<ConnectionCacheStats>,
     ) -> JoinHandle<()> {
         Builder::new()
-            .name("solQAsynCon".to_string())
+            .name("mlnQAsynCon".to_string())
             .spawn(move || loop {
                 let recv_result = receiver.recv();
                 match recv_result {
@@ -567,7 +567,7 @@ mod tests {
         fn default() -> Self {
             Self {
                 udp_socket: Arc::new(
-                    solana_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::UNSPECIFIED))
+                    miraland_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::UNSPECIFIED))
                         .expect("Unable to bind to UDP socket"),
                 ),
             }
@@ -578,7 +578,7 @@ mod tests {
         fn new() -> Result<Self, ClientError> {
             Ok(Self {
                 udp_socket: Arc::new(
-                    solana_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::UNSPECIFIED))
+                    miraland_net_utils::bind_with_any_port(IpAddr::V4(Ipv4Addr::UNSPECIFIED))
                         .map_err(Into::<ClientError>::into)?,
                 ),
             })
@@ -682,7 +682,7 @@ mod tests {
 
     #[test]
     fn test_connection_cache() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // Allow the test to run deterministically
         // with the same pseudorandom sequence between runs
         // and on different platforms - the cryptographic security

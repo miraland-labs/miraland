@@ -1,11 +1,11 @@
 #pragma once
 /**
- * @brief Solana Cross-Program Invocation
+ * @brief Miraland Cross-Program Invocation
  */
 
-#include <sol/types.h>
-#include <sol/pubkey.h>
-#include <sol/entrypoint.h>
+#include <mln/types.h>
+#include <mln/pubkey.h>
+#include <mln/entrypoint.h>
 
 #ifdef __cplusplus
 extern "C" {

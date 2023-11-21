@@ -23,7 +23,7 @@
 //! [`keccak`]: crate::keccak
 //!
 //! This instruction does not directly allow for key recovery as in Ethereum's
-//! [`ecrecover`] precompile. For that Solana provides the [`secp256k1_recover`]
+//! [`ecrecover`] precompile. For that Miraland provides the [`secp256k1_recover`]
 //! syscall.
 //!
 //! [secp256k1]: https://en.bitcoin.it/wiki/Secp256k1
@@ -118,8 +118,8 @@
 //! The signature offset structure is defined by [`SecpSignatureOffsets`],
 //! and can be serialized to the correct format with [`bincode::serialize_into`].
 //! Note that the bincode format may not be stable,
-//! and callers should ensure they use the same version of `bincode` as the Solana SDK.
-//! This data structure is not provided to Solana programs,
+//! and callers should ensure they use the same version of `bincode` as the Miraland SDK.
+//! This data structure is not provided to Miraland programs,
 //! which are expected to interpret the signature offsets manually.
 //!
 //! [`bincode::serialize_into`]: https://docs.rs/bincode/1.3.3/bincode/fn.serialize_into.html
@@ -148,7 +148,7 @@
 //!
 //! **The solana `secp256k1_recover` function does not prevent signature
 //! malleability**. This is in contrast to the Bitcoin secp256k1 library, which
-//! does prevent malleability by default. Solana accepts signatures with `S`
+//! does prevent malleability by default. Miraland accepts signatures with `S`
 //! values that are either in the _high order_ or in the _low order_, and it
 //! is trivial to produce one from the other.
 //!
@@ -203,7 +203,7 @@
 //! # Examples
 //!
 //! Both of the following examples make use of the following module definition
-//! to parse the secp256k1 instruction data from within a Solana program.
+//! to parse the secp256k1 instruction data from within a Miraland program.
 //!
 //! ```no_run
 //! mod secp256k1_defs {
@@ -263,12 +263,12 @@
 //! calling [`new_secp256k1_instruction`] to sign a single message and build the
 //! corresponding secp256k1 instruction.
 //!
-//! This example has two components: a Solana program, and an RPC client that
+//! This example has two components: a Miraland program, and an RPC client that
 //! sends a transaction to call it. The RPC client will sign a single message,
-//! and the Solana program will introspect the secp256k1 instruction to verify
+//! and the Miraland program will introspect the secp256k1 instruction to verify
 //! that the signer matches a known authorized public key.
 //!
-//! The Solana program. Note that it uses `libsecp256k1` version 0.7.0 to parse
+//! The Miraland program. Note that it uses `libsecp256k1` version 0.7.0 to parse
 //! the secp256k1 signature to prevent malleability.
 //!
 //! ```no_run
@@ -382,7 +382,7 @@
 //!     assert_eq!(0, offsets.message_instruction_index);
 //!
 //!     // Reject high-s value signatures to prevent malleability.
-//!     // Solana does not do this itself.
+//!     // Miraland does not do this itself.
 //!     // This may or may not be necessary depending on use case.
 //!     {
 //!         let signature = &secp256k1_instr.data[offsets.signature_offset as usize
@@ -417,9 +417,9 @@
 //! The client program:
 //!
 //! ```no_run
-//! # use solana_sdk::example_mocks::solana_rpc_client;
+//! # use solana_sdk::example_mocks::miraland_rpc_client;
 //! use anyhow::Result;
-//! use solana_rpc_client::rpc_client::RpcClient;
+//! use miraland_rpc_client::rpc_client::RpcClient;
 //! use solana_sdk::{
 //!     instruction::{AccountMeta, Instruction},
 //!     secp256k1_instruction,
@@ -465,24 +465,24 @@
 //! ## Example: Verifying multiple signatures in one instruction
 //!
 //! This examples demonstrates manually creating a secp256k1 instruction
-//! containing many signatures, and a Solana program that parses them all. This
+//! containing many signatures, and a Miraland program that parses them all. This
 //! example on its own has no practical purpose. It simply demonstrates advanced
 //! use of the secp256k1 program.
 //!
 //! Recall that the secp256k1 program will accept signatures, messages, and
 //! Ethereum addresses that reside in any instruction contained in the same
-//! transaction. In the _previous_ example, the Solana program asserted that all
+//! transaction. In the _previous_ example, the Miraland program asserted that all
 //! signatures, messages, and addresses were stored in the instruction at 0. In
-//! this next example the Solana program supports signatures, messages, and
+//! this next example the Miraland program supports signatures, messages, and
 //! addresses stored in any instruction. For simplicity the client still only
 //! stores signatures, messages, and addresses in a single instruction, the
 //! secp256k1 instruction. The code for storing this data across multiple
 //! instructions would be complex, and may not be necessary in practice.
 //!
-//! This example has two components: a Solana program, and an RPC client that
+//! This example has two components: a Miraland program, and an RPC client that
 //! sends a transaction to call it.
 //!
-//! The Solana program:
+//! The Miraland program:
 //!
 //! ```no_run
 //! # mod secp256k1_defs {
@@ -633,9 +633,9 @@
 //! The client program:
 //!
 //! ```no_run
-//! # use solana_sdk::example_mocks::solana_rpc_client;
+//! # use solana_sdk::example_mocks::miraland_rpc_client;
 //! use anyhow::Result;
-//! use solana_rpc_client::rpc_client::RpcClient;
+//! use miraland_rpc_client::rpc_client::RpcClient;
 //! use solana_sdk::{
 //!     instruction::{AccountMeta, Instruction},
 //!     keccak,
@@ -923,7 +923,7 @@ pub fn construct_eth_pubkey(
 /// the full slice of instruction datas for all instructions in the transaction,
 /// including the secp256k1 program's instruction data.
 ///
-/// `feature_set` is the set of active Solana features. It is used to enable or
+/// `feature_set` is the set of active Miraland features. It is used to enable or
 /// disable a few minor additional checks that were activated on chain
 /// subsequent to the addition of the secp256k1 native program. For many
 /// purposes passing `FeatureSet::all_enabled()` is reasonable.
@@ -1081,7 +1081,7 @@ pub mod test {
 
     #[test]
     fn test_invalid_offsets() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut instruction_data = vec![0u8; DATA_START];
         let offsets = SecpSignatureOffsets::default();
@@ -1217,7 +1217,7 @@ pub mod test {
 
     #[test]
     fn test_count_is_zero_but_sig_data_exists() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut instruction_data = vec![0u8; DATA_START];
         let offsets = SecpSignatureOffsets::default();
@@ -1240,7 +1240,7 @@ pub mod test {
 
     #[test]
     fn test_secp256k1() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let offsets = SecpSignatureOffsets::default();
         assert_eq!(
             bincode::serialized_size(&offsets).unwrap() as usize,
@@ -1283,7 +1283,7 @@ pub mod test {
     // Signatures are malleable.
     #[test]
     fn test_malleability() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let secret_key = libsecp256k1::SecretKey::random(&mut thread_rng());
         let public_key = libsecp256k1::PublicKey::from_secret_key(&secret_key);

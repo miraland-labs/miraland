@@ -6,8 +6,8 @@ use {
     },
     log::*,
     prost::Message,
-    solana_gossip::{cluster_info::ClusterInfo, epoch_slots::MAX_SLOTS_PER_ENTRY},
-    solana_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
+    miraland_gossip::{cluster_info::ClusterInfo, epoch_slots::MAX_SLOTS_PER_ENTRY},
+    miraland_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
     solana_vote_program::vote_state::VoteTransaction,
     std::{
         fs::File,
@@ -66,21 +66,21 @@ fn write_wen_restart_records(
 mod tests {
     use {
         crate::wen_restart::*,
-        solana_entry::entry,
-        solana_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
-        solana_ledger::{blockstore, get_tmp_ledger_path_auto_delete},
+        miraland_entry::entry,
+        miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
+        miraland_ledger::{blockstore, get_tmp_ledger_path_auto_delete},
         solana_program::{hash::Hash, vote::state::Vote},
         solana_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::{fs::read, sync::Arc},
     };
 
     #[test]
     fn test_wen_restart_normal_flow() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let node_keypair = Arc::new(Keypair::new());
         let cluster_info = Arc::new(ClusterInfo::new(
             {

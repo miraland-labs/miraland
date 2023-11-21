@@ -20,7 +20,7 @@ mod tests {
             status_cache::StatusCache,
         },
         assert_matches::assert_matches,
-        solana_accounts_db::{
+        miraland_accounts_db::{
             account_storage::{AccountStorageMap, AccountStorageReference},
             accounts_db::{
                 get_temp_accounts_paths, AccountShrinkThreshold, AccountStorageEntry, AccountsDb,
@@ -98,7 +98,7 @@ mod tests {
         incremental_snapshot_persistence: bool,
         initial_epoch_accounts_hash: bool,
     ) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (mut genesis_config, _) = create_genesis_config(500);
         activate_feature(&mut genesis_config, feature_set::epoch_accounts_hash::id());
         genesis_config.epoch_schedule = EpochSchedule::custom(400, 400, false);
@@ -272,7 +272,7 @@ mod tests {
             None,
             AccountShrinkThreshold::default(),
             false,
-            Some(solana_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
+            Some(miraland_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
             None,
             Arc::default(),
         )
@@ -335,7 +335,7 @@ mod tests {
 
     #[test]
     fn test_extra_fields_eof() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let sample_rewards = (0..2)
             .map(|_| StakeReward::new_random())
             .collect::<Vec<_>>();
@@ -404,7 +404,7 @@ mod tests {
                 None,
                 AccountShrinkThreshold::default(),
                 false,
-                Some(solana_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
+                Some(miraland_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
                 None,
                 Arc::default(),
             )
@@ -439,7 +439,7 @@ mod tests {
 
     #[test]
     fn test_extra_fields_full_snapshot_archive() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let sample_rewards = (0..2)
             .map(|_| StakeReward::new_random())
@@ -497,7 +497,7 @@ mod tests {
                 false,
                 false,
                 false,
-                Some(solana_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
+                Some(miraland_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
                 None,
                 Arc::default(),
             )
@@ -532,7 +532,7 @@ mod tests {
 
     #[test]
     fn test_blank_extra_fields() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (genesis_config, _) = create_genesis_config(500);
 
         let bank0 = Arc::new(Bank::new_for_tests_with_config(
@@ -591,7 +591,7 @@ mod tests {
             None,
             AccountShrinkThreshold::default(),
             false,
-            Some(solana_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
+            Some(miraland_accounts_db::accounts_db::ACCOUNTS_DB_CONFIG_FOR_TESTING),
             None,
             Arc::default(),
         )

@@ -2,7 +2,7 @@
 extern crate test;
 
 use {
-    solana_entry::entry::{next_entry_mut, Entry, EntrySlice},
+    miraland_entry::entry::{next_entry_mut, Entry, EntrySlice},
     solana_sdk::{
         hash::{hash, Hash},
         signature::{Keypair, Signer},
@@ -16,7 +16,7 @@ const NUM_ENTRIES: usize = 800;
 
 #[bench]
 fn bench_poh_verify_ticks(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let zero = Hash::default();
     let start_hash = hash(zero.as_ref());
     let mut cur_hash = start_hash;

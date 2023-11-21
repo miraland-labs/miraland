@@ -1,7 +1,7 @@
 [package]
-name = "solana-connection-cache"
-description = "Solana Connection Cache"
-documentation = "https://docs.rs/solana-connection-cache"
+name = "miraland-connection-cache"
+description = "Miraland Connection Cache"
+documentation = "https://docs.rs/miraland-connection-cache"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -20,13 +20,13 @@ log = { workspace = true }
 rand = { workspace = true }
 rayon = { workspace = true }
 rcgen = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-sdk = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [dev-dependencies]
 rand_chacha = { workspace = true }
-solana-logger = { workspace = true }
-solana-net-utils = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-net-utils = { workspace = true }

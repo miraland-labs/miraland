@@ -3,10 +3,10 @@ name: client_targets
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - "client/**"
       - "sdk/**"
@@ -41,7 +41,7 @@ jobs:
           rustup target add --toolchain "$rust_stable" ${{ matrix.target }}
 
       - name: Stable build
-        run: ./cargo stable ndk --target ${{ matrix.target }} build -p solana-client
+        run: ./cargo stable ndk --target ${{ matrix.target }} build -p miraland-client
 
   ios:
     strategy:
@@ -63,7 +63,7 @@ jobs:
           rustup target add --toolchain "$rust_stable" ${{ matrix.target }}
 
       - name: Stable build
-        run: ./cargo stable build --target ${{ matrix.target }} -p solana-client
+        run: ./cargo stable build --target ${{ matrix.target }} -p miraland-client
 
   error_reporting:
     needs:

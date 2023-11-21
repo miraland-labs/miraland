@@ -6,13 +6,13 @@ use log::*;
 use {
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_client::{
+    miraland_client::{
         connection_cache::{ConnectionCache, Protocol},
         thin_client::ThinClient,
     },
-    solana_core::consensus::VOTE_THRESHOLD_DEPTH,
-    solana_entry::entry::{Entry, EntrySlice},
-    solana_gossip::{
+    miraland_core::consensus::VOTE_THRESHOLD_DEPTH,
+    miraland_entry::entry::{Entry, EntrySlice},
+    miraland_gossip::{
         cluster_info::{self, ClusterInfo},
         contact_info::{ContactInfo, LegacyContactInfo},
         crds::Cursor,
@@ -20,7 +20,7 @@ use {
         gossip_error::GossipError,
         gossip_service::{self, discover_cluster, GossipService},
     },
-    solana_ledger::blockstore::Blockstore,
+    miraland_ledger::blockstore::Blockstore,
     solana_sdk::{
         client::SyncClient,
         clock::{self, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
@@ -36,7 +36,7 @@ use {
         transaction::Transaction,
         transport::TransportError,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     solana_vote::vote_transaction::VoteTransaction,
     solana_vote_program::vote_transaction,
     std::{

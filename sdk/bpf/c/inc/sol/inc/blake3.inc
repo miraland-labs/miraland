@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana Blake3 system call
+ * @brief Miraland Blake3 system call
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

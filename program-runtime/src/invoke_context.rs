@@ -9,7 +9,7 @@ use {
         sysvar_cache::SysvarCache,
         timings::{ExecuteDetailsTimings, ExecuteTimings},
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_rbpf::{
         ebpf::MM_HEAP_START,
         error::{EbpfError, ProgramResult},

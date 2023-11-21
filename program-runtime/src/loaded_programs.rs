@@ -6,7 +6,7 @@ use {
     itertools::Itertools,
     log::{debug, error, log_enabled, trace},
     percentage::PercentageInteger,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_rbpf::{
         elf::Executable,
         program::{BuiltinProgram, FunctionRegistry},
@@ -969,7 +969,7 @@ impl<FG: ForkGraph> LoadedPrograms<FG> {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl solana_frozen_abi::abi_example::AbiExample for LoadedProgram {
+impl miraland_frozen_abi::abi_example::AbiExample for LoadedProgram {
     fn example() -> Self {
         // LoadedProgram isn't serializable by definition.
         Self::default()
@@ -977,7 +977,7 @@ impl solana_frozen_abi::abi_example::AbiExample for LoadedProgram {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl<FG: ForkGraph> solana_frozen_abi::abi_example::AbiExample for LoadedPrograms<FG> {
+impl<FG: ForkGraph> miraland_frozen_abi::abi_example::AbiExample for LoadedPrograms<FG> {
     fn example() -> Self {
         // LoadedPrograms isn't serializable by definition.
         Self::default()

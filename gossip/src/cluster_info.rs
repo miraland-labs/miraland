@@ -15,10 +15,10 @@
 
 #[deprecated(
     since = "1.10.6",
-    note = "Please use `solana_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE}` instead"
+    note = "Please use `miraland_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE}` instead"
 )]
 #[allow(deprecated)]
-pub use solana_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE};
+pub use miraland_net_utils::{MINIMUM_VALIDATOR_PORT_RANGE_WIDTH, VALIDATOR_PORT_RANGE};
 use {
     crate::{
         cluster_info_metrics::{
@@ -48,17 +48,17 @@ use {
     rand::{seq::SliceRandom, thread_rng, CryptoRng, Rng},
     rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
     serde::ser::Serialize,
-    solana_ledger::shred::Shred,
-    solana_measure::measure::Measure,
-    solana_net_utils::{
+    miraland_ledger::shred::Shred,
+    miraland_measure::measure::Measure,
+    miraland_net_utils::{
         bind_common, bind_common_in_range, bind_in_range, bind_two_in_range_with_offset,
         find_available_port_in_range, multi_bind_in_range, PortRange,
     },
-    solana_perf::{
+    miraland_perf::{
         data_budget::DataBudget,
         packet::{Packet, PacketBatch, PacketBatchRecycler, PACKET_DATA_SIZE},
     },
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_rayon_threadlimit::get_thread_count,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT, DEFAULT_SLOTS_PER_EPOCH},
@@ -71,7 +71,7 @@ use {
         timing::timestamp,
         transaction::Transaction,
     },
-    solana_streamer::{
+    miraland_streamer::{
         packet,
         socket::SocketAddrSpace,
         streamer::{PacketBatchReceiver, PacketBatchSender},
@@ -137,7 +137,7 @@ const PULL_RESPONSE_MIN_SERIALIZED_SIZE: usize = 161;
 pub(crate) const CRDS_UNIQUE_PUBKEY_CAPACITY: usize = 8192;
 /// Minimum stake that a node should have so that its CRDS values are
 /// propagated through gossip (few types are exempted).
-const MIN_STAKE_FOR_GOSSIP: u64 = solana_sdk::native_token::LAMPORTS_PER_SOL;
+const MIN_STAKE_FOR_GOSSIP: u64 = solana_sdk::native_token::LAMPORTS_PER_MLN;
 /// Minimum number of staked nodes for enforcing stakes in gossip.
 const MIN_NUM_STAKED_NODES: usize = 500;
 
@@ -1226,7 +1226,7 @@ impl ClusterInfo {
             .collect()
     }
 
-    pub fn get_node_version(&self, pubkey: &Pubkey) -> Option<solana_version::LegacyVersion2> {
+    pub fn get_node_version(&self, pubkey: &Pubkey) -> Option<miraland_version::LegacyVersion2> {
         let gossip_crds = self.gossip.crds.read().unwrap();
         if let Some(version) = gossip_crds.get::<&Version>(*pubkey) {
             return Some(version.version.clone());
@@ -1735,11 +1735,11 @@ impl ClusterInfo {
     ) -> JoinHandle<()> {
         let thread_pool = ThreadPoolBuilder::new()
             .num_threads(std::cmp::min(get_thread_count(), 8))
-            .thread_name(|i| format!("solRunGossip{i:02}"))
+            .thread_name(|i| format!("mlnRunGossip{i:02}"))
             .build()
             .unwrap();
         Builder::new()
-            .name("solGossip".to_string())
+            .name("mlnGossip".to_string())
             .spawn(move || {
                 let mut last_push = 0;
                 let mut last_contact_info_trace = timestamp();
@@ -2576,7 +2576,7 @@ impl ClusterInfo {
     ) -> JoinHandle<()> {
         let thread_pool = ThreadPoolBuilder::new()
             .num_threads(get_thread_count().min(8))
-            .thread_name(|i| format!("solGossipCons{i:02}"))
+            .thread_name(|i| format!("mlnGossipCons{i:02}"))
             .build()
             .unwrap();
         let run_consume = move || {
@@ -2608,11 +2608,11 @@ impl ClusterInfo {
         let recycler = PacketBatchRecycler::default();
         let thread_pool = ThreadPoolBuilder::new()
             .num_threads(get_thread_count().min(8))
-            .thread_name(|i| format!("solGossipWork{i:02}"))
+            .thread_name(|i| format!("mlnGossipWork{i:02}"))
             .build()
             .unwrap();
         Builder::new()
-            .name("solGossipListen".to_string())
+            .name("mlnGossipListen".to_string())
             .spawn(move || {
                 while !exit.load(Ordering::Relaxed) {
                     if let Err(err) = self.run_listen(
@@ -3105,8 +3105,8 @@ mod tests {
             duplicate_shred::{self, tests::new_rand_shred, MAX_DUPLICATE_SHREDS},
         },
         itertools::izip,
-        solana_ledger::shred::Shredder,
-        solana_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
+        miraland_ledger::shred::Shredder,
+        miraland_net_utils::MINIMUM_VALIDATOR_PORT_RANGE_WIDTH,
         solana_sdk::signature::{Keypair, Signer},
         solana_vote_program::{vote_instruction, vote_state::Vote},
         std::{
@@ -3137,7 +3137,7 @@ mod tests {
 
     #[test]
     fn test_handle_pull() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let cluster_info = Arc::new({
             let keypair = Arc::new(Keypair::new());
             let node = Node::new_localhost_with_pubkey(&keypair.pubkey());

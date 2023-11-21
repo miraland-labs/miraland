@@ -46,7 +46,7 @@ pub fn new_self_signed_tls_certificate(
     cert_params.distinguished_name = DistinguishedName::new();
     cert_params
         .distinguished_name
-        .push(DnType::CommonName, "Solana node");
+        .push(DnType::CommonName, "Miraland node");
 
     let cert = rcgen::Certificate::from_params(cert_params)?;
     let cert_der = cert.serialize_der().unwrap();

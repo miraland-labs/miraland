@@ -4,7 +4,7 @@ extern crate test;
 
 use {
     solana_sdk::{instruction::CompiledInstruction, message::Message, pubkey::Pubkey},
-    solana_transaction_status::extract_memos::{spl_memo_id_v1, spl_memo_id_v3, ExtractMemos},
+    miraland_transaction_status::extract_memos::{spl_memo_id_v1, spl_memo_id_v3, ExtractMemos},
     test::Bencher,
 };
 

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package solana.wen_restart_proto;
+package miraland.wen_restart_proto;
 
 enum State {
     INIT = 0;

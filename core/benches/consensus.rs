@@ -1,10 +1,10 @@
 #![feature(test)]
 
-extern crate solana_core;
+extern crate miraland_core;
 extern crate test;
 
 use {
-    solana_core::{
+    miraland_core::{
         consensus::{tower_storage::FileTowerStorage, Tower},
         vote_simulator::VoteSimulator,
     },

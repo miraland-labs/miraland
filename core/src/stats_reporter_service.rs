@@ -21,7 +21,7 @@ impl StatsReporterService {
         exit: Arc<AtomicBool>,
     ) -> Self {
         let thread_hdl = Builder::new()
-            .name("solStatsReport".to_owned())
+            .name("mlnStatsReport".to_owned())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     return;

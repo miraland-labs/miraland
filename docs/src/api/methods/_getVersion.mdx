@@ -12,7 +12,7 @@ import {
 
 ## getVersion
 
-Returns the current Solana version running on the node
+Returns the current Miraland version running on the node
 
 <DocSideBySide>
 <CodeParams>
@@ -25,7 +25,7 @@ Returns the current Solana version running on the node
 
 The result field will be a JSON object with the following fields:
 
-- `solana-core` - software version of solana-core as a `string`
+- `miraland-core` - software version of miraland-core as a `string`
 - `feature-set` - unique identifier of the current software's feature set as a `u32`
 
 </CodeParams>
@@ -43,7 +43,7 @@ curl http://localhost:8899 -X POST -H "Content-Type: application/json" -d '
 ### Response:
 
 ```json
-{ "jsonrpc": "2.0", "result": { "feature-set": 2891131721, "solana-core": "1.16.7" }, "id": 1 }
+{ "jsonrpc": "2.0", "result": { "feature-set": 2891131721, "miraland-core": "1.16.7" }, "id": 1 }
 ```
 
 </CodeSnippets>

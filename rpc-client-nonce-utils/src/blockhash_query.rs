@@ -1,11 +1,11 @@
 use {
     clap::ArgMatches,
-    solana_clap_utils::{
+    miraland_clap_utils::{
         input_parsers::{pubkey_of, value_of},
         nonce::*,
         offline::*,
     },
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::{
         commitment_config::CommitmentConfig, fee_calculator::FeeCalculator, hash::Hash,
         pubkey::Pubkey,
@@ -188,8 +188,8 @@ mod tests {
         crate::blockhash_query,
         clap::App,
         serde_json::{self, json},
-        solana_account_decoder::{UiAccount, UiAccountEncoding},
-        solana_rpc_client_api::{
+        miraland_account_decoder::{UiAccount, UiAccountEncoding},
+        miraland_rpc_client_api::{
             request::RpcRequest,
             response::{Response, RpcFeeCalculator, RpcFees, RpcResponseContext},
         },

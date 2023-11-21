@@ -1,7 +1,7 @@
 [package]
-name = "solana-frozen-abi"
-description = "Solana Frozen ABI"
-documentation = "https://docs.rs/solana-frozen-abi"
+name = "miraland-frozen-abi"
+description = "Miraland Frozen ABI"
+documentation = "https://docs.rs/miraland-frozen-abi"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -18,7 +18,7 @@ serde = { workspace = true, features = ["derive", "rc"] }
 serde_bytes = { workspace = true }
 serde_derive = { workspace = true }
 sha2 = { workspace = true }
-solana-frozen-abi-macro = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
 thiserror = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]
@@ -31,7 +31,7 @@ subtle = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dev-dependencies]
 bitflags = { workspace = true }
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [build-dependencies]
 rustc_version = { workspace = true }

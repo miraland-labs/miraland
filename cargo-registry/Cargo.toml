@@ -1,7 +1,7 @@
 [package]
-name = "solana-cargo-registry"
-description = "Solana cargo registry"
-documentation = "https://docs.rs/solana-cargo-registry"
+name = "miraland-cargo-registry"
+description = "Miraland cargo registry"
+documentation = "https://docs.rs/miraland-cargo-registry"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -18,16 +18,16 @@ log = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 sha2 = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-cli = { workspace = true }
-solana-cli-config = { workspace = true }
-solana-cli-output = { workspace = true }
-solana-logger = { workspace = true }
-solana-remote-wallet = { workspace = true, features = ["default"] }
-solana-rpc-client = { workspace = true, features = ["default"] }
-solana-rpc-client-api = { workspace = true }
-solana-sdk = { workspace = true }
-solana-version = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-cli = { workspace = true }
+miraland-cli-config = { workspace = true }
+miraland-cli-output = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-remote-wallet = { workspace = true, features = ["default"] }
+miraland-rpc-client = { workspace = true, features = ["default"] }
+miraland-rpc-client-api = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-version = { workspace = true }
 tar = { workspace = true }
 tempfile = { workspace = true }
 tokio = { workspace = true, features = ["full"] }

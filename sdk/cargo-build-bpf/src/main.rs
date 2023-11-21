@@ -8,7 +8,7 @@ use {
 };
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
     warn!("cargo-build-bpf is deprecated. Please, use cargo-build-sbf");
     let mut args = env::args()
         .map(|x| {

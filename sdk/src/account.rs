@@ -1,4 +1,4 @@
-//! The Solana [`Account`] type.
+//! The Miraland [`Account`] type.
 
 #[cfg(feature = "dev-context-only-utils")]
 use qualifier_attr::qualifiers;

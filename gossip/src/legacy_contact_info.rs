@@ -11,7 +11,7 @@ use {
         sanitize::{Sanitize, SanitizeError},
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::net::{IpAddr, Ipv4Addr, SocketAddr},
 };
 

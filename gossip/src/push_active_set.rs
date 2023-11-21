@@ -2,8 +2,8 @@ use {
     crate::weighted_shuffle::WeightedShuffle,
     indexmap::IndexMap,
     rand::Rng,
-    solana_bloom::bloom::{AtomicBloom, Bloom},
-    solana_sdk::{native_token::LAMPORTS_PER_SOL, pubkey::Pubkey},
+    miraland_bloom::bloom::{AtomicBloom, Bloom},
+    solana_sdk::{native_token::LAMPORTS_PER_MLN, pubkey::Pubkey},
     std::collections::HashMap,
 };
 
@@ -168,7 +168,7 @@ impl PushActiveSetEntry {
 
 // Maps stake to bucket index.
 fn get_stake_bucket(stake: Option<&u64>) -> usize {
-    let stake = stake.copied().unwrap_or_default() / LAMPORTS_PER_SOL;
+    let stake = stake.copied().unwrap_or_default() / LAMPORTS_PER_MLN;
     let bucket = u64::BITS - stake.leading_zeros();
     (bucket as usize).min(NUM_PUSH_ACTIVE_SET_ENTRIES - 1)
 }
@@ -182,7 +182,7 @@ mod tests {
         assert_eq!(get_stake_bucket(None), 0);
         let buckets = [0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5];
         for (k, bucket) in buckets.into_iter().enumerate() {
-            let stake = (k as u64) * LAMPORTS_PER_SOL;
+            let stake = (k as u64) * LAMPORTS_PER_MLN;
             assert_eq!(get_stake_bucket(Some(&stake)), bucket);
         }
         for (stake, bucket) in [
@@ -191,7 +191,7 @@ mod tests {
             (8_388_607, 23),
             (8_388_608, 24),
         ] {
-            let stake = stake * LAMPORTS_PER_SOL;
+            let stake = stake * LAMPORTS_PER_MLN;
             assert_eq!(get_stake_bucket(Some(&stake)), bucket);
         }
         assert_eq!(
@@ -203,7 +203,7 @@ mod tests {
     #[test]
     fn test_push_active_set() {
         const CLUSTER_SIZE: usize = 117;
-        const MAX_STAKE: u64 = (1 << 20) * LAMPORTS_PER_SOL;
+        const MAX_STAKE: u64 = (1 << 20) * LAMPORTS_PER_MLN;
         let mut rng = ChaChaRng::from_seed([189u8; 32]);
         let pubkey = Pubkey::new_unique();
         let nodes: Vec<_> = repeat_with(Pubkey::new_unique).take(20).collect();

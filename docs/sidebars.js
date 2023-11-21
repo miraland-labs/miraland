@@ -5,12 +5,12 @@ module.exports = {
     {
       type: "category",
       collapsed: false,
-      label: "Introduction to Solana",
+      label: "Introduction to Miraland",
       items: [
         {
           type: "doc",
           id: "introduction",
-          label: "What is Solana?",
+          label: "What is Miraland?",
         },
         // This will be the future home for the economics overview page
         // {
@@ -21,21 +21,21 @@ module.exports = {
         {
           type: "doc",
           id: "history",
-          label: "History of Solana",
+          label: "History of Miraland",
         },
       ],
     },
     {
       type: "category",
       collapsed: false,
-      label: "Getting started with Solana",
+      label: "Getting started with Miraland",
       items: [
         {
           type: "doc",
           id: "wallet-guide",
           label: "Wallets",
         },
-        // This will be the future home of the `staking` page, with the introductory info on what staking on Solana looks like
+        // This will be the future home of the `staking` page, with the introductory info on what staking on Miraland looks like
         // {
         //   type: "doc",
         //   id: "staking",
@@ -46,7 +46,7 @@ module.exports = {
     {
       type: "category",
       collapsed: false,
-      label: "Dive into Solana",
+      label: "Dive into Miraland",
       items: [
         "terminology",
         {
@@ -321,7 +321,7 @@ module.exports = {
         {
           type: "doc",
           id: "developing/test-validator",
-          label: "Solana Test Validator",
+          label: "Miraland Test Validator",
         },
       ],
     },
@@ -389,7 +389,7 @@ module.exports = {
   ],
   cliSidebar: [
     "cli",
-    "cli/install-solana-cli-tools",
+    "cli/install-miraland-cli-tools",
     {
       type: "category",
       label: "Command-line Wallets",
@@ -421,7 +421,7 @@ module.exports = {
   architectureSidebar: [
     {
       type: "doc",
-      label: "What is a Solana Cluster?",
+      label: "What is a Miraland Cluster?",
       id: "cluster/overview",
     },
     {

@@ -1,7 +1,7 @@
 [package]
-name = "solana-client"
-description = "Solana Client"
-documentation = "https://docs.rs/solana-client"
+name = "miraland-client"
+description = "Miraland Client"
+documentation = "https://docs.rs/miraland-client"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -20,19 +20,19 @@ indicatif = { workspace = true }
 log = { workspace = true }
 quinn = { workspace = true }
 rayon = { workspace = true }
-solana-connection-cache = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-pubsub-client = { workspace = true }
-solana-quic-client = { workspace = true }
-solana-rpc-client = { workspace = true, features = ["default"] }
-solana-rpc-client-api = { workspace = true }
-solana-rpc-client-nonce-utils = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
-solana-thin-client = { workspace = true }
-solana-tpu-client = { workspace = true, features = ["default"] }
-solana-udp-client = { workspace = true }
+miraland-connection-cache = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-pubsub-client = { workspace = true }
+miraland-quic-client = { workspace = true }
+miraland-rpc-client = { workspace = true, features = ["default"] }
+miraland-rpc-client-api = { workspace = true }
+miraland-rpc-client-nonce-utils = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-thin-client = { workspace = true }
+miraland-tpu-client = { workspace = true, features = ["default"] }
+miraland-udp-client = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 

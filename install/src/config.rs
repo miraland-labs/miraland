@@ -142,7 +142,7 @@ mod test {
     #[test]
     fn test_save() {
         let root_dir = env::var("CARGO_MANIFEST_DIR").expect("$CARGO_MANIFEST_DIR");
-        let json_rpc_url = "https://api.mainnet-beta.solana.com";
+        let json_rpc_url = "https://api.mainnet-mln.miraland.top";
         let pubkey = Pubkey::default();
         let config_name = "config.yaml";
         let config_path = format!("{root_dir}/{config_name}");
@@ -158,7 +158,7 @@ mod test {
             read_to_string(&config_path).unwrap(),
             format!(
                 "---
-json_rpc_url: https://api.mainnet-beta.solana.com
+json_rpc_url: https://api.mainnet-mln.miraland.top
 update_manifest_pubkey:
 - 0
 - 0
@@ -210,7 +210,7 @@ active_release_dir: {root_dir}/active_release
             remove_file(file_name).unwrap();
         }
 
-        let root_dir = "/home/sol/.local/share/solana/install";
+        let root_dir = "/home/mln/.local/share/solana/install";
 
         writeln!(
             file,

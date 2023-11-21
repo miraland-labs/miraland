@@ -3,4 +3,4 @@
 pub mod nonblocking;
 pub mod tpu_client;
 
-extern crate solana_metrics;
+extern crate miraland_metrics;

@@ -14,7 +14,7 @@ const N: usize = 1_000_000;
 
 #[bench]
 fn bench_reset1(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut v = Vec::with_capacity(N);
     v.resize_with(N, AtomicU64::default);
@@ -31,7 +31,7 @@ fn bench_reset1(bencher: &mut Bencher) {
 
 #[bench]
 fn bench_reset2(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut v = Vec::with_capacity(N);
     v.resize_with(N, AtomicU64::default);

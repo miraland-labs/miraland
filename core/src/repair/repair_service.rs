@@ -20,12 +20,12 @@ use {
     },
     crossbeam_channel::{Receiver as CrossbeamReceiver, Sender as CrossbeamSender},
     lru::LruCache,
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_ledger::{
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_ledger::{
         blockstore::{Blockstore, SlotMeta},
         shred,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         clock::{Slot, DEFAULT_TICKS_PER_SECOND, MS_PER_TICK},
@@ -35,7 +35,7 @@ use {
         signer::keypair::Keypair,
         timing::timestamp,
     },
-    solana_streamer::sendmmsg::{batch_send, SendPktsError},
+    miraland_streamer::sendmmsg::{batch_send, SendPktsError},
     std::{
         collections::{HashMap, HashSet},
         iter::Iterator,
@@ -256,7 +256,7 @@ impl RepairService {
             let repair_info = repair_info.clone();
             let quic_endpoint_sender = quic_endpoint_sender.clone();
             Builder::new()
-                .name("solRepairSvc".to_string())
+                .name("mlnRepairSvc".to_string())
                 .spawn(move || {
                     Self::run(
                         &blockstore,
@@ -859,8 +859,8 @@ pub(crate) fn sleep_shred_deferment_period() {
 mod test {
     use {
         super::*,
-        solana_gossip::{cluster_info::Node, contact_info::ContactInfo},
-        solana_ledger::{
+        miraland_gossip::{cluster_info::Node, contact_info::ContactInfo},
+        miraland_ledger::{
             blockstore::{
                 make_chaining_slot_entries, make_many_slot_entries, make_slot_entries, Blockstore,
             },
@@ -873,7 +873,7 @@ mod test {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::collections::HashSet,
     };
 

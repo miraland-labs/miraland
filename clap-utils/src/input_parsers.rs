@@ -5,12 +5,12 @@ use {
     },
     chrono::DateTime,
     clap::ArgMatches,
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{
         clock::UnixTimestamp,
         commitment_config::CommitmentConfig,
         genesis_config::ClusterType,
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair, Signature, Signer},
     },
@@ -180,8 +180,8 @@ pub fn resolve_signer(
     )
 }
 
-pub fn lamports_of_sol(matches: &ArgMatches<'_>, name: &str) -> Option<u64> {
-    value_of(matches, name).map(sol_to_lamports)
+pub fn lamports_of_mln(matches: &ArgMatches<'_>, name: &str) -> Option<u64> {
+    value_of(matches, name).map(mln_to_lamports)
 }
 
 pub fn cluster_type_of(matches: &ArgMatches<'_>, name: &str) -> Option<ClusterType> {
@@ -330,14 +330,14 @@ mod tests {
     }
 
     #[test]
-    fn test_lamports_of_sol() {
+    fn test_lamports_of_mln() {
         let matches = app().get_matches_from(vec!["test", "--single", "50"]);
-        assert_eq!(lamports_of_sol(&matches, "single"), Some(50_000_000_000));
-        assert_eq!(lamports_of_sol(&matches, "multiple"), None);
+        assert_eq!(lamports_of_mln(&matches, "single"), Some(50_000_000_000));
+        assert_eq!(lamports_of_mln(&matches, "multiple"), None);
         let matches = app().get_matches_from(vec!["test", "--single", "1.5"]);
-        assert_eq!(lamports_of_sol(&matches, "single"), Some(1_500_000_000));
-        assert_eq!(lamports_of_sol(&matches, "multiple"), None);
+        assert_eq!(lamports_of_mln(&matches, "single"), Some(1_500_000_000));
+        assert_eq!(lamports_of_mln(&matches, "multiple"), None);
         let matches = app().get_matches_from(vec!["test", "--single", "0.03"]);
-        assert_eq!(lamports_of_sol(&matches, "single"), Some(30_000_000));
+        assert_eq!(lamports_of_mln(&matches, "single"), Some(30_000_000));
     }
 }

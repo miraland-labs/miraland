@@ -3,8 +3,8 @@ use {
     crate::cluster_nodes::ClusterNodesCache,
     crossbeam_channel::Sender,
     itertools::Itertools,
-    solana_entry::entry::Entry,
-    solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
+    miraland_entry::entry::Entry,
+    miraland_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     solana_sdk::{
         hash::Hash,
         signature::{Keypair, Signature, Signer},

@@ -1,8 +1,8 @@
 ---
-title: Solana Cluster RPC Endpoints
+title: Miraland Cluster RPC Endpoints
 ---
 
-Solana maintains dedicated api nodes to fulfill [JSON-RPC](/api)
+Miraland maintains dedicated api nodes to fulfill [JSON-RPC](/api)
 requests for each public cluster, and third parties may as well. Here are the
 public RPC endpoints currently available and recommended for each public cluster:
 
@@ -10,7 +10,7 @@ public RPC endpoints currently available and recommended for each public cluster
 
 #### Endpoint
 
-- `https://api.devnet.solana.com` - single Solana-hosted api node; rate-limited
+- `https://api.devnet-mln.miraland.top` - single Miraland-hosted api node; rate-limited
 
 #### Rate Limits
 
@@ -24,7 +24,7 @@ public RPC endpoints currently available and recommended for each public cluster
 
 #### Endpoint
 
-- `https://api.testnet.solana.com` - single Solana-hosted api node; rate-limited
+- `https://api.testnet-mln.miraland.top` - single Miraland-hosted api node; rate-limited
 
 #### Rate Limits
 
@@ -38,7 +38,7 @@ public RPC endpoints currently available and recommended for each public cluster
 
 #### Endpoints\*
 
-- `https://api.mainnet-beta.solana.com` - Solana-hosted api node cluster, backed by a load balancer; rate-limited
+- `https://api.mainnet-mln.miraland.top` - Miraland-hosted api node cluster, backed by a load balancer; rate-limited
 
 #### Rate Limits
 

@@ -2,7 +2,7 @@
 
 use {
     solana_program_test::{processor, tokio, ProgramTest},
-    solana_sbf_rust_simulation::process_instruction,
+    miraland_sbf_rust_simulation::process_instruction,
     solana_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
@@ -16,7 +16,7 @@ use {
 async fn no_panic_banks_client() {
     let program_id = Pubkey::new_unique();
     let program_test = ProgramTest::new(
-        "solana_sbf_rust_simulation",
+        "miraland_sbf_rust_simulation",
         program_id,
         processor!(process_instruction),
     );

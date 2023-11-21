@@ -16,8 +16,8 @@ use {
     jsonrpc_core::{Error, ErrorCode, Result},
     jsonrpc_derive::rpc,
     jsonrpc_pubsub::{typed::Subscriber, SubscriptionId as PubSubSubscriptionId},
-    solana_account_decoder::{UiAccount, UiAccountEncoding},
-    solana_rpc_client_api::{
+    miraland_account_decoder::{UiAccount, UiAccountEncoding},
+    miraland_rpc_client_api::{
         config::{
             RpcAccountInfoConfig, RpcBlockSubscribeConfig, RpcBlockSubscribeFilter,
             RpcProgramAccountsConfig, RpcSignatureSubscribeConfig, RpcTransactionLogsConfig,
@@ -29,7 +29,7 @@ use {
         },
     },
     solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
-    solana_transaction_status::UiTransactionEncoding,
+    miraland_transaction_status::UiTransactionEncoding,
     std::{str::FromStr, sync::Arc},
 };
 
@@ -591,9 +591,9 @@ impl RpcSolPubSubInternal for RpcSolPubSubImpl {
     }
 
     fn get_version(&self) -> Result<RpcVersionInfo> {
-        let version = solana_version::Version::default();
+        let version = miraland_version::Version::default();
         Ok(RpcVersionInfo {
-            solana_core: version.to_string(),
+            miraland_core: version.to_string(),
             feature_set: Some(version.feature_set),
         })
     }
@@ -610,8 +610,8 @@ mod tests {
         base64::{prelude::BASE64_STANDARD, Engine},
         jsonrpc_core::{IoHandler, Response},
         serial_test::serial,
-        solana_account_decoder::{parse_account_data::parse_account_data, UiAccountEncoding},
-        solana_rpc_client_api::response::{
+        miraland_account_decoder::{parse_account_data::parse_account_data, UiAccountEncoding},
+        miraland_rpc_client_api::response::{
             ProcessedSignatureResult, ReceivedSignatureResult, RpcSignatureResult, SlotInfo,
         },
         solana_runtime::{
@@ -1417,7 +1417,7 @@ mod tests {
         ));
         let (rpc, _receiver) = rpc_pubsub_service::test_connection(&rpc_subscriptions);
         let version = rpc.get_version().unwrap();
-        let expected_version = solana_version::Version::default();
+        let expected_version = miraland_version::Version::default();
         assert_eq!(version.to_string(), expected_version.to_string());
         assert_eq!(version.feature_set.unwrap(), expected_version.feature_set);
     }

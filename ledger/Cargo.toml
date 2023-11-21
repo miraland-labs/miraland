@@ -1,7 +1,7 @@
 [package]
-name = "solana-ledger"
-description = "Solana ledger"
-documentation = "https://docs.rs/solana-ledger"
+name = "miraland-ledger"
+description = "Miraland ledger"
+documentation = "https://docs.rs/miraland-ledger"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -37,28 +37,28 @@ scopeguard = { workspace = true }
 serde = { workspace = true }
 serde_bytes = { workspace = true }
 sha2 = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-bpf-loader-program = { workspace = true }
-solana-cost-model = { workspace = true }
-solana-entry = { workspace = true }
-solana-frozen-abi = { workspace = true }
-solana-frozen-abi-macro = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-perf = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-rayon-threadlimit = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-stake-program = { workspace = true }
-solana-storage-bigtable = { workspace = true }
-solana-storage-proto = { workspace = true }
-solana-transaction-status = { workspace = true }
-solana-vote = { workspace = true }
-solana-vote-program = { workspace = true }
-spl-token = { workspace = true, features = ["no-entrypoint"] }
-spl-token-2022 = { workspace = true, features = ["no-entrypoint"] }
+miraland-account-decoder = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-bpf-loader-program = { workspace = true }
+miraland-cost-model = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-rayon-threadlimit = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-stake-program = { workspace = true }
+miraland-storage-bigtable = { workspace = true }
+miraland-storage-proto = { workspace = true }
+miraland-transaction-status = { workspace = true }
+miraland-vote = { workspace = true }
+miraland-vote-program = { workspace = true }
+solarti-token = { workspace = true, features = ["no-entrypoint"] }
+solarti-token-2022 = { workspace = true, features = ["no-entrypoint"] }
 static_assertions = { workspace = true }
 strum = { workspace = true, features = ["derive"] }
 strum_macros = { workspace = true }
@@ -77,10 +77,10 @@ features = ["lz4"]
 
 [dev-dependencies]
 bs58 = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-logger = { workspace = true }
-solana-runtime = { workspace = true, features = ["dev-context-only-utils"] }
-spl-pod = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
+solarti-pod = { workspace = true }
 test-case = { workspace = true }
 
 [build-dependencies]
@@ -91,7 +91,7 @@ dev-context-only-utils = []
 
 [lib]
 crate-type = ["lib"]
-name = "solana_ledger"
+name = "miraland_ledger"
 
 [[bench]]
 name = "sigverify_shreds"

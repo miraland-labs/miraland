@@ -77,9 +77,9 @@ use {
     rayon::{prelude::*, ThreadPool},
     serde::{Deserialize, Serialize},
     smallvec::SmallVec,
-    solana_measure::{measure::Measure, measure_us},
-    solana_nohash_hasher::{IntMap, IntSet},
-    solana_rayon_threadlimit::get_thread_count,
+    miraland_measure::{measure::Measure, measure_us},
+    miraland_nohash_hasher::{IntMap, IntSet},
+    miraland_rayon_threadlimit::get_thread_count,
     solana_sdk::{
         account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
         clock::{BankId, Epoch, Slot},
@@ -2331,14 +2331,14 @@ pub fn make_min_priority_thread_pool() -> ThreadPool {
     // Use lower thread count to reduce priority.
     let num_threads = quarter_thread_count();
     rayon::ThreadPoolBuilder::new()
-        .thread_name(|i| format!("solAccountsLo{i:02}"))
+        .thread_name(|i| format!("mlnAccountsLo{i:02}"))
         .num_threads(num_threads)
         .build()
         .unwrap()
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl solana_frozen_abi::abi_example::AbiExample for AccountsDb {
+impl miraland_frozen_abi::abi_example::AbiExample for AccountsDb {
     fn example() -> Self {
         let accounts_db = AccountsDb::new_single_for_tests();
         let key = Pubkey::default();
@@ -2527,7 +2527,7 @@ impl AccountsDb {
             file_size: DEFAULT_FILE_SIZE,
             thread_pool: rayon::ThreadPoolBuilder::new()
                 .num_threads(num_threads)
-                .thread_name(|i| format!("solAccounts{i:02}"))
+                .thread_name(|i| format!("mlnAccounts{i:02}"))
                 .stack_size(ACCOUNTS_STACK_SIZE)
                 .build()
                 .unwrap(),
@@ -2954,7 +2954,7 @@ impl AccountsDb {
     fn start_background_hasher(&mut self) {
         let (sender, receiver) = unbounded();
         Builder::new()
-            .name("solDbStoreHashr".to_string())
+            .name("mlnDbStoreHashr".to_string())
             .spawn(move || {
                 Self::background_hasher(receiver);
             })
@@ -5000,8 +5000,8 @@ impl AccountsDb {
     {
         let key = match &index_key {
             IndexKey::ProgramId(key) => key,
-            IndexKey::SplTokenMint(key) => key,
-            IndexKey::SplTokenOwner(key) => key,
+            IndexKey::SolartiTokenMint(key) => key,
+            IndexKey::SolartiTokenOwner(key) => key,
         };
         if !self.account_indexes.include_key(key) {
             // the requested key was not indexed in the secondary index, so do a normal scan
@@ -10592,7 +10592,7 @@ pub mod tests {
 
     #[test]
     fn test_combine_multiple_slots_into_one_at_startup() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let (db, slot1) = create_db_with_storages_and_index(false, 2, None);
         let slot2 = slot1 + 1;
 
@@ -10665,7 +10665,7 @@ pub mod tests {
     #[test]
     #[should_panic(expected = "MismatchedAccountsHash")]
     fn test_accountsdb_scan_snapshot_stores_check_hash() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts_db = AccountsDb::new_single_for_tests();
         let (storages, _raw_expected) = sample_storages_and_accounts(&accounts_db);
         let max_slot = storages.iter().map(|storage| storage.slot()).max().unwrap();
@@ -10724,7 +10724,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_scan_snapshot_stores() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts_db = AccountsDb::new_single_for_tests();
         let (storages, raw_expected) = sample_storages_and_accounts(&accounts_db);
 
@@ -10987,7 +10987,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_calculate_accounts_hash_from_storages_simple() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let (storages, _size, _slot_expected) = sample_storage();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
@@ -11005,7 +11005,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_calculate_accounts_hash_from_storages() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let (storages, raw_expected) = sample_storages_and_accounts(&db);
@@ -11072,7 +11072,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_scan_account_storage_no_bank() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let expected = 1;
         let tf = crate::append_vec::test_utils::get_append_vec_path(
@@ -11188,7 +11188,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_scan_account_storage_no_bank_one_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let expected = 1;
         let tf = crate::append_vec::test_utils::get_append_vec_path(
@@ -11285,7 +11285,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_scan_multiple_account_storage_no_bank_one_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let slot_expected: Slot = 0;
         let tf = crate::append_vec::test_utils::get_append_vec_path(
@@ -11361,7 +11361,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_add_root() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let key = Pubkey::default();
         let account0 = AccountSharedData::new(1, 0, &key);
@@ -11377,7 +11377,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_latest_ancestor() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let key = Pubkey::default();
         let account0 = AccountSharedData::new(1, 0, &key);
@@ -11413,7 +11413,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_latest_ancestor_with_root() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let key = Pubkey::default();
         let account0 = AccountSharedData::new(1, 0, &key);
@@ -11439,7 +11439,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_root_one_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let key = Pubkey::default();
@@ -11534,7 +11534,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_count_stores() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_single_for_tests();
 
         let mut pubkeys: Vec<Pubkey> = vec![];
@@ -11822,7 +11822,7 @@ pub mod tests {
 
     #[test]
     fn test_lazy_gc_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         //This test is pedantic
         //A slot is purged when a non root bank is cleaned up.  If a slot is behind root but it is
         //not root, it means we are retaining dead banks.
@@ -11876,7 +11876,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_zero_lamport_and_dead_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let pubkey1 = solana_sdk::pubkey::new_rand();
@@ -11940,7 +11940,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_multiple_zero_lamport_decrements_index_ref_count() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let pubkey1 = solana_sdk::pubkey::new_rand();
@@ -11988,7 +11988,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_zero_lamport_and_old_roots() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let pubkey = solana_sdk::pubkey::new_rand();
@@ -12033,7 +12033,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_old_with_normal_account() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let pubkey = solana_sdk::pubkey::new_rand();
@@ -12061,7 +12061,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_old_with_zero_lamport_account() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let pubkey1 = solana_sdk::pubkey::new_rand();
@@ -12095,7 +12095,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_old_with_both_normal_and_zero_lamport_accounts() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut accounts = AccountsDb::new_with_config_for_tests(
             Vec::new(),
@@ -12140,7 +12140,7 @@ pub mod tests {
 
         // Secondary index should still find both pubkeys
         let mut found_accounts = HashSet::new();
-        let index_key = IndexKey::SplTokenMint(mint_key);
+        let index_key = IndexKey::SolartiTokenMint(mint_key);
         let bank_id = 0;
         accounts
             .accounts_index
@@ -12228,7 +12228,7 @@ pub mod tests {
             .index_scan_accounts(
                 &Ancestors::default(),
                 bank_id,
-                IndexKey::SplTokenMint(mint_key),
+                IndexKey::SolartiTokenMint(mint_key),
                 |key, _| found_accounts.push(*key),
                 &ScanConfig::default(),
             )
@@ -12238,7 +12238,7 @@ pub mod tests {
 
     #[test]
     fn test_clean_max_slot_zero_lamport_account() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let pubkey = solana_sdk::pubkey::new_rand();
@@ -12283,7 +12283,7 @@ pub mod tests {
 
     #[test]
     fn test_uncleaned_roots_with_account() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let pubkey = solana_sdk::pubkey::new_rand();
@@ -12303,7 +12303,7 @@ pub mod tests {
 
     #[test]
     fn test_uncleaned_roots_with_no_account() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let accounts = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
@@ -12325,7 +12325,7 @@ pub mod tests {
 
     #[test]
     fn test_accounts_db_purge_keep_live() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let some_lamport = 223;
         let zero_lamport = 0;
         let no_data = 0;
@@ -12408,7 +12408,7 @@ pub mod tests {
 
     #[test]
     fn test_accounts_db_purge1() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let some_lamport = 223;
         let zero_lamport = 0;
         let no_data = 0;
@@ -12511,7 +12511,7 @@ pub mod tests {
 
     #[test]
     fn test_accountsdb_scan_accounts() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let key = Pubkey::default();
         let key0 = solana_sdk::pubkey::new_rand();
@@ -12550,7 +12550,7 @@ pub mod tests {
 
     #[test]
     fn test_cleanup_key_not_removed() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_single_for_tests();
 
         let key = Pubkey::default();
@@ -12585,7 +12585,7 @@ pub mod tests {
 
     #[test]
     fn test_store_large_account() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let key = Pubkey::default();
@@ -12700,7 +12700,7 @@ pub mod tests {
 
     #[test]
     fn test_bank_hash_stats() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let key = Pubkey::default();
@@ -12728,7 +12728,7 @@ pub mod tests {
     #[ignore]
     #[test]
     fn test_calculate_accounts_hash_check_hash_mismatch() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let key = solana_sdk::pubkey::new_rand();
@@ -12791,7 +12791,7 @@ pub mod tests {
     #[ignore]
     #[test]
     fn test_calculate_accounts_hash_check_hash() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let key = solana_sdk::pubkey::new_rand();
@@ -12833,7 +12833,7 @@ pub mod tests {
     #[test]
     fn test_verify_accounts_hash() {
         use AccountsHashVerificationError::*;
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let key = solana_sdk::pubkey::new_rand();
@@ -12882,7 +12882,7 @@ pub mod tests {
     fn test_verify_bank_capitalization() {
         for pass in 0..2 {
             use AccountsHashVerificationError::*;
-            solana_logger::setup();
+            miraland_logger::setup();
             let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
             let key = solana_sdk::pubkey::new_rand();
@@ -12935,7 +12935,7 @@ pub mod tests {
 
     #[test]
     fn test_verify_accounts_hash_no_account() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let some_slot: Slot = 0;
@@ -12961,7 +12961,7 @@ pub mod tests {
     #[test]
     fn test_verify_accounts_hash_bad_account_hash() {
         use AccountsHashVerificationError::*;
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let key = Pubkey::default();
@@ -13001,7 +13001,7 @@ pub mod tests {
 
     #[test]
     fn test_storage_finder() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_sized(Vec::new(), 16 * 1024);
         let key = solana_sdk::pubkey::new_rand();
         let lamports = 100;
@@ -13229,7 +13229,7 @@ pub mod tests {
 
     #[test]
     fn test_full_clean_refcount() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         // Setup 3 scenarios which try to differentiate between pubkey1 being in an
         // Available slot or a Full slot which would cause a different reset behavior
@@ -13270,7 +13270,7 @@ pub mod tests {
 
     #[test]
     fn test_shrink_candidate_slots() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut accounts = AccountsDb::new_single_for_tests();
 
@@ -13332,7 +13332,7 @@ pub mod tests {
     #[test]
     fn test_select_candidates_by_total_usage_no_candidates() {
         // no input candidates -- none should be selected
-        solana_logger::setup();
+        miraland_logger::setup();
         let candidates = ShrinkCandidates::default();
         let db = AccountsDb::new_single_for_tests();
 
@@ -13346,7 +13346,7 @@ pub mod tests {
     #[test]
     fn test_select_candidates_by_total_usage_3_way_split_condition() {
         // three candidates, one selected for shrink, one is put back to the candidate list and one is ignored
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut candidates = ShrinkCandidates::default();
         let db = AccountsDb::new_single_for_tests();
 
@@ -13419,7 +13419,7 @@ pub mod tests {
     #[test]
     fn test_select_candidates_by_total_usage_2_way_split_condition() {
         // three candidates, 2 are selected for shrink, one is ignored
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_single_for_tests();
         let mut candidates = ShrinkCandidates::default();
 
@@ -13485,7 +13485,7 @@ pub mod tests {
     #[test]
     fn test_select_candidates_by_total_usage_all_clean() {
         // 2 candidates, they must be selected to achieve the target alive ratio
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_single_for_tests();
         let mut candidates = ShrinkCandidates::default();
 
@@ -13574,7 +13574,7 @@ pub mod tests {
 
     #[test]
     fn test_delete_dependencies() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts_index = AccountsIndex::default_for_tests();
         let key0 = Pubkey::new_from_array([0u8; 32]);
         let key1 = Pubkey::new_from_array([1u8; 32]);
@@ -13729,7 +13729,7 @@ pub mod tests {
 
     #[test]
     fn test_store_overhead() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts = AccountsDb::new_single_for_tests();
         let account = AccountSharedData::default();
         let pubkey = solana_sdk::pubkey::new_rand();
@@ -13743,7 +13743,7 @@ pub mod tests {
 
     #[test]
     fn test_store_clean_after_shrink() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts = AccountsDb::new_with_config_for_tests(
             vec![],
             &ClusterType::Development,
@@ -13792,7 +13792,7 @@ pub mod tests {
 
     #[test]
     fn test_store_reuse() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts = AccountsDb::new_sized_caching(vec![], 4096);
 
         let size = 100;
@@ -13885,7 +13885,7 @@ pub mod tests {
     #[test]
     #[should_panic(expected = "We've run out of storage ids!")]
     fn test_reuse_append_vec_id() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let zero_lamport_account =
@@ -15091,7 +15091,7 @@ pub mod tests {
 
     #[test]
     fn test_partial_clean() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
         let account_key1 = Pubkey::new_unique();
         let account_key2 = Pubkey::new_unique();
@@ -15153,7 +15153,7 @@ pub mod tests {
 
     #[test]
     fn test_recycle_stores_expiration() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let common_store_path = Path::new("");
         let common_slot_id = 12;
@@ -15275,7 +15275,7 @@ pub mod tests {
     }
 
     fn do_test_load_account_and_cache_flush_race(with_retry: bool) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut db = AccountsDb::new_with_config_for_tests(
             Vec::new(),
@@ -15620,7 +15620,7 @@ pub mod tests {
 
     #[test]
     fn test_collect_uncleaned_slots_up_to_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let slot1 = 11;
@@ -15650,7 +15650,7 @@ pub mod tests {
 
     #[test]
     fn test_remove_uncleaned_slots_and_collect_pubkeys() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let slot1 = 11;
@@ -15708,7 +15708,7 @@ pub mod tests {
 
     #[test]
     fn test_remove_uncleaned_slots_and_collect_pubkeys_up_to_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new(Vec::new(), &ClusterType::Development);
 
         let slot1 = 11;
@@ -15748,7 +15748,7 @@ pub mod tests {
 
     #[test]
     fn test_shrink_productive() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let s1 = AccountStorageEntry::new(Path::new("."), 0, 0, 1024);
         let store = Arc::new(s1);
         assert!(!AccountsDb::is_shrinking_productive(0, &store));
@@ -15766,7 +15766,7 @@ pub mod tests {
 
     #[test]
     fn test_is_candidate_for_shrink() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut accounts = AccountsDb::new_single_for_tests();
         let common_store_path = Path::new("");
@@ -16012,7 +16012,7 @@ pub mod tests {
     ///     - ensure Account1 *has* been purged
     #[test]
     fn test_clean_accounts_with_last_full_snapshot_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts_db = AccountsDb::new_single_for_tests();
         let pubkey = solana_sdk::pubkey::new_rand();
         let owner = solana_sdk::pubkey::new_rand();
@@ -16050,7 +16050,7 @@ pub mod tests {
 
     #[test]
     fn test_filter_zero_lamport_clean_for_incremental_snapshots() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let slot = 10;
 
         struct TestParameters {
@@ -16717,7 +16717,7 @@ pub mod tests {
 
     #[test]
     fn test_split_storages_splitter_large_offset() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // 1 full chunk - 1, mis-aligned by 2 at big offset
         // huge offset
         // we need ALL the chunks here
@@ -17201,7 +17201,7 @@ pub mod tests {
 
     #[test]
     fn test_shrink_collect_simple() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let account_counts = [
             1,
             SHRINK_COLLECT_CHUNK_SIZE,
@@ -17408,7 +17408,7 @@ pub mod tests {
 
     #[test]
     fn test_combine_ancient_slots_empty() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_single_for_tests();
         // empty slots
         db.combine_ancient_slots(Vec::default(), CAN_RANDOMLY_SHRINK_FALSE);
@@ -17490,7 +17490,7 @@ pub mod tests {
 
     #[test]
     fn test_shrink_ancient_overflow() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let num_normal_slots = 2;
         // build an ancient append vec at slot 'ancient_slot'
@@ -17562,7 +17562,7 @@ pub mod tests {
 
     #[test]
     fn test_shrink_ancient() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let num_normal_slots = 1;
         // build an ancient append vec at slot 'ancient_slot'
@@ -17650,7 +17650,7 @@ pub mod tests {
 
     #[test]
     fn test_combine_ancient_slots_append() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // combine 2-4 slots into a single ancient append vec
         for num_normal_slots in 1..3 {
             // but some slots contain only dead accounts
@@ -17823,7 +17823,7 @@ pub mod tests {
         num_slots: usize,
         account_data_size: Option<u64>,
     ) -> (AccountsDb, Slot) {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let db = AccountsDb::new_single_for_tests();
 
@@ -17870,7 +17870,7 @@ pub mod tests {
 
     #[test]
     fn test_handle_dropped_roots_for_ancient() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_single_for_tests();
         db.handle_dropped_roots_for_ancient(std::iter::empty::<Slot>());
         let slot0 = 0;
@@ -17891,7 +17891,7 @@ pub mod tests {
     #[test]
     #[should_panic(expected = "self.storage.remove")]
     fn test_handle_dropped_roots_for_ancient_assert() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let common_store_path = Path::new("");
         let store_file_size = 2 * PAGE_SIZE;
         let entry = Arc::new(AccountStorageEntry::new(
@@ -17909,7 +17909,7 @@ pub mod tests {
 
     #[test]
     fn test_should_move_to_ancient_append_vec() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let db = AccountsDb::new_single_for_tests();
         let slot5 = 5;
         let tf = crate::append_vec::test_utils::get_append_vec_path(

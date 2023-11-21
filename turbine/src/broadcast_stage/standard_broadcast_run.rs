@@ -8,8 +8,8 @@ use {
     crate::{
         broadcast_stage::broadcast_utils::UnfinishedSlotInfo, cluster_nodes::ClusterNodesCache,
     },
-    solana_entry::entry::Entry,
-    solana_ledger::{
+    miraland_entry::entry::Entry,
+    miraland_ledger::{
         blockstore,
         shred::{shred_code, ProcessShredsStats, ReedSolomonCache, Shred, ShredFlags, Shredder},
     },
@@ -499,9 +499,9 @@ impl BroadcastRun for StandardBroadcastRun {
 mod test {
     use {
         super::*,
-        solana_entry::entry::create_ticks,
-        solana_gossip::cluster_info::{ClusterInfo, Node},
-        solana_ledger::{
+        miraland_entry::entry::create_ticks,
+        miraland_gossip::cluster_info::{ClusterInfo, Node},
+        miraland_ledger::{
             blockstore::Blockstore, genesis_utils::create_genesis_config, get_tmp_ledger_path,
             get_tmp_ledger_path_auto_delete, shred::max_ticks_per_n_shreds,
         },
@@ -510,7 +510,7 @@ mod test {
             genesis_config::GenesisConfig,
             signature::{Keypair, Signer},
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::{ops::Deref, sync::Arc, time::Duration},
     };
 
@@ -809,7 +809,7 @@ mod test {
 
     #[test]
     fn entries_to_shreds_max() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let keypair = Keypair::new();
         let mut bs = StandardBroadcastRun::new(0);
         bs.current_slot_and_parent = Some((1, 0));

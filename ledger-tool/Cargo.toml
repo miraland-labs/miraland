@@ -1,7 +1,7 @@
 [package]
-name = "solana-ledger-tool"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-ledger-tool"
+name = "miraland-ledger-tool"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-ledger-tool"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -24,29 +24,29 @@ num_cpus = { workspace = true }
 regex = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-bpf-loader-program = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-cli-output = { workspace = true }
-solana-core = { workspace = true }
-solana-cost-model = { workspace = true }
-solana-entry = { workspace = true }
-solana-geyser-plugin-manager = { workspace = true }
-solana-gossip = { workspace = true }
-solana-ledger = { workspace = true }
-solana-logger = { workspace = true }
-solana-measure = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-rpc = { workspace = true }
-solana-runtime = { workspace = true, features = ["dev-context-only-utils"] }
-solana-sdk = { workspace = true }
-solana-stake-program = { workspace = true }
-solana-storage-bigtable = { workspace = true }
-solana-streamer = { workspace = true }
-solana-transaction-status = { workspace = true }
-solana-version = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-bpf-loader-program = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-cli-output = { workspace = true }
+miraland-core = { workspace = true }
+miraland-cost-model = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-geyser-plugin-manager = { workspace = true }
+miraland-gossip = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-rpc = { workspace = true }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
+miraland-sdk = { workspace = true }
+miraland-stake-program = { workspace = true }
+miraland-storage-bigtable = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-transaction-status = { workspace = true }
+miraland-version = { workspace = true }
+miraland-vote-program = { workspace = true }
 solana_rbpf = { workspace = true, features = ["debugger"] }
 tokio = { workspace = true, features = ["full"] }
 

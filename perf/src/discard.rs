@@ -22,7 +22,7 @@ mod tests {
 
     #[test]
     fn test_batch_discard_random() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut batch = PacketBatch::default();
         batch.resize(1, Packet::default());
         let num_batches = 100;

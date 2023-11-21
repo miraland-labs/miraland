@@ -1,7 +1,7 @@
-//! Communication with a Solana node over RPC.
+//! Communication with a Miraland node over RPC.
 //!
-//! Software that interacts with the Solana blockchain, whether querying its
-//! state or submitting transactions, communicates with a Solana node over
+//! Software that interacts with the Miraland blockchain, whether querying its
+//! state or submitting transactions, communicates with a Miraland node over
 //! [JSON-RPC], using the [`RpcClient`] type.
 //!
 //! [JSON-RPC]: https://www.jsonrpc.org/specification
@@ -11,7 +11,7 @@
 
 pub use crate::mock_sender::Mocks;
 #[allow(deprecated)]
-use solana_rpc_client_api::deprecated_config::{
+use miraland_rpc_client_api::deprecated_config::{
     RpcConfirmedBlockConfig, RpcConfirmedTransactionConfig,
 };
 use {
@@ -23,11 +23,11 @@ use {
     },
     serde::Serialize,
     serde_json::Value,
-    solana_account_decoder::{
+    miraland_account_decoder::{
         parse_token::{UiTokenAccount, UiTokenAmount},
         UiAccount, UiAccountEncoding,
     },
-    solana_rpc_client_api::{
+    miraland_rpc_client_api::{
         client_error::{Error as ClientError, ErrorKind, Result as ClientResult},
         config::{RpcAccountInfoConfig, *},
         request::{RpcRequest, TokenAccountsFilter},
@@ -47,7 +47,7 @@ use {
         signature::Signature,
         transaction::{self, uses_durable_nonce, Transaction, VersionedTransaction},
     },
-    solana_transaction_status::{
+    miraland_transaction_status::{
         EncodedConfirmedBlock, EncodedConfirmedTransactionWithStatusMeta, TransactionStatus,
         UiConfirmedBlock, UiTransactionEncoding,
     },
@@ -113,10 +113,10 @@ pub struct GetConfirmedSignaturesForAddress2Config {
     pub commitment: Option<CommitmentConfig>,
 }
 
-/// A client of a remote Solana node.
+/// A client of a remote Miraland node.
 ///
-/// `RpcClient` communicates with a Solana node over [JSON-RPC], with the
-/// [Solana JSON-RPC protocol][jsonprot]. It is the primary Rust interface for
+/// `RpcClient` communicates with a Miraland node over [JSON-RPC], with the
+/// [Miraland JSON-RPC protocol][jsonprot]. It is the primary Rust interface for
 /// querying and transacting with the network from external programs.
 ///
 /// This type builds on the underlying RPC protocol, adding extra features such
@@ -159,19 +159,19 @@ pub struct GetConfirmedSignaturesForAddress2Config {
 /// # Errors
 ///
 /// Methods on `RpcClient` return
-/// [`client_error::Result`][solana_rpc_client_api::client_error::Result], and many of them
-/// return the [`RpcResult`][solana_rpc_client_api::response::RpcResult] typedef, which
-/// contains [`Response<T>`][solana_rpc_client_api::response::Response] on `Ok`. Both
+/// [`client_error::Result`][miraland_rpc_client_api::client_error::Result], and many of them
+/// return the [`RpcResult`][miraland_rpc_client_api::response::RpcResult] typedef, which
+/// contains [`Response<T>`][miraland_rpc_client_api::response::Response] on `Ok`. Both
 /// `client_error::Result` and [`RpcResult`] contain `ClientError` on error. In
 /// the case of `RpcResult`, the actual return value is in the
-/// [`value`][solana_rpc_client_api::response::Response::value] field, with RPC contextual
-/// information in the [`context`][solana_rpc_client_api::response::Response::context]
+/// [`value`][miraland_rpc_client_api::response::Response::value] field, with RPC contextual
+/// information in the [`context`][miraland_rpc_client_api::response::Response::context]
 /// field, so it is common for the value to be accessed with `?.value`, as in
 ///
 /// ```
 /// # use solana_sdk::system_transaction;
-/// # use solana_rpc_client_api::client_error::Error;
-/// # use solana_rpc_client::rpc_client::RpcClient;
+/// # use miraland_rpc_client_api::client_error::Error;
+/// # use miraland_rpc_client::rpc_client::RpcClient;
 /// # use solana_sdk::signature::{Keypair, Signer};
 /// # use solana_sdk::hash::Hash;
 /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
@@ -187,14 +187,14 @@ pub struct GetConfirmedSignaturesForAddress2Config {
 ///
 /// Requests may timeout, in which case they return a [`ClientError`] where the
 /// [`ClientErrorKind`] is [`ClientErrorKind::Reqwest`], and where the interior
-/// [`reqwest::Error`](solana_rpc_client_api::client_error::reqwest::Error)s
-/// [`is_timeout`](solana_rpc_client_api::client_error::reqwest::Error::is_timeout) method
+/// [`reqwest::Error`](miraland_rpc_client_api::client_error::reqwest::Error)s
+/// [`is_timeout`](miraland_rpc_client_api::client_error::reqwest::Error::is_timeout) method
 /// returns `true`. The default timeout is 30 seconds, and may be changed by
 /// calling an appropriate constructor with a `timeout` parameter.
 ///
-/// [`ClientError`]: solana_rpc_client_api::client_error::Error
-/// [`ClientErrorKind`]: solana_rpc_client_api::client_error::ErrorKind
-/// [`ClientErrorKind::Reqwest`]: solana_rpc_client_api::client_error::ErrorKind::Reqwest
+/// [`ClientError`]: miraland_rpc_client_api::client_error::Error
+/// [`ClientErrorKind`]: miraland_rpc_client_api::client_error::ErrorKind
+/// [`ClientErrorKind::Reqwest`]: miraland_rpc_client_api::client_error::ErrorKind::Reqwest
 pub struct RpcClient {
     rpc_client: Arc<nonblocking::rpc_client::RpcClient>,
     runtime: Option<tokio::runtime::Runtime>,
@@ -223,7 +223,7 @@ impl RpcClient {
             )),
             runtime: Some(
                 tokio::runtime::Builder::new_current_thread()
-                    .thread_name("solRpcClient")
+                    .thread_name("mlnRpcClient")
                     .enable_io()
                     .enable_time()
                     .build()
@@ -246,7 +246,7 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// let url = "http://localhost:8899".to_string();
     /// let client = RpcClient::new(url);
     /// ```
@@ -270,7 +270,7 @@ impl RpcClient {
     ///
     /// ```
     /// # use solana_sdk::commitment_config::CommitmentConfig;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// let url = "http://localhost:8899".to_string();
     /// let commitment_config = CommitmentConfig::processed();
     /// let client = RpcClient::new_with_commitment(url, commitment_config);
@@ -297,7 +297,7 @@ impl RpcClient {
     ///
     /// ```
     /// # use std::time::Duration;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// let url = "http://localhost::8899".to_string();
     /// let timeout = Duration::from_secs(1);
     /// let client = RpcClient::new_with_timeout(url, timeout);
@@ -320,7 +320,7 @@ impl RpcClient {
     ///
     /// ```
     /// # use std::time::Duration;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// let url = "http://localhost::8899".to_string();
     /// let timeout = Duration::from_secs(1);
@@ -361,7 +361,7 @@ impl RpcClient {
     ///
     /// ```
     /// # use std::time::Duration;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// let url = "http://localhost::8899".to_string();
     /// let timeout = Duration::from_secs(1);
@@ -396,7 +396,7 @@ impl RpcClient {
     /// tests.
     ///
     /// It is primarily for internal use, with limited customizability, and
-    /// behaviors determined by internal Solana test cases. New users should
+    /// behaviors determined by internal Miraland test cases. New users should
     /// consider implementing `RpcSender` themselves and constructing
     /// `RpcClient` with [`RpcClient::new_sender`] to get mock behavior.
     ///
@@ -423,14 +423,14 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// // Create an `RpcClient` that always succeeds
     /// let url = "succeeds".to_string();
     /// let successful_client = RpcClient::new_mock(url);
     /// ```
     ///
     /// ```
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// // Create an `RpcClient` that always fails
     /// let url = "fails".to_string();
     /// let successful_client = RpcClient::new_mock(url);
@@ -449,7 +449,7 @@ impl RpcClient {
     /// tests.
     ///
     /// It is primarily for internal use, with limited customizability, and
-    /// behaviors determined by internal Solana test cases. New users should
+    /// behaviors determined by internal Miraland test cases. New users should
     /// consider implementing `RpcSender` themselves and constructing
     /// `RpcClient` with [`RpcClient::new_sender`] to get mock behavior.
     ///
@@ -485,11 +485,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     request::RpcRequest,
     /// #     response::{Response, RpcResponseContext},
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use std::collections::HashMap;
     /// # use serde_json::json;
     /// // Create a mock with a custom repsonse to the `GetBalance` request
@@ -523,7 +523,7 @@ impl RpcClient {
     ///
     /// ```
     /// # use std::net::{Ipv4Addr, SocketAddr};
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// let addr = SocketAddr::from((Ipv4Addr::LOCALHOST, 8899));
     /// let client = RpcClient::new_socket(addr);
     /// ```
@@ -544,7 +544,7 @@ impl RpcClient {
     ///
     /// ```
     /// # use std::net::{Ipv4Addr, SocketAddr};
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// let addr = SocketAddr::from((Ipv4Addr::LOCALHOST, 8899));
     /// let commitment_config = CommitmentConfig::processed();
@@ -572,7 +572,7 @@ impl RpcClient {
     /// ```
     /// # use std::net::{Ipv4Addr, SocketAddr};
     /// # use std::time::Duration;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// let addr = SocketAddr::from((Ipv4Addr::LOCALHOST, 8899));
     /// let timeout = Duration::from_secs(1);
     /// let client = RpcClient::new_socket_with_timeout(addr, timeout);
@@ -631,11 +631,11 @@ impl RpcClient {
     /// containing an [`RpcResponseError`] with `code` set to
     /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`].
     ///
-    /// [`RpcError`]: solana_rpc_client_api::request::RpcError
-    /// [`RpcResponseError`]: solana_rpc_client_api::request::RpcError::RpcResponseError
-    /// [`JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE
-    /// [`JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE
-    /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY
+    /// [`RpcError`]: miraland_rpc_client_api::request::RpcError
+    /// [`RpcResponseError`]: miraland_rpc_client_api::request::RpcError::RpcResponseError
+    /// [`JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE
+    /// [`JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE
+    /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY
     ///
     /// # RPC Reference
     ///
@@ -648,8 +648,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -725,8 +725,8 @@ impl RpcClient {
     /// method.
     ///
     /// [`send_transaction_with_config`]: RpcClient::send_transaction_with_config
-    /// [`skip_preflight`]: solana_rpc_client_api::config::RpcSendTransactionConfig::skip_preflight
-    /// [`RpcSendTransactionConfig`]: solana_rpc_client_api::config::RpcSendTransactionConfig
+    /// [`skip_preflight`]: miraland_rpc_client_api::config::RpcSendTransactionConfig::skip_preflight
+    /// [`RpcSendTransactionConfig`]: miraland_rpc_client_api::config::RpcSendTransactionConfig
     /// [`send_and_confirm_transaction`]: RpcClient::send_and_confirm_transaction
     ///
     /// # Errors
@@ -744,11 +744,11 @@ impl RpcClient {
     /// containing an [`RpcResponseError`] with `code` set to
     /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`].
     ///
-    /// [`RpcError`]: solana_rpc_client_api::request::RpcError
-    /// [`RpcResponseError`]: solana_rpc_client_api::request::RpcError::RpcResponseError
-    /// [`JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE
-    /// [`JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE
-    /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY
+    /// [`RpcError`]: miraland_rpc_client_api::request::RpcError
+    /// [`RpcResponseError`]: miraland_rpc_client_api::request::RpcError::RpcResponseError
+    /// [`JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE
+    /// [`JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE
+    /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY
     ///
     /// # RPC Reference
     ///
@@ -759,8 +759,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -799,8 +799,8 @@ impl RpcClient {
     /// method.
     ///
     /// [`send_transaction_with_config`]: RpcClient::send_transaction_with_config
-    /// [`skip_preflight`]: solana_rpc_client_api::config::RpcSendTransactionConfig::skip_preflight
-    /// [`RpcSendTransactionConfig`]: solana_rpc_client_api::config::RpcSendTransactionConfig
+    /// [`skip_preflight`]: miraland_rpc_client_api::config::RpcSendTransactionConfig::skip_preflight
+    /// [`RpcSendTransactionConfig`]: miraland_rpc_client_api::config::RpcSendTransactionConfig
     /// [`send_and_confirm_transaction`]: RpcClient::send_and_confirm_transaction
     ///
     /// # Errors
@@ -820,11 +820,11 @@ impl RpcClient {
     /// containing an [`RpcResponseError`] with `code` set to
     /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`].
     ///
-    /// [`RpcError`]: solana_rpc_client_api::request::RpcError
-    /// [`RpcResponseError`]: solana_rpc_client_api::request::RpcError::RpcResponseError
-    /// [`JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE
-    /// [`JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE
-    /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`]: solana_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY
+    /// [`RpcError`]: miraland_rpc_client_api::request::RpcError
+    /// [`RpcResponseError`]: miraland_rpc_client_api::request::RpcError::RpcResponseError
+    /// [`JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_TRANSACTION_SIGNATURE_VERIFICATION_FAILURE
+    /// [`JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_SEND_TRANSACTION_PREFLIGHT_FAILURE
+    /// [`JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY`]: miraland_rpc_client_api::custom_error::JSON_RPC_SERVER_ERROR_NODE_UNHEALTHY
     ///
     /// # RPC Reference
     ///
@@ -835,11 +835,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::RpcSendTransactionConfig,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -904,8 +904,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -957,8 +957,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     commitment_config::CommitmentConfig,
     /// #     signature::Signer,
@@ -1016,8 +1016,8 @@ impl RpcClient {
     /// [`RpcSimulateTransactionResult`] will be `Some`. Any logs emitted from
     /// the transaction are returned in the [`logs`] field.
     ///
-    /// [`err`]: solana_rpc_client_api::response::RpcSimulateTransactionResult::err
-    /// [`logs`]: solana_rpc_client_api::response::RpcSimulateTransactionResult::logs
+    /// [`err`]: miraland_rpc_client_api::response::RpcSimulateTransactionResult::err
+    /// [`logs`]: miraland_rpc_client_api::response::RpcSimulateTransactionResult::logs
     ///
     /// Simulating a transaction is similar to the ["preflight check"] that is
     /// run by default when sending a transaction.
@@ -1030,7 +1030,7 @@ impl RpcClient {
     /// `true`.
     ///
     /// [`simulate_transaction_with_config`]: RpcClient::simulate_transaction_with_config
-    /// [`sig_verify`]: solana_rpc_client_api::config::RpcSimulateTransactionConfig::sig_verify
+    /// [`sig_verify`]: miraland_rpc_client_api::config::RpcSimulateTransactionConfig::sig_verify
     ///
     /// # RPC Reference
     ///
@@ -1041,11 +1041,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     response::RpcSimulateTransactionResult,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -1077,8 +1077,8 @@ impl RpcClient {
     /// [`RpcSimulateTransactionResult`] will be `Some`. Any logs emitted from
     /// the transaction are returned in the [`logs`] field.
     ///
-    /// [`err`]: solana_rpc_client_api::response::RpcSimulateTransactionResult::err
-    /// [`logs`]: solana_rpc_client_api::response::RpcSimulateTransactionResult::logs
+    /// [`err`]: miraland_rpc_client_api::response::RpcSimulateTransactionResult::err
+    /// [`logs`]: miraland_rpc_client_api::response::RpcSimulateTransactionResult::logs
     ///
     /// Simulating a transaction is similar to the ["preflight check"] that is
     /// run by default when sending a transaction.
@@ -1091,7 +1091,7 @@ impl RpcClient {
     /// `true`.
     ///
     /// [`simulate_transaction_with_config`]: RpcClient::simulate_transaction_with_config
-    /// [`sig_verify`]: solana_rpc_client_api::config::RpcSimulateTransactionConfig::sig_verify
+    /// [`sig_verify`]: miraland_rpc_client_api::config::RpcSimulateTransactionConfig::sig_verify
     ///
     /// This method can additionally query information about accounts by
     /// including them in the [`accounts`] field of the
@@ -1099,8 +1099,8 @@ impl RpcClient {
     /// are reported in the [`accounts`][accounts2] field of the returned
     /// [`RpcSimulateTransactionResult`].
     ///
-    /// [`accounts`]: solana_rpc_client_api::config::RpcSimulateTransactionConfig::accounts
-    /// [accounts2]: solana_rpc_client_api::response::RpcSimulateTransactionResult::accounts
+    /// [`accounts`]: miraland_rpc_client_api::config::RpcSimulateTransactionConfig::accounts
+    /// [accounts2]: miraland_rpc_client_api::response::RpcSimulateTransactionResult::accounts
     ///
     /// # RPC Reference
     ///
@@ -1111,12 +1111,12 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::RpcSimulateTransactionConfig,
     /// #     response::RpcSimulateTransactionResult,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -1165,8 +1165,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let snapshot_slot_info = rpc_client.get_highest_snapshot_slot()?;
     /// # Ok::<(), Error>(())
@@ -1217,8 +1217,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -1282,8 +1282,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -1357,8 +1357,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -1418,8 +1418,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     commitment_config::CommitmentConfig,
     /// #     signature::Signer,
@@ -1481,8 +1481,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     commitment_config::CommitmentConfig,
     /// #     signature::Signer,
@@ -1534,8 +1534,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let slot = rpc_client.get_slot()?;
     /// # Ok::<(), Error>(())
@@ -1557,8 +1557,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let commitment_config = CommitmentConfig::processed();
@@ -1585,8 +1585,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let block_height = rpc_client.get_block_height()?;
     /// # Ok::<(), Error>(())
@@ -1608,8 +1608,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let commitment_config = CommitmentConfig::processed();
@@ -1636,8 +1636,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::slot_history::Slot;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let start_slot = 1;
@@ -1660,8 +1660,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let production = rpc_client.get_block_production()?;
     /// # Ok::<(), Error>(())
@@ -1681,11 +1681,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::{RpcBlockProductionConfig, RpcBlockProductionConfigRange},
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -1732,11 +1732,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     response::StakeActivationState,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signer::keypair::Keypair,
     /// #     signature::Signer,
@@ -1811,8 +1811,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let supply = rpc_client.supply()?;
     /// # Ok::<(), Error>(())
@@ -1832,8 +1832,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let commitment_config = CommitmentConfig::processed();
@@ -1861,11 +1861,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::{RpcLargestAccountsConfig, RpcLargestAccountsFilter},
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let commitment_config = CommitmentConfig::processed();
@@ -1900,8 +1900,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let accounts = rpc_client.get_vote_accounts()?;
     /// # Ok::<(), Error>(())
@@ -1924,8 +1924,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let commitment_config = CommitmentConfig::processed();
@@ -1955,11 +1955,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::RpcGetVoteAccountsConfig,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signer::keypair::Keypair,
     /// #     signature::Signer,
@@ -2007,8 +2007,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let cluster_nodes = rpc_client.get_cluster_nodes()?;
     /// # Ok::<(), Error>(())
@@ -2036,8 +2036,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let slot = rpc_client.get_slot()?;
     /// let block = rpc_client.get_block(slot)?;
@@ -2058,9 +2058,9 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
-    /// # use solana_transaction_status::UiTransactionEncoding;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_transaction_status::UiTransactionEncoding;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let slot = rpc_client.get_slot()?;
     /// let encoding = UiTransactionEncoding::Base58;
@@ -2089,12 +2089,12 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     config::RpcBlockConfig,
     /// #     client_error::Error,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
-    /// # use solana_transaction_status::{
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_transaction_status::{
     /// #     TransactionDetails,
     /// #     UiTransactionEncoding,
     /// # };
@@ -2187,8 +2187,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// // Get up to the first 10 blocks
     /// let start_slot = 0;
@@ -2238,8 +2238,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// // Get up to the first 10 blocks
@@ -2290,8 +2290,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// // Get the first 10 blocks
     /// let start_slot = 0;
@@ -2327,8 +2327,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// // Get the first 10 blocks
@@ -2441,8 +2441,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -2484,8 +2484,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::{GetConfirmedSignaturesForAddress2Config, RpcClient};
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::{GetConfirmedSignaturesForAddress2Config, RpcClient};
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -2568,15 +2568,15 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
     /// #     signer::keypair::Keypair,
     /// #     system_transaction,
     /// # };
-    /// # use solana_transaction_status::UiTransactionEncoding;
+    /// # use miraland_transaction_status::UiTransactionEncoding;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let alice = Keypair::new();
     /// # let bob = Keypair::new();
@@ -2620,11 +2620,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::RpcTransactionConfig,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signature::Signature,
@@ -2632,7 +2632,7 @@ impl RpcClient {
     /// #     system_transaction,
     /// #     commitment_config::CommitmentConfig,
     /// # };
-    /// # use solana_transaction_status::UiTransactionEncoding;
+    /// # use miraland_transaction_status::UiTransactionEncoding;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let alice = Keypair::new();
     /// # let bob = Keypair::new();
@@ -2698,8 +2698,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// // Get the time of the most recent finalized block
     /// let slot = rpc_client.get_slot()?;
@@ -2725,8 +2725,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let epoch_info = rpc_client.get_epoch_info()?;
     /// # Ok::<(), Error>(())
@@ -2746,8 +2746,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let commitment_config = CommitmentConfig::confirmed();
@@ -2778,8 +2778,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let slot = rpc_client.get_slot()?;
@@ -2806,8 +2806,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let slot = rpc_client.get_slot()?;
@@ -2839,11 +2839,11 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::RpcLeaderScheduleConfig,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let slot = rpc_client.get_slot()?;
@@ -2877,8 +2877,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let epoch_schedule = rpc_client.get_epoch_schedule()?;
     /// # Ok::<(), Error>(())
@@ -2901,8 +2901,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let limit = 10;
     /// let performance_samples = rpc_client.get_recent_performance_samples(
@@ -2933,8 +2933,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::signature::{Keypair, Signer};
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let alice = Keypair::new();
@@ -2963,8 +2963,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let identity = rpc_client.get_identity()?;
     /// # Ok::<(), Error>(())
@@ -2990,8 +2990,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let inflation_governor = rpc_client.get_inflation_governor()?;
     /// # Ok::<(), Error>(())
@@ -3011,8 +3011,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let inflation_rate = rpc_client.get_inflation_rate()?;
     /// # Ok::<(), Error>(())
@@ -3036,8 +3036,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::signature::{Keypair, Signer};
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let epoch_info = rpc_client.get_epoch_info()?;
@@ -3070,13 +3070,13 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::signature::{Keypair, Signer};
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let expected_version = semver::Version::new(1, 7, 0);
     /// let version = rpc_client.get_version()?;
-    /// let version = semver::Version::parse(&version.solana_core)?;
+    /// let version = semver::Version::parse(&version.miraland_core)?;
     /// assert!(version >= expected_version);
     /// # Ok::<(), Box<dyn std::error::Error>>(())
     /// ```
@@ -3099,8 +3099,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let slot = rpc_client.minimum_ledger_slot()?;
     /// # Ok::<(), Error>(())
@@ -3125,7 +3125,7 @@ impl RpcClient {
     /// [`RpcError::ForUser`]. This is unlike [`get_account_with_commitment`],
     /// which returns `Ok(None)` if the account does not exist.
     ///
-    /// [`RpcError::ForUser`]: solana_rpc_client_api::request::RpcError::ForUser
+    /// [`RpcError::ForUser`]: miraland_rpc_client_api::request::RpcError::ForUser
     /// [`get_account_with_commitment`]: RpcClient::get_account_with_commitment
     ///
     /// # RPC Reference
@@ -3137,8 +3137,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::{self, RpcClient};
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::{self, RpcClient};
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3172,8 +3172,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::{self, RpcClient};
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::{self, RpcClient};
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3219,18 +3219,18 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     config::RpcAccountInfoConfig,
     /// #     client_error::Error,
     /// # };
-    /// # use solana_rpc_client::rpc_client::{self, RpcClient};
+    /// # use miraland_rpc_client::rpc_client::{self, RpcClient};
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
     /// #     pubkey::Pubkey,
     /// #     commitment_config::CommitmentConfig,
     /// # };
-    /// # use solana_account_decoder::UiAccountEncoding;
+    /// # use miraland_account_decoder::UiAccountEncoding;
     /// # use std::str::FromStr;
     /// # let mocks = rpc_client::create_rpc_client_mocks();
     /// # let rpc_client = RpcClient::new_mock_with_mocks("succeeds".to_string(), mocks);
@@ -3268,8 +3268,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let slot = rpc_client.get_max_retransmit_slot()?;
     /// # Ok::<(), Error>(())
@@ -3289,8 +3289,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let slot = rpc_client.get_max_shred_insert_slot()?;
     /// # Ok::<(), Error>(())
@@ -3313,8 +3313,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3341,8 +3341,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3381,17 +3381,17 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     config::RpcAccountInfoConfig,
     /// #     client_error::Error,
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
     /// #     commitment_config::CommitmentConfig,
     /// # };
-    /// # use solana_account_decoder::UiAccountEncoding;
+    /// # use miraland_account_decoder::UiAccountEncoding;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let alice = Keypair::new();
     /// # let bob = Keypair::new();
@@ -3433,8 +3433,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::{self, RpcClient};
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::{self, RpcClient};
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3463,8 +3463,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let data_len = 300;
     /// let balance = rpc_client.get_minimum_balance_for_rent_exemption(data_len)?;
@@ -3489,8 +3489,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3515,8 +3515,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3557,8 +3557,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
@@ -3583,18 +3583,18 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::{
+    /// # use miraland_rpc_client_api::{
     /// #     client_error::Error,
     /// #     config::{RpcAccountInfoConfig, RpcProgramAccountsConfig},
     /// #     filter::{MemcmpEncodedBytes, RpcFilterType, Memcmp},
     /// # };
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::{
     /// #     signature::Signer,
     /// #     signer::keypair::Keypair,
     /// #     commitment_config::CommitmentConfig,
     /// # };
-    /// # use solana_account_decoder::{UiDataSliceConfig, UiAccountEncoding};
+    /// # use miraland_account_decoder::{UiDataSliceConfig, UiAccountEncoding};
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// # let alice = Keypair::new();
     /// # let base64_bytes = "\
@@ -3646,8 +3646,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let stake_minimum_delegation = rpc_client.get_stake_minimum_delegation()?;
     /// # Ok::<(), Error>(())
@@ -3667,8 +3667,8 @@ impl RpcClient {
     /// # Examples
     ///
     /// ```
-    /// # use solana_rpc_client_api::client_error::Error;
-    /// # use solana_rpc_client::rpc_client::RpcClient;
+    /// # use miraland_rpc_client_api::client_error::Error;
+    /// # use miraland_rpc_client::rpc_client::RpcClient;
     /// # use solana_sdk::commitment_config::CommitmentConfig;
     /// # let rpc_client = RpcClient::new_mock("succeeds".to_string());
     /// let stake_minimum_delegation =
@@ -4103,7 +4103,7 @@ mod tests {
         jsonrpc_core::{futures::prelude::*, Error, IoHandler, Params},
         jsonrpc_http_server::{AccessControlAllowOrigin, DomainsValidation, ServerBuilder},
         serde_json::{json, Number},
-        solana_rpc_client_api::client_error::ErrorKind,
+        miraland_rpc_client_api::client_error::ErrorKind,
         solana_sdk::{
             instruction::InstructionError,
             signature::{Keypair, Signer},

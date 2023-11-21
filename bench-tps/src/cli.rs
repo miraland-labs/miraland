@@ -1,23 +1,23 @@
 use {
     clap::{crate_description, crate_name, App, Arg, ArgMatches},
-    solana_clap_utils::{
+    miraland_clap_utils::{
         hidden_unless_forced,
         input_validators::{is_keypair, is_url, is_url_or_moniker, is_within_range},
     },
-    solana_cli_config::{ConfigInput, CONFIG_FILE},
+    miraland_cli_config::{ConfigInput, CONFIG_FILE},
     solana_sdk::{
         fee_calculator::FeeRateGovernor,
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair},
     },
-    solana_tpu_client::tpu_client::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
+    miraland_tpu_client::tpu_client::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
     std::{
         net::{IpAddr, Ipv4Addr, SocketAddr},
         time::Duration,
     },
 };
 
-const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = solana_sdk::native_token::LAMPORTS_PER_SOL;
+const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = solana_sdk::native_token::LAMPORTS_PER_MLN;
 
 #[derive(Eq, PartialEq, Debug)]
 pub enum ExternalClientType {
@@ -146,7 +146,7 @@ pub fn build_args<'a>(version: &'_ str) -> App<'a, '_> {
                 .global(true)
                 .validator(is_url_or_moniker)
                 .help(
-                    "URL for Solana's JSON RPC or moniker (or their first letter): \
+                    "URL for Miraland's JSON RPC or moniker (or their first letter): \
                        [mainnet-beta, testnet, devnet, localhost]",
                 ),
         )
@@ -383,7 +383,7 @@ pub fn build_args<'a>(version: &'_ str) -> App<'a, '_> {
                 .long("bind-address")
                 .value_name("HOST")
                 .takes_value(true)
-                .validator(solana_net_utils::is_host)
+                .validator(miraland_net_utils::is_host)
                 .requires("client_node_id")
                 .help("IP address to use with connection cache"),
         )
@@ -403,9 +403,9 @@ pub fn parse_args(matches: &ArgMatches) -> Result<Config, &'static str> {
     let mut args = Config::default();
 
     let config = if let Some(config_file) = matches.value_of("config_file") {
-        solana_cli_config::Config::load(config_file).unwrap_or_default()
+        miraland_cli_config::Config::load(config_file).unwrap_or_default()
     } else {
-        solana_cli_config::Config::default()
+        miraland_cli_config::Config::default()
     };
     let (_, json_rpc_url) = ConfigInput::compute_json_rpc_url_setting(
         matches.value_of("json_rpc_url").unwrap_or(""),
@@ -449,7 +449,7 @@ pub fn parse_args(matches: &ArgMatches) -> Result<Config, &'static str> {
     }
 
     if let Some(addr) = matches.value_of("entrypoint") {
-        args.entrypoint_addr = solana_net_utils::parse_host_port(addr)
+        args.entrypoint_addr = miraland_net_utils::parse_host_port(addr)
             .map_err(|_| "failed to parse entrypoint address")?;
     }
 
@@ -568,7 +568,7 @@ pub fn parse_args(matches: &ArgMatches) -> Result<Config, &'static str> {
 
     if let Some(addr) = matches.value_of("bind_address") {
         args.bind_address =
-            solana_net_utils::parse_host(addr).map_err(|_| "Failed to parse bind-address")?;
+            miraland_net_utils::parse_host(addr).map_err(|_| "Failed to parse bind-address")?;
     }
 
     if let Some(client_node_id_filename) = matches.value_of("client_node_id") {
@@ -614,7 +614,7 @@ mod tests {
         // parse provided rpc address, check that default ws address is correct
         // always specify identity in these tests because otherwise a random one will be used
         let matches = build_args("1.0.0").get_matches_from(vec![
-            "solana-bench-tps",
+            "miraland-bench-tps",
             "--identity",
             &keypair_file_name,
             "-u",
@@ -634,7 +634,7 @@ mod tests {
         // parse cli args typical for private cluster tests
         let keypair = read_keypair_file(&keypair_file_name).unwrap();
         let matches = build_args("1.0.0").get_matches_from(vec![
-            "solana-bench-tps",
+            "miraland-bench-tps",
             "--identity",
             &keypair_file_name,
             "-u",
@@ -669,7 +669,7 @@ mod tests {
         // select different client type
         let keypair = read_keypair_file(&keypair_file_name).unwrap();
         let matches = build_args("1.0.0").get_matches_from(vec![
-            "solana-bench-tps",
+            "miraland-bench-tps",
             "--identity",
             &keypair_file_name,
             "-u",
@@ -692,7 +692,7 @@ mod tests {
         let keypair = read_keypair_file(&keypair_file_name).unwrap();
         let (client_id, client_id_file_name) = write_tmp_keypair(&out_dir);
         let matches = build_args("1.0.0").get_matches_from(vec![
-            "solana-bench-tps",
+            "miraland-bench-tps",
             "--identity",
             &keypair_file_name,
             "-u",

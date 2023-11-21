@@ -1,3 +1,3 @@
 fn main() -> Result<(), String> {
-    solana_install::main()
+    miraland_install::main()
 }

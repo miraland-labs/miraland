@@ -1,5 +1,5 @@
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-use solana_frozen_abi::abi_example::AbiExample;
+use miraland_frozen_abi::abi_example::AbiExample;
 use {
     solana_sdk::{
         account::{AccountSharedData, ReadableAccount},

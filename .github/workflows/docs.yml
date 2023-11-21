@@ -3,13 +3,13 @@ name: docs
 on:
   push:
     branches:
-      - master
+      - main
       - v[0-9]+.[0-9]+
     tags:
       - v[0-9]+.[0-9]+.[0-9]+
   pull_request:
     branches:
-      - master
+      - main
       - v[0-9]+.[0-9]+
 
 jobs:
@@ -69,7 +69,7 @@ jobs:
     needs:
       - check
     if: >
-      github.repository == 'solana-labs/solana' &&
+      github.repository == 'miraland-labs/miraland' &&
       needs.check.outputs.continue == 1
     # the name is used by .mergify.yml as well
     name: build & deploy docs

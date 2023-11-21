@@ -7,7 +7,7 @@ pub use crate::nonblocking::{
     account_identity_ok, data_from_account, data_from_state, state_from_account, Error,
 };
 use {
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::{account::Account, commitment_config::CommitmentConfig, pubkey::Pubkey},
 };
 

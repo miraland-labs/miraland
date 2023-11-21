@@ -3,13 +3,13 @@
 extern crate test;
 
 use {
-    solana_perf::{packet::PacketBatchRecycler, recycler::Recycler},
+    miraland_perf::{packet::PacketBatchRecycler, recycler::Recycler},
     test::Bencher,
 };
 
 #[bench]
 fn bench_recycler(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let recycler: PacketBatchRecycler = Recycler::default();
 

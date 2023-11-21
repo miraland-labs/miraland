@@ -4,20 +4,20 @@ use {
     chrono::{Local, NaiveDateTime, SecondsFormat, TimeZone, Utc},
     console::style,
     indicatif::{ProgressBar, ProgressStyle},
-    solana_cli_config::SettingType,
+    miraland_cli_config::SettingType,
     solana_sdk::{
         clock::UnixTimestamp,
         hash::Hash,
         instruction::CompiledInstruction,
         message::v0::MessageAddressTableLookup,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
         program_utils::limited_deserialize,
         pubkey::Pubkey,
         signature::Signature,
         stake,
         transaction::{TransactionError, TransactionVersion, VersionedTransaction},
     },
-    solana_transaction_status::{
+    miraland_transaction_status::{
         Rewards, UiReturnDataEncoding, UiTransactionReturnData, UiTransactionStatusMeta,
     },
     spl_memo::{id as spl_memo_id, v1::id as spl_memo_v1_id},
@@ -53,8 +53,8 @@ pub fn build_balance_message_with_config(
     let value = if config.use_lamports_unit {
         lamports.to_string()
     } else {
-        let sol = lamports_to_sol(lamports);
-        let sol_str = format!("{sol:.9}");
+        let mln = lamports_to_mln(lamports);
+        let sol_str = format!("{mln:.9}");
         if config.trim_trailing_zeros {
             sol_str
                 .trim_end_matches('0')
@@ -69,7 +69,7 @@ pub fn build_balance_message_with_config(
             let ess = if lamports == 1 { "" } else { "s" };
             format!(" lamport{ess}")
         } else {
-            " SOL".to_string()
+            " MLN".to_string()
         }
     } else {
         "".to_string()
@@ -520,7 +520,7 @@ fn write_rewards<W: io::Write>(
                 let sign = if reward.lamports < 0 { "-" } else { "" };
                 writeln!(
                     w,
-                    "{}  {:<44}  {:^15}  {}◎{:<14.9}  ◎{:<18.9}",
+                    "{}  {:<44}  {:^15}  {}𝇊{:<14.9}  𝇊{:<18.9}",
                     prefix,
                     reward.pubkey,
                     if let Some(reward_type) = reward.reward_type {
@@ -529,8 +529,8 @@ fn write_rewards<W: io::Write>(
                         "-".to_string()
                     },
                     sign,
-                    lamports_to_sol(reward.lamports.unsigned_abs()),
-                    lamports_to_sol(reward.post_balance)
+                    lamports_to_mln(reward.lamports.unsigned_abs()),
+                    lamports_to_mln(reward.post_balance)
                 )?;
             }
         }
@@ -555,7 +555,7 @@ fn write_status<W: io::Write>(
 }
 
 fn write_fees<W: io::Write>(w: &mut W, transaction_fee: u64, prefix: &str) -> io::Result<()> {
-    writeln!(w, "{}  Fee: ◎{}", prefix, lamports_to_sol(transaction_fee))
+    writeln!(w, "{}  Fee: 𝇊{}", prefix, lamports_to_mln(transaction_fee))
 }
 
 fn write_balances<W: io::Write>(
@@ -576,19 +576,19 @@ fn write_balances<W: io::Write>(
         if pre == post {
             writeln!(
                 w,
-                "{}  Account {} balance: ◎{}",
+                "{}  Account {} balance: 𝇊{}",
                 prefix,
                 i,
-                lamports_to_sol(*pre)
+                lamports_to_mln(*pre)
             )?;
         } else {
             writeln!(
                 w,
-                "{}  Account {} balance: ◎{} -> ◎{}",
+                "{}  Account {} balance: 𝇊{} -> 𝇊{}",
                 prefix,
                 i,
-                lamports_to_sol(*pre),
-                lamports_to_sol(*post)
+                lamports_to_mln(*pre),
+                lamports_to_mln(*post)
             )?;
         }
     }
@@ -737,7 +737,7 @@ mod test {
             transaction::Transaction,
             transaction_context::TransactionReturnData,
         },
-        solana_transaction_status::{Reward, RewardType, TransactionStatusMeta},
+        miraland_transaction_status::{Reward, RewardType, TransactionStatusMeta},
         std::io::BufWriter,
     };
 
@@ -850,9 +850,9 @@ Instruction 0
   Account 0: 4zvwRjXUKGfvwnParsHAS3HuSVzV5cA4McphgmoCtajS (0)
   Data: []
 Status: Ok
-  Fee: ◎0.000005
-  Account 0 balance: ◎0.000005 -> ◎0
-  Account 1 balance: ◎0.00001 -> ◎0.0000099
+  Fee: 𝇊0.000005
+  Account 0 balance: 𝇊0.000005 -> 𝇊0
+  Account 1 balance: 𝇊0.00001 -> 𝇊0.0000099
 Compute Units Consumed: 1234
 Log Messages:
   Test message
@@ -861,7 +861,7 @@ Return Data from Program 8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR:
 0000:   01 02 03                                             ...
 Rewards:
   Address                                            Type        Amount            New Balance         \0
-  4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi        rent        -◎0.000000100     ◎0.000009900       \0
+  4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi        rent        -𝇊0.000000100     𝇊0.000009900       \0
 ".replace("\\0", "") // replace marker used to subvert trailing whitespace linter on CI
         );
     }
@@ -936,11 +936,11 @@ Address Table Lookup 0
   Writable Indexes: [0]
   Readonly Indexes: [1]
 Status: Ok
-  Fee: ◎0.000005
-  Account 0 balance: ◎0.000005 -> ◎0
-  Account 1 balance: ◎0.00001
-  Account 2 balance: ◎0.000015 -> ◎0.0000149
-  Account 3 balance: ◎0.00002
+  Fee: 𝇊0.000005
+  Account 0 balance: 𝇊0.000005 -> 𝇊0
+  Account 1 balance: 𝇊0.00001
+  Account 2 balance: 𝇊0.000015 -> 𝇊0.0000149
+  Account 3 balance: 𝇊0.00002
 Compute Units Consumed: 2345
 Log Messages:
   Test message
@@ -949,7 +949,7 @@ Return Data from Program 8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR:
 0000:   01 02 03                                             ...
 Rewards:
   Address                                            Type        Amount            New Balance         \0
-  CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8        rent        -◎0.000000100     ◎0.000014900       \0
+  CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8        rent        -𝇊0.000000100     𝇊0.000014900       \0
 ".replace("\\0", "") // replace marker used to subvert trailing whitespace linter on CI
         );
     }

@@ -7,16 +7,16 @@ use {
         stream::StreamExt,
     },
     log::*,
-    solana_connection_cache::{
+    miraland_connection_cache::{
         connection_cache::{
             ConnectionCache, ConnectionManager, ConnectionPool, NewConnectionConfig, Protocol,
             DEFAULT_CONNECTION_POOL_SIZE,
         },
         nonblocking::client_connection::ClientConnection,
     },
-    solana_pubsub_client::nonblocking::pubsub_client::{PubsubClient, PubsubClientError},
-    solana_rpc_client::nonblocking::rpc_client::RpcClient,
-    solana_rpc_client_api::{
+    miraland_pubsub_client::nonblocking::pubsub_client::{PubsubClient, PubsubClientError},
+    miraland_rpc_client::nonblocking::rpc_client::RpcClient,
+    miraland_rpc_client_api::{
         client_error::{Error as ClientError, Result as ClientResult},
         response::{RpcContactInfo, SlotUpdate},
     },
@@ -51,8 +51,8 @@ use {
 use {
     crate::tpu_client::{SEND_TRANSACTION_INTERVAL, TRANSACTION_RESEND_INTERVAL},
     indicatif::ProgressBar,
-    solana_rpc_client::spinner::{self, SendTransactionProgress},
-    solana_rpc_client_api::request::MAX_GET_SIGNATURE_STATUSES_QUERY_ITEMS,
+    miraland_rpc_client::spinner::{self, SendTransactionProgress},
+    miraland_rpc_client_api::request::MAX_GET_SIGNATURE_STATUSES_QUERY_ITEMS,
     solana_sdk::{message::Message, signers::Signers, transaction::TransactionError},
 };
 

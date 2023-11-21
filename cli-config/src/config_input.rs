@@ -1,5 +1,5 @@
 use {
-    crate::Config, solana_clap_utils::input_validators::normalize_to_url_if_moniker,
+    crate::Config, miraland_clap_utils::input_validators::normalize_to_url_if_moniker,
     solana_sdk::commitment_config::CommitmentConfig, std::str::FromStr,
 };
 

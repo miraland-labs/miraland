@@ -1,7 +1,7 @@
 [package]
-name = "solana-bucket-map"
-description = "solana-bucket-map"
-documentation = "https://docs.rs/solana-bucket-map"
+name = "miraland-bucket-map"
+description = "miraland-bucket-map"
+documentation = "https://docs.rs/miraland-bucket-map"
 readme = "../README.md"
 version = { workspace = true }
 authors = { workspace = true }
@@ -18,18 +18,18 @@ memmap2 = { workspace = true }
 modular-bitfield = { workspace = true }
 num_enum = { workspace = true }
 rand = { workspace = true }
-solana-measure = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-sdk = { workspace = true }
 tempfile = { workspace = true }
 
 [dev-dependencies]
 fs_extra = { workspace = true }
 rayon = { workspace = true }
-solana-logger = { workspace = true }
+miraland-logger = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_bucket_map"
+name = "miraland_bucket_map"
 
 [[bench]]
 name = "bucket_map"

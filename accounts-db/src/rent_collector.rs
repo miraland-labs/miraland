@@ -558,7 +558,7 @@ mod tests {
     #[test]
     fn test_collect_cleans_up_account() {
         for set_exempt_rent_epoch_max in [false, true] {
-            solana_logger::setup();
+            miraland_logger::setup();
             let account_lamports = 1; // must be *below* rent amount
             let account_data_len = 567;
             let account_rent_epoch = 11;

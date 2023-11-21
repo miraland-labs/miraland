@@ -3,7 +3,7 @@
 use {
     dashmap::{mapref::entry::Entry, DashMap},
     index_list::{Index, IndexList},
-    solana_measure::measure_us,
+    miraland_measure::measure_us,
     solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::Slot,
@@ -248,7 +248,7 @@ mod tests {
 
     #[test]
     fn test_read_only_accounts_cache() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let per_account_size = CACHE_ENTRY_SIZE;
         let data_size = 100;
         let max = data_size + per_account_size;

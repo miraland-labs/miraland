@@ -17,18 +17,18 @@ use {
         distributions::{Distribution, WeightedError, WeightedIndex},
         Rng,
     },
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::{ClusterInfo, ClusterInfoError},
         contact_info::{LegacyContactInfo as ContactInfo, LegacyContactInfo, Protocol},
         ping_pong::{self, PingCache, Pong},
         weighted_shuffle::WeightedShuffle,
     },
-    solana_ledger::{
+    miraland_ledger::{
         ancestor_iterator::{AncestorIterator, AncestorIteratorWithHash},
         blockstore::Blockstore,
         shred::{Nonce, Shred, ShredFetchStats, SIZE_OF_NONCE},
     },
-    solana_perf::{
+    miraland_perf::{
         data_budget::DataBudget,
         packet::{Packet, PacketBatch, PacketBatchRecycler},
     },
@@ -43,7 +43,7 @@ use {
         signer::keypair::Keypair,
         timing::{duration_as_ms, timestamp},
     },
-    solana_streamer::{
+    miraland_streamer::{
         sendmmsg::{batch_send, SendPktsError},
         socket::SocketAddrSpace,
         streamer::PacketBatchSender,
@@ -812,7 +812,7 @@ impl ServeRepair {
 
         let recycler = PacketBatchRecycler::default();
         Builder::new()
-            .name("solRepairListen".to_string())
+            .name("mlnRepairListen".to_string())
             .spawn(move || {
                 let mut last_print = Instant::now();
                 let mut stats = ServeRepairStats::default();
@@ -1419,21 +1419,21 @@ mod tests {
     use {
         super::*,
         crate::repair::repair_response,
-        solana_gossip::{contact_info::ContactInfo, socketaddr, socketaddr_any},
-        solana_ledger::{
+        miraland_gossip::{contact_info::ContactInfo, socketaddr, socketaddr_any},
+        miraland_ledger::{
             blockstore::make_many_slot_entries,
             blockstore_processor::fill_blockstore_slot_with_ticks,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             get_tmp_ledger_path_auto_delete,
             shred::{max_ticks_per_n_shreds, Shred, ShredFlags},
         },
-        solana_perf::packet::{deserialize_from_with_limit, Packet},
+        miraland_perf::packet::{deserialize_from_with_limit, Packet},
         solana_runtime::bank::Bank,
         solana_sdk::{
             feature_set::FeatureSet, hash::Hash, pubkey::Pubkey, signature::Keypair,
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::{io::Cursor, net::Ipv4Addr},
     };
 
@@ -1853,7 +1853,7 @@ mod tests {
     /// test run_window_request responds with the right shred, and do not overrun
     fn run_highest_window_request(slot: Slot, num_slots: u64, nonce: Nonce) {
         let recycler = PacketBatchRecycler::default();
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(Blockstore::open(ledger_path.path()).unwrap());
         let rv = ServeRepair::run_highest_window_request(
@@ -1918,7 +1918,7 @@ mod tests {
     /// test window requests respond with the right shred, and do not overrun
     fn run_window_request(slot: Slot, nonce: Nonce) {
         let recycler = PacketBatchRecycler::default();
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(Blockstore::open(ledger_path.path()).unwrap());
         let rv = ServeRepair::run_window_request(
@@ -2086,7 +2086,7 @@ mod tests {
     }
 
     fn run_orphan(slot: Slot, num_slots: u64, nonce: Nonce) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler = PacketBatchRecycler::default();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(Blockstore::open(ledger_path.path()).unwrap());
@@ -2149,7 +2149,7 @@ mod tests {
 
     #[test]
     fn run_orphan_corrupted_shred_size() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler = PacketBatchRecycler::default();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(Blockstore::open(ledger_path.path()).unwrap());
@@ -2206,7 +2206,7 @@ mod tests {
                 .unwrap()
         }
 
-        solana_logger::setup();
+        miraland_logger::setup();
         let recycler = PacketBatchRecycler::default();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
 

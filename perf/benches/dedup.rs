@@ -5,7 +5,7 @@ extern crate test;
 
 use {
     rand::prelude::*,
-    solana_perf::{
+    miraland_perf::{
         deduper::{self, Deduper},
         packet::{to_packet_batches, PacketBatch},
     },

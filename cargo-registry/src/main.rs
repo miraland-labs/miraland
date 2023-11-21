@@ -1,4 +1,4 @@
-//! The `registry_service` module implements the Solana cargo registry service.
+//! The `registry_service` module implements the Miraland cargo registry service.
 use {
     crate::{
         client::Client,
@@ -263,7 +263,7 @@ impl CargoRegistryService {
 
 #[tokio::main]
 async fn main() {
-    solana_logger::setup_with_default("solana=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     let client = Arc::new(Client::new().expect("Failed to get RPC Client instance"));
 
     let bind_addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), client.port);

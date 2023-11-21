@@ -1,4 +1,4 @@
-# Solana Coding Guidelines
+# Miraland Coding Guidelines
 
 The goal of these guidelines is to improve developer productivity by allowing
 developers to jump into any file in the codebase and not need to adapt to
@@ -45,14 +45,14 @@ $ git pull --rebase upstream master
 
 If there are no functional changes, PRs can be very large and that's no
 problem. If, however, your changes are making meaningful changes or additions,
-then about 1,000 lines of changes is about the most you should ask a Solana
+then about 1,000 lines of changes is about the most you should ask a Miraland
 maintainer to review.
 
 ### Should I send small PRs as I develop large, new components?
 
 Add only code to the codebase that is ready to be deployed. If you are building
 a large library, consider developing it in a separate git repository. When it
-is ready to be integrated, the Solana Labs Maintainers will work with you to decide
+is ready to be integrated, the Miraland Labs Maintainers will work with you to decide
 on a path forward. Smaller libraries may be copied in whereas very large ones
 may be pulled in with a package manager.
 
@@ -149,13 +149,13 @@ matches the logical flow in your PR description.
 ### The PR / Issue Labels
 
 Labels make it easier to manage and track PRs / issues.  Below some common labels
-that we use in Solana.  For the complete list of labels, please refer to the
-[label page](https://github.com/solana-labs/solana/issues/labels):
+that we use in Miraland.  For the complete list of labels, please refer to the
+[label page](https://github.com/miraland-labs/miraland/issues/labels):
 
 * "feature-gate": when you add a new feature gate or modify the behavior of
 an existing feature gate, please add the "feature-gate" label to your PR.
 New feature gates should also always have a corresponding tracking issue
-(go to "New Issue" -> "Feature Gate Tracker [Get Started](https://github.com/solana-labs/solana/issues/new?assignees=&labels=feature-gate&template=1-feature-gate.yml&title=Feature+Gate%3A+)")
+(go to "New Issue" -> "Feature Gate Tracker [Get Started](https://github.com/miraland-labs/miraland/issues/new?assignees=&labels=feature-gate&template=1-feature-gate.yml&title=Feature+Gate%3A+)")
 and should be updated each time the feature is activated on a cluster.
 
 * "automerge": When a PR is labelled with "automerge", the PR will be
@@ -230,7 +230,7 @@ Note that these lists are *independent* of how simple/complicated the actual
 ## Draft Pull Requests
 
 If you want early feedback on your PR, use GitHub's "Draft Pull Request"
-mechanism. Draft PRs are a convenient way to collaborate with the Solana
+mechanism. Draft PRs are a convenient way to collaborate with the Miraland
 maintainers without triggering notifications as you make changes. When you feel
 your PR is ready for a broader audience, you can transition your draft PR to a
 standard PR with the click of a button.
@@ -252,13 +252,13 @@ before the PR can be merged.  Here are the steps:
 
 ```toml
 [package]
-name = "solana-<PACKAGE_NAME>"
+name = "miraland-<PACKAGE_NAME>"
 version = "0.0.1"
 description = "<DESCRIPTION>"
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana"
-homepage = "https://solana.com/"
-documentation = "https://docs.rs/solana-<PACKAGE_NAME>"
+authors = ["Miraland Labs Crafters <crafters@miraland.top>"]
+repository = "https://github.com/miraland-labs/miraland"
+homepage = "https://miraland.top/"
+documentation = "https://docs.rs/miraland-<PACKAGE_NAME>"
 license = "Apache-2.0"
 edition = "2021"
 ```
@@ -268,7 +268,7 @@ edition = "2021"
 
 * Once all review feedback has been addressed, publish v0.0.1 of the crate
   under your personal crates.io account, and then transfer the crate ownership
-  to solana-grimes.
+  to miraland-grimes.
   https://crates.io/policies#package-ownership
 
 * After successful publication, update the PR by replacing the v0.0.1 version
@@ -320,12 +320,12 @@ confused with 3-letter acronyms.
 
 ## Design Proposals
 
-Solana's architecture is described by docs generated from markdown files in the `docs/src/`
-directory and viewable on the official [Solana Documentation](https://docs.solana.com) website.
+Miraland's architecture is described by docs generated from markdown files in the `docs/src/`
+directory and viewable on the official [Miraland Documentation](https://docs.miraland.top) website.
 
 Current design proposals may be viewed on the docs site:
+Miraland Request for Comments (MRC)
+1. [Accepted RFCs](https://docs.miraland.top/rfcs/accepted-rfcs)
+2. [Implemented RFCs](https://docs.miraland.top/rfcs/implemented-rfcs)
 
-1. [Accepted Proposals](https://docs.solana.com/proposals/accepted-design-proposals)
-2. [Implemented Proposals](https://docs.solana.com/implemented-proposals/implemented-proposals)
-
-New design proposals should follow this guide on [how to submit a design proposal](./docs/src/proposals.md#submit-a-design-proposal).
+New request for comments should follow this guide on [how to submit a RFC](./docs/src/rfcs.md#submit-a-rfc).

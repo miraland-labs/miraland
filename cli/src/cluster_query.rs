@@ -9,14 +9,14 @@ use {
     console::style,
     crossbeam_channel::unbounded,
     serde::{Deserialize, Serialize},
-    solana_clap_utils::{
+    miraland_clap_utils::{
         compute_unit_price::{compute_unit_price_arg, COMPUTE_UNIT_PRICE_ARG},
         input_parsers::*,
         input_validators::*,
         keypair::DefaultSigner,
         offline::{blockhash_arg, BLOCKHASH_ARG},
     },
-    solana_cli_output::{
+    miraland_cli_output::{
         cli_version::CliVersion,
         display::{
             build_balance_message, format_labeled_address, new_spinner_progress_bar,
@@ -24,10 +24,10 @@ use {
         },
         *,
     },
-    solana_pubsub_client::pubsub_client::PubsubClient,
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_rpc_client::rpc_client::{GetConfirmedSignaturesForAddress2Config, RpcClient},
-    solana_rpc_client_api::{
+    miraland_pubsub_client::pubsub_client::PubsubClient,
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_rpc_client::rpc_client::{GetConfirmedSignaturesForAddress2Config, RpcClient},
+    miraland_rpc_client_api::{
         client_error::ErrorKind as ClientErrorKind,
         config::{
             RpcAccountInfoConfig, RpcBlockConfig, RpcGetVoteAccountsConfig,
@@ -47,7 +47,7 @@ use {
         feature_set,
         hash::Hash,
         message::Message,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
         nonce::State as NonceState,
         pubkey::Pubkey,
         rent::Rent,
@@ -63,7 +63,7 @@ use {
         },
         transaction::Transaction,
     },
-    solana_transaction_status::{
+    miraland_transaction_status::{
         EncodableWithMeta, EncodedConfirmedTransactionWithStatusMeta, UiTransactionEncoding,
     },
     solana_vote_program::vote_state::VoteState,
@@ -224,7 +224,7 @@ impl ClusterQuerySubCommands for App<'_, '_> {
             ),
         )
         .subcommand(
-            SubCommand::with_name("supply").about("Get information about the cluster supply of SOL")
+            SubCommand::with_name("supply").about("Get information about the cluster supply of MLN")
             .arg(
                 Arg::with_name("print_accounts")
                     .long("print-accounts")
@@ -233,7 +233,7 @@ impl ClusterQuerySubCommands for App<'_, '_> {
             ),
         )
         .subcommand(
-            SubCommand::with_name("total-supply").about("Get total number of SOL")
+            SubCommand::with_name("total-supply").about("Get total number of MLN")
             .setting(AppSettings::Hidden),
         )
         .subcommand(
@@ -331,7 +331,7 @@ impl ClusterQuerySubCommands for App<'_, '_> {
                     Arg::with_name("lamports")
                         .long("lamports")
                         .takes_value(false)
-                        .help("Display balance in lamports instead of SOL"),
+                        .help("Display balance in lamports instead of MLN"),
                 )
                 .arg(
                     pubkey!(Arg::with_name("vote_account_pubkeys")
@@ -355,7 +355,7 @@ impl ClusterQuerySubCommands for App<'_, '_> {
                     Arg::with_name("lamports")
                         .long("lamports")
                         .takes_value(false)
-                        .help("Display balance in lamports instead of SOL"),
+                        .help("Display balance in lamports instead of MLN"),
                 )
                 .arg(
                     Arg::with_name("number")
@@ -481,7 +481,7 @@ impl ClusterQuerySubCommands for App<'_, '_> {
                     Arg::with_name("lamports")
                         .long("lamports")
                         .takes_value(false)
-                        .help("Display rent in lamports instead of SOL"),
+                        .help("Display rent in lamports instead of MLN"),
                 ),
         )
     }
@@ -1376,7 +1376,7 @@ pub fn process_supply(
 
 pub fn process_total_supply(rpc_client: &RpcClient, _config: &CliConfig) -> ProcessResult {
     let supply = rpc_client.supply()?.value;
-    Ok(format!("{} SOL", lamports_to_sol(supply.total)))
+    Ok(format!("{} MLN", lamports_to_mln(supply.total)))
 }
 
 pub fn process_get_transaction_count(rpc_client: &RpcClient, _config: &CliConfig) -> ProcessResult {
@@ -1759,7 +1759,7 @@ pub fn process_show_stakes(
 
     let mut program_accounts_config = RpcProgramAccountsConfig {
         account_config: RpcAccountInfoConfig {
-            encoding: Some(solana_account_decoder::UiAccountEncoding::Base64),
+            encoding: Some(miraland_account_decoder::UiAccountEncoding::Base64),
             ..RpcAccountInfoConfig::default()
         },
         ..RpcProgramAccountsConfig::default()

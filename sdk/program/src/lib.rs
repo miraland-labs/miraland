@@ -1,15 +1,15 @@
-//! The base library for all Solana on-chain Rust programs.
+//! The base library for all Miraland on-chain Rust programs.
 //!
-//! All Solana Rust programs that run on-chain will link to this crate, which
-//! acts as a standard library for Solana programs. Solana programs also link to
+//! All Miraland Rust programs that run on-chain will link to this crate, which
+//! acts as a standard library for Miraland programs. Miraland programs also link to
 //! the [Rust standard library][std], though it is [modified][sstd] for the
-//! Solana runtime environment. While off-chain programs that interact with the
-//! Solana network _can_ link to this crate, they typically instead use the
-//! [`solana-sdk`] crate, which reexports all modules from `solana-program`.
+//! Miraland runtime environment. While off-chain programs that interact with the
+//! Miraland network _can_ link to this crate, they typically instead use the
+//! [`miraland-sdk`] crate, which reexports all modules from `miraland-program`.
 //!
 //! [std]: https://doc.rust-lang.org/stable/std/
 //! [sstd]: https://docs.solana.com/developing/on-chain-programs/developing-rust#restrictions
-//! [`solana-sdk`]: https://docs.rs/solana-sdk/latest/solana_sdk/
+//! [`miraland-sdk`]: https://docs.rs/miraland-sdk/latest/solana_sdk/
 //!
 //! This library defines
 //!
@@ -22,7 +22,7 @@
 //!   [native programs][np],
 //! - [sysvar] accessors.
 //!
-//! [pe]: #defining-a-solana-program
+//! [pe]: #defining-a-miraland-program
 //! [cdt]: #core-data-types
 //! [logging]: crate::log
 //! [serialization]: #serialization
@@ -30,14 +30,14 @@
 //! [cpi]: #cross-program-instruction-execution
 //! [sysvar]: crate::sysvar
 //!
-//! Idiomatic examples of `solana-program` usage can be found in
-//! [the Solana Program Library][spl].
+//! Idiomatic examples of `miraland-program` usage can be found in
+//! [the Miraland Program Library][spl].
 //!
-//! [spl]: https://github.com/solana-labs/solana-program-library
+//! [spl]: https://github.com/solana-labs/solarti-program-library
 //!
 //! # Defining a solana program
 //!
-//! Solana program crates have some unique properties compared to typical Rust
+//! Miraland program crates have some unique properties compared to typical Rust
 //! programs:
 //!
 //! - They are often compiled for both on-chain use and off-chain use. This is
@@ -46,12 +46,12 @@
 //! - They do not define a `main` function, but instead define their entrypoint
 //!   with the [`entrypoint!`] macro.
 //! - They are compiled as the ["cdylib"] crate type for dynamic loading
-//!   by the Solana runtime.
+//!   by the Miraland runtime.
 //! - They run in a constrained VM environment, and while they do have access to
 //!   the [Rust standard library][std], many features of the standard library,
 //!   particularly related to OS services, will fail at runtime, will silently
 //!   do nothing, or are not defined. See the [restrictions to the Rust standard
-//!   library][sstd] in the Solana documentation for more.
+//!   library][sstd] in the Miraland documentation for more.
 //!
 //! [std]: https://doc.rust-lang.org/std/index.html
 //! ["cdylib"]: https://doc.rust-lang.org/reference/linkage.html
@@ -63,7 +63,7 @@
 //!
 //! [Cargo feature]: https://doc.rust-lang.org/cargo/reference/features.html
 //!
-//! The skeleton of a Solana program typically looks like:
+//! The skeleton of a Miraland program typically looks like:
 //!
 //! ```
 //! #[cfg(not(feature = "no-entrypoint"))]
@@ -100,20 +100,20 @@
 //! no-entrypoint = []
 //! ```
 //!
-//! Note that a Solana program must specify its crate-type as "cdylib", and
+//! Note that a Miraland program must specify its crate-type as "cdylib", and
 //! "cdylib" crates will automatically be discovered and built by the `cargo
-//! build-bpf` command. Solana programs also often have crate-type "rlib" so
+//! build-bpf` command. Miraland programs also often have crate-type "rlib" so
 //! they can be linked to other Rust crates.
 //!
 //! # On-chain vs. off-chain compilation targets
 //!
-//! Solana programs run on the [rbpf] VM, which implements a variant of the
+//! Miraland programs run on the [rbpf] VM, which implements a variant of the
 //! [eBPF] instruction set. Because this crate can be compiled for both on-chain
 //! and off-chain execution, the environments of which are significantly
 //! different, it extensively uses [conditional compilation][cc] to tailor its
 //! implementation to the environment. The `cfg` predicate used for identifying
 //! compilation for on-chain programs is `target_os = "solana"`, as in this
-//! example from the `solana-program` codebase that logs a message via a
+//! example from the `miraland-program` codebase that logs a message via a
 //! syscall when run on-chain, and via a library call when offchain:
 //!
 //! [rbpf]: https://github.com/solana-labs/rbpf
@@ -138,39 +138,39 @@
 //! This `cfg` pattern is suitable as well for user code that needs to work both
 //! on-chain and off-chain.
 //!
-//! `solana-program` and `solana-sdk` were previously a single crate. Because of
-//! this history, and because of the dual-usage of `solana-program` for two
+//! `miraland-program` and `miraland-sdk` were previously a single crate. Because of
+//! this history, and because of the dual-usage of `miraland-program` for two
 //! different environments, it contains some features that are not available to
 //! on-chain programs at compile-time. It also contains some on-chain features
 //! that will fail in off-chain scenarios at runtime. This distinction is not
 //! well-reflected in the documentation.
 //!
-//! For a more complete description of Solana's implementation of eBPF and its
-//! limitations, see the main Solana documentation for [on-chain programs][ocp].
+//! For a more complete description of Miraland's implementation of eBPF and its
+//! limitations, see the main Miraland documentation for [on-chain programs][ocp].
 //!
 //! [ocp]: https://docs.solana.com/developing/on-chain-programs/overview
 //!
 //! # Core data types
 //!
-//! - [`Pubkey`] &mdash; The address of a [Solana account][acc]. Some account
+//! - [`Pubkey`] &mdash; The address of a [Miraland account][acc]. Some account
 //!   addresses are [ed25519] public keys, with corresponding secret keys that
 //!   are managed off-chain. Often, though, account addresses do not have
 //!   corresponding secret keys &mdash; as with [_program derived
 //!   addresses_][pdas] &mdash; or the secret key is not relevant to the
 //!   operation of a program, and may have even been disposed of. As running
-//!   Solana programs can not safely create or manage secret keys, the full
-//!   [`Keypair`] is not defined in `solana-program` but in `solana-sdk`.
+//!   Miraland programs can not safely create or manage secret keys, the full
+//!   [`Keypair`] is not defined in `miraland-program` but in `miraland-sdk`.
 //! - [`Hash`] &mdash; A cryptographic hash. Used to uniquely identify blocks,
 //!   and also for general purpose hashing.
-//! - [`AccountInfo`] &mdash; A description of a single Solana account. All accounts
+//! - [`AccountInfo`] &mdash; A description of a single Miraland account. All accounts
 //!   that might be accessed by a program invocation are provided to the program
 //!   entrypoint as `AccountInfo`.
 //! - [`Instruction`] &mdash; A directive telling the runtime to execute a program,
 //!   passing it a set of accounts and program-specific data.
 //! - [`ProgramError`] and [`ProgramResult`] &mdash; The error type that all programs
 //!   must return, reported to the runtime as a `u64`.
-//! - [`Sol`] &mdash; The Solana native token type, with conversions to and from
-//!   [_lamports_], the smallest fractional unit of SOL, in the [`native_token`]
+//! - [`Mln`] &mdash; The Miraland native token type, with conversions to and from
+//!   [_lamports_], the smallest fractional unit of MLN, in the [`native_token`]
 //!   module.
 //!
 //! [acc]: https://docs.solana.com/developing/programming-model/accounts
@@ -181,18 +181,18 @@
 //! [`ProgramError`]: program_error::ProgramError
 //! [`ProgramResult`]: entrypoint::ProgramResult
 //! [ed25519]: https://ed25519.cr.yp.to/
-//! [`Keypair`]: https://docs.rs/solana-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html
+//! [`Keypair`]: https://docs.rs/miraland-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html
 //! [SHA-256]: https://en.wikipedia.org/wiki/SHA-2
-//! [`Sol`]: native_token::Sol
+//! [`Mln`]: native_token::Mln
 //! [_lamports_]: https://docs.solana.com/introduction#what-are-sols
 //!
 //! # Serialization
 //!
-//! Within the Solana runtime, programs, and network, at least three different
-//! serialization formats are used, and `solana-program` provides access to
+//! Within the Miraland runtime, programs, and network, at least three different
+//! serialization formats are used, and `miraland-program` provides access to
 //! those needed by programs.
 //!
-//! In user-written Solana program code, serialization is primarily used for
+//! In user-written Miraland program code, serialization is primarily used for
 //! accessing [`AccountInfo`] data and [`Instruction`] data, both of which are
 //! program-specific binary data. Every program is free to decide their own
 //! serialization format, but data received from other sources &mdash;
@@ -202,7 +202,7 @@
 //! [`AccountInfo`]: account_info::AccountInfo
 //! [`Instruction`]: instruction::Instruction
 //!
-//! The three serialization formats in use in Solana are:
+//! The three serialization formats in use in Miraland are:
 //!
 //! - __[Borsh]__, a compact and well-specified format developed by the [NEAR]
 //!   project, suitable for use in protocol definitions and for archival storage.
@@ -210,7 +210,7 @@
 //!   and is recommended for all purposes.
 //!
 //!   Users need to import the [`borsh`] crate themselves &mdash; it is not
-//!   re-exported by `solana-program`, though this crate provides several useful
+//!   re-exported by `miraland-program`, though this crate provides several useful
 //!   utilities in its [`borsh` module][borshmod] that are not available in the
 //!   `borsh` library.
 //!
@@ -242,8 +242,8 @@
 //!   [Serde]: https://serde.rs/
 //!   [`Instruction::new_with_bincode`]: instruction::Instruction::new_with_bincode
 //!
-//! - __[`Pack`]__, a Solana-specific serialization API that is used by many
-//!   older programs in the [Solana Program Library][spl] to define their
+//! - __[`Pack`]__, a Miraland-specific serialization API that is used by many
+//!   older programs in the [Miraland Program Library][spl] to define their
 //!   account format. It is difficult to implement and does not define a
 //!   language-independent serialization format. It is not generally recommended
 //!   for new code.
@@ -260,7 +260,7 @@
 //!
 //! # Cross-program instruction execution
 //!
-//! Solana programs may call other programs, termed [_cross-program
+//! Miraland programs may call other programs, termed [_cross-program
 //! invocation_][cpi] (CPI), with the [`invoke`] and [`invoke_signed`]
 //! functions. When calling another program the caller must provide the
 //! [`Instruction`] to be invoked, as well as the [`AccountInfo`] for every
@@ -312,7 +312,7 @@
 //! }
 //! ```
 //!
-//! Solana also includes a mechanism to let programs control and sign for
+//! Miraland also includes a mechanism to let programs control and sign for
 //! accounts without needing to protect a corresponding secret key, called
 //! [_program derived addresses_][pdas]. PDAs are derived with the
 //! [`Pubkey::find_program_address`] function. With a PDA, a program can call
@@ -397,10 +397,10 @@
 //! only be executed as "top-level" instructions included by off-chain clients
 //! in a [`Transaction`].
 //!
-//! [`Transaction`]: https://docs.rs/solana-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+//! [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
 //!
 //! This crate defines the program IDs for most native programs. Even though
-//! some native programs cannot be invoked by other programs, a Solana program
+//! some native programs cannot be invoked by other programs, a Miraland program
 //! may need access to their program IDs. For example, a program may need to
 //! verify that an ed25519 signature verification instruction was included in
 //! the same transaction as its own instruction. For many native programs, this
@@ -418,7 +418,7 @@
 //!
 //! [slot]: https://docs.solana.com/terminology#slot
 //!
-//! Native programs important to Solana program authors include:
+//! Native programs important to Miraland program authors include:
 //!
 //! - __System Program__: Creates new accounts, allocates account data, assigns
 //!   accounts to owning programs, transfers lamports from System Program owned
@@ -430,18 +430,18 @@
 //! - __Compute Budget Program__: Requests additional CPU or memory resources
 //!   for a transaction. This program does nothing when called from another
 //!   program.
-//!   - ID: [`solana_sdk::compute_budget`](https://docs.rs/solana-sdk/latest/solana_sdk/compute_budget/index.html)
-//!   - Instruction: [`solana_sdk::compute_budget`](https://docs.rs/solana-sdk/latest/solana_sdk/compute_budget/index.html)
+//!   - ID: [`solana_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/index.html)
+//!   - Instruction: [`solana_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __ed25519 Program__: Verifies an ed25519 signature.
 //!   - ID: [`solana_program::ed25519_program`]
-//!   - Instruction: [`solana_sdk::ed25519_instruction`](https://docs.rs/solana-sdk/latest/solana_sdk/ed25519_instruction/index.html)
+//!   - Instruction: [`solana_sdk::ed25519_instruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/ed25519_instruction/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __secp256k1 Program__: Verifies secp256k1 public key recovery operations.
 //!   - ID: [`solana_program::secp256k1_program`]
-//!   - Instruction: [`solana_sdk::secp256k1_instruction`](https://docs.rs/solana-sdk/latest/solana_sdk/secp256k1_instruction/index.html)
+//!   - Instruction: [`solana_sdk::secp256k1_instruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/secp256k1_instruction/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __BPF Loader__: Deploys, and executes immutable programs on the chain.
@@ -560,7 +560,7 @@ pub mod config {
     }
 }
 
-/// A vector of Solana SDK IDs.
+/// A vector of Miraland SDK IDs.
 pub mod sdk_ids {
     use {
         crate::{
@@ -642,7 +642,7 @@ pub use solana_sdk_macro::program_pubkey as pubkey;
 extern crate serde_derive;
 
 #[macro_use]
-extern crate solana_frozen_abi_macro;
+extern crate miraland_frozen_abi_macro;
 
 /// Convenience macro for doing integer division where the operation's safety
 /// can be checked at compile-time.

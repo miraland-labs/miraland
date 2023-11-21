@@ -5,7 +5,7 @@ pub mod serialization;
 pub mod syscalls;
 
 use {
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_program_runtime::{
         ic_logger_msg, ic_msg,
         invoke_context::{BpfAllocator, InvokeContext, SerializedAccountMetadata, SyscallContext},

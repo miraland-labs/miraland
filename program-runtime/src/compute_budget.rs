@@ -7,7 +7,7 @@ use {
 };
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl ::solana_frozen_abi::abi_example::AbiExample for ComputeBudget {
+impl ::miraland_frozen_abi::abi_example::AbiExample for ComputeBudget {
     fn example() -> Self {
         // ComputeBudget is not Serialize so just rely on Default.
         ComputeBudget::default()

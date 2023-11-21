@@ -12,16 +12,16 @@ use {
     },
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Select, Sender},
     log::*,
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::{ClusterInfo, GOSSIP_SLEEP_MILLIS},
         crds::Cursor,
     },
-    solana_ledger::blockstore::Blockstore,
-    solana_measure::measure::Measure,
-    solana_metrics::inc_new_counter_debug,
-    solana_perf::packet,
-    solana_poh::poh_recorder::PohRecorder,
-    solana_rpc::{
+    miraland_ledger::blockstore::Blockstore,
+    miraland_measure::measure::Measure,
+    miraland_metrics::inc_new_counter_debug,
+    miraland_perf::packet,
+    miraland_poh::poh_recorder::PohRecorder,
+    miraland_rpc::{
         optimistically_confirmed_bank_tracker::{BankNotification, BankNotificationSender},
         rpc_subscriptions::RpcSubscriptions,
     },
@@ -252,7 +252,7 @@ impl ClusterInfoVoteListener {
             let exit = exit.clone();
             let bank_forks = bank_forks.clone();
             Builder::new()
-                .name("solCiVoteLstnr".to_string())
+                .name("mlnCiVoteLstnr".to_string())
                 .spawn(move || {
                     let _ = Self::recv_loop(
                         exit,
@@ -267,7 +267,7 @@ impl ClusterInfoVoteListener {
         let bank_send_thread = {
             let exit = exit.clone();
             Builder::new()
-                .name("solCiBankSend".to_string())
+                .name("mlnCiBankSend".to_string())
                 .spawn(move || {
                     let _ = Self::bank_send_loop(
                         exit,
@@ -280,7 +280,7 @@ impl ClusterInfoVoteListener {
         };
 
         let send_thread = Builder::new()
-            .name("solCiProcVotes".to_string())
+            .name("mlnCiProcVotes".to_string())
             .spawn(move || {
                 let _ = Self::process_votes_loop(
                     exit,
@@ -875,8 +875,8 @@ mod tests {
     use {
         super::*,
         crate::banking_trace::BankingTracer,
-        solana_perf::packet,
-        solana_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
+        miraland_perf::packet,
+        miraland_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         solana_runtime::{
             bank::Bank,
             commitment::BlockCommitmentCache,
@@ -900,7 +900,7 @@ mod tests {
 
     #[test]
     fn test_max_vote_tx_fits() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let node_keypair = Keypair::new();
         let vote_keypair = Keypair::new();
         let slots: Vec<_> = (0..31).collect();
@@ -1581,7 +1581,7 @@ mod tests {
 
     #[test]
     fn test_verify_votes_empty() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let bank = Bank::new_for_tests(&genesis_config);
         let bank_forks = BankForks::new_rw_arc(bank);

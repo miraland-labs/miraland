@@ -1,22 +1,22 @@
 #![feature(test)]
 
-extern crate solana_turbine;
+extern crate miraland_turbine;
 extern crate test;
 
 use {
     crossbeam_channel::unbounded,
     log::*,
-    solana_entry::entry::Entry,
-    solana_gossip::{
+    miraland_entry::entry::Entry,
+    miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         contact_info::{ContactInfo, Protocol},
     },
-    solana_ledger::{
+    miraland_ledger::{
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         leader_schedule_cache::LeaderScheduleCache,
         shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{
         hash::Hash,
@@ -25,8 +25,8 @@ use {
         system_transaction,
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_turbine::retransmit_stage::retransmitter,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_turbine::retransmit_stage::retransmitter,
     std::{
         iter::repeat_with,
         net::{Ipv4Addr, UdpSocket},
@@ -49,7 +49,7 @@ use {
 #[ignore]
 #[bench]
 fn bench_retransmitter(bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let cluster_info = {
         let keypair = Arc::new(Keypair::new());
         let node = Node::new_localhost_with_pubkey(&keypair.pubkey());
@@ -121,7 +121,7 @@ fn bench_retransmitter(bencher: &mut Bencher) {
         leader_schedule_cache,
         cluster_info,
         shreds_receiver,
-        Arc::default(), // solana_rpc::max_slots::MaxSlots
+        Arc::default(), // miraland_rpc::max_slots::MaxSlots
         None,
     );
 

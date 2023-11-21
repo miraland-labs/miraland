@@ -31,7 +31,7 @@ impl DuplicateShredListener {
         handler: impl DuplicateShredHandlerTrait + 'static,
     ) -> Self {
         let listen_thread = Builder::new()
-            .name("solCiEntryLstnr".to_string())
+            .name("mlnCiEntryLstnr".to_string())
             .spawn(move || {
                 Self::recv_loop(exit, &cluster_info, handler);
             })
@@ -72,9 +72,9 @@ mod tests {
             cluster_info::Node, duplicate_shred::tests::new_rand_shred,
             duplicate_shred_listener::DuplicateShredHandlerTrait,
         },
-        solana_ledger::shred::Shredder,
+        miraland_ledger::shred::Shredder,
         solana_sdk::signature::{Keypair, Signer},
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::sync::{
             atomic::{AtomicU32, Ordering},
             Arc,

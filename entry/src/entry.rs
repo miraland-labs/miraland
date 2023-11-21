@@ -11,17 +11,17 @@ use {
     rand::{thread_rng, Rng},
     rayon::{prelude::*, ThreadPool},
     serde::{Deserialize, Serialize},
-    solana_measure::measure::Measure,
-    solana_merkle_tree::MerkleTree,
-    solana_metrics::*,
-    solana_perf::{
+    miraland_measure::measure::Measure,
+    miraland_merkle_tree::MerkleTree,
+    miraland_metrics::*,
+    miraland_perf::{
         cuda_runtime::PinnedVec,
         packet::{Packet, PacketBatch, PacketBatchRecycler, PACKETS_PER_BATCH},
         perf_libs,
         recycler::Recycler,
         sigverify,
     },
-    solana_rayon_threadlimit::get_max_thread_count,
+    miraland_rayon_threadlimit::get_max_thread_count,
     solana_sdk::{
         hash::Hash,
         packet::Meta,
@@ -46,7 +46,7 @@ use {
 lazy_static! {
     static ref PAR_THREAD_POOL: ThreadPool = rayon::ThreadPoolBuilder::new()
         .num_threads(get_max_thread_count())
-        .thread_name(|i| format!("solEntry{i:02}"))
+        .thread_name(|i| format!("mlnEntry{i:02}"))
         .build()
         .unwrap();
 }
@@ -67,9 +67,9 @@ fn init(name: &OsStr) {
     unsafe {
         INIT_HOOK.call_once(|| {
             let path;
-            let lib_name = if let Some(perf_libs_path) = solana_perf::perf_libs::locate_perf_libs()
+            let lib_name = if let Some(perf_libs_path) = miraland_perf::perf_libs::locate_perf_libs()
             {
-                solana_perf::perf_libs::append_to_ld_library_path(
+                miraland_perf::perf_libs::append_to_ld_library_path(
                     perf_libs_path.to_str().unwrap_or("").to_string(),
                 );
                 path = perf_libs_path.join(name);
@@ -122,8 +122,8 @@ pub struct Api<'a> {
 /// The solana core protocol currently requires an `Entry` to contain `transactions` that are
 /// executable in parallel. Implemented in:
 ///
-/// * For TPU: `solana_core::banking_stage::BankingStage::process_and_record_transactions()`
-/// * For TVU: `solana_core::replay_stage::ReplayStage::replay_blockstore_into_bank()`
+/// * For TPU: `miraland_core::banking_stage::BankingStage::process_and_record_transactions()`
+/// * For TVU: `miraland_core::replay_stage::ReplayStage::replay_blockstore_into_bank()`
 ///
 /// All transactions in the `transactions` field have to follow the read/write locking restrictions
 /// with regard to the accounts they reference. A single account can be either written by a single
@@ -573,7 +573,7 @@ fn start_verify_transactions_gpu(
     let out_recycler = verify_recyclers.out_recycler;
     let num_packets = entry_txs.len();
     let gpu_verify_thread = thread::Builder::new()
-        .name("solGpuSigVerify".into())
+        .name("mlnGpuSigVerify".into())
         .spawn(move || {
             let mut verify_time = Measure::start("sigverify");
             sigverify::ed25519_verify(
@@ -817,7 +817,7 @@ impl EntrySlice for [Entry] {
         let hashes_clone = hashes.clone();
 
         let gpu_verify_thread = thread::Builder::new()
-            .name("solGpuPohVerify".into())
+            .name("mlnGpuPohVerify".into())
             .spawn(move || {
                 let mut hashes = hashes_clone.lock().unwrap();
                 let gpu_wait = Instant::now();
@@ -942,7 +942,7 @@ pub fn next_versioned_entry(
 mod tests {
     use {
         super::*,
-        solana_perf::test_tx::{test_invalid_tx, test_tx},
+        miraland_perf::test_tx::{test_invalid_tx, test_tx},
         solana_sdk::{
             hash::{hash, Hash},
             pubkey::Pubkey,
@@ -1157,7 +1157,7 @@ mod tests {
 
     #[test]
     fn test_verify_slice1() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let zero = Hash::default();
         let one = hash(zero.as_ref());
         assert!(vec![][..].verify(&zero)); // base case
@@ -1172,7 +1172,7 @@ mod tests {
 
     #[test]
     fn test_verify_slice_with_hashes1() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let zero = Hash::default();
         let one = hash(zero.as_ref());
         let two = hash(one.as_ref());
@@ -1192,7 +1192,7 @@ mod tests {
 
     #[test]
     fn test_verify_slice_with_hashes_and_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let zero = Hash::default();
         let one = hash(zero.as_ref());
         let two = hash(one.as_ref());
@@ -1337,7 +1337,7 @@ mod tests {
 
     #[test]
     fn test_poh_verify_fuzz() {
-        solana_logger::setup();
+        miraland_logger::setup();
         for _ in 0..100 {
             let mut time = Measure::start("ticks");
             let num_ticks = thread_rng().gen_range(1..100);

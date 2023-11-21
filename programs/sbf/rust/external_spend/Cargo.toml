@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-external-spend"
-documentation = "https://docs.rs/solana-sbf-rust-external-spend"
+name = "miraland-sbf-rust-external-spend"
+documentation = "https://docs.rs/miraland-sbf-rust-external-spend"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -10,7 +10,7 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["cdylib"]

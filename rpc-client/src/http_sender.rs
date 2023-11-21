@@ -9,7 +9,7 @@ use {
         header::{self, CONTENT_TYPE, RETRY_AFTER},
         StatusCode,
     },
-    solana_rpc_client_api::{
+    miraland_rpc_client_api::{
         client_error::Result,
         custom_error,
         error_object::RpcErrorObject,
@@ -74,9 +74,9 @@ impl HttpSender {
     pub fn default_headers() -> header::HeaderMap {
         let mut default_headers = header::HeaderMap::new();
         default_headers.append(
-            header::HeaderName::from_static("solana-client"),
+            header::HeaderName::from_static("miraland-client"),
             header::HeaderValue::from_str(
-                format!("rust/{}", solana_version::Version::default()).as_str(),
+                format!("rust/{}", miraland_version::Version::default()).as_str(),
             )
             .unwrap(),
         );

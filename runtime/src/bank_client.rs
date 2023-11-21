@@ -313,7 +313,7 @@ impl BankClient {
         let transaction_sender = Mutex::new(transaction_sender);
         let thread_bank = bank.clone();
         Builder::new()
-            .name("solBankClient".to_string())
+            .name("mlnBankClient".to_string())
             .spawn(move || Self::run(&thread_bank, transaction_receiver))
             .unwrap();
         Self {
@@ -350,13 +350,13 @@ mod tests {
         super::*,
         solana_sdk::{
             genesis_config::create_genesis_config, instruction::AccountMeta,
-            native_token::sol_to_lamports,
+            native_token::mln_to_lamports,
         },
     };
 
     #[test]
     fn test_bank_client_new_with_keypairs() {
-        let (genesis_config, john_doe_keypair) = create_genesis_config(sol_to_lamports(1.0));
+        let (genesis_config, john_doe_keypair) = create_genesis_config(mln_to_lamports(1.0));
         let john_pubkey = john_doe_keypair.pubkey();
         let jane_doe_keypair = Keypair::new();
         let jane_pubkey = jane_doe_keypair.pubkey();

@@ -4,7 +4,7 @@ use {
         scheduler_messages::{ConsumeWork, FinishedConsumeWork},
     },
     crossbeam_channel::{Receiver, RecvError, SendError, Sender},
-    solana_poh::leader_bank_notifier::LeaderBankNotifier,
+    miraland_poh::leader_bank_notifier::LeaderBankNotifier,
     solana_runtime::bank::Bank,
     std::{sync::Arc, time::Duration},
     thiserror::Error,
@@ -133,11 +133,11 @@ mod tests {
             tests::{create_slow_genesis_config, sanitize_transactions, simulate_poh},
         },
         crossbeam_channel::unbounded,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::Blockstore, genesis_utils::GenesisConfigInfo,
             get_tmp_ledger_path_auto_delete, leader_schedule_cache::LeaderScheduleCache,
         },
-        solana_poh::poh_recorder::{PohRecorder, WorkingBankEntry},
+        miraland_poh::poh_recorder::{PohRecorder, WorkingBankEntry},
         solana_runtime::{bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache},
         solana_sdk::{
             genesis_config::GenesisConfig, poh_config::PohConfig, pubkey::Pubkey,

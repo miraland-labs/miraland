@@ -12,7 +12,7 @@ use {
         spend_utils::{resolve_spend_tx_and_check_account_balances, SpendAmount},
     },
     clap::{value_t, App, Arg, ArgGroup, ArgMatches, SubCommand},
-    solana_clap_utils::{
+    miraland_clap_utils::{
         compute_unit_price::{compute_unit_price_arg, COMPUTE_UNIT_PRICE_ARG},
         fee_payer::{fee_payer_arg, FEE_PAYER_ARG},
         hidden_unless_forced,
@@ -24,19 +24,19 @@ use {
         offline::*,
         ArgConstant,
     },
-    solana_cli_output::{
+    miraland_cli_output::{
         self, display::BuildBalanceMessageConfig, return_signers_with_config, CliBalance,
         CliEpochReward, CliStakeHistory, CliStakeHistoryEntry, CliStakeState, CliStakeType,
         OutputFormat, ReturnSignersConfig,
     },
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{
         config::RpcGetVoteAccountsConfig,
         request::DELINQUENT_VALIDATOR_SLOT_DISTANCE,
         response::{RpcInflationReward, RpcVoteAccountStatus},
     },
-    solana_rpc_client_nonce_utils::blockhash_query::BlockhashQuery,
+    miraland_rpc_client_nonce_utils::blockhash_query::BlockhashQuery,
     solana_sdk::{
         account::from_account,
         account_utils::StateMut,
@@ -153,7 +153,7 @@ impl StakeSubCommands for App<'_, '_> {
                         .takes_value(true)
                         .validator(is_amount_or_all)
                         .required(true)
-                        .help("The amount to send to the stake account, in SOL; accepts keyword ALL")
+                        .help("The amount to send to the stake account, in MLN; accepts keyword ALL")
                 )
                 .arg(
                     pubkey!(Arg::with_name("custodian")
@@ -233,7 +233,7 @@ impl StakeSubCommands for App<'_, '_> {
                         .takes_value(true)
                         .validator(is_amount_or_all)
                         .required(true)
-                        .help("The amount to send to the stake account, in SOL; accepts keyword ALL")
+                        .help("The amount to send to the stake account, in MLN; accepts keyword ALL")
                 )
                 .arg(
                     Arg::with_name("seed")
@@ -489,7 +489,7 @@ impl StakeSubCommands for App<'_, '_> {
                         .takes_value(true)
                         .validator(is_amount)
                         .required(true)
-                        .help("The amount to move into the new stake account, in SOL")
+                        .help("The amount to move into the new stake account, in MLN")
                 )
                 .arg(
                     Arg::with_name("seed")
@@ -507,13 +507,13 @@ impl StakeSubCommands for App<'_, '_> {
                 .arg(compute_unit_price_arg())
                 .arg(
                     Arg::with_name("rent_exempt_reserve_sol")
-                        .long("rent-exempt-reserve-sol")
+                        .long("rent-exempt-reserve-mln")
                         .value_name("AMOUNT")
                         .takes_value(true)
                         .validator(is_amount)
                         .requires("sign_only")
                         .help("Offline signing only: the rent-exempt amount to move into the new \
-                                stake account, in SOL")
+                                stake account, in MLN")
                 )
         )
         .subcommand(
@@ -543,7 +543,7 @@ impl StakeSubCommands for App<'_, '_> {
         )
         .subcommand(
             SubCommand::with_name("withdraw-stake")
-                .about("Withdraw the unstaked SOL from the stake account")
+                .about("Withdraw the unstaked MLN from the stake account")
                 .arg(
                     pubkey!(Arg::with_name("stake_account_pubkey")
                         .index(1)
@@ -556,7 +556,7 @@ impl StakeSubCommands for App<'_, '_> {
                         .index(2)
                         .value_name("RECIPIENT_ADDRESS")
                         .required(true),
-                        "Recipient of withdrawn SOL")
+                        "Recipient of withdrawn MLN")
                 )
                 .arg(
                     Arg::with_name("amount")
@@ -565,7 +565,7 @@ impl StakeSubCommands for App<'_, '_> {
                         .takes_value(true)
                         .validator(is_amount_or_all)
                         .required(true)
-                        .help("The amount to withdraw from the stake account, in SOL; accepts keyword ALL")
+                        .help("The amount to withdraw from the stake account, in MLN; accepts keyword ALL")
                 )
                 .arg(
                     Arg::with_name("seed")
@@ -698,7 +698,7 @@ impl StakeSubCommands for App<'_, '_> {
                     Arg::with_name("lamports")
                         .long("lamports")
                         .takes_value(false)
-                        .help("Display balance in lamports instead of SOL")
+                        .help("Display balance in lamports instead of MLN")
                 )
                 .arg(
                     Arg::with_name("with_rewards")
@@ -731,7 +731,7 @@ impl StakeSubCommands for App<'_, '_> {
                     Arg::with_name("lamports")
                         .long("lamports")
                         .takes_value(false)
-                        .help("Display balance in lamports instead of SOL")
+                        .help("Display balance in lamports instead of MLN")
                 )
                 .arg(
                     Arg::with_name("limit")
@@ -754,7 +754,7 @@ impl StakeSubCommands for App<'_, '_> {
                     Arg::with_name("lamports")
                         .long("lamports")
                         .takes_value(false)
-                        .help("Display minimum delegation in lamports instead of SOL")
+                        .help("Display minimum delegation in lamports instead of MLN")
                 )
         )
     }
@@ -1029,7 +1029,7 @@ pub fn parse_split_stake(
         pubkey_of_signer(matches, "stake_account_pubkey", wallet_manager)?.unwrap();
     let (split_stake_account, split_stake_account_pubkey) =
         signer_of(matches, "split_stake_account", wallet_manager)?;
-    let lamports = lamports_of_sol(matches, "amount").unwrap();
+    let lamports = lamports_of_mln(matches, "amount").unwrap();
     let seed = matches.value_of("seed").map(|s| s.to_string());
 
     let sign_only = matches.is_present(SIGN_ONLY_ARG.name);
@@ -1050,7 +1050,7 @@ pub fn parse_split_stake(
     let signer_info =
         default_signer.generate_unique_signers(bulk_signers, matches, wallet_manager)?;
     let compute_unit_price = value_of(matches, COMPUTE_UNIT_PRICE_ARG.name);
-    let rent_exempt_reserve = lamports_of_sol(matches, "rent_exempt_reserve_sol");
+    let rent_exempt_reserve = lamports_of_mln(matches, "rent_exempt_reserve_sol");
 
     Ok(CliCommandInfo {
         command: CliCommand::SplitStake {
@@ -1462,7 +1462,7 @@ pub fn process_create_stake_account(
         }
 
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -1602,7 +1602,7 @@ pub fn process_stake_authorize(
     } else {
         tx.try_sign(&config.signers, recent_blockhash)?;
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -1745,7 +1745,7 @@ pub fn process_deactivate_stake_account(
     } else {
         tx.try_sign(&config.signers, recent_blockhash)?;
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -1844,7 +1844,7 @@ pub fn process_withdraw_stake(
     } else {
         tx.try_sign(&config.signers, recent_blockhash)?;
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -2000,7 +2000,7 @@ pub fn process_split_stake(
     } else {
         tx.try_sign(&config.signers, recent_blockhash)?;
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -2106,7 +2106,7 @@ pub fn process_merge_stake(
     } else {
         tx.try_sign(&config.signers, recent_blockhash)?;
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -2201,7 +2201,7 @@ pub fn process_stake_set_lockup(
     } else {
         tx.try_sign(&config.signers, recent_blockhash)?;
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -2682,7 +2682,7 @@ pub fn process_delegate_stake(
     } else {
         tx.try_sign(&config.signers, recent_blockhash)?;
         if let Some(nonce_account) = &nonce_account {
-            let nonce_account = solana_rpc_client_nonce_utils::get_account_with_commitment(
+            let nonce_account = miraland_rpc_client_nonce_utils::get_account_with_commitment(
                 rpc_client,
                 nonce_account,
                 config.commitment,
@@ -2727,7 +2727,7 @@ mod tests {
     use {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
-        solana_rpc_client_nonce_utils::blockhash_query,
+        miraland_rpc_client_nonce_utils::blockhash_query,
         solana_sdk::{
             hash::Hash,
             signature::{

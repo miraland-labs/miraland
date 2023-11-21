@@ -9,10 +9,10 @@ use {
         },
         replay_stage::DUPLICATE_THRESHOLD,
     },
-    solana_ledger::{
+    miraland_ledger::{
         ancestor_iterator::AncestorIterator, blockstore::Blockstore, blockstore_meta::SlotMeta,
     },
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_runtime::epoch_stakes::EpochStakes,
     solana_sdk::{
         clock::Slot,
@@ -978,8 +978,8 @@ mod test {
     use {
         super::*,
         itertools::Itertools,
-        solana_accounts_db::contains::Contains,
-        solana_ledger::{
+        miraland_accounts_db::contains::Contains,
+        miraland_ledger::{
             blockstore::{make_chaining_slot_entries, Blockstore},
             get_tmp_ledger_path,
         },

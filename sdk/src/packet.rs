@@ -1,4 +1,4 @@
-//! The definition of a Solana network packet.
+//! The definition of a Miraland network packet.
 
 use {
     bincode::{Options, Result},
@@ -46,17 +46,17 @@ pub struct Meta {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl ::solana_frozen_abi::abi_example::AbiExample for PacketFlags {
+impl ::miraland_frozen_abi::abi_example::AbiExample for PacketFlags {
     fn example() -> Self {
         Self::empty()
     }
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl ::solana_frozen_abi::abi_example::IgnoreAsHelper for PacketFlags {}
+impl ::miraland_frozen_abi::abi_example::IgnoreAsHelper for PacketFlags {}
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl ::solana_frozen_abi::abi_example::EvenAsOpaque for PacketFlags {
+impl ::miraland_frozen_abi::abi_example::EvenAsOpaque for PacketFlags {
     const TYPE_NAME_MATCHER: &'static str = "::_::InternalBitFlags";
 }
 

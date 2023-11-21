@@ -1,6 +1,6 @@
 [package]
-name = "solana-memory-management"
-description = "Solana memory management"
+name = "miraland-memory-management"
+description = "Miraland memory management"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }

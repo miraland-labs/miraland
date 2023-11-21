@@ -2,7 +2,7 @@
 title: Epoch Accounts Hash
 ---
 
-*Paraphrasing from https://github.com/solana-labs/solana/issues/26847*
+*Paraphrasing from https://github.com/miraland-labs/miraland/issues/26847*
 
 ## Background
 
@@ -78,7 +78,7 @@ The main justifications for these values are:
    in the future to guarantee all validators are able to complete the accounts
    hash calculation in time.
 3. The `start offset` should be *after* the `rewarding interval`
-   (from [Partitioned Inflationary Rewards Distribution](https://github.com/solana-labs/solana/pull/27455)).
+   (from [Partitioned Inflationary Rewards Distribution](https://github.com/miraland-labs/miraland/pull/27455)).
    This ensures stake rewards have been distributed and stored into the
    accounts for this epoch.
 

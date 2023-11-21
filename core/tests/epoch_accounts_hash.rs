@@ -4,17 +4,17 @@
 use {
     crate::snapshot_utils::create_tmp_accounts_dir_for_tests,
     log::*,
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::{AccountShrinkThreshold, CalcAccountsHashDataSource},
         accounts_hash::CalcAccountsHashConfig,
         accounts_index::AccountSecondaryIndexes,
         epoch_accounts_hash::EpochAccountsHash,
     },
-    solana_core::{
+    miraland_core::{
         accounts_hash_verifier::AccountsHashVerifier,
         snapshot_packager_service::SnapshotPackagerService,
     },
-    solana_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
+    miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService, DroppedSlotsReceiver,
@@ -33,13 +33,13 @@ use {
         clock::Slot,
         epoch_schedule::EpochSchedule,
         feature_set,
-        native_token::LAMPORTS_PER_SOL,
+        native_token::LAMPORTS_PER_MLN,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         system_transaction,
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         mem::ManuallyDrop,
         sync::{
@@ -93,8 +93,8 @@ impl TestEnvironment {
 
     #[must_use]
     fn _new(snapshot_config: SnapshotConfig) -> TestEnvironment {
-        const MINT_LAMPORTS: u64 = 100_000 * LAMPORTS_PER_SOL;
-        const STAKE_LAMPORTS: u64 = 100 * LAMPORTS_PER_SOL;
+        const MINT_LAMPORTS: u64 = 100_000 * LAMPORTS_PER_MLN;
+        const STAKE_LAMPORTS: u64 = 100 * LAMPORTS_PER_MLN;
         let bank_snapshots_dir = TempDir::new().unwrap();
         let full_snapshot_archives_dir = TempDir::new().unwrap();
         let incremental_snapshot_archives_dir = TempDir::new().unwrap();
@@ -262,7 +262,7 @@ impl Drop for BackgroundServices {
 #[test_case(TestEnvironment::new()                      ; "without snapshots")]
 #[test_case(TestEnvironment::new_with_snapshots(80, 40) ; "with snapshots")]
 fn test_epoch_accounts_hash_basic(test_environment: TestEnvironment) {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     const NUM_EPOCHS_TO_TEST: u64 = 2;
     const SET_ROOT_INTERVAL: Slot = 3;
@@ -371,7 +371,7 @@ fn test_epoch_accounts_hash_basic(test_environment: TestEnvironment) {
 /// in-flight or valid.
 #[test]
 fn test_snapshots_have_expected_epoch_accounts_hash() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     const NUM_EPOCHS_TO_TEST: u64 = 2;
 
@@ -493,7 +493,7 @@ fn test_snapshots_have_expected_epoch_accounts_hash() {
 /// EAH request and the second bank sends a snapshot request, both requests should be handled.
 #[test]
 fn test_background_services_request_handling_for_epoch_accounts_hash() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     const NUM_EPOCHS_TO_TEST: u64 = 2;
     const FULL_SNAPSHOT_INTERVAL: Slot = 80;
@@ -579,7 +579,7 @@ fn test_background_services_request_handling_for_epoch_accounts_hash() {
 /// that use-case.
 #[test]
 fn test_epoch_accounts_hash_and_warping() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let test_environment = TestEnvironment::new();
     let bank_forks = test_environment.bank_forks.clone();

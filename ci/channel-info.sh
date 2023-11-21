@@ -11,7 +11,7 @@ here="$(dirname "$0")"
 # shellcheck source=ci/semver_bash/semver.sh
 source "$here"/semver_bash/semver.sh
 
-remote=https://github.com/solana-labs/solana.git
+remote=https://github.com/miraland-labs/miraland.git
 
 # Fetch all vX.Y.Z tags
 #
@@ -82,7 +82,7 @@ for tag in "${tags[@]}"; do
   fi
 done
 
-EDGE_CHANNEL=master
+EDGE_CHANNEL=main
 BETA_CHANNEL=${beta:+v$beta}
 STABLE_CHANNEL=${stable:+v$stable}
 BETA_CHANNEL_LATEST_TAG=${beta_tag:+v$beta_tag}

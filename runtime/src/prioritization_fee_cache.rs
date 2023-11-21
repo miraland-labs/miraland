@@ -7,7 +7,7 @@ use {
     dashmap::DashMap,
     log::*,
     lru::LruCache,
-    solana_measure::measure,
+    miraland_measure::measure,
     solana_sdk::{
         clock::{BankId, Slot},
         pubkey::Pubkey,
@@ -176,7 +176,7 @@ impl PrioritizationFeeCache {
         let metrics_clone = metrics.clone();
         let service_thread = Some(
             Builder::new()
-                .name("solPrFeeCachSvc".to_string())
+                .name("mlnPrFeeCachSvc".to_string())
                 .spawn(move || {
                     Self::service_loop(cache_clone, receiver, metrics_clone);
                 })
@@ -512,7 +512,7 @@ mod tests {
 
     #[test]
     fn test_prioritization_fee_cache_update() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let write_account_a = Pubkey::new_unique();
         let write_account_b = Pubkey::new_unique();
         let write_account_c = Pubkey::new_unique();
@@ -605,7 +605,7 @@ mod tests {
 
     #[test]
     fn test_get_prioritization_fees() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let write_account_a = Pubkey::new_unique();
         let write_account_b = Pubkey::new_unique();
         let write_account_c = Pubkey::new_unique();
@@ -857,7 +857,7 @@ mod tests {
     fn test_purge_duplicated_bank() {
         // duplicated bank can exists for same slot before OC.
         // prioritization_fee_cache should only have data from OC-ed bank
-        solana_logger::setup();
+        miraland_logger::setup();
         let write_account_a = Pubkey::new_unique();
         let write_account_b = Pubkey::new_unique();
         let write_account_c = Pubkey::new_unique();

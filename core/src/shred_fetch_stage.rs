@@ -5,16 +5,16 @@ use {
     bytes::Bytes,
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
     itertools::Itertools,
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_ledger::shred::{should_discard_shred, ShredFetchStats},
-    solana_perf::packet::{PacketBatch, PacketBatchRecycler, PacketFlags, PACKETS_PER_BATCH},
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_ledger::shred::{should_discard_shred, ShredFetchStats},
+    miraland_perf::packet::{PacketBatch, PacketBatchRecycler, PacketFlags, PACKETS_PER_BATCH},
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         clock::DEFAULT_MS_PER_SLOT,
         packet::{Meta, PACKET_DATA_SIZE},
         pubkey::Pubkey,
     },
-    solana_streamer::streamer::{self, PacketBatchReceiver, StreamerReceiveStats},
+    miraland_streamer::streamer::{self, PacketBatchReceiver, StreamerReceiveStats},
     std::{
         net::{SocketAddr, UdpSocket},
         sync::{
@@ -139,7 +139,7 @@ impl ShredFetchStage {
             })
             .collect();
         let modifier_hdl = Builder::new()
-            .name("solTvuFetchPMod".to_string())
+            .name("mlnTvuFetchPMod".to_string())
             .spawn(move || {
                 let repair_context = repair_context
                     .as_ref()
@@ -213,7 +213,7 @@ impl ShredFetchStage {
             let turbine_disabled = turbine_disabled.clone();
             tvu_threads.extend([
                 Builder::new()
-                    .name("solTvuRecvRpr".to_string())
+                    .name("mlnTvuRecvRpr".to_string())
                     .spawn(|| {
                         receive_repair_quic_packets(
                             repair_quic_endpoint_receiver,
@@ -224,7 +224,7 @@ impl ShredFetchStage {
                     })
                     .unwrap(),
                 Builder::new()
-                    .name("solTvuFetchRpr".to_string())
+                    .name("mlnTvuFetchRpr".to_string())
                     .spawn(move || {
                         Self::modify_packets(
                             packet_receiver,
@@ -244,7 +244,7 @@ impl ShredFetchStage {
         let (packet_sender, packet_receiver) = unbounded();
         tvu_threads.extend([
             Builder::new()
-                .name("solTvuRecvQuic".to_string())
+                .name("mlnTvuRecvQuic".to_string())
                 .spawn(|| {
                     receive_quic_datagrams(
                         turbine_quic_endpoint_receiver,
@@ -255,7 +255,7 @@ impl ShredFetchStage {
                 })
                 .unwrap(),
             Builder::new()
-                .name("solTvuFetchQuic".to_string())
+                .name("mlnTvuFetchQuic".to_string())
                 .spawn(move || {
                     Self::modify_packets(
                         packet_receiver,
@@ -377,7 +377,7 @@ pub(crate) fn receive_repair_quic_packets(
 mod tests {
     use {
         super::*,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::MAX_DATA_SHREDS_PER_SLOT,
             shred::{ReedSolomonCache, Shred, ShredFlags},
         },
@@ -386,7 +386,7 @@ mod tests {
 
     #[test]
     fn test_data_code_same_index() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut packet = Packet::default();
         let mut stats = ShredFetchStats::default();
 
@@ -415,7 +415,7 @@ mod tests {
             shred_version,
             &mut stats,
         ));
-        let coding = solana_ledger::shred::Shredder::generate_coding_shreds(
+        let coding = miraland_ledger::shred::Shredder::generate_coding_shreds(
             &[shred],
             3, // next_code_index
             &ReedSolomonCache::default(),
@@ -432,7 +432,7 @@ mod tests {
 
     #[test]
     fn test_shred_filter() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut packet = Packet::default();
         let mut stats = ShredFetchStats::default();
         let last_root = 0;

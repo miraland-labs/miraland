@@ -1,10 +1,10 @@
 use {
-    solana_client::thin_client::ThinClient,
-    solana_core::validator::{Validator, ValidatorConfig},
-    solana_gossip::{cluster_info::Node, contact_info::ContactInfo},
-    solana_ledger::shred::Shred,
+    miraland_client::thin_client::ThinClient,
+    miraland_core::validator::{Validator, ValidatorConfig},
+    miraland_gossip::{cluster_info::Node, contact_info::ContactInfo},
+    miraland_ledger::shred::Shred,
     solana_sdk::{pubkey::Pubkey, signature::Keypair},
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{path::PathBuf, sync::Arc},
 };
 

@@ -27,7 +27,7 @@ use {
         WriteBatch as RWriteBatch, DB,
     },
     serde::{de::DeserializeOwned, Serialize},
-    solana_accounts_db::hardened_unpack::UnpackError,
+    miraland_accounts_db::hardened_unpack::UnpackError,
     solana_sdk::{
         clock::{Slot, UnixTimestamp},
         pubkey::Pubkey,
@@ -434,13 +434,13 @@ impl Rocks {
                 write_batch_perf_status: PerfSamplingStatus::default(),
             },
             AccessType::Secondary => {
-                let secondary_path = path.join("solana-secondary");
+                let secondary_path = path.join("miraland-secondary");
 
                 info!(
                     "Opening Rocks with secondary (read only) access at: {:?}",
                     secondary_path
                 );
-                info!("This secondary access could temporarily degrade other accesses, such as by solana-validator");
+                info!("This secondary access could temporarily degrade other accesses, such as by miraland-validator");
 
                 Rocks {
                     db: DB::open_cf_descriptors_as_secondary(

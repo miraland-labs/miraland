@@ -5,7 +5,7 @@ use {
     },
     itertools::Itertools,
     rand::{thread_rng, Rng},
-    solana_perf::packet::Packet,
+    miraland_perf::packet::Packet,
     solana_runtime::bank::Bank,
     solana_sdk::{
         clock::{Slot, UnixTimestamp},
@@ -348,7 +348,7 @@ mod tests {
         super::*,
         itertools::Itertools,
         rand::{thread_rng, Rng},
-        solana_perf::packet::{Packet, PacketBatch, PacketFlags},
+        miraland_perf::packet::{Packet, PacketBatch, PacketFlags},
         solana_runtime::{
             bank::Bank,
             genesis_utils::{self, ValidatorVoteKeypairs},

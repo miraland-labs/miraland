@@ -17,7 +17,7 @@ apt-get install -y buildkite-agent
 
 
 # Configure the installation
-echo "Go to https://buildkite.com/organizations/solana-labs/agents"
+echo "Go to https://buildkite.com/organizations/miraland-labs/agents"
 echo "Click Reveal Agent Token"
 echo "Paste the Agent Token, then press Enter:"
 

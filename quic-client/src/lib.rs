@@ -4,7 +4,7 @@ pub mod nonblocking;
 pub mod quic_client;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 use {
     crate::{
@@ -16,7 +16,7 @@ use {
     },
     quinn::Endpoint,
     rcgen::RcgenError,
-    solana_connection_cache::{
+    miraland_connection_cache::{
         connection_cache::{
             BaseClientConnection, ClientError, ConnectionCache, ConnectionManager, ConnectionPool,
             ConnectionPoolError, NewConnectionConfig, Protocol,
@@ -27,7 +27,7 @@ use {
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    solana_streamer::{
+    miraland_streamer::{
         nonblocking::quic::{compute_max_allowed_uni_streams, ConnectionPeerType},
         streamer::StakedNodes,
         tls_certificates::new_self_signed_tls_certificate,
@@ -249,7 +249,7 @@ mod tests {
 
     #[test]
     fn test_connection_cache_max_parallel_chunks() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let mut connection_config = QuicConfig::new().unwrap();
         assert_eq!(

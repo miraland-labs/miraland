@@ -7,37 +7,37 @@ process, separated from transaction creation and network broadcast. Examples
 include:
 
 - Collecting signatures from geographically disparate signers in a
-  [multi-signature scheme](https://spl.solana.com/token#multisig-usage)
+  [multi-signature scheme](https://spl.miraland.top/token#multisig-usage)
 - Signing transactions using an [airgapped](<https://en.wikipedia.org/wiki/Air_gap_(networking)>)
   signing device
 
-This document describes using Solana's CLI to separately sign and submit a
+This document describes using Miraland's CLI to separately sign and submit a
 transaction.
 
 ## Commands Supporting Offline Signing
 
 At present, the following commands support offline signing:
 
-- [`create-stake-account`](cli/usage.md#solana-create-stake-account)
-- [`create-stake-account-checked`](cli/usage.md#solana-create-stake-account-checked)
-- [`deactivate-stake`](cli/usage.md#solana-deactivate-stake)
-- [`delegate-stake`](cli/usage.md#solana-delegate-stake)
-- [`split-stake`](cli/usage.md#solana-split-stake)
-- [`stake-authorize`](cli/usage.md#solana-stake-authorize)
-- [`stake-authorize-checked`](cli/usage.md#solana-stake-authorize-checked)
-- [`stake-set-lockup`](cli/usage.md#solana-stake-set-lockup)
-- [`stake-set-lockup-checked`](cli/usage.md#solana-stake-set-lockup-checked)
-- [`transfer`](cli/usage.md#solana-transfer)
-- [`withdraw-stake`](cli/usage.md#solana-withdraw-stake)
+- [`create-stake-account`](cli/usage.md#miraland-create-stake-account)
+- [`create-stake-account-checked`](cli/usage.md#miraland-create-stake-account-checked)
+- [`deactivate-stake`](cli/usage.md#miraland-deactivate-stake)
+- [`delegate-stake`](cli/usage.md#miraland-delegate-stake)
+- [`split-stake`](cli/usage.md#miraland-split-stake)
+- [`stake-authorize`](cli/usage.md#miraland-stake-authorize)
+- [`stake-authorize-checked`](cli/usage.md#miraland-stake-authorize-checked)
+- [`stake-set-lockup`](cli/usage.md#miraland-stake-set-lockup)
+- [`stake-set-lockup-checked`](cli/usage.md#miraland-stake-set-lockup-checked)
+- [`transfer`](cli/usage.md#miraland-transfer)
+- [`withdraw-stake`](cli/usage.md#miraland-withdraw-stake)
 
-- [`create-vote-account`](cli/usage.md#solana-create-vote-account)
-- [`vote-authorize-voter`](cli/usage.md#solana-vote-authorize-voter)
-- [`vote-authorize-voter-checked`](cli/usage.md#solana-vote-authorize-voter-checked)
-- [`vote-authorize-withdrawer`](cli/usage.md#solana-vote-authorize-withdrawer)
-- [`vote-authorize-withdrawer-checked`](cli/usage.md#solana-vote-authorize-withdrawer-checked)
-- [`vote-update-commission`](cli/usage.md#solana-vote-update-commission)
-- [`vote-update-validator`](cli/usage.md#solana-vote-update-validator)
-- [`withdraw-from-vote-account`](cli/usage.md#solana-withdraw-from-vote-account)
+- [`create-vote-account`](cli/usage.md#miraland-create-vote-account)
+- [`vote-authorize-voter`](cli/usage.md#miraland-vote-authorize-voter)
+- [`vote-authorize-voter-checked`](cli/usage.md#miraland-vote-authorize-voter-checked)
+- [`vote-authorize-withdrawer`](cli/usage.md#miraland-vote-authorize-withdrawer)
+- [`vote-authorize-withdrawer-checked`](cli/usage.md#miraland-vote-authorize-withdrawer-checked)
+- [`vote-update-commission`](cli/usage.md#miraland-vote-update-commission)
+- [`vote-update-validator`](cli/usage.md#miraland-vote-update-validator)
+- [`withdraw-from-vote-account`](cli/usage.md#miraland-withdraw-from-vote-account)
 
 ## Signing Transactions Offline
 
@@ -58,7 +58,7 @@ To sign a transaction offline, pass the following arguments on the command line
 Command
 
 ```bash
-solana@offline$ solana transfer --sign-only --blockhash 5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF \
+miraland@offline$ miraland transfer --sign-only --blockhash 5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF \
     recipient-keypair.json 1
 ```
 
@@ -88,7 +88,7 @@ following arguments on the command line
 Command
 
 ```bash
-solana@online$ solana transfer --blockhash 5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF \
+miraland@online$ miraland transfer --blockhash 5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF \
     --signer FhtzLVsmcV7S5XqGD79ErgoseCLhZYmEZnz9kQg1Rp7j=4vC38p4bz7XyiXrk6HtaooUqwxTWKocf45cstASGtmrD398biNJnmTcUCVEojE7wVQvgdYbjHJqRFZPpzfCQpmUN
     recipient-keypair.json 1
 ```
@@ -111,7 +111,7 @@ output
 Command (Offline Session #1)
 
 ```text
-solana@offline1$ solana transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
+miraland@offline1$ miraland transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
     --blockhash 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc \
     --sign-only \
     --keypair fee_payer.json \
@@ -131,7 +131,7 @@ Absent Signers (Pubkey):
 Command (Offline Session #2)
 
 ```text
-solana@offline2$ solana transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
+miraland@offline2$ miraland transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
     --blockhash 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc \
     --sign-only \
     --keypair from.json \
@@ -151,7 +151,7 @@ Absent Signers (Pubkey):
 Command (Online Submission)
 
 ```text
-solana@online$ solana transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
+miraland@online$ miraland transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
     --blockhash 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc \
     --from 674RgFMgdqdRoVtMqSBg7mHFbrrNm1h1r721H1ZMquHL \
     --signer 674RgFMgdqdRoVtMqSBg7mHFbrrNm1h1r721H1ZMquHL=3vJtnba4dKQmEAieAekC1rJnPUndBcpvqRPRMoPWqhLEMCty2SdUxt2yvC1wQW6wVUa5putZMt6kdwCaTv8gk7sQ \
@@ -167,7 +167,7 @@ ohGKvpRC46jAduwU9NW8tP91JkCT5r8Mo67Ysnid4zc76tiiV1Ho6jv3BKFSbBcr2NcPPCarmfTLSkTH
 
 ## Buying More Time to Sign
 
-Typically a Solana transaction must be signed and accepted by the network within
+Typically a Miraland transaction must be signed and accepted by the network within
 a number of slots from the blockhash in its `recent_blockhash` field (~1min at
 the time of this writing). If your signing procedure takes longer than this, a
 [Durable Transaction Nonce](offline-signing/durable-nonce.md) can give you the extra time you

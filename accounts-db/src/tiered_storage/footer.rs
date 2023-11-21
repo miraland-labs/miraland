@@ -20,7 +20,7 @@ static_assertions::const_assert_eq!(mem::size_of::<TieredStorageFooter>(), 160);
 pub const FOOTER_TAIL_SIZE: usize = 24;
 
 /// The ending 8 bytes of a valid tiered account storage file.
-pub const FOOTER_MAGIC_NUMBER: u64 = 0x502A2AB5; // SOLALABS -> SOLANA LABS
+pub const FOOTER_MAGIC_NUMBER: u64 = 0x502A2AB5; // SOLALABS -> MIRALAND LABS
 
 #[derive(Debug, PartialEq, Eq)]
 #[repr(C)]

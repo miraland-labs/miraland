@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-panic"
-documentation = "https://docs.rs/solana-sbf-rust-panic"
+name = "miraland-sbf-rust-panic"
+documentation = "https://docs.rs/miraland-sbf-rust-panic"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -10,7 +10,7 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [features]
 default = ["custom-panic"]

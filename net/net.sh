@@ -2,7 +2,7 @@
 set -e
 
 here=$(dirname "$0")
-SOLANA_ROOT="$(cd "$here"/..; pwd)"
+MIRALAND_ROOT="$(cd "$here"/..; pwd)"
 
 # shellcheck source=net/common.sh
 source "$here"/common.sh
@@ -120,7 +120,7 @@ Operate a configured testnet
 
  sanity/start-specific options:
    -F                   - Discard validator nodes that didn't bootup successfully
-   -o noInstallCheck    - Skip solana-install sanity
+   -o noInstallCheck    - Skip miraland-install sanity
    -o rejectExtraNodes  - Require the exact number of nodes
 
  stop-specific options:
@@ -136,7 +136,7 @@ Operate a configured testnet
    --netem-cmd         - Optional command argument to netem. Default is "add". Use "cleanup" to remove rules.
 
  update-specific options:
-   --platform linux|osx|windows       - Deploy the tarball using 'solana-install deploy ...' for the
+   --platform linux|osx|windows       - Deploy the tarball using 'miraland-install deploy ...' for the
                                         given platform (multiple platforms may be specified)
                                         (-t option must be supplied as well)
 
@@ -188,12 +188,12 @@ build() {
   declare MAYBE_DOCKER=
   if [[ $(uname) != Linux || ! " ${supported[*]} " =~ $(lsb_release -sr) ]]; then
     # shellcheck source=ci/rust-version.sh
-    source "$SOLANA_ROOT"/ci/rust-version.sh
+    source "$MIRALAND_ROOT"/ci/rust-version.sh
     MAYBE_DOCKER="ci/docker-run.sh $rust_stable_docker_image"
   fi
   SECONDS=0
   (
-    cd "$SOLANA_ROOT"
+    cd "$MIRALAND_ROOT"
     echo "--- Build started at $(date)"
 
     set -x
@@ -227,7 +227,7 @@ build() {
     (
       echo "channel: devbuild $NOTE"
       echo "commit: $COMMIT"
-    ) > "$SOLANA_ROOT"/farf/version.yml
+    ) > "$MIRALAND_ROOT"/farf/version.yml
   )
   echo "Build took $SECONDS seconds"
 }
@@ -243,29 +243,29 @@ startCommon() {
   declare ipAddress=$1
   declare remoteHome
   remoteHome=$(remoteHomeDir "$ipAddress")
-  local remoteSolanaHome="${remoteHome}/solana"
+  local remoteMiralandHome="${remoteHome}/miraland"
   local remoteCargoBin="${remoteHome}/.cargo/bin"
-  test -d "$SOLANA_ROOT"
+  test -d "$MIRALAND_ROOT"
   if $skipSetup; then
     # shellcheck disable=SC2029
     ssh "${sshOptions[@]}" "$ipAddress" "
       set -x;
-      mkdir -p $remoteSolanaHome/config;
+      mkdir -p $remoteMiralandHome/config;
       rm -rf ~/config;
-      mv $remoteSolanaHome/config ~;
-      rm -rf $remoteSolanaHome;
-      mkdir -p $remoteSolanaHome $remoteCargoBin;
-      mv ~/config $remoteSolanaHome/
+      mv $remoteMiralandHome/config ~;
+      rm -rf $remoteMiralandHome;
+      mkdir -p $remoteMiralandHome $remoteCargoBin;
+      mv ~/config $remoteMiralandHome/
     "
   else
     # shellcheck disable=SC2029
     ssh "${sshOptions[@]}" "$ipAddress" "
       set -x;
-      rm -rf $remoteSolanaHome;
+      rm -rf $remoteMiralandHome;
       mkdir -p $remoteCargoBin
     "
   fi
-  [[ -z "$externalNodeSshKey" ]] || ssh-copy-id -f -i "$externalNodeSshKey" "${sshOptions[@]}" "solana@$ipAddress"
+  [[ -z "$externalNodeSshKey" ]] || ssh-copy-id -f -i "$externalNodeSshKey" "${sshOptions[@]}" "miraland@$ipAddress"
   syncScripts "$ipAddress"
 }
 
@@ -274,11 +274,11 @@ syncScripts() {
   declare ipAddress=$1
   declare remoteHome
   remoteHome=$(remoteHomeDir "$ipAddress")
-  local remoteSolanaHome="${remoteHome}/solana"
+  local remoteMiralandHome="${remoteHome}/miraland"
   rsync -vPrc -e "ssh ${sshOptions[*]}" \
     --exclude 'net/log*' \
-    "$SOLANA_ROOT"/{fetch-perf-libs.sh,fetch-spl.sh,scripts,net,multinode-demo} \
-    "$ipAddress":"$remoteSolanaHome"/ > /dev/null
+    "$MIRALAND_ROOT"/{fetch-perf-libs.sh,fetch-spl.sh,scripts,net,multinode-demo} \
+    "$ipAddress":"$remoteMiralandHome"/ > /dev/null
 }
 
 # Deploy local binaries to bootstrap validator.  Other validators and clients later fetch the
@@ -293,12 +293,12 @@ deployBootstrapValidator() {
   echo "Deploying software to bootstrap validator ($ipAddress)"
   case $deployMethod in
   tar)
-    rsync -vPrc -e "ssh ${sshOptions[*]}" "$SOLANA_ROOT"/solana-release/bin/* "$ipAddress:$remoteCargoBin/"
-    rsync -vPrc -e "ssh ${sshOptions[*]}" "$SOLANA_ROOT"/solana-release/version.yml "$ipAddress:~/"
+    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/miraland-release/bin/* "$ipAddress:$remoteCargoBin/"
+    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/miraland-release/version.yml "$ipAddress:~/"
     ;;
   local)
-    rsync -vPrc -e "ssh ${sshOptions[*]}" "$SOLANA_ROOT"/farf/bin/* "$ipAddress:$remoteCargoBin/"
-    rsync -vPrc -e "ssh ${sshOptions[*]}" "$SOLANA_ROOT"/farf/version.yml "$ipAddress:~/"
+    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/farf/bin/* "$ipAddress:$remoteCargoBin/"
+    rsync -vPrc -e "ssh ${sshOptions[*]}" "$MIRALAND_ROOT"/farf/version.yml "$ipAddress:~/"
     ;;
   skip)
     ;;
@@ -324,7 +324,7 @@ startBootstrapLeader() {
     deployBootstrapValidator "$ipAddress"
 
     ssh "${sshOptions[@]}" -n "$ipAddress" \
-      "./solana/net/remote/remote-node.sh \
+      "./miraland/net/remote/remote-node.sh \
          $deployMethod \
          bootstrap-validator \
          $entrypointIp \
@@ -390,7 +390,7 @@ startNode() {
         timeout 30s scp "${sshOptions[@]}" "$localArchive" "$ipAddress:letsencrypt.tgz"
       fi
       ssh "${sshOptions[@]}" -n "$ipAddress" \
-        "sudo -H /certbot-restore.sh $letsEncryptDomainName maintainers@solanalabs.com"
+        "sudo -H /certbot-restore.sh $letsEncryptDomainName crafters@miraland.top"
       rm -f letsencrypt.tgz
       timeout 30s scp "${sshOptions[@]}" "$ipAddress:/letsencrypt.tgz" letsencrypt.tgz
       test -s letsencrypt.tgz # Ensure non-empty before overwriting $localArchive
@@ -398,7 +398,7 @@ startNode() {
     fi
 
     ssh "${sshOptions[@]}" -n "$ipAddress" \
-      "./solana/net/remote/remote-node.sh \
+      "./miraland/net/remote/remote-node.sh \
          $deployMethod \
          $nodeType \
          $entrypointIp \
@@ -443,7 +443,7 @@ startClient() {
     set -x
     startCommon "$ipAddress"
     ssh "${sshOptions[@]}" -f "$ipAddress" \
-      "./solana/net/remote/remote-client.sh $deployMethod $entrypointIp \
+      "./miraland/net/remote/remote-client.sh $deployMethod $entrypointIp \
       $clientToRun \"$RUST_LOG\" \"$benchTpsExtraArgs\" $clientIndex $clientType"
   ) >> "$logFile" 2>&1 || {
     cat "$logFile"
@@ -455,7 +455,7 @@ startClient() {
 startClients() {
   for ((i=0; i < "$numClients" && i < "$numClientsRequested"; i++)) do
     if [[ $i -lt "$numBenchTpsClients" ]]; then
-      startClient "${clientIpList[$i]}" "solana-bench-tps" "$i"
+      startClient "${clientIpList[$i]}" "miraland-bench-tps" "$i"
     else
       startClient "${clientIpList[$i]}" "idle"
     fi
@@ -478,7 +478,7 @@ sanity() {
     set -x
     # shellcheck disable=SC2029 # remote-client.sh args are expanded on client side intentionally
     ssh "${sshOptions[@]}" "$bootstrapLeader" \
-      "./solana/net/remote/remote-sanity.sh $bootstrapLeader $sanityExtraArgs \"$RUST_LOG\""
+      "./miraland/net/remote/remote-sanity.sh $bootstrapLeader $sanityExtraArgs \"$RUST_LOG\""
   ) || ok=false
   $ok || exit 1
 
@@ -489,7 +489,7 @@ sanity() {
       set -x
       # shellcheck disable=SC2029 # remote-client.sh args are expanded on client side intentionally
       ssh "${sshOptions[@]}" "$blockstreamer" \
-        "./solana/net/remote/remote-sanity.sh $blockstreamer $sanityExtraArgs \"$RUST_LOG\""
+        "./miraland/net/remote/remote-sanity.sh $blockstreamer $sanityExtraArgs \"$RUST_LOG\""
     ) || ok=false
     $ok || exit 1
   fi
@@ -511,18 +511,18 @@ deployUpdate() {
   declare bootstrapLeader=${validatorIpList[0]}
 
   for updatePlatform in $updatePlatforms; do
-    echo "--- Deploying solana-install update: $updatePlatform"
+    echo "--- Deploying miraland-install update: $updatePlatform"
     (
       set -x
 
-      scripts/solana-install-update-manifest-keypair.sh "$updatePlatform"
+      scripts/miraland-install-update-manifest-keypair.sh "$updatePlatform"
 
       timeout 30s scp "${sshOptions[@]}" \
-        update_manifest_keypair.json "$bootstrapLeader:solana/update_manifest_keypair.json"
+        update_manifest_keypair.json "$bootstrapLeader:miraland/update_manifest_keypair.json"
 
       # shellcheck disable=SC2029 # remote-deploy-update.sh args are expanded on client side intentionally
       ssh "${sshOptions[@]}" "$bootstrapLeader" \
-        "./solana/net/remote/remote-deploy-update.sh $releaseChannel $updatePlatform"
+        "./miraland/net/remote/remote-deploy-update.sh $releaseChannel $updatePlatform"
     ) || ok=false
     $ok || exit 1
   done
@@ -559,21 +559,21 @@ prepareDeploy() {
   tar)
     if [[ -n $releaseChannel ]]; then
       echo "Downloading release from channel: $releaseChannel"
-      rm -f "$SOLANA_ROOT"/solana-release.tar.bz2
-      declare updateDownloadUrl=https://release.solana.com/"$releaseChannel"/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+      rm -f "$MIRALAND_ROOT"/miraland-release.tar.bz2
+      declare updateDownloadUrl=https://release.miraland.com/"$releaseChannel"/miraland-release-x86_64-unknown-linux-gnu.tar.bz2
       (
         set -x
         curl -L -I "$updateDownloadUrl"
         curl -L --retry 5 --retry-delay 2 --retry-connrefused \
-          -o "$SOLANA_ROOT"/solana-release.tar.bz2 "$updateDownloadUrl"
+          -o "$MIRALAND_ROOT"/miraland-release.tar.bz2 "$updateDownloadUrl"
       )
-      tarballFilename="$SOLANA_ROOT"/solana-release.tar.bz2
+      tarballFilename="$MIRALAND_ROOT"/miraland-release.tar.bz2
     fi
     (
       set -x
-      rm -rf "$SOLANA_ROOT"/solana-release
-      cd "$SOLANA_ROOT"; tar jfxv "$tarballFilename"
-      cat "$SOLANA_ROOT"/solana-release/version.yml
+      rm -rf "$MIRALAND_ROOT"/miraland-release
+      cd "$MIRALAND_ROOT"; tar jfxv "$tarballFilename"
+      cat "$MIRALAND_ROOT"/miraland-release/version.yml
     )
     ;;
   local)
@@ -602,7 +602,7 @@ prepareDeploy() {
       rsync -vPrc -e "ssh ${sshOptions[*]}" "${validatorIpList[0]}":~/version.yml current-version.yml
     )
     cat current-version.yml
-    if ! diff -q current-version.yml "$SOLANA_ROOT"/solana-release/version.yml; then
+    if ! diff -q current-version.yml "$MIRALAND_ROOT"/miraland-release/version.yml; then
       echo "Cluster software version is old.  Update required"
     else
       echo "Cluster software version is current.  No update required"
@@ -666,7 +666,7 @@ deploy() {
         break
       fi
       ssh "${sshOptions[@]}" -n "$ipAddress" \
-        "./solana/net/remote/remote-node-wait-init.sh $((600 - timeWaited))"
+        "./miraland/net/remote/remote-node-wait-init.sh $((600 - timeWaited))"
     done
   fi
 
@@ -693,7 +693,7 @@ deploy() {
     networkVersion="$(
       (
         set -o pipefail
-        grep "^commit: " "$SOLANA_ROOT"/solana-release/version.yml | head -n1 | cut -d\  -f2
+        grep "^commit: " "$MIRALAND_ROOT"/miraland-release/version.yml | head -n1 | cut -d\  -f2
       ) || echo "tar-unknown"
     )"
     ;;
@@ -732,7 +732,7 @@ stopNode() {
     # the script itself will match the pkill pattern
     set -x
     # shellcheck disable=SC2029 # It's desired that PS4 be expanded on the client side
-    ssh "${sshOptions[@]}" "$ipAddress" "PS4=\"$PS4\" ./solana/net/remote/cleanup.sh"
+    ssh "${sshOptions[@]}" "$ipAddress" "PS4=\"$PS4\" ./miraland/net/remote/cleanup.sh"
   ) >> "$logFile" 2>&1 &
 
   declare pid=$!
@@ -1175,7 +1175,7 @@ logs)
     (
       set -x
       timeout 30s scp "${sshOptions[@]}" \
-        "$ipAddress":solana/"$log".log "$netLogDir"/remote-"$log"-"$ipAddress".log
+        "$ipAddress":miraland/"$log".log "$netLogDir"/remote-"$log"-"$ipAddress".log
     ) || echo "failed to fetch log"
   }
   fetchRemoteLog "${validatorIpList[0]}" faucet
@@ -1195,13 +1195,13 @@ netem)
     if [[ $netemCommand = "add" ]]; then
       for ipAddress in "${validatorIpList[@]}"; do
         remoteHome=$(remoteHomeDir "$ipAddress")
-        remoteSolanaHome="${remoteHome}/solana"
-        "$here"/scp.sh "$netemConfigFile" solana@"$ipAddress":"$remoteSolanaHome"
+        remoteMiralandHome="${remoteHome}/miraland"
+        "$here"/scp.sh "$netemConfigFile" miraland@"$ipAddress":"$remoteMiralandHome"
       done
     fi
     for i in "${!validatorIpList[@]}"; do
-      "$here"/ssh.sh solana@"${validatorIpList[$i]}" 'solana/scripts/net-shaper.sh' \
-      "$netemCommand" ~solana/solana/"$remoteNetemConfigFile" "${#validatorIpList[@]}" "$i"
+      "$here"/ssh.sh miraland@"${validatorIpList[$i]}" 'miraland/scripts/net-shaper.sh' \
+      "$netemCommand" ~miraland/miraland/"$remoteNetemConfigFile" "${#validatorIpList[@]}" "$i"
     done
   else
     num_nodes=$((${#validatorIpList[@]}*netemPartition/100))
@@ -1214,12 +1214,12 @@ netem)
 
     # Stop netem on all nodes
     for ipAddress in "${validatorIpList[@]}"; do
-      "$here"/ssh.sh solana@"$ipAddress" 'solana/scripts/netem.sh delete < solana/netem.cfg || true'
+      "$here"/ssh.sh miraland@"$ipAddress" 'miraland/scripts/netem.sh delete < miraland/netem.cfg || true'
     done
 
     # Start netem on required nodes
     for ((i=0; i<num_nodes; i++ )); do :
-      "$here"/ssh.sh solana@"${validatorIpList[$i]}" "echo $netemConfig > solana/netem.cfg; solana/scripts/netem.sh add \"$netemConfig\""
+      "$here"/ssh.sh miraland@"${validatorIpList[$i]}" "echo $netemConfig > miraland/netem.cfg; miraland/scripts/netem.sh add \"$netemConfig\""
     done
   fi
   ;;

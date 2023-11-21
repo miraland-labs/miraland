@@ -21,12 +21,12 @@ use {
     },
     crossbeam_channel::RecvTimeoutError,
     histogram::Histogram,
-    solana_client::connection_cache::ConnectionCache,
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_ledger::blockstore_processor::TransactionStatusSender,
-    solana_measure::{measure, measure_us},
-    solana_perf::{data_budget::DataBudget, packet::PACKETS_PER_BATCH},
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_client::connection_cache::ConnectionCache,
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_ledger::blockstore_processor::TransactionStatusSender,
+    miraland_measure::{measure, measure_us},
+    miraland_perf::{data_budget::DataBudget, packet::PACKETS_PER_BATCH},
+    miraland_poh::poh_recorder::PohRecorder,
     solana_runtime::{bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache},
     solana_sdk::timing::AtomicInterval,
     solana_vote::vote_sender_types::ReplayVoteSender,
@@ -457,7 +457,7 @@ impl BankingStage {
                 );
 
                 Builder::new()
-                    .name(format!("solBanknStgTx{id:02}"))
+                    .name(format!("mlnBanknStgTx{id:02}"))
                     .spawn(move || {
                         Self::process_loop(
                             &mut packet_receiver,
@@ -592,7 +592,7 @@ impl BankingStage {
 
     pub fn num_threads() -> u32 {
         cmp::max(
-            env::var("SOLANA_BANKING_THREADS")
+            env::var("MIRALAND_BANKING_THREADS")
                 .map(|x| x.parse().unwrap_or(NUM_THREADS))
                 .unwrap_or(NUM_THREADS),
             MIN_TOTAL_THREADS,
@@ -614,9 +614,9 @@ mod tests {
         crate::banking_trace::{BankingPacketBatch, BankingTracer},
         crossbeam_channel::{unbounded, Receiver},
         itertools::Itertools,
-        solana_entry::entry::{Entry, EntrySlice},
-        solana_gossip::cluster_info::Node,
-        solana_ledger::{
+        miraland_entry::entry::{Entry, EntrySlice},
+        miraland_gossip::cluster_info::Node,
+        miraland_ledger::{
             blockstore::Blockstore,
             genesis_utils::{
                 create_genesis_config, create_genesis_config_with_leader, GenesisConfigInfo,
@@ -624,8 +624,8 @@ mod tests {
             get_tmp_ledger_path_auto_delete,
             leader_schedule_cache::LeaderScheduleCache,
         },
-        solana_perf::packet::{to_packet_batches, PacketBatch},
-        solana_poh::{
+        miraland_perf::packet::{to_packet_batches, PacketBatch},
+        miraland_poh::{
             poh_recorder::{
                 create_test_recorder, PohRecorderError, Record, RecordTransactionsSummary,
             },
@@ -642,7 +642,7 @@ mod tests {
             system_transaction,
             transaction::{SanitizedTransaction, Transaction},
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         solana_vote_program::{
             vote_state::VoteStateUpdate, vote_transaction::new_vote_state_update_transaction,
         },
@@ -715,7 +715,7 @@ mod tests {
 
     #[test]
     fn test_banking_stage_tick() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             mut genesis_config, ..
         } = create_genesis_config(2);
@@ -795,7 +795,7 @@ mod tests {
 
     #[test]
     fn test_banking_stage_entries_only() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
@@ -924,7 +924,7 @@ mod tests {
 
     #[test]
     fn test_banking_stage_entryfication() {
-        solana_logger::setup();
+        miraland_logger::setup();
         // In this attack we'll demonstrate that a verifier can interpret the ledger
         // differently if either the server doesn't signal the ledger to add an
         // Entry OR if the verifier tries to parallelize across multiple Entries.
@@ -1041,7 +1041,7 @@ mod tests {
 
     #[test]
     fn test_bank_record_transactions() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let GenesisConfigInfo {
             genesis_config,
@@ -1119,7 +1119,7 @@ mod tests {
         let mut config_info = create_genesis_config_with_leader(
             lamports,
             validator_pubkey,
-            // See solana_ledger::genesis_utils::create_genesis_config.
+            // See miraland_ledger::genesis_utils::create_genesis_config.
             bootstrap_validator_stake_lamports(),
         );
 
@@ -1135,7 +1135,7 @@ mod tests {
         let poh_recorder = poh_recorder.clone();
         let is_exited = poh_recorder.read().unwrap().is_exited.clone();
         let tick_producer = Builder::new()
-            .name("solana-simulate_poh".to_string())
+            .name("miraland-simulate_poh".to_string())
             .spawn(move || loop {
                 PohService::read_record_receiver_and_process(
                     &poh_recorder,
@@ -1151,7 +1151,7 @@ mod tests {
 
     #[test]
     fn test_unprocessed_transaction_storage_full_send() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,

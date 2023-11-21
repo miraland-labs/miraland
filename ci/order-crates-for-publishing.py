@@ -64,19 +64,19 @@ def is_self_dev_dep_with_dev_context_only_utils(package, dependency, wrong_self_
     return is_special_cased
 
 def should_add(package, dependency, wrong_self_dev_dependencies):
-    related_to_solana = dependency['name'].startswith('solana')
+    related_to_miraland = dependency['name'].startswith('miraland')
     self_dev_dep_with_dev_context_only_utils = is_self_dev_dep_with_dev_context_only_utils(
         package, dependency, wrong_self_dev_dependencies
     )
 
-    return related_to_solana and not self_dev_dep_with_dev_context_only_utils
+    return related_to_miraland and not self_dev_dep_with_dev_context_only_utils
 
 def get_packages():
     metadata = load_metadata()
 
     manifest_path = dict()
 
-    # Build dictionary of packages and their immediate solana-only dependencies
+    # Build dictionary of packages and their immediate miraland-only dependencies
     dependency_graph = dict()
     wrong_self_dev_dependencies = list()
 

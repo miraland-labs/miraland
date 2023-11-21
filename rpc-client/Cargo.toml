@@ -1,7 +1,7 @@
 [package]
-name = "solana-rpc-client"
-description = "Solana RPC Client"
-documentation = "https://docs.rs/solana-rpc-client"
+name = "miraland-rpc-client"
+description = "Miraland RPC Client"
+documentation = "https://docs.rs/miraland-rpc-client"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -21,12 +21,12 @@ semver = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-solana-account-decoder = { workspace = true }
-solana-rpc-client-api = { workspace = true }
-solana-sdk = { workspace = true }
-solana-transaction-status = { workspace = true }
-solana-version = { workspace = true }
-solana-vote-program = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-transaction-status = { workspace = true }
+miraland-version = { workspace = true }
+miraland-vote-program = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [dev-dependencies]

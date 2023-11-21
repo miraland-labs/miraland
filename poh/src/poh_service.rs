@@ -4,8 +4,8 @@ use {
     crate::poh_recorder::{PohRecorder, Record},
     crossbeam_channel::Receiver,
     log::*,
-    solana_entry::poh::Poh,
-    solana_measure::{measure, measure::Measure},
+    miraland_entry::poh::Poh,
+    miraland_measure::{measure, measure::Measure},
     solana_sdk::poh_config::PohConfig,
     std::{
         sync::{
@@ -105,7 +105,7 @@ impl PohService {
     ) -> Self {
         let poh_config = poh_config.clone();
         let tick_producer = Builder::new()
-            .name("solPohTickProd".to_string())
+            .name("mlnPohTickProd".to_string())
             .spawn(move || {
                 if poh_config.hashes_per_tick.is_none() {
                     if poh_config.target_tick_count.is_none() {
@@ -382,14 +382,14 @@ mod tests {
     use {
         super::*,
         rand::{thread_rng, Rng},
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::Blockstore,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             get_tmp_ledger_path_auto_delete,
             leader_schedule_cache::LeaderScheduleCache,
         },
-        solana_measure::measure::Measure,
-        solana_perf::test_tx::test_tx,
+        miraland_measure::measure::Measure,
+        miraland_perf::test_tx::test_tx,
         solana_runtime::bank::Bank,
         solana_sdk::{
             clock, hash::hash, pubkey::Pubkey, timing, transaction::VersionedTransaction,
@@ -400,7 +400,7 @@ mod tests {
     #[test]
     #[ignore]
     fn test_poh_service() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(2);
         let bank = Arc::new(Bank::new_no_wallclock_throttle_for_tests(&genesis_config));
         let prev_hash = bank.last_blockhash();
@@ -449,7 +449,7 @@ mod tests {
             let exit = exit.clone();
 
             Builder::new()
-                .name("solPohEntryProd".to_string())
+                .name("mlnPohEntryProd".to_string())
                 .spawn(move || {
                     let now = Instant::now();
                     let mut total_us = 0;

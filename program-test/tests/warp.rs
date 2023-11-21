@@ -6,7 +6,7 @@ use {
     bincode::deserialize,
     log::debug,
     setup::{setup_stake, setup_vote},
-    solana_banks_client::BanksClient,
+    miraland_banks_client::BanksClient,
     solana_program_test::{processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestError},
     solana_sdk::{
         account::Account,
@@ -226,8 +226,8 @@ async fn stake_rewards_filter_bench_core(num_stake_accounts: u64) {
     let vote_account = vote_state::create_account(&vote_address, &node_address, 0, 1_000_000_000);
     program_test.add_account(vote_address, vote_account.clone().into());
 
-    // create stake accounts with 0.9 sol to test min-stake filtering
-    const TEST_FILTER_STAKE: u64 = 900_000_000; // 0.9 sol
+    // create stake accounts with 0.9 mln to test min-stake filtering
+    const TEST_FILTER_STAKE: u64 = 900_000_000; // 0.9 mln
     let mut to_filter = vec![];
     for i in 0..num_stake_accounts {
         let stake_pubkey = Pubkey::new_unique();

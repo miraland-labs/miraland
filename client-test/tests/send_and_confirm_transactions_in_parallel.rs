@@ -1,17 +1,17 @@
 use {
-    solana_client::{
+    miraland_client::{
         nonblocking::tpu_client::TpuClient,
         send_and_confirm_transactions_in_parallel::{
             send_and_confirm_transactions_in_parallel_blocking, SendAndConfirmConfig,
         },
     },
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::{
-        commitment_config::CommitmentConfig, message::Message, native_token::sol_to_lamports,
+        commitment_config::CommitmentConfig, message::Message, native_token::mln_to_lamports,
         pubkey::Pubkey, signature::Keypair, signer::Signer, system_instruction,
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_test_validator::TestValidator,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::TestValidator,
     std::sync::Arc,
 };
 
@@ -22,7 +22,7 @@ fn create_messages(from: Pubkey, to: Pubkey) -> (Vec<Message>, f64) {
     let mut sum = 0.0;
     for i in 1..NUM_TRANSACTIONS {
         let amount_to_transfer = i as f64;
-        let ix = system_instruction::transfer(&from, &to, sol_to_lamports(amount_to_transfer));
+        let ix = system_instruction::transfer(&from, &to, mln_to_lamports(amount_to_transfer));
         let message = Message::new(&[ix], Some(&from));
         messages.push(message);
         sum += amount_to_transfer;
@@ -32,7 +32,7 @@ fn create_messages(from: Pubkey, to: Pubkey) -> (Vec<Message>, f64) {
 
 #[test]
 fn test_send_and_confirm_transactions_in_parallel_without_tpu_client() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let test_validator =
@@ -44,8 +44,8 @@ fn test_send_and_confirm_transactions_in_parallel_without_tpu_client() {
     let rpc_client = Arc::new(RpcClient::new(test_validator.rpc_url()));
 
     assert_eq!(
-        rpc_client.get_version().unwrap().solana_core,
-        solana_version::semver!()
+        rpc_client.get_version().unwrap().miraland_core,
+        miraland_version::semver!()
     );
 
     let original_alice_balance = rpc_client.get_balance(&alice.pubkey()).unwrap();
@@ -69,20 +69,20 @@ fn test_send_and_confirm_transactions_in_parallel_without_tpu_client() {
             .get_balance_with_commitment(&bob_pubkey, CommitmentConfig::processed())
             .unwrap()
             .value,
-        sol_to_lamports(sum)
+        mln_to_lamports(sum)
     );
     assert_eq!(
         rpc_client
             .get_balance_with_commitment(&alice_pubkey, CommitmentConfig::processed())
             .unwrap()
             .value,
-        original_alice_balance - sol_to_lamports(sum)
+        original_alice_balance - mln_to_lamports(sum)
     );
 }
 
 #[test]
 fn test_send_and_confirm_transactions_in_parallel_with_tpu_client() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let alice = Keypair::new();
     let test_validator =
@@ -94,8 +94,8 @@ fn test_send_and_confirm_transactions_in_parallel_with_tpu_client() {
     let rpc_client = Arc::new(RpcClient::new(test_validator.rpc_url()));
 
     assert_eq!(
-        rpc_client.get_version().unwrap().solana_core,
-        solana_version::semver!()
+        rpc_client.get_version().unwrap().miraland_core,
+        miraland_version::semver!()
     );
 
     let original_alice_balance = rpc_client.get_balance(&alice.pubkey()).unwrap();
@@ -105,7 +105,7 @@ fn test_send_and_confirm_transactions_in_parallel_with_tpu_client() {
         "temp",
         rpc_client.get_inner_client().clone(),
         ws_url.as_str(),
-        solana_client::tpu_client::TpuClientConfig::default(),
+        miraland_client::tpu_client::TpuClientConfig::default(),
     );
     let tpu_client = rpc_client.runtime().block_on(tpu_client_fut).unwrap();
 
@@ -127,13 +127,13 @@ fn test_send_and_confirm_transactions_in_parallel_with_tpu_client() {
             .get_balance_with_commitment(&bob_pubkey, CommitmentConfig::processed())
             .unwrap()
             .value,
-        sol_to_lamports(sum)
+        mln_to_lamports(sum)
     );
     assert_eq!(
         rpc_client
             .get_balance_with_commitment(&alice_pubkey, CommitmentConfig::processed())
             .unwrap()
             .value,
-        original_alice_balance - sol_to_lamports(sum)
+        original_alice_balance - mln_to_lamports(sum)
     );
 }

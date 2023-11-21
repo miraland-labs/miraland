@@ -14,17 +14,17 @@ use {
     crate::{leader_bank_notifier::LeaderBankNotifier, poh_service::PohService},
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, SendError, Sender, TrySendError},
     log::*,
-    solana_entry::{
+    miraland_entry::{
         entry::{hash_transactions, Entry},
         poh::Poh,
     },
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::Blockstore,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_measure::{measure, measure_us},
-    solana_metrics::poh_timing_point::{send_poh_timing_point, PohTimingSender, SlotPohTimingInfo},
+    miraland_measure::{measure, measure_us},
+    miraland_metrics::poh_timing_point::{send_poh_timing_point, PohTimingSender, SlotPohTimingInfo},
     solana_runtime::{bank::Bank, installed_scheduler_pool::BankWithScheduler},
     solana_sdk::{
         clock::{Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
@@ -1112,10 +1112,10 @@ mod tests {
         super::*,
         bincode::serialize,
         crossbeam_channel::bounded,
-        solana_ledger::{
+        miraland_ledger::{
             blockstore::Blockstore, blockstore_meta::SlotMeta, get_tmp_ledger_path_auto_delete,
         },
-        solana_perf::test_tx::test_tx,
+        miraland_perf::test_tx::test_tx,
         solana_sdk::{clock::DEFAULT_TICKS_PER_SLOT, hash::hash},
     };
 
@@ -1677,7 +1677,7 @@ mod tests {
 
     #[test]
     fn test_reset_to_new_value() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Blockstore::open(ledger_path.path())
@@ -1764,7 +1764,7 @@ mod tests {
 
     #[test]
     fn test_poh_recorder_record_sets_start_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Blockstore::open(ledger_path.path())
             .expect("Expected to be able to open database ledger");
@@ -1812,7 +1812,7 @@ mod tests {
 
     #[test]
     fn test_reached_leader_tick() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Blockstore::open(ledger_path.path())
@@ -1874,7 +1874,7 @@ mod tests {
 
     #[test]
     fn test_reached_leader_slot() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Blockstore::open(ledger_path.path())

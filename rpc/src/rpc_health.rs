@@ -1,6 +1,6 @@
 use {
     crate::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
-    solana_ledger::blockstore::Blockstore,
+    miraland_ledger::blockstore::Blockstore,
     solana_sdk::clock::Slot,
     std::sync::{
         atomic::{AtomicBool, Ordering},
@@ -136,7 +136,7 @@ impl RpcHealth {
 pub mod tests {
     use {
         super::*,
-        solana_ledger::{
+        miraland_ledger::{
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             get_tmp_ledger_path_auto_delete,
         },

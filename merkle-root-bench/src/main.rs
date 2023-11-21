@@ -1,17 +1,17 @@
 extern crate log;
 use {
     clap::{crate_description, crate_name, value_t, App, Arg},
-    solana_accounts_db::accounts_hash::AccountsHasher,
-    solana_measure::measure::Measure,
+    miraland_accounts_db::accounts_hash::AccountsHasher,
+    miraland_measure::measure::Measure,
     solana_sdk::{hash::Hash, pubkey::Pubkey},
 };
 
 fn main() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let matches = App::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .arg(
             Arg::with_name("num_accounts")
                 .long("num_accounts")

@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-alt-bn128"
-description = "Solana BPF test program written in Rust"
+name = "miraland-sbf-rust-alt-bn128"
+description = "Miraland BPF test program written in Rust"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -10,7 +10,7 @@ edition = { workspace = true }
 
 [dependencies]
 array-bytes = { workspace = true }
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [lib]
 crate-type = ["cdylib"]

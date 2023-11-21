@@ -3,18 +3,18 @@ use {
     log::*,
     rand::{seq::SliceRandom, thread_rng, Rng},
     rayon::prelude::*,
-    solana_core::validator::{ValidatorConfig, ValidatorStartProgress},
-    solana_download_utils::{download_snapshot_archive, DownloadProgressRecord},
-    solana_genesis_utils::download_then_check_genesis_hash,
-    solana_gossip::{
+    miraland_core::validator::{ValidatorConfig, ValidatorStartProgress},
+    miraland_download_utils::{download_snapshot_archive, DownloadProgressRecord},
+    miraland_genesis_utils::download_then_check_genesis_hash,
+    miraland_gossip::{
         cluster_info::{ClusterInfo, Node},
         contact_info::Protocol,
         crds_value,
         gossip_service::GossipService,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_metrics::datapoint_info,
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_metrics::datapoint_info,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter, snapshot_package::SnapshotKind,
         snapshot_utils,
@@ -26,7 +26,7 @@ use {
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{hash_map::RandomState, HashMap, HashSet},
         net::{SocketAddr, TcpListener, TcpStream, UdpSocket},
@@ -124,7 +124,7 @@ fn verify_reachable_ports(
         tcp_listeners.push((ip_echo.local_addr().unwrap().port(), ip_echo));
     }
 
-    solana_net_utils::verify_reachable_ports(
+    miraland_net_utils::verify_reachable_ports(
         &cluster_entrypoint.gossip().unwrap(),
         tcp_listeners,
         &udp_sockets,
@@ -444,7 +444,7 @@ pub fn attempt_download_genesis_and_snapshot(
         )
         .unwrap_or_else(|err| {
             // Consider failures here to be more likely due to user error (eg,
-            // incorrect `solana-validator` command-line arguments) rather than the
+            // incorrect `miraland-validator` command-line arguments) rather than the
             // RPC node failing.
             //
             // Power users can always use the `--no-check-vote-account` option to
@@ -527,7 +527,7 @@ fn get_vetted_rpc_nodes(
                             if let Some(ping_time) = ping_time {
                                 info!(
                                     "RPC node version: {} Ping: {}ms",
-                                    rpc_version.solana_core,
+                                    rpc_version.miraland_core,
                                     ping_time.as_millis()
                                 );
                                 true
@@ -1379,7 +1379,7 @@ mod tests {
 
     #[test]
     fn test_build_known_snapshot_hashes() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let full_snapshot_hash1 = (400_000, Hash::new_unique());
         let full_snapshot_hash2 = (400_000, Hash::new_unique());
 

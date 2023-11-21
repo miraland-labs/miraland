@@ -1,7 +1,7 @@
 [package]
-name = "solana-genesis-utils"
-description = "Solana Genesis Utils"
-documentation = "https://docs.rs/solana-download-utils"
+name = "miraland-genesis-utils"
+description = "Miraland Genesis Utils"
+documentation = "https://docs.rs/miraland-genesis-utils"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -11,14 +11,14 @@ edition = { workspace = true }
 
 [dependencies]
 log = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-download-utils = { workspace = true }
-solana-rpc-client = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-download-utils = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_genesis_utils"
+name = "miraland_genesis_utils"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

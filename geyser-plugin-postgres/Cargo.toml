@@ -1,0 +1,51 @@
+[package]
+name = "miraland-geyser-plugin-postgres"
+description = "The Miraland AccountsDb plugin for PostgreSQL database."
+documentation = "https://docs.rs/miraland-geyser-plugin-postgres"
+version = { workspace = true }
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+bs58 = { workspace = true }
+bytemuck = { workspace = true }
+chrono = { workspace = true, features = ["serde"] }
+crossbeam-channel = { workspace = true }
+log = { workspace = true }
+miraland-geyser-plugin-interface = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-transaction-status = { workspace = true }
+openssl = { workspace = true }
+postgres = { workspace = true }
+postgres-openssl = { workspace = true }
+postgres-types = { workspace = true }
+serde = { workspace = true }
+serde_derive = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio-postgres = { workspace = true }
+
+[dev-dependencies]
+libc = { workspace = true }
+libloading = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-core = { workspace = true }
+miraland-local-cluster = { workspace = true }
+miraland-net-utils = { workspace = true }
+miraland-streamer = { workspace = true }
+serial_test = { workspace = true }
+socket2 = { workspace = true, features = ["all"] }
+tempfile = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]

@@ -1,7 +1,7 @@
 use {
     super::Bank,
     log::{debug, warn},
-    solana_accounts_db::{account_rent_state::RentState, stake_rewards::RewardInfo},
+    miraland_accounts_db::{account_rent_state::RentState, stake_rewards::RewardInfo},
     solana_sdk::{
         account::{ReadableAccount, WritableAccount},
         pubkey::Pubkey,
@@ -302,7 +302,7 @@ pub mod tests {
         },
         log::info,
         solana_sdk::{
-            account::AccountSharedData, feature_set, native_token::sol_to_lamports, pubkey,
+            account::AccountSharedData, feature_set, native_token::mln_to_lamports, pubkey,
             rent::Rent, signature::Signer,
         },
     };
@@ -617,7 +617,7 @@ pub mod tests {
 
     #[test]
     fn test_distribute_rent_to_validators_overflow() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         // These values are taken from the real cluster (testnet)
         const RENT_TO_BE_DISTRIBUTED: u64 = 120_525;
@@ -661,7 +661,7 @@ pub mod tests {
 
     #[test]
     fn test_distribute_rent_to_validators_rent_paying() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         const RENT_PER_VALIDATOR: u64 = 55;
         const TOTAL_RENT: u64 = RENT_PER_VALIDATOR * 4;
@@ -677,9 +677,9 @@ pub mod tests {
             &rent_exempt_validator,
         ];
         let genesis_config_info = create_genesis_config_with_vote_accounts(
-            sol_to_lamports(1000.),
+            mln_to_lamports(1000.),
             &keypairs,
-            vec![sol_to_lamports(1000.); 4],
+            vec![mln_to_lamports(1000.); 4],
         );
         let mut genesis_config = genesis_config_info.genesis_config;
         genesis_config.rent = Rent::default(); // Ensure rent is non-zero, as genesis_utils sets Rent::free by default

@@ -28,14 +28,14 @@ use {
         Rng,
     },
     rayon::{prelude::*, ThreadPool},
-    solana_bloom::bloom::{AtomicBloom, Bloom},
+    miraland_bloom::bloom::{AtomicBloom, Bloom},
     solana_sdk::{
         hash::{hash, Hash},
-        native_token::LAMPORTS_PER_SOL,
+        native_token::LAMPORTS_PER_MLN,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet, VecDeque},
         convert::TryInto,
@@ -269,7 +269,7 @@ impl CrdsGossipPull {
             crds_gossip::dedup_gossip_addresses(nodes, stakes)
                 .into_values()
                 .map(|(stake, node)| {
-                    let stake = stake.min(stake_cap) / LAMPORTS_PER_SOL;
+                    let stake = stake.min(stake_cap) / LAMPORTS_PER_MLN;
                     let weight = u64::BITS - stake.leading_zeros();
                     let weight = u64::from(weight).saturating_add(1).saturating_pow(2);
                     (weight, node)
@@ -621,7 +621,7 @@ pub(crate) mod tests {
         rand::{seq::SliceRandom, SeedableRng},
         rand_chacha::ChaChaRng,
         rayon::ThreadPoolBuilder,
-        solana_perf::test_tx::new_test_vote_tx,
+        miraland_perf::test_tx::new_test_vote_tx,
         solana_sdk::{
             hash::{hash, HASH_BYTES},
             packet::PACKET_DATA_SIZE,

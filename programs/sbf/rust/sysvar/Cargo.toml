@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-sysvar"
-documentation = "https://docs.rs/solana-sbf-rust-sysvar"
+name = "miraland-sbf-rust-sysvar"
+documentation = "https://docs.rs/miraland-sbf-rust-sysvar"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -10,16 +10,16 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 
 [features]
 test-bpf = []
 dummy-for-ci-check = ["test-bpf"]
 
 [dev-dependencies]
-solana-program-runtime = { workspace = true }
-solana-program-test = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-program-test = { workspace = true }
+miraland-sdk = { workspace = true }
 
 [lib]
 crate-type = ["cdylib", "lib"]

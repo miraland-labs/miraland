@@ -9,13 +9,13 @@ use {
     clap::{value_t_or_exit, App, AppSettings, Arg, ArgMatches, SubCommand},
     console::style,
     serde::{Deserialize, Serialize},
-    solana_clap_utils::{
+    miraland_clap_utils::{
         fee_payer::*, hidden_unless_forced, input_parsers::*, input_validators::*, keypair::*,
     },
-    solana_cli_output::{cli_version::CliVersion, QuietDisplay, VerboseDisplay},
-    solana_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_rpc_client::rpc_client::RpcClient,
-    solana_rpc_client_api::{client_error::Error as ClientError, request::MAX_MULTIPLE_ACCOUNTS},
+    miraland_cli_output::{cli_version::CliVersion, QuietDisplay, VerboseDisplay},
+    miraland_remote_wallet::remote_wallet::RemoteWalletManager,
+    miraland_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client_api::{client_error::Error as ClientError, request::MAX_MULTIPLE_ACCOUNTS},
     solana_sdk::{
         account::Account,
         clock::Slot,
@@ -711,7 +711,7 @@ fn feature_activation_allowed(
     let cluster_info_stats = cluster_info_stats(rpc_client)?;
     let feature_set_stats = cluster_info_stats.aggregate_by_feature_set();
 
-    let tool_version = solana_version::Version::default();
+    let tool_version = miraland_version::Version::default();
     let tool_feature_set = tool_version.feature_set;
     let tool_software_version = CliVersion::from(semver::Version::new(
         tool_version.major as u64,

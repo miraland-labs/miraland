@@ -1,6 +1,6 @@
 //! A client for subscribing to messages from the RPC server.
 //!
-//! The [`PubsubClient`] implements [Solana WebSocket event
+//! The [`PubsubClient`] implements [Miraland WebSocket event
 //! subscriptions][spec].
 //!
 //! [spec]: https://docs.solana.com/developing/clients/jsonrpc-api#subscription-websocket
@@ -32,12 +32,12 @@
 //! By default the [`block_subscribe`] and [`vote_subscribe`] events are
 //! disabled on RPC nodes. They can be enabled by passing
 //! `--rpc-pubsub-enable-block-subscription` and
-//! `--rpc-pubsub-enable-vote-subscription` to `solana-validator`. When these
+//! `--rpc-pubsub-enable-vote-subscription` to `miraland-validator`. When these
 //! methods are disabled, the RPC server will return a "Method not found" error
 //! message.
 //!
-//! [`block_subscribe`]: https://docs.rs/solana-rpc/latest/solana_rpc/rpc_pubsub/trait.RpcSolPubSub.html#tymethod.block_subscribe
-//! [`vote_subscribe`]: https://docs.rs/solana-rpc/latest/solana_rpc/rpc_pubsub/trait.RpcSolPubSub.html#tymethod.vote_subscribe
+//! [`block_subscribe`]: https://docs.rs/miraland-rpc/latest/miraland_rpc/rpc_pubsub/trait.RpcSolPubSub.html#tymethod.block_subscribe
+//! [`vote_subscribe`]: https://docs.rs/miraland-rpc/latest/miraland_rpc/rpc_pubsub/trait.RpcSolPubSub.html#tymethod.vote_subscribe
 //!
 //! # Examples
 //!
@@ -47,13 +47,13 @@
 //! ```
 //! use anyhow::Result;
 //! use solana_sdk::commitment_config::CommitmentConfig;
-//! use solana_pubsub_client::pubsub_client::PubsubClient;
-//! use solana_rpc_client_api::config::RpcAccountInfoConfig;
+//! use miraland_pubsub_client::pubsub_client::PubsubClient;
+//! use miraland_rpc_client_api::config::RpcAccountInfoConfig;
 //! use solana_sdk::pubkey::Pubkey;
 //! use std::thread;
 //!
 //! fn get_account_updates(account_pubkey: Pubkey) -> Result<()> {
-//!     let url = "wss://api.devnet.solana.com/";
+//!     let url = "wss://api.devnet-mln.miraland.top/";
 //!
 //!     let (mut account_subscription_client, account_subscription_receiver) =
 //!         PubsubClient::account_subscribe(
@@ -96,8 +96,8 @@ use {
         value::Value::{Number, Object},
         Map, Value,
     },
-    solana_account_decoder::UiAccount,
-    solana_rpc_client_api::{
+    miraland_account_decoder::UiAccount,
+    miraland_rpc_client_api::{
         config::{
             RpcAccountInfoConfig, RpcBlockSubscribeConfig, RpcBlockSubscribeFilter,
             RpcProgramAccountsConfig, RpcSignatureSubscribeConfig, RpcTransactionLogsConfig,
@@ -221,7 +221,7 @@ where
 
         if let Ok(json_msg) = serde_json::from_str::<Map<String, Value>>(message_text) {
             if let Some(Object(version_map)) = json_msg.get("result") {
-                if let Some(node_version) = version_map.get("solana-core") {
+                if let Some(node_version) = version_map.get("miraland-core") {
                     if let Some(node_version) = node_version.as_str() {
                         if let Ok(parsed) = semver::Version::parse(node_version) {
                             return Ok(parsed);
@@ -416,7 +416,7 @@ impl PubsubClient {
     /// Receives messages of type [`RpcBlockUpdate`] when a block is confirmed or finalized.
     ///
     /// This method is disabled by default. It can be enabled by passing
-    /// `--rpc-pubsub-enable-block-subscription` to `solana-validator`.
+    /// `--rpc-pubsub-enable-block-subscription` to `miraland-validator`.
     ///
     /// # RPC Reference
     ///
@@ -578,7 +578,7 @@ impl PubsubClient {
     /// votes are observed prior to confirmation and may never be confirmed.
     ///
     /// This method is disabled by default. It can be enabled by passing
-    /// `--rpc-pubsub-enable-vote-subscription` to `solana-validator`.
+    /// `--rpc-pubsub-enable-vote-subscription` to `miraland-validator`.
     ///
     /// # RPC Reference
     ///

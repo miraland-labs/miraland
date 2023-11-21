@@ -180,7 +180,7 @@ mod tests {
 
     #[test]
     fn test_vote_transaction_cost() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let node_keypair = Keypair::new();
         let vote_keypair = Keypair::new();
         let auth_keypair = Keypair::new();

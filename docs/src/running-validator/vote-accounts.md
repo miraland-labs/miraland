@@ -3,12 +3,12 @@ title: Vote Account Management
 ---
 
 This page describes how to set up an on-chain _vote account_. Creating a vote
-account is needed if you plan to run a validator node on Solana.
+account is needed if you plan to run a validator node on Miraland.
 
 ## Create a Vote Account
 
 A vote account can be created with the
-[create-vote-account](../cli/usage.md#solana-create-vote-account) command.
+[create-vote-account](../cli/usage.md#miraland-create-vote-account) command.
 The vote account can be configured when first created or after the validator is
 running. All aspects of the vote account can be changed except for the
 [vote account address](#vote-account-address), which is fixed for the lifetime
@@ -17,13 +17,13 @@ of the account.
 ### Configure an Existing Vote Account
 
 - To change the [validator identity](#validator-identity), use
-  [vote-update-validator](../cli/usage.md#solana-vote-update-validator).
+  [vote-update-validator](../cli/usage.md#miraland-vote-update-validator).
 - To change the [vote authority](#vote-authority), use
-  [vote-authorize-voter-checked](../cli/usage.md#solana-vote-authorize-voter-checked).
+  [vote-authorize-voter-checked](../cli/usage.md#miraland-vote-authorize-voter-checked).
 - To change the [authorized withdrawer](#authorized-withdrawer), use
-  [vote-authorize-withdrawer-checked](../cli/usage.md#solana-vote-authorize-withdrawer-checked).
+  [vote-authorize-withdrawer-checked](../cli/usage.md#miraland-vote-authorize-withdrawer-checked).
 - To change the [commission](#commission), use
-  [vote-update-commission](../cli/usage.md#solana-vote-update-commission).
+  [vote-update-commission](../cli/usage.md#miraland-vote-update-commission).
 
 ## Vote Account Structure
 
@@ -52,7 +52,7 @@ stored as a "hot wallet" in a keypair file on the same system the validator
 process is running.
 
 Because a hot wallet is generally less secure than an offline or "cold" wallet,
-the validator operator may choose to store only enough SOL on the identity
+the validator operator may choose to store only enough MLN on the identity
 account to cover voting fees for a limited amount of time, such as a few weeks
 or months. The validator identity account could be periodically topped off
 from a more secure wallet.
@@ -62,7 +62,7 @@ disk or file system becomes compromised or corrupted.
 
 The validator identity is required to be provided when a vote account is created.
 The validator identity can also be changed after an account is created by using
-the [vote-update-validator](../cli/usage.md#solana-vote-update-validator) command.
+the [vote-update-validator](../cli/usage.md#miraland-vote-update-validator) command.
 
 ### Vote Authority
 
@@ -76,7 +76,7 @@ validator process.
 The vote authority can be set to the same address as the validator identity.
 If the validator identity is also the vote authority, only one
 signature per vote transaction is needed in order to both sign the vote and pay
-the transaction fee. Because transaction fees on Solana are assessed
+the transaction fee. Because transaction fees on Miraland are assessed
 per-signature, having one signer instead of two will result in half the transaction
 fee paid compared to setting the vote authority and validator identity to two
 different accounts.
@@ -84,13 +84,13 @@ different accounts.
 The vote authority can be set when the vote account is created. If it is not
 provided, the default behavior is to assign it the same as the validator identity.
 The vote authority can be changed later with the
-[vote-authorize-voter-checked](../cli/usage.md#solana-vote-authorize-voter-checked) command.
+[vote-authorize-voter-checked](../cli/usage.md#miraland-vote-authorize-voter-checked) command.
 
 The vote authority can be changed at most once per epoch. If the authority is
-changed with [vote-authorize-voter-checked](../cli/usage.md#solana-vote-authorize-voter-checked),
+changed with [vote-authorize-voter-checked](../cli/usage.md#miraland-vote-authorize-voter-checked),
 this will not take effect until the beginning of the next epoch.
 To support a smooth transition of the vote signing,
-`solana-validator` allows the `--authorized-voter` argument to be specified
+`miraland-validator` allows the `--authorized-voter` argument to be specified
 multiple times. This allows the validator process to keep voting successfully
 when the network reaches an epoch boundary at which the validator's vote
 authority account changes.
@@ -98,7 +98,7 @@ authority account changes.
 ### Authorized Withdrawer
 
 The _authorized withdrawer_ keypair is used to withdraw funds from a vote account
-using the [withdraw-from-vote-account](../cli/usage.md#solana-withdraw-from-vote-account)
+using the [withdraw-from-vote-account](../cli/usage.md#miraland-withdraw-from-vote-account)
 command. Any network rewards a validator earns are deposited into the vote
 account and are only retrievable by signing with the authorized withdrawer keypair.
 
@@ -117,7 +117,7 @@ not be set to a keypair that is the same as either the validator identity
 keypair or the vote authority keypair.
 
 The authorized withdrawer can be changed later with the
-[vote-authorize-withdrawer-checked](../cli/usage.md#solana-vote-authorize-withdrawer-checked)
+[vote-authorize-withdrawer-checked](../cli/usage.md#miraland-vote-authorize-withdrawer-checked)
 command.
 
 ### Commission
@@ -144,7 +144,7 @@ rewards deposited in the vote account, and none passed on to any delegated
 stake accounts.
 
 Commission can also be changed later with the
-[vote-update-commission](../cli/usage.md#solana-vote-update-commission) command.
+[vote-update-commission](../cli/usage.md#miraland-vote-update-commission) command.
 
 When setting the commission, only integer values in the set [0-100] are accepted.
 The integer represents the number of percentage points for the commission, so
@@ -171,9 +171,9 @@ You will need access to the _authorized withdrawer_ keypair for the vote account
 change the validator identity. The following steps assume that
 `~/authorized_withdrawer.json` is that keypair.
 
-1. Create the new validator identity keypair, `solana-keygen new -o ~/new-validator-keypair.json`.
-2. Ensure that the new identity account has been funded, `solana transfer ~/new-validator-keypair.json 500`.
-3. Run `solana vote-update-validator ~/vote-account-keypair.json ~/new-validator-keypair.json ~/authorized_withdrawer.json`
+1. Create the new validator identity keypair, `miraland-keygen new -o ~/new-validator-keypair.json`.
+2. Ensure that the new identity account has been funded, `miraland transfer ~/new-validator-keypair.json 500`.
+3. Run `miraland vote-update-validator ~/vote-account-keypair.json ~/new-validator-keypair.json ~/authorized_withdrawer.json`
    to modify the validator identity in your vote account
 4. Restart your validator with the new identity keypair for the `--identity` argument
 
@@ -193,47 +193,47 @@ This temporary validator should be run for two full epochs. During this time it 
 * Receive the transaction fees and rent rewards for your old validator identity
 
 It is safe to stop this temporary validator when your old validator identity is
-no longer listed in the `solana leader-schedule` output.
+no longer listed in the `miraland leader-schedule` output.
 
 ### Vote Account Authorized Voter
 
 The _vote authority_ keypair may only be changed at epoch boundaries and
-requires some additional arguments to `solana-validator` for a seamless
+requires some additional arguments to `miraland-validator` for a seamless
 migration.
 
-1. Run `solana epoch-info`. If there is not much time remaining time in the
+1. Run `miraland epoch-info`. If there is not much time remaining time in the
    current epoch, consider waiting for the next epoch to allow your validator
    plenty of time to restart and catch up.
-2. Create the new vote authority keypair, `solana-keygen new -o ~/new-vote-authority.json`.
-3. Determine the current _vote authority_ keypair by running `solana vote-account ~/vote-account-keypair.json`. It may be validator's
+2. Create the new vote authority keypair, `miraland-keygen new -o ~/new-vote-authority.json`.
+3. Determine the current _vote authority_ keypair by running `miraland vote-account ~/vote-account-keypair.json`. It may be validator's
    identity account (the default) or some other keypair. The following steps
    assume that `~/validator-keypair.json` is that keypair.
-4. Run `solana vote-authorize-voter-checked ~/vote-account-keypair.json ~/validator-keypair.json ~/new-vote-authority.json`.
+4. Run `miraland vote-authorize-voter-checked ~/vote-account-keypair.json ~/validator-keypair.json ~/new-vote-authority.json`.
    The new vote authority is scheduled to become active starting at the next epoch.
-5. `solana-validator` now needs to be restarted with the old and new vote
+5. `miraland-validator` now needs to be restarted with the old and new vote
    authority keypairs, so that it can smoothly transition at the next epoch. Add
    the two arguments on restart: `--authorized-voter ~/validator-keypair.json --authorized-voter ~/new-vote-authority.json`
 6. After the cluster reaches the next epoch, remove the
    `--authorized-voter ~/validator-keypair.json` argument and restart
-   `solana-validator`, as the old vote authority keypair is no longer required.
+   `miraland-validator`, as the old vote authority keypair is no longer required.
 
 ### Vote Account Authorized Withdrawer
 
 No special handling or timing considerations are required.
-Use the `solana vote-authorize-withdrawer-checked` command as needed.
+Use the `miraland vote-authorize-withdrawer-checked` command as needed.
 
 ### Consider Durable Nonces for a Trustless Transfer of the Authorized Voter or Withdrawer
 
 If the Authorized Voter or Withdrawer is to be transferred to another entity
 then a two-stage signing process using a [Durable Nonce](../offline-signing/durable-nonce) is recommended.
 
-1. Entity B creates a durable nonce using `solana create-nonce-account`
-2. Entity B then runs a `solana vote-authorize-voter-checked` or `solana vote-authorize-withdrawer-checked` command, including:
+1. Entity B creates a durable nonce using `miraland create-nonce-account`
+2. Entity B then runs a `miraland vote-authorize-voter-checked` or `miraland vote-authorize-withdrawer-checked` command, including:
   - the `--sign-only` argument
   - the `--nonce`, `--nonce-authority`, and `--blockhash` arguments to specify the nonce particulars
   - the address of the Entity A's existing authority, and the keypair for Entity B's new authority
-3. When the `solana vote-authorize-...-checked` command successfully executes, it will output transaction signatures that Entity B must share with Entity A
-4. Entity A then runs a similar `solana vote-authorize-voter-checked` or `solana vote-authorize-withdrawer-checked` command with the following changes:
+3. When the `miraland vote-authorize-...-checked` command successfully executes, it will output transaction signatures that Entity B must share with Entity A
+4. Entity A then runs a similar `miraland vote-authorize-voter-checked` or `miraland vote-authorize-withdrawer-checked` command with the following changes:
   - the `--sign-only` argument is removed, and replaced with a `--signer` argument for each of the signatures provided by Entity B
   - the address of Entity A's existing authority is replaced with the corresponding keypair, and the keypair for Entity B's new authority is replaced with the corresponding address
 
@@ -242,6 +242,6 @@ On success the authority is now changed without Entity A or B having to reveal k
 ## Close a Vote Account
 
 A vote account can be closed with the
-[close-vote-account](../cli/usage.md#solana-close-vote-account) command.
-Closing a vote account withdraws all remaining SOL funds to a supplied recipient address and renders it invalid as a vote account.
+[close-vote-account](../cli/usage.md#miraland-close-vote-account) command.
+Closing a vote account withdraws all remaining MLN funds to a supplied recipient address and renders it invalid as a vote account.
 It is not possible to close a vote account with active stake.

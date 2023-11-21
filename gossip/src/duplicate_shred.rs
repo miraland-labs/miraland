@@ -1,7 +1,7 @@
 use {
     crate::crds_value::sanitize_wallclock,
     itertools::Itertools,
-    solana_ledger::{
+    miraland_ledger::{
         blockstore::BlockstoreError,
         blockstore_meta::{DuplicateSlotProof, ErasureMeta},
         shred::{self, Shred, ShredType},
@@ -283,8 +283,8 @@ pub(crate) mod tests {
     use {
         super::*,
         rand::Rng,
-        solana_entry::entry::Entry,
-        solana_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
+        miraland_entry::entry::Entry,
+        miraland_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
         solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},

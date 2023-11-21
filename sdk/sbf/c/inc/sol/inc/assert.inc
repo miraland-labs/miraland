@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana assert and panic utilities
+ * @brief Miraland assert and panic utilities
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

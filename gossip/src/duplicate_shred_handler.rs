@@ -4,7 +4,7 @@ use {
         duplicate_shred_listener::DuplicateShredHandlerTrait,
     },
     log::error,
-    solana_ledger::{blockstore::Blockstore, leader_schedule_cache::LeaderScheduleCache},
+    miraland_ledger::{blockstore::Blockstore, leader_schedule_cache::LeaderScheduleCache},
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         clock::{Epoch, Slot},
@@ -211,7 +211,7 @@ mod tests {
             cluster_info::DUPLICATE_SHRED_MAX_PAYLOAD_SIZE,
             duplicate_shred::{from_shred, tests::new_rand_shred},
         },
-        solana_ledger::{
+        miraland_ledger::{
             genesis_utils::{create_genesis_config_with_leader, GenesisConfigInfo},
             get_tmp_ledger_path_auto_delete,
             shred::Shredder,
@@ -263,7 +263,7 @@ mod tests {
 
     #[test]
     fn test_handle_mixed_entries() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(Blockstore::open(ledger_path.path()).unwrap());
@@ -329,7 +329,7 @@ mod tests {
 
     #[test]
     fn test_reject_abuses() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(Blockstore::open(ledger_path.path()).unwrap());

@@ -1,7 +1,7 @@
 use {
     crate::crds_gossip::CrdsGossip,
     itertools::Itertools,
-    solana_measure::measure::Measure,
+    miraland_measure::measure::Measure,
     solana_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         cmp::Reverse,

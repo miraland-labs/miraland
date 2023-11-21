@@ -11,7 +11,7 @@ use {
     },
 };
 pub use {
-    solana_perf::packet::{
+    miraland_perf::packet::{
         to_packet_batches, PacketBatch, PacketBatchRecycler, NUM_PACKETS, PACKETS_PER_BATCH,
     },
     solana_sdk::packet::{Meta, Packet, PACKET_DATA_SIZE},
@@ -100,7 +100,7 @@ mod tests {
 
     #[test]
     pub fn packet_send_recv() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recv_socket = UdpSocket::bind("127.0.0.1:0").expect("bind");
         let addr = recv_socket.local_addr().unwrap();
         let send_socket = UdpSocket::bind("127.0.0.1:0").expect("bind");
@@ -158,7 +158,7 @@ mod tests {
 
     #[test]
     fn test_packet_resize() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let recv_socket = UdpSocket::bind("127.0.0.1:0").expect("bind");
         let addr = recv_socket.local_addr().unwrap();
         let send_socket = UdpSocket::bind("127.0.0.1:0").expect("bind");

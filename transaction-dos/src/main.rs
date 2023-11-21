@@ -5,15 +5,15 @@ use {
     log::*,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_clap_utils::input_parsers::pubkey_of,
-    solana_cli::{
+    miraland_clap_utils::input_parsers::pubkey_of,
+    miraland_cli::{
         cli::{process_command, CliCommand, CliConfig},
         program::ProgramCliCommand,
     },
-    solana_client::transaction_executor::TransactionExecutor,
-    solana_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
-    solana_gossip::gossip_service::discover,
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_client::transaction_executor::TransactionExecutor,
+    miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
+    miraland_gossip::gossip_service::discover,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},
@@ -25,7 +25,7 @@ use {
         system_instruction,
         transaction::Transaction,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         net::{Ipv4Addr, SocketAddr},
         process::exit,
@@ -425,10 +425,10 @@ fn run_transactions_dos(
 }
 
 fn main() {
-    solana_logger::setup_with_default("solana=info");
+    miraland_logger::setup_with_default("solana=info,miraland=info");
     let matches = App::new(crate_name!())
         .about(crate_description!())
-        .version(solana_version::version!())
+        .version(miraland_version::version!())
         .arg(
             Arg::with_name("entrypoint")
                 .long("entrypoint")
@@ -540,14 +540,14 @@ fn main() {
     let port = if skip_gossip { DEFAULT_RPC_PORT } else { 8001 };
     let mut entrypoint_addr = SocketAddr::from((Ipv4Addr::LOCALHOST, port));
     if let Some(addr) = matches.value_of("entrypoint") {
-        entrypoint_addr = solana_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
+        entrypoint_addr = miraland_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
             eprintln!("failed to parse entrypoint address: {e}");
             exit(1)
         });
     }
     let mut faucet_addr = SocketAddr::from((Ipv4Addr::LOCALHOST, FAUCET_PORT));
     if let Some(addr) = matches.value_of("faucet_addr") {
-        faucet_addr = solana_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
+        faucet_addr = miraland_net_utils::parse_host_port(addr).unwrap_or_else(|e| {
             eprintln!("failed to parse entrypoint address: {e}");
             exit(1)
         });
@@ -635,18 +635,18 @@ fn main() {
 pub mod test {
     use {
         super::*,
-        solana_core::validator::ValidatorConfig,
-        solana_local_cluster::{
+        miraland_core::validator::ValidatorConfig,
+        miraland_local_cluster::{
             local_cluster::{ClusterConfig, LocalCluster},
             validator_configs::make_identical_validator_configs,
         },
-        solana_measure::measure::Measure,
+        miraland_measure::measure::Measure,
         solana_sdk::poh_config::PohConfig,
     };
 
     #[test]
     fn test_tx_size() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let keypair = Keypair::new();
         let num_instructions = 20;
         let program_id = Pubkey::new_unique();
@@ -674,7 +674,7 @@ pub mod test {
     #[test]
     #[ignore]
     fn test_transaction_dos() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let validator_config = ValidatorConfig::default_for_test();
         let num_nodes = 1;

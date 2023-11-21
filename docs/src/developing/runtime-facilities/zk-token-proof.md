@@ -2,18 +2,18 @@
 title: ZK Token Proof Program
 ---
 
-The native Solana ZK Token proof program verifies a number of zero-knowledge
+The native Miraland ZK Token proof program verifies a number of zero-knowledge
 proofs that are tailored to work with Pedersen commitments and ElGamal
 encryption over the elliptic curve
 [curve25519](https://www.rfc-editor.org/rfc/rfc7748#section-4.1). The program
 was originally designed to verify the zero-knowledge proofs that are required
-for the [SPL Token 2022](https://spl.solana.com/token-2022) program. However,
+for the [Solarti Token 2022](https://spl.miraland.top/token-2022) program. However,
 the zero-knowledge proofs in the proof program can be used in more general
-contexts outside of SPL Token 2022 as well.
+contexts outside of Solarti Token 2022 as well.
 
 - Program id: `ZkTokenProof1111111111111111111111111111111`
 - Instructions:
-  [ProofInstruction](https://github.com/solana-labs/solana/blob/master/zk-token-sdk/src/zk_token_proof_instruction.rs)
+  [ProofInstruction](https://github.com/miraland-labs/miraland/blob/master/zk-token-sdk/src/zk_token_proof_instruction.rs)
 
 ### Pedersen commitments and ElGamal encryption
 
@@ -41,8 +41,8 @@ treatment of Pedersen commitment and the (twisted) ElGamal encryption schemes.
 
 - [Notes](./zk-docs/twisted_elgamal.pdf) on the twisted ElGamal encryption
 - A technical
-  [overview](https://github.com/solana-labs/solana-program-library/blob/master/token/zk-token-protocol-paper/part1.pdf)
-  of the SPL Token 2022 confidential extension
+  [overview](https://github.com/miraland-labs/solarti-program-library/blob/master/token/zk-token-protocol-paper/part1.pdf)
+  of the Solarti Token 2022 confidential extension
 - Pretty Good Confidentiality [research paper](https://eprint.iacr.org/2019/319)
 
 The ZK Token proof program contains proof verification instructions on various
@@ -74,7 +74,7 @@ The ZK Token proof program processes a proof instruction in two steps:
 
 The simplest way to use a proof instruction is to execute it without producing a
 context state account. In this case, the proof instruction can be included as
-part of a larger Solana transaction that contains instructions of other Solana
+part of a larger Miraland transaction that contains instructions of other Miraland
 programs. Programs should directly access the context data from the proof
 instruction data and use it in its program logic.
 

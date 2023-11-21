@@ -1,9 +1,9 @@
 /**
  * @brief alt_bn128 syscall test
  */
-#include <sol/alt_bn128.h>
-#include <sol/assert.h>
-#include <sol/string.h>
+#include <mln/alt_bn128.h>
+#include <mln/assert.h>
+#include <mln/string.h>
 
 extern uint64_t entrypoint(const uint8_t *input) {
   // Addition

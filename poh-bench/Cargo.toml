@@ -1,6 +1,6 @@
 [package]
-name = "solana-poh-bench"
-documentation = "https://docs.rs/solana-poh-bench"
+name = "miraland-poh-bench"
+documentation = "https://docs.rs/miraland-poh-bench"
 publish = false
 version = { workspace = true }
 authors = { workspace = true }
@@ -13,12 +13,12 @@ edition = { workspace = true }
 clap = { version = "3.1.5", features = ["cargo"] }
 log = { workspace = true }
 rayon = { workspace = true }
-solana-entry = { workspace = true }
-solana-logger = { workspace = true }
-solana-measure = { workspace = true }
-solana-perf = { workspace = true }
-solana-sdk = { workspace = true }
-solana-version = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-version = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

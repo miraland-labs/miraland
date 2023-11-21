@@ -21,7 +21,7 @@ declare skip_patterns=(
 )
 
 declare -A verified_crate_owners=(
-  ["solana-grimes"]=1
+  ["miraland-grimes"]=1
 )
 
 # get Cargo.toml from git diff
@@ -71,7 +71,7 @@ or
   example:
   scripts/reserve-cratesio-package-name.sh \
     --token <GRIMES_CRATESIO_TOKEN> \
-    lib solana-new-lib-crate
+    lib miraland-new-lib-crate
 
   see also: scripts/reserve-cratesio-package-name.sh --help
 "

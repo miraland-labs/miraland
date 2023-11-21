@@ -1,6 +1,6 @@
 //! The `result` module exposes a Result type that propagates one of many different Error types.
 
-use {solana_gossip::gossip_error::GossipError, solana_ledger::blockstore, thiserror::Error};
+use {miraland_gossip::gossip_error::GossipError, miraland_ledger::blockstore, thiserror::Error};
 
 #[derive(Debug, Error)]
 pub enum Error {

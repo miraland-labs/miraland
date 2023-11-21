@@ -2,7 +2,7 @@
 title: Creating Compressed NFTs with JavaScript
 description:
   "Compressed NFTs use the Bubblegum program from Metaplex to cheaply and
-  securely store NFT metadata using State Compression on Solana."
+  securely store NFT metadata using State Compression on Miraland."
 keywords:
   - compression
   - merkle tree
@@ -10,7 +10,7 @@ keywords:
   - metaplex
 ---
 
-Compressed NFTs on Solana use the
+Compressed NFTs on Miraland use the
 [Bubblegum](https://docs.metaplex.com/programs/compression/) program from
 Metaplex to cheaply and securely store NFT metadata using
 [State Compression](../../learn/state-compression.md).
@@ -28,9 +28,9 @@ This developer guide will use JavaScript/TypeScript to demonstrate:
 Compressed NFTs use [State Compression](../../learn/state-compression.md) and
 [merkle trees](../../learn/state-compression.md#what-is-a-merkle-tree) to
 drastically reduce the storage cost for NFTs. Instead of storing an NFT's
-metadata in a typical Solana account, compressed NFTs store the metadata within
+metadata in a typical Miraland account, compressed NFTs store the metadata within
 the ledger. This allows compressed NFTs to still inherit the security and speed
-of the Solana blockchain, while at the same time reducing the overall storage
+of the Miraland blockchain, while at the same time reducing the overall storage
 costs.
 
 Even though the on-chain data storage mechanism is different than their
@@ -61,7 +61,7 @@ uncompressed NFTs.
 
 Since validators do not keep a very long history of the recent ledger data,
 these indexers effectively "cache" the compressed NFT metadata passed through
-the Solana ledger. Quickly serving it back on request to improve speed and user
+the Miraland ledger. Quickly serving it back on request to improve speed and user
 experience of applications.
 
 However, since the metadata was already secured by the ledger when minting the
@@ -81,24 +81,24 @@ the RPC providers that already support the Read API:
 
 ### How to mint compressed NFTs
 
-The process to create or mint compressed NFTs on Solana is similar to creating a
+The process to create or mint compressed NFTs on Miraland is similar to creating a
 "traditional NFT collection", with a few differences. The mint process will
 happen in 3 primary steps:
 
 - create an NFT collection (or use an existing one)
 - create a
   [concurrent merkle tree](../../learn/state-compression.md#what-is-a-concurrent-merkle-tree)
-  (using the `@solana/spl-account-compression` SDK)
+  (using the `@miraland/spl-account-compression` SDK)
 - mint compressed NFTs into your tree (to any owner's address you want)
 
 ### How to transfer a compressed NFT
 
-Once your compressed NFT exists on the Solana blockchain, the process to
+Once your compressed NFT exists on the Miraland blockchain, the process to
 transfer ownership of a compressed NFT happens in a few broad steps:
 
 1. get the NFT "asset" information (from the indexer)
 2. get the NFT's "proof" (from the indexer)
-3. get the Merkle tree account (from the Solana blockchain)
+3. get the Merkle tree account (from the Miraland blockchain)
 4. prepare the asset proof (by parsing and formatting it)
 5. build and send the transfer instruction
 
@@ -120,12 +120,12 @@ collection we are going to create:
 Before we start creating our compressed NFT collection, we need to install a few
 packages:
 
-- [`@solana/web3.js`](https://www.npmjs.com/package/@solana/web3.js) - the base
-  Solana JS SDK for interacting with the blockchain, including making our RPC
+- [`@miraland/web3.js`](https://www.npmjs.com/package/@miraland/web3.js) - the base
+  Miraland JS SDK for interacting with the blockchain, including making our RPC
   connection and sending transactions
-- [`@solana/spl-token`](https://www.npmjs.com/package/@solana/spl-token) - used
+- [`@miraland/solarti-token`](https://www.npmjs.com/package/@miraland/solarti-token) - used
   in creating our collection and mint on-chain
-- [`@solana/spl-account-compression`](https://www.npmjs.com/package/@solana/spl-account-compression) -
+- [`@miraland/spl-account-compression`](https://www.npmjs.com/package/@miraland/spl-account-compression) -
   used to create the on-chain tree to store our compressed NFTs
 - [`@metaplex-foundation/mpl-bubblegum`](https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum) -
   used to get the types and helper functions for minting and transferring
@@ -138,7 +138,7 @@ Using your preferred package manager (e.g. npm, yarn, pnpm, etc), install these
 packages into your project:
 
 ```sh
-yarn add @solana/web3.js @solana/spl-token @solana/spl-account-compression
+yarn add @miraland/web3.js @miraland/solarti-token @miraland/spl-account-compression
 ```
 
 ```sh
@@ -154,10 +154,10 @@ compressed NFTs. The NFT Collection will store all the broad metadata for our
 NFT grouping, such as the collection image and name that will appear in wallets
 and explorers.
 
-Under the hood, an NFT collection acts similar to any other token on Solana.
+Under the hood, an NFT collection acts similar to any other token on Miraland.
 More specifically, a Collection is effectively a uncompressed NFT. So we
 actually create them following the same process of creating an
-[SPL token](https://spl.solana.com/token):
+[Solarti token](https://spl.miraland.top/token):
 
 - create a new token "mint"
 - create a associated token account (`ata`) for our token mint
@@ -199,7 +199,7 @@ generally considered an anti-pattern and is not recommended.
 :::
 
 Using the helper functions provided by the
-[`@solana/spl-account-compression`](https://www.npmjs.com/package/@solana/spl-account-compression)
+[`@miraland/spl-account-compression`](https://www.npmjs.com/package/@miraland/spl-account-compression)
 SDK, we can create our tree in the following steps:
 
 - decide on our tree size
@@ -245,7 +245,7 @@ Setting a `maxDepth` of `14` will allow our tree to hold up to `16,384`
 compressed NFTs, more than exceeding our `10k` collection size.
 
 Since only specific
-[`ValidDepthSizePair`](https://solana-labs.github.io/solana-program-library/account-compression/sdk/docs/modules/index.html#ValidDepthSizePair)
+[`ValidDepthSizePair`](https://miraland-labs.github.io/solarti-program-library/account-compression/sdk/docs/modules/index.html#ValidDepthSizePair)
 pairs are allowed, simply set the `maxBufferSize` to the corresponding value
 tied to your desired `maxDepth`.
 
@@ -282,7 +282,7 @@ two related instructions:
 2. actually create the tree, owned by the Bubblegum program
 
 Using the
-[`createAllocTreeIx`](https://solana-labs.github.io/solana-program-library/account-compression/sdk/docs/modules/index.html#createAllocTreeIx)
+[`createAllocTreeIx`](https://miraland-labs.github.io/solarti-program-library/account-compression/sdk/docs/modules/index.html#createAllocTreeIx)
 helper function, we allocate enough space on-chain for our tree.
 
 ```ts
@@ -358,7 +358,7 @@ as traditional NFTs, we can define our actual NFTs data the same way.
 The primary difference is that with compressed NFTs the metadata is actually
 stored in the ledger (unlike traditional NFTs that store them in accounts). The
 metadata gets "hashed" and stored in our tree, and by association, secured by
-the Solana ledger.
+the Miraland ledger.
 
 Allowing us to cryptographically verify that our original metadata has not
 changed (unless we want it to).
@@ -367,7 +367,7 @@ changed (unless we want it to).
 
 Learn more about how State Compression uses
 [concurrent merkle trees](../../learn/state-compression.md#what-is-a-concurrent-merkle-tree)
-to cryptographically secure off-chain data using the Solana ledger.
+to cryptographically secure off-chain data using the Miraland ledger.
 
 :::
 
@@ -438,7 +438,7 @@ Using the `createMintToCollectionV1Instruction` helper function provided in the
 Bubblegum SDK, we can craft the instruction to actually mint our compressed NFT
 directly into our collection.
 
-If you have minted traditional NFTs on Solana, this will look fairly similar. We
+If you have minted traditional NFTs on Miraland, this will look fairly similar. We
 are creating a new instruction, giving several of the account addresses you
 might expect (e.g. the `payer`, `tokenMetadataProgram`, and various collection
 addresses), and then some tree specific addresses.
@@ -446,7 +446,7 @@ addresses), and then some tree specific addresses.
 The addresses to pay special attention to are:
 
 - `leafOwner` - this will be the owner of the compressed NFT. You can either
-  mint it your self (i.e. the `payer`), or airdrop to any other Solana address
+  mint it your self (i.e. the `payer`), or airdrop to any other Miraland address
 - `leafDelegate` - this is the delegated authority of this specific NFT we are
   about to mint. If you do not want to have a delegated authority for the NFT we
   are about to mint, then this value should be set to the same address of
@@ -500,7 +500,7 @@ standard to pass in when minting uncompressed NFTs.
 #### Sign and send the transaction
 
 Once our compressed mint instruction has been created, we can add it to a
-transaction and send it to the Solana network:
+transaction and send it to the Miraland network:
 
 ```ts
 const tx = new Transaction().add(compressedMintIx);
@@ -541,7 +541,7 @@ asset `id` value differs slightly between traditional NFTs and compressed NFTs:
   Account on-chain that stores the metadata for the asset.
 - for compressed NFTs: this is the `id` of the compressed NFT within the tree
   and is **NOT** an actual on-chain Account address. While a compressed NFT's
-  `assetId` resembles a traditional Solana Account address, it is not.
+  `assetId` resembles a traditional Miraland Account address, it is not.
 
 :::
 
@@ -645,7 +645,7 @@ These proof hashes themselves, and the specific asset's leaf data, are hashed
 together in a deterministic way to compute the "root hash". Therefore, allowing
 for cryptographic validation of an asset within the merkle tree.
 
-**NOTE:** While each of these hash values resemble a Solana Account's
+**NOTE:** While each of these hash values resemble a Miraland Account's
 [address/public key](../../terminology.md#public-key-pubkey), they are not
 addresses.
 
@@ -655,7 +655,7 @@ Transferring ownership of a compressed NFT happens in 5 broad steps:
 
 1. get the NFT's "asset" data (from the indexer)
 2. get the NFT's proof (from the indexer)
-3. get the Merkle tree account (directly from the Solana blockchain)
+3. get the Merkle tree account (directly from the Miraland blockchain)
 4. prepare the asset proof
 5. build and send the transfer instruction
 
@@ -742,8 +742,8 @@ we need to know the tree's `canopyDepth`.
 
 Once we have our compressed NFT's tree address (the `tree_id` value from
 `getAssetProof`), we can use the
-[`ConcurrentMerkleTreeAccount`](https://solana-labs.github.io/solana-program-library/account-compression/sdk/docs/classes/index.ConcurrentMerkleTreeAccount.html)
-class, from the `@solana/spl-account-compression` SDK:
+[`ConcurrentMerkleTreeAccount`](https://miraland-labs.github.io/solarti-program-library/account-compression/sdk/docs/classes/index.ConcurrentMerkleTreeAccount.html)
+class, from the `@miraland/spl-account-compression` SDK:
 
 ```ts
 // retrieve the merkle tree's account from the blockchain
@@ -836,7 +836,7 @@ helper function.
 
 Since each of these hash values resemble and are formatted similar to
 PublicKeys, we can use the
-[`PublicKey`](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html)
+[`PublicKey`](https://miraland-labs.github.io/miraland-web3.js/classes/PublicKey.html)
 class in web3.js to convert them into a accepted byte array format.
 
 #### Send the transaction
@@ -858,5 +858,5 @@ compressed NFT.
 
 ## Example code repository
 
-You can find an example code repository for this developer guide on the Solana
-Developers GitHub: https://github.com/solana-developers/compressed-nfts
+You can find an example code repository for this developer guide on the Miraland
+Developers GitHub: https://github.com/miraland-developers/compressed-nfts

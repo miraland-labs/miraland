@@ -2,13 +2,13 @@ use {
     bincode::{deserialize, serialize},
     crossbeam_channel::{unbounded, Receiver, Sender},
     futures::{future, prelude::stream::StreamExt},
-    solana_accounts_db::transaction_results::TransactionExecutionResult,
-    solana_banks_interface::{
+    miraland_accounts_db::transaction_results::TransactionExecutionResult,
+    miraland_banks_interface::{
         Banks, BanksRequest, BanksResponse, BanksTransactionResultWithMetadata,
         BanksTransactionResultWithSimulation, TransactionConfirmationStatus, TransactionMetadata,
         TransactionSimulationDetails, TransactionStatus,
     },
-    solana_client::connection_cache::ConnectionCache,
+    miraland_client::connection_cache::ConnectionCache,
     solana_runtime::{
         bank::{Bank, TransactionSimulationResult},
         bank_forks::BankForks,
@@ -26,7 +26,7 @@ use {
         signature::Signature,
         transaction::{self, MessageHash, SanitizedTransaction, VersionedTransaction},
     },
-    solana_send_transaction_service::{
+    miraland_send_transaction_service::{
         send_transaction_service::{SendTransactionService, TransactionInfo},
         tpu_info::NullTpuInfo,
     },
@@ -117,7 +117,7 @@ impl BanksServer {
         }
         let server_bank_forks = bank_forks.clone();
         Builder::new()
-            .name("solBankForksCli".to_string())
+            .name("mlnBankForksCli".to_string())
             .spawn(move || Self::run(server_bank_forks, transaction_receiver))
             .unwrap();
         Self::new(

@@ -1,6 +1,6 @@
 use {
     crate::bench_tps_client::{BenchTpsClient, BenchTpsError, Result},
-    solana_client::thin_client::ThinClient,
+    miraland_client::thin_client::ThinClient,
     solana_sdk::{
         account::Account,
         client::{AsyncClient, Client, SyncClient},

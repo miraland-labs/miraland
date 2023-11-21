@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana secp256k1 system call
+ * @brief Miraland secp256k1 system call
  */
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

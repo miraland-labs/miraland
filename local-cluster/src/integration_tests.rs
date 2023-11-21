@@ -17,20 +17,20 @@ use {
         validator_configs::*,
     },
     log::*,
-    solana_accounts_db::accounts_db::create_accounts_run_and_snapshot_dirs,
-    solana_core::{
+    miraland_accounts_db::accounts_db::create_accounts_run_and_snapshot_dirs,
+    miraland_core::{
         consensus::{tower_storage::FileTowerStorage, Tower, SWITCH_FORK_THRESHOLD},
         validator::{is_snapshot_config_valid, ValidatorConfig},
     },
-    solana_gossip::gossip_service::discover_cluster,
-    solana_ledger::{
+    miraland_gossip::gossip_service::discover_cluster,
+    miraland_ledger::{
         ancestor_iterator::AncestorIterator,
         blockstore::{Blockstore, PurgeType},
         blockstore_meta::DuplicateSlotProof,
         blockstore_options::{AccessType, BlockstoreOptions},
         leader_schedule::{FixedSchedule, LeaderSchedule},
     },
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_runtime::{
         snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL, snapshot_config::SnapshotConfig,
     },
@@ -38,12 +38,12 @@ use {
         account::AccountSharedData,
         clock::{self, Slot, DEFAULT_MS_PER_SLOT, DEFAULT_TICKS_PER_SLOT},
         hash::Hash,
-        native_token::LAMPORTS_PER_SOL,
+        native_token::LAMPORTS_PER_MLN,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_turbine::broadcast_stage::BroadcastStageType,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_turbine::broadcast_stage::BroadcastStageType,
     static_assertions,
     std::{
         collections::HashSet,
@@ -61,10 +61,10 @@ use {
 };
 
 pub const RUST_LOG_FILTER: &str =
-    "error,solana_core::replay_stage=warn,solana_local_cluster=info,local_cluster=info";
+    "error,miraland_core::replay_stage=warn,miraland_local_cluster=info,local_cluster=info";
 
-pub const DEFAULT_CLUSTER_LAMPORTS: u64 = 10_000_000 * LAMPORTS_PER_SOL;
-pub const DEFAULT_NODE_STAKE: u64 = 10 * LAMPORTS_PER_SOL;
+pub const DEFAULT_CLUSTER_LAMPORTS: u64 = 10_000_000 * LAMPORTS_PER_MLN;
+pub const DEFAULT_NODE_STAKE: u64 = 10 * LAMPORTS_PER_MLN;
 
 pub fn last_vote_in_tower(tower_path: &Path, node_pubkey: &Pubkey) -> Option<(Slot, Hash)> {
     restore_tower(tower_path, node_pubkey).map(|tower| tower.last_voted_slot_hash().unwrap())
@@ -312,7 +312,7 @@ pub fn run_cluster_partition<C>(
     ticks_per_slot: Option<u64>,
     additional_accounts: Vec<(Pubkey, AccountSharedData)>,
 ) {
-    solana_logger::setup_with_default(RUST_LOG_FILTER);
+    miraland_logger::setup_with_default(RUST_LOG_FILTER);
     info!("PARTITION_TEST!");
     let num_nodes = partitions.len();
     let node_stakes: Vec<_> = partitions

@@ -34,7 +34,7 @@ mod transaction_address_lookup_table_scanner;
 pub mod use_snapshot_archives_at_startup;
 
 #[macro_use]
-extern crate solana_metrics;
+extern crate miraland_metrics;
 
 #[macro_use]
 extern crate log;
@@ -43,4 +43,4 @@ extern crate log;
 extern crate lazy_static;
 
 #[macro_use]
-extern crate solana_frozen_abi_macro;
+extern crate miraland_frozen_abi_macro;

@@ -1,7 +1,7 @@
 use {
     crate::bench_tps_client::{BenchTpsClient, BenchTpsError, Result},
-    solana_client::tpu_client::TpuClient,
-    solana_connection_cache::connection_cache::{
+    miraland_client::tpu_client::TpuClient,
+    miraland_connection_cache::connection_cache::{
         ConnectionManager, ConnectionPool, NewConnectionConfig,
     },
     solana_sdk::{

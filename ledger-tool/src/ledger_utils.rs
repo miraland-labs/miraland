@@ -3,13 +3,13 @@ use {
     clap::{value_t, value_t_or_exit, values_t_or_exit, ArgMatches},
     crossbeam_channel::unbounded,
     log::*,
-    solana_accounts_db::hardened_unpack::open_genesis_config,
-    solana_core::{
+    miraland_accounts_db::hardened_unpack::open_genesis_config,
+    miraland_core::{
         accounts_hash_verifier::AccountsHashVerifier, validator::BlockVerificationMethod,
     },
-    solana_geyser_plugin_manager::geyser_plugin_service::GeyserPluginService,
-    solana_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
-    solana_ledger::{
+    miraland_geyser_plugin_manager::geyser_plugin_service::GeyserPluginService,
+    miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
+    miraland_ledger::{
         bank_forks_utils,
         blockstore::{Blockstore, BlockstoreError},
         blockstore_options::{
@@ -20,8 +20,8 @@ use {
             self, BlockstoreProcessorError, ProcessOptions, TransactionStatusSender,
         },
     },
-    solana_measure::measure,
-    solana_rpc::transaction_status_service::TransactionStatusService,
+    miraland_measure::measure,
+    miraland_rpc::transaction_status_service::TransactionStatusService,
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService,
@@ -39,7 +39,7 @@ use {
         genesis_config::GenesisConfig, signature::Signer, signer::keypair::Keypair,
         timing::timestamp,
     },
-    solana_streamer::socket::SocketAddrSpace,
+    miraland_streamer::socket::SocketAddrSpace,
     std::{
         path::{Path, PathBuf},
         process::exit,
@@ -137,14 +137,14 @@ pub fn load_and_process_ledger(
     }
 
     let account_paths = if let Some(account_paths) = arg_matches.value_of("account_paths") {
-        // If this blockstore access is Primary, no other process (solana-validator) can hold
+        // If this blockstore access is Primary, no other process (miraland-validator) can hold
         // Primary access. So, allow a custom accounts path without worry of wiping the accounts
-        // of solana-validator.
+        // of miraland-validator.
         if !blockstore.is_primary_access() {
             // Attempt to open the Blockstore in Primary access; if successful, no other process
             // was holding Primary so allow things to proceed with custom accounts path. Release
-            // the Primary access instead of holding it to give priority to solana-validator over
-            // solana-ledger-tool should solana-validator start before we've finished.
+            // the Primary access instead of holding it to give priority to miraland-validator over
+            // miraland-ledger-tool should miraland-validator start before we've finished.
             info!(
                 "Checking if another process currently holding Primary access to {:?}",
                 blockstore.ledger_path()

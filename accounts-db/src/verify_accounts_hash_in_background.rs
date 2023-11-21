@@ -117,7 +117,7 @@ pub mod tests {
         let verify_ = Arc::clone(verify);
         verify.start(|| {
             Builder::new()
-                .name("solBgHashVerfy".to_string())
+                .name("mlnBgHashVerfy".to_string())
                 .spawn(move || {
                     // should have been marked not complete before thread started
                     assert!(!verify_.check_complete());
@@ -131,7 +131,7 @@ pub mod tests {
 
     #[test]
     fn test_real() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let verify = Arc::new(VerifyAccountsHashInBackground::default());
         start_thread_and_return(&verify, true, || {});
         verify.wait_for_complete();
@@ -149,7 +149,7 @@ pub mod tests {
 
     #[test]
     fn test_long_running() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let verify = Arc::new(VerifyAccountsHashInBackground::default());
         let finish = Arc::new(AtomicBool::default());
         let finish_ = finish.clone();

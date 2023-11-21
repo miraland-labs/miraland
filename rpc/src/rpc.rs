@@ -1,4 +1,4 @@
-//! The `rpc` module implements the Solana RPC interface.
+//! The `rpc` module implements the Miraland RPC interface.
 use {
     crate::{
         max_slots::MaxSlots, optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
@@ -9,30 +9,30 @@ use {
     crossbeam_channel::{unbounded, Receiver, Sender},
     jsonrpc_core::{futures::future, types::error, BoxFuture, Error, Metadata, Result},
     jsonrpc_derive::rpc,
-    solana_account_decoder::{
+    miraland_account_decoder::{
         parse_token::{is_known_spl_token_id, token_amount_to_ui_amount, UiTokenAmount},
         UiAccount, UiAccountEncoding, UiDataSliceConfig, MAX_BASE58_BYTES,
     },
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts::AccountAddressFilter,
         accounts_index::{AccountIndex, AccountSecondaryIndexes, IndexKey, ScanConfig},
         inline_spl_token::{SPL_TOKEN_ACCOUNT_MINT_OFFSET, SPL_TOKEN_ACCOUNT_OWNER_OFFSET},
         inline_spl_token_2022::{self, ACCOUNTTYPE_ACCOUNT},
     },
-    solana_client::connection_cache::{ConnectionCache, Protocol},
-    solana_entry::entry::Entry,
-    solana_faucet::faucet::request_airdrop_transaction,
-    solana_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
-    solana_ledger::{
+    miraland_client::connection_cache::{ConnectionCache, Protocol},
+    miraland_entry::entry::Entry,
+    miraland_faucet::faucet::request_airdrop_transaction,
+    miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
+    miraland_ledger::{
         blockstore::{Blockstore, SignatureInfosForAddress},
         blockstore_db::BlockstoreError,
         blockstore_meta::{PerfSample, PerfSampleV1, PerfSampleV2},
         get_tmp_ledger_path,
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_metrics::inc_new_counter_info,
-    solana_perf::packet::PACKET_DATA_SIZE,
-    solana_rpc_client_api::{
+    miraland_metrics::inc_new_counter_info,
+    miraland_perf::packet::PACKET_DATA_SIZE,
+    miraland_rpc_client_api::{
         config::*,
         custom_error::RpcCustomError,
         deprecated_config::*,
@@ -79,14 +79,14 @@ use {
             VersionedTransaction, MAX_TX_ACCOUNT_LOCKS,
         },
     },
-    solana_send_transaction_service::{
+    miraland_send_transaction_service::{
         send_transaction_service::{SendTransactionService, TransactionInfo},
         tpu_info::NullTpuInfo,
     },
     solana_stake_program,
     solana_storage_bigtable::Error as StorageError,
-    solana_streamer::socket::SocketAddrSpace,
-    solana_transaction_status::{
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_transaction_status::{
         BlockEncodingOptions, ConfirmedBlock, ConfirmedTransactionStatusWithSignature,
         ConfirmedTransactionWithStatusMeta, EncodedConfirmedTransactionWithStatusMeta, Reward,
         RewardType, TransactionBinaryEncoding, TransactionConfirmationStatus, TransactionStatus,
@@ -2034,7 +2034,7 @@ impl JsonRpcRequestProcessor {
         }
     }
 
-    /// Get an iterator of spl-token accounts by owner address
+    /// Get an iterator of solarti-token accounts by owner address
     fn get_filtered_spl_token_accounts_by_owner(
         &self,
         bank: &Bank,
@@ -2058,7 +2058,7 @@ impl JsonRpcRequestProcessor {
         if self
             .config
             .account_indexes
-            .contains(&AccountIndex::SplTokenOwner)
+            .contains(&AccountIndex::SolartiTokenOwner)
         {
             if !self.config.account_indexes.include_key(owner_key) {
                 return Err(RpcCustomError::KeyExcludedFromSecondaryIndex {
@@ -2067,7 +2067,7 @@ impl JsonRpcRequestProcessor {
             }
             Ok(bank
                 .get_filtered_indexed_accounts(
-                    &IndexKey::SplTokenOwner(*owner_key),
+                    &IndexKey::SolartiTokenOwner(*owner_key),
                     |account| {
                         account.owner() == program_id
                             && filters
@@ -2085,7 +2085,7 @@ impl JsonRpcRequestProcessor {
         }
     }
 
-    /// Get an iterator of spl-token accounts by mint address
+    /// Get an iterator of solarti-token accounts by mint address
     fn get_filtered_spl_token_accounts_by_mint(
         &self,
         bank: &Bank,
@@ -2108,7 +2108,7 @@ impl JsonRpcRequestProcessor {
         if self
             .config
             .account_indexes
-            .contains(&AccountIndex::SplTokenMint)
+            .contains(&AccountIndex::SolartiTokenMint)
         {
             if !self.config.account_indexes.include_key(mint_key) {
                 return Err(RpcCustomError::KeyExcludedFromSecondaryIndex {
@@ -2117,7 +2117,7 @@ impl JsonRpcRequestProcessor {
             }
             Ok(bank
                 .get_filtered_indexed_accounts(
-                    &IndexKey::SplTokenMint(*mint_key),
+                    &IndexKey::SolartiTokenMint(*mint_key),
                     |account| {
                         account.owner() == program_id
                             && filters
@@ -2322,7 +2322,7 @@ fn encode_account<T: ReadableAccount>(
     }
 }
 
-/// Analyze custom filters to determine if the result will be a subset of spl-token accounts by
+/// Analyze custom filters to determine if the result will be a subset of solarti-token accounts by
 /// owner.
 /// NOTE: `optimize_filters()` should almost always be called before using this method because of
 /// the strict match on `MemcmpEncodedBytes::Bytes`.
@@ -2380,7 +2380,7 @@ fn get_spl_token_owner_filter(program_id: &Pubkey, filters: &[RpcFilterType]) ->
     }
 }
 
-/// Analyze custom filters to determine if the result will be a subset of spl-token accounts by
+/// Analyze custom filters to determine if the result will be a subset of solarti-token accounts by
 /// mint.
 /// NOTE: `optimize_filters()` should almost always be called before using this method because of
 /// the strict match on `MemcmpEncodedBytes::Bytes`.
@@ -2545,7 +2545,7 @@ pub mod rpc_minimal {
         #[rpc(meta, name = "getVersion")]
         fn get_version(&self, meta: Self::Metadata) -> Result<RpcVersionInfo>;
 
-        // TODO: Refactor `solana-validator wait-for-restart-window` to not require this method, so
+        // TODO: Refactor `miraland-validator wait-for-restart-window` to not require this method, so
         //       it can be removed from rpc_minimal
         #[rpc(meta, name = "getVoteAccounts")]
         fn get_vote_accounts(
@@ -2554,7 +2554,7 @@ pub mod rpc_minimal {
             config: Option<RpcGetVoteAccountsConfig>,
         ) -> Result<RpcVoteAccountStatus>;
 
-        // TODO: Refactor `solana-validator wait-for-restart-window` to not require this method, so
+        // TODO: Refactor `miraland-validator wait-for-restart-window` to not require this method, so
         //       it can be removed from rpc_minimal
         #[rpc(meta, name = "getLeaderSchedule")]
         fn get_leader_schedule(
@@ -2673,14 +2673,14 @@ pub mod rpc_minimal {
 
         fn get_version(&self, _: Self::Metadata) -> Result<RpcVersionInfo> {
             debug!("get_version rpc request received");
-            let version = solana_version::Version::default();
+            let version = miraland_version::Version::default();
             Ok(RpcVersionInfo {
-                solana_core: version.to_string(),
+                miraland_core: version.to_string(),
                 feature_set: Some(version.feature_set),
             })
         }
 
-        // TODO: Refactor `solana-validator wait-for-restart-window` to not require this method, so
+        // TODO: Refactor `miraland-validator wait-for-restart-window` to not require this method, so
         //       it can be removed from rpc_minimal
         fn get_vote_accounts(
             &self,
@@ -2691,7 +2691,7 @@ pub mod rpc_minimal {
             meta.get_vote_accounts(config)
         }
 
-        // TODO: Refactor `solana-validator wait-for-restart-window` to not require this method, so
+        // TODO: Refactor `miraland-validator wait-for-restart-window` to not require this method, so
         //       it can be removed from rpc_minimal
         fn get_leader_schedule(
             &self,
@@ -2717,7 +2717,7 @@ pub mod rpc_minimal {
                 .get_epoch_leader_schedule(epoch)
                 .map(|leader_schedule| {
                     let mut schedule_by_identity =
-                        solana_ledger::leader_schedule_utils::leader_schedule_by_identity(
+                        miraland_ledger::leader_schedule_utils::leader_schedule_by_identity(
                             leader_schedule.get_slot_leaders().iter().enumerate(),
                         );
                     if let Some(identity) = config.identity {
@@ -2983,8 +2983,8 @@ pub mod rpc_accounts {
             config: Option<RpcEpochConfig>,
         ) -> Result<RpcStakeActivation>;
 
-        // SPL Token-specific RPC endpoints
-        // See https://github.com/solana-labs/solana-program-library/releases/tag/token-v2.0.0 for
+        // Solarti Token-specific RPC endpoints
+        // See https://github.com/solana-labs/solarti-program-library/releases/tag/token-v2.0.0 for
         // program details
 
         #[rpc(meta, name = "getTokenAccountBalance")]
@@ -3127,8 +3127,8 @@ pub mod rpc_accounts_scan {
             config: Option<RpcSupplyConfig>,
         ) -> Result<RpcResponse<RpcSupply>>;
 
-        // SPL Token-specific RPC endpoints
-        // See https://github.com/solana-labs/solana-program-library/releases/tag/token-v2.0.0 for
+        // Solarti Token-specific RPC endpoints
+        // See https://github.com/solana-labs/solarti-program-library/releases/tag/token-v2.0.0 for
         // program details
 
         #[rpc(meta, name = "getTokenLargestAccounts")]
@@ -4551,7 +4551,7 @@ pub fn create_test_transaction_entries(
         blockhash,
     );
     signatures.push(success_tx.signatures[0]);
-    let entry_1 = solana_entry::entry::next_entry(&blockhash, 1, vec![success_tx]);
+    let entry_1 = miraland_entry::entry::next_entry(&blockhash, 1, vec![success_tx]);
     // Failed transaction, InstructionError
     let ix_error_tx = solana_sdk::system_transaction::transfer(
         keypair2,
@@ -4560,7 +4560,7 @@ pub fn create_test_transaction_entries(
         blockhash,
     );
     signatures.push(ix_error_tx.signatures[0]);
-    let entry_2 = solana_entry::entry::next_entry(&entry_1.hash, 1, vec![ix_error_tx]);
+    let entry_2 = miraland_entry::entry::next_entry(&entry_1.hash, 1, vec![ix_error_tx]);
     (vec![entry_1, entry_2], signatures)
 }
 
@@ -4572,7 +4572,7 @@ pub fn populate_blockstore_for_tests(
 ) {
     let slot = bank.slot();
     let parent_slot = bank.parent_slot();
-    let shreds = solana_ledger::blockstore::entries_to_test_shreds(
+    let shreds = miraland_ledger::blockstore::entries_to_test_shreds(
         &entries,
         slot,
         parent_slot,
@@ -4599,11 +4599,11 @@ pub fn populate_blockstore_for_tests(
     // Check that process_entries successfully writes can_commit transactions statuses, and
     // that they are matched properly by get_rooted_block
     assert_eq!(
-        solana_ledger::blockstore_processor::process_entries_for_tests(
+        miraland_ledger::blockstore_processor::process_entries_for_tests(
             &BankWithScheduler::new_without_scheduler(bank),
             entries,
             Some(
-                &solana_ledger::blockstore_processor::TransactionStatusSender {
+                &miraland_ledger::blockstore_processor::TransactionStatusSender {
                     sender: transaction_status_sender,
                 },
             ),
@@ -4632,15 +4632,15 @@ pub mod tests {
         jsonrpc_core::{futures, ErrorCode, MetaIoHandler, Output, Response, Value},
         jsonrpc_core_client::transports::local,
         serde::de::DeserializeOwned,
-        solana_accounts_db::{inline_spl_token, inline_spl_token_2022},
-        solana_entry::entry::next_versioned_entry,
-        solana_gossip::socketaddr,
-        solana_ledger::{
+        miraland_accounts_db::{inline_spl_token, inline_spl_token_2022},
+        miraland_entry::entry::next_versioned_entry,
+        miraland_gossip::socketaddr,
+        miraland_ledger::{
             blockstore_meta::PerfSampleV2,
             blockstore_processor::fill_blockstore_slot_with_ticks,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
         },
-        solana_rpc_client_api::{
+        miraland_rpc_client_api::{
             custom_error::{
                 JSON_RPC_SERVER_ERROR_BLOCK_NOT_AVAILABLE,
                 JSON_RPC_SERVER_ERROR_TRANSACTION_HISTORY_NOT_AVAILABLE,
@@ -4677,7 +4677,7 @@ pub mod tests {
                 self, SimpleAddressLoader, Transaction, TransactionError, TransactionVersion,
             },
         },
-        solana_transaction_status::{
+        miraland_transaction_status::{
             EncodedConfirmedBlock, EncodedTransaction, EncodedTransactionWithStatusMeta,
             TransactionDetails,
         },
@@ -4691,7 +4691,7 @@ pub mod tests {
                 immutable_owner::ImmutableOwner, memo_transfer::MemoTransfer,
                 mint_close_authority::MintCloseAuthority, ExtensionType, StateWithExtensionsMut,
             },
-            solana_program::{program_option::COption, pubkey::Pubkey as SplTokenPubkey},
+            solana_program::{program_option::COption, pubkey::Pubkey as SolartiTokenPubkey},
             state::{AccountState as TokenAccountState, Mint},
         },
         std::{borrow::Cow, collections::HashMap, net::Ipv4Addr},
@@ -6667,9 +6667,9 @@ pub mod tests {
         let request = create_test_request("getVersion", None);
         let result: Value = parse_success_result(rpc.handle_request_sync(request));
         let expected = {
-            let version = solana_version::Version::default();
+            let version = miraland_version::Version::default();
             json!({
-                "solana-core": version.to_string(),
+                "miraland-core": version.to_string(),
                 "feature-set": version.feature_set,
             })
         };
@@ -7433,16 +7433,16 @@ pub mod tests {
 
     #[test]
     fn test_token_rpcs() {
-        for program_id in solana_account_decoder::parse_token::spl_token_ids() {
+        for program_id in miraland_account_decoder::parse_token::spl_token_ids() {
             let rpc = RpcHandler::start();
             let bank = rpc.working_bank();
             let RpcHandler { io, meta, .. } = rpc;
-            let mint = SplTokenPubkey::new_from_array([2; 32]);
-            let owner = SplTokenPubkey::new_from_array([3; 32]);
-            let delegate = SplTokenPubkey::new_from_array([4; 32]);
+            let mint = SolartiTokenPubkey::new_from_array([2; 32]);
+            let owner = SolartiTokenPubkey::new_from_array([3; 32]);
+            let delegate = SolartiTokenPubkey::new_from_array([4; 32]);
             let token_account_pubkey = solana_sdk::pubkey::new_rand();
             let token_with_different_mint_pubkey = solana_sdk::pubkey::new_rand();
-            let new_mint = SplTokenPubkey::new_from_array([5; 32]);
+            let new_mint = SolartiTokenPubkey::new_from_array([5; 32]);
             if program_id == inline_spl_token_2022::id() {
                 // Add the token account
                 let account_base = TokenAccount {
@@ -7928,14 +7928,14 @@ pub mod tests {
 
     #[test]
     fn test_token_parsing() {
-        for program_id in solana_account_decoder::parse_token::spl_token_ids() {
+        for program_id in miraland_account_decoder::parse_token::spl_token_ids() {
             let rpc = RpcHandler::start();
             let bank = rpc.working_bank();
             let RpcHandler { io, meta, .. } = rpc;
 
-            let mint = SplTokenPubkey::new_from_array([2; 32]);
-            let owner = SplTokenPubkey::new_from_array([3; 32]);
-            let delegate = SplTokenPubkey::new_from_array([4; 32]);
+            let mint = SolartiTokenPubkey::new_from_array([2; 32]);
+            let owner = SolartiTokenPubkey::new_from_array([3; 32]);
+            let delegate = SolartiTokenPubkey::new_from_array([4; 32]);
             let token_account_pubkey = solana_sdk::pubkey::new_rand();
             let (program_name, account_size, mint_size) = if program_id
                 == inline_spl_token_2022::id()
@@ -8008,7 +8008,7 @@ pub mod tests {
                     ..Account::default()
                 });
                 bank.store_account(&Pubkey::from_str(&mint.to_string()).unwrap(), &mint_account);
-                ("spl-token-2022", account_size, mint_size)
+                ("solarti-token-2022", account_size, mint_size)
             } else {
                 let account_size = TokenAccount::get_packed_len();
                 let mut account_data = vec![0; account_size];
@@ -8049,7 +8049,7 @@ pub mod tests {
                     ..Account::default()
                 });
                 bank.store_account(&Pubkey::from_str(&mint.to_string()).unwrap(), &mint_account);
-                ("spl-token", account_size, mint_size)
+                ("solarti-token", account_size, mint_size)
             };
 
             let req = format!(
@@ -8147,7 +8147,7 @@ pub mod tests {
         let owner = Pubkey::new_unique();
         assert_eq!(
             get_spl_token_owner_filter(
-                &Pubkey::from_str("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA").unwrap(),
+                &Pubkey::from_str("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM").unwrap(),
                 &[
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(32, owner.to_bytes().to_vec())),
                     RpcFilterType::DataSize(165)
@@ -8160,7 +8160,7 @@ pub mod tests {
         // Filtering on token-2022 account type
         assert_eq!(
             get_spl_token_owner_filter(
-                &Pubkey::from_str("TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb").unwrap(),
+                &Pubkey::from_str("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89").unwrap(),
                 &[
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(32, owner.to_bytes().to_vec())),
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(165, vec![ACCOUNTTYPE_ACCOUNT])),
@@ -8173,7 +8173,7 @@ pub mod tests {
         // Filtering on token account state
         assert_eq!(
             get_spl_token_owner_filter(
-                &Pubkey::from_str("TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb").unwrap(),
+                &Pubkey::from_str("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89").unwrap(),
                 &[
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(32, owner.to_bytes().to_vec())),
                     RpcFilterType::TokenAccountState,
@@ -8185,7 +8185,7 @@ pub mod tests {
 
         // Can't filter on account type for token-v3
         assert!(get_spl_token_owner_filter(
-            &Pubkey::from_str("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA").unwrap(),
+            &Pubkey::from_str("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM").unwrap(),
             &[
                 RpcFilterType::Memcmp(Memcmp::new_raw_bytes(32, owner.to_bytes().to_vec())),
                 RpcFilterType::Memcmp(Memcmp::new_raw_bytes(165, vec![ACCOUNTTYPE_ACCOUNT])),
@@ -8195,7 +8195,7 @@ pub mod tests {
 
         // Filtering on mint instead of owner
         assert!(get_spl_token_owner_filter(
-            &Pubkey::from_str("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA").unwrap(),
+            &Pubkey::from_str("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM").unwrap(),
             &[
                 RpcFilterType::Memcmp(Memcmp::new_raw_bytes(0, owner.to_bytes().to_vec())),
                 RpcFilterType::DataSize(165)
@@ -8228,7 +8228,7 @@ pub mod tests {
         let mint = Pubkey::new_unique();
         assert_eq!(
             get_spl_token_mint_filter(
-                &Pubkey::from_str("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA").unwrap(),
+                &Pubkey::from_str("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM").unwrap(),
                 &[
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(0, mint.to_bytes().to_vec())),
                     RpcFilterType::DataSize(165)
@@ -8241,7 +8241,7 @@ pub mod tests {
         // Filtering on token-2022 account type
         assert_eq!(
             get_spl_token_mint_filter(
-                &Pubkey::from_str("TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb").unwrap(),
+                &Pubkey::from_str("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89").unwrap(),
                 &[
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(0, mint.to_bytes().to_vec())),
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(165, vec![ACCOUNTTYPE_ACCOUNT])),
@@ -8254,7 +8254,7 @@ pub mod tests {
         // Filtering on token account state
         assert_eq!(
             get_spl_token_mint_filter(
-                &Pubkey::from_str("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA").unwrap(),
+                &Pubkey::from_str("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM").unwrap(),
                 &[
                     RpcFilterType::Memcmp(Memcmp::new_raw_bytes(0, mint.to_bytes().to_vec())),
                     RpcFilterType::TokenAccountState,
@@ -8266,7 +8266,7 @@ pub mod tests {
 
         // Can't filter on account type for token-v3
         assert!(get_spl_token_mint_filter(
-            &Pubkey::from_str("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA").unwrap(),
+            &Pubkey::from_str("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM").unwrap(),
             &[
                 RpcFilterType::Memcmp(Memcmp::new_raw_bytes(0, mint.to_bytes().to_vec())),
                 RpcFilterType::Memcmp(Memcmp::new_raw_bytes(165, vec![ACCOUNTTYPE_ACCOUNT])),
@@ -8276,7 +8276,7 @@ pub mod tests {
 
         // Filtering on owner instead of mint
         assert!(get_spl_token_mint_filter(
-            &Pubkey::from_str("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA").unwrap(),
+            &Pubkey::from_str("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM").unwrap(),
             &[
                 RpcFilterType::Memcmp(Memcmp::new_raw_bytes(32, mint.to_bytes().to_vec())),
                 RpcFilterType::DataSize(165)

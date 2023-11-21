@@ -7,15 +7,15 @@ use {
         iter::IndexedParallelIterator,
         prelude::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
     },
-    solana_core::banking_stage::{
+    miraland_core::banking_stage::{
         committer::Committer, consumer::Consumer, qos_service::QosService,
     },
-    solana_entry::entry::Entry,
-    solana_ledger::{
+    miraland_entry::entry::Entry,
+    miraland_ledger::{
         blockstore::Blockstore,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
     },
-    solana_poh::{
+    miraland_poh::{
         poh_recorder::{create_test_recorder, PohRecorder},
         poh_service::PohService,
     },

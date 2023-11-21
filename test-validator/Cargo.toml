@@ -1,6 +1,6 @@
 [package]
-name = "solana-test-validator"
-description = "Blockchain, Rebuilt for Scale"
+name = "miraland-test-validator"
+description = "Blockchain for community beyond the horizon"
 readme = "../README.md"
 version = { workspace = true }
 authors = { workspace = true }
@@ -16,23 +16,23 @@ crossbeam-channel = { workspace = true }
 log = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-cli-output = { workspace = true }
-solana-client = { workspace = true }
-solana-core = { workspace = true }
-solana-geyser-plugin-manager = { workspace = true }
-solana-gossip = { workspace = true }
-solana-ledger = { workspace = true }
-solana-logger = { workspace = true }
-solana-net-utils = { workspace = true }
-solana-program-runtime = { workspace = true }
-solana-program-test = { workspace = true }
-solana-rpc = { workspace = true }
-solana-rpc-client = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-streamer = { workspace = true }
-solana-tpu-client = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-cli-output = { workspace = true }
+miraland-client = { workspace = true }
+miraland-core = { workspace = true }
+miraland-geyser-plugin-manager = { workspace = true }
+miraland-gossip = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-net-utils = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-program-test = { workspace = true }
+miraland-rpc = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-streamer = { workspace = true }
+miraland-tpu-client = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [package.metadata.docs.rs]

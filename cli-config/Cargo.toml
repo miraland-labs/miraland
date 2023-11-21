@@ -1,7 +1,7 @@
 [package]
-name = "solana-cli-config"
-description = "Blockchain, Rebuilt for Scale"
-documentation = "https://docs.rs/solana-cli-config"
+name = "miraland-cli-config"
+description = "Blockchain for community beyond the horizon"
+documentation = "https://docs.rs/miraland-cli-config"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -15,8 +15,8 @@ lazy_static = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_yaml = { workspace = true }
-solana-clap-utils = { workspace = true }
-solana-sdk = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-sdk = { workspace = true }
 url = { workspace = true }
 
 [dev-dependencies]

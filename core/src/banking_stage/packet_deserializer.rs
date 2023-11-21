@@ -7,7 +7,7 @@ use {
         sigverify::SigverifyTracerPacketStats,
     },
     crossbeam_channel::RecvTimeoutError,
-    solana_perf::packet::PacketBatch,
+    miraland_perf::packet::PacketBatch,
     solana_runtime::bank_forks::BankForks,
     std::{
         sync::{Arc, RwLock},
@@ -173,7 +173,7 @@ impl PacketDeserializer {
 mod tests {
     use {
         super::*,
-        solana_perf::packet::to_packet_batches,
+        miraland_perf::packet::to_packet_batches,
         solana_sdk::{
             hash::Hash, pubkey::Pubkey, signature::Keypair, system_transaction,
             transaction::Transaction,

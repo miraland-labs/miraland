@@ -1,7 +1,7 @@
 [package]
-name = "solana-geyser-plugin-manager"
-description = "The Solana Geyser plugin manager."
-documentation = "https://docs.rs/solana-geyser-plugin-manager"
+name = "miraland-geyser-plugin-manager"
+description = "The Miraland Geyser plugin manager."
+documentation = "https://docs.rs/miraland-geyser-plugin-manager"
 version = { workspace = true }
 authors = { workspace = true }
 repository = { workspace = true }
@@ -18,16 +18,16 @@ jsonrpc-server-utils = { workspace = true }
 libloading = { workspace = true }
 log = { workspace = true }
 serde_json = { workspace = true }
-solana-accounts-db = { workspace = true }
-solana-entry = { workspace = true }
-solana-geyser-plugin-interface = { workspace = true }
-solana-ledger = { workspace = true }
-solana-measure = { workspace = true }
-solana-metrics = { workspace = true }
-solana-rpc = { workspace = true }
-solana-runtime = { workspace = true }
-solana-sdk = { workspace = true }
-solana-transaction-status = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-entry = { workspace = true }
+miraland-geyser-plugin-interface = { workspace = true }
+miraland-ledger = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-rpc = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-transaction-status = { workspace = true }
 thiserror = { workspace = true }
 
 [package.metadata.docs.rs]

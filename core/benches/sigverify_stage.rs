@@ -1,7 +1,7 @@
 #![feature(test)]
 #![allow(clippy::arithmetic_side_effects)]
 
-extern crate solana_core;
+extern crate miraland_core;
 extern crate test;
 
 use {
@@ -11,13 +11,13 @@ use {
         distributions::{Distribution, Uniform},
         thread_rng, Rng,
     },
-    solana_core::{
+    miraland_core::{
         banking_trace::BankingTracer,
         sigverify::TransactionSigVerifier,
         sigverify_stage::{SigVerifier, SigVerifyStage},
     },
-    solana_measure::measure::Measure,
-    solana_perf::{
+    miraland_measure::measure::Measure,
+    miraland_perf::{
         packet::{to_packet_batches, PacketBatch},
         test_tx::test_tx,
     },
@@ -33,7 +33,7 @@ use {
 };
 
 fn run_bench_packet_discard(num_ips: usize, bencher: &mut Bencher) {
-    solana_logger::setup();
+    miraland_logger::setup();
     let len = 30 * 1000;
     let chunk_size = 1024;
     let tx = test_tx();
@@ -155,7 +155,7 @@ fn bench_sigverify_stage_without_same_tx(bencher: &mut Bencher) {
 }
 
 fn bench_sigverify_stage(bencher: &mut Bencher, use_same_tx: bool) {
-    solana_logger::setup();
+    miraland_logger::setup();
     trace!("start");
     let (packet_s, packet_r) = unbounded();
     let (verified_s, verified_r) = BankingTracer::channel_for_test();

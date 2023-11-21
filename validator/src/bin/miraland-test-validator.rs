@@ -3,32 +3,32 @@ use {
     crossbeam_channel::unbounded,
     itertools::Itertools,
     log::*,
-    solana_accounts_db::accounts_index::{AccountIndex, AccountSecondaryIndexes},
-    solana_clap_utils::{
+    miraland_accounts_db::accounts_index::{AccountIndex, AccountSecondaryIndexes},
+    miraland_clap_utils::{
         input_parsers::{pubkey_of, pubkeys_of, value_of},
         input_validators::normalize_to_url_if_moniker,
     },
-    solana_core::consensus::tower_storage::FileTowerStorage,
-    solana_faucet::faucet::run_local_faucet_with_port,
-    solana_rpc::{
+    miraland_core::consensus::tower_storage::FileTowerStorage,
+    miraland_faucet::faucet::run_local_faucet_with_port,
+    miraland_rpc::{
         rpc::{JsonRpcConfig, RpcBigtableConfig},
         rpc_pubsub_service::PubSubConfig,
     },
-    solana_rpc_client::rpc_client::RpcClient,
+    miraland_rpc_client::rpc_client::RpcClient,
     solana_sdk::{
         account::AccountSharedData,
         clock::Slot,
         epoch_schedule::EpochSchedule,
         feature_set,
-        native_token::sol_to_lamports,
+        native_token::mln_to_lamports,
         pubkey::Pubkey,
         rent::Rent,
         signature::{read_keypair_file, write_keypair_file, Keypair, Signer},
         system_program,
     },
-    solana_streamer::socket::SocketAddrSpace,
-    solana_test_validator::*,
-    solana_validator::{
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::*,
+    miraland_validator::{
         admin_rpc_service, cli, dashboard::Dashboard, ledger_lockfile, lock_ledger,
         println_name_value, redirect_stderr_to_file,
     },
@@ -52,7 +52,7 @@ enum Output {
 
 fn main() {
     let default_args = cli::DefaultTestArgs::new();
-    let version = solana_version::version!();
+    let version = miraland_version::version!();
     let matches = cli::test_app(version, &default_args).get_matches();
 
     let output = if matches.is_present("quiet") {
@@ -71,8 +71,8 @@ fn main() {
         .unwrap_or_default()
         .map(|value| match value {
             "program-id" => AccountIndex::ProgramId,
-            "spl-token-mint" => AccountIndex::SplTokenMint,
-            "spl-token-owner" => AccountIndex::SplTokenOwner,
+            "solarti-token-mint" => AccountIndex::SolartiTokenMint,
+            "solarti-token-owner" => AccountIndex::SolartiTokenOwner,
             _ => unreachable!(),
         })
         .collect();
@@ -129,16 +129,16 @@ fn main() {
     };
     let _logger_thread = redirect_stderr_to_file(logfile);
 
-    info!("{} {}", crate_name!(), solana_version::version!());
+    info!("{} {}", crate_name!(), miraland_version::version!());
     info!("Starting validator with: {:#?}", std::env::args_os());
-    solana_core::validator::report_target_features();
+    miraland_core::validator::report_target_features();
 
     // TODO: Ideally test-validator should *only* allow private addresses.
     let socket_addr_space = SocketAddrSpace::new(/*allow_private_addr=*/ true);
     let cli_config = if let Some(config_file) = matches.value_of("config_file") {
-        solana_cli_config::Config::load(config_file).unwrap_or_default()
+        miraland_cli_config::Config::load(config_file).unwrap_or_default()
     } else {
-        solana_cli_config::Config::default()
+        miraland_cli_config::Config::default()
     };
 
     let cluster_rpc_client = value_t!(matches, "json_rpc_url", String)
@@ -160,20 +160,20 @@ fn main() {
     let ticks_per_slot = value_t!(matches, "ticks_per_slot", u64).ok();
     let slots_per_epoch = value_t!(matches, "slots_per_epoch", Slot).ok();
     let gossip_host = matches.value_of("gossip_host").map(|gossip_host| {
-        solana_net_utils::parse_host(gossip_host).unwrap_or_else(|err| {
+        miraland_net_utils::parse_host(gossip_host).unwrap_or_else(|err| {
             eprintln!("Failed to parse --gossip-host: {err}");
             exit(1);
         })
     });
     let gossip_port = value_t!(matches, "gossip_port", u16).ok();
     let dynamic_port_range = matches.value_of("dynamic_port_range").map(|port_range| {
-        solana_net_utils::parse_port_range(port_range).unwrap_or_else(|| {
+        miraland_net_utils::parse_port_range(port_range).unwrap_or_else(|| {
             eprintln!("Failed to parse --dynamic-port-range");
             exit(1);
         })
     });
     let bind_address = matches.value_of("bind_address").map(|bind_address| {
-        solana_net_utils::parse_host(bind_address).unwrap_or_else(|err| {
+        miraland_net_utils::parse_host(bind_address).unwrap_or_else(|err| {
             eprintln!("Failed to parse --bind-address: {err}");
             exit(1);
         })
@@ -301,7 +301,7 @@ fn main() {
         None
     };
 
-    let faucet_lamports = sol_to_lamports(value_of(&matches, "faucet_sol").unwrap());
+    let faucet_lamports = mln_to_lamports(value_of(&matches, "faucet_mln").unwrap());
     let faucet_keypair_file = ledger_path.join("faucet-keypair.json");
     if !faucet_keypair_file.exists() {
         write_keypair_file(&Keypair::new(), faucet_keypair_file.to_str().unwrap()).unwrap_or_else(
@@ -330,10 +330,10 @@ fn main() {
     let faucet_time_slice_secs = value_t_or_exit!(matches, "faucet_time_slice_secs", u64);
     let faucet_per_time_cap = value_t!(matches, "faucet_per_time_sol_cap", f64)
         .ok()
-        .map(sol_to_lamports);
+        .map(mln_to_lamports);
     let faucet_per_request_cap = value_t!(matches, "faucet_per_request_sol_cap", f64)
         .ok()
-        .map(sol_to_lamports);
+        .map(mln_to_lamports);
 
     let (sender, receiver) = unbounded();
     run_local_faucet_with_port(
@@ -361,7 +361,7 @@ fn main() {
             ("mint_address", "--mint"),
             ("ticks_per_slot", "--ticks-per-slot"),
             ("slots_per_epoch", "--slots-per-epoch"),
-            ("faucet_sol", "--faucet-sol"),
+            ("faucet_mln", "--faucet-mln"),
             ("deactivate_feature", "--deactivate-feature"),
         ] {
             if matches.is_present(name) {
@@ -371,7 +371,7 @@ fn main() {
     } else if random_mint {
         println_name_value(
             "\nNotice!",
-            "No wallet available. `solana airdrop` localnet SOL after creating one\n",
+            "No wallet available. `miraland airdrop` localnet MLN after creating one\n",
         );
     }
 

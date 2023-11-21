@@ -1,7 +1,7 @@
 [package]
-name = "solana-rayon-threadlimit"
-description = "solana-rayon-threadlimit"
-documentation = "https://docs.rs/solana-rayon-threadlimit"
+name = "miraland-rayon-threadlimit"
+description = "miraland-rayon-threadlimit"
+documentation = "https://docs.rs/miraland-rayon-threadlimit"
 readme = "../README.md"
 version = { workspace = true }
 authors = { workspace = true }

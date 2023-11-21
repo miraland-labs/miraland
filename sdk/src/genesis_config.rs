@@ -10,7 +10,7 @@ use {
         fee_calculator::FeeRateGovernor,
         hash::{hash, Hash},
         inflation::Inflation,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
         poh_config::PohConfig,
         pubkey::Pubkey,
         rent::Rent,
@@ -99,7 +99,7 @@ pub struct GenesisConfig {
     /// network speed configuration
     pub poh_config: PohConfig,
     /// this field exists only to ensure that the binary layout of GenesisConfig remains compatible
-    /// with the Solana v0.23 release line
+    /// with the Miraland v0.23 release line
     pub __backwards_compat_with_v0_23: u64,
     /// transaction fee config
     pub fee_rate_governor: FeeRateGovernor,
@@ -269,7 +269,7 @@ impl fmt::Display for GenesisConfig {
              {:?}\n\
              {:?}\n\
              {:?}\n\
-             Capitalization: {} SOL in {} accounts\n\
+             Capitalization: {} MLN in {} accounts\n\
              Native instruction processors: {:#?}\n\
              Rewards pool: {:#?}\n\
              ",
@@ -292,7 +292,7 @@ impl fmt::Display for GenesisConfig {
             self.inflation,
             self.rent,
             self.fee_rate_governor,
-            lamports_to_sol(
+            lamports_to_mln(
                 self.accounts
                     .iter()
                     .map(|(pubkey, account)| {

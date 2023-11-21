@@ -12,14 +12,14 @@ use {
     bytes::Bytes,
     crossbeam_channel::{unbounded, Receiver, RecvError, RecvTimeoutError, Sender},
     itertools::{Either, Itertools},
-    solana_gossip::{
+    miraland_gossip::{
         cluster_info::{ClusterInfo, ClusterInfoError},
         contact_info::Protocol,
     },
-    solana_ledger::{blockstore::Blockstore, shred::Shred},
-    solana_measure::measure::Measure,
-    solana_metrics::{inc_new_counter_error, inc_new_counter_info},
-    solana_poh::poh_recorder::WorkingBankEntry,
+    miraland_ledger::{blockstore::Blockstore, shred::Shred},
+    miraland_measure::measure::Measure,
+    miraland_metrics::{inc_new_counter_error, inc_new_counter_info},
+    miraland_poh::poh_recorder::WorkingBankEntry,
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         clock::Slot,
@@ -27,7 +27,7 @@ use {
         signature::Keypair,
         timing::{timestamp, AtomicInterval},
     },
-    solana_streamer::{
+    miraland_streamer::{
         sendmmsg::{batch_send, SendPktsError},
         socket::SocketAddrSpace,
     },
@@ -63,9 +63,9 @@ pub(crate) type TransmitReceiver = Receiver<(Arc<Vec<Shred>>, Option<BroadcastSh
 #[derive(Debug, Error)]
 pub enum Error {
     #[error(transparent)]
-    Blockstore(#[from] solana_ledger::blockstore::BlockstoreError),
+    Blockstore(#[from] miraland_ledger::blockstore::BlockstoreError),
     #[error(transparent)]
-    ClusterInfo(#[from] solana_gossip::cluster_info::ClusterInfoError),
+    ClusterInfo(#[from] miraland_gossip::cluster_info::ClusterInfoError),
     #[error(transparent)]
     Io(#[from] std::io::Error),
     #[error(transparent)]
@@ -282,7 +282,7 @@ impl BroadcastStage {
             let blockstore = blockstore.clone();
             let cluster_info = cluster_info.clone();
             Builder::new()
-                .name("solBroadcast".to_string())
+                .name("mlnBroadcast".to_string())
                 .spawn(move || {
                     let _finalizer = Finalizer::new(exit);
                     Self::run(
@@ -317,7 +317,7 @@ impl BroadcastStage {
                 }
             };
             Builder::new()
-                .name("solBroadcastTx".to_string())
+                .name("mlnBroadcastTx".to_string())
                 .spawn(run_transmit)
                 .unwrap()
         }));
@@ -334,14 +334,14 @@ impl BroadcastStage {
                     }
                 };
                 Builder::new()
-                    .name("solBroadcastRec".to_string())
+                    .name("mlnBroadcastRec".to_string())
                     .spawn(run_record)
                     .unwrap()
             })
             .take(NUM_INSERT_THREADS),
         );
         let retransmit_thread = Builder::new()
-            .name("solBroadcastRtx".to_string())
+            .name("mlnBroadcastRtx".to_string())
             .spawn(move || loop {
                 if let Some(res) = Self::handle_error(
                     Self::check_retransmit_signals(
@@ -503,9 +503,9 @@ pub mod test {
     use {
         super::*,
         crossbeam_channel::unbounded,
-        solana_entry::entry::create_ticks,
-        solana_gossip::cluster_info::{ClusterInfo, Node},
-        solana_ledger::{
+        miraland_entry::entry::create_ticks,
+        miraland_gossip::cluster_info::{ClusterInfo, Node},
+        miraland_ledger::{
             blockstore::Blockstore,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             get_tmp_ledger_path_auto_delete,
@@ -696,7 +696,7 @@ pub mod test {
 
     #[test]
     fn test_broadcast_ledger() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let ledger_path = get_tmp_ledger_path_auto_delete!();
 
         // Create the leader scheduler

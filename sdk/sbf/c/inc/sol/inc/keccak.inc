@@ -1,9 +1,9 @@
 #pragma once
 /**
- * @brief Solana keccak system call
+ * @brief Miraland keccak system call
 **/
 
-#include <sol/types.h>
+#include <mln/types.h>
 
 #ifdef __cplusplus
 extern "C" {

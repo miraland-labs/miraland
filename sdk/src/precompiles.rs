@@ -1,4 +1,4 @@
-//! Solana precompiled programs.
+//! Miraland precompiled programs.
 
 #![cfg(feature = "full")]
 

@@ -1,4 +1,4 @@
-//! The `rpc_service` module implements the Solana JSON RPC service.
+//! The `rpc_service` module implements the Miraland JSON RPC service.
 
 use {
     crate::{
@@ -19,16 +19,16 @@ use {
         RequestMiddlewareAction, ServerBuilder,
     },
     regex::Regex,
-    solana_client::connection_cache::ConnectionCache,
-    solana_gossip::cluster_info::ClusterInfo,
-    solana_ledger::{
+    miraland_client::connection_cache::ConnectionCache,
+    miraland_gossip::cluster_info::ClusterInfo,
+    miraland_ledger::{
         bigtable_upload::ConfirmedBlockUploadConfig,
         bigtable_upload_service::BigTableUploadService, blockstore::Blockstore,
         leader_schedule_cache::LeaderScheduleCache,
     },
-    solana_metrics::inc_new_counter_info,
-    solana_perf::thread::renice_this_thread,
-    solana_poh::poh_recorder::PohRecorder,
+    miraland_metrics::inc_new_counter_info,
+    miraland_perf::thread::renice_this_thread,
+    miraland_poh::poh_recorder::PohRecorder,
     solana_runtime::{
         bank_forks::BankForks, commitment::BlockCommitmentCache,
         prioritization_fee_cache::PrioritizationFeeCache,
@@ -37,9 +37,9 @@ use {
     },
     solana_sdk::{
         exit::Exit, genesis_config::DEFAULT_GENESIS_DOWNLOAD_PATH, hash::Hash,
-        native_token::lamports_to_sol,
+        native_token::lamports_to_mln,
     },
-    solana_send_transaction_service::send_transaction_service::{self, SendTransactionService},
+    miraland_send_transaction_service::send_transaction_service::{self, SendTransactionService},
     solana_storage_bigtable::CredentialType,
     std::{
         net::SocketAddr,
@@ -322,13 +322,13 @@ fn process_rest(bank_forks: &Arc<RwLock<BankForks>>, path: &str) -> Option<Strin
                     .lamports;
             Some(format!(
                 "{}",
-                lamports_to_sol(total_supply - non_circulating_supply)
+                lamports_to_mln(total_supply - non_circulating_supply)
             ))
         }
         "/v0/total-supply" => {
             let bank = bank_forks.read().unwrap().root_bank();
             let total_supply = bank.capitalization();
-            Some(format!("{}", lamports_to_sol(total_supply)))
+            Some(format!("{}", lamports_to_mln(total_supply)))
         }
         _ => None,
     }
@@ -392,7 +392,7 @@ impl JsonRpcService {
             tokio::runtime::Builder::new_multi_thread()
                 .worker_threads(rpc_threads)
                 .on_thread_start(move || renice_this_thread(rpc_niceness_adj).unwrap())
-                .thread_name("solRpcEl")
+                .thread_name("mlnRpcEl")
                 .enable_all()
                 .build()
                 .expect("Runtime"),
@@ -494,7 +494,7 @@ impl JsonRpcService {
 
         let (close_handle_sender, close_handle_receiver) = unbounded();
         let thread_hdl = Builder::new()
-            .name("solJsonRpcSvc".to_string())
+            .name("mlnJsonRpcSvc".to_string())
             .spawn(move || {
                 renice_this_thread(rpc_niceness_adj).unwrap();
 
@@ -584,11 +584,11 @@ mod tests {
     use {
         super::*,
         crate::rpc::{create_validator_exit, tests::new_test_cluster_info},
-        solana_ledger::{
+        miraland_ledger::{
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             get_tmp_ledger_path_auto_delete,
         },
-        solana_rpc_client_api::config::RpcContextConfig,
+        miraland_rpc_client_api::config::RpcContextConfig,
         solana_runtime::bank::Bank,
         solana_sdk::{
             genesis_config::{ClusterType, DEFAULT_GENESIS_ARCHIVE},
@@ -615,7 +615,7 @@ mod tests {
         let ip_addr = IpAddr::V4(Ipv4Addr::UNSPECIFIED);
         let rpc_addr = SocketAddr::new(
             ip_addr,
-            solana_net_utils::find_available_port_in_range(ip_addr, (10000, 65535)).unwrap(),
+            miraland_net_utils::find_available_port_in_range(ip_addr, (10000, 65535)).unwrap(),
         );
         let bank_forks = BankForks::new_rw_arc(bank);
         let ledger_path = get_tmp_ledger_path_auto_delete!();
@@ -654,7 +654,7 @@ mod tests {
         )
         .expect("assume successful JsonRpcService start");
         let thread = rpc_service.thread_hdl.thread();
-        assert_eq!(thread.name().unwrap(), "solJsonRpcSvc");
+        assert_eq!(thread.name().unwrap(), "mlnJsonRpcSvc");
 
         assert_eq!(
             10_000,

@@ -103,10 +103,10 @@ if pushd "${tmpdir}" &>/dev/null; then
 name = "${package_name}"
 version = "0.0.0"
 description = "reserved for future use"
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana"
+authors = ["Miraland Labs Maintainers <crafters@miraland.top>"]
+repository = "https://github.com/miraland-labs/miraland"
 license = "Apache-2.0"
-homepage = "https://solanalabs.com"
+homepage = "https://miraland.top"
 documentation = "https://docs.rs/${package_name}"
 edition = "2021"
 EOF

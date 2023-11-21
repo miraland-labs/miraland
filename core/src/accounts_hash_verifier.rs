@@ -5,7 +5,7 @@
 
 use {
     crossbeam_channel::{Receiver, Sender},
-    solana_accounts_db::{
+    miraland_accounts_db::{
         accounts_db::CalcAccountsHashKind,
         accounts_hash::{
             AccountsHash, AccountsHashKind, CalcAccountsHashConfig, HashStats,
@@ -13,8 +13,8 @@ use {
         },
         sorted_storages::SortedStorages,
     },
-    solana_gossip::cluster_info::{ClusterInfo, MAX_ACCOUNTS_HASHES},
-    solana_measure::measure_us,
+    miraland_gossip::cluster_info::{ClusterInfo, MAX_ACCOUNTS_HASHES},
+    miraland_measure::measure_us,
     solana_runtime::{
         serde_snapshot::BankIncrementalSnapshotPersistence,
         snapshot_config::SnapshotConfig,
@@ -57,7 +57,7 @@ impl AccountsHashVerifier {
         // If there are no accounts packages to process, limit how often we re-check
         const LOOP_LIMITER: Duration = Duration::from_millis(DEFAULT_MS_PER_SLOT);
         let t_accounts_hash_verifier = Builder::new()
-            .name("solAcctHashVer".to_string())
+            .name("mlnAcctHashVer".to_string())
             .spawn(move || {
                 info!("AccountsHashVerifier has started");
                 let mut hashes = vec![];
@@ -584,7 +584,7 @@ mod tests {
     use {
         super::*,
         rand::seq::SliceRandom,
-        solana_gossip::contact_info::ContactInfo,
+        miraland_gossip::contact_info::ContactInfo,
         solana_runtime::{
             snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL, snapshot_package::SnapshotKind,
         },
@@ -592,7 +592,7 @@ mod tests {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_streamer::socket::SocketAddrSpace,
+        miraland_streamer::socket::SocketAddrSpace,
         std::str::FromStr,
     };
 
@@ -604,7 +604,7 @@ mod tests {
 
     #[test]
     fn test_max_hashes() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let cluster_info = new_test_cluster_info();
         let cluster_info = Arc::new(cluster_info);
         let exit = AtomicBool::new(false);

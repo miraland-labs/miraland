@@ -114,8 +114,8 @@ EOF
 
 trigger_secondary_step() {
   cat  >> "$output_file" <<"EOF"
-  - name: "Trigger Build on solana-secondary"
-    trigger: "solana-secondary"
+  - name: "Trigger Build on miraland-secondary"
+    trigger: "miraland-secondary"
     branches: "!pull/*"
     async: true
     build:
@@ -289,7 +289,7 @@ if [[ -n $BUILDKITE_TAG ]]; then
   start_pipeline "Tag pipeline for $BUILDKITE_TAG"
 
   annotate --style info --context release-tag \
-    "https://github.com/solana-labs/solana/releases/$BUILDKITE_TAG"
+    "https://github.com/miraland-labs/miraland/releases/$BUILDKITE_TAG"
 
   # Jump directly to the secondary build to publish release artifacts quickly
   trigger_secondary_step
@@ -307,7 +307,7 @@ if [[ $BUILDKITE_BRANCH =~ ^pull ]]; then
 
   # Add helpful link back to the corresponding Github Pull Request
   annotate --style info --context pr-backlink \
-    "Github Pull Request: https://github.com/solana-labs/solana/$BUILDKITE_BRANCH"
+    "Github Pull Request: https://github.com/miraland-labs/miraland/$BUILDKITE_BRANCH"
 
   if [[ $GITHUB_USER = "dependabot[bot]" ]]; then
     command_step dependabot "ci/dependabot-pr.sh" 5

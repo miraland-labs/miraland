@@ -64,7 +64,7 @@ pub(crate) fn hash_rewards_into_partitions(
 mod tests {
     use {
         super::*,
-        solana_accounts_db::stake_rewards::StakeReward,
+        miraland_accounts_db::stake_rewards::StakeReward,
         std::{collections::HashMap, ops::RangeInclusive},
     };
 

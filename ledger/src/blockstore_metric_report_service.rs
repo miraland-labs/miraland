@@ -25,7 +25,7 @@ pub struct BlockstoreMetricReportService {
 impl BlockstoreMetricReportService {
     pub fn new(blockstore: Arc<Blockstore>, exit: Arc<AtomicBool>) -> Self {
         let t_cf_metric = Builder::new()
-            .name("solRocksCfMtrcs".to_string())
+            .name("mlnRocksCfMtrcs".to_string())
             .spawn(move || loop {
                 if exit.load(Ordering::Relaxed) {
                     break;

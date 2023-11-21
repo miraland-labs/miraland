@@ -3,13 +3,13 @@ mod tests {
     use {
         crossbeam_channel::{unbounded, Receiver},
         log::*,
-        solana_connection_cache::connection_cache_stats::ConnectionCacheStats,
-        solana_perf::packet::PacketBatch,
-        solana_quic_client::nonblocking::quic_client::{
+        miraland_connection_cache::connection_cache_stats::ConnectionCacheStats,
+        miraland_perf::packet::PacketBatch,
+        miraland_quic_client::nonblocking::quic_client::{
             QuicClientCertificate, QuicLazyInitializedEndpoint,
         },
         solana_sdk::{net::DEFAULT_TPU_COALESCE, packet::PACKET_DATA_SIZE, signature::Keypair},
-        solana_streamer::{
+        miraland_streamer::{
             nonblocking::quic::DEFAULT_WAIT_FOR_CHUNK_TIMEOUT, streamer::StakedNodes,
             tls_certificates::new_self_signed_tls_certificate,
         },
@@ -61,14 +61,14 @@ mod tests {
     #[test]
     fn test_quic_client_multiple_writes() {
         use {
-            solana_connection_cache::client_connection::ClientConnection,
-            solana_quic_client::quic_client::QuicClientConnection,
+            miraland_connection_cache::client_connection::ClientConnection,
+            miraland_quic_client::quic_client::QuicClientConnection,
         };
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let staked_nodes = Arc::new(RwLock::new(StakedNodes::default()));
         let (s, exit, keypair, ip) = server_args();
-        let (_, t) = solana_streamer::quic::spawn_server(
+        let (_, t) = miraland_streamer::quic::spawn_server(
             "quic_streamer_test",
             s.try_clone().unwrap(),
             &keypair,
@@ -141,14 +141,14 @@ mod tests {
     #[tokio::test]
     async fn test_nonblocking_quic_client_multiple_writes() {
         use {
-            solana_connection_cache::nonblocking::client_connection::ClientConnection,
-            solana_quic_client::nonblocking::quic_client::QuicClientConnection,
+            miraland_connection_cache::nonblocking::client_connection::ClientConnection,
+            miraland_quic_client::nonblocking::quic_client::QuicClientConnection,
         };
-        solana_logger::setup();
+        miraland_logger::setup();
         let (sender, receiver) = unbounded();
         let staked_nodes = Arc::new(RwLock::new(StakedNodes::default()));
         let (s, exit, keypair, ip) = server_args();
-        let (_, _, t) = solana_streamer::nonblocking::quic::spawn_server(
+        let (_, _, t) = miraland_streamer::nonblocking::quic::spawn_server(
             "quic_streamer_test",
             s.try_clone().unwrap(),
             &keypair,
@@ -195,16 +195,16 @@ mod tests {
         /// In this we demonstrate that the request sender and the response receiver use the
         /// same quic Endpoint, and the same UDP socket.
         use {
-            solana_connection_cache::client_connection::ClientConnection,
-            solana_quic_client::quic_client::QuicClientConnection,
+            miraland_connection_cache::client_connection::ClientConnection,
+            miraland_quic_client::quic_client::QuicClientConnection,
         };
-        solana_logger::setup();
+        miraland_logger::setup();
 
         // Request Receiver
         let (sender, receiver) = unbounded();
         let staked_nodes = Arc::new(RwLock::new(StakedNodes::default()));
         let (request_recv_socket, request_recv_exit, keypair, request_recv_ip) = server_args();
-        let (request_recv_endpoint, request_recv_thread) = solana_streamer::quic::spawn_server(
+        let (request_recv_endpoint, request_recv_thread) = miraland_streamer::quic::spawn_server(
             "quic_streamer_test",
             request_recv_socket.try_clone().unwrap(),
             &keypair,
@@ -228,7 +228,7 @@ mod tests {
         let addr = response_recv_socket.local_addr().unwrap().ip();
         let port = response_recv_socket.local_addr().unwrap().port();
         let server_addr = SocketAddr::new(addr, port);
-        let (response_recv_endpoint, response_recv_thread) = solana_streamer::quic::spawn_server(
+        let (response_recv_endpoint, response_recv_thread) = miraland_streamer::quic::spawn_server(
             "quic_streamer_test",
             response_recv_socket,
             &keypair2,

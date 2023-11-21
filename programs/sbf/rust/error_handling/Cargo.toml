@@ -1,6 +1,6 @@
 [package]
-name = "solana-sbf-rust-error-handling"
-documentation = "https://docs.rs/solana-sbf-rust-error-handling"
+name = "miraland-sbf-rust-error-handling"
+documentation = "https://docs.rs/miraland-sbf-rust-error-handling"
 version = { workspace = true }
 description = { workspace = true }
 authors = { workspace = true }
@@ -12,7 +12,7 @@ edition = { workspace = true }
 [dependencies]
 num-derive = { workspace = true }
 num-traits = { workspace = true }
-solana-program = { workspace = true }
+miraland-program = { workspace = true }
 thiserror = { workspace = true }
 
 [lib]

@@ -20,25 +20,25 @@ spl() {
     )
     set -x
     rm -rf spl
-    git clone https://github.com/solana-labs/solana-program-library.git spl
-    # copy toolchain file to use solana's rust version
-    cp "$SOLANA_DIR"/rust-toolchain.toml spl/
+    git clone https://github.com/miraland-labs/solarti-program-library.git spl
+    # copy toolchain file to use miraland's rust version
+    cp "$MIRALAND_DIR"/rust-toolchain.toml spl/
     cd spl || exit 1
 
-    project_used_solana_version=$(sed -nE 's/solana-sdk = \"[>=<~]*(.*)\"/\1/p' <"token/program/Cargo.toml")
-    echo "used solana version: $project_used_solana_version"
-    if semverGT "$project_used_solana_version" "$SOLANA_VER"; then
+    project_used_miraland_version=$(sed -nE 's/miraland-sdk = \"[>=<~]*(.*)\"/\1/p' <"token/program/Cargo.toml")
+    echo "used miraland version: $project_used_miraland_version"
+    if semverGT "$project_used_miraland_version" "$MIRALAND_VER"; then
       echo "skip"
       return
     fi
 
-    ./patch.crates-io.sh "$SOLANA_DIR"
+    ./patch.crates-io.sh "$MIRALAND_DIR"
 
     for program in "${PROGRAMS[@]}"; do
       $CARGO_TEST_SBF --manifest-path "$program"/Cargo.toml
     done
 
-    # TODO better: `build.rs` for spl-token-cli doesn't seem to properly build
+    # TODO better: `build.rs` for solarti-token-cli doesn't seem to properly build
     # the required programs to run the tests, so instead we run the tests
     # after we know programs have been built
     cargo build

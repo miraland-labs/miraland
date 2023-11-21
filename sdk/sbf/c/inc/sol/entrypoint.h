@@ -1,11 +1,11 @@
 #pragma once
 /**
- * @brief Solana program entrypoint
+ * @brief Miraland program entrypoint
  */
 
-#include <sol/constants.h>
-#include <sol/types.h>
-#include <sol/pubkey.h>
+#include <mln/constants.h>
+#include <mln/types.h>
+#include <mln/pubkey.h>
 
 #ifdef __cplusplus
 extern "C" {
