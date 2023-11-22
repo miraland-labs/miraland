@@ -264,7 +264,7 @@ EOF
 }
 
 pull_or_push_steps() {
-  command_step sanity "ci/test-sanity.sh" 20 check
+  command_step sanity "ci/test-sanity.sh" 60 check
   wait_step
 
   # Check for any .sh file changes
@@ -272,7 +272,7 @@ pull_or_push_steps() {
               .sh$ \
               ^.buildkite/hooks \
       ; then
-    command_step shellcheck "ci/shellcheck.sh" 20 check
+    command_step shellcheck "ci/shellcheck.sh" 60 check
     wait_step
   fi
 
@@ -294,7 +294,7 @@ pull_or_push_steps() {
 
     if [ -z "$diff_other_than_version_bump" ]; then
       echo "Diff only contains version bump."
-      command_step checks ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 20
+      command_step checks ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 60
       exit 0
     fi
   fi
@@ -334,7 +334,7 @@ if [[ $BUILDKITE_BRANCH =~ ^pull ]]; then
     "Github Pull Request: https://github.com/miraland-labs/miraland/$BUILDKITE_BRANCH"
 
   if [[ $GITHUB_USER = "dependabot[bot]" ]]; then
-    command_step dependabot "ci/dependabot-pr.sh" 10
+    command_step dependabot "ci/dependabot-pr.sh" 20
     wait_step
   fi
   pull_or_push_steps
