@@ -40,7 +40,7 @@ use {
     solana_sdk::{
         clock::Slot,
         genesis_config::{
-            ClusterType::{self, Development, Devnet, MainnetBeta, Testnet},
+            ClusterType::{self, Development, Devnet, Mainnet, Testnet},
             GenesisConfig,
         },
         hash::{hashv, Hash},
@@ -298,7 +298,7 @@ fn run_bank_forks_snapshot_n<F>(
 #[test_case(V1_2_0, Development)]
 #[test_case(V1_2_0, Devnet)]
 #[test_case(V1_2_0, Testnet)]
-#[test_case(V1_2_0, MainnetBeta)]
+#[test_case(V1_2_0, Mainnet)]
 fn test_bank_forks_snapshot(snapshot_version: SnapshotVersion, cluster_type: ClusterType) {
     // create banks up to slot 4 and create 1 new account in each bank. test that bank 4 snapshots
     // and restores correctly
@@ -336,7 +336,7 @@ fn goto_end_of_slot(bank: &Bank) {
 #[test_case(V1_2_0, Development)]
 #[test_case(V1_2_0, Devnet)]
 #[test_case(V1_2_0, Testnet)]
-#[test_case(V1_2_0, MainnetBeta)]
+#[test_case(V1_2_0, Mainnet)]
 fn test_concurrent_snapshot_packaging(
     snapshot_version: SnapshotVersion,
     cluster_type: ClusterType,
@@ -596,7 +596,7 @@ fn test_concurrent_snapshot_packaging(
 #[test_case(V1_2_0, Development)]
 #[test_case(V1_2_0, Devnet)]
 #[test_case(V1_2_0, Testnet)]
-#[test_case(V1_2_0, MainnetBeta)]
+#[test_case(V1_2_0, Mainnet)]
 fn test_slots_to_snapshot(snapshot_version: SnapshotVersion, cluster_type: ClusterType) {
     miraland_logger::setup();
     let num_set_roots = MAX_CACHE_ENTRIES * 2;
@@ -672,7 +672,7 @@ fn test_slots_to_snapshot(snapshot_version: SnapshotVersion, cluster_type: Clust
 #[test_case(V1_2_0, Development)]
 #[test_case(V1_2_0, Devnet)]
 #[test_case(V1_2_0, Testnet)]
-#[test_case(V1_2_0, MainnetBeta)]
+#[test_case(V1_2_0, Mainnet)]
 fn test_bank_forks_status_cache_snapshot(
     snapshot_version: SnapshotVersion,
     cluster_type: ClusterType,
@@ -713,7 +713,7 @@ fn test_bank_forks_status_cache_snapshot(
 #[test_case(V1_2_0, Development)]
 #[test_case(V1_2_0, Devnet)]
 #[test_case(V1_2_0, Testnet)]
-#[test_case(V1_2_0, MainnetBeta)]
+#[test_case(V1_2_0, Mainnet)]
 fn test_bank_forks_incremental_snapshot(
     snapshot_version: SnapshotVersion,
     cluster_type: ClusterType,
@@ -939,7 +939,7 @@ fn restore_from_snapshots_and_check_banks_are_equal(
 #[test_case(V1_2_0, Development)]
 #[test_case(V1_2_0, Devnet)]
 #[test_case(V1_2_0, Testnet)]
-#[test_case(V1_2_0, MainnetBeta)]
+#[test_case(V1_2_0, Mainnet)]
 fn test_snapshots_with_background_services(
     snapshot_version: SnapshotVersion,
     cluster_type: ClusterType,

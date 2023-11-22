@@ -371,7 +371,7 @@ fn test_bank_capitalization() {
                 )
             })
             .collect(),
-        cluster_type: ClusterType::MainnetBeta,
+        cluster_type: ClusterType::Mainnet,
         ..GenesisConfig::default()
     }));
 
@@ -1250,7 +1250,7 @@ fn test_rent_eager_across_epoch_without_gap() {
 fn test_rent_eager_across_epoch_without_gap_mnb() {
     miraland_logger::setup();
     let (mut genesis_config, _mint_keypair) = create_genesis_config(1);
-    genesis_config.cluster_type = ClusterType::MainnetBeta;
+    genesis_config.cluster_type = ClusterType::Mainnet;
 
     let mut bank = Arc::new(Bank::new_for_tests(&genesis_config));
     assert_eq!(test_rent_collection_partitions(&bank), vec![(0, 0, 32)]);
@@ -1318,7 +1318,7 @@ fn test_rent_eager_across_epoch_without_gap_under_multi_epoch_cycle() {
     let leader_lamports = 3;
     let mut genesis_config =
         create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
-    genesis_config.cluster_type = ClusterType::MainnetBeta;
+    genesis_config.cluster_type = ClusterType::Mainnet;
 
     const SLOTS_PER_EPOCH: u64 = MINIMUM_SLOTS_PER_EPOCH;
     const LEADER_SCHEDULE_SLOT_OFFSET: u64 = SLOTS_PER_EPOCH * 3 - 3;
@@ -1388,7 +1388,7 @@ fn test_rent_eager_across_epoch_with_gap_under_multi_epoch_cycle() {
     let leader_lamports = 3;
     let mut genesis_config =
         create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
-    genesis_config.cluster_type = ClusterType::MainnetBeta;
+    genesis_config.cluster_type = ClusterType::Mainnet;
 
     const SLOTS_PER_EPOCH: u64 = MINIMUM_SLOTS_PER_EPOCH;
     const LEADER_SCHEDULE_SLOT_OFFSET: u64 = SLOTS_PER_EPOCH * 3 - 3;
@@ -1446,7 +1446,7 @@ fn test_rent_eager_with_warmup_epochs_under_multi_epoch_cycle() {
     let leader_lamports = 3;
     let mut genesis_config =
         create_genesis_config_with_leader(5, &leader_pubkey, leader_lamports).genesis_config;
-    genesis_config.cluster_type = ClusterType::MainnetBeta;
+    genesis_config.cluster_type = ClusterType::Mainnet;
 
     const SLOTS_PER_EPOCH: u64 = MINIMUM_SLOTS_PER_EPOCH * 8;
     const LEADER_SCHEDULE_SLOT_OFFSET: u64 = SLOTS_PER_EPOCH * 3 - 3;
@@ -1831,7 +1831,7 @@ where
             hashes_per_tick: None,
             target_tick_count: None,
         },
-        cluster_type: ClusterType::MainnetBeta,
+        cluster_type: ClusterType::Mainnet,
 
         ..GenesisConfig::default()
     }));
@@ -1960,7 +1960,7 @@ fn do_test_bank_update_rewards_determinism() -> u64 {
             hashes_per_tick: None,
             target_tick_count: None,
         },
-        cluster_type: ClusterType::MainnetBeta,
+        cluster_type: ClusterType::Mainnet,
 
         ..GenesisConfig::default()
     }));
@@ -6298,7 +6298,7 @@ fn test_bank_hash_consistency() {
         &[],
     );
     genesis_config.creation_time = 0;
-    genesis_config.cluster_type = ClusterType::MainnetBeta;
+    genesis_config.cluster_type = ClusterType::Mainnet;
     genesis_config.rent.burn_percent = 100;
     let mut bank = Arc::new(Bank::new_for_tests(&genesis_config));
     // Check a few slots, cross an epoch boundary

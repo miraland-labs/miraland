@@ -233,7 +233,7 @@ impl Accounts {
     /// If feature `cap_transaction_accounts_data_size` is active, total accounts data a
     /// transaction can load is limited to
     ///   if `set_tx_loaded_accounts_data_size` instruction is not activated or not used, then
-    ///     default value of 64MiB to not break anyone in Mainnet-beta today
+    ///     default value of 64MiB to not break anyone in Mainnet today
     ///   else
     ///     user requested loaded accounts size.
     ///     Note, requesting zero bytes will result transaction error

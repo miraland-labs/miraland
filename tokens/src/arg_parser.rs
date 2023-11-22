@@ -45,7 +45,7 @@ where
                 .validator(is_url_or_moniker)
                 .help(
                     "URL for Miraland's JSON RPC or moniker (or their first letter): \
-                       [mainnet-beta, testnet, devnet, localhost]",
+                       [mainnet, testnet, devnet, localhost]",
                 ),
         )
         .subcommand(

@@ -147,7 +147,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     let default_target_tick_duration =
         timing::duration_as_us(&PohConfig::default().target_tick_duration);
     let default_ticks_per_slot = &clock::DEFAULT_TICKS_PER_SLOT.to_string();
-    let default_cluster_type = "mainnet-beta";
+    let default_cluster_type = "mainnet";
     let default_genesis_archive_unpacked_size = MAX_GENESIS_ARCHIVE_UNPACKED_SIZE.to_string();
 
     let matches = App::new(crate_name!())
@@ -478,7 +478,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
                     compute_hashes_per_tick(poh_config.target_tick_duration, 1_000_000);
                 poh_config.hashes_per_tick = Some(hashes_per_tick / 2); // use 50% of peak ability
             }
-            ClusterType::Devnet | ClusterType::Testnet | ClusterType::MainnetBeta => {
+            ClusterType::Devnet | ClusterType::Testnet | ClusterType::Mainnet => {
                 poh_config.hashes_per_tick = Some(clock::DEFAULT_HASHES_PER_TICK);
             }
         },
@@ -495,7 +495,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     } else {
         match cluster_type {
             ClusterType::Development => clock::DEFAULT_DEV_SLOTS_PER_EPOCH,
-            ClusterType::Devnet | ClusterType::Testnet | ClusterType::MainnetBeta => {
+            ClusterType::Devnet | ClusterType::Testnet | ClusterType::Mainnet => {
                 clock::DEFAULT_SLOTS_PER_EPOCH
             }
         }

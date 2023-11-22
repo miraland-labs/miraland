@@ -44,18 +44,18 @@ pub const UNUSED_DEFAULT: u64 = 1024;
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq, AbiEnumVisitor, AbiExample)]
 pub enum ClusterType {
     Testnet,
-    MainnetBeta,
+    Mainnet,
     Devnet,
     Development,
 }
 
 impl ClusterType {
-    pub const STRINGS: [&'static str; 4] = ["development", "devnet", "testnet", "mainnet-beta"];
+    pub const STRINGS: [&'static str; 4] = ["development", "devnet", "testnet", "mainnet"];
 
     /// Get the known genesis hash for this ClusterType
     pub fn get_genesis_hash(&self) -> Option<Hash> {
         match self {
-            Self::MainnetBeta => {
+            Self::Mainnet => {
                 Some(Hash::from_str("5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d").unwrap())
             }
             Self::Testnet => {
@@ -77,7 +77,7 @@ impl FromStr for ClusterType {
             "development" => Ok(ClusterType::Development),
             "devnet" => Ok(ClusterType::Devnet),
             "testnet" => Ok(ClusterType::Testnet),
-            "mainnet-beta" => Ok(ClusterType::MainnetBeta),
+            "mainnet" => Ok(ClusterType::Mainnet),
             _ => Err(format!("{s} is unrecognized for cluster type")),
         }
     }

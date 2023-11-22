@@ -18,12 +18,12 @@ Explorers:
   test drive, as a user, token holder, app developer, or validator.
 - Application developers should target Devnet.
 - Potential validators should first target Devnet.
-- Key differences between Devnet and Mainnet Beta:
+- Key differences between Devnet and Mainnet:
   - Devnet tokens are **not real**
   - Devnet includes a token faucet for airdrops for application testing
   - Devnet may be subject to ledger resets
-  - Devnet typically runs the same software release branch version as Mainnet Beta,
-    but may run a newer minor release version than Mainnet Beta.
+  - Devnet typically runs the same software release branch version as Mainnet,
+    but may run a newer minor release version than Mainnet.
 - Gossip entrypoint for Devnet: `entrypoint.devnet.miraland.top:8001`
 - Metrics environment variable for Devnet:
 
@@ -75,7 +75,7 @@ are operated by Miraland Labs
 - Testnet may be subject to ledger resets.
 - Testnet includes a token faucet for airdrops for application testing
 - Testnet typically runs a newer software release branch than both
-  Devnet and Mainnet Beta
+  Devnet and Mainnet
 - Gossip entrypoint for Testnet: `entrypoint.testnet.miraland.top:8001`
 - Metrics environment variable for Testnet:
 
@@ -123,19 +123,19 @@ The identities of the
 - `eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ` - SerGo
 - `9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv` - Algo|Stake
 
-## Mainnet Beta
+## Mainnet
 
 A permissionless, persistent cluster for Miraland users, builders, validators and token holders.
 
-- Tokens that are issued on Mainnet Beta are **real** MLN
-- Gossip entrypoint for Mainnet Beta: `entrypoint.mainnet-beta.miraland.top:8001`
-- Metrics environment variable for Mainnet Beta:
+- Tokens that are issued on Mainnet are **real** MLN
+- Gossip entrypoint for Mainnet: `entrypoint.mainnet.miraland.top:8001`
+- Metrics environment variable for Mainnet:
 
 ```bash
-export MIRALAND_METRICS_CONFIG="host=https://metrics.miraland.top:8086,db=mainnet-beta,u=mainnet-beta_write,p=password"
+export MIRALAND_METRICS_CONFIG="host=https://metrics.miraland.top:8086,db=mainnet,u=mainnet_write,p=password"
 ```
 
-- RPC URL for Mainnet Beta: `https://api.mainnet-mln.miraland.top`
+- RPC URL for Mainnet: `https://api.mainnet-mln.miraland.top`
 
 ##### Example `miraland` command-line configuration
 
@@ -158,11 +158,11 @@ $ miraland-validator \
     --rpc-port 8899 \
     --private-rpc \
     --dynamic-port-range 8000-8020 \
-    --entrypoint entrypoint.mainnet-beta.miraland.top:8001 \
-    --entrypoint entrypoint2.mainnet-beta.miraland.top:8001 \
-    --entrypoint entrypoint3.mainnet-beta.miraland.top:8001 \
-    --entrypoint entrypoint4.mainnet-beta.miraland.top:8001 \
-    --entrypoint entrypoint5.mainnet-beta.miraland.top:8001 \
+    --entrypoint entrypoint.mainnet.miraland.top:8001 \
+    --entrypoint entrypoint2.mainnet.miraland.top:8001 \
+    --entrypoint entrypoint3.mainnet.miraland.top:8001 \
+    --entrypoint entrypoint4.mainnet.miraland.top:8001 \
+    --entrypoint entrypoint5.mainnet.miraland.top:8001 \
     --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \
     --wal-recovery-mode skip_any_corrupted_record \
     --limit-ledger-size

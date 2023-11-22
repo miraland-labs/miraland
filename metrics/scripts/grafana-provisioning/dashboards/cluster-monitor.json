@@ -13766,8 +13766,8 @@
         "allValue": ".*",
         "current": {
           "selected": true,
-          "text": "Mainnet Beta",
-          "value": "mainnet-beta"
+          "text": "Mainnet",
+          "value": "mainnet"
         },
         "datasource": "$datasource",
         "definition": "",
@@ -13781,7 +13781,7 @@
         "options": [],
         "query": "show databases",
         "refresh": 1,
-        "regex": "(devnet|tds|mainnet-beta|testnet.*)",
+        "regex": "(devnet|tds|mainnet|testnet.*)",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",

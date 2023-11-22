@@ -215,9 +215,9 @@ concurrent shred insertion, the proposed FIFO setting can inserts 295k shreds/s:
 The possibility of enabling fully concurrent multi-writer shred insertion is
 discussed in #21657.
 
-## Results from the Mainnet-Beta
+## Results from the Mainnet
 To further understand the performance, I setup two validator instances joining
-the Mainnet-Beta, but one with FIFO based validator and the other is based on
+the Mainnet, but one with FIFO based validator and the other is based on
 the current setting.  Two validators have the same machine spec (24-core
 2.8kMHz CPU, 128GB memory, 768GB SSD for blockstore, and everything else
 stored in the 1024GB SSD.)  Below are the results.
@@ -254,6 +254,6 @@ unique property of Miraland BlockStore workload where write-keys are mostly
 monotonically increasing over time.  Experimental results from the single
 node 100m slots insertion indicate the proposed solution can insert 185k
 shred/s, which is ~2.25x faster than current design that inserts 82k shreds/s.
-Experimental results from Mainnet-Beta also shows that the proposed FIFO-based
+Experimental results from Mainnet also shows that the proposed FIFO-based
 solution can achieve same task with 33% fewer disk writes compared to the
 current design.

@@ -6,7 +6,7 @@ Progress on optimistic confirmation can be tracked here
 
 https://github.com/miraland-labs/miraland/projects/52
 
-At the end of May, the mainnet-beta is moving to 1.1, and testnet is
+At the end of May, the mainnet is moving to 1.1, and testnet is
 moving to 1.2. With 1.2, testnet will behave as if it has optimistic
 finality as long as at least no more than 4.66% of the validators are
 acting maliciously. Applications can assume that 2/3+ votes observed in

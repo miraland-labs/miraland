@@ -4,7 +4,7 @@
 
 ## InfluxDB
 
-In oder to explore validator specific metrics from mainnet-beta, testnet or devnet you can use Chronograf:
+In oder to explore validator specific metrics from mainnet, testnet or devnet you can use Chronograf:
 
 * https://metrics.solana.com:8888/ (production enviroment)
 * https://metrics.solana.com:8889/ (testing enviroment)

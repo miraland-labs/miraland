@@ -227,7 +227,7 @@ For specific examples, refer to Appendix A.
 
 ##### Perform the EAH calculation in the foreground
 
-The accounts hash calculation takes around 15 seconds (median, on Mainnet-Beta
+The accounts hash calculation takes around 15 seconds (median, on Mainnet
 today).  This is far beyond the slot time; this would be bad UX, and also
 decrease network stability.
 

@@ -13,7 +13,7 @@ operations with a bundled monitoring tool.
 
 This setup enables you:
 
-- to have a self-administered gateway to the Miraland mainnet-beta cluster to get
+- to have a self-administered gateway to the Miraland mainnet cluster to get
   data and submit withdrawal transactions
 - to have full control over how much historical block data is retained
 - to maintain your service availability even if one node fails
@@ -44,7 +44,7 @@ miraland-validator \
 Customize `--ledger` to your desired ledger storage location, and `--rpc-port` to the port you want to expose.
 
 The `--entrypoint` and `--expected-genesis-hash` parameters are all specific to the cluster you are joining.
-[Current parameters for Mainnet Beta](../clusters.md#example-miraland-validator-command-line-2)
+[Current parameters for Mainnet](../clusters.md#example-miraland-validator-command-line-2)
 
 The `--limit-ledger-size` parameter allows you to specify how many ledger
 [shreds](../terminology.md#shred) your node retains on disk. If you do not
@@ -90,7 +90,7 @@ necessitate timely software update to avoid errors in processing blocks.
 Our official release announcements for all kinds of releases (normal and
 security) are communicated via a [discord](https://miraland.top/discord) channel called
 `#mb-announcement`
-(`mb` stands for `mainnet-beta`).
+(`mb` stands for `mainnet`).
 
 Like staked validators, we expect any exchange-operated validators to be updated
 at your earliest convenience within a business day or two after a normal release
@@ -185,7 +185,7 @@ transfer to the appropriate deposit address.
 
 ### Versioned Transaction Migration
 
-When the Mainnet Beta network starts processing versioned transactions, exchanges
+When the Mainnet network starts processing versioned transactions, exchanges
 **MUST** make changes. If no changes are made, deposit detection will no longer
 work properly because fetching a versioned transaction or a block containing
 versioned transactions will return an error.
@@ -918,7 +918,7 @@ the Solarti Token's mint account.
 ## Testing the Integration
 
 Be sure to test your complete workflow on Miraland devnet and testnet
-[clusters](../clusters.md) before moving to production on mainnet-beta. Devnet
+[clusters](../clusters.md) before moving to production on mainnet. Devnet
 is the most open and flexible, and ideal for initial development, while testnet
 offers more realistic cluster configuration. Both devnet and testnet support a faucet,
 run `miraland airdrop 1` to obtain some devnet or testnet MLN for development and testing.

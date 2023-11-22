@@ -672,7 +672,7 @@ mod tests {
         let GenesisConfigInfo {
             mut genesis_config, ..
         } = create_genesis_config(10_000);
-        genesis_config.cluster_type = ClusterType::MainnetBeta;
+        genesis_config.cluster_type = ClusterType::Mainnet;
         let bank = Bank::new_for_tests(&genesis_config);
         BankForks::new_rw_arc(bank)
     }

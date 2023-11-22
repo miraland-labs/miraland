@@ -38,7 +38,7 @@ pub fn get_clap_app<'ab, 'v>(name: &str, about: &'ab str, version: &'v str) -> A
                 .validator(is_url_or_moniker)
                 .help(
                     "URL for Miraland's JSON RPC or moniker (or their first letter): \
-                       [mainnet-beta, testnet, devnet, localhost]",
+                       [mainnet, testnet, devnet, localhost]",
                 ),
         )
         .arg(

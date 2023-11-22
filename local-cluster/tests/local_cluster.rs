@@ -432,11 +432,11 @@ fn test_restart_node() {
 
 #[test]
 #[serial]
-fn test_mainnet_beta_cluster_type() {
+fn test_mainnet_cluster_type() {
     miraland_logger::setup_with_default(RUST_LOG_FILTER);
 
     let mut config = ClusterConfig {
-        cluster_type: ClusterType::MainnetBeta,
+        cluster_type: ClusterType::Mainnet,
         node_stakes: vec![DEFAULT_NODE_STAKE],
         cluster_lamports: DEFAULT_CLUSTER_LAMPORTS,
         validator_configs: make_identical_validator_configs(

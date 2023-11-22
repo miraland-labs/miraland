@@ -2130,7 +2130,7 @@ pub fn test_app<'a>(version: &'a str, default_args: &'a DefaultTestArgs) -> App<
                 .validator(is_url_or_moniker)
                 .help(
                     "URL for Miraland's JSON RPC or moniker (or their first letter): \
-                   [mainnet-beta, testnet, devnet, localhost]",
+                   [mainnet, testnet, devnet, localhost]",
                 ),
         )
         .arg(

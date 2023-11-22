@@ -6266,7 +6266,7 @@ impl Bank {
     // within an epoch, so lower the frequency of it.
     // These logic isn't strictly eager anymore and should only be used
     // for development/performance purpose.
-    // Absolutely not under ClusterType::MainnetBeta!!!!
+    // Absolutely not under ClusterType::Mainnet!!!!
     fn use_multi_epoch_collection_cycle(&self, epoch: Epoch) -> bool {
         // Force normal behavior, disabling multi epoch collection cycle for manual local testing
         #[cfg(not(test))]
@@ -6287,7 +6287,7 @@ impl Bank {
             return false;
         }
 
-        self.cluster_type() != ClusterType::MainnetBeta
+        self.cluster_type() != ClusterType::Mainnet
             && self.slot_count_per_normal_epoch() < self.slot_count_in_two_day()
     }
 
@@ -6295,7 +6295,7 @@ impl Bank {
         Self::slot_count_in_two_day_helper(self.ticks_per_slot)
     }
 
-    // This value is specially chosen to align with slots per epoch in mainnet-beta and testnet
+    // This value is specially chosen to align with slots per epoch in mainnet and testnet
     // Also, assume 500GB account data set as the extreme, then for 2 day (=48 hours) to collect
     // rent eagerly, we'll consume 5.7 MB/s IO bandwidth, bidirectionally.
     pub fn slot_count_in_two_day_helper(ticks_per_slot: SlotCount) -> SlotCount {

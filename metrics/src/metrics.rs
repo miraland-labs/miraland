@@ -438,7 +438,7 @@ pub fn metrics_config_sanity_check(cluster_type: ClusterType) -> Result<(), Metr
         Err(e) => return Err(e),
     };
     match &config.db[..] {
-        "mainnet-beta" if cluster_type != ClusterType::MainnetBeta => (),
+        "mainnet" if cluster_type != ClusterType::Mainnet => (),
         "tds" if cluster_type != ClusterType::Testnet => (),
         "devnet" if cluster_type != ClusterType::Devnet => (),
         _ => return Ok(()),

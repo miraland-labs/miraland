@@ -47,7 +47,7 @@ Using the current rent cost model configuration, a rent-exempt account requires 
 
 #### Example of how much data is used for programs
 
-As a data point of the number of accounts and potential data stored on-chain, below is the distribution of the largest accounts (at least 100KB) at slot `103,089,804` on `mainnet-beta` by assigned on-chain program:
+As a data point of the number of accounts and potential data stored on-chain, below is the distribution of the largest accounts (at least 100KB) at slot `103,089,804` on `mainnet` by assigned on-chain program:
 
 1. **Serum Dex v3**: 1798 accounts
 2. **Metaplex Candy Machine**: 1089 accounts
@@ -64,7 +64,7 @@ Buffer accounts are used by the Upgradeable BPF loader to temporarily store byte
 
 Unfortunately, deploys fail occasionally and instead of reusing the buffer account, developers might retry their deployment with a new buffer and not realize that they stored a good chunk of MLN in a forgotten buffer account from an earlier deploy.
 
-> As of slot `103,089,804` on `mainnet-beta` there are 276 abandoned buffer accounts that could be reclaimed!
+> As of slot `103,089,804` on `mainnet` there are 276 abandoned buffer accounts that could be reclaimed!
 
 Developers can check if they own any abandoned buffer accounts by using the Miraland CLI:
 
@@ -86,7 +86,7 @@ miraland program close --buffers --keypair ~/.config/miraland/MY_KEYPAIR.json
 The owners of all abandoned program deploy buffer accounts can be fetched via the RPC API:
 
 ```bash
-curl http://api.mainnet-beta.miraland.top -H "Content-Type: application/json" \
+curl http://api.mainnet.miraland.top -H "Content-Type: application/json" \
 --data-binary @- << EOF | jq --raw-output '.result | .[] | .account.data[0]'
 {
     "jsonrpc":"2.0", "id":1, "method":"getProgramAccounts",
@@ -120,7 +120,7 @@ You may now realize that program data accounts (the accounts that store the exec
 
 While it would be uncommon for developers to need to close program data accounts since they can be rewritten during upgrades, one potential scenario is that since program data accounts can't be _resized_. You may wish to deploy your program at a new address to accommodate larger executables.
 
-The ability to reclaim program data account rent deposits also makes testing and experimentation on the `mainnet-beta` cluster a lot less costly since you could reclaim everything except the transaction fees and a small amount of rent for the program account. Lastly, this could help developers recover most of their funds if they mistakenly deploy a program at an unintended address or on the wrong cluster.
+The ability to reclaim program data account rent deposits also makes testing and experimentation on the `mainnet` cluster a lot less costly since you could reclaim everything except the transaction fees and a small amount of rent for the program account. Lastly, this could help developers recover most of their funds if they mistakenly deploy a program at an unintended address or on the wrong cluster.
 
 To view the programs which are owned by your wallet address, you can run:
 

@@ -80,7 +80,7 @@ pub fn calculate_non_circulating_supply(bank: &Bank) -> ScanResult<NonCirculatin
     })
 }
 
-// Mainnet-beta accounts that should be considered non-circulating
+// Mainnet accounts that should be considered non-circulating
 solana_sdk::pubkeys!(
     non_circulating_accounts,
     [
@@ -197,7 +197,7 @@ solana_sdk::pubkeys!(
     ]
 );
 
-// Withdraw authority for autostaked accounts on mainnet-beta
+// Withdraw authority for autostaked accounts on mainnet
 solana_sdk::pubkeys!(
     withdraw_authority,
     [
@@ -276,7 +276,7 @@ mod tests {
         let genesis_config = GenesisConfig {
             accounts,
             epoch_schedule: EpochSchedule::new(slots_per_epoch),
-            cluster_type: ClusterType::MainnetBeta,
+            cluster_type: ClusterType::Mainnet,
             ..GenesisConfig::default()
         };
         let mut bank = Arc::new(Bank::new_for_tests(&genesis_config));

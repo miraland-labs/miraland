@@ -6,16 +6,16 @@ source "$here"/common.sh
 
 set -e
 
-rm -rf "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot
-mkdir -p "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot
+rm -rf "$MIRALAND_CONFIG_DIR"/latest-mainnet-snapshot
+mkdir -p "$MIRALAND_CONFIG_DIR"/latest-mainnet-snapshot
 (
-  cd "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot || exit 1
+  cd "$MIRALAND_CONFIG_DIR"/latest-mainnet-snapshot || exit 1
   set -x
-  wget http://api.mainnet-beta.miraland.top/genesis.tar.bz2
-  wget --trust-server-names http://api.mainnet-beta.miraland.top/snapshot.tar.bz2
+  wget http://api.mainnet.miraland.top/genesis.tar.bz2
+  wget --trust-server-names http://api.mainnet.miraland.top/snapshot.tar.bz2
 )
 
-snapshot=$(ls "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot/snapshot-[0-9]*-*.tar.zst)
+snapshot=$(ls "$MIRALAND_CONFIG_DIR"/latest-mainnet-snapshot/snapshot-[0-9]*-*.tar.zst)
 if [[ -z $snapshot ]]; then
   echo Error: Unable to find latest snapshot
   exit 1
@@ -49,7 +49,7 @@ $miraland_keygen new --no-passphrase -so "$MIRALAND_CONFIG_DIR"/bootstrap-valida
 $miraland_keygen new --no-passphrase -so "$MIRALAND_CONFIG_DIR"/bootstrap-validator/stake-account.json
 
 $miraland_ledger_tool create-snapshot \
-  --ledger "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot \
+  --ledger "$MIRALAND_CONFIG_DIR"/latest-mainnet-snapshot \
   --faucet-pubkey "$MIRALAND_CONFIG_DIR"/faucet.json \
   --faucet-lamports 500000000000000000 \
   --bootstrap-validator "$MIRALAND_CONFIG_DIR"/bootstrap-validator/identity.json \
@@ -59,6 +59,6 @@ $miraland_ledger_tool create-snapshot \
   "$snapshot_slot" "$MIRALAND_CONFIG_DIR"/bootstrap-validator
 
 $miraland_ledger_tool modify-genesis \
-  --ledger "$MIRALAND_CONFIG_DIR"/latest-mainnet-beta-snapshot \
+  --ledger "$MIRALAND_CONFIG_DIR"/latest-mainnet-snapshot \
   --hashes-per-tick sleep \
   "$MIRALAND_CONFIG_DIR"/bootstrap-validator

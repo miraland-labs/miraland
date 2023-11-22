@@ -99,7 +99,7 @@ These disadvantages highlight a tradeoff in how transaction expiration is config
 
 Currently, Miraland clusters require that transactions use blockhashes that are no more than [151 slots](https://github.com/miraland-labs/miraland/blob/9488a73f5252ad0d7ea830a0b456d9aa4bfbb7c1/sdk/program/src/clock.rs#L65) old.
 
-> This [Github issue](https://github.com/miraland-labs/miraland/issues/23582) contains some calculations that estimate that mainnet-beta validators need about 150MB of memory to track transactions.
+> This [Github issue](https://github.com/miraland-labs/miraland/issues/23582) contains some calculations that estimate that mainnet validators need about 150MB of memory to track transactions.
 > This could be slimmed down in the future if necessary without decreasing expiration time as I’ve detailed in that issue.
 
 ## Transaction confirmation tips

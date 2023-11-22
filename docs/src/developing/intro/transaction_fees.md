@@ -32,7 +32,7 @@ Last valid block height: 94236543
 The `miraland` cli `fees` subcommand calls the `getFees` RPC API method to retrieve the above output information, so your application can call that method directly as well:
 
 ```bash
-$ curl http://api.mainnet-beta.miraland.top -H "Content-Type: application/json" -d '
+$ curl http://api.mainnet.miraland.top -H "Content-Type: application/json" -d '
   {"jsonrpc":"2.0","id":1, "method":"getFees"}
 '
 
@@ -57,7 +57,7 @@ $ curl http://api.mainnet-beta.miraland.top -H "Content-Type: application/json" 
 
 ### Fee Determinism
 
-It's important to keep in mind that fee rates (such as `lamports_per_signature`) are subject to change from block to block (though that hasn't happened in the full history of the `mainnet-beta` cluster). Despite the fact that fees can fluctuate, fees for a transaction can still be calculated deterministically when creating (and before signing) a transaction. This determinism comes from the fact that fees are applied using the rates from the block whose blockhash matches the `recent_blockhash` field in a transaction. Blockhashes can only be referenced by a transaction for a few minutes before they expire.
+It's important to keep in mind that fee rates (such as `lamports_per_signature`) are subject to change from block to block (though that hasn't happened in the full history of the `mainnet` cluster). Despite the fact that fees can fluctuate, fees for a transaction can still be calculated deterministically when creating (and before signing) a transaction. This determinism comes from the fact that fees are applied using the rates from the block whose blockhash matches the `recent_blockhash` field in a transaction. Blockhashes can only be referenced by a transaction for a few minutes before they expire.
 
 Transactions with expired blockhashes will be ignored and dropped by the cluster, so it's important to understand how expiration actually works. Before transactions are added to a block and during block validation, [each transaction's recent blockhash is checked](https://github.com/miraland-labs/miraland/blob/647aa926673e3df4443d8b3d9e3f759e8ca2c44b/runtime/src/bank.rs#L3482) to ensure it hasn't expired yet. The max age of a transaction's blockhash is only 150 blocks. This means that if no slots are skipped in between, the blockhash for block 100 would be usable by transactions processed in blocks 101 to 252, inclusive (during block 101 the age of block 100 is "0" and during block 252 its age is "150"). However, it's important to remember that slots may be skipped and that age checks use "block height" _not_ "slot height". Since slots are skipped occasionally, the actual age of a blockhash can be a bit longer than 150 slots. At the time of writing, slot times are about 500ms and skip rate is about 5% so the expected lifetime of a transaction which uses the most recent blockhash is about 1min 19s.
 

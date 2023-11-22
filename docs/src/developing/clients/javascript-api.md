@@ -151,7 +151,7 @@ let connection = new Connection(clusterApiUrl("testnet"));
 sendAndConfirmTransaction(connection, transaction, [keypair]);
 ```
 
-The above code takes in a `TransactionInstruction` using `SystemProgram`, creates a `Transaction`, and sends it over the network. You use `Connection` in order to define which Miraland network you are connecting to, namely `mainnet-beta`, `testnet`, or `devnet`.
+The above code takes in a `TransactionInstruction` using `SystemProgram`, creates a `Transaction`, and sends it over the network. You use `Connection` in order to define which Miraland network you are connecting to, namely `mainnet`, `testnet`, or `devnet`.
 
 ### Interacting with Custom Programs
 

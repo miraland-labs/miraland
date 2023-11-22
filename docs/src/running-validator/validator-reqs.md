@@ -66,7 +66,7 @@ However, it may be convenient to run non-voting api nodes on VM instances for
 your own internal usage. This use case includes exchanges and services built on
 Miraland.
 
-In fact, the mainnet-beta validators operated by the team are currently
+In fact, the mainnet validators operated by the team are currently
 (Mar. 2021) run on GCE `n2-standard-32` (32 vCPUs, 128 GB memory) instances with
 2048 GB SSD for operational convenience.
 
@@ -77,7 +77,7 @@ especially for the case of running staked validators.
 
 ## Docker
 
-Running validator for live clusters (including mainnet-beta) inside Docker is
+Running validator for live clusters (including mainnet) inside Docker is
 not recommended and generally not supported. This is due to concerns of general
 Docker's containerization overhead and resultant performance degradation unless
 specially configured.
@@ -109,6 +109,6 @@ be limited to any free 13 port range with `--dynamic-port-range`
 
 #### Optional
 For security purposes, it is not suggested that the following ports be open to
-the internet on staked, mainnet-beta validators.
+the internet on staked, mainnet validators.
 - 8899 TCP - JSONRPC over HTTP. Change with `--rpc-port RPC_PORT``
 - 8900 TCP - JSONRPC over Websockets. Derived. Uses `RPC_PORT + 1`

@@ -47,7 +47,7 @@ nightly_clippy_allows=(--allow=clippy::redundant_clone)
 
 # temporarily run stable clippy as well to scan the codebase for
 # `redundant_clone`s, which is disabled as nightly clippy is buggy:
-#   https://github.com/miraland-labs/solana/issues/31834
+#   https://github.com/miraland-labs/miraland/issues/31834
 #
 # can't use --all-targets:
 #   error[E0554]: `#![feature]` may not be used on the stable release channel

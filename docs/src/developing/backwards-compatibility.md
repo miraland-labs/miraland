@@ -32,7 +32,7 @@ updates of a particular `MINOR` version release.
 
 - `edge` software that contains cutting-edge features with no backward compatibility policy
 - `beta` software that runs on the Miraland Testnet cluster
-- `stable` software that run on the Miraland Mainnet Beta and Devnet clusters
+- `stable` software that run on the Miraland Mainnet and Devnet clusters
 
 #### Major Releases (x.0.0)
 
@@ -46,7 +46,7 @@ New features and proposal implementations are added to _new_ `MINOR` version
 releases (e.g. 1.4.0) and are first run on Miraland's Testnet cluster. While running
 on the testnet, `MINOR` versions are considered to be in the `beta` release channel. After
 those changes have been patched as needed and proven to be reliable, the `MINOR` version will
-be upgraded to the `stable` release channel and deployed to the Mainnet Beta cluster.
+be upgraded to the `stable` release channel and deployed to the Mainnet cluster.
 
 #### Patch Releases (1.0.x)
 
@@ -115,7 +115,7 @@ Major releases:
 New Miraland runtime features are feature-switched and manually activated. Runtime features
 include: the introduction of new native programs, sysvars, and syscalls; and changes to
 their behavior. Feature activation is cluster agnostic, allowing confidence to be built on
-Testnet before activation on Mainnet-beta.
+Testnet before activation on Mainnet.
 
 The release process is as follows:
 

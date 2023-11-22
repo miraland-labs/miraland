@@ -91,9 +91,9 @@ body:
     validations:
       required: false
   - type: input
-    id: mainnet-beta
+    id: mainnet
     attributes:
-      label: Mainnet-Beta Activation Epoch
+      label: Mainnet Activation Epoch
       placeholder: Edit this response when feature is activated on this cluster
     validations:
       required: false

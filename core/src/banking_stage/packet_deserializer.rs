@@ -54,7 +54,7 @@ impl PacketDeserializer {
         let (packet_count, packet_batches) = self.receive_until(recv_timeout, capacity)?;
 
         // Note: this can be removed after feature `round_compute_unit_price` is activated in
-        // mainnet-beta
+        // mainnet
         let _working_bank = self.bank_forks.read().unwrap().working_bank();
         let round_compute_unit_price_enabled = false; // TODO get from working_bank.feature_set
 

@@ -21,7 +21,7 @@ pub fn is_enabled_this_epoch(bank: &Bank) -> bool {
         (MAX_LOCKOUT_HISTORY as u64).saturating_add(CALCULATION_INTERVAL_BUFFER);
     // The calculation buffer is a best-attempt at median worst-case for how many bank ancestors can
     // accumulate before the bank is rooted.
-    // [brooks] On Wed Oct 26 12:15:21 2022, over the previous 6 hour period against mainnet-beta,
+    // [brooks] On Wed Oct 26 12:15:21 2022, over the previous 6 hour period against mainnet,
     // I saw multiple validators reporting metrics in the 120s for `total_parent_banks`.  The mean
     // is 2 to 3, but a number of nodes also reported values in the low 20s.  A value of 150 should
     // capture the majority of validators, and will not be an issue for clusters running with

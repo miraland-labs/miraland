@@ -218,7 +218,7 @@ where
 
 pub fn normalize_to_url_if_moniker<T: AsRef<str>>(url_or_moniker: T) -> String {
     match url_or_moniker.as_ref() {
-        "m" | "mainnet-beta" => "https://api.mainnet-mln.miraland.top",
+        "m" | "mainnet" => "https://api.mainnet-mln.miraland.top",
         "t" | "testnet" => "https://api.testnet-mln.miraland.top",
         "d" | "devnet" => "https://api.devnet-mln.miraland.top",
         "l" | "localhost" => "http://localhost:8899",

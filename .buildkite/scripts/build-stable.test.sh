@@ -12,7 +12,7 @@ want=$(
     steps:
       - name: "partitions"
         command: ". ci/rust-version.sh; ci/docker-run.sh $$rust_stable_docker_image ci/stable/run-partition.sh"
-        timeout_in_minutes: 30
+        timeout_in_minutes: 60
         agents:
           queue: "miraland"
         parallelism: 3
@@ -21,7 +21,7 @@ want=$(
             - limit: 3
       - name: "localnet"
         command: ". ci/rust-version.sh; ci/docker-run.sh $$rust_stable_docker_image ci/stable/run-localnet.sh"
-        timeout_in_minutes: 30
+        timeout_in_minutes: 60
         agents:
           queue: "miraland"
 EOF

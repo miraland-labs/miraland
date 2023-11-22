@@ -140,9 +140,9 @@ wait_step() {
 }
 
 all_test_steps() {
-  command_step checks1 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 20 check
-  command_step checks2 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-bins" 15 check
-  command_step checks3 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-all-targets" 15 check
+  command_step checks1 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 40 check
+  command_step checks2 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-bins" 30 check
+  command_step checks3 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-all-targets" 30 check
   wait_step
 
   # Full test suite
@@ -156,7 +156,7 @@ all_test_steps() {
              ^ci/rust-version.sh \
              ^ci/test-docs.sh \
       ; then
-    command_step doctest "ci/test-docs.sh" 15
+    command_step doctest "ci/test-docs.sh" 60
   else
     annotate --style info --context test-docs \
       "Docs skipped as no .rs files were modified"
@@ -226,7 +226,7 @@ EOF
              ^ci/test-stable.sh \
              ^sdk/ \
       ; then
-    command_step wasm ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-wasm.sh" 20
+    command_step wasm ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_stable_docker_image ci/test-wasm.sh" 60
   else
     annotate --style info \
       "wasm skipped as no relevant files were modified"
@@ -264,7 +264,7 @@ EOF
 }
 
 pull_or_push_steps() {
-  command_step sanity "ci/test-sanity.sh" 5 check
+  command_step sanity "ci/test-sanity.sh" 10 check
   wait_step
 
   # Check for any .sh file changes
@@ -272,7 +272,7 @@ pull_or_push_steps() {
               .sh$ \
               ^.buildkite/hooks \
       ; then
-    command_step shellcheck "ci/shellcheck.sh" 5 check
+    command_step shellcheck "ci/shellcheck.sh" 10 check
     wait_step
   fi
 
@@ -334,7 +334,7 @@ if [[ $BUILDKITE_BRANCH =~ ^pull ]]; then
     "Github Pull Request: https://github.com/miraland-labs/miraland/$BUILDKITE_BRANCH"
 
   if [[ $GITHUB_USER = "dependabot[bot]" ]]; then
-    command_step dependabot "ci/dependabot-pr.sh" 5
+    command_step dependabot "ci/dependabot-pr.sh" 10
     wait_step
   fi
   pull_or_push_steps

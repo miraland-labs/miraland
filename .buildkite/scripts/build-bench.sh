@@ -13,7 +13,7 @@ build_steps() {
 {
   "name": "$1",
   "command": "$2",
-  "timeout_in_minutes": 30,
+  "timeout_in_minutes": 90,
   "agent": "$agent",
   "retry": 3
 }

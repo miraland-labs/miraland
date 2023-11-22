@@ -146,4 +146,4 @@ appearing.  To check for progress:
 If this happens and the error is non-fatal, click "Retry" on the "publish crate" job
 
 ### Update software on testnet.miraland.com
-See the documentation at https://github.com/miraland-labs/cluster-ops/. devnet.miraland.com and mainnet-beta.miraland.com run stable releases that have been tested on testnet. Do not update devnet or mainnet-beta with a beta release.
+See the documentation at https://github.com/miraland-labs/cluster-ops/. devnet.miraland.com and mainnet.miraland.com run stable releases that have been tested on testnet. Do not update devnet or mainnet with a beta release.

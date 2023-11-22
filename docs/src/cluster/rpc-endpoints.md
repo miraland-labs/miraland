@@ -34,7 +34,7 @@ public RPC endpoints currently available and recommended for each public cluster
 - Maximum connection rate per 10 seconds per IP: 40
 - Maximum amount of data per 30 second: 100 MB
 
-## Mainnet Beta
+## Mainnet
 
 #### Endpoints\*
 

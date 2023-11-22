@@ -218,7 +218,7 @@ before deploying them to any network.
 
 In each environment, you'll be using one of three networks:
 
-- Mainnet Beta - the "production" network where all the action happens.
+- Mainnet - the "production" network where all the action happens.
   Transactions cost real money here.
 - Testnet - used for stress testing recent releases. Focused on network
   performance, stability, and validator behavior.

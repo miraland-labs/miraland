@@ -31,7 +31,7 @@ bitflags! {
         const TRACER_PACKET  = 0b0001_0000;
         /// to be set by bank.feature_set.is_active(round_compute_unit_price::id()) at the moment
         /// the packet is built.
-        /// This field can be removed when the above feature gate is adopted by mainnet-beta.
+        /// This field can be removed when the above feature gate is adopted by mainnet.
         const ROUND_COMPUTE_UNIT_PRICE = 0b0010_0000;
     }
 }
