@@ -99,8 +99,8 @@ pub struct RemoteWalletManager {
 impl RemoteWalletManager {
     /// Create a new instance.
     #[cfg(feature = "hidapi")]
-    pub fn new(usb: Arc<Mutex<hidapi::HidApi>>) -> Arc<Self> {
-        Arc::new(Self {
+    pub fn new(usb: Arc<Mutex<hidapi::HidApi>>) -> Rc<Self> {
+        Rc::new(Self {
             usb,
             devices: RwLock::new(Vec::new()),
         })
@@ -133,7 +133,7 @@ impl RemoteWalletManager {
                             detected_devices.push(Device {
                                 path,
                                 info,
-                                wallet_type: RemoteWalletType::Ledger(Arc::new(ledger)),
+                                wallet_type: RemoteWalletType::Ledger(Rc::new(ledger)),
                             })
                         }
                         Err(err) => {
@@ -173,7 +173,7 @@ impl RemoteWalletManager {
     pub fn get_ledger(
         &self,
         host_device_path: &str,
-    ) -> Result<Arc<LedgerWallet>, RemoteWalletError> {
+    ) -> Result<Rc<LedgerWallet>, RemoteWalletError> {
         self.devices
             .read()
             .iter()
@@ -237,6 +237,16 @@ pub trait RemoteWallet<T> {
     ) -> Result<Signature, RemoteWalletError> {
         unimplemented!();
     }
+
+    /// Sign off-chain message with wallet managing pubkey at derivation path
+    /// `m/44'/501'/<account>'/<change>'`.
+    fn sign_offchain_message(
+        &self,
+        derivation_path: &DerivationPath,
+        message: &[u8],
+    ) -> Result<Signature, RemoteWalletError> {
+        unimplemented!();
+    }
 }
 
 /// `RemoteWallet` device
@@ -251,7 +261,7 @@ pub struct Device {
 /// Remote wallet convenience enum to hold various wallet types
 #[derive(Debug)]
 pub enum RemoteWalletType {
-    Ledger(Arc<LedgerWallet>),
+    Ledger(Rc<LedgerWallet>),
 }
 
 /// Remote wallet information.

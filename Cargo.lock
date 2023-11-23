@@ -4270,7 +4270,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-remote-wallet"
-version = "1.14.19"
+version = "1.14.20"
 dependencies = [
  "console",
  "dialoguer",
