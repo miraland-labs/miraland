@@ -404,14 +404,14 @@ pub struct RpcVoteAccountInfo {
     pub root_slot: Slot,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct RpcSignatureConfirmation {
     pub confirmations: usize,
     pub status: Result<()>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct RpcSimulateTransactionResult {
     pub err: Option<TransactionError>,
@@ -421,7 +421,7 @@ pub struct RpcSimulateTransactionResult {
     pub return_data: Option<UiTransactionReturnData>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct RpcStorageTurn {
     pub blockhash: String,
@@ -508,7 +508,7 @@ pub enum RpcBlockUpdateError {
     UnsupportedTransactionVersion(u8),
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct RpcBlockUpdate {
     pub slot: Slot,

@@ -1,6 +1,6 @@
 [package]
 name = "miraland-client"
-version = "1.14.19"
+version = "1.14.20"
 description = "Miraland Client"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",
