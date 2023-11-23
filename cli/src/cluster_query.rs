@@ -67,6 +67,7 @@ use {
     std::{
         collections::{BTreeMap, HashMap, VecDeque},
         fmt,
+        rc::Rc,
         str::FromStr,
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -478,7 +479,7 @@ impl ClusterQuerySubCommands for App<'_, '_> {
 
 pub fn parse_catchup(
     matches: &ArgMatches<'_>,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let node_pubkey = pubkey_of_signer(matches, "node_pubkey", wallet_manager)?;
     let mut our_localhost_port = value_t!(matches, "our_localhost", u16).ok();
@@ -513,7 +514,7 @@ pub fn parse_catchup(
 pub fn parse_cluster_ping(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let interval = Duration::from_secs(value_t_or_exit!(matches, "interval", u64));
     let count = if matches.is_present("count") {
@@ -620,7 +621,7 @@ pub fn parse_get_transaction_count(_matches: &ArgMatches<'_>) -> Result<CliComma
 
 pub fn parse_show_stakes(
     matches: &ArgMatches<'_>,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let use_lamports_unit = matches.is_present("lamports");
     let vote_account_pubkeys =
@@ -672,7 +673,7 @@ pub fn parse_show_validators(matches: &ArgMatches<'_>) -> Result<CliCommandInfo,
 
 pub fn parse_transaction_history(
     matches: &ArgMatches<'_>,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let address = pubkey_of_signer(matches, "address", wallet_manager)?.unwrap();
 
@@ -1581,7 +1582,7 @@ pub fn process_ping(
 
 pub fn parse_logs(
     matches: &ArgMatches<'_>,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let address = pubkey_of_signer(matches, "address", wallet_manager)?;
     let include_votes = matches.is_present("include_votes");

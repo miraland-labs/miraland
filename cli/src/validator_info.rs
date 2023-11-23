@@ -26,7 +26,7 @@ use {
         signature::{Keypair, Signer},
         transaction::Transaction,
     },
-    std::{error, sync::Arc},
+    std::{error, rc::Rc, sync::Arc},
 };
 
 // Return an error if a validator details are longer than the max length.
@@ -214,7 +214,7 @@ impl ValidatorInfoSubCommands for App<'_, '_> {
 pub fn parse_validator_info_command(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let info_pubkey = pubkey_of(matches, "info_pubkey");
     // Prepare validator info

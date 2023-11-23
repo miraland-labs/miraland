@@ -1,6 +1,6 @@
 [package]
 name = "miraland-clap-utils"
-version = "1.14.19"
+version = "1.14.20"
 description = "Miraland utilities for the clap"
 authors = [
   "Miraland Crafters <crafters@miraland.top>",

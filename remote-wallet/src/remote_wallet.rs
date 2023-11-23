@@ -14,6 +14,7 @@ use {
         signature::{Signature, SignerError},
     },
     std::{
+        rc::Rc,
         sync::Arc,
         time::{Duration, Instant},
     },
@@ -298,18 +299,18 @@ pub fn is_valid_hid_device(usage_page: u16, interface_number: i32) -> bool {
 
 /// Helper to initialize hidapi and RemoteWalletManager
 #[cfg(feature = "hidapi")]
-pub fn initialize_wallet_manager() -> Result<Arc<RemoteWalletManager>, RemoteWalletError> {
+pub fn initialize_wallet_manager() -> Result<Rc<RemoteWalletManager>, RemoteWalletError> {
     let hidapi = Arc::new(Mutex::new(hidapi::HidApi::new()?));
     Ok(RemoteWalletManager::new(hidapi))
 }
 #[cfg(not(feature = "hidapi"))]
-pub fn initialize_wallet_manager() -> Result<Arc<RemoteWalletManager>, RemoteWalletError> {
+pub fn initialize_wallet_manager() -> Result<Rc<RemoteWalletManager>, RemoteWalletError> {
     Err(RemoteWalletError::Hid(
         "hidapi crate compilation disabled in miraland-remote-wallet.".to_string(),
     ))
 }
 
-pub fn maybe_wallet_manager() -> Result<Option<Arc<RemoteWalletManager>>, RemoteWalletError> {
+pub fn maybe_wallet_manager() -> Result<Option<Rc<RemoteWalletManager>>, RemoteWalletError> {
     let wallet_manager = initialize_wallet_manager()?;
     let device_count = wallet_manager.update_devices()?;
     if device_count > 0 {

@@ -55,6 +55,7 @@ use {
         io::{Read, Write},
         mem::size_of,
         path::PathBuf,
+        rc::Rc,
         str::FromStr,
         sync::Arc,
     },
@@ -447,7 +448,7 @@ impl ProgramSubCommands for App<'_, '_> {
 pub fn parse_program_subcommand(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let (subcommand, sub_matches) = matches.subcommand();
     let matches_skip_fee_check = matches.is_present("skip_fee_check");

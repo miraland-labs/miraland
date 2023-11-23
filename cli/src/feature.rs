@@ -22,7 +22,7 @@ use {
         pubkey::Pubkey,
         transaction::Transaction,
     },
-    std::{cmp::Ordering, collections::HashMap, fmt, str::FromStr, sync::Arc},
+    std::{cmp::Ordering, collections::HashMap, fmt, rc::Rc, str::FromStr, sync::Arc},
 };
 
 const DEFAULT_MAX_ACTIVE_DISPLAY_AGE_SLOTS: Slot = 15_000_000; // ~90days
@@ -464,7 +464,7 @@ fn known_feature(feature: &Pubkey) -> Result<(), CliError> {
 pub fn parse_feature_subcommand(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let response = match matches.subcommand() {
         ("activate", Some(matches)) => {

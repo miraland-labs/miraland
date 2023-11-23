@@ -16,6 +16,7 @@ use {
         account::from_account, clock::Clock, commitment_config::CommitmentConfig, message::Message,
         pubkey::Pubkey, sysvar, transaction::Transaction,
     },
+    std::rc::Rc,
     std::sync::Arc,
 };
 
@@ -219,7 +220,7 @@ impl AddressLookupTableSubCommands for App<'_, '_> {
 pub fn parse_address_lookup_table_subcommand(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let (subcommand, sub_matches) = matches.subcommand();
 

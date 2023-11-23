@@ -12,6 +12,7 @@ use {
     miraland_client::rpc_client::RpcClient,
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     solana_sdk::{clock::Epoch, pubkey::Pubkey},
+    std::rc::Rc,
     std::sync::Arc,
 };
 
@@ -56,7 +57,7 @@ impl InflationSubCommands for App<'_, '_> {
 pub fn parse_inflation_subcommand(
     matches: &ArgMatches<'_>,
     _default_signer: &DefaultSigner,
-    _wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    _wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let command = match matches.subcommand() {
         ("rewards", Some(matches)) => {

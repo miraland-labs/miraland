@@ -45,7 +45,7 @@ use {
         system_program,
         transaction::{Transaction, VersionedTransaction},
     },
-    std::{fmt::Write as FmtWrite, fs::File, io::Write, sync::Arc},
+    std::{fmt::Write as FmtWrite, fs::File, io::Write, rc::Rc, sync::Arc},
 };
 
 pub trait WalletSubCommands {
@@ -292,7 +292,7 @@ fn resolve_derived_address_program_id(matches: &ArgMatches<'_>, arg_name: &str) 
 
 pub fn parse_account(
     matches: &ArgMatches<'_>,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let account_pubkey = pubkey_of_signer(matches, "account_pubkey", wallet_manager)?.unwrap();
     let output_file = matches.value_of("output_file");
@@ -310,7 +310,7 @@ pub fn parse_account(
 pub fn parse_airdrop(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let pubkey = pubkey_of_signer(matches, "to", wallet_manager)?;
     let signers = if pubkey.is_some() {
@@ -328,7 +328,7 @@ pub fn parse_airdrop(
 pub fn parse_balance(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let pubkey = pubkey_of_signer(matches, "pubkey", wallet_manager)?;
     let signers = if pubkey.is_some() {
@@ -369,7 +369,7 @@ pub fn parse_decode_transaction(matches: &ArgMatches<'_>) -> Result<CliCommandIn
 pub fn parse_create_address_with_seed(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let from_pubkey = pubkey_of_signer(matches, "from", wallet_manager)?;
     let signers = if from_pubkey.is_some() {
@@ -395,7 +395,7 @@ pub fn parse_create_address_with_seed(
 pub fn parse_transfer(
     matches: &ArgMatches<'_>,
     default_signer: &DefaultSigner,
-    wallet_manager: &mut Option<Arc<RemoteWalletManager>>,
+    wallet_manager: &mut Option<Rc<RemoteWalletManager>>,
 ) -> Result<CliCommandInfo, CliError> {
     let amount = SpendAmount::new_from_matches(matches, "amount");
     let to = pubkey_of_signer(matches, "to", wallet_manager)?.unwrap();
