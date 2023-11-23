@@ -4922,7 +4922,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-proof-program"
-version = "1.14.19"
+version = "1.14.20"
 dependencies = [
  "bytemuck",
  "getrandom 0.1.16",
