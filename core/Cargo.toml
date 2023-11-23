@@ -1,7 +1,7 @@
 [package]
 name = "miraland-core"
 description = "Blockchain for community beyond the horizon"
-version = "1.14.19"
+version = "1.14.20"
 homepage = "https://miraland.top/"
 documentation = "https://docs.rs/miraland-core"
 readme = "../README.md"
@@ -70,7 +70,7 @@ serde_derive = "1.0.103"
 sys-info = "0.9.1"
 tempfile = "3.6.0"
 thiserror = "1.0"
-tokio = { version = "~1.14.1", features = ["full"] }
+tokio = { version = "1.14.1", features = ["full"] }
 trees = "0.4.2"
 
 [dev-dependencies]
