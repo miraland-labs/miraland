@@ -19,7 +19,7 @@ pub(in crate::parse_token) fn parse_default_account_state_instruction(
         DefaultAccountStateInstruction::Initialize => {
             check_num_token_accounts(account_indexes, 1)?;
             Ok(ParsedInstructionEnum {
-                instruction_type: format!("initialize{}", instruction_type),
+                instruction_type: format!("initialize{instruction_type}"),
                 info: json!({
                     "mint": account_keys[account_indexes[0] as usize].to_string(),
                     "accountState": UiAccountState::from(account_state),
@@ -42,7 +42,7 @@ pub(in crate::parse_token) fn parse_default_account_state_instruction(
                 "multisigFreezeAuthority",
             );
             Ok(ParsedInstructionEnum {
-                instruction_type: format!("update{}", instruction_type),
+                instruction_type: format!("update{instruction_type}"),
                 info: value,
             })
         }
@@ -53,7 +53,6 @@ pub(in crate::parse_token) fn parse_default_account_state_instruction(
 mod test {
     use {
         super::*,
-        crate::parse_token::test::*,
         solana_sdk::pubkey::Pubkey,
         spl_token_2022::{
             extension::default_account_state::instruction::{
@@ -69,16 +68,16 @@ mod test {
         let mint_pubkey = Pubkey::new_unique();
         let init_default_account_state_ix = initialize_default_account_state(
             &spl_token_2022::id(),
-            &convert_pubkey(mint_pubkey),
+            &mint_pubkey,
             &AccountState::Frozen,
         )
         .unwrap();
         let message = Message::new(&[init_default_account_state_ix], None);
-        let compiled_instruction = convert_compiled_instruction(&message.instructions[0]);
+        let compiled_instruction = &message.instructions[0];
         assert_eq!(
             parse_token(
-                &compiled_instruction,
-                &AccountKeys::new(&convert_account_keys(&message), None)
+                compiled_instruction,
+                &AccountKeys::new(&message.account_keys, None)
             )
             .unwrap(),
             ParsedInstructionEnum {
@@ -94,18 +93,18 @@ mod test {
         let mint_freeze_authority = Pubkey::new_unique();
         let update_default_account_state_ix = update_default_account_state(
             &spl_token_2022::id(),
-            &convert_pubkey(mint_pubkey),
-            &convert_pubkey(mint_freeze_authority),
+            &mint_pubkey,
+            &mint_freeze_authority,
             &[],
             &AccountState::Initialized,
         )
         .unwrap();
         let message = Message::new(&[update_default_account_state_ix], None);
-        let compiled_instruction = convert_compiled_instruction(&message.instructions[0]);
+        let compiled_instruction = &message.instructions[0];
         assert_eq!(
             parse_token(
-                &compiled_instruction,
-                &AccountKeys::new(&convert_account_keys(&message), None)
+                compiled_instruction,
+                &AccountKeys::new(&message.account_keys, None)
             )
             .unwrap(),
             ParsedInstructionEnum {
@@ -124,21 +123,18 @@ mod test {
         let multisig_signer1 = Pubkey::new_unique();
         let update_default_account_state_ix = update_default_account_state(
             &spl_token_2022::id(),
-            &convert_pubkey(mint_pubkey),
-            &convert_pubkey(multisig_pubkey),
-            &[
-                &convert_pubkey(multisig_signer0),
-                &convert_pubkey(multisig_signer1),
-            ],
+            &mint_pubkey,
+            &multisig_pubkey,
+            &[&multisig_signer0, &multisig_signer1],
             &AccountState::Initialized,
         )
         .unwrap();
         let message = Message::new(&[update_default_account_state_ix], None);
-        let compiled_instruction = convert_compiled_instruction(&message.instructions[0]);
+        let compiled_instruction = &message.instructions[0];
         assert_eq!(
             parse_token(
-                &compiled_instruction,
-                &AccountKeys::new(&convert_account_keys(&message), None)
+                compiled_instruction,
+                &AccountKeys::new(&message.account_keys, None)
             )
             .unwrap(),
             ParsedInstructionEnum {

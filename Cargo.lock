@@ -4802,7 +4802,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-transaction-status"
-version = "1.14.20"
+version = "1.14.21"
 dependencies = [
  "Inflector",
  "base64 0.13.1",
@@ -4823,7 +4823,7 @@ dependencies = [
  "solarti-associated-token-account",
  "solarti-memo 3.0.7",
  "solarti-token 3.5.6",
- "solarti-token-2022 0.6.7",
+ "solarti-token-2022 0.9.0",
  "thiserror",
 ]
 
