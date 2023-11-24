@@ -23,14 +23,14 @@ use {
         },
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
-    solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::{
         config::{RpcAccountInfoConfig, RpcProgramAccountsConfig, RpcSendTransactionConfig},
         filter::{Memcmp, RpcFilterType},
     },
+    solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
+    solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
     solana_sdk::{
         account::Account,
         commitment_config::CommitmentConfig,
@@ -795,7 +795,7 @@ fn check_payer(
     }
     if !write_messages.is_empty() {
         // Assume all write messages cost the same
-        if let Some(message) = write_messages.get(0) {
+        if let Some(message) = write_messages.first() {
             fee += rpc_client.get_fee_for_message(message)? * (write_messages.len() as u64);
         }
     }
@@ -1271,11 +1271,11 @@ mod tests {
     use {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
-        serde_json::json,
         miraland_rpc_client_api::{
             request::RpcRequest,
             response::{Response, RpcResponseContext},
         },
+        serde_json::json,
         solana_sdk::signature::{
             keypair_from_seed, read_keypair_file, write_keypair_file, Keypair,
         },

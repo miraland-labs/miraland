@@ -20,14 +20,6 @@ indexmap = { workspace = true, features = ["rayon"] }
 itertools = { workspace = true }
 log = { workspace = true }
 lru = { workspace = true }
-num-traits = { workspace = true }
-rand = { workspace = true }
-rand_chacha = { workspace = true }
-rayon = { workspace = true }
-rustversion = { workspace = true }
-serde = { workspace = true }
-serde_bytes = { workspace = true }
-serde_derive = { workspace = true }
 miraland-bloom = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-client = { workspace = true }
@@ -49,6 +41,14 @@ miraland-tpu-client = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote = { workspace = true }
 miraland-vote-program = { workspace = true }
+num-traits = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+rayon = { workspace = true }
+rustversion = { workspace = true }
+serde = { workspace = true }
+serde_bytes = { workspace = true }
+serde_derive = { workspace = true }
 static_assertions = { workspace = true }
 thiserror = { workspace = true }
 

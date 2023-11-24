@@ -12,10 +12,10 @@ edition = { workspace = true }
 [dependencies]
 byte-unit = { workspace = true }
 clap = { version = "3.1.5", features = ["cargo"] }
-serde = { workspace = true }
-serde_json = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-version = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
 
 [[bin]]
 name = "miraland-log-analyzer"

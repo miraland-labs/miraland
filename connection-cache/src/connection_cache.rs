@@ -7,8 +7,8 @@ use {
     crossbeam_channel::{Receiver, RecvError, Sender},
     indexmap::map::IndexMap,
     log::*,
-    rand::{thread_rng, Rng},
     miraland_measure::measure::Measure,
+    rand::{thread_rng, Rng},
     solana_sdk::timing::AtomicInterval,
     std::{
         net::SocketAddr,

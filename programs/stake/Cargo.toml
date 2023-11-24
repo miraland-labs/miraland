@@ -19,8 +19,8 @@ miraland-vote-program = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-proptest = { workspace = true }
 miraland-logger = { workspace = true }
+proptest = { workspace = true }
 test-case = { workspace = true }
 
 [build-dependencies]

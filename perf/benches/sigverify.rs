@@ -4,13 +4,13 @@ extern crate test;
 
 use {
     log::*,
-    rand::{thread_rng, Rng},
     miraland_perf::{
         packet::{to_packet_batches, Packet, PacketBatch},
         recycler::Recycler,
         sigverify,
         test_tx::{test_multisig_tx, test_tx},
     },
+    rand::{thread_rng, Rng},
     test::Bencher,
 };
 

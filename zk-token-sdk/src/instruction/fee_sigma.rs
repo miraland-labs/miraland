@@ -1,6 +1,6 @@
 //! The fee sigma proof instruction.
 //!
-//! A fee sigma proof certifies that a Pedersen commitment to a transfer fee for Solarti Token 2022 is
+//! A fee sigma proof certifies that a Pedersen commitment to a transfer fee for SPL Token 2022 is
 //! well-formed.
 //!
 //! A formal documentation of how transfer fees and fee sigma proof are computed can be found in
@@ -12,7 +12,7 @@
 use {
     crate::{
         encryption::pedersen::{PedersenCommitment, PedersenOpening},
-        errors::ProofError,
+        errors::{ProofGenerationError, ProofVerificationError},
         sigma_proofs::fee_proof::FeeSigmaProof,
         transcript::TranscriptProtocol,
     },
@@ -72,7 +72,7 @@ impl FeeSigmaProofData {
         fee_amount: u64,
         delta_fee: u64,
         max_fee: u64,
-    ) -> Result<Self, ProofError> {
+    ) -> Result<Self, ProofGenerationError> {
         let pod_fee_commitment = pod::PedersenCommitment(fee_commitment.to_bytes());
         let pod_delta_commitment = pod::PedersenCommitment(delta_commitment.to_bytes());
         let pod_claimed_commitment = pod::PedersenCommitment(claimed_commitment.to_bytes());
@@ -108,7 +108,7 @@ impl ZkProofData<FeeSigmaProofContext> for FeeSigmaProofData {
     }
 
     #[cfg(not(target_os = "solana"))]
-    fn verify_proof(&self) -> Result<(), ProofError> {
+    fn verify_proof(&self) -> Result<(), ProofVerificationError> {
         let mut transcript = self.context.new_transcript();
 
         let fee_commitment = self.context.fee_commitment.try_into()?;

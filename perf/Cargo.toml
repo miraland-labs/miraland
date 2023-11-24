@@ -18,15 +18,15 @@ dlopen2 = { workspace = true }
 fnv = { workspace = true }
 lazy_static = { workspace = true }
 log = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
-serde = { workspace = true }
 miraland-frozen-abi = { workspace = true }
 miraland-frozen-abi-macro = { workspace = true }
 miraland-metrics = { workspace = true }
 miraland-rayon-threadlimit = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-vote-program = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
 
 [target."cfg(target_os = \"linux\")".dependencies]
 caps = { workspace = true }
@@ -38,8 +38,8 @@ name = "miraland_perf"
 
 [dev-dependencies]
 assert_matches = { workspace = true }
-rand_chacha = { workspace = true }
 miraland-logger = { workspace = true }
+rand_chacha = { workspace = true }
 test-case = { workspace = true }
 
 [build-dependencies]

@@ -9,12 +9,6 @@ use {
     dashmap::DashMap,
     itertools::Itertools,
     log::*,
-    regex::Regex,
-    serde::{
-        ser::{SerializeSeq, Serializer},
-        Serialize,
-    },
-    serde_json::json,
     miraland_account_decoder::{UiAccount, UiAccountData, UiAccountEncoding},
     miraland_accounts_db::{
         accounts::Accounts, accounts_db::CalcAccountsHashDataSource, accounts_index::ScanConfig,
@@ -49,6 +43,12 @@ use {
         use_snapshot_archives_at_startup::{self, UseSnapshotArchivesAtStartup},
     },
     miraland_measure::{measure, measure::Measure},
+    regex::Regex,
+    serde::{
+        ser::{SerializeSeq, Serializer},
+        Serialize,
+    },
+    serde_json::json,
     solana_runtime::{
         bank::{bank_hash_details, Bank, RewardCalculationEvent, TotalAccountsStats},
         bank_forks::BankForks,
@@ -743,17 +743,23 @@ fn analyze_column<
     db: &Database,
     name: &str,
 ) {
+    let mut key_len: u64 = 0;
     let mut key_tot: u64 = 0;
     let mut val_hist = histogram::Histogram::new();
     let mut val_tot: u64 = 0;
     let mut row_hist = histogram::Histogram::new();
-    let a = C::key_size() as u64;
-    for (_x, y) in db.iter::<C>(blockstore_db::IteratorMode::Start).unwrap() {
-        let b = y.len() as u64;
-        key_tot += a;
-        val_hist.increment(b).unwrap();
-        val_tot += b;
-        row_hist.increment(a + b).unwrap();
+    for (key, val) in db.iter::<C>(blockstore_db::IteratorMode::Start).unwrap() {
+        // Key length is fixed, only need to calculate it once
+        if key_len == 0 {
+            key_len = C::key(key).len() as u64;
+        }
+        let val_len = val.len() as u64;
+
+        key_tot += key_len;
+        val_hist.increment(val_len).unwrap();
+        val_tot += val_len;
+
+        row_hist.increment(key_len + val_len).unwrap();
     }
 
     let json_result = if val_hist.entries() > 0 {
@@ -761,7 +767,7 @@ fn analyze_column<
             "column":name,
             "entries":val_hist.entries(),
             "key_stats":{
-                "max":a,
+                "max":key_len,
                 "total_bytes":key_tot,
             },
             "val_stats":{
@@ -790,7 +796,7 @@ fn analyze_column<
         "column":name,
         "entries":val_hist.entries(),
         "key_stats":{
-            "max":a,
+            "max":key_len,
             "total_bytes":0,
         },
         "val_stats":{

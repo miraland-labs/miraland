@@ -4,8 +4,8 @@ use {
     clap::{crate_description, crate_name, crate_version, Arg},
     itertools::Itertools,
     log::*,
-    regex::Regex,
     miraland_download_utils::download_file,
+    regex::Regex,
     solana_sdk::signature::{write_keypair_file, Keypair},
     std::{
         borrow::Cow,

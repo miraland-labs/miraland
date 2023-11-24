@@ -3,8 +3,8 @@ use {
     miraland_core::validator::{Validator, ValidatorConfig},
     miraland_gossip::{cluster_info::Node, contact_info::ContactInfo},
     miraland_ledger::shred::Shred,
-    solana_sdk::{pubkey::Pubkey, signature::Keypair},
     miraland_streamer::socket::SocketAddrSpace,
+    solana_sdk::{pubkey::Pubkey, signature::Keypair},
     std::{path::PathBuf, sync::Arc},
 };
 

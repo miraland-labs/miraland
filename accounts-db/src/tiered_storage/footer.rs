@@ -1,7 +1,7 @@
 use {
     crate::tiered_storage::{
         error::TieredStorageError, file::TieredStorageFile, index::IndexBlockFormat,
-        mmap_utils::get_type, TieredStorageResult as TsResult,
+        mmap_utils::get_type, TieredStorageResult,
     },
     memmap2::Mmap,
     solana_sdk::{hash::Hash, pubkey::Pubkey},
@@ -122,7 +122,7 @@ pub struct TieredStorageFooter {
     /// The offset pointing to the first byte of the account index block.
     pub index_block_offset: u64,
     /// The offset pointing to the first byte of the owners block.
-    pub owners_offset: u64,
+    pub owners_block_offset: u64,
 
     // account range
     /// The smallest account address in this file.
@@ -157,7 +157,7 @@ impl Default for TieredStorageFooter {
             owner_count: 0,
             owner_entry_size: 0,
             index_block_offset: 0,
-            owners_offset: 0,
+            owners_block_offset: 0,
             hash: Hash::new_unique(),
             min_account_address: Pubkey::default(),
             max_account_address: Pubkey::default(),
@@ -168,19 +168,19 @@ impl Default for TieredStorageFooter {
 }
 
 impl TieredStorageFooter {
-    pub fn new_from_path(path: impl AsRef<Path>) -> TsResult<Self> {
+    pub fn new_from_path(path: impl AsRef<Path>) -> TieredStorageResult<Self> {
         let file = TieredStorageFile::new_readonly(path);
         Self::new_from_footer_block(&file)
     }
 
-    pub fn write_footer_block(&self, file: &TieredStorageFile) -> TsResult<()> {
+    pub fn write_footer_block(&self, file: &TieredStorageFile) -> TieredStorageResult<()> {
         file.write_type(self)?;
         file.write_type(&TieredStorageMagicNumber::default())?;
 
         Ok(())
     }
 
-    pub fn new_from_footer_block(file: &TieredStorageFile) -> TsResult<Self> {
+    pub fn new_from_footer_block(file: &TieredStorageFile) -> TieredStorageResult<Self> {
         let mut footer_size: u64 = 0;
         let mut footer_version: u64 = 0;
         let mut magic_number = TieredStorageMagicNumber(0);
@@ -204,11 +204,11 @@ impl TieredStorageFooter {
         Ok(footer)
     }
 
-    pub fn new_from_mmap(map: &Mmap) -> TsResult<&TieredStorageFooter> {
-        let offset = map.len().saturating_sub(FOOTER_TAIL_SIZE);
-        let (footer_size, offset) = get_type::<u64>(map, offset)?;
-        let (_footer_version, offset) = get_type::<u64>(map, offset)?;
-        let (magic_number, _offset) = get_type::<TieredStorageMagicNumber>(map, offset)?;
+    pub fn new_from_mmap(mmap: &Mmap) -> TieredStorageResult<&TieredStorageFooter> {
+        let offset = mmap.len().saturating_sub(FOOTER_TAIL_SIZE);
+        let (footer_size, offset) = get_type::<u64>(mmap, offset)?;
+        let (_footer_version, offset) = get_type::<u64>(mmap, offset)?;
+        let (magic_number, _offset) = get_type::<TieredStorageMagicNumber>(mmap, offset)?;
 
         if *magic_number != TieredStorageMagicNumber::default() {
             return Err(TieredStorageError::MagicNumberMismatch(
@@ -217,8 +217,10 @@ impl TieredStorageFooter {
             ));
         }
 
-        let (footer, _offset) =
-            get_type::<TieredStorageFooter>(map, map.len().saturating_sub(*footer_size as usize))?;
+        let (footer, _offset) = get_type::<TieredStorageFooter>(
+            mmap,
+            mmap.len().saturating_sub(*footer_size as usize),
+        )?;
 
         Ok(footer)
     }
@@ -241,7 +243,7 @@ mod tests {
         let expected_footer = TieredStorageFooter {
             account_meta_format: AccountMetaFormat::Hot,
             owners_block_format: OwnersBlockFormat::LocalIndex,
-            index_block_format: IndexBlockFormat::AddressAndOffset,
+            index_block_format: IndexBlockFormat::AddressAndBlockOffsetOnly,
             account_block_format: AccountBlockFormat::AlignedRaw,
             account_entry_count: 300,
             account_meta_entry_size: 24,
@@ -249,7 +251,7 @@ mod tests {
             owner_count: 250,
             owner_entry_size: 32,
             index_block_offset: 1069600,
-            owners_offset: 1081200,
+            owners_block_offset: 1081200,
             hash: Hash::new_unique(),
             min_account_address: Pubkey::default(),
             max_account_address: Pubkey::new_unique(),
@@ -286,7 +288,7 @@ mod tests {
         assert_eq!(offset_of!(TieredStorageFooter, owner_count), 0x18);
         assert_eq!(offset_of!(TieredStorageFooter, owner_entry_size), 0x1C);
         assert_eq!(offset_of!(TieredStorageFooter, index_block_offset), 0x20);
-        assert_eq!(offset_of!(TieredStorageFooter, owners_offset), 0x28);
+        assert_eq!(offset_of!(TieredStorageFooter, owners_block_offset), 0x28);
         assert_eq!(offset_of!(TieredStorageFooter, min_account_address), 0x30);
         assert_eq!(offset_of!(TieredStorageFooter, max_account_address), 0x50);
         assert_eq!(offset_of!(TieredStorageFooter, hash), 0x70);

@@ -23,12 +23,6 @@ jsonrpc-http-server = { workspace = true }
 jsonrpc-pubsub = { workspace = true }
 libc = { workspace = true }
 log = { workspace = true }
-rayon = { workspace = true }
-regex = { workspace = true }
-serde = { workspace = true }
-serde_derive = { workspace = true }
-serde_json = { workspace = true }
-soketto = { workspace = true }
 miraland-account-decoder = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-client = { workspace = true }
@@ -53,6 +47,12 @@ miraland-transaction-status = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote = { workspace = true }
 miraland-vote-program = { workspace = true }
+rayon = { workspace = true }
+regex = { workspace = true }
+serde = { workspace = true }
+serde_derive = { workspace = true }
+serde_json = { workspace = true }
+soketto = { workspace = true }
 solarti-token = { workspace = true, features = ["no-entrypoint"] }
 solarti-token-2022 = { workspace = true, features = ["no-entrypoint"] }
 stream-cancel = { workspace = true }
@@ -61,9 +61,9 @@ tokio = { workspace = true, features = ["full"] }
 tokio-util = { workspace = true, features = ["codec", "compat"] }
 
 [dev-dependencies]
-serial_test = { workspace = true }
 miraland-net-utils = { workspace = true }
 miraland-stake-program = { workspace = true }
+serial_test = { workspace = true }
 solarti-pod = { workspace = true }
 symlink = { workspace = true }
 

@@ -6,7 +6,6 @@ use {
     console::style,
     crossbeam_channel::unbounded,
     log::*,
-    rand::{seq::SliceRandom, thread_rng},
     miraland_accounts_db::{
         accounts_db::{
             AccountShrinkThreshold, AccountsDb, AccountsDbConfig, CreateAncientStorage,
@@ -46,6 +45,19 @@ use {
     },
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::config::RpcLeaderScheduleConfig,
+    miraland_send_transaction_service::send_transaction_service,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
+    miraland_validator::{
+        admin_rpc_service,
+        admin_rpc_service::{load_staked_nodes_overrides, StakedNodesOverrides},
+        bootstrap,
+        cli::{app, warn_for_deprecated_arguments, DefaultArgs},
+        dashboard::Dashboard,
+        ledger_lockfile, lock_ledger, new_spinner_progress_bar, println_name_value,
+        redirect_stderr_to_file,
+    },
+    rand::{seq::SliceRandom, thread_rng},
     solana_runtime::{
         runtime_config::RuntimeConfig,
         snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL,
@@ -61,18 +73,6 @@ use {
         hash::Hash,
         pubkey::Pubkey,
         signature::{read_keypair, Keypair, Signer},
-    },
-    miraland_send_transaction_service::send_transaction_service,
-    miraland_streamer::socket::SocketAddrSpace,
-    miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
-    miraland_validator::{
-        admin_rpc_service,
-        admin_rpc_service::{load_staked_nodes_overrides, StakedNodesOverrides},
-        bootstrap,
-        cli::{app, warn_for_deprecated_arguments, DefaultArgs},
-        dashboard::Dashboard,
-        ledger_lockfile, lock_ledger, new_spinner_progress_bar, println_name_value,
-        redirect_stderr_to_file,
     },
     std::{
         collections::{HashSet, VecDeque},
@@ -244,7 +244,7 @@ fn wait_for_restart_window(
                     Err("Current epoch is almost complete".to_string())
                 } else {
                     while leader_schedule
-                        .get(0)
+                        .front()
                         .map(|slot| *slot < epoch_info.absolute_slot)
                         .unwrap_or(false)
                     {
@@ -258,7 +258,7 @@ fn wait_for_restart_window(
                         upcoming_idle_windows.pop();
                     }
 
-                    match leader_schedule.get(0) {
+                    match leader_schedule.front() {
                         None => {
                             Ok(()) // Validator has no leader slots
                         }
@@ -1287,7 +1287,8 @@ pub fn main() {
                 || matches.is_present("enable_extended_tx_metadata_storage"),
             rpc_bigtable_config,
             faucet_addr: matches.value_of("rpc_faucet_addr").map(|address| {
-                miraland_net_utils::parse_host_port(address).expect("failed to parse faucet address")
+                miraland_net_utils::parse_host_port(address)
+                    .expect("failed to parse faucet address")
             }),
             full_api,
             obsolete_v1_7_api: matches.is_present("obsolete_v1_7_rpc_api"),
@@ -1776,10 +1777,12 @@ pub fn main() {
         matches
             .value_of("public_tpu_forwards_addr")
             .map(|public_tpu_forwards_addr| {
-                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(|err| {
-                    eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
-                    exit(1);
-                })
+                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(
+                    |err| {
+                        eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
+                        exit(1);
+                    },
+                )
             });
 
     let cluster_entrypoints = entrypoint_addrs

@@ -1,8 +1,6 @@
 use {
     itertools::Itertools,
     log::*,
-    rand::{seq::SliceRandom, thread_rng, Rng},
-    rayon::prelude::*,
     miraland_core::validator::{ValidatorConfig, ValidatorStartProgress},
     miraland_download_utils::{download_snapshot_archive, DownloadProgressRecord},
     miraland_genesis_utils::download_then_check_genesis_hash,
@@ -15,6 +13,9 @@ use {
     },
     miraland_metrics::datapoint_info,
     miraland_rpc_client::rpc_client::RpcClient,
+    miraland_streamer::socket::SocketAddrSpace,
+    rand::{seq::SliceRandom, thread_rng, Rng},
+    rayon::prelude::*,
     solana_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter, snapshot_package::SnapshotKind,
         snapshot_utils,
@@ -26,7 +27,6 @@ use {
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{hash_map::RandomState, HashMap, HashSet},
         net::{SocketAddr, TcpListener, TcpStream, UdpSocket},

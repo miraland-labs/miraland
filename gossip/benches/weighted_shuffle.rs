@@ -3,9 +3,9 @@
 extern crate test;
 
 use {
+    miraland_gossip::weighted_shuffle::WeightedShuffle,
     rand::{Rng, SeedableRng},
     rand_chacha::ChaChaRng,
-    miraland_gossip::weighted_shuffle::WeightedShuffle,
     std::iter::repeat_with,
     test::Bencher,
 };

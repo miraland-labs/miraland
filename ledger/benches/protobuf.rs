@@ -9,9 +9,9 @@ use {
         blockstore_db::{columns as cf, LedgerColumn},
         get_tmp_ledger_path_auto_delete,
     },
+    miraland_transaction_status::{Reward, Rewards},
     solana_runtime::bank::RewardType,
     solana_sdk::{clock::Slot, pubkey},
-    miraland_transaction_status::{Reward, Rewards},
     std::path::Path,
     test::Bencher,
 };

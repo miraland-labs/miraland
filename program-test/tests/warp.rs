@@ -5,8 +5,8 @@ mod setup;
 use {
     bincode::deserialize,
     log::debug,
-    setup::{setup_stake, setup_vote},
     miraland_banks_client::BanksClient,
+    setup::{setup_stake, setup_vote},
     solana_program_test::{processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestError},
     solana_sdk::{
         account::Account,

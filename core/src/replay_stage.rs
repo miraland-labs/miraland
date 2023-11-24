@@ -34,7 +34,6 @@ use {
     },
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     lazy_static::lazy_static,
-    rayon::{prelude::*, ThreadPool},
     miraland_entry::entry::VerifyRecyclers,
     miraland_geyser_plugin_manager::block_metadata_notifier_interface::BlockMetadataNotifierArc,
     miraland_gossip::cluster_info::ClusterInfo,
@@ -50,13 +49,16 @@ use {
         leader_schedule_utils::first_of_consecutive_leader_slots,
     },
     miraland_measure::measure::Measure,
-    miraland_poh::poh_recorder::{PohLeaderStatus, PohRecorder, GRACE_TICKS_FACTOR, MAX_GRACE_SLOTS},
-    solana_program_runtime::timings::ExecuteTimings,
+    miraland_poh::poh_recorder::{
+        PohLeaderStatus, PohRecorder, GRACE_TICKS_FACTOR, MAX_GRACE_SLOTS,
+    },
     miraland_rpc::{
         optimistically_confirmed_bank_tracker::{BankNotification, BankNotificationSenderConfig},
         rpc_subscriptions::RpcSubscriptions,
     },
     miraland_rpc_client_api::response::SlotUpdate,
+    rayon::{prelude::*, ThreadPool},
+    solana_program_runtime::timings::ExecuteTimings,
     solana_runtime::{
         accounts_background_service::AbsRequestSender,
         bank::{bank_hash_details, Bank, NewBankOptions},
@@ -4118,6 +4120,8 @@ pub(crate) mod tests {
             optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
             rpc::{create_test_transaction_entries, populate_blockstore_for_tests},
         },
+        miraland_streamer::socket::SocketAddrSpace,
+        miraland_transaction_status::VersionedTransactionWithStatusMeta,
         solana_runtime::{
             accounts_background_service::AbsRequestSender,
             commitment::BlockCommitment,
@@ -4133,8 +4137,6 @@ pub(crate) mod tests {
             system_transaction,
             transaction::TransactionError,
         },
-        miraland_streamer::socket::SocketAddrSpace,
-        miraland_transaction_status::VersionedTransactionWithStatusMeta,
         solana_vote_program::{
             vote_state::{self, VoteStateVersions},
             vote_transaction,
@@ -6512,8 +6514,9 @@ pub(crate) mod tests {
         );
 
         // 4 should be the heaviest slot, but should not be votable
-        // because of lockout. 5 is no longer valid due to it being a duplicate.
-        let (vote_fork, reset_fork, _) = run_compute_and_select_forks(
+        // because of lockout. 5 is no longer valid due to it being a duplicate, however we still
+        // reset onto 5.
+        let (vote_fork, reset_fork, heaviest_fork_failures) = run_compute_and_select_forks(
             &bank_forks,
             &mut progress,
             &mut tower,
@@ -6522,7 +6525,41 @@ pub(crate) mod tests {
             None,
         );
         assert!(vote_fork.is_none());
-        assert!(reset_fork.is_none());
+        assert_eq!(reset_fork, Some(5));
+        assert_eq!(
+            heaviest_fork_failures,
+            vec![
+                HeaviestForkFailures::FailedSwitchThreshold(4, 0, 10000),
+                HeaviestForkFailures::LockedOut(4)
+            ]
+        );
+
+        // Continue building on 5
+        let forks = tr(5) / (tr(6) / (tr(7) / (tr(8) / (tr(9)))) / tr(10));
+        vote_simulator.bank_forks = bank_forks;
+        vote_simulator.progress = progress;
+        vote_simulator.fill_bank_forks(forks, &HashMap::<Pubkey, Vec<u64>>::new(), true);
+        let (bank_forks, mut progress) = (vote_simulator.bank_forks, vote_simulator.progress);
+        // 4 is still the heaviest slot, but not votable beecause of lockout.
+        // 9 is the deepest slot from our last voted fork (5), so it is what we should
+        // reset to.
+        let (vote_fork, reset_fork, heaviest_fork_failures) = run_compute_and_select_forks(
+            &bank_forks,
+            &mut progress,
+            &mut tower,
+            &mut vote_simulator.heaviest_subtree_fork_choice,
+            &mut vote_simulator.latest_validator_votes_for_frozen_banks,
+            None,
+        );
+        assert!(vote_fork.is_none());
+        assert_eq!(reset_fork, Some(9));
+        assert_eq!(
+            heaviest_fork_failures,
+            vec![
+                HeaviestForkFailures::FailedSwitchThreshold(4, 0, 10000),
+                HeaviestForkFailures::LockedOut(4)
+            ]
+        );
 
         // If slot 5 is marked as confirmed, it becomes the heaviest bank on same slot again
         let mut duplicate_slots_to_repair = DuplicateSlotsToRepair::default();
@@ -6544,12 +6581,16 @@ pub(crate) mod tests {
             &mut purge_repair_slot_counter,
             SlotStateUpdate::DuplicateConfirmed(duplicate_confirmed_state),
         );
+
         // The confirmed hash is detected in `progress`, which means
         // it's confirmation on the replayed block. This means we have
         // the right version of the block, so `duplicate_slots_to_repair`
         // should be empty
         assert!(duplicate_slots_to_repair.is_empty());
-        let (vote_fork, reset_fork, _) = run_compute_and_select_forks(
+
+        // We should still reset to slot 9 as it's the heaviest on the now valid
+        // fork.
+        let (vote_fork, reset_fork, heaviest_fork_failures) = run_compute_and_select_forks(
             &bank_forks,
             &mut progress,
             &mut tower,
@@ -6557,9 +6598,40 @@ pub(crate) mod tests {
             &mut vote_simulator.latest_validator_votes_for_frozen_banks,
             None,
         );
+        assert!(vote_fork.is_none());
+        assert_eq!(reset_fork.unwrap(), 9);
+        assert_eq!(
+            heaviest_fork_failures,
+            vec![
+                HeaviestForkFailures::FailedSwitchThreshold(4, 0, 10000),
+                HeaviestForkFailures::LockedOut(4)
+            ]
+        );
+
+        // Resetting our forks back to how it was should allow us to reset to our
+        // last vote which was previously marked as invalid and now duplicate confirmed
+        let bank6_hash = bank_forks.read().unwrap().bank_hash(6).unwrap();
+        let _ = vote_simulator
+            .heaviest_subtree_fork_choice
+            .split_off(&(6, bank6_hash));
         // Should now pick 5 as the heaviest fork from last vote again.
+        let (vote_fork, reset_fork, heaviest_fork_failures) = run_compute_and_select_forks(
+            &bank_forks,
+            &mut progress,
+            &mut tower,
+            &mut vote_simulator.heaviest_subtree_fork_choice,
+            &mut vote_simulator.latest_validator_votes_for_frozen_banks,
+            None,
+        );
         assert!(vote_fork.is_none());
         assert_eq!(reset_fork.unwrap(), 5);
+        assert_eq!(
+            heaviest_fork_failures,
+            vec![
+                HeaviestForkFailures::FailedSwitchThreshold(4, 0, 10000),
+                HeaviestForkFailures::LockedOut(4)
+            ]
+        );
     }
 
     #[test]

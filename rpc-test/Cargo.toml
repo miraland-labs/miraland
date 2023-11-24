@@ -16,9 +16,6 @@ bs58 = { workspace = true }
 crossbeam-channel = { workspace = true }
 futures-util = { workspace = true }
 log = { workspace = true }
-reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
-serde = { workspace = true }
-serde_json = { workspace = true }
 miraland-account-decoder = { workspace = true }
 miraland-client = { workspace = true }
 miraland-pubsub-client = { workspace = true }
@@ -30,6 +27,9 @@ miraland-streamer = { workspace = true }
 miraland-test-validator = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-transaction-status = { workspace = true }
+reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [dev-dependencies]

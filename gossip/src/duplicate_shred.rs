@@ -282,9 +282,9 @@ impl Sanitize for DuplicateShred {
 pub(crate) mod tests {
     use {
         super::*,
-        rand::Rng,
         miraland_entry::entry::Entry,
         miraland_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
+        rand::Rng,
         solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},

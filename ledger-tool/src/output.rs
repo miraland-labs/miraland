@@ -1,6 +1,6 @@
 use {
-    serde::Serialize,
     miraland_cli_output::{QuietDisplay, VerboseDisplay},
+    serde::Serialize,
     std::fmt::{Display, Formatter, Result},
 };
 

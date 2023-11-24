@@ -15,17 +15,17 @@ bv = { workspace = true, features = ["serde"] }
 bytemuck = { workspace = true, features = ["derive"] }
 log = { workspace = true }
 memmap2 = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-sdk = { workspace = true }
 modular-bitfield = { workspace = true }
 num_enum = { workspace = true }
 rand = { workspace = true }
-miraland-measure = { workspace = true }
-miraland-sdk = { workspace = true }
 tempfile = { workspace = true }
 
 [dev-dependencies]
 fs_extra = { workspace = true }
-rayon = { workspace = true }
 miraland-logger = { workspace = true }
+rayon = { workspace = true }
 
 [lib]
 crate-type = ["lib"]

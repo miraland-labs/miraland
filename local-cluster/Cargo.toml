@@ -13,8 +13,6 @@ edition = { workspace = true }
 crossbeam-channel = { workspace = true }
 itertools = { workspace = true }
 log = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-client = { workspace = true }
 miraland-config-program = { workspace = true }
@@ -35,6 +33,8 @@ miraland-tpu-client = { workspace = true }
 miraland-turbine = { workspace = true }
 miraland-vote = { workspace = true }
 miraland-vote-program = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
 static_assertions = { workspace = true }
 tempfile = { workspace = true }
 trees = { workspace = true }
@@ -43,9 +43,9 @@ trees = { workspace = true }
 assert_matches = { workspace = true }
 fs_extra = { workspace = true }
 gag = { workspace = true }
-serial_test = { workspace = true }
 miraland-download-utils = { workspace = true }
 miraland-ledger = { workspace = true, features = ["dev-context-only-utils"] }
+serial_test = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

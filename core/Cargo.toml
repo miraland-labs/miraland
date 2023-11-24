@@ -34,18 +34,6 @@ lazy_static = { workspace = true }
 log = { workspace = true }
 lru = { workspace = true }
 min-max-heap = { workspace = true }
-num_enum = { workspace = true }
-prio-graph = { workspace = true }
-quinn = { workspace = true }
-rand = { workspace = true }
-rand_chacha = { workspace = true }
-rayon = { workspace = true }
-rcgen = { workspace = true }
-rolling-file = { workspace = true }
-rustls = { workspace = true }
-serde = { workspace = true }
-serde_bytes = { workspace = true }
-serde_derive = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-client = { workspace = true }
 miraland-cost-model = { workspace = true }
@@ -76,6 +64,18 @@ miraland-version = { workspace = true }
 miraland-vote = { workspace = true }
 miraland-vote-program = { workspace = true }
 miraland-wen-restart = { workspace = true }
+num_enum = { workspace = true }
+prio-graph = { workspace = true }
+quinn = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+rayon = { workspace = true }
+rcgen = { workspace = true }
+rolling-file = { workspace = true }
+rustls = { workspace = true }
+serde = { workspace = true }
+serde_bytes = { workspace = true }
+serde_derive = { workspace = true }
 strum = { workspace = true, features = ["derive"] }
 strum_macros = { workspace = true }
 sys-info = { workspace = true }
@@ -87,9 +87,6 @@ trees = { workspace = true }
 [dev-dependencies]
 assert_matches = { workspace = true }
 fs_extra = { workspace = true }
-raptorq = { workspace = true }
-serde_json = { workspace = true }
-serial_test = { workspace = true }
 # See order-crates-for-publishing.py for using this unusual `path = "."`
 miraland-core = { path = ".", features = ["dev-context-only-utils"] }
 miraland-logger = { workspace = true }
@@ -98,6 +95,9 @@ miraland-program-runtime = { workspace = true }
 miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-stake-program = { workspace = true }
+raptorq = { workspace = true }
+serde_json = { workspace = true }
+serial_test = { workspace = true }
 static_assertions = { workspace = true }
 systemstat = { workspace = true }
 test-case = { workspace = true }

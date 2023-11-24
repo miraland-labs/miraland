@@ -1,8 +1,8 @@
 use {
     crate::repair::request_response::RequestResponse,
     lru::LruCache,
-    rand::{thread_rng, Rng},
     miraland_ledger::shred::Nonce,
+    rand::{thread_rng, Rng},
 };
 
 pub const DEFAULT_REQUEST_EXPIRATION_MS: u64 = 60_000;

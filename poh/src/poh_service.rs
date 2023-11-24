@@ -381,7 +381,6 @@ impl PohService {
 mod tests {
     use {
         super::*,
-        rand::{thread_rng, Rng},
         miraland_ledger::{
             blockstore::Blockstore,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
@@ -390,6 +389,7 @@ mod tests {
         },
         miraland_measure::measure::Measure,
         miraland_perf::test_tx::test_tx,
+        rand::{thread_rng, Rng},
         solana_runtime::bank::Bank,
         solana_sdk::{
             clock, hash::hash, pubkey::Pubkey, timing, transaction::VersionedTransaction,

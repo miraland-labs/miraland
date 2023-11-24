@@ -17,10 +17,6 @@ clap = "2.33.0"
 console = { workspace = true }
 humantime = { workspace = true }
 indicatif = { workspace = true }
-pretty-hex = { workspace = true }
-semver = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
 miraland-account-decoder = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-cli-config = { workspace = true }
@@ -28,6 +24,10 @@ miraland-rpc-client-api = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-vote-program = { workspace = true }
+pretty-hex = { workspace = true }
+semver = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
 solarti-memo = { workspace = true, features = ["no-entrypoint"] }
 
 [dev-dependencies]

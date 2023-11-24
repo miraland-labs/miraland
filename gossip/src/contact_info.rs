@@ -1,6 +1,7 @@
 use {
     crate::crds_value::MAX_WALLCLOCK,
     assert_matches::{assert_matches, debug_assert_matches},
+    miraland_streamer::socket::SocketAddrSpace,
     serde::{Deserialize, Deserializer, Serialize},
     solana_sdk::{
         pubkey::Pubkey,
@@ -9,7 +10,6 @@ use {
         sanitize::{Sanitize, SanitizeError},
         serde_varint, short_vec,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     static_assertions::const_assert_eq,
     std::{
         collections::HashSet,

@@ -17,12 +17,6 @@ futures = { workspace = true }
 itertools = { workspace = true }
 log = { workspace = true }
 lru = { workspace = true }
-quinn = { workspace = true }
-rand = { workspace = true }
-rand_chacha = { workspace = true }
-rayon = { workspace = true }
-rcgen = { workspace = true }
-rustls = { workspace = true }
 miraland-entry = { workspace = true }
 miraland-gossip = { workspace = true }
 miraland-ledger = { workspace = true }
@@ -37,6 +31,12 @@ miraland-rpc-client-api = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
+quinn = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+rayon = { workspace = true }
+rcgen = { workspace = true }
+rustls = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
 

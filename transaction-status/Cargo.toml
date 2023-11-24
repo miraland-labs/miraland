@@ -17,11 +17,11 @@ borsh = { workspace = true }
 bs58 = { workspace = true }
 lazy_static = { workspace = true }
 log = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-sdk = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-miraland-account-decoder = { workspace = true }
-miraland-sdk = { workspace = true }
 solarti-associated-token-account = { workspace = true, features = ["no-entrypoint"] }
 solarti-memo = { workspace = true, features = ["no-entrypoint"] }
 solarti-token = { workspace = true, features = ["no-entrypoint"] }

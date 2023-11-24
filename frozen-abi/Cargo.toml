@@ -14,11 +14,11 @@ bs58 = { workspace = true }
 bv = { workspace = true, features = ["serde"] }
 lazy_static = { workspace = true }
 log = { workspace = true, features = ["std"] }
+miraland-frozen-abi-macro = { workspace = true }
 serde = { workspace = true, features = ["derive", "rc"] }
 serde_bytes = { workspace = true }
 serde_derive = { workspace = true }
 sha2 = { workspace = true }
-miraland-frozen-abi-macro = { workspace = true }
 thiserror = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]

@@ -18,9 +18,10 @@ use {
         ping_pong::PingCache,
     },
     itertools::Itertools,
+    miraland_ledger::shred::Shred,
+    miraland_streamer::socket::SocketAddrSpace,
     rand::{CryptoRng, Rng},
     rayon::ThreadPool,
-    miraland_ledger::shred::Shred,
     solana_sdk::{
         clock::Slot,
         hash::Hash,
@@ -28,7 +29,6 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         net::SocketAddr,

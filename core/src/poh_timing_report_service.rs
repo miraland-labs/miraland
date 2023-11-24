@@ -54,7 +54,8 @@ impl PohTimingReportService {
 #[cfg(test)]
 mod test {
     use {
-        super::*, crossbeam_channel::unbounded, miraland_metrics::poh_timing_point::SlotPohTimingInfo,
+        super::*, crossbeam_channel::unbounded,
+        miraland_metrics::poh_timing_point::SlotPohTimingInfo,
     };
 
     #[test]

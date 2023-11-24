@@ -22,7 +22,9 @@ use {
             v0::{self, LoadedAddresses, MessageAddressTableLookup},
             // // MI: add next line
             // LegacyMessage,
-            Message, MessageHeader, SanitizedMessage,
+            Message,
+            MessageHeader,
+            SanitizedMessage,
         },
         transaction::TransactionError,
     },
@@ -689,6 +691,7 @@ pub(crate) mod tests {
     use {
         super::*,
         miraland_account_decoder::parse_token::UiTokenAmount,
+        miraland_transaction_status::InnerInstruction,
         solana_sdk::{
             hash::Hash,
             message::VersionedMessage,
@@ -699,7 +702,6 @@ pub(crate) mod tests {
                 SanitizedTransaction, SimpleAddressLoader, Transaction, VersionedTransaction,
             },
         },
-        miraland_transaction_status::InnerInstruction,
     };
 
     fn check_compiled_instruction_equality(

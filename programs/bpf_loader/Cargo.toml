@@ -14,19 +14,19 @@ bincode = { workspace = true }
 byteorder = { workspace = true }
 libsecp256k1 = { workspace = true }
 log = { workspace = true }
-scopeguard = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-program-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-zk-token-sdk = { workspace = true }
+scopeguard = { workspace = true }
 solana_rbpf = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
 memoffset = { workspace = true }
-rand = { workspace = true }
 miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
+rand = { workspace = true }
 
 [lib]
 crate-type = ["lib"]

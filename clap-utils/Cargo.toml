@@ -12,9 +12,9 @@ edition = { workspace = true }
 [dependencies]
 chrono = { workspace = true, features = ["default"] }
 clap = "2.33.0"
-rpassword = { workspace = true }
 miraland-remote-wallet = { workspace = true }
 miraland-sdk = { workspace = true }
+rpassword = { workspace = true }
 thiserror = { workspace = true }
 tiny-bip39 = { workspace = true }
 uriparse = { workspace = true }

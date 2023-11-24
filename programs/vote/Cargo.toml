@@ -12,16 +12,16 @@ edition = { workspace = true }
 [dependencies]
 bincode = { workspace = true }
 log = { workspace = true }
-num-derive = { workspace = true }
-num-traits = { workspace = true }
-serde = { workspace = true }
-serde_derive = { workspace = true }
 miraland-frozen-abi = { workspace = true }
 miraland-frozen-abi-macro = { workspace = true }
 miraland-metrics = { workspace = true }
 miraland-program = { workspace = true }
 miraland-program-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
+num-derive = { workspace = true }
+num-traits = { workspace = true }
+serde = { workspace = true }
+serde_derive = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]

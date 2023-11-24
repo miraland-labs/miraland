@@ -10,7 +10,6 @@ mod serde_snapshot_tests {
         },
         bincode::{serialize_into, Error},
         log::info,
-        rand::{thread_rng, Rng},
         miraland_accounts_db::{
             account_storage::{AccountStorageMap, AccountStorageReference},
             accounts::Accounts,
@@ -25,6 +24,7 @@ mod serde_snapshot_tests {
             ancestors::Ancestors,
             rent_collector::RentCollector,
         },
+        rand::{thread_rng, Rng},
         solana_sdk::{
             account::{AccountSharedData, ReadableAccount},
             clock::Slot,

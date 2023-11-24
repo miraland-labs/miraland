@@ -12,8 +12,6 @@ edition = { workspace = true }
 bincode = { workspace = true }
 clap = { workspace = true }
 log = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-cli = { workspace = true }
 miraland-client = { workspace = true }
@@ -29,6 +27,8 @@ miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-version = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
 
 [dev-dependencies]
 miraland-local-cluster = { workspace = true }

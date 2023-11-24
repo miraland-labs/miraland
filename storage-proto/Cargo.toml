@@ -12,11 +12,11 @@ edition = { workspace = true }
 [dependencies]
 bincode = { workspace = true }
 bs58 = { workspace = true }
-prost = { workspace = true }
-serde = { workspace = true }
 miraland-account-decoder = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-transaction-status = { workspace = true }
+prost = { workspace = true }
+serde = { workspace = true }
 
 [dev-dependencies]
 enum-iterator = { workspace = true }

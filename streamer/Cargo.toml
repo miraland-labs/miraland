@@ -19,6 +19,9 @@ indexmap = { workspace = true }
 itertools = { workspace = true }
 libc = { workspace = true }
 log = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-perf = { workspace = true }
+miraland-sdk = { workspace = true }
 nix = { workspace = true }
 pem = { workspace = true }
 percentage = { workspace = true }
@@ -28,9 +31,6 @@ quinn-proto = { workspace = true }
 rand = { workspace = true }
 rcgen = { workspace = true }
 rustls = { workspace = true, features = ["dangerous_configuration"] }
-miraland-metrics = { workspace = true }
-miraland-perf = { workspace = true }
-miraland-sdk = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 x509-parser = { workspace = true }

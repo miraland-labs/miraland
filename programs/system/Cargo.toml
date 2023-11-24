@@ -12,10 +12,10 @@ edition = { workspace = true }
 [dependencies]
 bincode = { workspace = true }
 log = { workspace = true }
-serde = { workspace = true }
-serde_derive = { workspace = true }
 miraland-program-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
+serde = { workspace = true }
+serde_derive = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }

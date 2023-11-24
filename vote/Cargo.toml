@@ -13,12 +13,12 @@ edition = { workspace = true }
 crossbeam-channel = { workspace = true }
 itertools = { workspace = true }
 log = { workspace = true }
-serde = { workspace = true, features = ["rc"] }
-serde_derive = { workspace = true }
 miraland-frozen-abi = { workspace = true }
 miraland-frozen-abi-macro = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-vote-program = { workspace = true }
+serde = { workspace = true, features = ["rc"] }
+serde_derive = { workspace = true }
 thiserror = { workspace = true }
 
 [lib]

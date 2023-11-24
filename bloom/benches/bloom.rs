@@ -4,8 +4,8 @@ extern crate test;
 use {
     bv::BitVec,
     fnv::FnvHasher,
-    rand::Rng,
     miraland_bloom::bloom::{AtomicBloom, Bloom, BloomHashIndex},
+    rand::Rng,
     solana_sdk::{
         hash::{hash, Hash},
         signature::Signature,

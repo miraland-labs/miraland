@@ -1,6 +1,8 @@
 //! Helper types and functions for handling and dealing with snapshot hashes.
 use {
-    miraland_accounts_db::{accounts_hash::AccountsHashKind, epoch_accounts_hash::EpochAccountsHash},
+    miraland_accounts_db::{
+        accounts_hash::AccountsHashKind, epoch_accounts_hash::EpochAccountsHash,
+    },
     solana_sdk::{
         clock::Slot,
         hash::{Hash, Hasher},

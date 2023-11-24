@@ -19,9 +19,9 @@ thiserror = { workspace = true }
 [dev-dependencies]
 anyhow = { workspace = true }
 futures = { workspace = true }
-serde_json = { workspace = true }
 miraland-account-decoder = { workspace = true }
 miraland-rpc-client-api = { workspace = true }
+serde_json = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [package.metadata.docs.rs]

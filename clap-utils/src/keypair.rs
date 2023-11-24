@@ -17,12 +17,12 @@ use {
     },
     bip39::{Language, Mnemonic, Seed},
     clap::ArgMatches,
-    rpassword::prompt_password,
     miraland_remote_wallet::{
         locator::{Locator as RemoteWalletLocator, LocatorError as RemoteWalletLocatorError},
         remote_keypair::generate_remote_keypair,
         remote_wallet::{maybe_wallet_manager, RemoteWalletError, RemoteWalletManager},
     },
+    rpassword::prompt_password,
     solana_sdk::{
         derivation_path::{DerivationPath, DerivationPathError},
         hash::Hash,

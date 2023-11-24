@@ -25,18 +25,6 @@ lazy_static = { workspace = true }
 libc = { workspace = true }
 log = { workspace = true }
 lru = { workspace = true }
-mockall = { workspace = true }
-num_cpus = { workspace = true }
-num_enum = { workspace = true }
-prost = { workspace = true }
-rand = { workspace = true }
-rand_chacha = { workspace = true }
-rayon = { workspace = true }
-reed-solomon-erasure = { workspace = true, features = ["simd-accel"] }
-scopeguard = { workspace = true }
-serde = { workspace = true }
-serde_bytes = { workspace = true }
-sha2 = { workspace = true }
 miraland-account-decoder = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-bpf-loader-program = { workspace = true }
@@ -57,6 +45,18 @@ miraland-storage-proto = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-vote = { workspace = true }
 miraland-vote-program = { workspace = true }
+mockall = { workspace = true }
+num_cpus = { workspace = true }
+num_enum = { workspace = true }
+prost = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+rayon = { workspace = true }
+reed-solomon-erasure = { workspace = true, features = ["simd-accel"] }
+scopeguard = { workspace = true }
+serde = { workspace = true }
+serde_bytes = { workspace = true }
+sha2 = { workspace = true }
 solarti-token = { workspace = true, features = ["no-entrypoint"] }
 solarti-token-2022 = { workspace = true, features = ["no-entrypoint"] }
 static_assertions = { workspace = true }

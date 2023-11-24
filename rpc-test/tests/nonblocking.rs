@@ -4,8 +4,8 @@ use {
         nonblocking::tpu_client::{LeaderTpuService, TpuClient},
         tpu_client::TpuClientConfig,
     },
-    solana_sdk::{clock::DEFAULT_MS_PER_SLOT, pubkey::Pubkey, system_transaction},
     miraland_test_validator::TestValidatorGenesis,
+    solana_sdk::{clock::DEFAULT_MS_PER_SLOT, pubkey::Pubkey, system_transaction},
     std::sync::{
         atomic::{AtomicBool, Ordering},
         Arc,
@@ -40,7 +40,7 @@ async fn test_tpu_send_transaction() {
             .get_signature_statuses(&signatures)
             .await
             .unwrap();
-        if statuses.value.get(0).is_some() {
+        if statuses.value.first().is_some() {
             break;
         }
     }

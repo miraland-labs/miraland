@@ -16,10 +16,6 @@ futures = { workspace = true }
 itertools = { workspace = true }
 lazy_static = { workspace = true }
 log = { workspace = true }
-quinn = { workspace = true }
-quinn-proto = { workspace = true }
-rcgen = { workspace = true }
-rustls = { workspace = true, features = ["dangerous_configuration"] }
 miraland-connection-cache = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-metrics = { workspace = true }
@@ -27,6 +23,10 @@ miraland-net-utils = { workspace = true }
 miraland-rpc-client-api = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
+quinn = { workspace = true }
+quinn-proto = { workspace = true }
+rcgen = { workspace = true }
+rustls = { workspace = true, features = ["dangerous_configuration"] }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 

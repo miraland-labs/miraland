@@ -4,8 +4,8 @@ use {
         immutable_deserialized_packet::{DeserializedPacketError, ImmutableDeserializedPacket},
     },
     itertools::Itertools,
-    rand::{thread_rng, Rng},
     miraland_perf::packet::Packet,
+    rand::{thread_rng, Rng},
     solana_runtime::bank::Bank,
     solana_sdk::{
         clock::{Slot, UnixTimestamp},
@@ -64,7 +64,7 @@ impl LatestValidatorVotePacket {
                 let &pubkey = message
                     .message
                     .static_account_keys()
-                    .get(0)
+                    .first()
                     .ok_or(DeserializedPacketError::VoteTransactionError)?;
                 let slot = vote_state_update_instruction.last_voted_slot().unwrap_or(0);
                 let timestamp = vote_state_update_instruction.timestamp();
@@ -347,8 +347,8 @@ mod tests {
     use {
         super::*,
         itertools::Itertools,
-        rand::{thread_rng, Rng},
         miraland_perf::packet::{Packet, PacketBatch, PacketFlags},
+        rand::{thread_rng, Rng},
         solana_runtime::{
             bank::Bank,
             genesis_utils::{self, ValidatorVoteKeypairs},

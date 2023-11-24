@@ -15,12 +15,12 @@ cargo_metadata = { workspace = true }
 clap = { version = "3.1.5", features = ["cargo", "env"] }
 itertools = { workspace = true }
 log = { workspace = true, features = ["std"] }
-regex = { workspace = true }
-reqwest = { workspace = true, features = ["blocking", "rustls-tls"] }
-semver = { workspace = true }
 miraland-download-utils = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-sdk = { workspace = true }
+regex = { workspace = true }
+reqwest = { workspace = true, features = ["blocking", "rustls-tls"] }
+semver = { workspace = true }
 tar = { workspace = true }
 
 [dev-dependencies]

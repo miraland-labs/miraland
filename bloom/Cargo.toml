@@ -13,13 +13,13 @@ edition = { workspace = true }
 bv = { workspace = true, features = ["serde"] }
 fnv = { workspace = true }
 log = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-sdk = { workspace = true }
 rand = { workspace = true }
 rayon = { workspace = true }
 serde = { workspace = true, features = ["rc"] }
 serde_derive = { workspace = true }
-miraland-frozen-abi = { workspace = true }
-miraland-frozen-abi-macro = { workspace = true }
-miraland-sdk = { workspace = true }
 
 [lib]
 crate-type = ["lib"]

@@ -631,6 +631,7 @@ mod tests {
             },
             poh_service::PohService,
         },
+        miraland_streamer::socket::SocketAddrSpace,
         solana_runtime::{
             bank::Bank, bank_forks::BankForks, genesis_utils::bootstrap_validator_stake_lamports,
         },
@@ -642,7 +643,6 @@ mod tests {
             system_transaction,
             transaction::{SanitizedTransaction, Transaction},
         },
-        miraland_streamer::socket::SocketAddrSpace,
         solana_vote_program::{
             vote_state::VoteStateUpdate, vote_transaction::new_vote_state_update_transaction,
         },

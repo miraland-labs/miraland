@@ -7,10 +7,6 @@ extern crate test;
 use {
     crossbeam_channel::unbounded,
     log::*,
-    rand::{
-        distributions::{Distribution, Uniform},
-        thread_rng, Rng,
-    },
     miraland_core::{
         banking_trace::BankingTracer,
         sigverify::TransactionSigVerifier,
@@ -20,6 +16,10 @@ use {
     miraland_perf::{
         packet::{to_packet_batches, PacketBatch},
         test_tx::test_tx,
+    },
+    rand::{
+        distributions::{Distribution, Uniform},
+        thread_rng, Rng,
     },
     solana_sdk::{
         hash::Hash,

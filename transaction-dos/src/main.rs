@@ -3,8 +3,6 @@
 use {
     clap::{crate_description, crate_name, value_t, values_t_or_exit, App, Arg},
     log::*,
-    rand::{thread_rng, Rng},
-    rayon::prelude::*,
     miraland_clap_utils::input_parsers::pubkey_of,
     miraland_cli::{
         cli::{process_command, CliCommand, CliConfig},
@@ -14,6 +12,9 @@ use {
     miraland_faucet::faucet::{request_airdrop_transaction, FAUCET_PORT},
     miraland_gossip::gossip_service::discover,
     miraland_rpc_client::rpc_client::RpcClient,
+    miraland_streamer::socket::SocketAddrSpace,
+    rand::{thread_rng, Rng},
+    rayon::prelude::*,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},
@@ -25,7 +26,6 @@ use {
         system_instruction,
         transaction::Transaction,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         net::{Ipv4Addr, SocketAddr},
         process::exit,

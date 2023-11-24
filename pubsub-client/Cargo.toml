@@ -13,14 +13,14 @@ edition = { workspace = true }
 crossbeam-channel = { workspace = true }
 futures-util = { workspace = true }
 log = { workspace = true }
+miraland-account-decoder = { workspace = true }
+miraland-rpc-client-api = { workspace = true }
+miraland-sdk = { workspace = true }
 reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 semver = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-miraland-account-decoder = { workspace = true }
-miraland-rpc-client-api = { workspace = true }
-miraland-sdk = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 tokio-stream = { workspace = true }

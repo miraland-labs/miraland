@@ -16,11 +16,11 @@ bincode = { workspace = true }
 bs58 = { workspace = true }
 bv = { workspace = true }
 lazy_static = { workspace = true }
+miraland-config-program = { workspace = true }
+miraland-sdk = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }
-miraland-config-program = { workspace = true }
-miraland-sdk = { workspace = true }
 solarti-token = { workspace = true, features = ["no-entrypoint"] }
 solarti-token-2022 = { workspace = true, features = ["no-entrypoint"] }
 solarti-token-metadata-interface = { workspace = true }

@@ -27,7 +27,6 @@ use {
     base64::{prelude::BASE64_STANDARD, Engine},
     bincode::serialize,
     log::*,
-    serde_json::{json, Value},
     miraland_account_decoder::{
         parse_token::{TokenAccountType, UiTokenAccount, UiTokenAmount},
         UiAccount, UiAccountData, UiAccountEncoding,
@@ -41,6 +40,11 @@ use {
         request::{RpcError, RpcRequest, RpcResponseErrorData, TokenAccountsFilter},
         response::*,
     },
+    miraland_transaction_status::{
+        EncodedConfirmedBlock, EncodedConfirmedTransactionWithStatusMeta, TransactionStatus,
+        UiConfirmedBlock, UiTransactionEncoding,
+    },
+    serde_json::{json, Value},
     solana_sdk::{
         account::Account,
         clock::{Epoch, Slot, UnixTimestamp, DEFAULT_MS_PER_SLOT},
@@ -52,10 +56,6 @@ use {
         pubkey::Pubkey,
         signature::Signature,
         transaction,
-    },
-    miraland_transaction_status::{
-        EncodedConfirmedBlock, EncodedConfirmedTransactionWithStatusMeta, TransactionStatus,
-        UiConfirmedBlock, UiTransactionEncoding,
     },
     solana_vote_program::vote_state::MAX_LOCKOUT_HISTORY,
     std::{
@@ -531,9 +531,10 @@ impl RpcClient {
             let node_version = self.get_version().await.map_err(|e| {
                 RpcError::RpcRequestError(format!("cluster version query failed: {e}"))
             })?;
-            let node_version = semver::Version::parse(&node_version.miraland_core).map_err(|e| {
-                RpcError::RpcRequestError(format!("failed to parse cluster version: {e}"))
-            })?;
+            let node_version =
+                semver::Version::parse(&node_version.miraland_core).map_err(|e| {
+                    RpcError::RpcRequestError(format!("failed to parse cluster version: {e}"))
+                })?;
             *w_node_version = Some(node_version.clone());
             Ok(node_version)
         }

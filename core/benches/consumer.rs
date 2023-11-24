@@ -3,10 +3,6 @@
 
 use {
     crossbeam_channel::{unbounded, Receiver},
-    rayon::{
-        iter::IndexedParallelIterator,
-        prelude::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
-    },
     miraland_core::banking_stage::{
         committer::Committer, consumer::Consumer, qos_service::QosService,
     },
@@ -18,6 +14,10 @@ use {
     miraland_poh::{
         poh_recorder::{create_test_recorder, PohRecorder},
         poh_service::PohService,
+    },
+    rayon::{
+        iter::IndexedParallelIterator,
+        prelude::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
     },
     solana_runtime::bank::Bank,
     solana_sdk::{

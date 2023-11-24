@@ -415,7 +415,10 @@ fn main() -> Result<(), Box<dyn error::Error>> {
                 );
                 info!("{}", all_clear_msg);
                 notifier.send(
-                    &format!("miraland-watchtower{}: {}", config.name_suffix, all_clear_msg),
+                    &format!(
+                        "miraland-watchtower{}: {}",
+                        config.name_suffix, all_clear_msg
+                    ),
                     &NotificationType::Resolve { incident },
                 );
             }

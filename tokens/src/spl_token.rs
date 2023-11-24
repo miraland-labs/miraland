@@ -16,7 +16,10 @@ use {
     },
 };
 
-pub fn update_token_args(client: &RpcClient, args: &mut Option<SolartiTokenArgs>) -> Result<(), Error> {
+pub fn update_token_args(
+    client: &RpcClient,
+    args: &mut Option<SolartiTokenArgs>,
+) -> Result<(), Error> {
     if let Some(spl_token_args) = args {
         let sender_account = client
             .get_account(&spl_token_args.token_account_address)
@@ -27,7 +30,10 @@ pub fn update_token_args(client: &RpcClient, args: &mut Option<SolartiTokenArgs>
     Ok(())
 }
 
-pub fn update_decimals(client: &RpcClient, args: &mut Option<SolartiTokenArgs>) -> Result<(), Error> {
+pub fn update_decimals(
+    client: &RpcClient,
+    args: &mut Option<SolartiTokenArgs>,
+) -> Result<(), Error> {
     if let Some(spl_token_args) = args {
         let mint_account = client.get_account(&spl_token_args.mint).unwrap_or_default();
         let mint = Mint::unpack(&mint_account.data)?;

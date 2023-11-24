@@ -3,8 +3,6 @@ use {
     crossbeam_channel::unbounded,
     futures_util::StreamExt,
     log::*,
-    reqwest::{self, header::CONTENT_TYPE},
-    serde_json::{json, Value},
     miraland_account_decoder::UiAccount,
     miraland_client::{
         connection_cache::ConnectionCache,
@@ -18,6 +16,12 @@ use {
         request::RpcError,
         response::{Response as RpcResponse, RpcSignatureResult, SlotUpdate},
     },
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::TestValidator,
+    miraland_tpu_client::tpu_client::DEFAULT_TPU_CONNECTION_POOL_SIZE,
+    miraland_transaction_status::TransactionStatus,
+    reqwest::{self, header::CONTENT_TYPE},
+    serde_json::{json, Value},
     solana_sdk::{
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -27,10 +31,6 @@ use {
         system_transaction,
         transaction::Transaction,
     },
-    miraland_streamer::socket::SocketAddrSpace,
-    miraland_test_validator::TestValidator,
-    miraland_tpu_client::tpu_client::DEFAULT_TPU_CONNECTION_POOL_SIZE,
-    miraland_transaction_status::TransactionStatus,
     std::{
         collections::HashSet,
         net::UdpSocket,
@@ -496,7 +496,7 @@ fn run_tpu_send_transaction(tpu_use_quic: bool) {
     loop {
         assert!(now.elapsed() < timeout);
         let statuses = rpc_client.get_signature_statuses(&signatures).unwrap();
-        if statuses.value.get(0).is_some() {
+        if statuses.value.first().is_some() {
             return;
         }
     }

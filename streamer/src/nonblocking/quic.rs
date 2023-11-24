@@ -10,11 +10,11 @@ use {
     bytes::Bytes,
     crossbeam_channel::Sender,
     indexmap::map::{Entry, IndexMap},
+    miraland_perf::packet::{PacketBatch, PACKETS_PER_BATCH},
     percentage::Percentage,
     quinn::{Connecting, Connection, Endpoint, EndpointConfig, TokioRuntime, VarInt},
     quinn_proto::VarIntBoundsExceeded,
     rand::{thread_rng, Rng},
-    miraland_perf::packet::{PacketBatch, PACKETS_PER_BATCH},
     solana_sdk::{
         packet::{Meta, PACKET_DATA_SIZE},
         pubkey::Pubkey,

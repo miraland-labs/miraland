@@ -22,15 +22,15 @@ http = { workspace = true }
 hyper = { workspace = true }
 hyper-proxy = { workspace = true }
 log = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-storage-proto = { workspace = true }
+miraland-transaction-status = { workspace = true }
 prost = { workspace = true }
 prost-types = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 smpl_jwt = { workspace = true }
-miraland-metrics = { workspace = true }
-miraland-sdk = { workspace = true }
-miraland-storage-proto = { workspace = true }
-miraland-transaction-status = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
 tonic = { workspace = true, features = ["tls", "transport"] }

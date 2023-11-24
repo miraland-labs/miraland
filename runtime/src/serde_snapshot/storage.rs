@@ -1,6 +1,6 @@
 use {
-    serde::{Deserialize, Serialize},
     miraland_accounts_db::accounts_db::AccountStorageEntry,
+    serde::{Deserialize, Serialize},
 };
 
 /// The serialized AppendVecId type is fixed as usize

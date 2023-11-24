@@ -4,11 +4,11 @@
 extern crate test;
 
 use {
-    rand::prelude::*,
     miraland_perf::{
         packet::{to_packet_batches, PacketBatch, PACKETS_PER_BATCH},
         sigverify,
     },
+    rand::prelude::*,
     test::Bencher,
 };
 

@@ -5,9 +5,9 @@ use {
         MyLastVotedForkSlots, State as RestartState, WenRestartProgress,
     },
     log::*,
-    prost::Message,
     miraland_gossip::{cluster_info::ClusterInfo, epoch_slots::MAX_SLOTS_PER_ENTRY},
     miraland_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
+    prost::Message,
     solana_vote_program::vote_state::VoteTransaction,
     std::{
         fs::File,
@@ -69,12 +69,12 @@ mod tests {
         miraland_entry::entry,
         miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
         miraland_ledger::{blockstore, get_tmp_ledger_path_auto_delete},
+        miraland_streamer::socket::SocketAddrSpace,
         solana_program::{hash::Hash, vote::state::Vote},
         solana_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        miraland_streamer::socket::SocketAddrSpace,
         std::{fs::read, sync::Arc},
     };
 

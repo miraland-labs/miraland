@@ -16,7 +16,6 @@ bincode = { workspace = true }
 chrono-humanize = { workspace = true }
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
-serde = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-banks-client = { workspace = true }
 miraland-banks-interface = { workspace = true }
@@ -27,6 +26,7 @@ miraland-program-runtime = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-vote-program = { workspace = true }
+serde = { workspace = true }
 solana_rbpf = { workspace = true }
 test-case = { workspace = true }
 thiserror = { workspace = true }

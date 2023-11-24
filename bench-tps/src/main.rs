@@ -17,6 +17,7 @@ use {
     miraland_genesis::Base64Account,
     miraland_gossip::gossip_service::{discover_cluster, get_client, get_multi_client},
     miraland_rpc_client::rpc_client::RpcClient,
+    miraland_streamer::{socket::SocketAddrSpace, streamer::StakedNodes},
     solana_sdk::{
         commitment_config::CommitmentConfig,
         fee_calculator::FeeRateGovernor,
@@ -24,7 +25,6 @@ use {
         signature::{Keypair, Signer},
         system_program,
     },
-    miraland_streamer::{socket::SocketAddrSpace, streamer::StakedNodes},
     std::{
         collections::HashMap,
         fs::File,

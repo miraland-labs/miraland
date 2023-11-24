@@ -24,10 +24,10 @@ thiserror = { workspace = true }
 [dev-dependencies]
 assert_matches = { workspace = true }
 bincode = { workspace = true }
-rand = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-perf = { workspace = true }
 miraland-poh = { path = ".", features = ["dev-context-only-utils"] }
+rand = { workspace = true }
 
 [features]
 dev-context-only-utils = []

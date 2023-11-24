@@ -4,8 +4,8 @@
 use {
     core::iter::repeat,
     miraland_connection_cache::client_connection::ClientConnection,
-    solana_sdk::transport::Result as TransportResult,
     miraland_streamer::sendmmsg::batch_send,
+    solana_sdk::transport::Result as TransportResult,
     std::{
         net::{SocketAddr, UdpSocket},
         sync::Arc,

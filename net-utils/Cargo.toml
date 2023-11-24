@@ -14,14 +14,14 @@ bincode = { workspace = true }
 clap = { version = "3.1.5", features = ["cargo"] }
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-version = { workspace = true }
 nix = { workspace = true }
 rand = { workspace = true }
 serde = { workspace = true }
 serde_derive = { workspace = true }
 socket2 = { workspace = true }
-miraland-logger = { workspace = true }
-miraland-sdk = { workspace = true }
-miraland-version = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 url = { workspace = true }
 

@@ -10,14 +10,13 @@ use {
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand},
     log::*,
     miraland_account_decoder::{UiAccountEncoding, UiDataSliceConfig},
-    solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
     miraland_clap_utils::{
         self, hidden_unless_forced, input_parsers::*, input_validators::*, keypair::*,
     },
     miraland_cli_output::{
         CliProgram, CliProgramAccountType, CliProgramAuthority, CliProgramBuffer, CliProgramId,
         CliUpgradeableBuffer, CliUpgradeableBuffers, CliUpgradeableProgram,
-        CliUpgradeableProgramClosed, CliUpgradeablePrograms,
+        CliUpgradeableProgramClosed, CliUpgradeableProgramExtended, CliUpgradeablePrograms,
     },
     miraland_client::{
         connection_cache::ConnectionCache,
@@ -26,8 +25,6 @@ use {
         },
         tpu_client::{TpuClient, TpuClientConfig},
     },
-    solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
-    solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::{
@@ -35,6 +32,9 @@ use {
         config::{RpcAccountInfoConfig, RpcProgramAccountsConfig, RpcSendTransactionConfig},
         filter::{Memcmp, RpcFilterType},
     },
+    solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
+    solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
+    solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
     solana_sdk::{
         account::Account,
         account_utils::StateMut,
@@ -123,6 +123,10 @@ pub enum ProgramCliCommand {
         authority_index: SignerIndex,
         use_lamports_unit: bool,
         bypass_warning: bool,
+    },
+    ExtendProgram {
+        program_pubkey: Pubkey,
+        additional_bytes: u32,
     },
 }
 
@@ -417,6 +421,28 @@ impl ProgramSubCommands for App<'_, '_> {
                                 .help("Bypass the permanent program closure warning"),
                         ),
                 )
+                .subcommand(
+                    SubCommand::with_name("extend")
+                        .about("Extend the length of an upgradeable program to deploy larger programs")
+                        .arg(
+                            Arg::with_name("program_id")
+                                .index(1)
+                                .value_name("PROGRAM_ID")
+                                .takes_value(true)
+                                .required(true)
+                                .validator(is_valid_pubkey)
+                                .help("Address of the program to extend"),
+                        )
+                        .arg(
+                            Arg::with_name("additional_bytes")
+                                .index(2)
+                                .value_name("ADDITIONAL_BYTES")
+                                .takes_value(true)
+                                .required(true)
+                                .validator(is_parsable::<u32>)
+                                .help("Number of bytes that will be allocated for the program's data account")
+                        )
+                )
         )
         .subcommand(
             SubCommand::with_name("deploy")
@@ -675,6 +701,26 @@ pub fn parse_program_subcommand(
                 signers: signer_info.signers,
             }
         }
+        ("extend", Some(matches)) => {
+            let program_pubkey = pubkey_of(matches, "program_id").unwrap();
+            let additional_bytes = value_of(matches, "additional_bytes").unwrap();
+
+            let signer_info = default_signer.generate_unique_signers(
+                vec![Some(
+                    default_signer.signer_from_path(matches, wallet_manager)?,
+                )],
+                matches,
+                wallet_manager,
+            )?;
+
+            CliCommandInfo {
+                command: CliCommand::Program(ProgramCliCommand::ExtendProgram {
+                    program_pubkey,
+                    additional_bytes,
+                }),
+                signers: signer_info.signers,
+            }
+        }
         _ => unreachable!(),
     };
     Ok(response)
@@ -799,6 +845,10 @@ pub fn process_program_subcommand(
             *use_lamports_unit,
             *bypass_warning,
         ),
+        ProgramCliCommand::ExtendProgram {
+            program_pubkey,
+            additional_bytes,
+        } => process_extend_program(&rpc_client, config, *program_pubkey, *additional_bytes),
     }
 }
 
@@ -1716,6 +1766,100 @@ fn process_close(
     }
 }
 
+fn process_extend_program(
+    rpc_client: &RpcClient,
+    config: &CliConfig,
+    program_pubkey: Pubkey,
+    additional_bytes: u32,
+) -> ProcessResult {
+    let payer_pubkey = config.signers[0].pubkey();
+
+    if additional_bytes == 0 {
+        return Err("Additional bytes must be greater than zero".into());
+    }
+
+    let program_account = match rpc_client
+        .get_account_with_commitment(&program_pubkey, config.commitment)?
+        .value
+    {
+        Some(program_account) => Ok(program_account),
+        None => Err(format!("Unable to find program {program_pubkey}")),
+    }?;
+
+    if !bpf_loader_upgradeable::check_id(&program_account.owner) {
+        return Err(format!("Account {program_pubkey} is not an upgradeable program").into());
+    }
+
+    let programdata_pubkey = match program_account.state() {
+        Ok(UpgradeableLoaderState::Program {
+            programdata_address: programdata_pubkey,
+        }) => Ok(programdata_pubkey),
+        _ => Err(format!(
+            "Account {program_pubkey} is not an upgradeable program"
+        )),
+    }?;
+
+    let programdata_account = match rpc_client
+        .get_account_with_commitment(&programdata_pubkey, config.commitment)?
+        .value
+    {
+        Some(programdata_account) => Ok(programdata_account),
+        None => Err(format!("Program {program_pubkey} is closed")),
+    }?;
+
+    let upgrade_authority_address = match programdata_account.state() {
+        Ok(UpgradeableLoaderState::ProgramData {
+            slot: _,
+            upgrade_authority_address,
+        }) => Ok(upgrade_authority_address),
+        _ => Err(format!("Program {program_pubkey} is closed")),
+    }?;
+
+    match upgrade_authority_address {
+        None => Err(format!("Program {program_pubkey} is not upgradeable")),
+        _ => Ok(()),
+    }?;
+
+    let blockhash = rpc_client.get_latest_blockhash()?;
+
+    let mut tx = Transaction::new_unsigned(Message::new(
+        &[bpf_loader_upgradeable::extend_program(
+            &program_pubkey,
+            Some(&payer_pubkey),
+            additional_bytes,
+        )],
+        Some(&payer_pubkey),
+    ));
+
+    tx.try_sign(&[config.signers[0]], blockhash)?;
+    let result = rpc_client.send_and_confirm_transaction_with_spinner_and_config(
+        &tx,
+        config.commitment,
+        RpcSendTransactionConfig {
+            preflight_commitment: Some(config.commitment.commitment),
+            ..RpcSendTransactionConfig::default()
+        },
+    );
+    if let Err(err) = result {
+        if let ClientErrorKind::TransactionError(TransactionError::InstructionError(
+            _,
+            InstructionError::InvalidInstructionData,
+        )) = err.kind()
+        {
+            return Err("Extending a program is not supported by the cluster".into());
+        } else {
+            return Err(format!("Extend program failed: {err}").into());
+        }
+    }
+
+    Ok(config
+        .output_format
+        .formatted_string(&CliUpgradeableProgramExtended {
+            program_id: program_pubkey.to_string(),
+            additional_bytes,
+        }))
+}
+
 pub fn calculate_max_chunk_size<F>(create_msg: &F) -> usize
 where
     F: Fn(u32, Vec<u8>) -> Message,
@@ -2104,7 +2248,7 @@ fn check_payer(
     }
     if !write_messages.is_empty() {
         // Assume all write messages cost the same
-        if let Some(message) = write_messages.get(0) {
+        if let Some(message) = write_messages.first() {
             fee += rpc_client.get_fee_for_message(message)? * (write_messages.len() as u64);
         }
     }
@@ -2270,8 +2414,8 @@ mod tests {
             clap_app::get_clap_app,
             cli::{parse_command, process_command},
         },
-        serde_json::Value,
         miraland_cli_output::OutputFormat,
+        serde_json::Value,
         solana_sdk::signature::write_keypair_file,
     };
 
@@ -3111,6 +3255,38 @@ mod tests {
                     bypass_warning: false,
                 }),
                 signers: vec![read_keypair_file(&keypair_file).unwrap().into(),],
+            }
+        );
+    }
+
+    #[test]
+    fn test_cli_parse_extend_program() {
+        let test_commands = get_clap_app("test", "desc", "version");
+
+        let default_keypair = Keypair::new();
+        let keypair_file = make_tmp_path("keypair_file");
+        write_keypair_file(&default_keypair, &keypair_file).unwrap();
+        let default_signer = DefaultSigner::new("", &keypair_file);
+
+        // defaults
+        let program_pubkey = Pubkey::new_unique();
+        let additional_bytes = 100;
+
+        let test_command = test_commands.clone().get_matches_from(vec![
+            "test",
+            "program",
+            "extend",
+            &program_pubkey.to_string(),
+            &additional_bytes.to_string(),
+        ]);
+        assert_eq!(
+            parse_command(&test_command, &default_signer, &mut None).unwrap(),
+            CliCommandInfo {
+                command: CliCommand::Program(ProgramCliCommand::ExtendProgram {
+                    program_pubkey,
+                    additional_bytes
+                }),
+                signers: vec![read_keypair_file(&keypair_file).unwrap().into()],
             }
         );
     }

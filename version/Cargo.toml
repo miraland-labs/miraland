@@ -11,12 +11,12 @@ edition = { workspace = true }
 
 [dependencies]
 log = { workspace = true }
-semver = { workspace = true }
-serde = { workspace = true }
-serde_derive = { workspace = true }
 miraland-frozen-abi = { workspace = true }
 miraland-frozen-abi-macro = { workspace = true }
 miraland-sdk = { workspace = true }
+semver = { workspace = true }
+serde = { workspace = true }
+serde_derive = { workspace = true }
 
 [features]
 dummy-for-ci-check = []

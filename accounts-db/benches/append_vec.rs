@@ -2,7 +2,6 @@
 extern crate test;
 
 use {
-    rand::{thread_rng, Rng},
     miraland_accounts_db::{
         account_storage::meta::{
             StorableAccountsWithHashesAndWriteVersions, StoredAccountInfo, StoredMeta,
@@ -13,6 +12,7 @@ use {
             AppendVec,
         },
     },
+    rand::{thread_rng, Rng},
     solana_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::Slot,

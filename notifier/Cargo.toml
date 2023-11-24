@@ -11,9 +11,9 @@ edition = { workspace = true }
 
 [dependencies]
 log = { workspace = true }
+miraland-sdk = { workspace = true }
 reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 serde_json = { workspace = true }
-miraland-sdk = { workspace = true }
 
 [lib]
 name = "miraland_notifier"

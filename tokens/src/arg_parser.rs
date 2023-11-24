@@ -628,9 +628,11 @@ fn parse_distribute_spl_tokens_args(
 fn parse_balances_args(matches: &ArgMatches<'_>) -> Result<BalancesArgs, Box<dyn Error>> {
     let mut wallet_manager = maybe_wallet_manager()?;
     let spl_token_args =
-        pubkey_of_signer(matches, "mint_address", &mut wallet_manager)?.map(|mint| SolartiTokenArgs {
-            mint,
-            ..SolartiTokenArgs::default()
+        pubkey_of_signer(matches, "mint_address", &mut wallet_manager)?.map(|mint| {
+            SolartiTokenArgs {
+                mint,
+                ..SolartiTokenArgs::default()
+            }
         });
     Ok(BalancesArgs {
         input_csv: value_t_or_exit!(matches, "input_csv", String),
@@ -668,7 +670,9 @@ where
             Command::DistributeTokens(parse_distribute_spl_tokens_args(matches)?)
         }
         ("balances", Some(matches)) => Command::Balances(parse_balances_args(matches)?),
-        ("solarti-token-balances", Some(matches)) => Command::Balances(parse_balances_args(matches)?),
+        ("solarti-token-balances", Some(matches)) => {
+            Command::Balances(parse_balances_args(matches)?)
+        }
         ("transaction-log", Some(matches)) => {
             Command::TransactionLog(parse_transaction_log_args(matches))
         }

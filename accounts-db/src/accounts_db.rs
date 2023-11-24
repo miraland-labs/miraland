@@ -73,13 +73,13 @@ use {
     crossbeam_channel::{unbounded, Receiver, Sender},
     dashmap::{DashMap, DashSet},
     log::*,
+    miraland_measure::{measure::Measure, measure_us},
+    miraland_nohash_hasher::{IntMap, IntSet},
+    miraland_rayon_threadlimit::get_thread_count,
     rand::{thread_rng, Rng},
     rayon::{prelude::*, ThreadPool},
     serde::{Deserialize, Serialize},
     smallvec::SmallVec,
-    miraland_measure::{measure::Measure, measure_us},
-    miraland_nohash_hasher::{IntMap, IntSet},
-    miraland_rayon_threadlimit::get_thread_count,
     solana_sdk::{
         account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
         clock::{BankId, Epoch, Slot},
@@ -10938,7 +10938,7 @@ pub mod tests {
                 expected[0].push(raw_expected[index]);
             }
             let mut result2 = (0..range).map(|_| Vec::default()).collect::<Vec<_>>();
-            if let Some(m) = result.get(0) {
+            if let Some(m) = result.first() {
                 m.load_all(&mut result2, bin, &PubkeyBinCalculator24::new(bins));
             } else {
                 result2 = vec![];

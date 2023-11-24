@@ -16,7 +16,6 @@ futures-util = { workspace = true }
 indexmap = { workspace = true }
 indicatif = { workspace = true, optional = true }
 log = { workspace = true }
-rayon = { workspace = true }
 miraland-connection-cache = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-metrics = { workspace = true }
@@ -24,6 +23,7 @@ miraland-pubsub-client = { workspace = true }
 miraland-rpc-client = { workspace = true }
 miraland-rpc-client-api = { workspace = true }
 miraland-sdk = { workspace = true }
+rayon = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 

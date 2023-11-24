@@ -2,8 +2,8 @@ use {
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     miraland_accounts_db::stake_rewards::RewardInfo,
     miraland_ledger::blockstore::Blockstore,
-    solana_sdk::{clock::Slot, pubkey::Pubkey},
     miraland_transaction_status::Reward,
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         sync::{
             atomic::{AtomicBool, AtomicU64, Ordering},

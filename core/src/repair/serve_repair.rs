@@ -13,10 +13,6 @@ use {
     bincode::{serialize, Options},
     crossbeam_channel::{Receiver, RecvTimeoutError, Sender},
     lru::LruCache,
-    rand::{
-        distributions::{Distribution, WeightedError, WeightedIndex},
-        Rng,
-    },
     miraland_gossip::{
         cluster_info::{ClusterInfo, ClusterInfoError},
         contact_info::{LegacyContactInfo as ContactInfo, LegacyContactInfo, Protocol},
@@ -32,6 +28,15 @@ use {
         data_budget::DataBudget,
         packet::{Packet, PacketBatch, PacketBatchRecycler},
     },
+    miraland_streamer::{
+        sendmmsg::{batch_send, SendPktsError},
+        socket::SocketAddrSpace,
+        streamer::PacketBatchSender,
+    },
+    rand::{
+        distributions::{Distribution, WeightedError, WeightedIndex},
+        Rng,
+    },
     solana_runtime::bank_forks::BankForks,
     solana_sdk::{
         clock::Slot,
@@ -42,11 +47,6 @@ use {
         signature::{Signable, Signature, Signer, SIGNATURE_BYTES},
         signer::keypair::Keypair,
         timing::{duration_as_ms, timestamp},
-    },
-    miraland_streamer::{
-        sendmmsg::{batch_send, SendPktsError},
-        socket::SocketAddrSpace,
-        streamer::PacketBatchSender,
     },
     std::{
         cmp::Reverse,
@@ -1428,12 +1428,12 @@ mod tests {
             shred::{max_ticks_per_n_shreds, Shred, ShredFlags},
         },
         miraland_perf::packet::{deserialize_from_with_limit, Packet},
+        miraland_streamer::socket::SocketAddrSpace,
         solana_runtime::bank::Bank,
         solana_sdk::{
             feature_set::FeatureSet, hash::Hash, pubkey::Pubkey, signature::Keypair,
             timing::timestamp,
         },
-        miraland_streamer::socket::SocketAddrSpace,
         std::{io::Cursor, net::Ipv4Addr},
     };
 

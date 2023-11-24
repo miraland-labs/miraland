@@ -14,8 +14,6 @@ use {
     clap::ArgMatches,
     console::{style, Emoji},
     inflector::cases::titlecase::to_title_case,
-    serde::{Deserialize, Serialize},
-    serde_json::{Map, Value},
     miraland_account_decoder::{
         parse_account_data::AccountAdditionalData, parse_token::UiTokenAccount, UiAccount,
         UiAccountEncoding, UiDataSliceConfig,
@@ -25,6 +23,12 @@ use {
         RpcAccountBalance, RpcContactInfo, RpcInflationGovernor, RpcInflationRate, RpcKeyedAccount,
         RpcSupply, RpcVoteAccountInfo,
     },
+    miraland_transaction_status::{
+        EncodedConfirmedBlock, EncodedTransaction, TransactionConfirmationStatus,
+        UiTransactionStatusMeta,
+    },
+    serde::{Deserialize, Serialize},
+    serde_json::{Map, Value},
     solana_sdk::{
         account::ReadableAccount,
         clock::{Epoch, Slot, UnixTimestamp},
@@ -36,10 +40,6 @@ use {
         stake::state::{Authorized, Lockup},
         stake_history::StakeHistoryEntry,
         transaction::{Transaction, TransactionError, VersionedTransaction},
-    },
-    miraland_transaction_status::{
-        EncodedConfirmedBlock, EncodedTransaction, TransactionConfirmationStatus,
-        UiTransactionStatusMeta,
     },
     solana_vote_program::{
         authorized_voters::AuthorizedVoters,
@@ -2311,6 +2311,26 @@ impl fmt::Display for CliUpgradeableProgramClosed {
             "Closed Program Id {}, {} reclaimed",
             &self.program_id,
             &build_balance_message(self.lamports, self.use_lamports_unit, true)
+        )?;
+        Ok(())
+    }
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CliUpgradeableProgramExtended {
+    pub program_id: String,
+    pub additional_bytes: u32,
+}
+impl QuietDisplay for CliUpgradeableProgramExtended {}
+impl VerboseDisplay for CliUpgradeableProgramExtended {}
+impl fmt::Display for CliUpgradeableProgramExtended {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        writeln!(f)?;
+        writeln!(
+            f,
+            "Extended Program Id {} by {} bytes",
+            &self.program_id, self.additional_bytes,
         )?;
         Ok(())
     }

@@ -163,8 +163,8 @@ mod tests {
     use {
         super::*,
         miraland_gossip::contact_info::ContactInfo,
-        solana_sdk::signature::Signer,
         miraland_streamer::socket::SocketAddrSpace,
+        solana_sdk::signature::Signer,
         std::net::{IpAddr, Ipv4Addr, SocketAddr},
     };
 

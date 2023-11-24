@@ -73,8 +73,8 @@ mod tests {
             duplicate_shred_listener::DuplicateShredHandlerTrait,
         },
         miraland_ledger::shred::Shredder,
-        solana_sdk::signature::{Keypair, Signer},
         miraland_streamer::socket::SocketAddrSpace,
+        solana_sdk::signature::{Keypair, Signer},
         std::sync::{
             atomic::{AtomicU32, Ordering},
             Arc,

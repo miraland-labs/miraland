@@ -17,7 +17,6 @@ use {
         result::{Error, Result},
     },
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
-    rayon::{prelude::*, ThreadPool},
     miraland_gossip::cluster_info::ClusterInfo,
     miraland_ledger::{
         blockstore::{Blockstore, BlockstoreInsertionMetrics, PossibleDuplicateShred},
@@ -28,6 +27,7 @@ use {
     miraland_metrics::inc_new_counter_error,
     miraland_perf::packet::{Packet, PacketBatch},
     miraland_rayon_threadlimit::get_thread_count,
+    rayon::{prelude::*, ThreadPool},
     solana_sdk::clock::Slot,
     std::{
         cmp::Reverse,
@@ -510,12 +510,12 @@ mod test {
             get_tmp_ledger_path_auto_delete,
             shred::{ProcessShredsStats, Shredder},
         },
+        miraland_streamer::socket::SocketAddrSpace,
         solana_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        miraland_streamer::socket::SocketAddrSpace,
     };
 
     fn local_entries_to_shred(

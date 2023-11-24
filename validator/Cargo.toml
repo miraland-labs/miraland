@@ -27,12 +27,6 @@ jsonrpc-server-utils = { workspace = true }
 lazy_static = { workspace = true }
 libloading = { workspace = true }
 log = { workspace = true }
-num_cpus = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
-serde = { workspace = true }
-serde_json = { workspace = true }
-serde_yaml = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-cli-config = { workspace = true }
@@ -62,6 +56,12 @@ miraland-test-validator = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote-program = { workspace = true }
+num_cpus = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
 symlink = { workspace = true }
 thiserror = { workspace = true }
 

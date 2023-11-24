@@ -2,8 +2,6 @@
 use {
     bincode::serialized_size,
     log::*,
-    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
-    serial_test::serial,
     miraland_gossip::{
         cluster_info,
         cluster_info_metrics::GossipStats,
@@ -17,13 +15,15 @@ use {
         ping_pong::PingCache,
     },
     miraland_rayon_threadlimit::get_thread_count,
+    miraland_streamer::socket::SocketAddrSpace,
+    rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
+    serial_test::serial,
     solana_sdk::{
         hash::hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::{HashMap, HashSet},
         ops::Deref,

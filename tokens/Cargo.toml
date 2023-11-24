@@ -17,8 +17,6 @@ csv = { workspace = true }
 ctrlc = { workspace = true, features = ["termination"] }
 indexmap = { workspace = true }
 indicatif = { workspace = true }
-pickledb = { workspace = true, features = ["yaml"] }
-serde = { workspace = true, features = ["derive"] }
 miraland-account-decoder = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-cli-config = { workspace = true }
@@ -28,6 +26,8 @@ miraland-rpc-client-api = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-version = { workspace = true }
+pickledb = { workspace = true, features = ["yaml"] }
+serde = { workspace = true, features = ["derive"] }
 solarti-associated-token-account = { workspace = true }
 solarti-token = { workspace = true, features = ["no-entrypoint"] }
 tempfile = { workspace = true }

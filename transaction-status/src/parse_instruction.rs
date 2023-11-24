@@ -10,8 +10,8 @@ use {
         parse_vote::parse_vote,
     },
     inflector::Inflector,
-    serde_json::Value,
     miraland_account_decoder::parse_token::spl_token_ids,
+    serde_json::Value,
     solana_sdk::{
         address_lookup_table, instruction::CompiledInstruction, message::AccountKeys,
         pubkey::Pubkey, stake, system_program, vote,
@@ -124,7 +124,9 @@ pub fn parse(
             serde_json::to_value(parse_associated_token(instruction, account_keys)?)?
         }
         ParsableProgram::SolartiMemo => parse_memo(instruction)?,
-        ParsableProgram::SolartiToken => serde_json::to_value(parse_token(instruction, account_keys)?)?,
+        ParsableProgram::SolartiToken => {
+            serde_json::to_value(parse_token(instruction, account_keys)?)?
+        }
         ParsableProgram::BpfLoader => {
             serde_json::to_value(parse_bpf_loader(instruction, account_keys)?)?
         }

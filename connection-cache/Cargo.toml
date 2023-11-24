@@ -17,16 +17,16 @@ futures-util = { workspace = true }
 indexmap = { workspace = true }
 indicatif = { workspace = true, optional = true }
 log = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
-rcgen = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-metrics = { workspace = true }
 miraland-sdk = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+rcgen = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [dev-dependencies]
-rand_chacha = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-net-utils = { workspace = true }
+rand_chacha = { workspace = true }

@@ -13,6 +13,7 @@ use {
         request::{RpcError, RpcResponseErrorData, MAX_GET_SIGNATURE_STATUSES_QUERY_ITEMS},
         response::RpcSimulateTransactionResult,
     },
+    miraland_tpu_client::tpu_client::{Result, TpuSenderError},
     solana_sdk::{
         hash::Hash,
         message::Message,
@@ -20,7 +21,6 @@ use {
         signers::Signers,
         transaction::{Transaction, TransactionError},
     },
-    miraland_tpu_client::tpu_client::{Result, TpuSenderError},
     std::{
         sync::{
             atomic::{AtomicU64, AtomicUsize, Ordering},

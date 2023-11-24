@@ -24,7 +24,9 @@ use {
         leader_schedule_cache::LeaderScheduleCache,
     },
     miraland_measure::{measure, measure_us},
-    miraland_metrics::poh_timing_point::{send_poh_timing_point, PohTimingSender, SlotPohTimingInfo},
+    miraland_metrics::poh_timing_point::{
+        send_poh_timing_point, PohTimingSender, SlotPohTimingInfo,
+    },
     solana_runtime::{bank::Bank, installed_scheduler_pool::BankWithScheduler},
     solana_sdk::{
         clock::{Slot, NUM_CONSECUTIVE_LEADER_SLOTS},

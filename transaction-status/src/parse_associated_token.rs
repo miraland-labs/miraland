@@ -30,8 +30,9 @@ pub fn parse_associated_token(
     let ata_instruction = if instruction.data.is_empty() {
         AssociatedTokenAccountInstruction::Create
     } else {
-        AssociatedTokenAccountInstruction::try_from_slice(&instruction.data)
-            .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken))?
+        AssociatedTokenAccountInstruction::try_from_slice(&instruction.data).map_err(|_| {
+            ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
+        })?
     };
 
     match ata_instruction {
@@ -85,7 +86,11 @@ fn check_num_associated_token_accounts(
     accounts: &[u8],
     num: usize,
 ) -> Result<(), ParseInstructionError> {
-    check_num_accounts(accounts, num, ParsableProgram::SolartiAssociatedTokenAccount)
+    check_num_accounts(
+        accounts,
+        num,
+        ParsableProgram::SolartiAssociatedTokenAccount,
+    )
 }
 
 #[cfg(test)]

@@ -10,9 +10,9 @@ use {
         perf_libs,
         recycler::Recycler,
     },
-    rayon::{prelude::*, ThreadPool},
     miraland_metrics::inc_new_counter_debug,
     miraland_rayon_threadlimit::get_thread_count,
+    rayon::{prelude::*, ThreadPool},
     solana_sdk::{
         hash::Hash,
         message::{MESSAGE_HEADER_LENGTH, MESSAGE_VERSION_PREFIX},

@@ -29,6 +29,19 @@ lazy_static = { workspace = true }
 log = { workspace = true }
 lz4 = { workspace = true }
 memmap2 = { workspace = true }
+miraland-bucket-map = { workspace = true }
+miraland-config-program = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-nohash-hasher = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-rayon-threadlimit = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-stake-program = { workspace = true }
+miraland-system-program = { workspace = true }
+miraland-vote-program = { workspace = true }
 modular-bitfield = { workspace = true }
 num-derive = { workspace = true }
 num-traits = { workspace = true }
@@ -44,19 +57,6 @@ seqlock = { workspace = true }
 serde = { workspace = true, features = ["rc"] }
 serde_derive = { workspace = true }
 smallvec = { workspace = true }
-miraland-bucket-map = { workspace = true }
-miraland-config-program = { workspace = true }
-miraland-frozen-abi = { workspace = true }
-miraland-frozen-abi-macro = { workspace = true }
-miraland-measure = { workspace = true }
-miraland-metrics = { workspace = true }
-miraland-nohash-hasher = { workspace = true }
-miraland-program-runtime = { workspace = true }
-miraland-rayon-threadlimit = { workspace = true }
-miraland-sdk = { workspace = true }
-miraland-stake-program = { workspace = true }
-miraland-system-program = { workspace = true }
-miraland-vote-program = { workspace = true }
 static_assertions = { workspace = true }
 strum = { workspace = true, features = ["derive"] }
 strum_macros = { workspace = true }
@@ -73,11 +73,11 @@ assert_matches = { workspace = true }
 ed25519-dalek = { workspace = true }
 libsecp256k1 = { workspace = true }
 memoffset = { workspace = true }
-rand_chacha = { workspace = true }
 # See order-crates-for-publishing.py for using this unusual `path = "."`
 miraland-accounts-db = { path = ".", features = ["dev-context-only-utils"] }
 miraland-logger = { workspace = true }
 miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
+rand_chacha = { workspace = true }
 static_assertions = { workspace = true }
 test-case = { workspace = true }
 

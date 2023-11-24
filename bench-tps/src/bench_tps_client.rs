@@ -1,11 +1,11 @@
 use {
     miraland_rpc_client_api::client_error::Error as ClientError,
+    miraland_tpu_client::tpu_client::TpuSenderError,
     solana_sdk::{
         account::Account, commitment_config::CommitmentConfig, epoch_info::EpochInfo, hash::Hash,
         message::Message, pubkey::Pubkey, signature::Signature, transaction::Transaction,
         transport::TransportError,
     },
-    miraland_tpu_client::tpu_client::TpuSenderError,
     thiserror::Error,
 };
 

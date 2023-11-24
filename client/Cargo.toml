@@ -18,8 +18,6 @@ futures-util = { workspace = true }
 indexmap = { workspace = true }
 indicatif = { workspace = true }
 log = { workspace = true }
-quinn = { workspace = true }
-rayon = { workspace = true }
 miraland-connection-cache = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-metrics = { workspace = true }
@@ -33,6 +31,8 @@ miraland-streamer = { workspace = true }
 miraland-thin-client = { workspace = true }
 miraland-tpu-client = { workspace = true, features = ["default"] }
 miraland-udp-client = { workspace = true }
+quinn = { workspace = true }
+rayon = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 

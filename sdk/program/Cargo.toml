@@ -23,6 +23,9 @@ itertools =  { workspace = true }
 lazy_static = { workspace = true }
 log = { workspace = true }
 memoffset = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-sdk-macro = { workspace = true }
 num-derive = { workspace = true }
 num-traits = { workspace = true, features = ["i128"] }
 rustversion = { workspace = true }
@@ -32,9 +35,6 @@ serde_derive = { workspace = true }
 serde_json = { workspace = true }
 sha2 = { workspace = true }
 sha3 = { workspace = true }
-miraland-frozen-abi = { workspace = true }
-miraland-frozen-abi-macro = { workspace = true }
-miraland-sdk-macro = { workspace = true }
 thiserror = { workspace = true }
 
 # This is currently needed to build on-chain programs reliably.

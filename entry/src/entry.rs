@@ -8,9 +8,6 @@ use {
     dlopen2::symbor::{Container, SymBorApi, Symbol},
     lazy_static::lazy_static,
     log::*,
-    rand::{thread_rng, Rng},
-    rayon::{prelude::*, ThreadPool},
-    serde::{Deserialize, Serialize},
     miraland_measure::measure::Measure,
     miraland_merkle_tree::MerkleTree,
     miraland_metrics::*,
@@ -22,6 +19,9 @@ use {
         sigverify,
     },
     miraland_rayon_threadlimit::get_max_thread_count,
+    rand::{thread_rng, Rng},
+    rayon::{prelude::*, ThreadPool},
+    serde::{Deserialize, Serialize},
     solana_sdk::{
         hash::Hash,
         packet::Meta,
@@ -67,16 +67,16 @@ fn init(name: &OsStr) {
     unsafe {
         INIT_HOOK.call_once(|| {
             let path;
-            let lib_name = if let Some(perf_libs_path) = miraland_perf::perf_libs::locate_perf_libs()
-            {
-                miraland_perf::perf_libs::append_to_ld_library_path(
-                    perf_libs_path.to_str().unwrap_or("").to_string(),
-                );
-                path = perf_libs_path.join(name);
-                path.as_os_str()
-            } else {
-                name
-            };
+            let lib_name =
+                if let Some(perf_libs_path) = miraland_perf::perf_libs::locate_perf_libs() {
+                    miraland_perf::perf_libs::append_to_ld_library_path(
+                        perf_libs_path.to_str().unwrap_or("").to_string(),
+                    );
+                    path = perf_libs_path.join(name);
+                    path.as_os_str()
+                } else {
+                    name
+                };
 
             API = Container::load(lib_name).ok();
         })

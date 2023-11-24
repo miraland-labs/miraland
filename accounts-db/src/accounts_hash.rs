@@ -9,8 +9,8 @@ use {
     bytemuck::{Pod, Zeroable},
     log::*,
     memmap2::MmapMut,
-    rayon::prelude::*,
     miraland_measure::{measure::Measure, measure_us},
+    rayon::prelude::*,
     solana_sdk::{
         hash::{Hash, Hasher},
         pubkey::Pubkey,

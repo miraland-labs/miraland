@@ -21,6 +21,12 @@ ctrlc = { workspace = true, features = ["termination"] }
 dirs-next = { workspace = true }
 indicatif = { workspace = true }
 lazy_static = { workspace = true }
+miraland-clap-utils = { workspace = true }
+miraland-config-program = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-rpc-client = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-version = { workspace = true }
 nix = { workspace = true }
 reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 scopeguard = { workspace = true }
@@ -28,12 +34,6 @@ semver = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_yaml = { workspace = true }
 serde_yaml_08 = { package = "serde_yaml", version = "0.8.26" }
-miraland-clap-utils = { workspace = true }
-miraland-config-program = { workspace = true }
-miraland-logger = { workspace = true }
-miraland-rpc-client = { workspace = true }
-miraland-sdk = { workspace = true }
-miraland-version = { workspace = true }
 tar = { workspace = true }
 tempfile = { workspace = true }
 url = { workspace = true }

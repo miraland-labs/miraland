@@ -1,7 +1,6 @@
 #![allow(clippy::arithmetic_side_effects)]
 
 use {
-    serial_test::serial,
     miraland_bench_tps::{
         bench::{do_bench_tps, generate_and_fund_keypairs},
         cli::{Config, InstructionPaddingConfig},
@@ -19,6 +18,9 @@ use {
     },
     miraland_rpc::rpc::JsonRpcConfig,
     miraland_rpc_client::rpc_client::RpcClient,
+    miraland_streamer::socket::SocketAddrSpace,
+    miraland_test_validator::TestValidatorGenesis,
+    serial_test::serial,
     solana_sdk::{
         account::{Account, AccountSharedData},
         commitment_config::CommitmentConfig,
@@ -26,8 +28,6 @@ use {
         rent::Rent,
         signature::{Keypair, Signer},
     },
-    miraland_streamer::socket::SocketAddrSpace,
-    miraland_test_validator::TestValidatorGenesis,
     std::{sync::Arc, time::Duration},
 };
 

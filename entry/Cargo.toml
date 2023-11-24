@@ -15,15 +15,15 @@ crossbeam-channel = { workspace = true }
 dlopen2 = { workspace = true }
 lazy_static = { workspace = true }
 log = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
-serde = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-merkle-tree = { workspace = true }
 miraland-metrics = { workspace = true }
 miraland-perf = { workspace = true }
 miraland-rayon-threadlimit = { workspace = true }
 miraland-sdk = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+serde = { workspace = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }

@@ -583,8 +583,9 @@ impl AccountsHashVerifier {
 mod tests {
     use {
         super::*,
-        rand::seq::SliceRandom,
         miraland_gossip::contact_info::ContactInfo,
+        miraland_streamer::socket::SocketAddrSpace,
+        rand::seq::SliceRandom,
         solana_runtime::{
             snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL, snapshot_package::SnapshotKind,
         },
@@ -592,7 +593,6 @@ mod tests {
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        miraland_streamer::socket::SocketAddrSpace,
         std::str::FromStr,
     };
 

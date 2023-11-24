@@ -164,11 +164,11 @@ pub fn check_unique_pubkeys(
 mod tests {
     use {
         super::*,
-        serde_json::json,
         miraland_rpc_client_api::{
             request::RpcRequest,
             response::{Response, RpcResponseContext},
         },
+        serde_json::json,
         solana_sdk::system_instruction,
         std::collections::HashMap,
     };

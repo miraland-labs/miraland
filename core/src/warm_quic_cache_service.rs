@@ -2,13 +2,13 @@
 // by the time we need it.
 
 use {
-    rand::{thread_rng, Rng},
     miraland_client::{
         connection_cache::{ConnectionCache, Protocol},
         tpu_connection::TpuConnection,
     },
     miraland_gossip::cluster_info::ClusterInfo,
     miraland_poh::poh_recorder::PohRecorder,
+    rand::{thread_rng, Rng},
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},

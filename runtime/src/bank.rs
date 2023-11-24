@@ -61,12 +61,6 @@ use {
     dashmap::{DashMap, DashSet},
     itertools::izip,
     log::*,
-    percentage::Percentage,
-    rayon::{
-        iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
-        slice::ParallelSlice,
-        ThreadPool, ThreadPoolBuilder,
-    },
     miraland_accounts_db::{
         account_overrides::AccountOverrides,
         accounts::{
@@ -101,11 +95,17 @@ use {
             TransactionResults,
         },
     },
-    solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
     miraland_cost_model::cost_tracker::CostTracker,
     miraland_loader_v4_program::create_program_runtime_environment_v2,
     miraland_measure::{measure, measure::Measure, measure_us},
     miraland_perf::perf_libs,
+    percentage::Percentage,
+    rayon::{
+        iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
+        slice::ParallelSlice,
+        ThreadPool, ThreadPoolBuilder,
+    },
+    solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
     solana_program_runtime::{
         accounts_data_meter::MAX_ACCOUNTS_DATA_LEN,
         compute_budget::ComputeBudget,
@@ -6384,7 +6384,7 @@ impl Bank {
     pub fn process_transaction(&self, tx: &Transaction) -> Result<()> {
         self.try_process_transactions(std::iter::once(tx))?[0].clone()?;
         tx.signatures
-            .get(0)
+            .first()
             .map_or(Ok(()), |sig| self.get_signature_status(sig).unwrap())
     }
 

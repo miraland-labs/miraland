@@ -1,9 +1,9 @@
 use {
     crate::bench_tps_client::*,
     log::*,
-    rayon::prelude::*,
     miraland_core::gen_keys::GenKeys,
     miraland_measure::measure::Measure,
+    rayon::prelude::*,
     solana_sdk::{
         commitment_config::CommitmentConfig,
         compute_budget::ComputeBudgetInstruction,

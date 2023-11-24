@@ -5,8 +5,6 @@ use {
     },
     bincode::{deserialize, serialized_size},
     clap::{App, AppSettings, Arg, ArgMatches, SubCommand},
-    reqwest::blocking::Client,
-    serde_json::{Map, Value},
     miraland_account_decoder::validator_info::{
         self, ValidatorInfo, MAX_LONG_FIELD_LENGTH, MAX_SHORT_FIELD_LENGTH,
     },
@@ -17,9 +15,11 @@ use {
         keypair::DefaultSigner,
     },
     miraland_cli_output::{CliValidatorInfo, CliValidatorInfoVec},
-    solana_config_program::{config_instruction, get_config_data, ConfigKeys, ConfigState},
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     miraland_rpc_client::rpc_client::RpcClient,
+    reqwest::blocking::Client,
+    serde_json::{Map, Value},
+    solana_config_program::{config_instruction, get_config_data, ConfigKeys, ConfigState},
     solana_sdk::{
         account::Account,
         message::Message,
@@ -82,8 +82,9 @@ fn verify_keybase(
     keybase_username: &Value,
 ) -> Result<(), Box<dyn error::Error>> {
     if let Some(keybase_username) = keybase_username.as_str() {
-        let url =
-            format!("https://keybase.pub/{keybase_username}/miraland/validator-{validator_pubkey:?}");
+        let url = format!(
+            "https://keybase.pub/{keybase_username}/miraland/validator-{validator_pubkey:?}"
+        );
         let client = Client::new();
         if client.head(&url).send()?.status().is_success() {
             Ok(())

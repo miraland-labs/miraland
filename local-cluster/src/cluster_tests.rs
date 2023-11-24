@@ -4,8 +4,6 @@
 /// discover the rest of the network.
 use log::*;
 use {
-    rand::{thread_rng, Rng},
-    rayon::prelude::*,
     miraland_client::{
         connection_cache::{ConnectionCache, Protocol},
         thin_client::ThinClient,
@@ -21,6 +19,9 @@ use {
         gossip_service::{self, discover_cluster, GossipService},
     },
     miraland_ledger::blockstore::Blockstore,
+    miraland_streamer::socket::SocketAddrSpace,
+    rand::{thread_rng, Rng},
+    rayon::prelude::*,
     solana_sdk::{
         client::SyncClient,
         clock::{self, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
@@ -36,7 +37,6 @@ use {
         transaction::Transaction,
         transport::TransportError,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     solana_vote::vote_transaction::VoteTransaction,
     solana_vote_program::vote_transaction,
     std::{

@@ -13,9 +13,9 @@ edition = { workspace = true }
 console = { workspace = true }
 indicatif = { workspace = true }
 log = { workspace = true }
-reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
+reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }
 
 [lib]
 crate-type = ["lib"]

@@ -12,10 +12,6 @@ edition = { workspace = true }
 clap = { workspace = true }
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
-serde_json = { workspace = true }
-serde_yaml = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-cli-config = { workspace = true }
 miraland-client = { workspace = true }
@@ -38,13 +34,17 @@ miraland-streamer = { workspace = true }
 miraland-thin-client = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-version = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
 solarti-instruction-padding = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-serial_test = { workspace = true }
 miraland-local-cluster = { workspace = true }
 miraland-test-validator = { workspace = true }
+serial_test = { workspace = true }
 tempfile = { workspace = true }
 
 [package.metadata.docs.rs]

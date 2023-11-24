@@ -17,6 +17,7 @@ use {
         snapshot_packager_service::SnapshotPackagerService,
     },
     miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
+    miraland_streamer::socket::SocketAddrSpace,
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService,
@@ -49,7 +50,6 @@ use {
         system_transaction,
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         collections::HashSet,
         fs,

@@ -13,12 +13,12 @@ edition = { workspace = true }
 bs58 = { workspace = true }
 clap = { version = "3.1.5", features = ["cargo"] }
 dirs-next = { workspace = true }
-num_cpus = { workspace = true }
 miraland-clap-v3-utils = { workspace = true }
 miraland-cli-config = { workspace = true }
 miraland-remote-wallet = { workspace = true, features = ["default"] }
 miraland-sdk = { workspace = true }
 miraland-version = { workspace = true }
+num_cpus = { workspace = true }
 tiny-bip39 = { workspace = true }
 
 [dev-dependencies]

@@ -12,8 +12,6 @@ publish = true
 
 [dependencies]
 log = { workspace = true }
-prost = { workspace = true }
-prost-types = { workspace = true }
 miraland-gossip = { workspace = true }
 miraland-ledger = { workspace = true }
 miraland-logger = { workspace = true }
@@ -21,11 +19,13 @@ miraland-program = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-vote-program = { workspace = true }
+prost = { workspace = true }
+prost-types = { workspace = true }
 
 [dev-dependencies]
-serial_test = { workspace = true }
 miraland-entry = { workspace = true }
 miraland-streamer = { workspace = true }
+serial_test = { workspace = true }
 
 [build-dependencies]
 prost-build = { workspace = true }

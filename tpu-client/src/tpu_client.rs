@@ -1,11 +1,11 @@
 pub use crate::nonblocking::tpu_client::TpuSenderError;
 use {
     crate::nonblocking::tpu_client::TpuClient as NonblockingTpuClient,
-    rayon::iter::{IntoParallelIterator, ParallelIterator},
     miraland_connection_cache::connection_cache::{
         ConnectionCache, ConnectionManager, ConnectionPool, NewConnectionConfig,
     },
     miraland_rpc_client::rpc_client::RpcClient,
+    rayon::iter::{IntoParallelIterator, ParallelIterator},
     solana_sdk::{clock::Slot, transaction::Transaction, transport::Result as TransportResult},
     std::{
         collections::VecDeque,

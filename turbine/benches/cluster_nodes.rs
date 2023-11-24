@@ -3,14 +3,14 @@
 extern crate test;
 
 use {
-    rand::{seq::SliceRandom, Rng},
     miraland_gossip::legacy_contact_info::LegacyContactInfo as ContactInfo,
     miraland_ledger::shred::{Shred, ShredFlags},
-    solana_sdk::{clock::Slot, pubkey::Pubkey},
     miraland_turbine::{
         cluster_nodes::{make_test_cluster, new_cluster_nodes, ClusterNodes},
         retransmit_stage::RetransmitStage,
     },
+    rand::{seq::SliceRandom, Rng},
+    solana_sdk::{clock::Slot, pubkey::Pubkey},
     test::Bencher,
 };
 

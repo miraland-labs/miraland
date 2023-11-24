@@ -13,12 +13,12 @@ edition = { workspace = true }
 bincode = { workspace = true }
 bytemuck = { workspace = true }
 log = { workspace = true }
-num-derive = { workspace = true }
-num-traits = { workspace = true }
-serde = { workspace = true, features = ["derive"] }
 miraland-frozen-abi = { workspace = true }
 miraland-frozen-abi-macro = { workspace = true }
 miraland-program = { workspace = true }
+num-derive = { workspace = true }
+num-traits = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
 thiserror = { workspace = true }
 
 [target.'cfg(not(target_os = "solana"))'.dependencies]

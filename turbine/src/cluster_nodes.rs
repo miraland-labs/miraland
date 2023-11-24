@@ -2,8 +2,6 @@ use {
     crate::{broadcast_stage::BroadcastStage, retransmit_stage::RetransmitStage},
     itertools::Itertools,
     lru::LruCache,
-    rand::{seq::SliceRandom, Rng, SeedableRng},
-    rand_chacha::ChaChaRng,
     miraland_gossip::{
         cluster_info::ClusterInfo,
         contact_info::{LegacyContactInfo as ContactInfo, LegacyContactInfo, Protocol},
@@ -13,6 +11,9 @@ use {
         weighted_shuffle::WeightedShuffle,
     },
     miraland_ledger::shred::ShredId,
+    miraland_streamer::socket::SocketAddrSpace,
+    rand::{seq::SliceRandom, Rng, SeedableRng},
+    rand_chacha::ChaChaRng,
     solana_runtime::bank::Bank,
     solana_sdk::{
         clock::{Epoch, Slot},
@@ -22,7 +23,6 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::{
         any::TypeId,
         cmp::Reverse,

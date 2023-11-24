@@ -52,6 +52,8 @@ pub enum AuthenticatedEncryptionError {
     SeedLengthTooShort,
     #[error("seed length too long for derivation")]
     SeedLengthTooLong,
+    #[error("failed to deserialize")]
+    Deserialization,
 }
 
 struct AuthenticatedEncryption;
@@ -103,10 +105,10 @@ impl AuthenticatedEncryption {
 #[derive(Debug, Zeroize)]
 pub struct AeKey([u8; AE_KEY_LEN]);
 impl AeKey {
-    /// Deterministically derives an authenticated encryption key from a Miraland signer and a public
+    /// Deterministically derives an authenticated encryption key from a Solana signer and a public
     /// seed.
     ///
-    /// This function exists for applications where a user may not wish to maintain a Miraland signer
+    /// This function exists for applications where a user may not wish to maintain a Solana signer
     /// and an authenticated encryption key separately. Instead, a user can derive the ElGamal
     /// keypair on-the-fly whenever encrytion/decryption is needed.
     pub fn new_from_signer(
@@ -117,7 +119,7 @@ impl AeKey {
         Self::from_seed(&seed)
     }
 
-    /// Derive a seed from a Miraland signer used to generate an authenticated encryption key.
+    /// Derive a seed from a Solana signer used to generate an authenticated encryption key.
     ///
     /// The seed is derived as the hash of the signature of a public seed.
     pub fn seed_from_signer(
@@ -208,7 +210,7 @@ impl SeedDerivable for AeKey {
     }
 }
 
-/// For the purpose of encrypting balances for the solarti token accounts, the nonce and ciphertext
+/// For the purpose of encrypting balances for the spl token accounts, the nonce and ciphertext
 /// sizes should always be fixed.
 type Nonce = [u8; NONCE_LEN];
 type Ciphertext = [u8; CIPHERTEXT_LEN];

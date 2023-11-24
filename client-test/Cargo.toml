@@ -12,8 +12,6 @@ edition = { workspace = true }
 
 [dependencies]
 futures-util = { workspace = true }
-rand = { workspace = true }
-serde_json = { workspace = true }
 miraland-client = { workspace = true }
 miraland-ledger = { workspace = true }
 miraland-measure = { workspace = true }
@@ -31,6 +29,8 @@ miraland-streamer = { workspace = true }
 miraland-test-validator = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-version = { workspace = true }
+rand = { workspace = true }
+serde_json = { workspace = true }
 systemstat = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }

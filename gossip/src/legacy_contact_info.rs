@@ -6,12 +6,12 @@ use {
         },
         crds_value::MAX_WALLCLOCK,
     },
+    miraland_streamer::socket::SocketAddrSpace,
     solana_sdk::{
         pubkey::Pubkey,
         sanitize::{Sanitize, SanitizeError},
         timing::timestamp,
     },
-    miraland_streamer::socket::SocketAddrSpace,
     std::net::{IpAddr, Ipv4Addr, SocketAddr},
 };
 

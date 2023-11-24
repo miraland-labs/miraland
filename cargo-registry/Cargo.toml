@@ -15,9 +15,6 @@ flate2 = { workspace = true }
 hex = { workspace = true }
 hyper = { workspace = true, features = ["full"] }
 log = { workspace = true }
-serde = { workspace = true, features = ["derive"] }
-serde_json = { workspace = true }
-sha2 = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-cli = { workspace = true }
 miraland-cli-config = { workspace = true }
@@ -28,6 +25,9 @@ miraland-rpc-client = { workspace = true, features = ["default"] }
 miraland-rpc-client-api = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-version = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
 tar = { workspace = true }
 tempfile = { workspace = true }
 tokio = { workspace = true, features = ["full"] }

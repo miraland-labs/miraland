@@ -1,6 +1,5 @@
 pub use miraland_connection_cache::connection_cache::Protocol;
 use {
-    quinn::Endpoint,
     miraland_connection_cache::{
         client_connection::ClientConnection,
         connection_cache::{
@@ -9,9 +8,10 @@ use {
         },
     },
     miraland_quic_client::{QuicConfig, QuicConnectionManager, QuicPool},
-    solana_sdk::{pubkey::Pubkey, signature::Keypair, transport::Result as TransportResult},
     miraland_streamer::streamer::StakedNodes,
     miraland_udp_client::{UdpConfig, UdpConnectionManager, UdpPool},
+    quinn::Endpoint,
+    solana_sdk::{pubkey::Pubkey, signature::Keypair, transport::Result as TransportResult},
     std::{
         error::Error,
         net::{IpAddr, Ipv4Addr, SocketAddr},
@@ -215,10 +215,10 @@ mod tests {
         super::*,
         crate::connection_cache::ConnectionCache,
         crossbeam_channel::unbounded,
-        solana_sdk::{net::DEFAULT_TPU_COALESCE, signature::Keypair},
         miraland_streamer::{
             nonblocking::quic::DEFAULT_WAIT_FOR_CHUNK_TIMEOUT, streamer::StakedNodes,
         },
+        solana_sdk::{net::DEFAULT_TPU_COALESCE, signature::Keypair},
         std::{
             net::{IpAddr, Ipv4Addr, SocketAddr, UdpSocket},
             sync::{

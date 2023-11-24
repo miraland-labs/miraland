@@ -5,7 +5,6 @@
 
 use {
     log::*,
-    rayon::iter::{IntoParallelIterator, ParallelIterator},
     miraland_connection_cache::{
         client_connection::ClientConnection,
         connection_cache::{
@@ -14,6 +13,7 @@ use {
     },
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::{config::RpcProgramAccountsConfig, response::Response},
+    rayon::iter::{IntoParallelIterator, ParallelIterator},
     solana_sdk::{
         account::Account,
         client::{AsyncClient, Client, SyncClient},

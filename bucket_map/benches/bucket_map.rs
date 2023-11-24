@@ -20,8 +20,8 @@ macro_rules! DEFINE_NxM_BENCH {
 
 extern crate test;
 use {
-    rayon::prelude::*,
     miraland_bucket_map::bucket_map::{BucketMap, BucketMapConfig},
+    rayon::prelude::*,
     solana_sdk::pubkey::Pubkey,
     std::{collections::hash_map::HashMap, sync::RwLock},
     test::Bencher,

@@ -16,7 +16,7 @@ use {
     tonic::{codegen::InterceptedService, transport::ClientTlsConfig, Request, Status},
 };
 
-#[allow(clippy::derive_partial_eq_without_eq)]
+#[allow(clippy::derive_partial_eq_without_eq, clippy::enum_variant_names)]
 mod google {
     mod rpc {
         include!(concat!(
@@ -882,16 +882,16 @@ mod tests {
     use {
         super::*,
         crate::StoredConfirmedBlock,
+        miraland_transaction_status::{
+            ConfirmedBlock, TransactionStatusMeta, TransactionWithStatusMeta,
+            VersionedTransactionWithStatusMeta,
+        },
         prost::Message,
         solana_sdk::{
             hash::Hash, message::v0::LoadedAddresses, signature::Keypair, system_transaction,
             transaction::VersionedTransaction, transaction_context::TransactionReturnData,
         },
         solana_storage_proto::convert::generated,
-        miraland_transaction_status::{
-            ConfirmedBlock, TransactionStatusMeta, TransactionWithStatusMeta,
-            VersionedTransactionWithStatusMeta,
-        },
         std::convert::TryInto,
     };
 

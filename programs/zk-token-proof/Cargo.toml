@@ -10,11 +10,11 @@ edition = { workspace = true }
 
 [dependencies]
 bytemuck = { workspace = true, features = ["derive"] }
-num-derive = { workspace = true }
-num-traits = { workspace = true }
 miraland-program-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-zk-token-sdk = { workspace = true }
+num-derive = { workspace = true }
+num-traits = { workspace = true }
 
 [dev-dependencies]
 criterion = { workspace = true }

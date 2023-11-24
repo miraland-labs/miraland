@@ -14,12 +14,12 @@ console = { workspace = true }
 dialoguer = { workspace = true }
 hidapi = { workspace = true, optional = true }
 log = { workspace = true }
+miraland-sdk = { workspace = true }
 num-derive = { workspace = true }
 num-traits = { workspace = true }
 parking_lot = { workspace = true }
 qstring = { workspace = true }
 semver = { workspace = true }
-miraland-sdk = { workspace = true }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
 

@@ -16,6 +16,7 @@ use {
     bincode::{deserialize, serialize},
     byteorder::{BigEndian, ByteOrder},
     log::*,
+    miraland_accounts_db::hardened_unpack::UnpackError,
     prost::Message,
     rocksdb::{
         self,
@@ -27,7 +28,6 @@ use {
         WriteBatch as RWriteBatch, DB,
     },
     serde::{de::DeserializeOwned, Serialize},
-    miraland_accounts_db::hardened_unpack::UnpackError,
     solana_sdk::{
         clock::{Slot, UnixTimestamp},
         pubkey::Pubkey,
@@ -718,10 +718,6 @@ impl Rocks {
 
 pub trait Column {
     type Index;
-
-    fn key_size() -> usize {
-        std::mem::size_of::<Self::Index>()
-    }
 
     fn key(index: Self::Index) -> Vec<u8>;
     fn index(key: &[u8]) -> Self::Index;

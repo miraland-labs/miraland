@@ -20,10 +20,6 @@ futures = { workspace = true }
 histogram = { workspace = true }
 itertools = { workspace = true }
 log = { workspace = true }
-num_cpus = { workspace = true }
-regex = { workspace = true }
-serde = { workspace = true, features = ["derive"] }
-serde_json = { workspace = true }
 miraland-account-decoder = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-bpf-loader-program = { workspace = true }
@@ -47,6 +43,10 @@ miraland-streamer = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote-program = { workspace = true }
+num_cpus = { workspace = true }
+regex = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
 solana_rbpf = { workspace = true, features = ["debugger"] }
 tokio = { workspace = true, features = ["full"] }
 

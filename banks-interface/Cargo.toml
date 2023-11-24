@@ -10,8 +10,8 @@ license = { workspace = true }
 edition = { workspace = true }
 
 [dependencies]
-serde = { workspace = true, features = ["derive"] }
 miraland-sdk = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
 tarpc = { workspace = true, features = ["full"] }
 
 [lib]

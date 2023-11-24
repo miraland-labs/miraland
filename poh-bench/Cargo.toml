@@ -12,13 +12,13 @@ edition = { workspace = true }
 [dependencies]
 clap = { version = "3.1.5", features = ["cargo"] }
 log = { workspace = true }
-rayon = { workspace = true }
 miraland-entry = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-perf = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-version = { workspace = true }
+rayon = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

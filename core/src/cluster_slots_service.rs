@@ -183,8 +183,8 @@ mod test {
     use {
         super::*,
         miraland_gossip::{cluster_info::Node, crds_value::LowestSlot},
-        solana_sdk::signature::{Keypair, Signer},
         miraland_streamer::socket::SocketAddrSpace,
+        solana_sdk::signature::{Keypair, Signer},
     };
 
     #[test]

@@ -12,8 +12,6 @@ edition = { workspace = true }
 clap = { version = "3.1.8", features = ["derive"] }
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
-rand = { workspace = true }
-rayon = { workspace = true }
 miraland-client = { workspace = true }
 miraland-core = { workspace = true }
 miraland-gossip = { workspace = true }
@@ -27,6 +25,8 @@ miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-version = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
 
 [features]
 dev-context-only-utils = []

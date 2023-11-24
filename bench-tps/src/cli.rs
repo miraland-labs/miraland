@@ -5,12 +5,12 @@ use {
         input_validators::{is_keypair, is_url, is_url_or_moniker, is_within_range},
     },
     miraland_cli_config::{ConfigInput, CONFIG_FILE},
+    miraland_tpu_client::tpu_client::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
     solana_sdk::{
         fee_calculator::FeeRateGovernor,
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair},
     },
-    miraland_tpu_client::tpu_client::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
     std::{
         net::{IpAddr, Ipv4Addr, SocketAddr},
         time::Duration,
