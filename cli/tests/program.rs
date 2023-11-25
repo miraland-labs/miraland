@@ -728,7 +728,7 @@ fn test_cli_program_close_program() {
 
 #[test]
 fn test_cli_program_extend_program() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let mut noop_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     noop_path.push("tests");
