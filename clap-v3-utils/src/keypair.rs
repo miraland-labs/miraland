@@ -588,7 +588,7 @@ pub struct SignerFromPathConfig {
 ///
 ///   - `full-path` &mdash; In this case the value is a full derivation path,
 ///     and the user is responsible for ensuring it is correct. Example:
-///     `full-path=m/44/501/0/0/0`.
+///     `full-path=m/44/2002/0/0/0`.
 ///
 ///   If neither is provided, then the default derivation path is used.
 ///

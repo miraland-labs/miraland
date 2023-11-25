@@ -229,7 +229,7 @@ pub trait RemoteWallet<T> {
     }
 
     /// Sign transaction data with wallet managing pubkey at derivation path
-    /// `m/44'/501'/<account>'/<change>'`.
+    /// `m/44'/2002'/<account>'/<change>'`.
     fn sign_message(
         &self,
         derivation_path: &DerivationPath,
@@ -239,7 +239,7 @@ pub trait RemoteWallet<T> {
     }
 
     /// Sign off-chain message with wallet managing pubkey at derivation path
-    /// `m/44'/501'/<account>'/<change>'`.
+    /// `m/44'/2002'/<account>'/<change>'`.
     fn sign_offchain_message(
         &self,
         derivation_path: &DerivationPath,

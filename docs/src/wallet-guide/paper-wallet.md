@@ -133,7 +133,7 @@ The miraland-cli supports
 hierarchical derivation of private keys from your seed phrase and passphrase by
 adding either the `?key=` query string or the `?full-path=` query string.
 
-By default, `prompt:` will derive miraland's base derivation path `m/44'/501'`. To
+By default, `prompt:` will derive miraland's base derivation path `m/44'/2002'`. To
 derive a child key, supply the `?key=<ACCOUNT>/<CHANGE>` query string.
 
 ```bash
