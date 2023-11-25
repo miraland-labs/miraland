@@ -24,5 +24,9 @@ miraland-rpc-client-api = { workspace = true }
 serde_json = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
+[lib]
+crate-type = ["lib"]
+name = "miraland_rpc_client_nonce_utils"
+
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

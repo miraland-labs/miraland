@@ -27,5 +27,9 @@ thiserror = { workspace = true }
 
 [dev-dependencies]
 
+[lib]
+crate-type = ["lib"]
+name = "miraland_rpc_client_api"
+
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
