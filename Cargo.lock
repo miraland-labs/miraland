@@ -3190,8 +3190,8 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "solarti-pod",
- "solarti-token 4.0.0",
- "solarti-token-2022 0.9.0",
+ "solarti-token",
+ "solarti-token-2022",
  "solarti-token-metadata-interface",
  "thiserror",
  "zstd",
@@ -3238,7 +3238,7 @@ dependencies = [
  "miraland-version",
  "rand 0.8.5",
  "rayon",
- "solarti-token 4.0.0",
+ "solarti-token",
 ]
 
 [[package]]
@@ -3284,7 +3284,7 @@ dependencies = [
  "miraland-system-program",
  "miraland-vote-program",
  "modular-bitfield",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "num_cpus",
  "num_enum 0.7.1",
@@ -3321,7 +3321,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-runtime",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "rustc_version",
  "serde",
@@ -3681,7 +3681,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "solana_rbpf",
- "solarti-memo 4.0.0",
+ "solarti-memo",
  "tempfile",
  "thiserror",
  "tiny-bip39",
@@ -3725,7 +3725,7 @@ dependencies = [
  "semver",
  "serde",
  "serde_json",
- "solarti-memo 4.0.0",
+ "solarti-memo",
 ]
 
 [[package]]
@@ -4036,7 +4036,7 @@ dependencies = [
  "miraland-version",
  "serde",
  "serde_derive",
- "solarti-memo 4.0.0",
+ "solarti-memo",
  "thiserror",
  "tokio",
 ]
@@ -4343,8 +4343,8 @@ dependencies = [
  "serde_bytes",
  "sha2 0.10.8",
  "solarti-pod",
- "solarti-token 4.0.0",
- "solarti-token-2022 0.9.0",
+ "solarti-token",
+ "solarti-token-2022",
  "static_assertions",
  "strum",
  "strum_macros",
@@ -4680,7 +4680,7 @@ dependencies = [
  "miraland-logger",
  "miraland-sdk-macro",
  "num-bigint 0.4.4",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "parking_lot 0.12.1",
  "rand 0.8.5",
@@ -4718,7 +4718,7 @@ dependencies = [
  "miraland-measure",
  "miraland-metrics",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "percentage",
  "rand 0.8.5",
@@ -4827,7 +4827,7 @@ dependencies = [
  "hidapi",
  "log",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "parking_lot 0.12.1",
  "qstring",
@@ -4886,8 +4886,8 @@ dependencies = [
  "serial_test",
  "soketto",
  "solarti-pod",
- "solarti-token 4.0.0",
- "solarti-token-2022 0.9.0",
+ "solarti-token",
+ "solarti-token-2022",
  "stream-cancel",
  "symlink",
  "thiserror",
@@ -4940,7 +4940,7 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "solarti-token-2022 0.9.0",
+ "solarti-token-2022",
  "thiserror",
 ]
 
@@ -5046,7 +5046,7 @@ dependencies = [
  "miraland-zk-token-sdk",
  "mockall",
  "modular-bitfield",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "num_cpus",
  "num_enum 0.7.1",
@@ -5107,7 +5107,7 @@ dependencies = [
  "miraland-program",
  "miraland-sdk",
  "miraland-sdk-macro",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "num_enum 0.7.1",
  "pbkdf2 0.11.0",
@@ -5368,7 +5368,7 @@ dependencies = [
  "pickledb",
  "serde",
  "solarti-associated-token-account",
- "solarti-token 4.0.0",
+ "solarti-token",
  "tempfile",
  "thiserror",
 ]
@@ -5439,9 +5439,9 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "solarti-associated-token-account",
- "solarti-memo 4.0.0",
- "solarti-token 4.0.0",
- "solarti-token-2022 0.9.0",
+ "solarti-memo",
+ "solarti-token",
+ "solarti-token-2022",
  "thiserror",
 ]
 
@@ -5561,7 +5561,7 @@ dependencies = [
  "serde_json",
  "serde_yaml 0.9.27",
  "signal-hook",
- "solarti-token-2022 0.9.0",
+ "solarti-token-2022",
  "symlink",
  "thiserror",
  "tikv-jemallocator",
@@ -5614,7 +5614,7 @@ dependencies = [
  "miraland-program",
  "miraland-program-runtime",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "rustc_version",
  "serde",
@@ -5693,7 +5693,7 @@ dependencies = [
  "miraland-program-runtime",
  "miraland-sdk",
  "miraland-zk-token-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
 ]
 
@@ -5725,7 +5725,7 @@ dependencies = [
  "merlin",
  "miraland-program",
  "miraland-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "rand 0.7.3",
  "serde",
@@ -5904,17 +5904,6 @@ checksum = "b6b19411a9719e753aff12e5187b74d60d3dc449ec3f4dc21e3989c3f554bc95"
 dependencies = [
  "autocfg",
  "num-traits",
-]
-
-[[package]]
-name = "num-derive"
-version = "0.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "876a53fff98e03a936a674b29568b0e605f06b29372c2489ff4de23f1949743d"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -7792,17 +7781,17 @@ dependencies = [
 
 [[package]]
 name = "solarti-associated-token-account"
-version = "1.1.8"
+version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "36966225488d32cef90c3dfd5297a67ee5c55a15e506e906b92fab0fd2bf8753"
+checksum = "64af7d473f0759d729bf20db6348674cf83f36b12a6a1d2c0b2200c4c788ff3a"
 dependencies = [
  "assert_matches",
  "borsh 0.10.3",
  "miraland-program",
- "num-derive 0.3.3",
+ "num-derive",
  "num-traits",
- "solarti-token 3.5.6",
- "solarti-token-2022 0.6.7",
+ "solarti-token",
+ "solarti-token-2022",
  "thiserror",
 ]
 
@@ -7853,15 +7842,6 @@ dependencies = [
 
 [[package]]
 name = "solarti-memo"
-version = "3.0.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a4ecdadda1f3b90e33d2d2c1f4fded247f76f3388d2d3745d53b1ee1cce7f702"
-dependencies = [
- "miraland-program",
-]
-
-[[package]]
-name = "solarti-memo"
 version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "49f0565b53bb010b1014a9dacb5310cc65aeeaa4dba53aa8f6b8ae1c55fa7ced"
@@ -7889,7 +7869,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3a6c1925cde09e6b346706b44fda57e571276913e4fb2cf4fdcac72c52887b43"
 dependencies = [
  "miraland-program",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "solarti-program-error-derive",
  "thiserror",
@@ -7923,22 +7903,6 @@ dependencies = [
 
 [[package]]
 name = "solarti-token"
-version = "3.5.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "17273f7df4912364361cab2272b0f5d449c0bb50feb87d7689411aac49d63744"
-dependencies = [
- "arrayref",
- "bytemuck",
- "miraland-program",
- "num-derive 0.3.3",
- "num-traits",
- "num_enum 0.5.11",
- "thiserror",
- "winnow 0.4.1",
-]
-
-[[package]]
-name = "solarti-token"
 version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3766b4400984182e35cd02fcee1ccb060901c27b1cf3a49b17f2251b86298c10"
@@ -7946,27 +7910,9 @@ dependencies = [
  "arrayref",
  "bytemuck",
  "miraland-program",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "num_enum 0.7.1",
- "thiserror",
-]
-
-[[package]]
-name = "solarti-token-2022"
-version = "0.6.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "29e840b83ceaf5ea498ead31f5cf069b0b85192f513fef21b83ba511c4cd9899"
-dependencies = [
- "arrayref",
- "bytemuck",
- "miraland-program",
- "miraland-zk-token-sdk",
- "num-derive 0.3.3",
- "num-traits",
- "num_enum 0.5.11",
- "solarti-memo 3.0.7",
- "solarti-token 3.5.6",
  "thiserror",
 ]
 
@@ -7980,12 +7926,12 @@ dependencies = [
  "bytemuck",
  "miraland-program",
  "miraland-zk-token-sdk",
- "num-derive 0.4.1",
+ "num-derive",
  "num-traits",
  "num_enum 0.7.1",
- "solarti-memo 4.0.0",
+ "solarti-memo",
  "solarti-pod",
- "solarti-token 4.0.0",
+ "solarti-token",
  "solarti-token-group-interface",
  "solarti-token-metadata-interface",
  "solarti-transfer-hook-interface",
@@ -8703,7 +8649,7 @@ checksum = "1b5bb770da30e5cbfde35a2d7b9b8a2c4b8ef89548a7a6aeab5c9a576e3e7421"
 dependencies = [
  "indexmap 2.1.0",
  "toml_datetime",
- "winnow 0.5.19",
+ "winnow",
 ]
 
 [[package]]
@@ -8714,7 +8660,7 @@ checksum = "70f427fce4d84c72b5b732388bf4a9f4531b53f74e2887e3ecb2481f68f66d81"
 dependencies = [
  "indexmap 2.1.0",
  "toml_datetime",
- "winnow 0.5.19",
+ "winnow",
 ]
 
 [[package]]
@@ -8727,7 +8673,7 @@ dependencies = [
  "serde",
  "serde_spanned",
  "toml_datetime",
- "winnow 0.5.19",
+ "winnow",
 ]
 
 [[package]]
@@ -9403,15 +9349,6 @@ name = "windows_x86_64_msvc"
 version = "0.48.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ed94fce61571a4006852b7389a063ab983c02eb1bb37b47f8272ce92d06d9538"
-
-[[package]]
-name = "winnow"
-version = "0.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae8970b36c66498d8ff1d66685dc86b91b29db0c7739899012f63a63814b4b28"
-dependencies = [
- "memchr",
-]
 
 [[package]]
 name = "winnow"
