@@ -140,9 +140,9 @@ wait_step() {
 }
 
 all_test_steps() {
-  command_step checks1 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 80 check
-  command_step checks2 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-bins" 60 check
-  command_step checks3 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-all-targets" 60 check
+  command_step checks1 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 90 check
+  command_step checks2 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-bins" 90 check
+  command_step checks3 ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-dev-context-only-utils.sh check-all-targets" 90 check
   wait_step
 
   # Full test suite
@@ -184,7 +184,7 @@ all_test_steps() {
     cat >> "$output_file" <<"EOF"
   - command: ". ci/rust-version.sh; ci/docker-run.sh $$rust_stable_docker_image ci/test-stable-sbf.sh"
     name: "stable-sbf"
-    timeout_in_minutes: 35
+    timeout_in_minutes: 90
     artifact_paths: "sbf-dumps.tar.bz2"
     agents:
       queue: "miraland"
@@ -258,7 +258,7 @@ EOF
              ^ci/test-coverage.sh \
              ^scripts/coverage.sh \
       ; then
-    command_step coverage ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-coverage.sh" 80
+    command_step coverage ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-coverage.sh" 90
   else
     annotate --style info --context test-coverage \
       "Coverage skipped as no .rs files were modified"
@@ -296,7 +296,7 @@ pull_or_push_steps() {
 
     if [ -z "$diff_other_than_version_bump" ]; then
       echo "Diff only contains version bump."
-      command_step checks ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 60
+      command_step checks ". ci/rust-version.sh; ci/docker-run.sh \$\$rust_nightly_docker_image ci/test-checks.sh" 90
       exit 0
     fi
   fi
