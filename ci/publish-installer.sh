@@ -33,12 +33,16 @@ MIRALAND_DOWNLOAD_ROOT=https://release.miraland.top
 EOF
 cat install/miraland-install-init.sh >>release.miraland.top-install
 
-echo --- AWS S3 Store: "install"
-# upload-s3-artifact "/miraland/release.miraland.top-install" "s3://release.miraland.top/$CHANNEL_OR_TAG/install"
-# temp using rc1.miraland.top
-upload-s3-artifact-cmd "release.miraland.top-install" "s3://rc1.miraland.top/$CHANNEL_OR_TAG/install"
-echo Published to:
-ci/format-url.sh https://rc1.miraland.top/"$CHANNEL_OR_TAG"/install
+if [[ -n $DO_NOT_PUBLISH_TO_AWS ]]; then
+  echo "Skipped AWS S3 publishing due to DO_NOT_PUBLISH_TO_AWS"
+else
+  echo --- AWS S3 Store: "install"
+  # upload-s3-artifact "/miraland/release.miraland.top-install" "s3://release.miraland.top/$CHANNEL_OR_TAG/install"
+  # temp using rc1.miraland.top
+  upload-s3-artifact-cmd "release.miraland.top-install" "s3://rc1.miraland.top/$CHANNEL_OR_TAG/install"
+  echo Published to:
+  ci/format-url.sh https://rc1.miraland.top/"$CHANNEL_OR_TAG"/install
+fi
 
 echo --- Aliyun OSS Store: "install"
 # upload-oss-artifact "/miraland/release.miraland.top-install" "oss://release-miraland-top/$CHANNEL_OR_TAG/install"
