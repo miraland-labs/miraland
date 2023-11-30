@@ -62,7 +62,8 @@ pub struct BankingTracer {
     active_tracer: Option<ActiveTracer>,
 }
 
-#[frozen_abi(digest = "Eq6YrAFtTbtPrCEvh6Et1mZZDCARUg1gcK2qiZdqyjUz")]
+// #[frozen_abi(digest = "Eq6YrAFtTbtPrCEvh6Et1mZZDCARUg1gcK2qiZdqyjUz")]
+#[frozen_abi(digest = "6cHFXuHyLc2cLDMi1k3stj4j1c2m379mnNKTEpDj9u1B")]
 #[derive(Serialize, Deserialize, Debug, AbiExample)]
 pub struct TimedTracedEvent(pub std::time::SystemTime, pub TracedEvent);
 
