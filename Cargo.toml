@@ -371,6 +371,7 @@ miraland-rpc-client = { path = "rpc-client", version = "=1.18.1", default-featur
 miraland-rpc-client-api = { path = "rpc-client-api", version = "=1.18.1" }
 miraland-rpc-client-nonce-utils = { path = "rpc-client-nonce-utils", version = "=1.18.1" }
 miraland-runtime = { path = "runtime", version = "=1.18.1" }
+miraland-runtime-transaction = { path = "runtime-transaction", version = "=1.18.1" }
 miraland-sdk = { path = "sdk", version = "=1.18.1" }
 miraland-sdk-macro = { path = "sdk/macro", version = "=1.18.1" }
 miraland-send-transaction-service = { path = "send-transaction-service", version = "=1.18.1" }
