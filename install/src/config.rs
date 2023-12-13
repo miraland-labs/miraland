@@ -210,12 +210,12 @@ active_release_dir: {root_dir}/active_release
             remove_file(file_name).unwrap();
         }
 
-        let root_dir = "/home/mln/.local/share/solana/install";
+        let root_dir = "/home/mln/.local/share/miraland/install";
 
         writeln!(
             file,
             "---
-json_rpc_url: \"http://api.devnet.solana.com\"
+json_rpc_url: \"http://api.devnet-mln.miraland.top\"
 update_manifest_pubkey:
   - 0
   - 0
@@ -262,7 +262,7 @@ active_release_dir: {root_dir}/active_release
         assert_eq!(
             config,
             Config {
-                json_rpc_url: String::from("http://api.devnet.solana.com"),
+                json_rpc_url: String::from("http://api.devnet-mln.miraland.top"),
                 update_manifest_pubkey: Pubkey::default(),
                 current_update_manifest: None,
                 update_poll_secs: 3600,

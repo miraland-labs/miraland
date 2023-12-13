@@ -61,7 +61,7 @@ get() {
   declare version=$1
   declare dirname=$2
   declare job=$3
-  declare cache_root=~/.cache/solana
+  declare cache_root=~/.cache/miraland
   declare cache_dirname="$cache_root/$version/$dirname"
   declare cache_partial_dirname="$cache_dirname"_partial
 
@@ -130,9 +130,9 @@ if [[ ! -e platform-tools-$version.md || ! -e platform-tools ]]; then
   ./platform-tools/rust/bin/rustc --version
   ./platform-tools/rust/bin/rustc --print sysroot
   set +e
-  rustup toolchain uninstall solana
+  rustup toolchain uninstall miraland
   set -e
-  rustup toolchain link solana platform-tools/rust
+  rustup toolchain link miraland platform-tools/rust
 fi
 
 exit 0

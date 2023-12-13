@@ -223,7 +223,7 @@ fn distribution_instructions(
 
         // Stake args provided, so create a recipient stake account.
         Some(stake_args) => {
-            let unlocked_sol = stake_args.unlocked_sol;
+            let unlocked_mln = stake_args.unlocked_mln;
             let sender_pubkey = args.sender_keypair.pubkey();
             let recipient = allocation.recipient;
 
@@ -247,7 +247,7 @@ fn distribution_instructions(
                         new_stake_account_address,
                         &authorized,
                         &lockup,
-                        allocation.amount - unlocked_sol,
+                        allocation.amount - unlocked_mln,
                     )
                 }
 
@@ -271,7 +271,7 @@ fn distribution_instructions(
                     instructions.append(&mut stake_instruction::split(
                         &sender_stake_args.stake_account_address,
                         &stake_authority,
-                        allocation.amount - unlocked_sol - rent_exempt_reserve,
+                        allocation.amount - unlocked_mln - rent_exempt_reserve,
                         new_stake_account_address,
                     ));
 
@@ -315,7 +315,7 @@ fn distribution_instructions(
             instructions.push(system_instruction::transfer(
                 &sender_pubkey,
                 &recipient,
-                unlocked_sol,
+                unlocked_mln,
             ));
 
             instructions
@@ -826,9 +826,9 @@ fn check_payer_balances(
     let mut undistributed_tokens: u64 = allocations.iter().map(|x| x.amount).sum();
     let fees = get_fee_estimate_for_messages(messages, client)?;
 
-    let (distribution_source, unlocked_sol_source) = if let Some(stake_args) = &args.stake_args {
-        let total_unlocked_sol = allocations.len() as u64 * stake_args.unlocked_sol;
-        undistributed_tokens -= total_unlocked_sol;
+    let (distribution_source, unlocked_mln_source) = if let Some(stake_args) = &args.stake_args {
+        let total_unlocked_mln = allocations.len() as u64 * stake_args.unlocked_mln;
+        undistributed_tokens -= total_unlocked_mln;
         let from_pubkey = if let Some(sender_stake_args) = &stake_args.sender_stake_args {
             sender_stake_args.stake_account_address
         } else {
@@ -836,14 +836,14 @@ fn check_payer_balances(
         };
         (
             from_pubkey,
-            Some((args.sender_keypair.pubkey(), total_unlocked_sol)),
+            Some((args.sender_keypair.pubkey(), total_unlocked_mln)),
         )
     } else {
         (args.sender_keypair.pubkey(), None)
     };
 
     let fee_payer_balance = client.get_balance(&args.fee_payer.pubkey())?;
-    if let Some((unlocked_sol_source, total_unlocked_sol)) = unlocked_sol_source {
+    if let Some((unlocked_mln_source, total_unlocked_mln)) = unlocked_mln_source {
         let staker_balance = client.get_balance(&distribution_source)?;
         if staker_balance < undistributed_tokens {
             return Err(Error::InsufficientFunds(
@@ -851,11 +851,11 @@ fn check_payer_balances(
                 lamports_to_mln(undistributed_tokens).to_string(),
             ));
         }
-        if args.fee_payer.pubkey() == unlocked_sol_source {
-            if fee_payer_balance < fees + total_unlocked_sol {
+        if args.fee_payer.pubkey() == unlocked_mln_source {
+            if fee_payer_balance < fees + total_unlocked_mln {
                 return Err(Error::InsufficientFunds(
                     vec![FundingSource::SystemAccount, FundingSource::FeePayer].into(),
-                    lamports_to_mln(fees + total_unlocked_sol).to_string(),
+                    lamports_to_mln(fees + total_unlocked_mln).to_string(),
                 ));
             }
         } else {
@@ -865,11 +865,11 @@ fn check_payer_balances(
                     lamports_to_mln(fees).to_string(),
                 ));
             }
-            let unlocked_sol_balance = client.get_balance(&unlocked_sol_source)?;
-            if unlocked_sol_balance < total_unlocked_sol {
+            let unlocked_mln_balance = client.get_balance(&unlocked_mln_source)?;
+            if unlocked_mln_balance < total_unlocked_mln {
                 return Err(Error::InsufficientFunds(
                     vec![FundingSource::SystemAccount].into(),
-                    lamports_to_mln(total_unlocked_sol).to_string(),
+                    lamports_to_mln(total_unlocked_mln).to_string(),
                 ));
             }
         }
@@ -1116,7 +1116,7 @@ pub fn test_process_create_stake_with_client(client: &RpcClient, sender_keypair:
 
     let stake_args = StakeArgs {
         lockup_authority: None,
-        unlocked_sol: mln_to_lamports(1.0),
+        unlocked_mln: mln_to_lamports(1.0),
         sender_stake_args: None,
     };
     let args = DistributeTokensArgs {
@@ -1247,7 +1247,7 @@ pub fn test_process_distribute_stake_with_client(client: &RpcClient, sender_keyp
         rent_exempt_reserve: Some(rent_exempt_reserve),
     };
     let stake_args = StakeArgs {
-        unlocked_sol: mln_to_lamports(1.0),
+        unlocked_mln: mln_to_lamports(1.0),
         lockup_authority: None,
         sender_stake_args: Some(sender_stake_args),
     };
@@ -1797,7 +1797,7 @@ mod tests {
         };
         let stake_args = StakeArgs {
             lockup_authority: Some(lockup_authority_address),
-            unlocked_sol: mln_to_lamports(1.0),
+            unlocked_mln: mln_to_lamports(1.0),
             sender_stake_args: Some(sender_stake_args),
         };
         let args = DistributeTokensArgs {
@@ -2033,7 +2033,7 @@ mod tests {
 
     fn initialize_stake_account(
         stake_account_amount: u64,
-        unlocked_sol: u64,
+        unlocked_mln: u64,
         sender_keypair: &Keypair,
         client: &RpcClient,
     ) -> StakeArgs {
@@ -2072,7 +2072,7 @@ mod tests {
 
         StakeArgs {
             lockup_authority: None,
-            unlocked_sol,
+            unlocked_mln,
             sender_stake_args: Some(sender_stake_args),
         }
     }
@@ -2100,10 +2100,10 @@ mod tests {
         write_keypair_file(&alice, &sender_keypair_file).unwrap();
 
         let allocation_amount = 1000.0;
-        let unlocked_sol = 1.0;
+        let unlocked_mln = 1.0;
         let stake_args = initialize_stake_account(
             mln_to_lamports(allocation_amount),
-            mln_to_lamports(unlocked_sol),
+            mln_to_lamports(unlocked_mln),
             &alice,
             &client,
         );
@@ -2135,7 +2135,7 @@ mod tests {
             assert_eq!(sources, vec![FundingSource::StakeAccount].into());
             assert_eq!(
                 amount,
-                (expensive_allocation_amount - unlocked_sol).to_string()
+                (expensive_allocation_amount - unlocked_mln).to_string()
             );
         } else {
             panic!("check_payer_balances should have errored");
@@ -2160,7 +2160,7 @@ mod tests {
                 sources,
                 vec![FundingSource::SystemAccount, FundingSource::FeePayer].into()
             );
-            assert_eq!(amount, (unlocked_sol + fees_in_sol).to_string());
+            assert_eq!(amount, (unlocked_mln + fees_in_sol).to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }
@@ -2176,7 +2176,7 @@ mod tests {
         .unwrap();
         let transaction = transfer(
             &client,
-            mln_to_lamports(unlocked_sol),
+            mln_to_lamports(unlocked_mln),
             &alice,
             &partially_funded_payer.pubkey(),
         )
@@ -2199,7 +2199,7 @@ mod tests {
                 sources,
                 vec![FundingSource::SystemAccount, FundingSource::FeePayer].into()
             );
-            assert_eq!(amount, (unlocked_sol + fees_in_sol).to_string());
+            assert_eq!(amount, (unlocked_mln + fees_in_sol).to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }
@@ -2223,10 +2223,10 @@ mod tests {
         write_keypair_file(&alice, &sender_keypair_file).unwrap();
 
         let allocation_amount = 1000.0;
-        let unlocked_sol = 1.0;
+        let unlocked_mln = 1.0;
         let stake_args = initialize_stake_account(
             mln_to_lamports(allocation_amount),
-            mln_to_lamports(unlocked_sol),
+            mln_to_lamports(unlocked_mln),
             &alice,
             &client,
         );
@@ -2236,7 +2236,7 @@ mod tests {
         write_keypair_file(&funded_payer, &funded_payer_keypair_file).unwrap();
         let transaction = transfer(
             &client,
-            mln_to_lamports(unlocked_sol),
+            mln_to_lamports(unlocked_mln),
             &alice,
             &funded_payer.pubkey(),
         )
@@ -2268,7 +2268,7 @@ mod tests {
                 .unwrap_err();
         if let Error::InsufficientFunds(sources, amount) = err_result {
             assert_eq!(sources, vec![FundingSource::SystemAccount].into());
-            assert_eq!(amount, unlocked_sol.to_string());
+            assert_eq!(amount, unlocked_mln.to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }

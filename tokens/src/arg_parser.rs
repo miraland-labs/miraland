@@ -157,7 +157,7 @@ where
                         .help("Keypair to fund accounts"),
                 )
                 .arg(
-                    Arg::with_name("unlocked_sol")
+                    Arg::with_name("unlocked_mln")
                         .default_value("1.0")
                         .long("unlocked-mln")
                         .takes_value(true)
@@ -237,7 +237,7 @@ where
                         .help("Stake Account Address"),
                 )
                 .arg(
-                    Arg::with_name("unlocked_sol")
+                    Arg::with_name("unlocked_mln")
                         .default_value("1.0")
                         .long("unlocked-mln")
                         .takes_value(true)
@@ -478,7 +478,7 @@ fn parse_create_stake_args(
         .transpose()?;
 
     let stake_args = StakeArgs {
-        unlocked_sol: mln_to_lamports(value_t_or_exit!(matches, "unlocked_sol", f64)),
+        unlocked_mln: mln_to_lamports(value_t_or_exit!(matches, "unlocked_mln", f64)),
         lockup_authority,
         sender_stake_args: None,
     };
@@ -562,7 +562,7 @@ fn parse_distribute_stake_args(
         rent_exempt_reserve: None,
     };
     let stake_args = StakeArgs {
-        unlocked_sol: mln_to_lamports(value_t_or_exit!(matches, "unlocked_sol", f64)),
+        unlocked_mln: mln_to_lamports(value_t_or_exit!(matches, "unlocked_mln", f64)),
         lockup_authority: lockup_authority_address,
         sender_stake_args: Some(sender_stake_args),
     };
@@ -654,7 +654,7 @@ where
 {
     let matches = get_matches(args);
     let config_file = matches.value_of("config_file").unwrap().to_string();
-    let url = matches.value_of("url").map(|x| x.to_string());
+    let url = matches.value_of("json_rpc_url").map(|x| x.to_string());
 
     let command = match matches.subcommand() {
         ("distribute-tokens", Some(matches)) => {

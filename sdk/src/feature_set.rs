@@ -395,7 +395,7 @@ pub mod require_static_program_ids_in_transaction {
     solana_sdk::declare_id!("oGKc7zccts79GHrWwf3ndumuC6FxxCBaoHM3BbqQgBs");
 }
 
-pub mod stake_raise_minimum_delegation_to_1_sol {
+pub mod stake_raise_minimum_delegation_to_1_mln {
     // This is a feature-proposal *feature id*.  The feature keypair address is `GQXzC7YiSNkje6FFUk6sc2p53XRvKoaZ9VMktYzUMnpL`.
     solana_sdk::declare_id!("GDUQPY5WH24nccKtcHtpNMPQp6cP1SSnjePsMHCjEEcs");
 }
@@ -501,23 +501,27 @@ pub mod incremental_snapshot_only_incremental_hash_calculation {
 }
 
 pub mod disable_cpi_setting_executable_and_rent_epoch {
-    solana_sdk::declare_id!("B9cdB55u4jQsDNsdTK525yE9dmSc5Ga7YBaBrDFvEhM9");
+    solana_sdk::declare_id!("4BrSEo9yocvW66UXrG6wqzTjiGwRsyq1fKbqk2yrBGaq");
+}
+
+pub mod on_load_preserve_rent_epoch_for_rent_exempt_accounts {
+    solana_sdk::declare_id!("5PxkpSkieoAFGaN8NuVXGQnHmVxe27DS5Q42wewroM1w");
 }
 
 pub mod account_hash_ignore_slot {
-    solana_sdk::declare_id!("SVn36yVApPLYsa8koK3qUcy14zXDnqkNYWyUh1f4oK1");
+    solana_sdk::declare_id!("Aify2XEM5uFNprngYP8D8jyL1aHJ61FWs5erCxB2aN1r");
 }
 
 pub mod set_exempt_rent_epoch_max {
-    solana_sdk::declare_id!("5wAGiy15X1Jb2hkHnPDCM8oB9V42VNA9ftNVFK84dEgv");
+    solana_sdk::declare_id!("7Tr7PC29heiSC7KdhAHCiYHcZdoR2c8cQ3hS7HG4WYC9");
 }
 
 pub mod relax_authority_signer_check_for_lookup_table_creation {
-    solana_sdk::declare_id!("FKAcEvNgSY79RpqsPNUV5gDyumopH4cEHqUxyfm8b8Ap");
+    solana_sdk::declare_id!("C3ntUw4zmc86bNdFnExymqUPG4nUbJgV3Ng5GCPuGgan");
 }
 
 pub mod stop_sibling_instruction_search_at_parent {
-    solana_sdk::declare_id!("EYVpEP7uzH1CoXzbD6PubGhYmnxRXPeq3PPsm1ba3gpo");
+    solana_sdk::declare_id!("BAAkVzojXVbP8M6UCvSFphu5w4TNkdMK7a8fvXfSg63K");
 }
 
 pub mod vote_state_update_root_fix {
@@ -542,10 +546,6 @@ pub mod remove_deprecated_request_unit_ix {
 
 pub mod disable_rehash_for_rent_epoch {
     solana_sdk::declare_id!("4ZRYdjX3o3EvWQAftrqCRM3AG3hMvo5Z6TjzMMXJNmLX");
-}
-
-pub mod on_load_preserve_rent_epoch_for_rent_exempt_accounts {
-    solana_sdk::declare_id!("5PxkpSkieoAFGaN8NuVXGQnHmVxe27DS5Q42wewroM1w");
 }
 
 pub mod increase_tx_account_lock_limit {
@@ -742,6 +742,22 @@ pub mod validate_fee_collector_account {
     solana_sdk::declare_id!("6rx1ZUWENuBB4og2KqhSCR1cpaFpfjqrLHvQiJfN4VFT");
 }
 
+pub mod disable_rent_fees_collection {
+    solana_sdk::declare_id!("2m4tqba9mJ2W55Z4tU1QWqsmxxDR1Z4f945TKWooEGuW");
+}
+
+pub mod enable_zk_transfer_with_fee {
+    solana_sdk::declare_id!("4SfSmAdtkSt5uBGVsx4RBY3Z3jyuo2m2mQss3gA9AvUW");
+}
+
+pub mod drop_legacy_shreds {
+    solana_sdk::declare_id!("CzP5s8kWixq2U4h7pKeNkzq6x2cVeJhwxgM8bB6m6mCg");
+}
+
+pub mod allow_commission_decrease_at_any_time {
+    solana_sdk::declare_id!("C7vnTthLpM7Tz5bH5b7My9op4jwoJk4R5PBUCMWRd5dD");
+}
+
 lazy_static! {
     /// Map of feature identifiers to user-visible description
     pub static ref FEATURE_NAMES: HashMap<Pubkey, &'static str> = [
@@ -834,7 +850,7 @@ lazy_static! {
         (default_units_per_instruction::id(), "Default max tx-wide compute units calculated per instruction"),
         (stake_allow_zero_undelegated_amount::id(), "Allow zero-lamport undelegated amount for initialized stakes #24670"),
         (require_static_program_ids_in_transaction::id(), "require static program ids in versioned transactions"),
-        (stake_raise_minimum_delegation_to_1_sol::id(), "Raise minimum stake delegation to 1.0 MLN #24357"),
+        (stake_raise_minimum_delegation_to_1_mln::id(), "Raise minimum stake delegation to 1.0 MLN #24357"),
         (stake_minimum_delegation_for_rewards::id(), "stakes must be at least the minimum delegation to earn rewards"),
         (add_set_compute_unit_price_ix::id(), "add compute budget ix for setting a compute unit price"),
         (disable_deploy_of_alloc_free_syscall::id(), "disable new deployments of deprecated sol_alloc_free_ syscall"),
@@ -922,6 +938,10 @@ lazy_static! {
         (update_hashes_per_tick5::id(), "Update desired hashes per tick to 9.2M"),
         (update_hashes_per_tick6::id(), "Update desired hashes per tick to 10M"),
         (validate_fee_collector_account::id(), "validate fee collector account #33888"),
+        (disable_rent_fees_collection::id(), "Disable rent fees collection #33945"),
+        (enable_zk_transfer_with_fee::id(), "enable Zk Token proof program transfer with fee"),
+        (drop_legacy_shreds::id(), "drops legacy shreds #34328"),
+        (allow_commission_decrease_at_any_time::id(), "Allow commission decrease at any time in epoch #33843"),
         /*************** ADD NEW FEATURES HERE ***************/
     ]
     .iter()

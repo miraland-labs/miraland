@@ -2,7 +2,7 @@ use {
     crate::{StoredExtendedRewards, StoredTransactionStatusMeta},
     miraland_account_decoder::parse_token::{real_number_string_trimmed, UiTokenAmount},
     miraland_transaction_status::{
-        ConfirmedBlock, InnerInstruction, InnerInstructions, Reward, RewardType,
+        ConfirmedBlock, EntrySummary, InnerInstruction, InnerInstructions, Reward, RewardType,
         TransactionByAddrInfo, TransactionStatusMeta, TransactionTokenBalance,
         TransactionWithStatusMeta, VersionedConfirmedBlock, VersionedTransactionWithStatusMeta,
     },
@@ -29,7 +29,7 @@ use {
 pub mod generated {
     include!(concat!(
         env!("OUT_DIR"),
-        "/solana.storage.confirmed_block.rs"
+        "/miraland.storage.confirmed_block.rs"
     ));
 }
 
@@ -37,8 +37,13 @@ pub mod generated {
 pub mod tx_by_addr {
     include!(concat!(
         env!("OUT_DIR"),
-        "/solana.storage.transaction_by_addr.rs"
+        "/miraland.storage.transaction_by_addr.rs"
     ));
+}
+
+#[allow(clippy::derive_partial_eq_without_eq)]
+pub mod entries {
+    include!(concat!(env!("OUT_DIR"), "/miraland.storage.entries.rs"));
 }
 
 impl From<Vec<Reward>> for generated::Rewards {
@@ -1186,6 +1191,29 @@ impl TryFrom<tx_by_addr::TransactionByAddr> for Vec<TransactionByAddrInfo> {
             .into_iter()
             .map(|tx_by_addr| tx_by_addr.try_into())
             .collect::<Result<Vec<TransactionByAddrInfo>, Self::Error>>()
+    }
+}
+
+impl From<(usize, EntrySummary)> for entries::Entry {
+    fn from((index, entry_summary): (usize, EntrySummary)) -> Self {
+        entries::Entry {
+            index: index as u32,
+            num_hashes: entry_summary.num_hashes,
+            hash: entry_summary.hash.as_ref().into(),
+            num_transactions: entry_summary.num_transactions,
+            starting_transaction_index: entry_summary.starting_transaction_index as u32,
+        }
+    }
+}
+
+impl From<entries::Entry> for EntrySummary {
+    fn from(entry: entries::Entry) -> Self {
+        EntrySummary {
+            num_hashes: entry.num_hashes,
+            hash: Hash::new(&entry.hash),
+            num_transactions: entry.num_transactions,
+            starting_transaction_index: entry.starting_transaction_index as usize,
+        }
     }
 }
 

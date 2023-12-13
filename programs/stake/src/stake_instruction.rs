@@ -435,7 +435,7 @@ mod tests {
         let mut feature_set = feature_set_old_warmup_cooldown();
         Arc::get_mut(&mut feature_set)
             .unwrap()
-            .deactivate(&feature_set::stake_raise_minimum_delegation_to_1_sol::id());
+            .deactivate(&feature_set::stake_raise_minimum_delegation_to_1_mln::id());
         feature_set
     }
 

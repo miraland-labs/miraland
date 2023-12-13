@@ -10,7 +10,7 @@ lazy_static! {
     ///
     /// This is a [lazy_static] of `Option<String>`, the value of which is
     ///
-    /// > `~/.config/solana/cli/config.yml`
+    /// > `~/.config/miraland/cli/config.yml`
     ///
     /// It will only be `None` if it is unable to identify the user's home
     /// directory, which should not happen under typical OS environments.

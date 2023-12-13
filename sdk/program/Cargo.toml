@@ -15,6 +15,7 @@ rust-version = "1.72.0" # solana platform-tools rust version
 bincode = { workspace = true }
 blake3 = { workspace = true, features = ["digest", "traits-preview"] }
 borsh = { workspace = true }
+borsh0-10 = { package = "borsh", version = "0.10.3" }
 borsh0-9 = { package = "borsh", version = "0.9.3" }
 bs58 = { workspace = true }
 bv = { workspace = true, features = ["serde"] }
@@ -43,7 +44,6 @@ thiserror = { workspace = true }
 # upgrades Borsh's dependency to hashbrown 0.13.
 # Remove this once borsh 0.11 or 1.0 is released, which correctly declares the
 # hashbrown dependency as optional.
-# MI: since borsh version now is 1.2.0 in workspace, comment out next 2 lines
 [target.'cfg(target_os = "solana")'.dependencies]
 getrandom = { workspace = true, features = ["custom"] }
 

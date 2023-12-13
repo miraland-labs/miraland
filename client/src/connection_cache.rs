@@ -11,7 +11,10 @@ use {
     miraland_streamer::streamer::StakedNodes,
     miraland_udp_client::{UdpConfig, UdpConnectionManager, UdpPool},
     quinn::Endpoint,
-    solana_sdk::{pubkey::Pubkey, signature::Keypair, transport::Result as TransportResult},
+    solana_sdk::{
+        pubkey::Pubkey, quic::NotifyKeyUpdate, signature::Keypair,
+        transport::Result as TransportResult,
+    },
     std::{
         error::Error,
         net::{IpAddr, Ipv4Addr, SocketAddr},
@@ -41,6 +44,15 @@ pub enum BlockingClientConnection {
 pub enum NonblockingClientConnection {
     Quic(Arc<<QuicBaseClientConnection as BaseClientConnection>::NonblockingClientConnection>),
     Udp(Arc<<UdpBaseClientConnection as BaseClientConnection>::NonblockingClientConnection>),
+}
+
+impl NotifyKeyUpdate for ConnectionCache {
+    fn update_key(&self, key: &Keypair) -> Result<(), Box<dyn std::error::Error>> {
+        match self {
+            Self::Udp(_) => Ok(()),
+            Self::Quic(backend) => backend.update_key(key),
+        }
+    }
 }
 
 impl ConnectionCache {
@@ -216,7 +228,8 @@ mod tests {
         crate::connection_cache::ConnectionCache,
         crossbeam_channel::unbounded,
         miraland_streamer::{
-            nonblocking::quic::DEFAULT_WAIT_FOR_CHUNK_TIMEOUT, streamer::StakedNodes,
+            nonblocking::quic::DEFAULT_WAIT_FOR_CHUNK_TIMEOUT, quic::SpawnServerResult,
+            streamer::StakedNodes,
         },
         solana_sdk::{net::DEFAULT_TPU_COALESCE, signature::Keypair},
         std::{
@@ -245,7 +258,11 @@ mod tests {
 
         let staked_nodes = Arc::new(RwLock::new(StakedNodes::default()));
 
-        let (response_recv_endpoint, response_recv_thread) = miraland_streamer::quic::spawn_server(
+        let SpawnServerResult {
+            endpoint: response_recv_endpoint,
+            thread: response_recv_thread,
+            key_updater: _,
+        } = solana_streamer::quic::spawn_server(
             "quic_streamer_test",
             response_recv_socket,
             &keypair2,

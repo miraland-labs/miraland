@@ -61,7 +61,7 @@ get() {
   declare version=$1
   declare dirname=$2
   declare job=$3
-  declare cache_root=~/.cache/solana
+  declare cache_root=~/.cache/miraland
   declare cache_dirname="$cache_root/$version/$dirname"
   declare cache_partial_dirname="$cache_dirname"_partial
 

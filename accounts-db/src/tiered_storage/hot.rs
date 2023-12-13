@@ -1,4 +1,3 @@
-#![allow(dead_code)]
 //! The account meta and related structs for hot accounts.
 
 use {
@@ -35,6 +34,10 @@ const MAX_HOT_PADDING: u8 = 7;
 
 /// The maximum allowed value for the owner index of a hot account.
 const MAX_HOT_OWNER_OFFSET: OwnerOffset = OwnerOffset((1 << 29) - 1);
+
+/// The multiplier for converting AccountOffset to the internal hot account
+/// offset.  This increases the maximum size of a hot accounts file.
+const HOT_ACCOUNT_OFFSET_MULTIPLIER: usize = 8;
 
 #[bitfield(bits = 32)]
 #[repr(C)]
@@ -203,11 +206,11 @@ impl HotStorageReader {
     pub fn new_from_path(path: impl AsRef<Path>) -> TieredStorageResult<Self> {
         let file = OpenOptions::new().read(true).open(path)?;
         let mmap = unsafe { MmapOptions::new().map(&file)? };
-        // Here we are cloning the footer as accessing any data in a
+        // Here we are copying the footer, as accessing any data in a
         // TieredStorage instance requires accessing its Footer.
         // This can help improve cache locality and reduce the overhead
         // of indirection associated with memory-mapped accesses.
-        let footer = TieredStorageFooter::new_from_mmap(&mmap)?.clone();
+        let footer = *TieredStorageFooter::new_from_mmap(&mmap)?;
 
         Ok(Self { mmap, footer })
     }
@@ -228,7 +231,9 @@ impl HotStorageReader {
         &self,
         account_offset: AccountOffset,
     ) -> TieredStorageResult<&HotAccountMeta> {
-        let (meta, _) = get_type::<HotAccountMeta>(&self.mmap, account_offset.block as usize)?;
+        let internal_account_offset = account_offset.block as usize * HOT_ACCOUNT_OFFSET_MULTIPLIER;
+
+        let (meta, _) = get_type::<HotAccountMeta>(&self.mmap, internal_account_offset)?;
         Ok(meta)
     }
 
@@ -468,7 +473,10 @@ pub mod tests {
                 .map(|meta| {
                     let prev_offset = current_offset;
                     current_offset += file.write_type(meta).unwrap() as u32;
-                    AccountOffset { block: prev_offset }
+                    assert_eq!(prev_offset % HOT_ACCOUNT_OFFSET_MULTIPLIER as u32, 0);
+                    AccountOffset {
+                        block: prev_offset / HOT_ACCOUNT_OFFSET_MULTIPLIER as u32,
+                    }
                 })
                 .collect();
             // while the test only focuses on account metas, writing a footer

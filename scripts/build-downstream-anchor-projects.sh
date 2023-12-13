@@ -9,8 +9,10 @@ source ci/_
 source scripts/patch-crates.sh
 source scripts/read-cargo-variable.sh
 
+anchor_version=$1
 miraland_ver=$(readCargoVariable version Cargo.toml)
 miraland_dir=$PWD
+cargo="$miraland_dir"/cargo
 cargo_build_sbf="$miraland_dir"/cargo-build-sbf
 cargo_test_sbf="$miraland_dir"/cargo-test-sbf
 
@@ -42,16 +44,24 @@ EOF
 anchor() {
   set -x
   rm -rf anchor
-  git clone https://github.com/coral-xyz/anchor.git
-  # copy toolchain file to use solana's rust version
-  cp "$miraland_dir"/rust-toolchain.toml anchor/
-  cd anchor
+  # git clone https://github.com/coral-xyz/anchor.git
+  git clone https://github.com/miraland-labs/anchor.git
+  cd anchor || exit 1
 
-  update_solana_dependencies . "$miraland_ver"
-  patch_crates_io_solana Cargo.toml "$miraland_dir"
+  # checkout tag
+  if [[ -n "$anchor_version" ]]; then
+    git checkout "$anchor_version"
+  fi
 
-  cargo build
-  cargo test
+  # copy toolchain file to use miraland's rust version
+  cp "$miraland_dir"/rust-toolchain.toml .
+
+  update_miraland_dependencies . "$miraland_ver"
+  patch_crates_io_miraland Cargo.toml "$miraland_dir"
+
+  $cargo test
+  (cd spl && $cargo_build_sbf --features dex metadata stake)
+  (cd client && $cargo test --all-features)
 
   anchor_dir=$PWD
   anchor_ver=$(readCargoVariable version "$anchor_dir"/lang/Cargo.toml)
@@ -64,17 +74,18 @@ mango() {
     set -x
     rm -rf mango-v3
     git clone https://github.com/blockworks-foundation/mango-v3
-    # copy toolchain file to use solana's rust version
+    # copy toolchain file to use miraland's rust version
     cp "$miraland_dir"/rust-toolchain.toml mango-v3/
     cd mango-v3
 
-    update_solana_dependencies . "$miraland_ver"
+    update_miraland_dependencies . "$miraland_ver"
     update_anchor_dependencies . "$anchor_ver"
-    patch_crates_io_solana Cargo.toml "$miraland_dir"
+    patch_crates_io_miraland Cargo.toml "$miraland_dir"
     patch_crates_io_anchor Cargo.toml "$anchor_dir"
 
-    cargo build
-    cargo test
+    cd program
+    $cargo build
+    $cargo test
     $cargo_build_sbf
     $cargo_test_sbf
   )
@@ -83,19 +94,17 @@ mango() {
 metaplex() {
   (
     set -x
-    rm -rf metaplex-program-library
-    git clone https://github.com/metaplex-foundation/metaplex-program-library
-     # copy toolchain file to use solana's rust version
-     cp "$miraland_dir"/rust-toolchain.toml metaplex-program-library/
-    cd metaplex-program-library
+    rm -rf miraplex-program-library
+    git clone https://github.com/miraland-labs/miraplex-program-library
+     # copy toolchain file to use miraland's rust version
+     cp "$miraland_dir"/rust-toolchain.toml miraplex-program-library/
+    cd miraplex-program-library/token-metadata/program
 
-    update_solana_dependencies . "$miraland_ver"
-    update_anchor_dependencies . "$anchor_ver"
-    patch_crates_io_solana Cargo.toml "$miraland_dir"
-    patch_crates_io_anchor Cargo.toml "$anchor_dir"
+    update_miraland_dependencies . "$miraland_ver"
+    patch_crates_io_miraland Cargo.toml "$miraland_dir"
 
-    cargo build
-    cargo test
+    $cargo build
+    $cargo test
     $cargo_build_sbf
     $cargo_test_sbf
   )
