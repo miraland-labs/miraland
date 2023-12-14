@@ -4,8 +4,11 @@ use {
         bank::Bank,
         genesis_utils::{self, GenesisConfigInfo, ValidatorVoteKeypairs},
     },
+    solana_sdk::{pubkey::Pubkey, signature::Signer},
+};
+use {
     miraland_accounts_db::transaction_results::TransactionResults,
-    solana_sdk::{pubkey::Pubkey, signature::Signer, transaction::SanitizedTransaction},
+    solana_sdk::transaction::SanitizedTransaction,
     solana_vote::{vote_parser, vote_sender_types::ReplayVoteSender},
 };
 
