@@ -1,3 +1,4 @@
+#[cfg(feature = "dev-context-only-utils")]
 use {
     crate::{
         bank::Bank,
@@ -8,6 +9,7 @@ use {
     solana_vote::{vote_parser, vote_sender_types::ReplayVoteSender},
 };
 
+#[cfg(feature = "dev-context-only-utils")]
 pub fn setup_bank_and_vote_pubkeys_for_tests(
     num_vote_accounts: usize,
     stake: u64,
