@@ -22,7 +22,7 @@ tokio-serde = { workspace = true, features = ["bincode"] }
 
 [dev-dependencies]
 miraland-banks-server = { workspace = true }
-miraland-runtime = { workspace = true }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
 
 [lib]
 crate-type = ["lib"]

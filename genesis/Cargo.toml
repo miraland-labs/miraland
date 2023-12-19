@@ -30,6 +30,9 @@ serde_json = { workspace = true }
 serde_yaml = { workspace = true }
 tempfile = { workspace = true }
 
+[dev-dependencies]
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
+
 [[bin]]
 name = "miraland-genesis"
 path = "src/main.rs"

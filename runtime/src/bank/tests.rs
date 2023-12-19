@@ -10005,7 +10005,6 @@ fn calculate_test_fee(
     remove_congestion_multiplier: bool,
 ) -> u64 {
     let mut feature_set = FeatureSet::all_enabled();
-    feature_set.deactivate(&solana_sdk::feature_set::remove_deprecated_request_unit_ix::id());
 
     if !support_set_accounts_data_size_limit_ix {
         feature_set.deactivate(
@@ -10013,10 +10012,9 @@ fn calculate_test_fee(
         );
     }
 
-    let budget_limits =
-        process_compute_budget_instructions(message.program_instructions_iter(), &feature_set)
-            .unwrap_or_default()
-            .into();
+    let budget_limits = process_compute_budget_instructions(message.program_instructions_iter())
+        .unwrap_or_default()
+        .into();
 
     fee_structure.calculate_fee(
         message,
@@ -14114,4 +14112,30 @@ fn test_rebuild_skipped_rewrites() {
     // Ensure the snapshot bank's skipped rewrites match the original bank's
     let snapshot_skipped_rewrites = snapshot_bank.calculate_skipped_rewrites();
     assert_eq!(snapshot_skipped_rewrites, actual_skipped_rewrites);
+}
+
+/// Test that simulations report the compute units of failed transactions
+#[test]
+fn test_failed_simulation_compute_units() {
+    let (genesis_config, mint_keypair) = create_genesis_config(LAMPORTS_PER_SOL);
+    let program_id = Pubkey::new_unique();
+    let bank =
+        Bank::new_with_mockup_builtin_for_tests(&genesis_config, program_id, MockBuiltin::vm).0;
+
+    const TEST_UNITS: u64 = 10_000;
+    declare_process_instruction!(MockBuiltin, 1, |invoke_context| {
+        invoke_context.consume_checked(TEST_UNITS).unwrap();
+        Err(InstructionError::InvalidInstructionData)
+    });
+
+    let message = Message::new(
+        &[Instruction::new_with_bincode(program_id, &0, vec![])],
+        Some(&mint_keypair.pubkey()),
+    );
+    let transaction = Transaction::new(&[&mint_keypair], message, bank.last_blockhash());
+
+    bank.freeze();
+    let sanitized = SanitizedTransaction::from_transaction_for_tests(transaction);
+    let simulation = bank.simulate_transaction(&sanitized, false);
+    assert_eq!(TEST_UNITS, simulation.units_consumed);
 }

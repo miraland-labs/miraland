@@ -21,7 +21,7 @@ miraland-stake-program = { workspace = true }
 miraland-version = { workspace = true }
 
 [dev-dependencies]
-miraland-runtime = { workspace = true }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

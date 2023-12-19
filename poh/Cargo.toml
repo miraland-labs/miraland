@@ -27,6 +27,7 @@ bincode = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-perf = { workspace = true }
 miraland-poh = { path = ".", features = ["dev-context-only-utils"] }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
 rand = { workspace = true }
 
 [features]

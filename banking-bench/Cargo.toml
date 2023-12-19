@@ -20,7 +20,7 @@ miraland-logger = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-perf = { workspace = true }
 miraland-poh = { workspace = true, features = ["dev-context-only-utils"] }
-miraland-runtime = { workspace = true }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
 miraland-tpu-client = { workspace = true }

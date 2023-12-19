@@ -3,7 +3,7 @@ use {
     miraland_account_decoder::{parse_token::UiTokenAmount, UiAccount},
     miraland_transaction_status::{
         ConfirmedTransactionStatusWithSignature, TransactionConfirmationStatus, UiConfirmedBlock,
-        UiTransactionReturnData,
+        UiInnerInstructions, UiTransactionReturnData,
     },
     serde::{Deserialize, Deserializer, Serialize, Serializer},
     solana_sdk::{
@@ -423,6 +423,7 @@ pub struct RpcSimulateTransactionResult {
     pub accounts: Option<Vec<Option<UiAccount>>>,
     pub units_consumed: Option<u64>,
     pub return_data: Option<UiTransactionReturnData>,
+    pub inner_instructions: Option<Vec<UiInnerInstructions>>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]

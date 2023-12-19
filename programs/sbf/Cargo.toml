@@ -91,7 +91,7 @@ miraland-cli-output = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-program-runtime = { workspace = true }
-miraland-runtime = { workspace = true }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-sbf-rust-invoke = { workspace = true }
 miraland-sbf-rust-realloc = { workspace = true, features = ["default"] }
 miraland-sbf-rust-realloc-invoke = { workspace = true }
