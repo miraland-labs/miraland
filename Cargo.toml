@@ -402,7 +402,7 @@ solarti-token = { version = "4.0", features = ["no-entrypoint"] }
 solarti-token-2022 = { version = "0.9", features = ["no-entrypoint"] }
 solarti-token-metadata-interface = "0.2.2"
 static_assertions = "1.1.0"
-stream-cancel = "0.8.1"
+stream-cancel = "0.8.2"
 strum = "0.24"
 strum_macros = "0.24"
 subtle = "2.4.1"
