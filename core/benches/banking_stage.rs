@@ -38,8 +38,7 @@ use {
     rand::{thread_rng, Rng},
     rayon::prelude::*,
     solana_runtime::{
-        bank::Bank, bank_forks::BankForks, installed_scheduler_pool::BankWithScheduler,
-        prioritization_fee_cache::PrioritizationFeeCache,
+        bank::Bank, bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache,
     },
     solana_sdk::{
         genesis_config::GenesisConfig,
