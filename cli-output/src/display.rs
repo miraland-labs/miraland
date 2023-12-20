@@ -54,14 +54,14 @@ pub fn build_balance_message_with_config(
         lamports.to_string()
     } else {
         let mln = lamports_to_mln(lamports);
-        let sol_str = format!("{mln:.9}");
+        let mln_str = format!("{mln:.9}");
         if config.trim_trailing_zeros {
-            sol_str
+            mln_str
                 .trim_end_matches('0')
                 .trim_end_matches('.')
                 .to_string()
         } else {
-            sol_str
+            mln_str
         }
     };
     let unit = if config.show_unit {
@@ -708,7 +708,7 @@ pub fn new_spinner_progress_bar() -> ProgressBar {
     progress_bar.set_style(
         ProgressStyle::default_spinner()
             .template("{spinner:.green} {wide_msg}")
-            .expect("ProgresStyle::template direct input to be correct"),
+            .expect("ProgressStyle::template direct input to be correct"),
     );
     progress_bar.enable_steady_tick(Duration::from_millis(100));
     progress_bar

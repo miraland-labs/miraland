@@ -72,7 +72,7 @@ mod tests {
             endpoint: _,
             thread: t,
             key_updater: _,
-        } = solana_streamer::quic::spawn_server(
+        } = miraland_streamer::quic::spawn_server(
             "quic_streamer_test",
             s.try_clone().unwrap(),
             &keypair,

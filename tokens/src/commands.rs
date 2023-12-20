@@ -1406,7 +1406,7 @@ mod tests {
             vec![allocation]
         );
 
-        let allocation_sol = TypedAllocation {
+        let allocation_mln = TypedAllocation {
             recipient: alice_pubkey,
             amount: mln_to_lamports(42.0),
             lockup_date: None,
@@ -1414,15 +1414,15 @@ mod tests {
 
         assert_eq!(
             read_allocations(&input_csv, None, true, true).unwrap(),
-            vec![allocation_sol.clone()]
+            vec![allocation_mln.clone()]
         );
         assert_eq!(
             read_allocations(&input_csv, None, false, false).unwrap(),
-            vec![allocation_sol.clone()]
+            vec![allocation_mln.clone()]
         );
         assert_eq!(
             read_allocations(&input_csv, None, true, false).unwrap(),
-            vec![allocation_sol]
+            vec![allocation_mln]
         );
     }
 
@@ -1876,7 +1876,7 @@ mod tests {
         let fees = client
             .get_fee_for_message(&one_signer_message(&client))
             .unwrap();
-        let fees_in_sol = lamports_to_mln(fees);
+        let fees_in_mln = lamports_to_mln(fees);
 
         let allocation_amount = 1000.0;
 
@@ -1908,7 +1908,7 @@ mod tests {
                 sources,
                 vec![FundingSource::SystemAccount, FundingSource::FeePayer].into()
             );
-            assert_eq!(amount, (allocation_amount + fees_in_sol).to_string());
+            assert_eq!(amount, (allocation_amount + fees_in_mln).to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }
@@ -1947,7 +1947,7 @@ mod tests {
                 sources,
                 vec![FundingSource::SystemAccount, FundingSource::FeePayer].into()
             );
-            assert_eq!(amount, (allocation_amount + fees_in_sol).to_string());
+            assert_eq!(amount, (allocation_amount + fees_in_mln).to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }
@@ -1965,7 +1965,7 @@ mod tests {
         let fees = client
             .get_fee_for_message(&one_signer_message(&client))
             .unwrap();
-        let fees_in_sol = lamports_to_mln(fees);
+        let fees_in_mln = lamports_to_mln(fees);
 
         let sender_keypair_file = tmp_file_path("keypair_file", &alice.pubkey());
         write_keypair_file(&alice, &sender_keypair_file).unwrap();
@@ -2025,7 +2025,7 @@ mod tests {
                 .unwrap_err();
         if let Error::InsufficientFunds(sources, amount) = err_result {
             assert_eq!(sources, vec![FundingSource::FeePayer].into());
-            assert_eq!(amount, fees_in_sol.to_string());
+            assert_eq!(amount, fees_in_mln.to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }
@@ -2094,7 +2094,7 @@ mod tests {
         let fees = client
             .get_fee_for_message(&one_signer_message(&client))
             .unwrap();
-        let fees_in_sol = lamports_to_mln(fees);
+        let fees_in_mln = lamports_to_mln(fees);
 
         let sender_keypair_file = tmp_file_path("keypair_file", &alice.pubkey());
         write_keypair_file(&alice, &sender_keypair_file).unwrap();
@@ -2160,7 +2160,7 @@ mod tests {
                 sources,
                 vec![FundingSource::SystemAccount, FundingSource::FeePayer].into()
             );
-            assert_eq!(amount, (unlocked_mln + fees_in_sol).to_string());
+            assert_eq!(amount, (unlocked_mln + fees_in_mln).to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }
@@ -2199,7 +2199,7 @@ mod tests {
                 sources,
                 vec![FundingSource::SystemAccount, FundingSource::FeePayer].into()
             );
-            assert_eq!(amount, (unlocked_mln + fees_in_sol).to_string());
+            assert_eq!(amount, (unlocked_mln + fees_in_mln).to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }
@@ -2217,7 +2217,7 @@ mod tests {
         let fees = client
             .get_fee_for_message(&one_signer_message(&client))
             .unwrap();
-        let fees_in_sol = lamports_to_mln(fees);
+        let fees_in_mln = lamports_to_mln(fees);
 
         let sender_keypair_file = tmp_file_path("keypair_file", &alice.pubkey());
         write_keypair_file(&alice, &sender_keypair_file).unwrap();
@@ -2284,7 +2284,7 @@ mod tests {
                 .unwrap_err();
         if let Error::InsufficientFunds(sources, amount) = err_result {
             assert_eq!(sources, vec![FundingSource::FeePayer].into());
-            assert_eq!(amount, fees_in_sol.to_string());
+            assert_eq!(amount, fees_in_mln.to_string());
         } else {
             panic!("check_payer_balances should have errored");
         }

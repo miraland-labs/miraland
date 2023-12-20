@@ -124,7 +124,7 @@ pub struct StakeAuthorizationIndexed {
 struct SignOnlySplitNeedsRent {}
 impl ArgsConfig for SignOnlySplitNeedsRent {
     fn sign_only_arg<'a, 'b>(&self, arg: Arg<'a, 'b>) -> Arg<'a, 'b> {
-        arg.requires("rent_exempt_reserve_sol")
+        arg.requires("rent_exempt_reserve_mln")
     }
 }
 
@@ -506,7 +506,7 @@ impl StakeSubCommands for App<'_, '_> {
                 .arg(memo_arg())
                 .arg(compute_unit_price_arg())
                 .arg(
-                    Arg::with_name("rent_exempt_reserve_sol")
+                    Arg::with_name("rent_exempt_reserve_mln")
                         .long("rent-exempt-reserve-mln")
                         .value_name("AMOUNT")
                         .takes_value(true)
@@ -1050,7 +1050,7 @@ pub fn parse_split_stake(
     let signer_info =
         default_signer.generate_unique_signers(bulk_signers, matches, wallet_manager)?;
     let compute_unit_price = value_of(matches, COMPUTE_UNIT_PRICE_ARG.name);
-    let rent_exempt_reserve = lamports_of_mln(matches, "rent_exempt_reserve_sol");
+    let rent_exempt_reserve = lamports_of_mln(matches, "rent_exempt_reserve_mln");
 
     Ok(CliCommandInfo {
         command: CliCommand::SplitStake {
@@ -1938,7 +1938,7 @@ pub fn process_split_stake(
     } else {
         rent_exempt_reserve
             .cloned()
-            .expect("rent_exempt_reserve_sol is required with sign_only")
+            .expect("rent_exempt_reserve_mln is required with sign_only")
     };
 
     let recent_blockhash = blockhash_query.get_blockhash(rpc_client, config.commitment)?;

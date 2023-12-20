@@ -35,6 +35,7 @@ log = { workspace = true }
 lru = { workspace = true }
 min-max-heap = { workspace = true }
 miraland-accounts-db = { workspace = true }
+miraland-bloom = { workspace = true }
 miraland-client = { workspace = true }
 miraland-cost-model = { workspace = true }
 miraland-entry = { workspace = true }
@@ -60,6 +61,7 @@ miraland-streamer = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-turbine = { workspace = true }
+miraland-unified-scheduler-pool = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote = { workspace = true }
 miraland-vote-program = { workspace = true }

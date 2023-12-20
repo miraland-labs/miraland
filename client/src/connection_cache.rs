@@ -262,7 +262,7 @@ mod tests {
             endpoint: response_recv_endpoint,
             thread: response_recv_thread,
             key_updater: _,
-        } = solana_streamer::quic::spawn_server(
+        } = miraland_streamer::quic::spawn_server(
             "quic_streamer_test",
             response_recv_socket,
             &keypair2,

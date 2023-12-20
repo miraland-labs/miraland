@@ -1,0 +1,10 @@
+[package]
+name = "miraland-unified-scheduler-logic"
+description = "The Miraland unified scheduler logic"
+documentation = "https://docs.rs/miraland-unified-scheduler-logic"
+version = { workspace = true }
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }

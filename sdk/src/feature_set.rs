@@ -758,6 +758,10 @@ pub mod allow_commission_decrease_at_any_time {
     solana_sdk::declare_id!("C7vnTthLpM7Tz5bH5b7My9op4jwoJk4R5PBUCMWRd5dD");
 }
 
+pub mod consume_blockstore_duplicate_proofs {
+    solana_sdk::declare_id!("sD5CYgZ9acawPhYkpszjQNAphBohP7qYiaEEsewFQaH");
+}
+
 lazy_static! {
     /// Map of feature identifiers to user-visible description
     pub static ref FEATURE_NAMES: HashMap<Pubkey, &'static str> = [
@@ -942,6 +946,7 @@ lazy_static! {
         (enable_zk_transfer_with_fee::id(), "enable Zk Token proof program transfer with fee"),
         (drop_legacy_shreds::id(), "drops legacy shreds #34328"),
         (allow_commission_decrease_at_any_time::id(), "Allow commission decrease at any time in epoch #33843"),
+        (consume_blockstore_duplicate_proofs::id(), "consume duplicate proofs from blockstore in consensus #34372")
         /*************** ADD NEW FEATURES HERE ***************/
     ]
     .iter()

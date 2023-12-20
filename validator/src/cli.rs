@@ -2458,11 +2458,11 @@ pub fn test_app<'a>(version: &'a str, default_args: &'a DefaultTestArgs) -> App<
                 .help("Keep this amount of shreds in root slots."),
         )
         .arg(
-            Arg::with_name("faucet_sol")
+            Arg::with_name("faucet_mln")
                 .long("faucet-mln")
                 .takes_value(true)
                 .value_name("MLN")
-                .default_value(default_args.faucet_sol.as_str())
+                .default_value(default_args.faucet_mln.as_str())
                 .help(
                     "Give the faucet address this much MLN in genesis. \
                      If the ledger already exists then this parameter is silently ignored",
@@ -2479,7 +2479,7 @@ pub fn test_app<'a>(version: &'a str, default_args: &'a DefaultTestArgs) -> App<
                 ),
         )
         .arg(
-            Arg::with_name("faucet_per_time_sol_cap")
+            Arg::with_name("faucet_per_time_mln_cap")
                 .long("faucet-per-time-mln-cap")
                 .takes_value(true)
                 .value_name("MLN")
@@ -2490,7 +2490,7 @@ pub fn test_app<'a>(version: &'a str, default_args: &'a DefaultTestArgs) -> App<
                 ),
         )
         .arg(
-            Arg::with_name("faucet_per_request_sol_cap")
+            Arg::with_name("faucet_per_request_mln_cap")
                 .long("faucet-per-request-mln-cap")
                 .takes_value(true)
                 .value_name("MLN")
@@ -2549,7 +2549,7 @@ pub struct DefaultTestArgs {
     pub rpc_port: String,
     pub faucet_port: String,
     pub limit_ledger_size: String,
-    pub faucet_sol: String,
+    pub faucet_mln: String,
     pub faucet_time_slice_secs: String,
 }
 
@@ -2563,7 +2563,7 @@ impl DefaultTestArgs {
              * 40MB-150MB range when running `miraland-test-validator`
              */
             limit_ledger_size: 10_000.to_string(),
-            faucet_sol: (1_000_000.).to_string(),
+            faucet_mln: (1_000_000.).to_string(),
             faucet_time_slice_secs: (faucet::TIME_SLICE).to_string(),
         }
     }

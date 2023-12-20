@@ -14,8 +14,8 @@ use {
     },
     crossbeam_channel::{Receiver, Sender, TryRecvError},
     itertools::izip,
-    prio_graph::{AccessKind, PrioGraph},
     miraland_measure::measure_us,
+    prio_graph::{AccessKind, PrioGraph},
     solana_sdk::{
         pubkey::Pubkey, saturating_add_assign, slot_history::Slot,
         transaction::SanitizedTransaction,

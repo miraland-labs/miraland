@@ -1,0 +1,23 @@
+[package]
+name = "miraland-unified-scheduler-pool"
+description = "The Miraland unified scheduler pool"
+documentation = "https://docs.rs/miraland-unified-scheduler-pool"
+version = { workspace = true }
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+miraland-ledger = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-unified-scheduler-logic = { workspace = true }
+miraland-vote = { workspace = true }
+
+[dev-dependencies]
+assert_matches = { workspace = true }
+miraland-logger = { workspace = true }
+miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }

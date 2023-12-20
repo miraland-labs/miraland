@@ -39,4 +39,5 @@ $miraland_ledger_tool create-snapshot --ledger config/ledger "$snapshot_slot" co
 cp config/ledger/genesis.tar.bz2 config/snapshot-ledger
 $miraland_ledger_tool copy --ledger config/ledger \
   --target-db config/snapshot-ledger --starting-slot "$snapshot_slot" --ending-slot "$latest_slot"
-$miraland_ledger_tool verify --ledger config/snapshot-ledger
+$miraland_ledger_tool verify --ledger config/snapshot-ledger --block-verification-method blockstore-processor
+$miraland_ledger_tool verify --ledger config/snapshot-ledger --block-verification-method unified-scheduler

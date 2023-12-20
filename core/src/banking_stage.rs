@@ -958,7 +958,7 @@ mod tests {
     }
 
     fn test_banking_stage_entries_only(block_production_method: BlockProductionMethod) {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,

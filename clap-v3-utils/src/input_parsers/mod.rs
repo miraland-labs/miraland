@@ -61,7 +61,7 @@ pub fn unix_timestamp_from_rfc3339_datetime(
 
 #[deprecated(
     since = "1.17.0",
-    note = "please use `Amount::parse_decimal` and `Amount::sol_to_lamport` instead"
+    note = "please use `Amount::parse_decimal` and `Amount::mln_to_lamport` instead"
 )]
 pub fn lamports_of_mln(matches: &ArgMatches, name: &str) -> Option<u64> {
     value_of(matches, name).map(mln_to_lamports)
@@ -159,9 +159,9 @@ impl Amount {
         }
     }
 
-    pub fn sol_to_lamport(&self) -> Amount {
-        const NATIVE_SOL_DECIMALS: u8 = 9;
-        self.to_raw_amount(NATIVE_SOL_DECIMALS)
+    pub fn mln_to_lamport(&self) -> Amount {
+        const NATIVE_MLN_DECIMALS: u8 = 9;
+        self.to_raw_amount(NATIVE_MLN_DECIMALS)
     }
 }
 
@@ -509,7 +509,7 @@ mod tests {
                 matches
                     .get_one::<Amount>("amount")
                     .unwrap()
-                    .sol_to_lamport(),
+                    .mln_to_lamport(),
                 Amount::Raw(expected_lamport),
             );
         }

@@ -21,8 +21,8 @@ name = "miraland_runtime_transaction"
 
 [dev-dependencies]
 bincode = { workspace = true }
-rand = { workspace = true }
 miraland-program ={ workspace = true }
+rand = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

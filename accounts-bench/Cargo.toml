@@ -11,7 +11,7 @@ edition = { workspace = true }
 [dependencies]
 clap = { workspace = true }
 log = { workspace = true }
-miraland-accounts-db = { workspace = true }
+miraland-accounts-db = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-logger = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-sdk = { workspace = true }
@@ -20,3 +20,6 @@ rayon = { workspace = true }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
+
+[features]
+dev-context-only-utils = []

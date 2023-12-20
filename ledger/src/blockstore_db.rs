@@ -2309,7 +2309,7 @@ pub mod tests {
 
     #[test]
     fn test_open_unknown_columns() {
-        solana_logger::setup();
+        miraland_logger::setup();
 
         let temp_dir = tempdir().unwrap();
         let db_path = temp_dir.path();

@@ -41,6 +41,7 @@ miraland-stake-program = { workspace = true }
 miraland-storage-bigtable = { workspace = true }
 miraland-streamer = { workspace = true }
 miraland-transaction-status = { workspace = true }
+miraland-unified-scheduler-pool = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote-program = { workspace = true }
 num_cpus = { workspace = true }
@@ -48,6 +49,7 @@ regex = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 solana_rbpf = { workspace = true, features = ["debugger"] }
+thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]

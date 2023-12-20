@@ -328,10 +328,10 @@ fn main() {
     let faucet_pubkey = faucet_keypair.pubkey();
 
     let faucet_time_slice_secs = value_t_or_exit!(matches, "faucet_time_slice_secs", u64);
-    let faucet_per_time_cap = value_t!(matches, "faucet_per_time_sol_cap", f64)
+    let faucet_per_time_cap = value_t!(matches, "faucet_per_time_mln_cap", f64)
         .ok()
         .map(mln_to_lamports);
-    let faucet_per_request_cap = value_t!(matches, "faucet_per_request_sol_cap", f64)
+    let faucet_per_request_cap = value_t!(matches, "faucet_per_request_mln_cap", f64)
         .ok()
         .map(mln_to_lamports);
 
