@@ -298,7 +298,7 @@ rayon = "1.8.0"
 rcgen = "0.10.0"
 reed-solomon-erasure = "6.0.0"
 regex = "1.10.2"
-reqwest = { version = "0.11.22", default-features = false }
+reqwest = { version = "0.11.23", default-features = false }
 rolling-file = "0.2.0"
 rpassword = "7.3"
 rustc_version = "0.4"
@@ -425,7 +425,7 @@ tar = "0.4.40"
 tarpc = "0.29.0"
 tempfile = "3.8.1"
 test-case = "3.3.1"
-thiserror = "1.0.50"
+thiserror = "1.0.51"
 tiny-bip39 = "0.8.2"
 # Update solana-tokio patch below when updating this version
 tokio = "1.29.1"
