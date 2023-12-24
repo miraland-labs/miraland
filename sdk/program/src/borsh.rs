@@ -8,19 +8,23 @@
 //! be removed in a future release
 //!
 //! [borsh]: https://borsh.io/
-use borsh0_10::{maybestd::io::Error, BorshDeserialize, BorshSchema, BorshSerialize};
+// MI: since Miraland has no backwards-incompatibility issue,
+// use borsh(means borsh1, representing borsh 1.2.1+) directly here.
+// use borsh0_10::{maybestd::io::Error, BorshDeserialize, BorshSchema, BorshSerialize};
+use borsh::{io::Error, BorshDeserialize, BorshSchema, BorshSerialize};
 
 /// Get the worst-case packed length for the given BorshSchema
 ///
 /// Note: due to the serializer currently used by Borsh, this function cannot
 /// be used on-chain in the Solana SBF execution environment.
-#[deprecated(
-    since = "1.17.0",
-    note = "Please use `borsh0_10::get_packed_len` instead"
-)]
+// MI
+// #[deprecated(
+//     since = "1.17.0",
+//     note = "Please use `borsh0_10::get_packed_len` instead"
+// )]
 pub fn get_packed_len<S: BorshSchema>() -> usize {
-    #[allow(deprecated)]
-    crate::borsh0_10::get_packed_len::<S>()
+    // #[allow(deprecated)]
+    crate::borsh1::get_packed_len::<S>()
 }
 
 /// Deserializes without checking that the entire slice has been consumed
@@ -32,13 +36,14 @@ pub fn get_packed_len<S: BorshSchema>() -> usize {
 /// or equal to the expected size will properly deserialize. For example, if the
 /// user passes a buffer destined for a different type, the error won't get caught
 /// as easily.
-#[deprecated(
-    since = "1.17.0",
-    note = "Please use `borsh0_10::try_from_slice_unchecked` instead"
-)]
+// MI
+// #[deprecated(
+//     since = "1.17.0",
+//     note = "Please use `borsh0_10::try_from_slice_unchecked` instead"
+// )]
 pub fn try_from_slice_unchecked<T: BorshDeserialize>(data: &[u8]) -> Result<T, Error> {
-    #[allow(deprecated)]
-    crate::borsh0_10::try_from_slice_unchecked::<T>(data)
+    // #[allow(deprecated)]
+    crate::borsh1::try_from_slice_unchecked::<T>(data)
 }
 
 /// Get the packed length for the serialized form of this object instance.
@@ -47,13 +52,14 @@ pub fn try_from_slice_unchecked<T: BorshDeserialize>(data: &[u8]) -> Result<T, E
 /// sequence, such as a Vec or HashMap.  Since it is impossible to know the packed
 /// length only from the type's schema, this can be used when an instance already
 /// exists, to figure out how much space to allocate in an account.
-#[deprecated(
-    since = "1.17.0",
-    note = "Please use `borsh0_10::get_instance_packed_len` instead"
-)]
+// MI
+// #[deprecated(
+//     since = "1.17.0",
+//     note = "Please use `borsh0_10::get_instance_packed_len` instead"
+// )]
 pub fn get_instance_packed_len<T: BorshSerialize>(instance: &T) -> Result<usize, Error> {
-    #[allow(deprecated)]
-    crate::borsh0_10::get_instance_packed_len(instance)
+    // #[allow(deprecated)]
+    crate::borsh1::get_instance_packed_len(instance)
 }
 
 macro_rules! impl_get_packed_len_v0 {
