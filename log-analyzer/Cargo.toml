@@ -11,7 +11,7 @@ edition = { workspace = true }
 
 [dependencies]
 byte-unit = { workspace = true }
-clap = { version = "3.1.5", features = ["cargo"] }
+clap = { version = "4.4.11", features = ["cargo"] }
 miraland-logger = { workspace = true }
 miraland-version = { workspace = true }
 serde = { workspace = true }
