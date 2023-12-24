@@ -4,9 +4,9 @@ use {
     },
     extension::{
         confidential_transfer::*, confidential_transfer_fee::*, cpi_guard::*,
-        default_account_state::*, interest_bearing_mint::*, memo_transfer::*, metadata_pointer::*,
-        mint_close_authority::*, permanent_delegate::*, reallocate::*, transfer_fee::*,
-        transfer_hook::*,
+        default_account_state::*, group_member_pointer::*, group_pointer::*,
+        interest_bearing_mint::*, memo_transfer::*, metadata_pointer::*, mint_close_authority::*,
+        permanent_delegate::*, reallocate::*, transfer_fee::*, transfer_hook::*,
     },
     miraland_account_decoder::parse_token::{token_amount_to_ui_amount, UiAccountState},
     serde_json::{json, Map, Value},
@@ -30,9 +30,8 @@ pub fn parse_token(
     instruction: &CompiledInstruction,
     account_keys: &AccountKeys,
 ) -> Result<ParsedInstructionEnum, ParseInstructionError> {
-    let token_instruction = TokenInstruction::unpack(&instruction.data).map_err(|_| {
-        ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
-    })?;
+    let token_instruction = TokenInstruction::unpack(&instruction.data)
+        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken))?;
     match instruction.accounts.iter().max() {
         Some(index) if (*index as usize) < account_keys.len() => {}
         _ => {
@@ -234,9 +233,10 @@ pub fn parse_token(
                 | AuthorityType::ConfidentialTransferMint
                 | AuthorityType::TransferHookProgramId
                 | AuthorityType::ConfidentialTransferFeeConfig
-                | AuthorityType::MetadataPointer => "mint",
+                | AuthorityType::MetadataPointer
+                | AuthorityType::GroupPointer
+                | AuthorityType::GroupMemberPointer => "mint",
                 AuthorityType::AccountOwner | AuthorityType::CloseAccount => "account",
-                AuthorityType::GroupPointer => todo!(), // MI
             };
             let mut value = json!({
                 owned: account_keys[instruction.accounts[0] as usize].to_string(),
@@ -652,7 +652,30 @@ pub fn parse_token(
                 account_keys,
             )
         }
-        TokenInstruction::GroupPointerExtension => todo!(), // MI
+        TokenInstruction::GroupPointerExtension => {
+            if instruction.data.len() < 2 {
+                return Err(ParseInstructionError::InstructionNotParsable(
+                    ParsableProgram::SolartiToken,
+                ));
+            }
+            parse_group_pointer_instruction(
+                &instruction.data[1..],
+                &instruction.accounts,
+                account_keys,
+            )
+        }
+        TokenInstruction::GroupMemberPointerExtension => {
+            if instruction.data.len() < 2 {
+                return Err(ParseInstructionError::InstructionNotParsable(
+                    ParsableProgram::SolartiToken,
+                ));
+            }
+            parse_group_member_pointer_instruction(
+                &instruction.data[1..],
+                &instruction.accounts,
+                account_keys,
+            )
+        }
     }
 }
 
@@ -672,6 +695,8 @@ pub enum UiAuthorityType {
     TransferHookProgramId,
     ConfidentialTransferFeeConfig,
     MetadataPointer,
+    GroupPointer,
+    GroupMemberPointer,
 }
 
 impl From<AuthorityType> for UiAuthorityType {
@@ -692,7 +717,8 @@ impl From<AuthorityType> for UiAuthorityType {
                 UiAuthorityType::ConfidentialTransferFeeConfig
             }
             AuthorityType::MetadataPointer => UiAuthorityType::MetadataPointer,
-            AuthorityType::GroupPointer => todo!(), // MI
+            AuthorityType::GroupPointer => UiAuthorityType::GroupPointer,
+            AuthorityType::GroupMemberPointer => UiAuthorityType::GroupMemberPointer,
         }
     }
 }
@@ -720,6 +746,10 @@ pub enum UiExtensionType {
     ConfidentialTransferFeeAmount,
     MetadataPointer,
     TokenMetadata,
+    GroupPointer,
+    GroupMemberPointer,
+    TokenGroup,
+    TokenGroupMember,
 }
 
 impl From<ExtensionType> for UiExtensionType {
@@ -751,8 +781,10 @@ impl From<ExtensionType> for UiExtensionType {
             }
             ExtensionType::MetadataPointer => UiExtensionType::MetadataPointer,
             ExtensionType::TokenMetadata => UiExtensionType::TokenMetadata,
-            ExtensionType::GroupPointer => todo!(), // MI
-            ExtensionType::TokenGroup => todo!(),   // MI
+            ExtensionType::GroupPointer => UiExtensionType::GroupPointer,
+            ExtensionType::GroupMemberPointer => UiExtensionType::GroupMemberPointer,
+            ExtensionType::TokenGroup => UiExtensionType::TokenGroup,
+            ExtensionType::TokenGroupMember => UiExtensionType::TokenGroupMember,
         }
     }
 }
