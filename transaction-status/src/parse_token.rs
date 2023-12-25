@@ -30,8 +30,9 @@ pub fn parse_token(
     instruction: &CompiledInstruction,
     account_keys: &AccountKeys,
 ) -> Result<ParsedInstructionEnum, ParseInstructionError> {
-    let token_instruction = TokenInstruction::unpack(&instruction.data)
-        .map_err(|_| ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken))?;
+    let token_instruction = TokenInstruction::unpack(&instruction.data).map_err(|_| {
+        ParseInstructionError::InstructionNotParsable(ParsableProgram::SolartiToken)
+    })?;
     match instruction.accounts.iter().max() {
         Some(index) if (*index as usize) < account_keys.len() => {}
         _ => {

@@ -18,12 +18,12 @@ use {
         crds::{Crds, GossipRoute, VersionedCrdsValue},
         crds_gossip,
         crds_gossip_error::CrdsGossipError,
-        crds_value::{CrdsData, CrdsValue},
+        crds_value::CrdsValue,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
         ping_pong::PingCache,
     },
     itertools::Itertools,
-    miraland_bloom::bloom::{AtomicBloom, Bloom},
+    miraland_bloom::bloom::{Bloom, ConcurrentBloom},
     miraland_streamer::socket::SocketAddrSpace,
     rand::{
         distributions::{Distribution, WeightedIndex},
@@ -141,7 +141,7 @@ impl CrdsFilter {
 
 /// A vector of crds filters that together hold a complete set of Hashes.
 struct CrdsFilterSet {
-    filters: Vec<Option<AtomicBloom<Hash>>>,
+    filters: Vec<Option<ConcurrentBloom<Hash>>>,
     mask_bits: u32,
 }
 
@@ -159,7 +159,7 @@ impl CrdsFilterSet {
             let k = rng.gen_range(0..indices.len());
             let k = indices.swap_remove(k);
             let filter = Bloom::random(max_items as usize, FALSE_RATE, max_bits as usize);
-            filters[k] = Some(AtomicBloom::<Hash>::from(filter));
+            filters[k] = Some(ConcurrentBloom::<Hash>::from(filter));
         }
         Self { filters, mask_bits }
     }
@@ -488,11 +488,6 @@ impl CrdsGossipPull {
             let out: Vec<_> = crds
                 .filter_bitmask(filter.mask, filter.mask_bits)
                 .filter(pred)
-                .filter(|entry| {
-                    // Exclude the new ContactInfo from the pull responses
-                    // until the cluster has upgraded.
-                    !matches!(&entry.value.data, CrdsData::ContactInfo(_))
-                })
                 .map(|entry| entry.value.clone())
                 .take(output_size_limit.load(Ordering::Relaxed).max(0) as usize)
                 .collect();
