@@ -8,7 +8,7 @@ here=$(dirname "$0")
 # shellcheck source=multinode-demo/common.sh
 source "$here"/common.sh
 
-stake_sol=10   # default number of MLN to assign as stake (10 MLN)
+stake_mln=10   # default number of MLN to assign as stake (10 MLN)
 url=http://127.0.0.1:8899   # default RPC url
 
 usage() {
@@ -18,7 +18,7 @@ usage() {
   fi
   cat <<EOF
 
-usage: $0 [OPTIONS] <MLN to stake ($stake_sol)>
+usage: $0 [OPTIONS] <MLN to stake ($stake_mln)>
 
 Add stake to a validator
 
@@ -85,7 +85,7 @@ if [[ ${#positional_args[@]} -gt 1 ]]; then
   usage "$@"
 fi
 if [[ -n ${positional_args[0]} ]]; then
-  stake_sol=${positional_args[0]}
+  stake_mln=${positional_args[0]}
 fi
 
 VALIDATOR_KEYS_DIR=$MIRALAND_CONFIG_DIR/validator$label
@@ -104,7 +104,7 @@ if ((airdrops_enabled)); then
   fi
   $miraland_cli \
     "${common_args[@]}" --keypair "$MIRALAND_CONFIG_DIR/faucet.json" \
-    transfer --allow-unfunded-recipient "$keypair" "$stake_sol"
+    transfer --allow-unfunded-recipient "$keypair" "$stake_mln"
 fi
 
 if [[ -n $keypair ]]; then
@@ -121,7 +121,7 @@ set -x
 $miraland_cli "${common_args[@]}" \
   vote-account "$vote_account"
 $miraland_cli "${common_args[@]}" \
-  create-stake-account "$stake_account" "$stake_sol"
+  create-stake-account "$stake_account" "$stake_mln"
 $miraland_cli "${common_args[@]}" \
   delegate-stake $maybe_force "$stake_account" "$vote_account"
 $miraland_cli "${common_args[@]}" stakes "$stake_account"

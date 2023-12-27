@@ -111,16 +111,16 @@ colo_instance_run_foreach() {
 }
 
 colo_whoami() {
-  declare ME LINE SOL_USER EOL
+  declare ME LINE MLN_USER EOL
   while read -r LINE; do
     declare IP RC
-    IFS=$'\x1f' read -r IP RC SOL_USER EOL <<< "${LINE}"
+    IFS=$'\x1f' read -r IP RC MLN_USER EOL <<< "${LINE}"
     if [ "${RC}" -eq 0 ]; then
       [[ "${EOL}" = "EOL" ]] || echo "${FUNCNAME[0]}: Unexpected input \"${LINE}\"" 1>&2
-      if [ -z "${ME}" ] || [ "${ME}" = "${SOL_USER}" ]; then
-        ME="${SOL_USER}"
+      if [ -z "${ME}" ] || [ "${ME}" = "${MLN_USER}" ]; then
+        ME="${MLN_USER}"
       else
-        echo "Found conflicting username \"${SOL_USER}\" on ${IP}, expected \"${ME}\"" 1>&2
+        echo "Found conflicting username \"${MLN_USER}\" on ${IP}, expected \"${ME}\"" 1>&2
       fi
     fi
   done < <(colo_instance_run_foreach "[ -n \"\${MIRALAND_USER}\" ] && echo -e \"\${MIRALAND_USER}\\x1fEOL\"")
