@@ -21,7 +21,7 @@ use {
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService, DroppedSlotsReceiver,
             PrunedBanksRequestHandler, SnapshotRequestHandler,
         },
-        bank::{epoch_accounts_hash_utils, Bank, BankTestConfig},
+        bank::{epoch_accounts_hash_utils, Bank},
         bank_forks::BankForks,
         genesis_utils::{self, GenesisConfigInfo},
         runtime_config::RuntimeConfig,
