@@ -146,3 +146,21 @@ Accordingly, there is a risk to individuals that other persons using any of the
 code contained in this repo, or a derivation thereof, may be sanctioned persons 
 and that transactions with such persons would be a violation of U.S. export 
 controls and sanctions law.
+
+## Questions or ideas?
+
+https://x.com/miracleland6 (X - Formerly Twitter)
+
+## Donate to Miraland Development
+
+We greatly appreciate any donation to help support Miraland blockchain development. We worked out of passion and kindness for the world, we believe this technology must exist and be free for all to use. Miraland is dedicated to freedom and individual sovereignty and we are doing our best to make it a reality.
+
+BTC: bc1plh7wnl0v0xfemmk395tvsu73jtt0s8l28lhhznafzrj5jwu4dy9qx2rpda
+
+![Donate BTC to Miraland Development](donations/donate-btc-qr-code.png)
+
+
+SOL: 9h9TXFtSsDAiL5kpCRZuKUxPE4Nv3W56fcSyUC3zmQip
+
+![Donate SOL to Miraland Development](donations/donate-sol-qr-code.png)
+
