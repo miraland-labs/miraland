@@ -183,7 +183,7 @@ const_format = "0.2.32"
 core_affinity = "0.5.10"
 criterion = "0.5.1"
 criterion-stats = "0.3.0"
-crossbeam-channel = "0.5.9"
+crossbeam-channel = "0.5.11"
 # MI: crossbeam-deque is not a direct deps, but required by rayon(via rayon-core).
 # crossbeam-deque current ver is 0.8.4 which in turn requires crossbeam-epoch ^0.9.16
 # conflicting with crossbeam-epoch v0.9.5 listed in patch section below.
