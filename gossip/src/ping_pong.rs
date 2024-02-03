@@ -16,7 +16,7 @@ use {
     },
 };
 
-const PING_PONG_HASH_PREFIX: &[u8] = "SOLANA_PING_PONG".as_bytes();
+const PING_PONG_HASH_PREFIX: &[u8] = "MIRALAND_PING_PONG".as_bytes();
 
 #[derive(AbiExample, Debug, Deserialize, Serialize)]
 pub struct Ping<T> {

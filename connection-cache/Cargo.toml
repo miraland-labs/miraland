@@ -22,7 +22,6 @@ miraland-metrics = { workspace = true }
 miraland-sdk = { workspace = true }
 rand = { workspace = true }
 rayon = { workspace = true }
-rcgen = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 

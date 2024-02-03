@@ -15,7 +15,7 @@ use {
     miraland_net_utils::VALIDATOR_PORT_RANGE,
     miraland_rpc_client_api::client_error::ErrorKind as ClientErrorKind,
     miraland_streamer::{
-        nonblocking::quic::ALPN_TPU_PROTOCOL_ID, tls_certificates::new_self_signed_tls_certificate,
+        nonblocking::quic::ALPN_TPU_PROTOCOL_ID, tls_certificates::new_dummy_x509_certificate,
     },
     quinn::{
         ClientConfig, ConnectError, Connection, ConnectionError, Endpoint, EndpointConfig,
@@ -148,9 +148,7 @@ impl QuicLazyInitializedEndpoint {
 
 impl Default for QuicLazyInitializedEndpoint {
     fn default() -> Self {
-        let (cert, priv_key) =
-            new_self_signed_tls_certificate(&Keypair::new(), IpAddr::V4(Ipv4Addr::UNSPECIFIED))
-                .expect("Failed to create QUIC client certificate");
+        let (cert, priv_key) = new_dummy_x509_certificate(&Keypair::new());
         Self::new(
             Arc::new(QuicClientCertificate {
                 certificate: cert,

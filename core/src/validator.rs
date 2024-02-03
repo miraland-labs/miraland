@@ -3,7 +3,7 @@
 pub use miraland_perf::report_target_features;
 use {
     crate::{
-        accounts_hash_verifier::{AccountsHashFaultInjector, AccountsHashVerifier},
+        accounts_hash_verifier::AccountsHashVerifier,
         admin_rpc_post_init::AdminRpcRequestMetadataPostInit,
         banking_trace::{self, BankingTracer},
         cache_block_meta_service::{CacheBlockMetaSender, CacheBlockMetaService},
@@ -34,6 +34,7 @@ use {
         accounts_index::AccountSecondaryIndexes,
         accounts_update_notifier_interface::AccountsUpdateNotifier,
         hardened_unpack::{open_genesis_config, MAX_GENESIS_ARCHIVE_UNPACKED_SIZE},
+        utils::{move_and_async_delete_path, move_and_async_delete_path_contents},
     },
     miraland_client::connection_cache::{ConnectionCache, Protocol},
     miraland_entry::poh::compute_hash_time_ns,
@@ -105,15 +106,13 @@ use {
         snapshot_bank_utils::{self, DISABLED_SNAPSHOT_ARCHIVE_INTERVAL},
         snapshot_config::SnapshotConfig,
         snapshot_hash::StartingSnapshotHashes,
-        snapshot_utils::{
-            self, clean_orphaned_account_snapshot_dirs, move_and_async_delete_path_contents,
-        },
+        snapshot_utils::{self, clean_orphaned_account_snapshot_dirs},
     },
     solana_sdk::{
         clock::Slot,
         epoch_schedule::MAX_LEADER_SCHEDULE_EPOCH_OFFSET,
         exit::Exit,
-        genesis_config::GenesisConfig,
+        genesis_config::{ClusterType, GenesisConfig},
         hash::Hash,
         pubkey::Pubkey,
         shred_version::compute_shred_version,
@@ -168,8 +167,8 @@ impl BlockVerificationMethod {
 #[derive(Clone, EnumString, EnumVariantNames, Default, IntoStaticStr, Display)]
 #[strum(serialize_all = "kebab-case")]
 pub enum BlockProductionMethod {
-    #[default]
     ThreadLocalMultiIterator,
+    #[default]
     CentralScheduler,
 }
 
@@ -205,7 +204,6 @@ pub struct ValidatorConfig {
     pub voting_disabled: bool,
     pub account_paths: Vec<PathBuf>,
     pub account_snapshot_paths: Vec<PathBuf>,
-    pub account_shrink_paths: Option<Vec<PathBuf>>,
     pub rpc_config: JsonRpcConfig,
     /// Specifies which plugins to start up with
     pub on_start_geyser_plugin_config_files: Option<Vec<PathBuf>>,
@@ -223,7 +221,6 @@ pub struct ValidatorConfig {
     pub repair_validators: Option<HashSet<Pubkey>>, // None = repair from all
     pub repair_whitelist: Arc<RwLock<HashSet<Pubkey>>>, // Empty = repair with all
     pub gossip_validators: Option<HashSet<Pubkey>>, // None = gossip with all
-    pub accounts_hash_fault_injector: Option<AccountsHashFaultInjector>,
     pub accounts_hash_interval_slots: u64,
     pub max_genesis_archive_unpacked_size: u64,
     pub wal_recovery_mode: Option<BlockstoreRecoveryMode>,
@@ -278,7 +275,6 @@ impl Default for ValidatorConfig {
             max_ledger_shreds: None,
             account_paths: Vec::new(),
             account_snapshot_paths: Vec::new(),
-            account_shrink_paths: None,
             rpc_config: JsonRpcConfig::default(),
             on_start_geyser_plugin_config_files: None,
             rpc_addrs: None,
@@ -294,7 +290,6 @@ impl Default for ValidatorConfig {
             repair_validators: None,
             repair_whitelist: Arc::new(RwLock::new(HashSet::default())),
             gossip_validators: None,
-            accounts_hash_fault_injector: None,
             accounts_hash_interval_slots: std::u64::MAX,
             max_genesis_archive_unpacked_size: MAX_GENESIS_ARCHIVE_UNPACKED_SIZE,
             wal_recovery_mode: None,
@@ -343,6 +338,7 @@ impl ValidatorConfig {
         Self {
             enforce_ulimit_nofile: false,
             rpc_config: JsonRpcConfig::default_for_test(),
+            block_production_method: BlockProductionMethod::ThreadLocalMultiIterator,
             ..Self::default()
         }
     }
@@ -471,12 +467,12 @@ pub struct Validator {
     blockstore_metric_report_service: BlockstoreMetricReportService,
     accounts_background_service: AccountsBackgroundService,
     accounts_hash_verifier: AccountsHashVerifier,
-    turbine_quic_endpoint: Endpoint,
+    turbine_quic_endpoint: Option<Endpoint>,
     turbine_quic_endpoint_runtime: Option<TokioRuntime>,
-    turbine_quic_endpoint_join_handle: miraland_turbine::quic_endpoint::AsyncTryJoinHandle,
-    repair_quic_endpoint: Endpoint,
+    turbine_quic_endpoint_join_handle: Option<miraland_turbine::quic_endpoint::AsyncTryJoinHandle>,
+    repair_quic_endpoint: Option<Endpoint>,
     repair_quic_endpoint_runtime: Option<TokioRuntime>,
-    repair_quic_endpoint_join_handle: repair::quic_endpoint::AsyncTryJoinHandle,
+    repair_quic_endpoint_join_handle: Option<repair::quic_endpoint::AsyncTryJoinHandle>,
 }
 
 impl Validator {
@@ -565,9 +561,10 @@ impl Validator {
                 "ledger directory does not exist or is not accessible: {ledger_path:?}"
             ));
         }
-
         let genesis_config =
-            open_genesis_config(ledger_path, config.max_genesis_archive_unpacked_size);
+            open_genesis_config(ledger_path, config.max_genesis_archive_unpacked_size)
+                .map_err(|err| format!("Failed to open genesis config: {err}"))?;
+
         metrics_config_sanity_check(genesis_config.cluster_type)?;
 
         if let Some(expected_shred_version) = config.expected_shred_version {
@@ -606,7 +603,7 @@ impl Validator {
             &config.snapshot_config.bank_snapshots_dir,
             &config.account_snapshot_paths,
         )
-        .map_err(|err| format!("Failed to clean orphaned account snapshot directories: {err:?}"))?;
+        .map_err(|err| format!("failed to clean orphaned account snapshot directories: {err}"))?;
         timer.stop();
         info!("Cleaning orphaned account snapshot directories done. {timer}");
 
@@ -625,7 +622,7 @@ impl Validator {
         ];
         for old_accounts_hash_cache_dir in old_accounts_hash_cache_dirs {
             if old_accounts_hash_cache_dir.exists() {
-                snapshot_utils::move_and_async_delete_path(old_accounts_hash_cache_dir);
+                move_and_async_delete_path(old_accounts_hash_cache_dir);
             }
         }
 
@@ -776,8 +773,6 @@ impl Validator {
             accounts_package_receiver,
             snapshot_package_sender,
             exit.clone(),
-            cluster_info.clone(),
-            config.accounts_hash_fault_injector,
             config.snapshot_config.clone(),
         );
 
@@ -1170,58 +1165,66 @@ impl Validator {
         // Outside test-validator crate, we always need a tokio runtime (and
         // the respective handle) to initialize the turbine QUIC endpoint.
         let current_runtime_handle = tokio::runtime::Handle::try_current();
-        let turbine_quic_endpoint_runtime = current_runtime_handle.is_err().then(|| {
-            tokio::runtime::Builder::new_multi_thread()
-                .enable_all()
-                .thread_name("mlnTurbineQuic")
-                .build()
-                .unwrap()
-        });
+        let turbine_quic_endpoint_runtime = (current_runtime_handle.is_err()
+            && genesis_config.cluster_type != ClusterType::Mainnet)
+            .then(|| {
+                tokio::runtime::Builder::new_multi_thread()
+                    .enable_all()
+                    .thread_name("mlnTurbineQuic")
+                    .build()
+                    .unwrap()
+            });
         let (turbine_quic_endpoint_sender, turbine_quic_endpoint_receiver) = unbounded();
         let (
             turbine_quic_endpoint,
             turbine_quic_endpoint_sender,
             turbine_quic_endpoint_join_handle,
-        ) = miraland_turbine::quic_endpoint::new_quic_endpoint(
-            turbine_quic_endpoint_runtime
-                .as_ref()
-                .map(TokioRuntime::handle)
-                .unwrap_or_else(|| current_runtime_handle.as_ref().unwrap()),
-            &identity_keypair,
-            node.sockets.tvu_quic,
-            node.info
-                .tvu(Protocol::QUIC)
-                .map_err(|err| format!("Invalid QUIC TVU address: {err:?}"))?
-                .ip(),
-            turbine_quic_endpoint_sender,
-            bank_forks.clone(),
-        )
-        .unwrap();
-
-        // Repair quic endpoint.
-        let repair_quic_endpoint_runtime = current_runtime_handle.is_err().then(|| {
-            tokio::runtime::Builder::new_multi_thread()
-                .enable_all()
-                .thread_name("mlnRepairQuic")
-                .build()
-                .unwrap()
-        });
-        let (repair_quic_endpoint, repair_quic_endpoint_sender, repair_quic_endpoint_join_handle) =
-            repair::quic_endpoint::new_quic_endpoint(
-                repair_quic_endpoint_runtime
+        ) = if genesis_config.cluster_type == ClusterType::Mainnet {
+            let (sender, _receiver) = tokio::sync::mpsc::channel(1);
+            (None, sender, None)
+        } else {
+            miraland_turbine::quic_endpoint::new_quic_endpoint(
+                turbine_quic_endpoint_runtime
                     .as_ref()
                     .map(TokioRuntime::handle)
                     .unwrap_or_else(|| current_runtime_handle.as_ref().unwrap()),
                 &identity_keypair,
-                node.sockets.serve_repair_quic,
-                node.info
-                    .serve_repair(Protocol::QUIC)
-                    .map_err(|err| format!("Invalid QUIC serve-repair address: {err:?}"))?
-                    .ip(),
-                repair_quic_endpoint_sender,
+                node.sockets.tvu_quic,
+                turbine_quic_endpoint_sender,
                 bank_forks.clone(),
             )
-            .unwrap();
+            .map(|(endpoint, sender, join_handle)| (Some(endpoint), sender, Some(join_handle)))
+            .unwrap()
+        };
+
+        // Repair quic endpoint.
+        let repair_quic_endpoint_runtime = (current_runtime_handle.is_err()
+            && genesis_config.cluster_type != ClusterType::Mainnet)
+            .then(|| {
+                tokio::runtime::Builder::new_multi_thread()
+                    .enable_all()
+                    .thread_name("mlnRepairQuic")
+                    .build()
+                    .unwrap()
+            });
+        let (repair_quic_endpoint, repair_quic_endpoint_sender, repair_quic_endpoint_join_handle) =
+            if genesis_config.cluster_type == ClusterType::Mainnet {
+                let (sender, _receiver) = tokio::sync::mpsc::channel(1);
+                (None, sender, None)
+            } else {
+                repair::quic_endpoint::new_quic_endpoint(
+                    repair_quic_endpoint_runtime
+                        .as_ref()
+                        .map(TokioRuntime::handle)
+                        .unwrap_or_else(|| current_runtime_handle.as_ref().unwrap()),
+                    &identity_keypair,
+                    node.sockets.serve_repair_quic,
+                    repair_quic_endpoint_sender,
+                    bank_forks.clone(),
+                )
+                .map(|(endpoint, sender, join_handle)| (Some(endpoint), sender, Some(join_handle)))
+                .unwrap()
+            };
 
         let in_wen_restart = config.wen_restart_proto_path.is_some() && !waited_for_supermajority;
         let tower = match process_blockstore.process_to_create_tower() {
@@ -1239,13 +1242,18 @@ impl Validator {
         };
         let last_vote = tower.last_vote();
 
+        let outstanding_repair_requests =
+            Arc::<RwLock<repair::repair_service::OutstandingShredRepairs>>::default();
+        let cluster_slots =
+            Arc::new(crate::cluster_slots_service::cluster_slots::ClusterSlots::default());
+
         let tvu = Tvu::new(
             vote_account,
             authorized_voter_keypairs,
             &bank_forks,
             &cluster_info,
             TvuSockets {
-                repair: node.sockets.repair,
+                repair: node.sockets.repair.try_clone().unwrap(),
                 retransmit: node.sockets.retransmit_sockets,
                 fetch: node.sockets.tvu,
                 ancestor_hashes_requests: node.sockets.ancestor_hashes_requests,
@@ -1291,6 +1299,8 @@ impl Validator {
             turbine_quic_endpoint_sender.clone(),
             turbine_quic_endpoint_receiver,
             repair_quic_endpoint_sender,
+            outstanding_repair_requests.clone(),
+            cluster_slots.clone(),
         )?;
 
         if in_wen_restart {
@@ -1367,6 +1377,9 @@ impl Validator {
             vote_account: *vote_account,
             repair_whitelist: config.repair_whitelist.clone(),
             notifies: key_notifies,
+            repair_socket: Arc::new(node.sockets.repair),
+            outstanding_repair_requests,
+            cluster_slots,
         });
 
         Ok(Self {
@@ -1514,14 +1527,18 @@ impl Validator {
         }
 
         self.gossip_service.join().expect("gossip_service");
-        repair::quic_endpoint::close_quic_endpoint(&self.repair_quic_endpoint);
+        if let Some(repair_quic_endpoint) = &self.repair_quic_endpoint {
+            repair::quic_endpoint::close_quic_endpoint(repair_quic_endpoint);
+        }
         self.serve_repair_service
             .join()
             .expect("serve_repair_service");
-        self.repair_quic_endpoint_runtime
-            .map(|runtime| runtime.block_on(self.repair_quic_endpoint_join_handle))
-            .transpose()
-            .unwrap();
+        if let Some(repair_quic_endpoint_join_handle) = self.repair_quic_endpoint_join_handle {
+            self.repair_quic_endpoint_runtime
+                .map(|runtime| runtime.block_on(repair_quic_endpoint_join_handle))
+                .transpose()
+                .unwrap();
+        };
         self.stats_reporter_service
             .join()
             .expect("stats_reporter_service");
@@ -1534,13 +1551,17 @@ impl Validator {
         self.accounts_hash_verifier
             .join()
             .expect("accounts_hash_verifier");
-        miraland_turbine::quic_endpoint::close_quic_endpoint(&self.turbine_quic_endpoint);
+        if let Some(turbine_quic_endpoint) = &self.turbine_quic_endpoint {
+            miraland_turbine::quic_endpoint::close_quic_endpoint(turbine_quic_endpoint);
+        }
         self.tpu.join().expect("tpu");
         self.tvu.join().expect("tvu");
-        self.turbine_quic_endpoint_runtime
-            .map(|runtime| runtime.block_on(self.turbine_quic_endpoint_join_handle))
-            .transpose()
-            .unwrap();
+        if let Some(turbine_quic_endpoint_join_handle) = self.turbine_quic_endpoint_join_handle {
+            self.turbine_quic_endpoint_runtime
+                .map(|runtime| runtime.block_on(turbine_quic_endpoint_join_handle))
+                .transpose()
+                .unwrap();
+        }
         self.completed_data_sets_service
             .join()
             .expect("completed_data_sets_service");
@@ -1730,7 +1751,8 @@ fn load_blockstore(
 > {
     info!("loading ledger from {:?}...", ledger_path);
     *start_progress.write().unwrap() = ValidatorStartProgress::LoadingLedger;
-    let genesis_config = open_genesis_config(ledger_path, config.max_genesis_archive_unpacked_size);
+    let genesis_config = open_genesis_config(ledger_path, config.max_genesis_archive_unpacked_size)
+        .map_err(|err| format!("Failed to open genesis config: {err}"))?;
 
     // This needs to be limited otherwise the state in the VoteAccount data
     // grows too large
@@ -1813,7 +1835,6 @@ fn load_blockstore(
             &genesis_config,
             &blockstore,
             config.account_paths.clone(),
-            config.account_shrink_paths.clone(),
             Some(&config.snapshot_config),
             &process_options,
             transaction_history_services
@@ -1840,11 +1861,6 @@ fn load_blockstore(
         let mut bank_forks = bank_forks.write().unwrap();
         bank_forks.set_snapshot_config(Some(config.snapshot_config.clone()));
         bank_forks.set_accounts_hash_interval_slots(config.accounts_hash_interval_slots);
-        if let Some(ref shrink_paths) = config.account_shrink_paths {
-            bank_forks
-                .working_bank()
-                .set_shrink_paths(shrink_paths.clone());
-        }
     }
 
     Ok((
@@ -2423,12 +2439,16 @@ fn get_stake_percent_in_gossip(bank: &Bank, cluster_info: &ClusterInfo, log: boo
 }
 
 fn cleanup_accounts_paths(config: &ValidatorConfig) {
-    for accounts_path in &config.account_paths {
-        move_and_async_delete_path_contents(accounts_path);
+    for account_path in &config.account_paths {
+        move_and_async_delete_path_contents(account_path);
     }
-    if let Some(ref shrink_paths) = config.account_shrink_paths {
-        for accounts_path in shrink_paths {
-            move_and_async_delete_path_contents(accounts_path);
+    if let Some(shrink_paths) = config
+        .accounts_db_config
+        .as_ref()
+        .and_then(|config| config.shrink_paths.as_ref())
+    {
+        for shrink_path in shrink_paths {
+            move_and_async_delete_path_contents(shrink_path);
         }
     }
 }

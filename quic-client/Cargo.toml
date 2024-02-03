@@ -25,7 +25,6 @@ miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
 quinn = { workspace = true }
 quinn-proto = { workspace = true }
-rcgen = { workspace = true }
 rustls = { workspace = true, features = ["dangerous_configuration"] }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }

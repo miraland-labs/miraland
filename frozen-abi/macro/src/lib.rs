@@ -304,11 +304,11 @@ fn quote_for_test(
                 }
                 result.unwrap();
                 let actual_digest = format!("{}", hash);
-                if ::std::env::var("SOLANA_ABI_BULK_UPDATE").is_ok() {
+                if ::std::env::var("MIRALAND_ABI_BULK_UPDATE").is_ok() {
                     if #expected_digest != actual_digest {
                         #p!("sed -i -e 's/{}/{}/g' $(git grep --files-with-matches frozen_abi)", #expected_digest, hash);
                     }
-                    ::log::warn!("Not testing the abi digest under SOLANA_ABI_BULK_UPDATE!");
+                    ::log::warn!("Not testing the abi digest under MIRALAND_ABI_BULK_UPDATE!");
                 } else {
                     if let Ok(dir) = ::std::env::var("MIRALAND_ABI_DUMP_DIR") {
                         assert_eq!(#expected_digest, actual_digest, "Possibly ABI changed? Examine the diff in MIRALAND_ABI_DUMP_DIR!: \n$ diff -u {}/*{}* {}/*{}*", dir, #expected_digest, dir, actual_digest);

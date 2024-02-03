@@ -21,7 +21,6 @@ use {
     },
     solana_sdk::{
         entrypoint::SUCCESS,
-        feature_set,
         instruction::InstructionError,
         loader_v4::{self, LoaderV4State, LoaderV4Status, DEPLOYMENT_COOLDOWN_IN_SLOTS},
         loader_v4_instruction::LoaderV4Instruction,
@@ -466,6 +465,7 @@ pub fn process_instruction_retract(
     let transaction_context = &invoke_context.transaction_context;
     let instruction_context = transaction_context.get_current_instruction_context()?;
     let mut program = instruction_context.try_borrow_instruction_account(transaction_context, 0)?;
+
     let authority_address = instruction_context
         .get_index_of_instruction_account_in_transaction(1)
         .and_then(|index| transaction_context.get_key_of_account_at_index(index))?;
@@ -553,12 +553,7 @@ pub fn process_instruction_inner(
     let instruction_data = instruction_context.get_instruction_data();
     let program_id = instruction_context.get_last_program_key(transaction_context)?;
     if loader_v4::check_id(program_id) {
-        if invoke_context
-            .feature_set
-            .is_active(&feature_set::native_programs_consume_cu::id())
-        {
-            invoke_context.consume_checked(DEFAULT_COMPUTE_UNITS)?;
-        }
+        invoke_context.consume_checked(DEFAULT_COMPUTE_UNITS)?;
         match limited_deserialize(instruction_data)? {
             LoaderV4Instruction::Write { offset, bytes } => {
                 process_instruction_write(invoke_context, offset, bytes)

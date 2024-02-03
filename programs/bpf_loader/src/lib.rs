@@ -34,9 +34,9 @@ use {
         clock::Slot,
         entrypoint::{MAX_PERMITTED_DATA_INCREASE, SUCCESS},
         feature_set::{
-            bpf_account_data_direct_mapping, enable_bpf_loader_extend_program_ix,
-            enable_bpf_loader_set_authority_checked_ix, native_programs_consume_cu,
-            remove_bpf_loader_incorrect_program_id, FeatureSet,
+            bpf_account_data_direct_mapping, deprecate_executable_meta_update_in_bpf_loader,
+            disable_bpf_loader_instructions, enable_bpf_loader_extend_program_ix,
+            enable_bpf_loader_set_authority_checked_ix, FeatureSet,
         },
         instruction::{AccountMeta, InstructionError},
         loader_instruction::LoaderInstruction,
@@ -46,9 +46,7 @@ use {
         pubkey::Pubkey,
         saturating_add_assign,
         system_instruction::{self, MAX_PERMITTED_DATA_LENGTH},
-        transaction_context::{
-            BorrowedAccount, IndexOfAccount, InstructionContext, TransactionContext,
-        },
+        transaction_context::{IndexOfAccount, InstructionContext, TransactionContext},
     },
     std::{
         cell::RefCell,
@@ -377,125 +375,21 @@ pub fn process_instruction_inner(
     let log_collector = invoke_context.get_log_collector();
     let transaction_context = &invoke_context.transaction_context;
     let instruction_context = transaction_context.get_current_instruction_context()?;
-
-    if !invoke_context
-        .feature_set
-        .is_active(&remove_bpf_loader_incorrect_program_id::id())
-    {
-        fn get_index_in_transaction(
-            instruction_context: &InstructionContext,
-            index_in_instruction: IndexOfAccount,
-        ) -> Result<IndexOfAccount, InstructionError> {
-            if index_in_instruction < instruction_context.get_number_of_program_accounts() {
-                instruction_context
-                    .get_index_of_program_account_in_transaction(index_in_instruction)
-            } else {
-                instruction_context.get_index_of_instruction_account_in_transaction(
-                    index_in_instruction
-                        .saturating_sub(instruction_context.get_number_of_program_accounts()),
-                )
-            }
-        }
-
-        fn try_borrow_account<'a>(
-            transaction_context: &'a TransactionContext,
-            instruction_context: &'a InstructionContext,
-            index_in_instruction: IndexOfAccount,
-        ) -> Result<BorrowedAccount<'a>, InstructionError> {
-            if index_in_instruction < instruction_context.get_number_of_program_accounts() {
-                instruction_context
-                    .try_borrow_program_account(transaction_context, index_in_instruction)
-            } else {
-                instruction_context.try_borrow_instruction_account(
-                    transaction_context,
-                    index_in_instruction
-                        .saturating_sub(instruction_context.get_number_of_program_accounts()),
-                )
-            }
-        }
-
-        let first_instruction_account = {
-            let borrowed_root_account =
-                instruction_context.try_borrow_program_account(transaction_context, 0)?;
-            let owner_id = borrowed_root_account.get_owner();
-            if native_loader::check_id(owner_id) {
-                1
-            } else {
-                0
-            }
-        };
-        let first_account_key = transaction_context.get_key_of_account_at_index(
-            get_index_in_transaction(instruction_context, first_instruction_account)?,
-        )?;
-        let second_account_key = get_index_in_transaction(
-            instruction_context,
-            first_instruction_account.saturating_add(1),
-        )
-        .and_then(|index_in_transaction| {
-            transaction_context.get_key_of_account_at_index(index_in_transaction)
-        });
-        let program_id = instruction_context.get_last_program_key(transaction_context)?;
-        let program_account_index = if first_account_key == program_id {
-            first_instruction_account
-        } else if second_account_key
-            .map(|key| key == program_id)
-            .unwrap_or(false)
-        {
-            first_instruction_account.saturating_add(1)
-        } else {
-            let first_account = try_borrow_account(
-                transaction_context,
-                instruction_context,
-                first_instruction_account,
-            )?;
-            if first_account.is_executable(&invoke_context.feature_set) {
-                ic_logger_msg!(log_collector, "BPF loader is executable");
-                return Err(Box::new(InstructionError::IncorrectProgramId));
-            }
-            first_instruction_account
-        };
-        let program = try_borrow_account(
-            transaction_context,
-            instruction_context,
-            program_account_index,
-        )?;
-        if program.is_executable(&invoke_context.feature_set)
-            && !check_loader_id(program.get_owner())
-        {
-            ic_logger_msg!(
-                log_collector,
-                "Executable account not owned by the BPF loader"
-            );
-            return Err(Box::new(InstructionError::IncorrectProgramId));
-        }
-    }
-
     let program_account =
         instruction_context.try_borrow_last_program_account(transaction_context)?;
-
-    // Consume compute units if feature `native_programs_consume_cu` is activated
-    let native_programs_consume_cu = invoke_context
-        .feature_set
-        .is_active(&native_programs_consume_cu::id());
 
     // Program Management Instruction
     if native_loader::check_id(program_account.get_owner()) {
         drop(program_account);
         let program_id = instruction_context.get_last_program_key(transaction_context)?;
         return if bpf_loader_upgradeable::check_id(program_id) {
-            if native_programs_consume_cu {
-                invoke_context.consume_checked(UPGRADEABLE_LOADER_COMPUTE_UNITS)?;
-            }
+            invoke_context.consume_checked(UPGRADEABLE_LOADER_COMPUTE_UNITS)?;
             process_loader_upgradeable_instruction(invoke_context)
         } else if bpf_loader::check_id(program_id) {
-            if native_programs_consume_cu {
-                invoke_context.consume_checked(DEFAULT_LOADER_COMPUTE_UNITS)?;
-            }
+            invoke_context.consume_checked(DEFAULT_LOADER_COMPUTE_UNITS)?;
             process_loader_instruction(invoke_context)
         } else if bpf_loader_deprecated::check_id(program_id) {
-            if native_programs_consume_cu {
-                invoke_context.consume_checked(DEPRECATED_LOADER_COMPUTE_UNITS)?;
-            }
+            invoke_context.consume_checked(DEPRECATED_LOADER_COMPUTE_UNITS)?;
             ic_logger_msg!(log_collector, "Deprecated loader is no longer supported");
             Err(InstructionError::UnsupportedProgramId)
         } else {
@@ -785,7 +679,15 @@ fn process_loader_upgradeable_instruction(
                 },
                 &invoke_context.feature_set,
             )?;
-            program.set_executable(true)?;
+
+            // Skip writing true to executable meta after bpf program deployment when
+            // `deprecate_executable_meta_update_in_bpf_loader` feature is activated.
+            if !invoke_context
+                .feature_set
+                .is_active(&deprecate_executable_meta_update_in_bpf_loader::id())
+            {
+                program.set_executable(true)?;
+            }
             drop(program);
 
             ic_logger_msg!(log_collector, "Deployed program {:?}", new_program_id);
@@ -1469,6 +1371,20 @@ fn process_loader_instruction(invoke_context: &mut InvokeContext) -> Result<(), 
         );
         return Err(InstructionError::IncorrectProgramId);
     }
+
+    // Return `UnsupportedProgramId` error for bpf_loader when
+    // `disable_bpf_loader_instruction` feature is activated.
+    if invoke_context
+        .feature_set
+        .is_active(&disable_bpf_loader_instructions::id())
+    {
+        ic_msg!(
+            invoke_context,
+            "BPF loader management instructions are no longer supported"
+        );
+        return Err(InstructionError::UnsupportedProgramId);
+    }
+
     let is_program_signer = program.is_signer();
     match limited_deserialize(instruction_data)? {
         LoaderInstruction::Write { offset, bytes } => {
@@ -1493,6 +1409,13 @@ fn process_loader_instruction(invoke_context: &mut InvokeContext) -> Result<(), 
                 {},
                 program.get_data(),
             );
+
+            // `deprecate_executable_meta_update_in_bpf_loader` feature doesn't
+            // apply to  bpf_loader v2. Instead, the deployment by bpf_loader
+            // will be deprecated by its own feature
+            // `disable_bpf_loader_instructions`. Before we activate
+            // deprecate_executable_meta_update_in_bpf_loader, we should
+            // activate `disable_bpf_loader_instructions` first.
             program.set_executable(true)?;
             ic_msg!(invoke_context, "Finalized account {:?}", program.get_key());
         }
@@ -1779,6 +1702,10 @@ mod tests {
             expected_result,
             Entrypoint::vm,
             |invoke_context| {
+                let mut features = FeatureSet::all_enabled();
+                features.deactivate(&disable_bpf_loader_instructions::id());
+                features.deactivate(&deprecate_executable_meta_update_in_bpf_loader::id());
+                invoke_context.feature_set = Arc::new(features);
                 test_utils::load_all_invoked_programs(invoke_context);
             },
             |_invoke_context| {},
@@ -1998,6 +1925,10 @@ mod tests {
             Err(InstructionError::ProgramFailedToComplete),
             Entrypoint::vm,
             |invoke_context| {
+                let mut features = FeatureSet::all_enabled();
+                features.deactivate(&disable_bpf_loader_instructions::id());
+                features.deactivate(&deprecate_executable_meta_update_in_bpf_loader::id());
+                invoke_context.feature_set = Arc::new(features);
                 invoke_context.mock_set_remaining(0);
                 test_utils::load_all_invoked_programs(invoke_context);
             },
@@ -2543,7 +2474,12 @@ mod tests {
                 instruction_accounts,
                 expected_result,
                 Entrypoint::vm,
-                |_invoke_context| {},
+                |invoke_context| {
+                    let mut features = FeatureSet::all_enabled();
+                    features.deactivate(&disable_bpf_loader_instructions::id());
+                    features.deactivate(&deprecate_executable_meta_update_in_bpf_loader::id());
+                    invoke_context.feature_set = Arc::new(features);
+                },
                 |_invoke_context| {},
             )
         }

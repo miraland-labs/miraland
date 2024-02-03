@@ -1,10 +1,5 @@
-pub mod account_rent_state;
-
 use {
-    crate::{
-        accounts::account_rent_state::{check_rent_state_with_account, RentState},
-        bank::RewardInterval,
-    },
+    crate::{bank::RewardInterval, svm::account_rent_state::RentState},
     itertools::Itertools,
     log::warn,
     miraland_accounts_db::{
@@ -12,8 +7,7 @@ use {
         accounts::{LoadedTransaction, TransactionLoadResult, TransactionRent},
         accounts_db::AccountsDb,
         ancestors::Ancestors,
-        blockhash_queue::BlockhashQueue,
-        nonce_info::{NonceFull, NonceInfo},
+        nonce_info::NonceFull,
         rent_collector::{RentCollector, RENT_EXEMPT_RENT_EPOCH},
         rent_debits::RentDebits,
         transaction_error_metrics::TransactionErrorMetrics,
@@ -24,13 +18,11 @@ use {
         loaded_programs::LoadedProgramsForTxBatch,
     },
     solana_sdk::{
-        account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
-        account_utils::StateMut,
-        bpf_loader_upgradeable::{self, UpgradeableLoaderState},
-        feature_set::{
-            include_loaded_accounts_data_size_in_fee_calculation,
-            simplify_writable_program_account_check, FeatureSet,
+        account::{
+            create_executable_meta, is_builtin, is_executable, Account, AccountSharedData,
+            ReadableAccount, WritableAccount,
         },
+        feature_set::{self, include_loaded_accounts_data_size_in_fee_calculation, FeatureSet},
         fee::FeeStructure,
         message::SanitizedMessage,
         native_loader,
@@ -47,12 +39,11 @@ use {
 };
 
 #[allow(clippy::too_many_arguments)]
-pub(super) fn load_accounts(
+pub(crate) fn load_accounts(
     accounts_db: &AccountsDb,
     ancestors: &Ancestors,
     txs: &[SanitizedTransaction],
-    lock_results: Vec<TransactionCheckResult>,
-    hash_queue: &BlockhashQueue,
+    lock_results: &[TransactionCheckResult],
     error_counters: &mut TransactionErrorMetrics,
     rent_collector: &RentCollector,
     feature_set: &FeatureSet,
@@ -61,22 +52,15 @@ pub(super) fn load_accounts(
     in_reward_interval: RewardInterval,
     program_accounts: &HashMap<Pubkey, (&Pubkey, u64)>,
     loaded_programs: &LoadedProgramsForTxBatch,
-    should_collect_rent: bool,
 ) -> Vec<TransactionLoadResult> {
     txs.iter()
         .zip(lock_results)
         .map(|etx| match etx {
-            (tx, (Ok(()), nonce)) => {
-                let lamports_per_signature = nonce
-                    .as_ref()
-                    .map(|nonce| nonce.lamports_per_signature())
-                    .unwrap_or_else(|| {
-                        hash_queue.get_lamports_per_signature(tx.message().recent_blockhash())
-                    });
+            (tx, (Ok(()), nonce, lamports_per_signature)) => {
                 let fee = if let Some(lamports_per_signature) = lamports_per_signature {
                     fee_structure.calculate_fee(
                         tx.message(),
-                        lamports_per_signature,
+                        *lamports_per_signature,
                         &process_compute_budget_instructions(
                             tx.message().program_instructions_iter(),
                         )
@@ -102,7 +86,6 @@ pub(super) fn load_accounts(
                     in_reward_interval,
                     program_accounts,
                     loaded_programs,
-                    should_collect_rent,
                 ) {
                     Ok(loaded_transaction) => loaded_transaction,
                     Err(e) => return (Err(e), None),
@@ -125,7 +108,7 @@ pub(super) fn load_accounts(
 
                 (Ok(loaded_transaction), nonce)
             }
-            (_, (Err(e), _nonce)) => (Err(e), None),
+            (_, (Err(e), _nonce, _lamports_per_signature)) => (Err(e.clone()), None),
         })
         .collect()
 }
@@ -143,7 +126,6 @@ fn load_transaction_accounts(
     reward_interval: RewardInterval,
     program_accounts: &HashMap<Pubkey, (&Pubkey, u64)>,
     loaded_programs: &LoadedProgramsForTxBatch,
-    should_collect_rent: bool,
 ) -> Result<LoadedTransaction> {
     let in_reward_interval = reward_interval == RewardInterval::InsideInterval;
 
@@ -192,12 +174,9 @@ fn load_transaction_accounts(
                     account_overrides.and_then(|overrides| overrides.get(key))
                 {
                     (account_override.data().len(), account_override.clone(), 0)
-                } else if let Some(program) = (feature_set
-                    .is_active(&simplify_writable_program_account_check::id())
-                    && !instruction_account
-                    && !message.is_writable(i))
-                .then_some(())
-                .and_then(|_| loaded_programs.find(key))
+                } else if let Some(program) = (!instruction_account && !message.is_writable(i))
+                    .then_some(())
+                    .and_then(|_| loaded_programs.find(key))
                 {
                     // Optimization to skip loading of accounts which are only used as
                     // programs in top-level instructions and not passed as instruction accounts.
@@ -208,7 +187,9 @@ fn load_transaction_accounts(
                         .load_with_fixed_root(ancestors, key)
                         .map(|(mut account, _)| {
                             if message.is_writable(i) {
-                                if should_collect_rent {
+                                if !feature_set
+                                    .is_active(&feature_set::disable_rent_fees_collection::id())
+                                {
                                     let rent_due = rent_collector
                                         .collect_from_existing_account(
                                             key,
@@ -272,37 +253,6 @@ fn load_transaction_accounts(
                     validated_fee_payer = true;
                 }
 
-                if !feature_set.is_active(&simplify_writable_program_account_check::id()) {
-                    if bpf_loader_upgradeable::check_id(account.owner()) {
-                        if message.is_writable(i) && !message.is_upgradeable_loader_present() {
-                            error_counters.invalid_writable_account += 1;
-                            return Err(TransactionError::InvalidWritableAccount);
-                        }
-
-                        if account.executable() {
-                            // The upgradeable loader requires the derived ProgramData account
-                            if let Ok(UpgradeableLoaderState::Program {
-                                programdata_address,
-                            }) = account.state()
-                            {
-                                if accounts_db
-                                    .load_with_fixed_root(ancestors, &programdata_address)
-                                    .is_none()
-                                {
-                                    error_counters.account_not_found += 1;
-                                    return Err(TransactionError::ProgramAccountNotFound);
-                                }
-                            } else {
-                                error_counters.invalid_program_for_execution += 1;
-                                return Err(TransactionError::InvalidProgramForExecution);
-                            }
-                        }
-                    } else if account.executable() && message.is_writable(i) {
-                        error_counters.invalid_writable_account += 1;
-                        return Err(TransactionError::InvalidWritableAccount);
-                    }
-                }
-
                 if in_reward_interval
                     && message.is_writable(i)
                     && solana_stake_program::check_id(account.owner())
@@ -346,15 +296,17 @@ fn load_transaction_accounts(
             let (program_id, program_account) = accounts
                 .get(program_index)
                 .ok_or(TransactionError::ProgramAccountNotFound)?;
-            let account_found = accounts_found.get(program_index).unwrap_or(&true);
             if native_loader::check_id(program_id) {
                 return Ok(account_indices);
             }
+
+            let account_found = accounts_found.get(program_index).unwrap_or(&true);
             if !account_found {
                 error_counters.account_not_found += 1;
                 return Err(TransactionError::ProgramAccountNotFound);
             }
-            if !program_account.executable() {
+
+            if !(is_builtin(program_account) || is_executable(program_account, feature_set)) {
                 error_counters.invalid_program_for_execution += 1;
                 return Err(TransactionError::InvalidProgramForExecution);
             }
@@ -376,7 +328,8 @@ fn load_transaction_accounts(
                     accounts_db.load_with_fixed_root(ancestors, owner_id)
                 {
                     if !native_loader::check_id(owner_account.owner())
-                        || !owner_account.executable()
+                        || !(is_builtin(&owner_account)
+                            || is_executable(&owner_account, feature_set))
                     {
                         error_counters.invalid_program_for_execution += 1;
                         return Err(TransactionError::InvalidProgramForExecution);
@@ -442,6 +395,7 @@ fn account_shared_data_from_program(
         .ok_or(TransactionError::AccountNotFound)?;
     program_account.set_owner(**program_owner);
     program_account.set_executable(true);
+    program_account.set_data_from_slice(create_executable_meta(program_owner));
     Ok(program_account)
 }
 
@@ -468,7 +422,7 @@ fn accumulate_and_check_loaded_account_data_size(
     }
 }
 
-fn validate_fee_payer(
+pub fn validate_fee_payer(
     payer_address: &Pubkey,
     payer_account: &mut AccountSharedData,
     payer_index: IndexOfAccount,
@@ -480,10 +434,11 @@ fn validate_fee_payer(
         error_counters.account_not_found += 1;
         return Err(TransactionError::AccountNotFound);
     }
-    let min_balance = match get_system_account_kind(payer_account).ok_or_else(|| {
+    let system_account_kind = get_system_account_kind(payer_account).ok_or_else(|| {
         error_counters.invalid_account_for_fee += 1;
         TransactionError::InvalidAccountForFee
-    })? {
+    })?;
+    let min_balance = match system_account_kind {
         SystemAccountKind::System => 0,
         SystemAccountKind::Nonce => {
             // Should we ever allow a fees charge to zero a nonce account's
@@ -507,7 +462,7 @@ fn validate_fee_payer(
         .map_err(|_| TransactionError::InsufficientFundsForFee)?;
 
     let payer_post_rent_state = RentState::from_account(payer_account, &rent_collector.rent);
-    check_rent_state_with_account(
+    RentState::check_rent_state_with_account(
         &payer_pre_rent_state,
         &payer_post_rent_state,
         payer_address,
@@ -536,6 +491,7 @@ mod tests {
         },
         solana_sdk::{
             account::{AccountSharedData, WritableAccount},
+            bpf_loader_upgradeable,
             compute_budget::ComputeBudgetInstruction,
             epoch_schedule::EpochSchedule,
             hash::Hash,
@@ -557,11 +513,9 @@ mod tests {
         lamports_per_signature: u64,
         rent_collector: &RentCollector,
         error_counters: &mut TransactionErrorMetrics,
-        feature_set: &FeatureSet,
+        feature_set: &mut FeatureSet,
         fee_structure: &FeeStructure,
     ) -> Vec<TransactionLoadResult> {
-        let mut hash_queue = BlockhashQueue::new(100);
-        hash_queue.register_hash(&tx.message().recent_blockhash, lamports_per_signature);
         let accounts_db = AccountsDb::new_single_for_tests();
         let accounts = Accounts::new(Arc::new(accounts_db));
         for ka in ka.iter() {
@@ -569,13 +523,13 @@ mod tests {
         }
 
         let ancestors = vec![(0, 0)].into_iter().collect();
+        feature_set.deactivate(&feature_set::disable_rent_fees_collection::id());
         let sanitized_tx = SanitizedTransaction::from_transaction_for_tests(tx);
         load_accounts(
             &accounts.accounts_db,
             &ancestors,
             &[sanitized_tx],
-            vec![(Ok(()), None)],
-            &hash_queue,
+            &[(Ok(()), None, Some(lamports_per_signature))],
             error_counters,
             rent_collector,
             feature_set,
@@ -584,7 +538,6 @@ mod tests {
             RewardInterval::OutsideInterval,
             &HashMap::new(),
             &LoadedProgramsForTxBatch::default(),
-            true,
         )
     }
 
@@ -611,8 +564,11 @@ mod tests {
             lamports_per_signature,
             &RentCollector::default(),
             error_counters,
-            &all_features_except(exclude_features),
-            &FeeStructure::default(),
+            &mut all_features_except(exclude_features),
+            &FeeStructure {
+                lamports_per_signature,
+                ..FeeStructure::default()
+            },
         )
     }
 
@@ -811,7 +767,7 @@ mod tests {
             lamports_per_signature,
             &rent_collector,
             &mut error_counters,
-            &all_features_except(None),
+            &mut all_features_except(None),
             &FeeStructure::default(),
         );
         assert_eq!(loaded_accounts.len(), 1);
@@ -827,7 +783,7 @@ mod tests {
             lamports_per_signature,
             &rent_collector,
             &mut error_counters,
-            &FeatureSet::all_enabled(),
+            &mut FeatureSet::all_enabled(),
             &FeeStructure::default(),
         );
         assert_eq!(loaded_accounts.len(), 1);
@@ -844,7 +800,7 @@ mod tests {
             lamports_per_signature,
             &rent_collector,
             &mut error_counters,
-            &FeatureSet::all_enabled(),
+            &mut FeatureSet::all_enabled(),
             &FeeStructure::default(),
         );
         assert_eq!(loaded_accounts.len(), 1);
@@ -907,7 +863,8 @@ mod tests {
         accounts.push((key0, account));
 
         let mut account = AccountSharedData::new(40, 1, &Pubkey::default());
-        account.set_executable(true);
+        account.set_owner(bpf_loader_upgradeable::id());
+        account.set_data(create_executable_meta(account.owner()).to_vec());
         accounts.push((key1, account));
 
         let instructions = vec![CompiledInstruction::new(1, &(), vec![0])];
@@ -941,7 +898,7 @@ mod tests {
         let account = AccountSharedData::new(1, 0, &Pubkey::default());
         accounts.push((key0, account));
 
-        let account = AccountSharedData::new(40, 1, &native_loader::id());
+        let account = AccountSharedData::new(40, 0, &native_loader::id());
         accounts.push((key1, account));
 
         let instructions = vec![CompiledInstruction::new(1, &(), vec![0])];
@@ -970,7 +927,7 @@ mod tests {
 
         let keypair = Keypair::new();
         let key0 = keypair.pubkey();
-        let key1 = Pubkey::from([5u8; 32]);
+        let key1 = bpf_loader_upgradeable::id();
         let key2 = Pubkey::from([6u8; 32]);
 
         let mut account = AccountSharedData::new(1, 0, &Pubkey::default());
@@ -987,6 +944,7 @@ mod tests {
         account.set_executable(true);
         account.set_rent_epoch(1);
         account.set_owner(key1);
+        account.set_data(create_executable_meta(account.owner()).to_vec());
         accounts.push((key2, account));
 
         let instructions = vec![
@@ -1031,309 +989,6 @@ mod tests {
         }
     }
 
-    #[test]
-    fn test_load_accounts_executable_with_write_lock() {
-        let mut accounts: Vec<TransactionAccount> = Vec::new();
-        let mut error_counters = TransactionErrorMetrics::default();
-
-        let keypair = Keypair::new();
-        let key0 = keypair.pubkey();
-        let key1 = Pubkey::from([5u8; 32]);
-        let key2 = Pubkey::from([6u8; 32]);
-
-        let mut account = AccountSharedData::new(1, 0, &Pubkey::default());
-        account.set_rent_epoch(1);
-        accounts.push((key0, account));
-
-        let mut account = AccountSharedData::new(40, 1, &native_loader::id());
-        account.set_executable(true);
-        account.set_rent_epoch(1);
-        accounts.push((key1, account));
-
-        let mut account = AccountSharedData::new(40, 1, &native_loader::id());
-        account.set_executable(true);
-        account.set_rent_epoch(1);
-        accounts.push((key2, account));
-
-        let instructions = vec![CompiledInstruction::new(2, &(), vec![0, 1])];
-        let mut message = Message::new_with_compiled_instructions(
-            1,
-            0,
-            1, // only one executable marked as readonly
-            vec![key0, key1, key2],
-            Hash::default(),
-            instructions,
-        );
-        let tx = Transaction::new(&[&keypair], message.clone(), Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx,
-            &accounts,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        assert_eq!(
-            loaded_accounts[0],
-            (Err(TransactionError::InvalidWritableAccount), None)
-        );
-
-        // Mark executables as readonly
-        message.account_keys = vec![key0, key1, key2]; // revert key change
-        message.header.num_readonly_unsigned_accounts = 2; // mark both executables as readonly
-        let tx = Transaction::new(&[&keypair], message, Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx,
-            &accounts,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        let result = loaded_accounts[0].0.as_ref().unwrap();
-        assert_eq!(result.accounts[..2], accounts[..2]);
-        assert_eq!(
-            result.accounts[result.program_indices[0][0] as usize],
-            accounts[2]
-        );
-    }
-
-    #[test]
-    fn test_load_accounts_upgradeable_with_write_lock() {
-        let mut accounts: Vec<TransactionAccount> = Vec::new();
-        let mut error_counters = TransactionErrorMetrics::default();
-
-        let keypair = Keypair::new();
-        let key0 = keypair.pubkey();
-        let key1 = Pubkey::from([5u8; 32]);
-        let key2 = Pubkey::from([6u8; 32]);
-        let programdata_key1 = Pubkey::from([7u8; 32]);
-        let programdata_key2 = Pubkey::from([8u8; 32]);
-
-        let mut account = AccountSharedData::new(1, 0, &Pubkey::default());
-        account.set_rent_epoch(1);
-        accounts.push((key0, account));
-
-        let program_data = UpgradeableLoaderState::ProgramData {
-            slot: 42,
-            upgrade_authority_address: None,
-        };
-
-        let program = UpgradeableLoaderState::Program {
-            programdata_address: programdata_key1,
-        };
-        let mut account =
-            AccountSharedData::new_data(40, &program, &bpf_loader_upgradeable::id()).unwrap();
-        account.set_executable(true);
-        account.set_rent_epoch(1);
-        accounts.push((key1, account));
-        let mut account =
-            AccountSharedData::new_data(40, &program_data, &bpf_loader_upgradeable::id()).unwrap();
-        account.set_rent_epoch(1);
-        accounts.push((programdata_key1, account));
-
-        let program = UpgradeableLoaderState::Program {
-            programdata_address: programdata_key2,
-        };
-        let mut account =
-            AccountSharedData::new_data(40, &program, &bpf_loader_upgradeable::id()).unwrap();
-        account.set_executable(true);
-        account.set_rent_epoch(1);
-        accounts.push((key2, account));
-        let mut account =
-            AccountSharedData::new_data(40, &program_data, &bpf_loader_upgradeable::id()).unwrap();
-        account.set_rent_epoch(1);
-        accounts.push((programdata_key2, account));
-
-        let mut account = AccountSharedData::new(40, 1, &native_loader::id()); // create mock bpf_loader_upgradeable
-        account.set_executable(true);
-        account.set_rent_epoch(1);
-        accounts.push((bpf_loader_upgradeable::id(), account));
-
-        let instructions = vec![CompiledInstruction::new(2, &(), vec![0, 1])];
-        let mut message = Message::new_with_compiled_instructions(
-            1,
-            0,
-            1, // only one executable marked as readonly
-            vec![key0, key1, key2],
-            Hash::default(),
-            instructions,
-        );
-        let tx = Transaction::new(&[&keypair], message.clone(), Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx.clone(),
-            &accounts,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        assert_eq!(
-            loaded_accounts[0],
-            (Err(TransactionError::InvalidWritableAccount), None)
-        );
-
-        // Solution 0: Include feature simplify_writable_program_account_check
-        let loaded_accounts =
-            load_accounts_with_excluded_features(tx, &accounts, &mut error_counters, None);
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-
-        // Solution 1: include bpf_loader_upgradeable account
-        message.account_keys = vec![key0, key1, bpf_loader_upgradeable::id()];
-        let tx = Transaction::new(&[&keypair], message.clone(), Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx,
-            &accounts,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        let result = loaded_accounts[0].0.as_ref().unwrap();
-        assert_eq!(result.accounts[..2], accounts[..2]);
-        assert_eq!(
-            result.accounts[result.program_indices[0][0] as usize],
-            accounts[5]
-        );
-
-        // Solution 2: mark programdata as readonly
-        message.account_keys = vec![key0, key1, key2]; // revert key change
-        message.header.num_readonly_unsigned_accounts = 2; // mark both executables as readonly
-        let tx = Transaction::new(&[&keypair], message, Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx,
-            &accounts,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        let result = loaded_accounts[0].0.as_ref().unwrap();
-        assert_eq!(result.accounts[..2], accounts[..2]);
-        assert_eq!(
-            result.accounts[result.program_indices[0][0] as usize],
-            accounts[5]
-        );
-        assert_eq!(
-            result.accounts[result.program_indices[0][1] as usize],
-            accounts[3]
-        );
-    }
-
-    #[test]
-    fn test_load_accounts_programdata_with_write_lock() {
-        let mut accounts: Vec<TransactionAccount> = Vec::new();
-        let mut error_counters = TransactionErrorMetrics::default();
-
-        let keypair = Keypair::new();
-        let key0 = keypair.pubkey();
-        let key1 = Pubkey::from([5u8; 32]);
-        let key2 = Pubkey::from([6u8; 32]);
-
-        let mut account = AccountSharedData::new(1, 0, &Pubkey::default());
-        account.set_rent_epoch(1);
-        accounts.push((key0, account));
-
-        let program_data = UpgradeableLoaderState::ProgramData {
-            slot: 42,
-            upgrade_authority_address: None,
-        };
-        let mut account =
-            AccountSharedData::new_data(40, &program_data, &bpf_loader_upgradeable::id()).unwrap();
-        account.set_rent_epoch(1);
-        accounts.push((key1, account));
-
-        let mut account = AccountSharedData::new(40, 1, &native_loader::id());
-        account.set_executable(true);
-        account.set_rent_epoch(1);
-        accounts.push((key2, account));
-
-        let instructions = vec![CompiledInstruction::new(2, &(), vec![0, 1])];
-        let mut message = Message::new_with_compiled_instructions(
-            1,
-            0,
-            1, // only the program marked as readonly
-            vec![key0, key1, key2],
-            Hash::default(),
-            instructions,
-        );
-        let tx = Transaction::new(&[&keypair], message.clone(), Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx.clone(),
-            &accounts,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        assert_eq!(
-            loaded_accounts[0],
-            (Err(TransactionError::InvalidWritableAccount), None)
-        );
-
-        // Solution 0: Include feature simplify_writable_program_account_check
-        let loaded_accounts =
-            load_accounts_with_excluded_features(tx, &accounts, &mut error_counters, None);
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-
-        // Solution 1: include bpf_loader_upgradeable account
-        let mut account = AccountSharedData::new(40, 1, &native_loader::id()); // create mock bpf_loader_upgradeable
-        account.set_executable(true);
-        account.set_rent_epoch(1);
-        let accounts_with_upgradeable_loader = vec![
-            accounts[0].clone(),
-            accounts[1].clone(),
-            (bpf_loader_upgradeable::id(), account),
-        ];
-        message.account_keys = vec![key0, key1, bpf_loader_upgradeable::id()];
-        let tx = Transaction::new(&[&keypair], message.clone(), Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx,
-            &accounts_with_upgradeable_loader,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        let result = loaded_accounts[0].0.as_ref().unwrap();
-        assert_eq!(result.accounts[..2], accounts_with_upgradeable_loader[..2]);
-        assert_eq!(
-            result.accounts[result.program_indices[0][0] as usize],
-            accounts_with_upgradeable_loader[2]
-        );
-
-        // Solution 2: mark programdata as readonly
-        message.account_keys = vec![key0, key1, key2]; // revert key change
-        message.header.num_readonly_unsigned_accounts = 2; // extend readonly set to include programdata
-        let tx = Transaction::new(&[&keypair], message, Hash::default());
-        let loaded_accounts = load_accounts_with_excluded_features(
-            tx,
-            &accounts,
-            &mut error_counters,
-            Some(&[simplify_writable_program_account_check::id()]),
-        );
-
-        assert_eq!(error_counters.invalid_writable_account, 1);
-        assert_eq!(loaded_accounts.len(), 1);
-        let result = loaded_accounts[0].0.as_ref().unwrap();
-        assert_eq!(result.accounts[..2], accounts[..2]);
-        assert_eq!(
-            result.accounts[result.program_indices[0][0] as usize],
-            accounts[2]
-        );
-    }
-
     fn load_accounts_no_store(
         accounts: &Accounts,
         tx: Transaction,
@@ -1341,8 +996,6 @@ mod tests {
     ) -> Vec<TransactionLoadResult> {
         let tx = SanitizedTransaction::from_transaction_for_tests(tx);
         let rent_collector = RentCollector::default();
-        let mut hash_queue = BlockhashQueue::new(100);
-        hash_queue.register_hash(tx.message().recent_blockhash(), 10);
 
         let ancestors = vec![(0, 0)].into_iter().collect();
         let mut error_counters = TransactionErrorMetrics::default();
@@ -1350,8 +1003,7 @@ mod tests {
             &accounts.accounts_db,
             &ancestors,
             &[tx],
-            vec![(Ok(()), None)],
-            &hash_queue,
+            &[(Ok(()), None, Some(10))],
             &mut error_counters,
             &rent_collector,
             &FeatureSet::all_enabled(),
@@ -1360,13 +1012,12 @@ mod tests {
             RewardInterval::OutsideInterval,
             &HashMap::new(),
             &LoadedProgramsForTxBatch::default(),
-            true,
         )
     }
 
     #[test]
     fn test_instructions() {
-        miraland_logger::setup();
+        solana_logger::setup();
         let accounts_db = AccountsDb::new_single_for_tests();
         let accounts = Accounts::new(Arc::new(accounts_db));
 
@@ -1388,7 +1039,7 @@ mod tests {
 
     #[test]
     fn test_overrides() {
-        miraland_logger::setup();
+        solana_logger::setup();
         let accounts_db = AccountsDb::new_single_for_tests();
         let accounts = Accounts::new(Arc::new(accounts_db));
         let mut account_overrides = AccountOverrides::default();
@@ -1523,7 +1174,7 @@ mod tests {
 
     #[test]
     fn test_load_accounts_too_high_prioritization_fee() {
-        miraland_logger::setup();
+        solana_logger::setup();
         let lamports_per_signature = 5000_u64;
         let request_units = 1_000_000_u32;
         let request_unit_price = 2_000_000_000_u64;

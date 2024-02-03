@@ -17,7 +17,7 @@ use {
         validator_configs::*,
     },
     log::*,
-    miraland_accounts_db::accounts_db::create_accounts_run_and_snapshot_dirs,
+    miraland_accounts_db::utils::create_accounts_run_and_snapshot_dirs,
     miraland_core::{
         consensus::{tower_storage::FileTowerStorage, Tower, SWITCH_FORK_THRESHOLD},
         validator::{is_snapshot_config_valid, ValidatorConfig},

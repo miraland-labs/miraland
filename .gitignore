@@ -1,10 +1,9 @@
-/dos/farf/
-/farf/
+farf/
+target/
 /miraland-release/
 /miraland-release.tar.bz2
 /miraland-metrics/
 /miraland-metrics.tar.bz2
-/target/
 /test-ledger/
 
 **/*.rs.bk
@@ -17,7 +16,7 @@
 # log files
 *.log
 log-*.txt
-# log-*/
+log-*/
 
 # intellij files
 .idea/

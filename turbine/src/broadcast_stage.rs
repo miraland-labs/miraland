@@ -511,6 +511,7 @@ pub mod test {
             get_tmp_ledger_path_auto_delete,
             shred::{max_ticks_per_n_shreds, ProcessShredsStats, ReedSolomonCache, Shredder},
         },
+        rand::Rng,
         solana_runtime::bank::Bank,
         solana_sdk::{
             hash::Hash,
@@ -544,6 +545,8 @@ pub mod test {
             &Keypair::new(),
             &entries,
             true, // is_last_in_slot
+            // chained_merkle_root
+            Some(Hash::new_from_array(rand::thread_rng().gen())),
             0,    // next_shred_index,
             0,    // next_code_index
             true, // merkle_variant

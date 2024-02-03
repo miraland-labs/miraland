@@ -24,7 +24,7 @@ impl std::fmt::Debug for DisplayError {
 }
 
 pub fn hidden_unless_forced() -> bool {
-    std::env::var("SOLANA_NO_HIDDEN_CLI_ARGS").is_err()
+    std::env::var("MIRALAND_NO_HIDDEN_CLI_ARGS").is_err()
 }
 
 pub mod compute_unit_price;

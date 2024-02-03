@@ -13,6 +13,7 @@ use {
             AccountsIndexConfig, IndexLimitMb,
         },
         partitioned_rewards::TestPartitionedEpochRewards,
+        utils::{create_all_accounts_run_and_snapshot_dirs, create_and_canonicalize_directories},
     },
     miraland_clap_utils::input_parsers::{keypair_of, keypairs_of, pubkey_of, value_of},
     miraland_core::{
@@ -59,10 +60,7 @@ use {
         runtime_config::RuntimeConfig,
         snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL,
         snapshot_config::{SnapshotConfig, SnapshotUsage},
-        snapshot_utils::{
-            self, create_all_accounts_run_and_snapshot_dirs, create_and_canonicalize_directories,
-            ArchiveFormat, SnapshotVersion,
-        },
+        snapshot_utils::{self, ArchiveFormat, SnapshotVersion},
     },
     solana_sdk::{
         clock::{Slot, DEFAULT_S_PER_SLOT},
@@ -793,6 +791,24 @@ pub fn main() {
             });
             return;
         }
+        ("repair-shred-from-peer", Some(subcommand_matches)) => {
+            let pubkey = value_t!(subcommand_matches, "pubkey", Pubkey).ok();
+            let slot = value_t_or_exit!(subcommand_matches, "slot", u64);
+            let shred_index = value_t_or_exit!(subcommand_matches, "shred", u64);
+            let admin_client = admin_rpc_service::connect(&ledger_path);
+            admin_rpc_service::runtime()
+                .block_on(async move {
+                    admin_client
+                        .await?
+                        .repair_shred_from_peer(pubkey, slot, shred_index)
+                        .await
+                })
+                .unwrap_or_else(|err| {
+                    println!("repair shred from peer failed: {err}");
+                    exit(1);
+                });
+            return;
+        }
         ("repair-whitelist", Some(repair_whitelist_subcommand_matches)) => {
             match repair_whitelist_subcommand_matches.subcommand() {
                 ("get", Some(subcommand_matches)) => {
@@ -973,9 +989,12 @@ pub fn main() {
         .map(BlockstoreRecoveryMode::from);
 
     // Canonicalize ledger path to avoid issues with symlink creation
-    let ledger_path = create_and_canonicalize_directories(&[ledger_path])
+    let ledger_path = create_and_canonicalize_directories([&ledger_path])
         .unwrap_or_else(|err| {
-            eprintln!("Unable to access ledger path: {err}");
+            eprintln!(
+                "Unable to access ledger path '{}': {err}",
+                ledger_path.display(),
+            );
             exit(1);
         })
         .pop()
@@ -985,9 +1004,12 @@ pub fn main() {
         .value_of("accounts_hash_cache_path")
         .map(Into::into)
         .unwrap_or_else(|| ledger_path.join(AccountsDb::DEFAULT_ACCOUNTS_HASH_CACHE_DIR));
-    let accounts_hash_cache_path = create_and_canonicalize_directories(&[accounts_hash_cache_path])
+    let accounts_hash_cache_path = create_and_canonicalize_directories([&accounts_hash_cache_path])
         .unwrap_or_else(|err| {
-            eprintln!("Unable to access accounts hash cache path: {err}");
+            eprintln!(
+                "Unable to access accounts hash cache path '{}': {err}",
+                accounts_hash_cache_path.display(),
+            );
             exit(1);
         })
         .pop()
@@ -1183,10 +1205,30 @@ pub fn main() {
             .ok()
             .map(|mb| mb * MB);
 
+    let account_shrink_paths: Option<Vec<PathBuf>> =
+        values_t!(matches, "account_shrink_path", String)
+            .map(|shrink_paths| shrink_paths.into_iter().map(PathBuf::from).collect())
+            .ok();
+    let account_shrink_paths = account_shrink_paths.as_ref().map(|paths| {
+        create_and_canonicalize_directories(paths).unwrap_or_else(|err| {
+            eprintln!("Unable to access account shrink path: {err}");
+            exit(1);
+        })
+    });
+    let (account_shrink_run_paths, account_shrink_snapshot_paths) = account_shrink_paths
+        .map(|paths| {
+            create_all_accounts_run_and_snapshot_dirs(&paths).unwrap_or_else(|err| {
+                eprintln!("Error: {err}");
+                exit(1);
+            })
+        })
+        .unzip();
+
     let accounts_db_config = AccountsDbConfig {
         index: Some(accounts_index_config),
         base_working_path: Some(ledger_path.clone()),
         accounts_hash_cache_path: Some(accounts_hash_cache_path),
+        shrink_paths: account_shrink_run_paths,
         write_cache_limit_bytes: value_t!(matches, "accounts_db_cache_limit_mb", u64)
             .ok()
             .map(|mb| mb * MB as u64),
@@ -1230,6 +1272,7 @@ pub fn main() {
             timeout: value_t!(matches, "rpc_bigtable_timeout", u64)
                 .ok()
                 .map(Duration::from_secs),
+            max_message_size: value_t_or_exit!(matches, "rpc_bigtable_max_message_size", usize),
         })
     } else {
         None
@@ -1425,21 +1468,9 @@ pub fn main() {
         } else {
             vec![ledger_path.join("accounts")]
         };
-    let account_paths = snapshot_utils::create_and_canonicalize_directories(&account_paths)
-        .unwrap_or_else(|err| {
-            eprintln!("Unable to access account path: {err}");
-            exit(1);
-        });
-
-    let account_shrink_paths: Option<Vec<PathBuf>> =
-        values_t!(matches, "account_shrink_path", String)
-            .map(|shrink_paths| shrink_paths.into_iter().map(PathBuf::from).collect())
-            .ok();
-    let account_shrink_paths = account_shrink_paths.as_ref().map(|paths| {
-        create_and_canonicalize_directories(paths).unwrap_or_else(|err| {
-            eprintln!("Unable to access account shrink path: {err}");
-            exit(1);
-        })
+    let account_paths = create_and_canonicalize_directories(account_paths).unwrap_or_else(|err| {
+        eprintln!("Unable to access account path: {err}");
+        exit(1);
     });
 
     let (account_run_paths, account_snapshot_paths) =
@@ -1448,18 +1479,8 @@ pub fn main() {
             exit(1);
         });
 
-    let (account_shrink_run_paths, account_shrink_snapshot_paths) = account_shrink_paths
-        .map(|paths| {
-            create_all_accounts_run_and_snapshot_dirs(&paths).unwrap_or_else(|err| {
-                eprintln!("Error: {err}");
-                exit(1);
-            })
-        })
-        .unzip();
-
     // From now on, use run/ paths in the same way as the previous account_paths.
     validator_config.account_paths = account_run_paths;
-    validator_config.account_shrink_paths = account_shrink_run_paths;
 
     // These snapshot paths are only used for initial clean up, add in shrink paths if they exist.
     validator_config.account_snapshot_paths =
@@ -1674,7 +1695,7 @@ pub fn main() {
         if SystemMonitorService::check_os_network_limits() {
             info!("OS network limits test passed.");
         } else {
-            eprintln!("OS network limit test failed. See: https://docs.solana.com/running-validator/validator-start#system-tuning");
+            eprintln!("OS network limit test failed. See: https://docs.miraland.top/operations/guides/validator-start#system-tuning");
             exit(1);
         }
     }

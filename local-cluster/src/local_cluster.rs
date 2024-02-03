@@ -6,7 +6,7 @@ use {
     },
     itertools::izip,
     log::*,
-    miraland_accounts_db::accounts_db::create_accounts_run_and_snapshot_dirs,
+    miraland_accounts_db::utils::create_accounts_run_and_snapshot_dirs,
     miraland_client::{connection_cache::ConnectionCache, thin_client::ThinClient},
     miraland_core::{
         consensus::tower_storage::FileTowerStorage,

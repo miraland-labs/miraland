@@ -146,6 +146,10 @@ pub mod curve25519_syscall_enabled {
     solana_sdk::declare_id!("8rd1cN2QwtAMR5BV4fEZGxyUfWJtSB2AihHhctPGc4Ya");
 }
 
+pub mod curve25519_restrict_msm_length {
+    solana_sdk::declare_id!("9FjsWJGJrtCiaR6wWiwxJHyWdSSjj2E5E3VYhKJDXXLU");
+}
+
 pub mod versioned_tx_message_enabled {
     solana_sdk::declare_id!("4R9FuBD4tN3rzYnGL6VLtehzuVXSbxgUSor4sRqYfxQD");
 }
@@ -766,6 +770,34 @@ pub mod index_erasure_conflict_duplicate_proofs {
     solana_sdk::declare_id!("5xFJJztY9D5EQhLiBthKRHU5kg5h7x1b52vGpnwzYVep");
 }
 
+pub mod merkle_conflict_duplicate_proofs {
+    solana_sdk::declare_id!("HSwuZ1VfMMUG6mXWo2SPiGsbRrYnjXiC2a98RC6ZShKg");
+}
+
+pub mod disable_bpf_loader_instructions {
+    solana_sdk::declare_id!("2tx9keGzrsFHba9j3LfLm4QyMHg3uaKoXAGJmSkn6Mgv");
+}
+
+pub mod deprecate_executable_meta_update_in_bpf_loader {
+    solana_sdk::declare_id!("4cvufB5AdaaPum7ZjQfRHJDqmD81wiiZVsAP2ReJGAEV");
+}
+
+pub mod enable_zk_proof_from_account {
+    solana_sdk::declare_id!("9gRxP7Pi7sWAVuhLg22QHcrhEs1UhWEwcWZgkUZDTXTk");
+}
+
+pub mod cost_model_requested_write_lock_cost {
+    solana_sdk::declare_id!("DnADtnAoAoPzRpeK83g2W6eUYRrtk8sFaTxj7RSKF65k");
+}
+
+pub mod enable_gossip_duplicate_proof_ingestion {
+    solana_sdk::declare_id!("Ec5KxA5iUVDb4A95QJu6b1EABdPHWe1uP4xcezSxW5zZ");
+}
+
+pub mod enable_chained_merkle_shreds {
+    solana_sdk::declare_id!("2MjwbrGZBTkRkkibnWjMKwrSFcBJ1NrKmndhUeFLnChm");
+}
+
 lazy_static! {
     /// Map of feature identifiers to user-visible description
     pub static ref FEATURE_NAMES: HashMap<Pubkey, &'static str> = [
@@ -952,6 +984,14 @@ lazy_static! {
         (allow_commission_decrease_at_any_time::id(), "Allow commission decrease at any time in epoch #33843"),
         (consume_blockstore_duplicate_proofs::id(), "consume duplicate proofs from blockstore in consensus #34372"),
         (index_erasure_conflict_duplicate_proofs::id(), "generate duplicate proofs for index and erasure conflicts #34360"),
+        (merkle_conflict_duplicate_proofs::id(), "generate duplicate proofs for merkle root conflicts #34270"),
+        (disable_bpf_loader_instructions::id(), "disable bpf loader management instructions #34194"),
+        (deprecate_executable_meta_update_in_bpf_loader::id(), "deprecate executable meta flag update in bpf loader #34194"),
+        (enable_zk_proof_from_account::id(), "Enable zk token proof program to read proof from accounts instead of instruction data #34750"),
+        (curve25519_restrict_msm_length::id(), "restrict curve25519 multiscalar multiplication vector lengths #34763"),
+        (cost_model_requested_write_lock_cost::id(), "cost model uses number of requested write locks #34819"),
+        (enable_gossip_duplicate_proof_ingestion::id(), "enable gossip duplicate proof ingestion #32963"),
+        (enable_chained_merkle_shreds::id(), "Enable chained Merkle shreds #34916"),
         /*************** ADD NEW FEATURES HERE ***************/
     ]
     .iter()

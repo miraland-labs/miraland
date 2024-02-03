@@ -2,12 +2,8 @@ use {
     crate::{args::*, canonicalize_ledger_path, ledger_utils::*},
     clap::{value_t, App, AppSettings, Arg, ArgMatches, SubCommand},
     log::*,
-    miraland_clap_utils::input_parsers::pubkeys_of,
     miraland_cli_output::{OutputFormat, QuietDisplay, VerboseDisplay},
-    miraland_ledger::{
-        blockstore_options::{AccessType, BlockstoreRecoveryMode},
-        blockstore_processor::ProcessOptions,
-    },
+    miraland_ledger::{blockstore_options::AccessType, use_snapshot_archives_at_startup},
     serde::{Deserialize, Serialize},
     serde_json::Result,
     solana_bpf_loader_program::{
@@ -23,7 +19,7 @@ use {
         assembler::assemble, elf::Executable, static_analysis::Analysis,
         verifier::RequisiteVerifier,
     },
-    solana_runtime::{bank::Bank, runtime_config::RuntimeConfig},
+    solana_runtime::bank::Bank,
     solana_sdk::{
         account::AccountSharedData,
         account_utils::StateMut,
@@ -33,7 +29,6 @@ use {
         transaction_context::{IndexOfAccount, InstructionAccount},
     },
     std::{
-        collections::HashSet,
         fmt::{self, Debug, Formatter},
         fs::File,
         io::{Read, Seek, Write},
@@ -75,32 +70,8 @@ fn load_accounts(path: &Path) -> Result<Input> {
 }
 
 fn load_blockstore(ledger_path: &Path, arg_matches: &ArgMatches<'_>) -> Arc<Bank> {
-    let debug_keys = pubkeys_of(arg_matches, "debug_key")
-        .map(|pubkeys| Arc::new(pubkeys.into_iter().collect::<HashSet<_>>()));
-    let force_update_to_open = arg_matches.is_present("force_update_to_open");
-    let enforce_ulimit_nofile = !arg_matches.is_present("ignore_ulimit_nofile_error");
-    let process_options = ProcessOptions {
-        new_hard_forks: hardforks_of(arg_matches, "hard_forks"),
-        run_verification: false,
-        on_halt_store_hash_raw_data_for_debug: false,
-        run_final_accounts_hash_calc: false,
-        halt_at_slot: value_t!(arg_matches, "halt_at_slot", Slot).ok(),
-        debug_keys,
-        limit_load_slot_count_from_snapshot: value_t!(
-            arg_matches,
-            "limit_load_slot_count_from_snapshot",
-            usize
-        )
-        .ok(),
-        accounts_db_config: Some(get_accounts_db_config(ledger_path, arg_matches)),
-        verify_index: false,
-        allow_dead_slots: arg_matches.is_present("allow_dead_slots"),
-        accounts_db_test_hash_calculation: false,
-        accounts_db_skip_shrink: arg_matches.is_present("accounts_db_skip_shrink"),
-        runtime_config: RuntimeConfig::default(),
-        ..ProcessOptions::default()
-    };
-    let snapshot_archive_path = value_t!(arg_matches, "snapshot_archive_path", String)
+    let process_options = parse_process_options(ledger_path, arg_matches);
+    let snapshot_archive_path = value_t!(arg_matches, "snapshots", String)
         .ok()
         .map(PathBuf::from);
     let incremental_snapshot_archive_path =
@@ -108,18 +79,9 @@ fn load_blockstore(ledger_path: &Path, arg_matches: &ArgMatches<'_>) -> Arc<Bank
             .ok()
             .map(PathBuf::from);
 
-    let wal_recovery_mode = arg_matches
-        .value_of("wal_recovery_mode")
-        .map(BlockstoreRecoveryMode::from);
     let genesis_config = open_genesis_config_by(ledger_path, arg_matches);
     info!("genesis hash: {}", genesis_config.hash());
-    let blockstore = open_blockstore(
-        ledger_path,
-        AccessType::Secondary,
-        wal_recovery_mode,
-        force_update_to_open,
-        enforce_ulimit_nofile,
-    );
+    let blockstore = open_blockstore(ledger_path, arg_matches, AccessType::Secondary);
     let (bank_forks, ..) = load_and_process_ledger_or_exit(
         arg_matches,
         &genesis_config,
@@ -151,6 +113,17 @@ impl ProgramSubCommand for App<'_, '_> {
             .takes_value(true)
             .default_value("10485760")
             .help("maximum total uncompressed size of unpacked genesis archive");
+        let use_snapshot_archives_at_startup =
+            Arg::with_name(use_snapshot_archives_at_startup::cli::NAME)
+                .long(use_snapshot_archives_at_startup::cli::LONG_ARG)
+                .takes_value(true)
+                .possible_values(use_snapshot_archives_at_startup::cli::POSSIBLE_VALUES)
+                .default_value(
+                    use_snapshot_archives_at_startup::cli::default_value_for_ledger_tool(),
+                )
+                .help(use_snapshot_archives_at_startup::cli::HELP)
+                .long_help(use_snapshot_archives_at_startup::cli::LONG_HELP);
+
         self.subcommand(
             SubCommand::with_name("program")
         .about("Run to test, debug, and analyze on-chain programs.")
@@ -202,6 +175,7 @@ and the following fields are required
                         .default_value("0"),
                 )
                 .arg(&max_genesis_arg)
+                .arg(&use_snapshot_archives_at_startup)
                 .arg(
                     Arg::with_name("memory")
                         .help("Heap memory for the program to run on")

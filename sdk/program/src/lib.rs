@@ -491,6 +491,7 @@ pub mod ed25519_program;
 pub mod entrypoint;
 pub mod entrypoint_deprecated;
 pub mod epoch_rewards;
+pub mod epoch_rewards_partition_data;
 pub mod epoch_schedule;
 pub mod feature;
 pub mod fee_calculator;
@@ -554,7 +555,7 @@ pub use wasm_bindgen::prelude::wasm_bindgen;
 
 /// The [config native program][np].
 ///
-/// [np]: https://docs.solana.com/developing/runtime-facilities/programs#config-program
+/// [np]: https://docs.miraland.top/runtime/programs#config-program
 pub mod config {
     pub mod program {
         crate::declare_id!("Config1111111111111111111111111111111111111");

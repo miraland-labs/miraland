@@ -19,6 +19,7 @@ use {
     miraland_measure::measure::Measure,
     miraland_streamer::socket::SocketAddrSpace,
     miraland_turbine::retransmit_stage::retransmitter,
+    rand::Rng,
     solana_runtime::{bank::Bank, bank_forks::BankForks},
     solana_sdk::{
         hash::Hash,
@@ -105,6 +106,8 @@ fn bench_retransmitter(bencher: &mut Bencher) {
         &keypair,
         &entries,
         true, // is_last_in_slot
+        // chained_merkle_root
+        Some(Hash::new_from_array(rand::thread_rng().gen())),
         0,    // next_shred_index
         0,    // next_code_index
         true, // merkle_variant

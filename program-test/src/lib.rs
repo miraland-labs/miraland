@@ -30,7 +30,7 @@ use {
     solana_sdk::{
         account::{create_account_shared_data_for_test, Account, AccountSharedData},
         account_info::AccountInfo,
-        clock::Slot,
+        clock::{Epoch, Slot},
         entrypoint::{deserialize, ProgramResult, SUCCESS},
         feature_set::FEATURE_NAMES,
         fee_calculator::{FeeCalculator, FeeRateGovernor, DEFAULT_TARGET_LAMPORTS_PER_SIGNATURE},
@@ -111,6 +111,9 @@ pub fn invoke_builtin_function(
     let instruction_context = transaction_context.get_current_instruction_context()?;
     let instruction_data = instruction_context.get_instruction_data();
     let instruction_account_indices = 0..instruction_context.get_number_of_instruction_accounts();
+
+    // mock builtin program must consume units
+    invoke_context.consume_checked(1)?;
 
     let log_collector = invoke_context.get_log_collector();
     let program_id = instruction_context.get_last_program_key(transaction_context)?;
@@ -498,17 +501,12 @@ impl Default for ProgramTest {
         let prefer_bpf =
             std::env::var("BPF_OUT_DIR").is_ok() || std::env::var("SBF_OUT_DIR").is_ok();
 
-        // deactivate feature `native_program_consume_cu` to continue support existing mock/test
-        // programs that do not consume units.
-        let deactivate_feature_set =
-            HashSet::from([solana_sdk::feature_set::native_programs_consume_cu::id()]);
-
         Self {
             accounts: vec![],
             builtin_programs: vec![],
             compute_max_units: None,
             prefer_bpf,
-            deactivate_feature_set,
+            deactivate_feature_set: HashSet::default(),
             transaction_account_lock_limit: None,
         }
     }
@@ -832,6 +830,7 @@ impl ProgramTest {
             AccountSecondaryIndexes::default(),
             AccountShrinkThreshold::default(),
             false,
+            None,
             None,
             None,
             Arc::default(),
@@ -1205,6 +1204,14 @@ impl ProgramTestContext {
         let bank = bank_forks.working_bank();
         self.last_blockhash = bank.last_blockhash();
         Ok(())
+    }
+
+    pub fn warp_to_epoch(&mut self, warp_epoch: Epoch) -> Result<(), ProgramTestError> {
+        let warp_slot = self
+            .genesis_config
+            .epoch_schedule
+            .get_first_slot_in_epoch(warp_epoch);
+        self.warp_to_slot(warp_slot)
     }
 
     /// warp forward one more slot and force reward interval end

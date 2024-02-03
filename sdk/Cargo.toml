@@ -80,6 +80,7 @@ serde_json = { workspace = true, optional = true }
 serde_with = { workspace = true, features = ["macros"] }
 sha2 = { workspace = true }
 sha3 = { workspace = true, optional = true }
+siphasher = { workspace = true }
 thiserror = { workspace = true }
 uriparse = { workspace = true }
 wasm-bindgen = { workspace = true }

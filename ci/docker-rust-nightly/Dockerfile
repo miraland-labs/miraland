@@ -1,4 +1,4 @@
-FROM miralandlabs/rust:1.74.0
+FROM miralandlabs/rust:1.75.0
 
 ARG date
 ARG GRCOV_VERSION=v0.8.18

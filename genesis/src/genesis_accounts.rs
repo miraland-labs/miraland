@@ -277,7 +277,7 @@ pub fn add_genesis_accounts(genesis_config: &mut GenesisConfig, mut issued_lampo
             &UNLOCKS_ALL_DAY_ZERO,
         );
 
-    // "one thanks" (community pool) gets 500_000_000SOL (total) - above distributions
+    // "one thanks" (community pool) gets 500_000_000MLN (total) - above distributions
     // MI: investors, top-ups for bootstrapper validators and other built-in accounts, etc.
     create_and_add_stakes(
         genesis_config,

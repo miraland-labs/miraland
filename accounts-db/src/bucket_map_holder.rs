@@ -233,7 +233,8 @@ impl<T: IndexValue, U: DiskIndexValue + From<T> + Into<T>> BucketMapHolder<T, U>
                     .map(|config| config.started_from_validator)
                     .unwrap_or_default()
                 {
-                    if let Ok(_limit) = std::env::var("SOLANA_TEST_ACCOUNTS_INDEX_MEMORY_LIMIT_MB")
+                    if let Ok(_limit) =
+                        std::env::var("MIRALAND_TEST_ACCOUNTS_INDEX_MEMORY_LIMIT_MB")
                     {
                         // Note this env var means the opposite of the default. The default now is disk index is on.
                         // So, if this env var is set, DO NOT allocate with disk buckets if mem budget was not set, we were NOT started from validator, and env var was set

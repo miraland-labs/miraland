@@ -25,11 +25,9 @@ miraland-sdk = { workspace = true }
 nix = { workspace = true }
 pem = { workspace = true }
 percentage = { workspace = true }
-pkcs8 = { workspace = true, features = ["alloc"] }
 quinn = { workspace = true }
 quinn-proto = { workspace = true }
 rand = { workspace = true }
-rcgen = { workspace = true }
 rustls = { workspace = true, features = ["dangerous_configuration"] }
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }

@@ -3,14 +3,16 @@ use {
     clap::{value_t, value_t_or_exit, values_t_or_exit, ArgMatches},
     crossbeam_channel::unbounded,
     log::*,
-    miraland_accounts_db::hardened_unpack::open_genesis_config,
+    miraland_accounts_db::{
+        hardened_unpack::open_genesis_config,
+        utils::{create_all_accounts_run_and_snapshot_dirs, move_and_async_delete_path_contents},
+    },
     miraland_core::{
         accounts_hash_verifier::AccountsHashVerifier, validator::BlockVerificationMethod,
     },
     miraland_geyser_plugin_manager::geyser_plugin_service::{
         GeyserPluginService, GeyserPluginServiceError,
     },
-    miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     miraland_ledger::{
         bank_forks_utils::{self, BankForksUtilsError},
         blockstore::{Blockstore, BlockstoreError},
@@ -21,10 +23,10 @@ use {
         blockstore_processor::{
             self, BlockstoreProcessorError, ProcessOptions, TransactionStatusSender,
         },
+        use_snapshot_archives_at_startup::UseSnapshotArchivesAtStartup,
     },
     miraland_measure::measure,
     miraland_rpc::transaction_status_service::TransactionStatusService,
-    miraland_streamer::socket::SocketAddrSpace,
     miraland_unified_scheduler_pool::DefaultSchedulerPool,
     solana_runtime::{
         accounts_background_service::{
@@ -35,14 +37,11 @@ use {
         prioritization_fee_cache::PrioritizationFeeCache,
         snapshot_config::SnapshotConfig,
         snapshot_hash::StartingSnapshotHashes,
-        snapshot_utils::{
-            self, clean_orphaned_account_snapshot_dirs, create_all_accounts_run_and_snapshot_dirs,
-            move_and_async_delete_path_contents, SnapshotError,
-        },
+        snapshot_utils::{self, clean_orphaned_account_snapshot_dirs},
     },
     solana_sdk::{
-        clock::Slot, genesis_config::GenesisConfig, signature::Signer, signer::keypair::Keypair,
-        timing::timestamp,
+        clock::Slot, genesis_config::GenesisConfig, pubkey::Pubkey,
+        transaction::VersionedTransaction,
     },
     std::{
         path::{Path, PathBuf},
@@ -64,10 +63,10 @@ const PROCESS_SLOTS_HELP_STRING: &str =
 #[derive(Error, Debug)]
 pub(crate) enum LoadAndProcessLedgerError {
     #[error("failed to clean orphaned account snapshot directories: {0}")]
-    CleanOrphanedAccountSnapshotDirectories(#[source] SnapshotError),
+    CleanOrphanedAccountSnapshotDirectories(#[source] std::io::Error),
 
     #[error("failed to create all run and snapshot directories: {0}")]
-    CreateAllAccountsRunAndSnapshotDirectories(#[source] SnapshotError),
+    CreateAllAccountsRunAndSnapshotDirectories(#[source] std::io::Error),
 
     #[error("custom accounts path is not supported with seconday blockstore access")]
     CustomAccountsPathUnsupported(#[source] BlockstoreError),
@@ -92,20 +91,6 @@ pub(crate) enum LoadAndProcessLedgerError {
 
     #[error("failed to process blockstore from root: {0}")]
     ProcessBlockstoreFromRoot(#[source] BlockstoreProcessorError),
-}
-
-pub fn get_shred_storage_type(ledger_path: &Path, message: &str) -> ShredStorageType {
-    // TODO: the following shred_storage_type inference must be updated once
-    // the rocksdb options can be constructed via load_options_file() as the
-    // value picked by passing None for `max_shred_storage_size` could affect
-    // the persisted rocksdb options file.
-    match ShredStorageType::from_ledger_path(ledger_path, None) {
-        Some(s) => s,
-        None => {
-            info!("{}", message);
-            ShredStorageType::RocksLevel
-        }
-    }
 }
 
 pub fn load_and_process_ledger_or_exit(
@@ -288,7 +273,6 @@ pub fn load_and_process_ledger(
             genesis_config,
             blockstore.as_ref(),
             account_paths,
-            None,
             snapshot_config.as_ref(),
             &process_options,
             None,
@@ -327,20 +311,12 @@ pub fn load_and_process_ledger(
         }
     }
 
-    let node_id = Arc::new(Keypair::new());
-    let cluster_info = Arc::new(ClusterInfo::new(
-        ContactInfo::new_localhost(&node_id.pubkey(), timestamp()),
-        Arc::clone(&node_id),
-        SocketAddrSpace::Unspecified,
-    ));
     let (accounts_package_sender, accounts_package_receiver) = crossbeam_channel::unbounded();
     let accounts_hash_verifier = AccountsHashVerifier::new(
         accounts_package_sender.clone(),
         accounts_package_receiver,
         None,
         exit.clone(),
-        cluster_info,
-        None,
         SnapshotConfig::new_load_only(),
     );
     let (snapshot_request_sender, snapshot_request_receiver) = crossbeam_channel::unbounded();
@@ -370,40 +346,40 @@ pub fn load_and_process_ledger(
 
     let enable_rpc_transaction_history = arg_matches.is_present("enable_rpc_transaction_history");
 
-    let (transaction_status_sender, transaction_status_service) =
-        if geyser_plugin_active || enable_rpc_transaction_history {
-            // Need Primary (R/W) access to insert transaction data
-            let tss_blockstore = if enable_rpc_transaction_history {
-                Arc::new(open_blockstore(
-                    blockstore.ledger_path(),
-                    AccessType::PrimaryForMaintenance,
-                    None,
-                    false,
-                    false,
-                ))
-            } else {
-                blockstore.clone()
-            };
-
-            let (transaction_status_sender, transaction_status_receiver) = unbounded();
-            let transaction_status_service = TransactionStatusService::new(
-                transaction_status_receiver,
-                Arc::default(),
-                enable_rpc_transaction_history,
-                transaction_notifier,
-                tss_blockstore,
-                false,
-                exit.clone(),
-            );
-            (
-                Some(TransactionStatusSender {
-                    sender: transaction_status_sender,
-                }),
-                Some(transaction_status_service),
-            )
+    let (transaction_status_sender, transaction_status_service) = if geyser_plugin_active
+        || enable_rpc_transaction_history
+    {
+        // Need Primary (R/W) access to insert transaction data;
+        // obtain Primary access if we do not already have it
+        let tss_blockstore = if enable_rpc_transaction_history && !blockstore.is_primary_access() {
+            Arc::new(open_blockstore(
+                blockstore.ledger_path(),
+                arg_matches,
+                AccessType::PrimaryForMaintenance,
+            ))
         } else {
-            (None, None)
+            blockstore.clone()
         };
+
+        let (transaction_status_sender, transaction_status_receiver) = unbounded();
+        let transaction_status_service = TransactionStatusService::new(
+            transaction_status_receiver,
+            Arc::default(),
+            enable_rpc_transaction_history,
+            transaction_notifier,
+            tss_blockstore,
+            false,
+            exit.clone(),
+        );
+        (
+            Some(TransactionStatusSender {
+                sender: transaction_status_sender,
+            }),
+            Some(transaction_status_service),
+        )
+    } else {
+        (None, None)
+    };
 
     let result = blockstore_processor::process_blockstore_from_root(
         blockstore.as_ref(),
@@ -430,11 +406,14 @@ pub fn load_and_process_ledger(
 
 pub fn open_blockstore(
     ledger_path: &Path,
+    matches: &ArgMatches,
     access_type: AccessType,
-    wal_recovery_mode: Option<BlockstoreRecoveryMode>,
-    force_update_to_open: bool,
-    enforce_ulimit_nofile: bool,
 ) -> Blockstore {
+    let wal_recovery_mode = matches
+        .value_of("wal_recovery_mode")
+        .map(BlockstoreRecoveryMode::from);
+    let force_update_to_open = matches.is_present("force_update_to_open");
+    let enforce_ulimit_nofile = !matches.is_present("ignore_ulimit_nofile_error");
     let shred_storage_type = get_shred_storage_type(
         ledger_path,
         &format!(
@@ -508,6 +487,20 @@ pub fn open_blockstore(
     }
 }
 
+pub fn get_shred_storage_type(ledger_path: &Path, message: &str) -> ShredStorageType {
+    // TODO: the following shred_storage_type inference must be updated once
+    // the rocksdb options can be constructed via load_options_file() as the
+    // value picked by passing None for `max_shred_storage_size` could affect
+    // the persisted rocksdb options file.
+    match ShredStorageType::from_ledger_path(ledger_path, None) {
+        Some(s) => s,
+        None => {
+            info!("{}", message);
+            ShredStorageType::RocksLevel
+        }
+    }
+}
+
 /// Open blockstore with temporary primary access to allow necessary,
 /// persistent changes to be made to the blockstore (such as creation of new
 /// column family(s)). Then, continue opening with `original_access_type`
@@ -549,5 +542,28 @@ fn open_blockstore_with_temporary_primary_access(
 pub fn open_genesis_config_by(ledger_path: &Path, matches: &ArgMatches<'_>) -> GenesisConfig {
     let max_genesis_archive_unpacked_size =
         value_t_or_exit!(matches, "max_genesis_archive_unpacked_size", u64);
-    open_genesis_config(ledger_path, max_genesis_archive_unpacked_size)
+
+    open_genesis_config(ledger_path, max_genesis_archive_unpacked_size).unwrap_or_else(|err| {
+        eprintln!("Exiting. Failed to open genesis config: {err}");
+        exit(1);
+    })
+}
+
+pub fn get_program_ids(tx: &VersionedTransaction) -> impl Iterator<Item = &Pubkey> + '_ {
+    let message = &tx.message;
+    let account_keys = message.static_account_keys();
+
+    message
+        .instructions()
+        .iter()
+        .map(|ix| ix.program_id(account_keys))
+}
+
+/// Get the AccessType required, based on `process_options`
+pub(crate) fn get_access_type(process_options: &ProcessOptions) -> AccessType {
+    match process_options.use_snapshot_archives_at_startup {
+        UseSnapshotArchivesAtStartup::Always => AccessType::Secondary,
+        UseSnapshotArchivesAtStartup::Never => AccessType::PrimaryForMaintenance,
+        UseSnapshotArchivesAtStartup::WhenNewest => AccessType::PrimaryForMaintenance,
+    }
 }

@@ -44,7 +44,7 @@ use {
     solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
     solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
     solana_sdk::{
-        account::Account,
+        account::{is_executable, Account},
         account_utils::StateMut,
         bpf_loader, bpf_loader_deprecated,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
@@ -219,7 +219,7 @@ impl ProgramSubCommands for App<'_, '_> {
                                 .required(false)
                                 .help(
                                     "Maximum length of the upgradeable program \
-                                    [default: twice the length of the original deployed program]",
+                                    [default: the length of the original deployed program]",
                                 ),
                         )
                         .arg(
@@ -300,7 +300,7 @@ impl ProgramSubCommands for App<'_, '_> {
                                 .required(false)
                                 .help(
                                     "Maximum length of the upgradeable program \
-                                    [default: twice the length of the original deployed program]",
+                                    [default: the length of the original deployed program]",
                                 ),
                         ),
                 )
@@ -1036,6 +1036,15 @@ fn get_default_program_keypair(program_location: &Option<String>) -> Keypair {
     program_keypair
 }
 
+fn is_account_executable(account: &Account) -> bool {
+    if account.owner == bpf_loader_deprecated::id() || account.owner == bpf_loader::id() {
+        account.executable
+    } else {
+        let feature_set = FeatureSet::all_enabled();
+        is_executable(account, &feature_set)
+    }
+}
+
 /// Deploy program using upgradeable loader. It also can process program upgrades
 #[allow(clippy::too_many_arguments)]
 fn process_program_deploy(
@@ -1092,7 +1101,7 @@ fn process_program_deploy(
             .into());
         }
 
-        if !account.executable {
+        if !is_account_executable(&account) {
             // Continue an initial deploy
             true
         } else if let Ok(UpgradeableLoaderState::Program {
@@ -1162,10 +1171,8 @@ fn process_program_deploy(
             );
         }
         len
-    } else if is_final {
-        program_len
     } else {
-        program_len * 2
+        program_len
     };
 
     let min_rent_exempt_program_data_balance = rpc_client.get_minimum_balance_for_rent_exemption(
@@ -1330,11 +1337,12 @@ fn process_program_upgrade(
         let mut tx = Transaction::new_unsigned(message);
         let signers = &[fee_payer_signer, upgrade_authority_signer];
         tx.try_sign(signers, blockhash)?;
-        rpc_client
+        let final_tx_sig = rpc_client
             .send_and_confirm_transaction_with_spinner(&tx)
             .map_err(|e| format!("Upgrading program failed: {e}"))?;
         let program_id = CliProgramId {
             program_id: program_id.to_string(),
+            signature: Some(final_tx_sig.to_string()),
         };
         Ok(config.output_format.formatted_string(&program_id))
     }
@@ -2256,7 +2264,7 @@ fn do_process_program_write_and_deploy(
         )?;
     }
 
-    send_deploy_messages(
+    let final_tx_sig = send_deploy_messages(
         rpc_client,
         config,
         &initial_message,
@@ -2271,6 +2279,7 @@ fn do_process_program_write_and_deploy(
     if let Some(program_signers) = program_signers {
         let program_id = CliProgramId {
             program_id: program_signers[0].pubkey().to_string(),
+            signature: final_tx_sig.as_ref().map(ToString::to_string),
         };
         Ok(config.output_format.formatted_string(&program_id))
     } else {
@@ -2389,7 +2398,7 @@ fn do_process_program_upgrade(
         )?;
     }
 
-    send_deploy_messages(
+    let final_tx_sig = send_deploy_messages(
         rpc_client,
         config,
         &initial_message,
@@ -2403,6 +2412,7 @@ fn do_process_program_upgrade(
 
     let program_id = CliProgramId {
         program_id: program_id.to_string(),
+        signature: final_tx_sig.as_ref().map(ToString::to_string),
     };
     Ok(config.output_format.formatted_string(&program_id))
 }
@@ -2444,7 +2454,7 @@ fn complete_partial_program_init(
 ) -> Result<(Vec<Instruction>, u64), Box<dyn std::error::Error>> {
     let mut instructions: Vec<Instruction> = vec![];
     let mut balance_needed = 0;
-    if account.executable {
+    if is_account_executable(account) {
         return Err("Buffer account is already executable".into());
     }
     if account.owner != *loader_id && !system_program::check_id(&account.owner) {
@@ -2527,7 +2537,7 @@ fn send_deploy_messages(
     initial_signer: Option<&dyn Signer>,
     write_signer: Option<&dyn Signer>,
     final_signers: Option<&[&dyn Signer]>,
-) -> Result<(), Box<dyn std::error::Error>> {
+) -> Result<Option<Signature>, Box<dyn std::error::Error>> {
     if let Some(message) = initial_message {
         if let Some(initial_signer) = initial_signer {
             trace!("Preparing the required accounts");
@@ -2619,20 +2629,22 @@ fn send_deploy_messages(
             let mut signers = final_signers.to_vec();
             signers.push(fee_payer_signer);
             final_tx.try_sign(&signers, blockhash)?;
-            rpc_client
-                .send_and_confirm_transaction_with_spinner_and_config(
-                    &final_tx,
-                    config.commitment,
-                    RpcSendTransactionConfig {
-                        preflight_commitment: Some(config.commitment.commitment),
-                        ..RpcSendTransactionConfig::default()
-                    },
-                )
-                .map_err(|e| format!("Deploying program failed: {e}"))?;
+            return Ok(Some(
+                rpc_client
+                    .send_and_confirm_transaction_with_spinner_and_config(
+                        &final_tx,
+                        config.commitment,
+                        RpcSendTransactionConfig {
+                            preflight_commitment: Some(config.commitment.commitment),
+                            ..RpcSendTransactionConfig::default()
+                        },
+                    )
+                    .map_err(|e| format!("Deploying program failed: {e}"))?,
+            ));
         }
     }
 
-    Ok(())
+    Ok(None)
 }
 
 fn create_ephemeral_keypair(

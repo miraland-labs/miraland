@@ -35,7 +35,6 @@ quinn = { workspace = true }
 rand = { workspace = true }
 rand_chacha = { workspace = true }
 rayon = { workspace = true }
-rcgen = { workspace = true }
 rustls = { workspace = true }
 thiserror = { workspace = true }
 tokio = { workspace = true }
