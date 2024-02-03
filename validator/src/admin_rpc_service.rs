@@ -933,7 +933,7 @@ mod tests {
                         RwLock<repair_service::OutstandingShredRepairs>,
                     >::default(),
                     cluster_slots: Arc::new(
-                        solana_core::cluster_slots_service::cluster_slots::ClusterSlots::default(),
+                        miraland_core::cluster_slots_service::cluster_slots::ClusterSlots::default(),
                     ),
                 }))),
                 staked_nodes_overrides: Arc::new(RwLock::new(HashMap::new())),

@@ -4611,7 +4611,7 @@ mod tests {
 
     #[test]
     fn test_push_restart_heaviest_fork() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let keypair = Arc::new(Keypair::new());
         let pubkey = keypair.pubkey();
         let contact_info = ContactInfo::new_localhost(&pubkey, 0);

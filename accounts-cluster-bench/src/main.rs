@@ -1077,8 +1077,8 @@ pub mod test {
     };
 
     fn add_secondary_indexes(indexes: &mut AccountSecondaryIndexes) {
-        indexes.indexes.insert(AccountIndex::SplTokenOwner);
-        indexes.indexes.insert(AccountIndex::SplTokenMint);
+        indexes.indexes.insert(AccountIndex::SolartiTokenOwner);
+        indexes.indexes.insert(AccountIndex::SolartiTokenMint);
         indexes.indexes.insert(AccountIndex::ProgramId);
     }
 
@@ -1135,7 +1135,7 @@ pub mod test {
 
     #[test]
     fn test_halt_accounts_creation_at_max() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let mut validator_config = ValidatorConfig::default_for_test();
         let num_nodes = 1;
         add_secondary_indexes(&mut validator_config.account_indexes);

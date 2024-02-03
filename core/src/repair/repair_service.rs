@@ -1054,7 +1054,7 @@ mod test {
 
         // Receive and translate repair packet
         let mut packets = vec![solana_sdk::packet::Packet::default(); 1];
-        let _recv_count = solana_streamer::recvmmsg::recv_mmsg(&reader, &mut packets[..]).unwrap();
+        let _recv_count = miraland_streamer::recvmmsg::recv_mmsg(&reader, &mut packets[..]).unwrap();
         let packet = &packets[0];
         let Some(bytes) = packet.data(..).map(Vec::from) else {
             panic!("packet data not found");

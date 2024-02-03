@@ -504,7 +504,7 @@ fn test_sol_alloc_free_no_longer_deployable() {
     expected = "called `Result::unwrap()` on an `Err` value: TransactionError(InstructionError(1, InvalidAccountData))"
 )]
 fn test_sol_alloc_free_no_longer_deployable_with_upgradeable_loader() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     let GenesisConfigInfo {
         genesis_config,

@@ -1179,7 +1179,7 @@ mod tests {
 
     #[test]
     fn test_bank_nonce_update_blockhash_queried_before_transaction_record() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let GenesisConfigInfo {
             genesis_config,
             mint_keypair,
