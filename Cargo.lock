@@ -703,11 +703,11 @@ dependencies = [
 
 [[package]]
 name = "borsh"
-version = "1.3.0"
+version = "1.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26d4d6dafc1a3bb54687538972158f07b2c948bc57d5890df22c0739098b3028"
+checksum = "f58b559fd6448c6e2fd0adb5720cd98a2506594cafa4737ff98c396f3e82f667"
 dependencies = [
- "borsh-derive 1.3.0",
+ "borsh-derive 1.3.1",
  "cfg_aliases",
 ]
 
@@ -739,12 +739,12 @@ dependencies = [
 
 [[package]]
 name = "borsh-derive"
-version = "1.3.0"
+version = "1.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bf4918709cc4dd777ad2b6303ed03cb37f3ca0ccede8c1b0d28ac6db8f4710e0"
+checksum = "7aadb5b6ccbd078890f6d7003694e33816e6b784358f18e15e7e6d9f065a57cd"
 dependencies = [
  "once_cell",
- "proc-macro-crate 2.0.0",
+ "proc-macro-crate 3.1.0",
  "proc-macro2",
  "quote",
  "syn 2.0.48",
@@ -3386,7 +3386,7 @@ dependencies = [
 name = "miraland-banks-client"
 version = "1.18.3"
 dependencies = [
- "borsh 1.3.0",
+ "borsh 1.3.1",
  "futures 0.3.30",
  "miraland-banks-interface",
  "miraland-banks-server",
@@ -4683,7 +4683,7 @@ dependencies = [
  "blake3",
  "borsh 0.10.3",
  "borsh 0.9.3",
- "borsh 1.3.0",
+ "borsh 1.3.1",
  "bs58",
  "bv",
  "bytemuck",
@@ -5119,7 +5119,7 @@ dependencies = [
  "base64 0.21.7",
  "bincode",
  "bitflags 2.4.2",
- "borsh 1.3.0",
+ "borsh 1.3.1",
  "bs58",
  "bytemuck",
  "byteorder",
@@ -5471,7 +5471,7 @@ dependencies = [
  "Inflector",
  "base64 0.21.7",
  "bincode",
- "borsh 1.3.0",
+ "borsh 1.3.1",
  "bs58",
  "lazy_static",
  "log",
@@ -6670,6 +6670,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "proc-macro-crate"
+version = "3.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6d37c51ca738a55da99dc0c4a34860fd675453b8b36209178c2249bb13651284"
+dependencies = [
+ "toml_edit 0.21.0",
+]
+
+[[package]]
 name = "proc-macro-error"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -7788,7 +7797,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f71110a79cabfcd851c6e0f8dcc227510b9f6b59637e8a3b4051cddac33d0079"
 dependencies = [
  "assert_matches",
- "borsh 1.3.0",
+ "borsh 1.3.1",
  "miraland-program",
  "num-derive",
  "num-traits",
@@ -7857,7 +7866,7 @@ version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c5174b6ab0496e01d489e2bd38e2a98ec9eb5b87db86d2914475d5b946f3c1d3"
 dependencies = [
- "borsh 1.3.0",
+ "borsh 1.3.1",
  "bytemuck",
  "miraland-program",
  "miraland-zk-token-sdk",
@@ -7961,7 +7970,7 @@ version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a0d4ee1e1c52d24260cca75c24ada1bec4ffc9967f7ed00a47a77c254c4b05bb"
 dependencies = [
- "borsh 1.3.0",
+ "borsh 1.3.1",
  "miraland-program",
  "solarti-discriminator",
  "solarti-pod",
