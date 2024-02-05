@@ -3572,7 +3572,7 @@ dependencies = [
  "miraland-download-utils",
  "miraland-logger",
  "miraland-sdk",
- "predicates 2.1.5",
+ "predicates 3.1.0",
  "regex",
  "reqwest",
  "semver",
@@ -6610,7 +6610,10 @@ checksum = "68b87bfd4605926cdfefc1c3b5f8fe560e3feca9d5552cf68c466d3d8236c7e8"
 dependencies = [
  "anstyle",
  "difflib",
+ "float-cmp",
+ "normalize-line-endings",
  "predicates-core",
+ "regex",
 ]
 
 [[package]]
