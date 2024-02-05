@@ -72,7 +72,7 @@ Operate a configured testnet
    --no-airdrop
                                       - If set, disables the faucet keypair.  Nodes must be funded in genesis config
    --faucet-lamports NUM_LAMPORTS_TO_MINT
-                                      - Override the default 500000000000000000 lamports minted in genesis
+                                      - Override the default 1000000000000000000 lamports minted in genesis
    --extra-primordial-stakes NUM_EXTRA_PRIMORDIAL_STAKES
                                       - Number of nodes to be initially staked in genesis.
                                         Gives extra stake in genesis to NUM_EXTRA_PRIMORDIAL_STAKES many nodes.

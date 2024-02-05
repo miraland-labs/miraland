@@ -164,7 +164,7 @@ impl TransactionGenerator {
 
     /// Create a transaction which transfers some lamports from payer to several destinations
     fn create_multi_transfer_transaction(&self, payer: &Keypair, to: &[&Keypair]) -> Transaction {
-        let to_transfer: u64 = 500_000_000; // specify amount which will cause error
+        let to_transfer: u64 = 1_000_000_000; // specify amount which will cause error
         let to: Vec<(Pubkey, u64)> = to.iter().map(|to| (to.pubkey(), to_transfer)).collect();
         let instructions = system_instruction::transfer_many(&payer.pubkey(), to.as_slice());
         let message = Message::new(&instructions, Some(&payer.pubkey()));
@@ -176,7 +176,7 @@ impl TransactionGenerator {
     /// Create a transaction which opens account
     fn create_account_transaction(&self, payer: &Keypair, to: &Keypair) -> Transaction {
         let program_id = system_program::id(); // some valid program id
-        let balance = 500_000_000;
+        let balance = 1_000_000_000;
         let space = 1024;
         let instructions = vec![system_instruction::create_account(
             &payer.pubkey(),

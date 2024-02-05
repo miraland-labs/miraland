@@ -709,7 +709,7 @@ impl TestValidator {
         let validator_stake_account = Keypair::new();
         let validator_identity_lamports = mln_to_lamports(500.);
         let validator_stake_lamports = mln_to_lamports(1_000_000.);
-        let mint_lamports = mln_to_lamports(500_000_000.);
+        let mint_lamports = mln_to_lamports(1_000_000_000.);
 
         let mut accounts = config.accounts.clone();
         for (address, account) in solana_program_test::programs::spl_programs(&config.rent) {

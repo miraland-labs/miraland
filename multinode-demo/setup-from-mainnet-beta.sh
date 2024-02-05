@@ -51,7 +51,7 @@ $miraland_keygen new --no-passphrase -so "$MIRALAND_CONFIG_DIR"/bootstrap-valida
 $miraland_ledger_tool create-snapshot \
   --ledger "$MIRALAND_CONFIG_DIR"/latest-mainnet-snapshot \
   --faucet-pubkey "$MIRALAND_CONFIG_DIR"/faucet.json \
-  --faucet-lamports 500000000000000000 \
+  --faucet-lamports 1000000000000000000 \
   --bootstrap-validator "$MIRALAND_CONFIG_DIR"/bootstrap-validator/identity.json \
                         "$MIRALAND_CONFIG_DIR"/bootstrap-validator/vote-account.json \
                         "$MIRALAND_CONFIG_DIR"/bootstrap-validator/stake-account.json \

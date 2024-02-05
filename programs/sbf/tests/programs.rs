@@ -3957,7 +3957,7 @@ fn test_program_fees() {
         mut genesis_config,
         mint_keypair,
         ..
-    } = create_genesis_config(500_000_000);
+    } = create_genesis_config(1_000_000_000);
 
     genesis_config.fee_rate_governor = FeeRateGovernor::new(congestion_multiplier, 0);
     let mut bank = Bank::new_for_tests(&genesis_config);
