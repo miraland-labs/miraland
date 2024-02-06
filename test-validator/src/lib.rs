@@ -38,7 +38,7 @@ use {
     solana_program_runtime::compute_budget::ComputeBudget,
     solana_runtime::{
         bank_forks::BankForks, genesis_utils::create_genesis_config_with_leader_ex,
-        runtime_config::RuntimeConfig, snapshot_config::SnapshotConfig,
+        snapshot_config::SnapshotConfig, svm::runtime_config::RuntimeConfig,
     },
     solana_sdk::{
         account::{Account, AccountSharedData},

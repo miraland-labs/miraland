@@ -57,10 +57,10 @@ use {
     },
     rand::{seq::SliceRandom, thread_rng},
     solana_runtime::{
-        runtime_config::RuntimeConfig,
         snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL,
         snapshot_config::{SnapshotConfig, SnapshotUsage},
         snapshot_utils::{self, ArchiveFormat, SnapshotVersion},
+        svm::runtime_config::RuntimeConfig,
     },
     solana_sdk::{
         clock::{Slot, DEFAULT_S_PER_SLOT},
