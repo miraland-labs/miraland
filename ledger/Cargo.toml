@@ -42,6 +42,7 @@ miraland-sdk = { workspace = true }
 miraland-stake-program = { workspace = true }
 miraland-storage-bigtable = { workspace = true }
 miraland-storage-proto = { workspace = true }
+miraland-svm = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-vote = { workspace = true }
 miraland-vote-program = { workspace = true }

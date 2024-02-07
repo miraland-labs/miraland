@@ -25,6 +25,7 @@ miraland-logger = { workspace = true }
 miraland-program-runtime = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
+miraland-svm = { workspace = true }
 miraland-vote-program = { workspace = true }
 serde = { workspace = true }
 solana_rbpf = { workspace = true }

@@ -30,6 +30,7 @@ miraland-rpc-client = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
+miraland-svm = { workspace = true }
 miraland-tpu-client = { workspace = true }
 serde_derive = { workspace = true }
 serde_json = { workspace = true }

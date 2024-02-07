@@ -3909,6 +3909,7 @@ dependencies = [
  "miraland-send-transaction-service",
  "miraland-stake-program",
  "miraland-streamer",
+ "miraland-svm",
  "miraland-tpu-client",
  "miraland-transaction-status",
  "miraland-turbine",
@@ -4351,6 +4352,7 @@ dependencies = [
  "miraland-stake-program",
  "miraland-storage-bigtable",
  "miraland-storage-proto",
+ "miraland-svm",
  "miraland-transaction-status",
  "miraland-vote",
  "miraland-vote-program",
@@ -4418,6 +4420,7 @@ dependencies = [
  "miraland-stake-program",
  "miraland-storage-bigtable",
  "miraland-streamer",
+ "miraland-svm",
  "miraland-transaction-status",
  "miraland-unified-scheduler-pool",
  "miraland-version",
@@ -4779,6 +4782,7 @@ dependencies = [
  "miraland-runtime",
  "miraland-sdk",
  "miraland-stake-program",
+ "miraland-svm",
  "miraland-vote-program",
  "serde",
  "solana_rbpf",
@@ -5067,6 +5071,7 @@ dependencies = [
  "miraland-runtime",
  "miraland-sdk",
  "miraland-stake-program",
+ "miraland-svm",
  "miraland-system-program",
  "miraland-version",
  "miraland-vote",
@@ -5330,6 +5335,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "miraland-svm"
+version = "1.18.3"
+dependencies = [
+ "itertools",
+ "log",
+ "miraland-accounts-db",
+ "miraland-bpf-loader-program",
+ "miraland-frozen-abi",
+ "miraland-frozen-abi-macro",
+ "miraland-loader-v4-program",
+ "miraland-logger",
+ "miraland-measure",
+ "miraland-metrics",
+ "miraland-program-runtime",
+ "miraland-sdk",
+ "miraland-system-program",
+ "percentage",
+ "rustc_version",
+]
+
+[[package]]
 name = "miraland-system-program"
 version = "1.18.3"
 dependencies = [
@@ -5367,6 +5393,7 @@ dependencies = [
  "miraland-runtime",
  "miraland-sdk",
  "miraland-streamer",
+ "miraland-svm",
  "miraland-tpu-client",
  "serde_derive",
  "serde_json",
@@ -5620,6 +5647,7 @@ dependencies = [
  "miraland-send-transaction-service",
  "miraland-storage-bigtable",
  "miraland-streamer",
+ "miraland-svm",
  "miraland-test-validator",
  "miraland-tpu-client",
  "miraland-version",

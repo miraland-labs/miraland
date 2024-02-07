@@ -23,7 +23,6 @@ use {
             UnpackedSnapshotsDirAndVersion, VerifySlotDeltasError,
         },
         status_cache,
-        svm::runtime_config::RuntimeConfig,
     },
     bincode::{config::Options, serialize_into},
     log::*,
@@ -38,6 +37,7 @@ use {
         utils::delete_contents_of_path,
     },
     miraland_measure::{measure, measure::Measure},
+    miraland_svm::runtime_config::RuntimeConfig,
     solana_sdk::{
         clock::Slot,
         feature_set,

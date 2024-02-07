@@ -91,6 +91,7 @@ use {
     miraland_turbine::{self, broadcast_stage::BroadcastStageType},
     miraland_unified_scheduler_pool::DefaultSchedulerPool,
     miraland_wen_restart::wen_restart::wait_for_wen_restart,
+    miraland_svm::runtime_config::RuntimeConfig,
     quinn::Endpoint,
     solana_runtime::{
         accounts_background_service::{
@@ -106,7 +107,6 @@ use {
         snapshot_config::SnapshotConfig,
         snapshot_hash::StartingSnapshotHashes,
         snapshot_utils::{self, clean_orphaned_account_snapshot_dirs},
-        svm::runtime_config::RuntimeConfig,
     },
     solana_sdk::{
         clock::Slot,

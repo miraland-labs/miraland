@@ -58,6 +58,7 @@ miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-send-transaction-service = { workspace = true }
 miraland-streamer = { workspace = true }
+miraland-svm = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-turbine = { workspace = true }

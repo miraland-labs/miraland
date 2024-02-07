@@ -49,6 +49,7 @@ miraland-program-runtime = { workspace = true }
 miraland-rayon-threadlimit = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-stake-program = { workspace = true }
+miraland-svm = { workspace = true }
 miraland-system-program = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote = { workspace = true }

@@ -101,6 +101,7 @@ members = [
     "storage-bigtable/build-proto",
     "storage-proto",
     "streamer",
+    "svm",
     "test-validator",
     "thin-client",
     "tokens",
@@ -388,6 +389,7 @@ miraland-stake-program = { path = "programs/stake", version = "=1.18.3" }
 miraland-storage-bigtable = { path = "storage-bigtable", version = "=1.18.3" }
 miraland-storage-proto = { path = "storage-proto", version = "=1.18.3" }
 miraland-streamer = { path = "streamer", version = "=1.18.3" }
+miraland-svm = { path = "svm", version = "=1.18.3" }
 miraland-system-program = { path = "programs/system", version = "=1.18.3" }
 miraland-test-validator = { path = "test-validator", version = "=1.18.3" }
 miraland-thin-client = { path = "thin-client", version = "=1.18.3" }
@@ -423,7 +425,7 @@ sysctl = "0.4.6"
 systemstat = "0.2.3"
 tar = "0.4.40"
 tarpc = "0.29.0"
-tempfile = "3.9.0"
+tempfile = "3.10.0"
 test-case = "3.3.1"
 thiserror = "1.0.56"
 tiny-bip39 = "0.8.2"

@@ -30,6 +30,7 @@ use {
     miraland_measure::{measure, measure::Measure},
     miraland_metrics::datapoint_error,
     miraland_rayon_threadlimit::{get_max_thread_count, get_thread_count},
+    miraland_svm::runtime_config::RuntimeConfig,
     miraland_transaction_status::token_balances::TransactionTokenBalancesSet,
     rayon::{prelude::*, ThreadPool},
     scopeguard::defer,
@@ -42,7 +43,6 @@ use {
         commitment::VOTE_THRESHOLD_SIZE,
         installed_scheduler_pool::BankWithScheduler,
         prioritization_fee_cache::PrioritizationFeeCache,
-        svm::runtime_config::RuntimeConfig,
         transaction_batch::TransactionBatch,
     },
     solana_sdk::{

@@ -8,7 +8,6 @@ use {
             self, SnapshotError, StorageAndNextAppendVecId, BANK_SNAPSHOT_PRE_FILENAME_EXTENSION,
         },
         stakes::Stakes,
-        svm::runtime_config::RuntimeConfig,
     },
     bincode::{self, config::Options, Error},
     log::*,
@@ -28,6 +27,7 @@ use {
         rent_collector::RentCollector,
     },
     miraland_measure::measure::Measure,
+    miraland_svm::runtime_config::RuntimeConfig,
     serde::{de::DeserializeOwned, Deserialize, Serialize},
     solana_sdk::{
         clock::{Epoch, Slot, UnixTimestamp},

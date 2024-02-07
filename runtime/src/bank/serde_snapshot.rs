@@ -17,7 +17,6 @@ mod tests {
                 StorageAndNextAppendVecId, BANK_SNAPSHOT_PRE_FILENAME_EXTENSION,
             },
             status_cache::StatusCache,
-            svm::runtime_config::RuntimeConfig,
         },
         assert_matches::assert_matches,
         miraland_accounts_db::{
@@ -32,6 +31,7 @@ mod tests {
             epoch_accounts_hash::EpochAccountsHash,
             stake_rewards::StakeReward,
         },
+        miraland_svm::runtime_config::RuntimeConfig,
         solana_sdk::{
             epoch_schedule::EpochSchedule,
             genesis_config::create_genesis_config,

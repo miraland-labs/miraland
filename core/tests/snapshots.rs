@@ -18,6 +18,7 @@ use {
     },
     miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     miraland_streamer::socket::SocketAddrSpace,
+    miraland_svm::runtime_config::RuntimeConfig,
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService,
@@ -36,7 +37,6 @@ use {
             SnapshotVersion::{self, V1_2_0},
         },
         status_cache::MAX_CACHE_ENTRIES,
-        svm::runtime_config::RuntimeConfig,
     },
     solana_sdk::{
         clock::Slot,

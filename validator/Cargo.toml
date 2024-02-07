@@ -52,6 +52,7 @@ miraland-sdk = { workspace = true }
 miraland-send-transaction-service = { workspace = true }
 miraland-storage-bigtable = { workspace = true }
 miraland-streamer = { workspace = true }
+miraland-svm = { workspace = true }
 miraland-test-validator = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-version = { workspace = true }

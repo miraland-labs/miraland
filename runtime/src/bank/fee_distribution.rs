@@ -1,8 +1,8 @@
 use {
     super::Bank,
-    crate::svm::account_rent_state::RentState,
     log::{debug, warn},
     miraland_accounts_db::stake_rewards::RewardInfo,
+    miraland_svm::account_rent_state::RentState,
     solana_sdk::{
         account::{ReadableAccount, WritableAccount},
         pubkey::Pubkey,

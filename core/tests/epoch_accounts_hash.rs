@@ -16,6 +16,7 @@ use {
     },
     miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     miraland_streamer::socket::SocketAddrSpace,
+    miraland_svm::runtime_config::RuntimeConfig,
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService, DroppedSlotsReceiver,
@@ -28,7 +29,6 @@ use {
         snapshot_bank_utils,
         snapshot_config::SnapshotConfig,
         snapshot_utils,
-        svm::runtime_config::RuntimeConfig,
     },
     solana_sdk::{
         clock::Slot,

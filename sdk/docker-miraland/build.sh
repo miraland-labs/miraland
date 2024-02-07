@@ -20,8 +20,7 @@ fi
 
 cd "$(dirname "$0")"
 rm -rf usr/
-../../ci/docker-run.sh "$rust_stable_docker_image" \
-  scripts/cargo-install-all.sh sdk/docker-miraland/usr
+../../ci/docker-run-default-image.sh scripts/cargo-install-all.sh sdk/docker-miraland/usr
 
 cp -f ../../scripts/run.sh usr/bin/miraland-run.sh
 cp -f ../../fetch-spl.sh usr/bin/

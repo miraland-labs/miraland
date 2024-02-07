@@ -1,0 +1,43 @@
+[package]
+name = "miraland-svm"
+description = "Miraland SVM"
+documentation = "https://docs.rs/miraland-svm"
+version = { workspace = true }
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[dependencies]
+itertools = { workspace = true }
+log = { workspace = true }
+percentage = { workspace = true }
+miraland-accounts-db = { workspace = true }
+miraland-bpf-loader-program = { workspace = true }
+miraland-frozen-abi = { workspace = true }
+miraland-frozen-abi-macro = { workspace = true }
+miraland-loader-v4-program = { workspace = true }
+miraland-measure = { workspace = true }
+miraland-metrics = { workspace = true }
+miraland-program-runtime = { workspace = true }
+miraland-sdk = { workspace = true }
+miraland-system-program = { workspace = true }
+
+[lib]
+crate-type = ["lib"]
+name = "miraland_svm"
+
+[dev-dependencies]
+miraland-accounts-db = { workspace = true, features = ["dev-context-only-utils"] }
+miraland-logger = { workspace = true }
+miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[build-dependencies]
+rustc_version = { workspace = true }
+
+[features]
+dev-context-only-utils = []

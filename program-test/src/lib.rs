@@ -14,6 +14,7 @@ use {
     },
     miraland_banks_client::start_client,
     miraland_banks_server::banks_server::start_local_server,
+    miraland_svm::runtime_config::RuntimeConfig,
     solana_bpf_loader_program::serialization::serialize_parameters,
     solana_program_runtime::{
         compute_budget::ComputeBudget, ic_msg, invoke_context::BuiltinFunctionWithContext,
@@ -25,7 +26,6 @@ use {
         bank_forks::BankForks,
         commitment::BlockCommitmentCache,
         genesis_utils::{create_genesis_config_with_leader_ex, GenesisConfigInfo},
-        svm::runtime_config::RuntimeConfig,
     },
     solana_sdk::{
         account::{create_account_shared_data_for_test, Account, AccountSharedData},

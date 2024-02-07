@@ -45,6 +45,7 @@ use {
     miraland_rpc_client_api::config::RpcLeaderScheduleConfig,
     miraland_send_transaction_service::send_transaction_service,
     miraland_streamer::socket::SocketAddrSpace,
+    miraland_svm::runtime_config::RuntimeConfig,
     miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
     miraland_validator::{
         admin_rpc_service,
@@ -60,7 +61,6 @@ use {
         snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL,
         snapshot_config::{SnapshotConfig, SnapshotUsage},
         snapshot_utils::{self, ArchiveFormat, SnapshotVersion},
-        svm::runtime_config::RuntimeConfig,
     },
     solana_sdk::{
         clock::{Slot, DEFAULT_S_PER_SLOT},
