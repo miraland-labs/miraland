@@ -12,7 +12,6 @@ edition = { workspace = true }
 [dependencies]
 itertools = { workspace = true }
 log = { workspace = true }
-percentage = { workspace = true }
 miraland-accounts-db = { workspace = true }
 miraland-bpf-loader-program = { workspace = true }
 miraland-frozen-abi = { workspace = true }
@@ -23,6 +22,7 @@ miraland-metrics = { workspace = true }
 miraland-program-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-system-program = { workspace = true }
+percentage = { workspace = true }
 
 [lib]
 crate-type = ["lib"]

@@ -462,7 +462,7 @@ mod tests {
     use {
         super::*,
         nonce::state::Versions as NonceVersions,
-        solana_accounts_db::{
+        miraland_accounts_db::{
             accounts::Accounts, accounts_db::AccountsDb, accounts_file::MatchAccountOwnerError,
             ancestors::Ancestors, rent_collector::RentCollector,
         },
@@ -1037,7 +1037,7 @@ mod tests {
 
     #[test]
     fn test_instructions() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts_db = AccountsDb::new_single_for_tests();
         let accounts = Accounts::new(Arc::new(accounts_db));
 
@@ -1059,7 +1059,7 @@ mod tests {
 
     #[test]
     fn test_overrides() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let accounts_db = AccountsDb::new_single_for_tests();
         let accounts = Accounts::new(Arc::new(accounts_db));
         let mut account_overrides = AccountOverrides::default();
@@ -1194,7 +1194,7 @@ mod tests {
 
     #[test]
     fn test_load_accounts_too_high_prioritization_fee() {
-        solana_logger::setup();
+        miraland_logger::setup();
         let lamports_per_signature = 5000_u64;
         let request_units = 1_000_000_u32;
         let request_unit_price = 2_000_000_000_u64;
