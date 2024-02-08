@@ -24,7 +24,6 @@ use {
         accounts_update_notifier_interface::AccountsUpdateNotifier,
         blockhash_queue::BlockhashQueue,
         epoch_accounts_hash::EpochAccountsHash,
-        rent_collector::RentCollector,
     },
     miraland_measure::measure::Measure,
     miraland_svm::runtime_config::RuntimeConfig,
@@ -39,6 +38,7 @@ use {
         hash::Hash,
         inflation::Inflation,
         pubkey::Pubkey,
+        rent_collector::RentCollector,
     },
     std::{
         collections::{HashMap, HashSet},

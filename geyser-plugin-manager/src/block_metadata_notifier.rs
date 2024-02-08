@@ -4,14 +4,13 @@ use {
         geyser_plugin_manager::GeyserPluginManager,
     },
     log::*,
-    miraland_accounts_db::stake_rewards::RewardInfo,
     miraland_geyser_plugin_interface::geyser_plugin_interface::{
         ReplicaBlockInfoV3, ReplicaBlockInfoVersions,
     },
     miraland_measure::measure::Measure,
     miraland_metrics::*,
     miraland_transaction_status::{Reward, Rewards},
-    solana_sdk::{clock::UnixTimestamp, pubkey::Pubkey},
+    solana_sdk::{clock::UnixTimestamp, pubkey::Pubkey, reward_info::RewardInfo},
     std::sync::{Arc, RwLock},
 };
 

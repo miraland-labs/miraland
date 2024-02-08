@@ -14,7 +14,6 @@ use {
         accounts_index::{AccountSecondaryIndexes, ScanConfig},
         ancestors::Ancestors,
         epoch_accounts_hash::EpochAccountsHash,
-        rent_collector::RentCollector,
     },
     rand::Rng,
     rayon::iter::{IntoParallelRefIterator, ParallelIterator},
@@ -25,6 +24,7 @@ use {
         hash::Hash,
         lamports::LamportsError,
         pubkey::Pubkey,
+        rent_collector::RentCollector,
         sysvar::epoch_schedule::EpochSchedule,
     },
     std::{

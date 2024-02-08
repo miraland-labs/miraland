@@ -1,11 +1,11 @@
 use {
     super::Bank,
     log::{debug, warn},
-    miraland_accounts_db::stake_rewards::RewardInfo,
     miraland_svm::account_rent_state::RentState,
     solana_sdk::{
         account::{ReadableAccount, WritableAccount},
         pubkey::Pubkey,
+        reward_info::RewardInfo,
         reward_type::RewardType,
         system_program,
     },
