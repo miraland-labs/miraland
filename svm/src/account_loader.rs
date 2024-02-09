@@ -6,11 +6,7 @@ use {
     },
     itertools::Itertools,
     log::warn,
-    miraland_accounts_db::{
-        accounts::{LoadedTransaction, TransactionLoadResult, TransactionRent},
-        nonce_info::NonceFull,
-        transaction_results::TransactionCheckResult,
-    },
+    miraland_accounts_db::accounts::{LoadedTransaction, TransactionLoadResult, TransactionRent},
     solana_program_runtime::{
         compute_budget_processor::process_compute_budget_instructions,
         loaded_programs::LoadedProgramsForTxBatch,
@@ -25,18 +21,21 @@ use {
         message::SanitizedMessage,
         native_loader,
         nonce::State as NonceState,
+        nonce_info::{NonceFull, NoncePartial},
         pubkey::Pubkey,
         rent::RentDue,
         rent_collector::{RentCollector, RENT_EXEMPT_RENT_EPOCH},
         rent_debits::RentDebits,
         saturating_add_assign,
         sysvar::{self, instructions::construct_instructions_data},
-        transaction::{Result, SanitizedTransaction, TransactionError},
+        transaction::{self, Result, SanitizedTransaction, TransactionError},
         transaction_context::IndexOfAccount,
     },
     solana_system_program::{get_system_account_kind, SystemAccountKind},
     std::{collections::HashMap, num::NonZeroUsize},
 };
+
+pub type TransactionCheckResult = (transaction::Result<()>, Option<NoncePartial>, Option<u64>);
 
 pub fn load_accounts<CB: TransactionProcessingCallback>(
     callbacks: &CB,
@@ -450,10 +449,7 @@ pub fn construct_instructions_account(message: &SanitizedMessage) -> AccountShar
 mod tests {
     use {
         super::*,
-        miraland_accounts_db::{
-            accounts::Accounts, accounts_db::AccountsDb, accounts_file::MatchAccountOwnerError,
-            ancestors::Ancestors,
-        },
+        miraland_accounts_db::{accounts::Accounts, accounts_db::AccountsDb, ancestors::Ancestors},
         nonce::state::Versions as NonceVersions,
         solana_program_runtime::{
             compute_budget_processor,
@@ -487,12 +483,8 @@ mod tests {
     }
 
     impl TransactionProcessingCallback for TestCallbacks {
-        fn account_matches_owners(
-            &self,
-            _account: &Pubkey,
-            _owners: &[Pubkey],
-        ) -> std::result::Result<usize, MatchAccountOwnerError> {
-            Err(MatchAccountOwnerError::UnableToLoad)
+        fn account_matches_owners(&self, _account: &Pubkey, _owners: &[Pubkey]) -> Option<usize> {
+            None
         }
 
         fn get_account_shared_data(&self, pubkey: &Pubkey) -> Option<AccountSharedData> {

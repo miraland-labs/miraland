@@ -5,16 +5,14 @@
 )]
 pub use solana_sdk::inner_instruction::{InnerInstruction, InnerInstructionsList};
 use {
-    crate::nonce_info::{NonceFull, NonceInfo, NoncePartial},
     solana_program_runtime::loaded_programs::LoadedProgramsForTxBatch,
     solana_sdk::{
+        nonce_info::{NonceFull, NonceInfo},
         rent_debits::RentDebits,
         transaction::{self, TransactionError},
         transaction_context::TransactionReturnData,
     },
 };
-
-pub type TransactionCheckResult = (transaction::Result<()>, Option<NoncePartial>, Option<u64>);
 
 pub struct TransactionResults {
     pub fee_collection_results: Vec<transaction::Result<()>>,

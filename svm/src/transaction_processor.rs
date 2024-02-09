@@ -1,16 +1,16 @@
 use {
     crate::{
-        account_loader::load_accounts, account_overrides::AccountOverrides,
-        runtime_config::RuntimeConfig, transaction_account_state_info::TransactionAccountStateInfo,
+        account_loader::{load_accounts, TransactionCheckResult},
+        account_overrides::AccountOverrides,
+        runtime_config::RuntimeConfig,
+        transaction_account_state_info::TransactionAccountStateInfo,
         transaction_error_metrics::TransactionErrorMetrics,
     },
     log::debug,
     miraland_accounts_db::{
         accounts::{LoadedTransaction, TransactionLoadResult},
-        accounts_file::MatchAccountOwnerError,
         transaction_results::{
-            DurableNonceFee, TransactionCheckResult, TransactionExecutionDetails,
-            TransactionExecutionResult,
+            DurableNonceFee, TransactionExecutionDetails, TransactionExecutionResult,
         },
     },
     miraland_measure::measure::Measure,
@@ -70,11 +70,7 @@ pub struct LoadAndExecuteSanitizedTransactionsOutput {
 }
 
 pub trait TransactionProcessingCallback {
-    fn account_matches_owners(
-        &self,
-        account: &Pubkey,
-        owners: &[Pubkey],
-    ) -> std::result::Result<usize, MatchAccountOwnerError>;
+    fn account_matches_owners(&self, account: &Pubkey, owners: &[Pubkey]) -> Option<usize>;
 
     fn get_account_shared_data(&self, pubkey: &Pubkey) -> Option<AccountSharedData>;
 
@@ -340,7 +336,7 @@ impl<FG: ForkGraph> TransactionBatchProcessor<FG> {
                                 saturating_add_assign!(*count, 1);
                             }
                             Entry::Vacant(entry) => {
-                                if let Ok(index) =
+                                if let Some(index) =
                                     callbacks.account_matches_owners(key, program_owners)
                                 {
                                     program_owners

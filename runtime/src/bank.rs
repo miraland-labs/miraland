@@ -70,7 +70,6 @@ use {
             AccountShrinkThreshold, AccountStorageEntry, AccountsDb, AccountsDbConfig,
             CalcAccountsHashDataSource, VerifyAccountsHashAndLamportsConfig,
         },
-        accounts_file::MatchAccountOwnerError,
         accounts_hash::{
             AccountHash, AccountsHash, CalcAccountsHashConfig, HashStats, IncrementalAccountsHash,
         },
@@ -80,14 +79,12 @@ use {
         ancestors::{Ancestors, AncestorsForSerialization},
         blockhash_queue::BlockhashQueue,
         epoch_accounts_hash::EpochAccountsHash,
-        nonce_info::{NonceInfo, NoncePartial},
         partitioned_rewards::PartitionedEpochRewardsConfig,
         sorted_storages::SortedStorages,
         stake_rewards::StakeReward,
         storable_accounts::StorableAccounts,
         transaction_results::{
-            TransactionCheckResult, TransactionExecutionDetails, TransactionExecutionResult,
-            TransactionResults,
+            TransactionExecutionDetails, TransactionExecutionResult, TransactionResults,
         },
     },
     miraland_cost_model::cost_tracker::CostTracker,
@@ -95,6 +92,7 @@ use {
     miraland_measure::{measure, measure::Measure, measure_us},
     miraland_perf::perf_libs,
     miraland_svm::{
+        account_loader::TransactionCheckResult,
         account_overrides::AccountOverrides,
         runtime_config::RuntimeConfig,
         transaction_error_metrics::TransactionErrorMetrics,
@@ -145,6 +143,7 @@ use {
         native_token::LAMPORTS_PER_MLN,
         nonce::{self, state::DurableNonce, NONCED_TX_MARKER_IX_INDEX},
         nonce_account,
+        nonce_info::{NonceInfo, NoncePartial},
         packet::PACKET_DATA_SIZE,
         precompiles::get_precompiles,
         pubkey::Pubkey,
@@ -6040,8 +6039,16 @@ impl Bank {
     // pro: safer assertion can be enabled inside AccountsDb
     // con: panics!() if called from off-chain processing
     pub fn get_account_with_fixed_root(&self, pubkey: &Pubkey) -> Option<AccountSharedData> {
-        self.load_slow_with_fixed_root(&self.ancestors, pubkey)
+        self.get_account_modified_slot_with_fixed_root(pubkey)
             .map(|(acc, _slot)| acc)
+    }
+
+    // See note above get_account_with_fixed_root() about when to prefer this function
+    pub fn get_account_modified_slot_with_fixed_root(
+        &self,
+        pubkey: &Pubkey,
+    ) -> Option<(AccountSharedData, Slot)> {
+        self.load_slow_with_fixed_root(&self.ancestors, pubkey)
     }
 
     pub fn get_account_modified_slot(&self, pubkey: &Pubkey) -> Option<(AccountSharedData, Slot)> {
@@ -7488,15 +7495,12 @@ impl Bank {
 }
 
 impl TransactionProcessingCallback for Bank {
-    fn account_matches_owners(
-        &self,
-        account: &Pubkey,
-        owners: &[Pubkey],
-    ) -> std::result::Result<usize, MatchAccountOwnerError> {
+    fn account_matches_owners(&self, account: &Pubkey, owners: &[Pubkey]) -> Option<usize> {
         self.rc
             .accounts
             .accounts_db
             .account_matches_owners(&self.ancestors, account, owners)
+            .ok()
     }
 
     fn get_account_shared_data(&self, pubkey: &Pubkey) -> Option<AccountSharedData> {
