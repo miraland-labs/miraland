@@ -11,7 +11,7 @@ edition = { workspace = true }
 
 [dependencies]
 chrono = { workspace = true, features = ["default"] }
-clap = { version = "3.2.23", features = ["cargo"] }
+clap = { version = "4.5.0", features = ["cargo"] }
 miraland-remote-wallet = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-zk-token-sdk = { workspace = true }

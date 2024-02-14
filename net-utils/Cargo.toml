@@ -11,7 +11,7 @@ edition = { workspace = true }
 
 [dependencies]
 bincode = { workspace = true }
-clap = { version = "3.1.5", features = ["cargo"] }
+clap = { version = "4.5.0", features = ["cargo"] }
 crossbeam-channel = { workspace = true }
 log = { workspace = true }
 miraland-logger = { workspace = true }
