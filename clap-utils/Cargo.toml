@@ -11,7 +11,7 @@ edition = { workspace = true }
 
 [dependencies]
 chrono = { workspace = true, features = ["default"] }
-clap = "2.33.0"
+clap = "4.5.1"
 miraland-remote-wallet = { workspace = true }
 miraland-sdk = { workspace = true }
 rpassword = { workspace = true }
