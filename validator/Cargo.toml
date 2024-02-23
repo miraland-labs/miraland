@@ -55,6 +55,7 @@ miraland-streamer = { workspace = true }
 miraland-svm = { workspace = true }
 miraland-test-validator = { workspace = true }
 miraland-tpu-client = { workspace = true }
+miraland-unified-scheduler-pool = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote-program = { workspace = true }
 num_cpus = { workspace = true }

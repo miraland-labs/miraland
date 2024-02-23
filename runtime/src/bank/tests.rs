@@ -32,13 +32,9 @@ use {
         ancestors::Ancestors,
         inline_spl_token,
         partitioned_rewards::TestPartitionedEpochRewards,
-        transaction_results::DurableNonceFee,
     },
     miraland_logger,
-    miraland_svm::{
-        account_loader::load_accounts, transaction_account_state_info::TransactionAccountStateInfo,
-        transaction_error_metrics::TransactionErrorMetrics,
-    },
+    miraland_svm::transaction_results::DurableNonceFee,
     rand::Rng,
     rayon::ThreadPoolBuilder,
     serde::{Deserialize, Serialize},
@@ -109,7 +105,7 @@ use {
             Result, SanitizedTransaction, Transaction, TransactionError,
             TransactionVerificationMode,
         },
-        transaction_context::{TransactionAccount, TransactionContext},
+        transaction_context::TransactionAccount,
     },
     solana_stake_program::stake_state::{self, StakeStateV2},
     solana_vote_program::{
@@ -1631,19 +1627,25 @@ fn test_rent_eager_under_fixed_cycle_for_development() {
 }
 
 impl Bank {
-    fn slots_by_pubkey(&self, pubkey: &Pubkey, ancestors: &Ancestors) -> Vec<Slot> {
-        let (locked_entry, _) = self
-            .rc
+    fn slots_by_pubkey(&self, pubkey: &Pubkey) -> Vec<Slot> {
+        self.rc
             .accounts
             .accounts_db
             .accounts_index
-            .get(pubkey, Some(ancestors), None)
-            .unwrap();
-        locked_entry
-            .slot_list()
-            .iter()
-            .map(|(slot, _)| *slot)
-            .collect::<Vec<Slot>>()
+            .get_and_then(pubkey, |entry| {
+                let slots = entry
+                    .map(|entry| {
+                        entry
+                            .slot_list
+                            .read()
+                            .unwrap()
+                            .iter()
+                            .map(|(slot, _)| *slot)
+                            .collect()
+                    })
+                    .unwrap_or_default();
+                (false, slots)
+            })
     }
 }
 
@@ -1693,7 +1695,6 @@ fn test_rent_eager_collect_rent_in_partition(should_collect_rent: bool) {
     );
 
     let genesis_slot = 0;
-    let ancestors = vec![(some_slot, 0), (0, 1)].into_iter().collect();
 
     let previous_epoch = bank.epoch();
     bank = Arc::new(Bank::new_from_parent(bank, &Pubkey::default(), some_slot));
@@ -1706,16 +1707,13 @@ fn test_rent_eager_collect_rent_in_partition(should_collect_rent: bool) {
         little_lamports
     );
     assert_eq!(bank.get_account(&rent_due_pubkey).unwrap().rent_epoch(), 0);
+    assert_eq!(bank.slots_by_pubkey(&rent_due_pubkey), vec![genesis_slot]);
     assert_eq!(
-        bank.slots_by_pubkey(&rent_due_pubkey, &ancestors),
+        bank.slots_by_pubkey(&rent_exempt_pubkey),
         vec![genesis_slot]
     );
     assert_eq!(
-        bank.slots_by_pubkey(&rent_exempt_pubkey, &ancestors),
-        vec![genesis_slot]
-    );
-    assert_eq!(
-        bank.slots_by_pubkey(&zero_lamport_pubkey, &ancestors),
+        bank.slots_by_pubkey(&zero_lamport_pubkey),
         vec![genesis_slot]
     );
 
@@ -1740,15 +1738,15 @@ fn test_rent_eager_collect_rent_in_partition(should_collect_rent: bool) {
         RENT_EXEMPT_RENT_EPOCH
     );
     assert_eq!(
-        bank.slots_by_pubkey(&rent_due_pubkey, &ancestors),
+        bank.slots_by_pubkey(&rent_due_pubkey),
         vec![genesis_slot, some_slot]
     );
     assert_eq!(
-        bank.slots_by_pubkey(&rent_exempt_pubkey, &ancestors),
+        bank.slots_by_pubkey(&rent_exempt_pubkey),
         vec![genesis_slot, some_slot]
     );
     assert_eq!(
-        bank.slots_by_pubkey(&zero_lamport_pubkey, &ancestors),
+        bank.slots_by_pubkey(&zero_lamport_pubkey),
         vec![genesis_slot]
     );
 }
@@ -10966,60 +10964,6 @@ fn test_rent_state_incinerator() {
         bank.transfer(amount, &mint_keypair, &solana_sdk::incinerator::id())
             .unwrap();
     }
-}
-
-#[test]
-fn test_rent_state_list_len() {
-    let GenesisConfigInfo {
-        mut genesis_config,
-        mint_keypair,
-        ..
-    } = create_genesis_config_with_leader(mln_to_lamports(100.), &Pubkey::new_unique(), 42);
-    genesis_config.rent = Rent::default();
-
-    let bank = Bank::new_for_tests(&genesis_config);
-    let recipient = Pubkey::new_unique();
-    let tx = system_transaction::transfer(
-        &mint_keypair,
-        &recipient,
-        mln_to_lamports(1.),
-        bank.last_blockhash(),
-    );
-    let num_accounts = tx.message().account_keys.len();
-    let sanitized_tx = SanitizedTransaction::try_from_legacy_transaction(tx).unwrap();
-    let mut error_counters = TransactionErrorMetrics::default();
-    let loaded_txs = load_accounts(
-        &bank,
-        &[sanitized_tx.clone()],
-        &[(Ok(()), None, Some(0))],
-        &mut error_counters,
-        &FeeStructure::default(),
-        None,
-        &HashMap::new(),
-        &LoadedProgramsForTxBatch::default(),
-    );
-
-    let compute_budget = bank.runtime_config.compute_budget.unwrap_or_else(|| {
-        ComputeBudget::new(u64::from(
-            compute_budget_processor::DEFAULT_INSTRUCTION_COMPUTE_UNIT_LIMIT,
-        ))
-    });
-    let transaction_context = TransactionContext::new(
-        loaded_txs[0].0.as_ref().unwrap().accounts.clone(),
-        Rent::default(),
-        compute_budget.max_invoke_stack_height,
-        compute_budget.max_instruction_trace_length,
-    );
-
-    assert_eq!(
-        TransactionAccountStateInfo::new(
-            &bank.rent_collector.rent,
-            &transaction_context,
-            sanitized_tx.message()
-        )
-        .len(),
-        num_accounts,
-    );
 }
 
 #[test]

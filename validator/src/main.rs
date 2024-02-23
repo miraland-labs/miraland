@@ -218,7 +218,8 @@ fn wait_for_restart_window(
                 }
                 if !leader_schedule.is_empty() && upcoming_idle_windows.is_empty() {
                     return Err(format!(
-                        "Validator has no idle window of at least {} slots. Largest idle window for epoch {} is {} slots",
+                        "Validator has no idle window of at least {} slots. Largest idle window \
+                         for epoch {} is {} slots",
                         min_idle_slots, epoch_info.epoch, max_idle_window
                     )
                     .into());
@@ -272,7 +273,8 @@ fn wait_for_restart_window(
                                         )
                                     }
                                     None => format!(
-                                        "Validator will be leader soon. Next leader slot is {next_leader_slot}"
+                                        "Validator will be leader soon. Next leader slot is \
+                                         {next_leader_slot}"
                                     ),
                                 })
                             }
@@ -866,10 +868,13 @@ pub fn main() {
             let parse_arg_addr = |arg_name: &str, arg_long: &str| -> Option<SocketAddr> {
                 subcommand_matches.value_of(arg_name).map(|host_port| {
                         miraland_net_utils::parse_host_port(host_port).unwrap_or_else(|err| {
-                            eprintln!("Failed to parse --{arg_long} address. It must be in the HOST:PORT format. {err}");
-                            exit(1);
-                        })
+                        eprintln!(
+                            "Failed to parse --{arg_long} address. It must be in the HOST:PORT \
+                             format. {err}"
+                        );
+                        exit(1);
                     })
+                })
             };
             let tpu_addr = parse_arg_addr("tpu_addr", "tpu");
             let tpu_forwards_addr = parse_arg_addr("tpu_forwards_addr", "tpu-forwards");
@@ -1081,7 +1086,8 @@ pub fn main() {
     let shrink_ratio = value_t_or_exit!(matches, "accounts_shrink_ratio", f64);
     if !(0.0..=1.0).contains(&shrink_ratio) {
         eprintln!(
-            "The specified account-shrink-ratio is invalid, it must be between 0. and 1.0 inclusive: {shrink_ratio}"
+            "The specified account-shrink-ratio is invalid, it must be between 0. and 1.0 \
+             inclusive: {shrink_ratio}"
         );
         exit(1);
     }
@@ -1285,7 +1291,8 @@ pub fn main() {
 
     if rpc_send_batch_send_rate_ms > rpc_send_retry_rate_ms {
         eprintln!(
-            "The specified rpc-send-batch-ms ({rpc_send_batch_send_rate_ms}) is invalid, it must be <= rpc-send-retry-ms ({rpc_send_retry_rate_ms})"
+            "The specified rpc-send-batch-ms ({rpc_send_batch_send_rate_ms}) is invalid, it must \
+             be <= rpc-send-retry-ms ({rpc_send_retry_rate_ms})"
         );
         exit(1);
     }
@@ -1294,7 +1301,7 @@ pub fn main() {
     if tps > send_transaction_service::MAX_TRANSACTION_SENDS_PER_SECOND {
         eprintln!(
             "Either the specified rpc-send-batch-size ({}) or rpc-send-batch-ms ({}) is invalid, \
-            'rpc-send-batch-size * 1000 / rpc-send-batch-ms' must be smaller than ({}) .",
+             'rpc-send-batch-size * 1000 / rpc-send-batch-ms' must be smaller than ({}) .",
             rpc_send_batch_size,
             rpc_send_batch_send_rate_ms,
             send_transaction_service::MAX_TRANSACTION_SENDS_PER_SECOND
@@ -1321,8 +1328,7 @@ pub fn main() {
                 || matches.is_present("enable_extended_tx_metadata_storage"),
             rpc_bigtable_config,
             faucet_addr: matches.value_of("rpc_faucet_addr").map(|address| {
-                miraland_net_utils::parse_host_port(address)
-                    .expect("failed to parse faucet address")
+                miraland_net_utils::parse_host_port(address).expect("failed to parse faucet address")
             }),
             full_api,
             obsolete_v1_7_api: matches.is_present("obsolete_v1_7_rpc_api"),
@@ -1614,14 +1620,25 @@ pub fn main() {
         &validator_config.snapshot_config,
         validator_config.accounts_hash_interval_slots,
     ) {
-        eprintln!("Invalid snapshot configuration provided: snapshot intervals are incompatible. \
-            \n\t- full snapshot interval MUST be a multiple of incremental snapshot interval (if enabled) \
-            \n\t- full snapshot interval MUST be larger than incremental snapshot interval (if enabled) \
-            \nSnapshot configuration values: \
-            \n\tfull snapshot interval: {} \
-            \n\tincremental snapshot interval: {}",
-            if full_snapshot_archive_interval_slots == DISABLED_SNAPSHOT_ARCHIVE_INTERVAL { "disabled".to_string() } else { full_snapshot_archive_interval_slots.to_string() },
-            if incremental_snapshot_archive_interval_slots == DISABLED_SNAPSHOT_ARCHIVE_INTERVAL { "disabled".to_string() } else { incremental_snapshot_archive_interval_slots.to_string() },
+        eprintln!(
+            "Invalid snapshot configuration provided: snapshot intervals are incompatible. \
+             \n\t- full snapshot interval MUST be a multiple of incremental snapshot interval (if \
+             enabled)\
+             \n\t- full snapshot interval MUST be larger than incremental snapshot \
+             interval (if enabled)\
+             \nSnapshot configuration values:\
+             \n\tfull snapshot interval: {}\
+             \n\tincremental snapshot interval: {}",
+            if full_snapshot_archive_interval_slots == DISABLED_SNAPSHOT_ARCHIVE_INTERVAL {
+                "disabled".to_string()
+            } else {
+                full_snapshot_archive_interval_slots.to_string()
+            },
+            if incremental_snapshot_archive_interval_slots == DISABLED_SNAPSHOT_ARCHIVE_INTERVAL {
+                "disabled".to_string()
+            } else {
+                incremental_snapshot_archive_interval_slots.to_string()
+            },
         );
         exit(1);
     }
@@ -1633,7 +1650,8 @@ pub fn main() {
         };
         if limit_ledger_size < DEFAULT_MIN_MAX_LEDGER_SHREDS {
             eprintln!(
-                "The provided --limit-ledger-size value was too small, the minimum value is {DEFAULT_MIN_MAX_LEDGER_SHREDS}"
+                "The provided --limit-ledger-size value was too small, the minimum value is \
+                 {DEFAULT_MIN_MAX_LEDGER_SHREDS}"
             );
             exit(1);
         }
@@ -1653,6 +1671,8 @@ pub fn main() {
         BlockProductionMethod
     )
     .unwrap_or_default();
+    validator_config.unified_scheduler_handler_threads =
+        value_t!(matches, "unified_scheduler_handler_threads", usize).ok();
 
     validator_config.ledger_column_options = LedgerColumnOptions {
         compression_type: match matches.value_of("rocksdb_ledger_compression") {
@@ -1794,12 +1814,10 @@ pub fn main() {
         matches
             .value_of("public_tpu_forwards_addr")
             .map(|public_tpu_forwards_addr| {
-                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(
-                    |err| {
-                        eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
-                        exit(1);
-                    },
-                )
+                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(|err| {
+                    eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
+                    exit(1);
+                })
             });
 
     let cluster_entrypoints = entrypoint_addrs

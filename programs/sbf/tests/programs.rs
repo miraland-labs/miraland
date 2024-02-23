@@ -15,10 +15,6 @@ use {
     miraland_account_decoder::parse_bpf_loader::{
         parse_bpf_upgradeable_loader, BpfUpgradeableLoaderAccountType,
     },
-    miraland_accounts_db::transaction_results::{
-        DurableNonceFee, InnerInstruction, TransactionExecutionDetails, TransactionExecutionResult,
-        TransactionResults,
-    },
     miraland_ledger::token_balances::collect_token_balances,
     solana_program_runtime::{
         compute_budget::ComputeBudget,
@@ -36,6 +32,10 @@ use {
     miraland_sbf_rust_invoke::instructions::*,
     miraland_sbf_rust_realloc::instructions::*,
     miraland_sbf_rust_realloc_invoke::instructions::*,
+    miraland_svm::transaction_results::{
+        DurableNonceFee, InnerInstruction, TransactionExecutionDetails, TransactionExecutionResult,
+        TransactionResults,
+    },
     solana_sdk::{
         account::{ReadableAccount, WritableAccount},
         account_utils::StateMut,

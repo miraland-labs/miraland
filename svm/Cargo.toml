@@ -12,7 +12,6 @@ edition = { workspace = true }
 [dependencies]
 itertools = { workspace = true }
 log = { workspace = true }
-miraland-accounts-db = { workspace = true }
 miraland-bpf-loader-program = { workspace = true }
 miraland-frozen-abi = { workspace = true }
 miraland-frozen-abi-macro = { workspace = true }
@@ -29,7 +28,6 @@ crate-type = ["lib"]
 name = "miraland_svm"
 
 [dev-dependencies]
-miraland-accounts-db = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-logger = { workspace = true }
 miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
 

@@ -44,7 +44,6 @@ EOF
 anchor() {
   set -x
   rm -rf anchor
-  # git clone https://github.com/coral-xyz/anchor.git
   git clone https://github.com/miraland-labs/anchor.git
   cd anchor || exit 1
 
@@ -69,25 +68,27 @@ anchor() {
   cd "$miraland_dir"/target/downstream-projects-anchor
 }
 
+openbook() {
+  # Openbook-v2 is still using cargo 1.70.0, which is not compatible with the latest main
+  rm -rf openbook-v2
+  git clone https://github.com/openbook-dex/openbook-v2.git
+  cd openbook-v2
+  update_miraland_dependencies . "$miraland_ver"
+  patch_crates_io_miraland Cargo.toml "$miraland_dir"
+  $cargo_build_sbf --features enable-gpl
+  cd programs/openbook-v2
+  $cargo_test_sbf  --features enable-gpl
+}
+
 mango() {
   (
     set -x
-    rm -rf mango-v3
-    git clone https://github.com/blockworks-foundation/mango-v3
-    # copy toolchain file to use miraland's rust version
-    cp "$miraland_dir"/rust-toolchain.toml mango-v3/
-    cd mango-v3
-
-    update_miraland_dependencies . "$miraland_ver"
-    update_anchor_dependencies . "$anchor_ver"
-    patch_crates_io_miraland Cargo.toml "$miraland_dir"
-    patch_crates_io_anchor Cargo.toml "$anchor_dir"
-
-    cd program
-    $cargo build
-    $cargo test
-    $cargo_build_sbf
-    $cargo_test_sbf
+    rm -rf mango-v4
+    git clone https://github.com/blockworks-foundation/mango-v4.git
+    cd mango-v4
+    update_miraland_dependencies . "$solana_ver"
+    patch_crates_io_miraland_no_header Cargo.toml "$miraland_dir"
+    $cargo_test_sbf --features enable-gpl
   )
 }
 
@@ -98,18 +99,21 @@ metaplex() {
     git clone https://github.com/miraland-labs/miraplex-program-library
      # copy toolchain file to use miraland's rust version
      cp "$miraland_dir"/rust-toolchain.toml miraplex-program-library/
-    cd miraplex-program-library/token-metadata/program
+    cd miraplex-program-library
+    ./configs/program-scripts/dump.sh ./programs/bin
+    ROOT_DIR=$(pwd)
+    cd programs/token-metadata
 
     update_miraland_dependencies . "$miraland_ver"
     patch_crates_io_miraland Cargo.toml "$miraland_dir"
 
-    $cargo build
-    $cargo test
-    $cargo_build_sbf
-    $cargo_test_sbf
+    OUT_DIR="$ROOT_DIR"/programs/bin
+    export SBF_OUT_DIR="$OUT_DIR"
+    $cargo_test_sbf --sbf-out-dir "${OUT_DIR}"
   )
 }
 
 _ anchor
 #_ metaplex
 #_ mango
+#_ openbook

@@ -615,10 +615,9 @@ impl AdminRpc for AdminRpcImpl {
                 .tpu(Protocol::UDP)
                 .map_err(|err| {
                     error!(
-                        "The public TPU address isn't being published. \
-                        The node is likely in repair mode. \
-                        See help for --restricted-repair-only-mode for more information. \
-                        {err}"
+                        "The public TPU address isn't being published. The node is likely in \
+                         repair mode. See help for --restricted-repair-only-mode for more \
+                         information. {err}"
                     );
                     jsonrpc_core::error::Error::internal_error()
                 })?;
@@ -653,10 +652,9 @@ impl AdminRpc for AdminRpcImpl {
                 .tpu_forwards(Protocol::UDP)
                 .map_err(|err| {
                     error!(
-                        "The public TPU Forwards address isn't being published. \
-                        The node is likely in repair mode. \
-                        See help for --restricted-repair-only-mode for more information. \
-                        {err}"
+                        "The public TPU Forwards address isn't being published. The node is \
+                         likely in repair mode. See help for --restricted-repair-only-mode for \
+                         more information. {err}"
                     );
                     jsonrpc_core::error::Error::internal_error()
                 })?;
@@ -933,8 +931,7 @@ mod tests {
                         RwLock<repair_service::OutstandingShredRepairs>,
                     >::default(),
                     cluster_slots: Arc::new(
-                        miraland_core::cluster_slots_service::cluster_slots::ClusterSlots::default(
-                        ),
+                        miraland_core::cluster_slots_service::cluster_slots::ClusterSlots::default(),
                     ),
                 }))),
                 staked_nodes_overrides: Arc::new(RwLock::new(HashMap::new())),

@@ -31,6 +31,14 @@ patch_crates_io_miraland() {
   declare miraland_dir="$2"
   cat >> "$Cargo_toml" <<EOF
 [patch.crates-io]
+EOF
+patch_crates_io_miraland_no_header "$Cargo_toml" "$miraland_dir"
+}
+
+patch_crates_io_miraland_no_header() {
+  declare Cargo_toml="$1"
+  declare miraland_dir="$2"
+  cat >> "$Cargo_toml" <<EOF
 miraland-account-decoder = { path = "$miraland_dir/account-decoder" }
 miraland-clap-utils = { path = "$miraland_dir/clap-utils" }
 miraland-client = { path = "$miraland_dir/client" }

@@ -27,7 +27,7 @@ use {
         input_parsers::{cluster_type_of, pubkey_of, pubkeys_of},
         input_validators::{
             is_parsable, is_pow2, is_pubkey, is_pubkey_or_keypair, is_slot, is_valid_percentage,
-            validate_maximum_full_snapshot_archives_to_retain,
+            is_within_range, validate_maximum_full_snapshot_archives_to_retain,
             validate_maximum_incremental_snapshot_archives_to_retain,
         },
     },
@@ -43,6 +43,7 @@ use {
         use_snapshot_archives_at_startup,
     },
     miraland_measure::{measure, measure::Measure},
+    miraland_unified_scheduler_pool::DefaultSchedulerPool,
     serde::Serialize,
     solana_runtime::{
         bank::{bank_hash_details, Bank, RewardCalculationEvent},
@@ -95,6 +96,7 @@ use {
 mod args;
 mod bigtable;
 mod blockstore;
+mod error;
 mod ledger_path;
 mod ledger_utils;
 mod output;
@@ -604,7 +606,11 @@ fn main() {
         .long("accounts")
         .value_name("PATHS")
         .takes_value(true)
-        .help("Comma separated persistent accounts location");
+        .help(
+            "Persistent accounts location. \
+            May be specified multiple times. \
+            [default: <LEDGER>/accounts]",
+        );
     let accounts_hash_cache_path_arg = Arg::with_name("accounts_hash_cache_path")
         .long("accounts-hash-cache-path")
         .value_name("PATH")
@@ -616,8 +622,9 @@ fn main() {
         .takes_value(true)
         .multiple(true)
         .help(
-            "Persistent accounts-index location. May be specified multiple times. [default: \
-             [ledger]/accounts_index]",
+            "Persistent accounts-index location. \
+            May be specified multiple times. \
+            [default: <LEDGER>/accounts_index]",
         );
     let accounts_db_test_hash_calculation_arg = Arg::with_name("accounts_db_test_hash_calculation")
         .long("accounts-db-test-hash-calculation")
@@ -846,6 +853,16 @@ fn main() {
                 .global(true)
                 .hidden(hidden_unless_forced())
                 .help(BlockVerificationMethod::cli_message()),
+        )
+        .arg(
+            Arg::with_name("unified_scheduler_handler_threads")
+                .long("unified-scheduler-handler-threads")
+                .value_name("COUNT")
+                .takes_value(true)
+                .validator(|s| is_within_range(s, 1..))
+                .global(true)
+                .hidden(hidden_unless_forced())
+                .help(DefaultSchedulerPool::cli_message()),
         )
         .arg(
             Arg::with_name("output_format")

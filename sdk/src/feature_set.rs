@@ -694,7 +694,7 @@ pub mod reduce_stake_warmup_cooldown {
     solana_sdk::declare_id!("BkynwF8uZGLaeEFo1ciirN6ozoXtWHdi8AyJvT522zGG");
 }
 
-pub mod revise_turbine_epoch_stakes {
+mod revise_turbine_epoch_stakes {
     solana_sdk::declare_id!("APLRhyXeMsypAJeBiGyE2uivUi7z8JAnx9gHsY211Pcj");
 }
 

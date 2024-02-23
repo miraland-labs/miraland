@@ -19,6 +19,7 @@ miraland-client = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-send-transaction-service = { workspace = true }
+miraland-svm = { workspace = true }
 tarpc = { workspace = true, features = ["full"] }
 tokio = { workspace = true, features = ["full"] }
 tokio-serde = { workspace = true, features = ["bincode"] }

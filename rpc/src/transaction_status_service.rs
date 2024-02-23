@@ -2,11 +2,11 @@ use {
     crate::transaction_notifier_interface::TransactionNotifierArc,
     crossbeam_channel::{Receiver, RecvTimeoutError},
     itertools::izip,
-    miraland_accounts_db::transaction_results::{DurableNonceFee, TransactionExecutionDetails},
     miraland_ledger::{
         blockstore::Blockstore,
         blockstore_processor::{TransactionStatusBatch, TransactionStatusMessage},
     },
+    miraland_svm::transaction_results::{DurableNonceFee, TransactionExecutionDetails},
     miraland_transaction_status::{
         extract_and_fmt_memos, map_inner_instructions, Reward, TransactionStatusMeta,
     },
