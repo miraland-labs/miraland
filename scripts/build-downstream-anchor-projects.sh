@@ -86,7 +86,7 @@ mango() {
     rm -rf mango-v4
     git clone https://github.com/blockworks-foundation/mango-v4.git
     cd mango-v4
-    update_miraland_dependencies . "$solana_ver"
+    update_miraland_dependencies . "$miraland_ver"
     patch_crates_io_miraland_no_header Cargo.toml "$miraland_dir"
     $cargo_test_sbf --features enable-gpl
   )
