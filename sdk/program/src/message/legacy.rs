@@ -7,7 +7,7 @@
 //!
 //! [`legacy`]: crate::message::legacy
 //! [`v0`]: crate::message::v0
-//! [future message format]: https://docs.solana.com/proposals/versioned-transactions
+//! [future message format]: https://docs.miraland.top/proposals/versioned-transactions
 
 #![allow(clippy::arithmetic_side_effects)]
 
@@ -479,9 +479,9 @@ impl Message {
     pub fn hash_raw_message(message_bytes: &[u8]) -> Hash {
         use blake3::traits::digest::Digest;
         let mut hasher = blake3::Hasher::new();
-        hasher.update(b"solana-tx-message-v1");
+        hasher.update(b"miraland-tx-message-v1");
         hasher.update(message_bytes);
-        Hash(<[u8; crate::hash::HASH_BYTES]>::try_from(hasher.finalize().as_slice()).unwrap())
+        Hash(hasher.finalize().into())
     }
 
     pub fn compile_instruction(&self, ix: &Instruction) -> CompiledInstruction {
@@ -852,7 +852,7 @@ mod tests {
     #[test]
     fn test_message_hash() {
         // when this test fails, it's most likely due to a new serialized format of a message.
-        // in this case, the domain prefix `solana-tx-message-v1` should be updated.
+        // in this case, the domain prefix `miraland-tx-message-v1` should be updated.
         let program_id0 = Pubkey::from_str("4uQeVj5tqViQh7yWWGStvkEG1Zmhx6uasJtWCJziofM").unwrap();
         let program_id1 = Pubkey::from_str("8opHzTAnfzRpPEx21XtnrVTX28YQuCpAjcn1PczScKh").unwrap();
         let id0 = Pubkey::from_str("CiDwVBFgWV9E5MvXWoLgnEgn2hK7rJikbvfWavzAQz3").unwrap();

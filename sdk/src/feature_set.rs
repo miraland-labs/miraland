@@ -202,8 +202,6 @@ pub mod do_support_realloc {
     solana_sdk::declare_id!("DM4TyMJkUYN6YXVaeFpWTDGBdWo5sbhk82RDScK7ptjU");
 }
 
-// Note: when this feature is cleaned up, also remove the secp256k1 program from
-// the list of builtins and remove its files from /programs
 pub mod prevent_calling_precompiles_as_programs {
     solana_sdk::declare_id!("9EmqPEbM54LjSwHwNFBvF5G5ePmyc9vtYDdeafAXcUAB");
 }
@@ -496,10 +494,6 @@ pub mod compact_vote_state_updates {
     solana_sdk::declare_id!("D81C628sHgkTy8bFoSaTFKR8rtFpBgAZpXrwWvjGN2B1");
 }
 
-// pub mod concurrent_replay_of_forks {
-//     solana_sdk::declare_id!("HKTb558dxjV1pHiUoHY6WiXDW1SPAdR2pp1kqRC74eKy");
-// }
-
 pub mod incremental_snapshot_only_incremental_hash_calculation {
     solana_sdk::declare_id!("2ot2vmSkdBsHZzx7192NwSk9vkTdKwU9WudDR8yHXLR4");
 }
@@ -531,10 +525,6 @@ pub mod stop_sibling_instruction_search_at_parent {
 pub mod vote_state_update_root_fix {
     solana_sdk::declare_id!("2NmVW5eyqpz2rk9sJbtpEV9NhQgXPYVWJ5yVo4jp74ai");
 }
-
-// pub mod return_none_for_zero_lamport_accounts {
-//     solana_sdk::declare_id!("GpdtZ46oewuJTJooRvKQWWWfvmf9SjhfA6kr4BhTTTL6");
-// }
 
 pub mod cap_accounts_data_allocations_per_transaction {
     solana_sdk::declare_id!("A4nSusDCkARGEdmhxHfBVKxgqKV79P3hSpBikAio1Ri4");
@@ -590,14 +580,6 @@ pub mod enable_turbine_fanout_experiments {
 pub mod disable_turbine_fanout_experiments {
     solana_sdk::declare_id!("2NowhDaiW3CbPfjzuAdZgyK5fgBpxZyBaQJXHgEmwMbp");
 }
-
-// pub mod drop_merkle_shreds {
-//     solana_sdk::declare_id!("AAtYRhtYe8RpaVmDYekreCekGaMrd5KycsBTMs28BFbL");
-// }
-
-// pub mod keep_merkle_shreds {
-//     solana_sdk::declare_id!("3JzPqxHr9evdDxuUfCBB8C9aP5s4X8idQkhoFn3mj5zC");
-// }
 
 pub mod move_serialized_len_ptr_in_cpi {
     solana_sdk::declare_id!("D8Uyu9cPJUs4hq3A671SZVb1a245YbdX73H6dmSiyDXe");
@@ -798,6 +780,10 @@ pub mod enable_chained_merkle_shreds {
     solana_sdk::declare_id!("2MjwbrGZBTkRkkibnWjMKwrSFcBJ1NrKmndhUeFLnChm");
 }
 
+pub mod remove_rounding_in_fee_calculation {
+    solana_sdk::declare_id!("EvR8BDv7qX256Pq6sn5CN7S549wbx86Bvg3iNr4qJfmh");
+}
+
 lazy_static! {
     /// Map of feature identifiers to user-visible description
     pub static ref FEATURE_NAMES: HashMap<Pubkey, &'static str> = [
@@ -919,13 +905,11 @@ lazy_static! {
         (loosen_cpi_size_restriction::id(), "loosen cpi size restrictions #26641"),
         (use_default_units_in_fee_calculation::id(), "use default units per instruction in fee calculation #26785"),
         (compact_vote_state_updates::id(), "Compact vote state updates to lower block size"),
-        // (concurrent_replay_of_forks::id(), "Allow slots from different forks to be replayed concurrently #26465"),
         (incremental_snapshot_only_incremental_hash_calculation::id(), "only hash accounts in incremental snapshot during incremental snapshot creation #26799"),
         (disable_cpi_setting_executable_and_rent_epoch::id(), "disable setting is_executable and_rent_epoch in CPI #26987"),
         (relax_authority_signer_check_for_lookup_table_creation::id(), "relax authority signer check for lookup table creation #27205"),
         (stop_sibling_instruction_search_at_parent::id(), "stop the search in get_processed_sibling_instruction when the parent instruction is reached #27289"),
         (vote_state_update_root_fix::id(), "fix root in vote state updates #27361"),
-        // (return_none_for_zero_lamport_accounts::id(), "return none for zero lamport accounts #27800"),
         (cap_accounts_data_allocations_per_transaction::id(), "cap accounts data allocations per transaction #27375"),
         (epoch_accounts_hash::id(), "enable epoch accounts hash calculation #27539"),
         (remove_deprecated_request_unit_ix::id(), "remove support for RequestUnitsDeprecated instruction #27500"),
@@ -938,8 +922,6 @@ lazy_static! {
         (commission_updates_only_allowed_in_first_half_of_epoch::id(), "validator commission updates are only allowed in the first half of an epoch #29362"),
         (enable_turbine_fanout_experiments::id(), "enable turbine fanout experiments #29393"),
         (disable_turbine_fanout_experiments::id(), "disable turbine fanout experiments #29393"),
-        // (drop_merkle_shreds::id(), "drop merkle shreds #29711"),
-        // (keep_merkle_shreds::id(), "keep merkle shreds #29711"),
         (move_serialized_len_ptr_in_cpi::id(), "cpi ignore serialized_len_ptr #29592"),
         (update_hashes_per_tick::id(), "Update desired hashes per tick on epoch boundary"),
         (enable_big_mod_exp_syscall::id(), "add big_mod_exp syscall #28503"),
@@ -992,6 +974,7 @@ lazy_static! {
         (cost_model_requested_write_lock_cost::id(), "cost model uses number of requested write locks #34819"),
         (enable_gossip_duplicate_proof_ingestion::id(), "enable gossip duplicate proof ingestion #32963"),
         (enable_chained_merkle_shreds::id(), "Enable chained Merkle shreds #34916"),
+        (remove_rounding_in_fee_calculation::id(), "Removing unwanted rounding in fee calculation #34982"),
         /*************** ADD NEW FEATURES HERE ***************/
     ]
     .iter()
