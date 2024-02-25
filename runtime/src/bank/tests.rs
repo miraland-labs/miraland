@@ -11962,7 +11962,7 @@ fn test_feature_activation_loaded_programs_recompilation_phase() {
 
 #[test]
 fn test_feature_activation_loaded_programs_epoch_transition() {
-    solana_logger::setup();
+    miraland_logger::setup();
 
     // Bank Setup
     let (mut genesis_config, mint_keypair) = create_genesis_config(1_000_000 * LAMPORTS_PER_SOL);
