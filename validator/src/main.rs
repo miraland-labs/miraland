@@ -867,7 +867,7 @@ pub fn main() {
         ("set-public-address", Some(subcommand_matches)) => {
             let parse_arg_addr = |arg_name: &str, arg_long: &str| -> Option<SocketAddr> {
                 subcommand_matches.value_of(arg_name).map(|host_port| {
-                        miraland_net_utils::parse_host_port(host_port).unwrap_or_else(|err| {
+                    miraland_net_utils::parse_host_port(host_port).unwrap_or_else(|err| {
                         eprintln!(
                             "Failed to parse --{arg_long} address. It must be in the HOST:PORT \
                              format. {err}"
@@ -1328,7 +1328,8 @@ pub fn main() {
                 || matches.is_present("enable_extended_tx_metadata_storage"),
             rpc_bigtable_config,
             faucet_addr: matches.value_of("rpc_faucet_addr").map(|address| {
-                miraland_net_utils::parse_host_port(address).expect("failed to parse faucet address")
+                miraland_net_utils::parse_host_port(address)
+                    .expect("failed to parse faucet address")
             }),
             full_api,
             obsolete_v1_7_api: matches.is_present("obsolete_v1_7_rpc_api"),
@@ -1814,10 +1815,12 @@ pub fn main() {
         matches
             .value_of("public_tpu_forwards_addr")
             .map(|public_tpu_forwards_addr| {
-                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(|err| {
-                    eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
-                    exit(1);
-                })
+                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(
+                    |err| {
+                        eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
+                        exit(1);
+                    },
+                )
             });
 
     let cluster_entrypoints = entrypoint_addrs
