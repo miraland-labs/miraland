@@ -11965,7 +11965,7 @@ fn test_feature_activation_loaded_programs_epoch_transition() {
     miraland_logger::setup();
 
     // Bank Setup
-    let (mut genesis_config, mint_keypair) = create_genesis_config(1_000_000 * LAMPORTS_PER_SOL);
+    let (mut genesis_config, mint_keypair) = create_genesis_config(1_000_000 * LAMPORTS_PER_MLN);
     genesis_config
         .accounts
         .remove(&feature_set::reject_callx_r10::id());
