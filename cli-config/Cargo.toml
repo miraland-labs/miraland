@@ -1,6 +1,6 @@
 [package]
 name = "miraland-cli-config"
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 documentation = "https://docs.rs/miraland-cli-config"
 version = { workspace = true }
 authors = { workspace = true }

@@ -1,5 +1,5 @@
 [package]
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 name = "proto"
 publish = false
 version = { workspace = true }

@@ -1,6 +1,6 @@
 [package]
 name = "miraland-stake-accounts"
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 documentation = "https://docs.rs/miraland-stake-accounts"
 version = { workspace = true }
 authors = { workspace = true }

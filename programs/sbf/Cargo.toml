@@ -55,7 +55,7 @@ thiserror = "1.0"
 
 [package]
 name = "miraland-sbf-programs"
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 documentation = "https://docs.rs/solana"
 readme = "README.md"
 publish = false

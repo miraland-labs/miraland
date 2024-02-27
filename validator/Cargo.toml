@@ -1,6 +1,6 @@
 [package]
 name = "miraland-validator"
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 documentation = "https://docs.rs/miraland-validator"
 default-run = "miraland-validator"
 version = { workspace = true }

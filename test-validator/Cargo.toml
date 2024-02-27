@@ -1,6 +1,6 @@
 [package]
 name = "miraland-test-validator"
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 readme = "../README.md"
 version = { workspace = true }
 authors = { workspace = true }

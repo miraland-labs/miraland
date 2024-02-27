@@ -1,6 +1,6 @@
 [package]
 name = "miraland-core"
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 documentation = "https://docs.rs/miraland-core"
 readme = "../README.md"
 version = { workspace = true }

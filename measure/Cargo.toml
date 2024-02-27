@@ -1,6 +1,6 @@
 [package]
 name = "miraland-measure"
-description = "Blockchain for community beyond the horizon"
+description = "Blockchain for sovereign individuals living in Mirascape Horizon"
 documentation = "https://docs.rs/miraland-measure"
 readme = "../README.md"
 version = { workspace = true }
