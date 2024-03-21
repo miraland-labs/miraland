@@ -1,10 +1,11 @@
 use {
-    miraland_rpc_client_api::client_error::Error as ClientError,
+    miraland_rpc_client_api::{client_error::Error as ClientError, config::RpcBlockConfig},
     miraland_tpu_client::tpu_client::TpuSenderError,
+    miraland_transaction_status::UiConfirmedBlock,
     solana_sdk::{
         account::Account, commitment_config::CommitmentConfig, epoch_info::EpochInfo, hash::Hash,
-        message::Message, pubkey::Pubkey, signature::Signature, transaction::Transaction,
-        transport::TransportError,
+        message::Message, pubkey::Pubkey, signature::Signature, slot_history::Slot,
+        transaction::Transaction, transport::TransportError,
     },
     thiserror::Error,
 };
@@ -93,6 +94,21 @@ pub trait BenchTpsClient {
     ) -> Result<Account>;
 
     fn get_multiple_accounts(&self, pubkeys: &[Pubkey]) -> Result<Vec<Option<Account>>>;
+
+    fn get_slot_with_commitment(&self, commitment_config: CommitmentConfig) -> Result<Slot>;
+
+    fn get_blocks_with_commitment(
+        &self,
+        start_slot: Slot,
+        end_slot: Option<Slot>,
+        commitment_config: CommitmentConfig,
+    ) -> Result<Vec<Slot>>;
+
+    fn get_block_with_config(
+        &self,
+        slot: Slot,
+        rpc_block_config: RpcBlockConfig,
+    ) -> Result<UiConfirmedBlock>;
 }
 
 mod bank_client;

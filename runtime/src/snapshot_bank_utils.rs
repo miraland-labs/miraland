@@ -37,7 +37,7 @@ use {
         utils::delete_contents_of_path,
     },
     miraland_measure::{measure, measure::Measure},
-    miraland_svm::runtime_config::RuntimeConfig,
+    solana_program_runtime::runtime_config::RuntimeConfig,
     solana_sdk::{
         clock::Slot,
         feature_set,

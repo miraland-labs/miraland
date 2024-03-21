@@ -23,7 +23,6 @@ jsonrpc-core = { workspace = true }
 jsonrpc-core-client = { workspace = true, features = ["ipc"] }
 jsonrpc-derive = { workspace = true }
 jsonrpc-ipc-server = { workspace = true }
-jsonrpc-server-utils = { workspace = true }
 lazy_static = { workspace = true }
 libloading = { workspace = true }
 log = { workspace = true }
@@ -44,6 +43,7 @@ miraland-metrics = { workspace = true }
 miraland-net-utils = { workspace = true }
 miraland-perf = { workspace = true }
 miraland-poh = { workspace = true }
+miraland-program-runtime = { workspace = true }
 miraland-rpc = { workspace = true }
 miraland-rpc-client = { workspace = true }
 miraland-rpc-client-api = { workspace = true }
@@ -52,7 +52,6 @@ miraland-sdk = { workspace = true }
 miraland-send-transaction-service = { workspace = true }
 miraland-storage-bigtable = { workspace = true }
 miraland-streamer = { workspace = true }
-miraland-svm = { workspace = true }
 miraland-test-validator = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-unified-scheduler-pool = { workspace = true }
@@ -66,6 +65,7 @@ serde_json = { workspace = true }
 serde_yaml = { workspace = true }
 symlink = { workspace = true }
 thiserror = { workspace = true }
+tokio = { workspace = true }
 
 [dev-dependencies]
 miraland-account-decoder = { workspace = true }

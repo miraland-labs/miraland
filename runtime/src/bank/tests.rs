@@ -117,7 +117,7 @@ use {
     },
     std::{
         collections::{HashMap, HashSet},
-        convert::{TryFrom, TryInto},
+        convert::TryInto,
         fs::File,
         io::Read,
         str::FromStr,
@@ -193,6 +193,10 @@ fn create_genesis_config_no_tx_fee(lamports: u64) -> (GenesisConfig, Keypair) {
 
 fn create_genesis_config(lamports: u64) -> (GenesisConfig, Keypair) {
     solana_sdk::genesis_config::create_genesis_config(lamports)
+}
+
+fn new_sanitized_message(message: Message) -> SanitizedMessage {
+    SanitizedMessage::try_from_legacy_message(message).unwrap()
 }
 
 #[test]
@@ -1275,26 +1279,6 @@ fn test_rent_complex() {
     assert_eq!(bank.collected_rent.load(Relaxed), rent_collected);
 }
 
-fn test_rent_collection_partitions(bank: &Bank) -> Vec<Partition> {
-    let partitions = bank.rent_collection_partitions();
-    let slot = bank.slot();
-    if slot.saturating_sub(1) == bank.parent_slot() {
-        let partition = accounts_partition::variable_cycle_partition_from_previous_slot(
-            bank.epoch_schedule(),
-            bank.slot(),
-        );
-        assert_eq!(
-            partitions.last().unwrap(),
-            &partition,
-            "slot: {}, slots per epoch: {}, partitions: {:?}",
-            bank.slot(),
-            bank.epoch_schedule().slots_per_epoch,
-            partitions
-        );
-    }
-    partitions
-}
-
 #[test]
 fn test_rent_eager_across_epoch_without_gap() {
     let mut bank = create_simple_test_arc_bank(1).0;
@@ -1317,16 +1301,16 @@ fn test_rent_eager_across_epoch_without_gap_mnb() {
     genesis_config.cluster_type = ClusterType::Mainnet;
 
     let mut bank = Arc::new(Bank::new_for_tests(&genesis_config));
-    assert_eq!(test_rent_collection_partitions(&bank), vec![(0, 0, 32)]);
+    assert_eq!(bank.rent_collection_partitions(), vec![(0, 0, 32)]);
 
     bank = Arc::new(new_from_parent(bank));
-    assert_eq!(test_rent_collection_partitions(&bank), vec![(0, 1, 32)]);
+    assert_eq!(bank.rent_collection_partitions(), vec![(0, 1, 32)]);
     for _ in 2..32 {
         bank = Arc::new(new_from_parent(bank));
     }
-    assert_eq!(test_rent_collection_partitions(&bank), vec![(30, 31, 32)]);
+    assert_eq!(bank.rent_collection_partitions(), vec![(30, 31, 32)]);
     bank = Arc::new(new_from_parent(bank));
-    assert_eq!(test_rent_collection_partitions(&bank), vec![(0, 0, 64)]);
+    assert_eq!(bank.rent_collection_partitions(), vec![(0, 0, 64)]);
 }
 
 #[test]
@@ -2666,7 +2650,7 @@ fn test_bank_tx_compute_unit_fee() {
     let (bank, bank_forks) = Bank::new_with_bank_forks_for_tests(&genesis_config);
 
     let expected_fee_paid = calculate_test_fee(
-        &SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique()))).unwrap(),
+        &new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique()))),
         genesis_config
             .fee_rate_governor
             .create_fee_calculator()
@@ -2794,7 +2778,7 @@ fn test_bank_blockhash_fee_structure() {
     assert_eq!(bank.process_transaction(&tx), Ok(()));
     assert_eq!(bank.get_balance(&key), 1);
     let cheap_fee = calculate_test_fee(
-        &SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique()))).unwrap(),
+        &new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique()))),
         cheap_lamports_per_signature,
         &bank.fee_structure,
     );
@@ -2810,7 +2794,7 @@ fn test_bank_blockhash_fee_structure() {
     assert_eq!(bank.process_transaction(&tx), Ok(()));
     assert_eq!(bank.get_balance(&key), 1);
     let expensive_fee = calculate_test_fee(
-        &SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique()))).unwrap(),
+        &new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique()))),
         expensive_lamports_per_signature,
         &bank.fee_structure,
     );
@@ -2856,7 +2840,7 @@ fn test_bank_blockhash_compute_unit_fee_structure() {
     assert_eq!(bank.process_transaction(&tx), Ok(()));
     assert_eq!(bank.get_balance(&key), 1);
     let cheap_fee = calculate_test_fee(
-        &SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique()))).unwrap(),
+        &new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique()))),
         cheap_lamports_per_signature,
         &bank.fee_structure,
     );
@@ -2872,7 +2856,7 @@ fn test_bank_blockhash_compute_unit_fee_structure() {
     assert_eq!(bank.process_transaction(&tx), Ok(()));
     assert_eq!(bank.get_balance(&key), 1);
     let expensive_fee = calculate_test_fee(
-        &SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique()))).unwrap(),
+        &new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique()))),
         expensive_lamports_per_signature,
         &bank.fee_structure,
     );
@@ -2979,8 +2963,7 @@ fn test_filter_program_errors_and_collect_compute_unit_fee() {
                 .fee_rate_governor
                 .burn(
                     calculate_test_fee(
-                        &SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique())))
-                            .unwrap(),
+                        &new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique()))),
                         genesis_config
                             .fee_rate_governor
                             .create_fee_calculator()
@@ -3119,9 +3102,7 @@ fn test_interleaving_locks() {
             &lock_result,
             MAX_PROCESSING_AGE,
             false,
-            false,
-            false,
-            false,
+            ExecutionRecordingConfig::new_single_setting(false),
             &mut ExecuteTimings::default(),
             None,
         )
@@ -5275,7 +5256,7 @@ fn test_nonce_transaction() {
     recent_message.recent_blockhash = bank.last_blockhash();
     let mut expected_balance = 4_650_000
         - bank
-            .get_fee_for_message(&recent_message.try_into().unwrap())
+            .get_fee_for_message(&new_sanitized_message(recent_message))
             .unwrap();
     assert_eq!(bank.get_balance(&custodian_pubkey), expected_balance);
     assert_eq!(bank.get_balance(&nonce_pubkey), 250_000);
@@ -5334,7 +5315,7 @@ fn test_nonce_transaction() {
     let mut recent_message = nonce_tx.message.clone();
     recent_message.recent_blockhash = bank.last_blockhash();
     expected_balance -= bank
-        .get_fee_for_message(&SanitizedMessage::try_from(recent_message).unwrap())
+        .get_fee_for_message(&new_sanitized_message(recent_message))
         .unwrap();
     assert_eq!(bank.get_balance(&custodian_pubkey), expected_balance);
     assert_ne!(
@@ -5402,7 +5383,7 @@ fn test_nonce_transaction_with_tx_wide_caps() {
     recent_message.recent_blockhash = bank.last_blockhash();
     let mut expected_balance = 4_650_000
         - bank
-            .get_fee_for_message(&recent_message.try_into().unwrap())
+            .get_fee_for_message(&new_sanitized_message(recent_message))
             .unwrap();
     assert_eq!(bank.get_balance(&custodian_pubkey), expected_balance);
     assert_eq!(bank.get_balance(&nonce_pubkey), 250_000);
@@ -5461,7 +5442,7 @@ fn test_nonce_transaction_with_tx_wide_caps() {
     let mut recent_message = nonce_tx.message.clone();
     recent_message.recent_blockhash = bank.last_blockhash();
     expected_balance -= bank
-        .get_fee_for_message(&SanitizedMessage::try_from(recent_message).unwrap())
+        .get_fee_for_message(&new_sanitized_message(recent_message))
         .unwrap();
     assert_eq!(bank.get_balance(&custodian_pubkey), expected_balance);
     assert_ne!(
@@ -5593,7 +5574,7 @@ fn test_nonce_payer() {
         bank.get_balance(&nonce_pubkey),
         nonce_starting_balance
             - bank
-                .get_fee_for_message(&recent_message.try_into().unwrap())
+                .get_fee_for_message(&new_sanitized_message(recent_message))
                 .unwrap()
     );
     assert_ne!(
@@ -5660,7 +5641,7 @@ fn test_nonce_payer_tx_wide_cap() {
         bank.get_balance(&nonce_pubkey),
         nonce_starting_balance
             - bank
-                .get_fee_for_message(&recent_message.try_into().unwrap())
+                .get_fee_for_message(&new_sanitized_message(recent_message))
                 .unwrap()
     );
     assert_ne!(
@@ -5945,9 +5926,7 @@ fn test_pre_post_transaction_balances() {
             &lock_result,
             MAX_PROCESSING_AGE,
             true,
-            false,
-            false,
-            false,
+            ExecutionRecordingConfig::new_single_setting(false),
             &mut ExecuteTimings::default(),
             None,
         );
@@ -9227,9 +9206,11 @@ fn test_tx_log_order() {
             &batch,
             MAX_PROCESSING_AGE,
             false,
-            false,
-            true,
-            false,
+            ExecutionRecordingConfig {
+                enable_cpi_recording: false,
+                enable_log_recording: true,
+                enable_return_data_recording: false,
+            },
             &mut ExecuteTimings::default(),
             None,
         )
@@ -9335,9 +9316,11 @@ fn test_tx_return_data() {
                 &batch,
                 MAX_PROCESSING_AGE,
                 false,
-                false,
-                false,
-                true,
+                ExecutionRecordingConfig {
+                    enable_cpi_recording: false,
+                    enable_log_recording: false,
+                    enable_return_data_recording: true,
+                },
                 &mut ExecuteTimings::default(),
                 None,
             )
@@ -10034,8 +10017,7 @@ fn calculate_test_fee(
 #[test]
 fn test_calculate_fee() {
     // Default: no fee.
-    let message =
-        SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique()))).unwrap();
+    let message = new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique())));
     assert_eq!(
         calculate_test_fee(
             &message,
@@ -10066,7 +10048,7 @@ fn test_calculate_fee() {
     let key1 = Pubkey::new_unique();
     let ix0 = system_instruction::transfer(&key0, &key1, 1);
     let ix1 = system_instruction::transfer(&key1, &key0, 1);
-    let message = SanitizedMessage::try_from(Message::new(&[ix0, ix1], Some(&key0))).unwrap();
+    let message = new_sanitized_message(Message::new(&[ix0, ix1], Some(&key0)));
     assert_eq!(
         calculate_test_fee(
             &message,
@@ -10091,8 +10073,7 @@ fn test_calculate_fee_compute_units() {
 
     // One signature, no unit request
 
-    let message =
-        SanitizedMessage::try_from(Message::new(&[], Some(&Pubkey::new_unique()))).unwrap();
+    let message = new_sanitized_message(Message::new(&[], Some(&Pubkey::new_unique())));
     assert_eq!(
         calculate_test_fee(&message, 1, &fee_structure,),
         max_fee + lamports_per_signature
@@ -10102,8 +10083,7 @@ fn test_calculate_fee_compute_units() {
 
     let ix0 = system_instruction::transfer(&Pubkey::new_unique(), &Pubkey::new_unique(), 1);
     let ix1 = system_instruction::transfer(&Pubkey::new_unique(), &Pubkey::new_unique(), 1);
-    let message =
-        SanitizedMessage::try_from(Message::new(&[ix0, ix1], Some(&Pubkey::new_unique()))).unwrap();
+    let message = new_sanitized_message(Message::new(&[ix0, ix1], Some(&Pubkey::new_unique())));
     assert_eq!(
         calculate_test_fee(&message, 1, &fee_structure,),
         max_fee + 3 * lamports_per_signature
@@ -10129,15 +10109,14 @@ fn test_calculate_fee_compute_units() {
             PrioritizationFeeType::ComputeUnitPrice(PRIORITIZATION_FEE_RATE),
             requested_compute_units as u64,
         );
-        let message = SanitizedMessage::try_from(Message::new(
+        let message = new_sanitized_message(Message::new(
             &[
                 ComputeBudgetInstruction::set_compute_unit_limit(requested_compute_units),
                 ComputeBudgetInstruction::set_compute_unit_price(PRIORITIZATION_FEE_RATE),
                 Instruction::new_with_bincode(Pubkey::new_unique(), &0_u8, vec![]),
             ],
             Some(&Pubkey::new_unique()),
-        ))
-        .unwrap();
+        ));
         let fee = calculate_test_fee(&message, 1, &fee_structure);
         assert_eq!(
             fee,
@@ -10161,14 +10140,13 @@ fn test_calculate_prioritization_fee() {
     );
     let prioritization_fee = prioritization_fee_details.get_fee();
 
-    let message = SanitizedMessage::try_from(Message::new(
+    let message = new_sanitized_message(Message::new(
         &[
             ComputeBudgetInstruction::set_compute_unit_limit(request_units),
             ComputeBudgetInstruction::set_compute_unit_price(request_unit_price),
         ],
         Some(&Pubkey::new_unique()),
-    ))
-    .unwrap();
+    ));
 
     let fee = calculate_test_fee(
         &message,
@@ -10202,24 +10180,22 @@ fn test_calculate_fee_secp256k1() {
         data: vec![1],
     };
 
-    let message = SanitizedMessage::try_from(Message::new(
+    let message = new_sanitized_message(Message::new(
         &[
             ix0.clone(),
             secp_instruction1.clone(),
             secp_instruction2.clone(),
         ],
         Some(&key0),
-    ))
-    .unwrap();
+    ));
     assert_eq!(calculate_test_fee(&message, 1, &fee_structure,), 2);
 
     secp_instruction1.data = vec![0];
     secp_instruction2.data = vec![10];
-    let message = SanitizedMessage::try_from(Message::new(
+    let message = new_sanitized_message(Message::new(
         &[ix0, secp_instruction1, secp_instruction2],
         Some(&key0),
-    ))
-    .unwrap();
+    ));
     assert_eq!(calculate_test_fee(&message, 1, &fee_structure,), 11);
 }
 
@@ -10745,16 +10721,15 @@ fn test_invalid_rent_state_changes_fee_payer() {
     .unwrap();
 
     // Dummy message to determine fee amount
-    let dummy_message = SanitizedMessage::try_from(Message::new_with_blockhash(
+    let dummy_message = new_sanitized_message(Message::new_with_blockhash(
         &[system_instruction::transfer(
             &rent_exempt_fee_payer.pubkey(),
             &recipient,
-            mln_to_lamports(1.),
+            sol_to_lamports(1.),
         )],
         Some(&rent_exempt_fee_payer.pubkey()),
         &recent_blockhash,
-    ))
-    .unwrap();
+    ));
     let fee = bank.get_fee_for_message(&dummy_message).unwrap();
 
     // RentPaying fee-payer can remain RentPaying
@@ -11814,7 +11789,7 @@ fn test_calculate_fee_with_congestion_multiplier() {
     let key1 = Pubkey::new_unique();
     let ix0 = system_instruction::transfer(&key0, &key1, 1);
     let ix1 = system_instruction::transfer(&key1, &key0, 1);
-    let message = SanitizedMessage::try_from(Message::new(&[ix0, ix1], Some(&key0))).unwrap();
+    let message = new_sanitized_message(Message::new(&[ix0, ix1], Some(&key0)));
 
     // assert when lamports_per_signature is less than BASE_LAMPORTS, turnning on/off
     // congestion_multiplier has no effect on fee.
@@ -11843,7 +11818,7 @@ fn test_calculate_fee_with_request_heap_frame_flag() {
         lamports_per_signature: signature_fee,
         ..FeeStructure::default()
     };
-    let message = SanitizedMessage::try_from(Message::new(
+    let message = new_sanitized_message(Message::new(
         &[
             system_instruction::transfer(&key0, &key1, 1),
             ComputeBudgetInstruction::set_compute_unit_limit(request_cu as u32),
@@ -11851,8 +11826,7 @@ fn test_calculate_fee_with_request_heap_frame_flag() {
             ComputeBudgetInstruction::set_compute_unit_price(lamports_per_cu * 1_000_000),
         ],
         Some(&key0),
-    ))
-    .unwrap();
+    ));
 
     // assert when request_heap_frame is presented in tx, prioritization fee will be counted
     // into transaction fee
@@ -11890,12 +11864,6 @@ fn test_feature_activation_loaded_programs_recompilation_phase() {
         .remove(&feature_set::reject_callx_r10::id());
     let (root_bank, bank_forks) = Bank::new_with_bank_forks_for_tests(&genesis_config);
 
-    // Test a basic transfer
-    let amount = genesis_config.rent.minimum_balance(0);
-    let pubkey = solana_sdk::pubkey::new_rand();
-    root_bank.transfer(amount, &mint_keypair, &pubkey).unwrap();
-    assert_eq!(root_bank.get_balance(&pubkey), amount);
-
     // Program Setup
     let program_keypair = Keypair::new();
     let program_data =
@@ -11909,26 +11877,19 @@ fn test_feature_activation_loaded_programs_recompilation_phase() {
     });
     root_bank.store_account(&program_keypair.pubkey(), &program_account);
 
-    // Compose instruction using the desired program
-    let instruction1 = Instruction::new_with_bytes(program_keypair.pubkey(), &[], Vec::new());
-    let message1 = Message::new(&[instruction1], Some(&mint_keypair.pubkey()));
-    let binding1 = mint_keypair.insecure_clone();
-    let signers1 = vec![&binding1];
-    let transaction1 = Transaction::new(&signers1, message1, root_bank.last_blockhash());
+    // Compose message using the desired program.
+    let instruction = Instruction::new_with_bytes(program_keypair.pubkey(), &[], Vec::new());
+    let message = Message::new(&[instruction], Some(&mint_keypair.pubkey()));
+    let binding = mint_keypair.insecure_clone();
+    let signers = vec![&binding];
 
-    // Advance the bank so the next transaction can be submitted.
+    // Advance the bank so that the program becomes effective.
     goto_end_of_slot(root_bank.clone());
     let bank = new_from_parent_with_fork_next_slot(root_bank, bank_forks.as_ref());
 
-    // Compose second instruction using the same program with a different block hash
-    let instruction2 = Instruction::new_with_bytes(program_keypair.pubkey(), &[], Vec::new());
-    let message2 = Message::new(&[instruction2], Some(&mint_keypair.pubkey()));
-    let binding2 = mint_keypair.insecure_clone();
-    let signers2 = vec![&binding2];
-    let transaction2 = Transaction::new(&signers2, message2, bank.last_blockhash());
-
-    // Execute before feature is enabled to get program into the cache.
-    let result_without_feature_enabled = bank.process_transaction(&transaction1);
+    // Load the program with the old environment.
+    let transaction = Transaction::new(&signers, message.clone(), bank.last_blockhash());
+    let result_without_feature_enabled = bank.process_transaction(&transaction);
     assert_eq!(
         result_without_feature_enabled,
         Err(TransactionError::InstructionError(
@@ -11937,7 +11898,7 @@ fn test_feature_activation_loaded_programs_recompilation_phase() {
         ))
     );
 
-    // Activate feature
+    // Schedule feature activation to trigger a change of environment at the epoch boundary.
     let feature_account_balance =
         std::cmp::max(genesis_config.rent.minimum_balance(Feature::size_of()), 1);
     bank.store_account(
@@ -11945,12 +11906,59 @@ fn test_feature_activation_loaded_programs_recompilation_phase() {
         &feature::create_account(&Feature { activated_at: None }, feature_account_balance),
     );
 
+    // Advance the bank to middle of epoch to start the recompilation phase.
     goto_end_of_slot(bank.clone());
-    // Advance to next epoch, which starts the recompilation phase
-    let bank = new_from_parent_next_epoch(bank, bank_forks.as_ref(), 1);
+    let bank = new_bank_from_parent_with_bank_forks(&bank_forks, bank, &Pubkey::default(), 16);
+    let current_env = bank
+        .loaded_programs_cache
+        .read()
+        .unwrap()
+        .get_environments_for_epoch(0)
+        .program_runtime_v1
+        .clone();
+    let upcoming_env = bank
+        .loaded_programs_cache
+        .read()
+        .unwrap()
+        .get_environments_for_epoch(1)
+        .program_runtime_v1
+        .clone();
 
-    // Execute after feature is enabled to check it was filtered out and reverified.
-    let result_with_feature_enabled = bank.process_transaction(&transaction2);
+    // Advance the bank to recompile the program.
+    {
+        let loaded_programs_cache = bank.loaded_programs_cache.read().unwrap();
+        let slot_versions =
+            loaded_programs_cache.get_slot_versions_for_tests(&program_keypair.pubkey());
+        assert_eq!(slot_versions.len(), 1);
+        assert!(Arc::ptr_eq(
+            slot_versions[0].program.get_environment().unwrap(),
+            &current_env
+        ));
+    }
+    goto_end_of_slot(bank.clone());
+    let bank = new_from_parent_with_fork_next_slot(bank, bank_forks.as_ref());
+    {
+        let loaded_programs_cache = bank.loaded_programs_cache.read().unwrap();
+        let slot_versions =
+            loaded_programs_cache.get_slot_versions_for_tests(&program_keypair.pubkey());
+        assert_eq!(slot_versions.len(), 2);
+        assert!(Arc::ptr_eq(
+            slot_versions[0].program.get_environment().unwrap(),
+            &current_env
+        ));
+        assert!(Arc::ptr_eq(
+            slot_versions[1].program.get_environment().unwrap(),
+            &upcoming_env
+        ));
+    }
+
+    // Advance the bank to cross the epoch boundary and activate the feature.
+    goto_end_of_slot(bank.clone());
+    let bank = new_bank_from_parent_with_bank_forks(&bank_forks, bank, &Pubkey::default(), 33);
+
+    // Load the program with the new environment.
+    let transaction = Transaction::new(&signers, message, bank.last_blockhash());
+    let result_with_feature_enabled = bank.process_transaction(&transaction);
     assert_eq!(
         result_with_feature_enabled,
         Err(TransactionError::InstructionError(

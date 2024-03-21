@@ -28,6 +28,7 @@ crate-type = ["lib"]
 name = "miraland_svm"
 
 [dev-dependencies]
+bincode = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
 

@@ -118,7 +118,7 @@ Operate a configured testnet
                                       - Enable UDP for tpu transactions
 
    --client-type
-                                      - Specify backend client type for bench-tps. Valid options are (thin-client|rpc-client|tpu-client), thin-client is default
+                                      - Specify backend client type for bench-tps. Valid options are (rpc-client|tpu-client), tpu-client is default
 
  sanity/start-specific options:
    -F                   - Discard validator nodes that didn't bootup successfully
@@ -563,7 +563,7 @@ prepareDeploy() {
     if [[ -n $releaseChannel ]]; then
       echo "Downloading release from channel: $releaseChannel"
       rm -f "$MIRALAND_ROOT"/miraland-release.tar.bz2
-      declare updateDownloadUrl=https://release.miraland.com/"$releaseChannel"/miraland-release-x86_64-unknown-linux-gnu.tar.bz2
+      declare updateDownloadUrl=https://release.miraland.top/"$releaseChannel"/miraland-release-x86_64-unknown-linux-gnu.tar.bz2
       (
         set -x
         curl -L -I "$updateDownloadUrl"
@@ -834,7 +834,7 @@ waitForNodeInit=true
 extraPrimordialStakes=0
 disableQuic=false
 enableUdp=false
-clientType=thin-client
+clientType=tpu-client
 maybeUseUnstakedConnection=""
 
 command=$1
@@ -972,7 +972,7 @@ while [[ -n $1 ]]; do
     elif [[ $1 = --client-type ]]; then
       clientType=$2
       case "$clientType" in
-        thin-client|tpu-client|rpc-client)
+        tpu-client|rpc-client)
           ;;
         *)
           echo "Unexpected client type: \"$clientType\""

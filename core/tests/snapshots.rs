@@ -11,6 +11,7 @@ use {
         accounts_hash::AccountsHash,
         accounts_index::AccountSecondaryIndexes,
         epoch_accounts_hash::EpochAccountsHash,
+        starting_snapshot_storages::StartingSnapshotStorages,
     },
     miraland_core::{
         accounts_hash_verifier::AccountsHashVerifier,
@@ -18,7 +19,7 @@ use {
     },
     miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     miraland_streamer::socket::SocketAddrSpace,
-    miraland_svm::runtime_config::RuntimeConfig,
+    solana_program_runtime::runtime_config::RuntimeConfig,
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService,
@@ -1043,6 +1044,7 @@ fn test_snapshots_with_background_services(
         accounts_package_sender,
         accounts_package_receiver,
         Some(snapshot_package_sender),
+        StartingSnapshotStorages::Genesis,
         exit.clone(),
         snapshot_test_config.snapshot_config.clone(),
     );

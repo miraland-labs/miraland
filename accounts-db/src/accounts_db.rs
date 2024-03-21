@@ -41,10 +41,10 @@ use {
             ZeroLamportAccounts,
         },
         accounts_index::{
-            AccountIndexGetResult, AccountMapEntry, AccountSecondaryIndexes, AccountsIndex,
-            AccountsIndexConfig, AccountsIndexRootsStats, AccountsIndexScanResult, DiskIndexValue,
-            IndexKey, IndexValue, IsCached, RefCount, ScanConfig, ScanResult, SlotList,
-            UpsertReclaim, ZeroLamport, ACCOUNTS_INDEX_CONFIG_FOR_BENCHMARKS,
+            in_mem_accounts_index::StartupStats, AccountMapEntry, AccountSecondaryIndexes,
+            AccountsIndex, AccountsIndexConfig, AccountsIndexRootsStats, AccountsIndexScanResult,
+            DiskIndexValue, IndexKey, IndexValue, IsCached, RefCount, ScanConfig, ScanResult,
+            SlotList, UpsertReclaim, ZeroLamport, ACCOUNTS_INDEX_CONFIG_FOR_BENCHMARKS,
             ACCOUNTS_INDEX_CONFIG_FOR_TESTING,
         },
         accounts_index_storage::Startup,
@@ -63,7 +63,6 @@ use {
         },
         contains::Contains,
         epoch_accounts_hash::EpochAccountsHashManager,
-        in_mem_accounts_index::StartupStats,
         partitioned_rewards::{PartitionedEpochRewardsConfig, TestPartitionedEpochRewards},
         pubkey_bins::PubkeyBinCalculator24,
         read_only_accounts_cache::ReadOnlyAccountsCache,
@@ -5086,36 +5085,18 @@ impl AccountsDb {
         max_root: Option<Slot>,
         clone_in_lock: bool,
     ) -> Option<(Slot, StorageLocation, Option<LoadedAccountAccessor<'a>>)> {
-        let (lock, index) = match self.accounts_index.get(pubkey, Some(ancestors), max_root) {
-            AccountIndexGetResult::Found(lock, index) => (lock, index),
-            // we bail out pretty early for missing.
-            AccountIndexGetResult::NotFound => {
-                return None;
-            }
-        };
-
-        let slot_list = lock.slot_list();
-        let (slot, info) = slot_list[index];
-        let storage_location = info.storage_location();
-        let some_from_slow_path = if clone_in_lock {
-            // the fast path must have failed.... so take the slower approach
-            // of copying potentially large Account::data inside the lock.
-
-            // calling check_and_get_loaded_account is safe as long as we're guaranteed to hold
-            // the lock during the time and there should be no purge thanks to alive ancestors
-            // held by our caller.
-            Some(self.get_account_accessor(slot, pubkey, &storage_location))
-        } else {
-            None
-        };
-
-        Some((slot, storage_location, some_from_slow_path))
-        // `lock` is dropped here rather pretty quickly with clone_in_lock = false,
-        // so the entry could be raced for mutation by other subsystems,
-        // before we actually provision an account data for caller's use from now on.
-        // This is traded for less contention and resultant performance, introducing fair amount of
-        // delicate handling in retry_to_get_account_accessor() below ;)
-        // you're warned!
+        self.accounts_index.get_with_and_then(
+            pubkey,
+            Some(ancestors),
+            max_root,
+            true,
+            |(slot, account_info)| {
+                let storage_location = account_info.storage_location();
+                let account_accessor = clone_in_lock
+                    .then(|| self.get_account_accessor(slot, pubkey, &storage_location));
+                (slot, storage_location, account_accessor)
+            },
+        )
     }
 
     fn retry_to_get_account_accessor<'a>(
@@ -6138,19 +6119,18 @@ impl AccountsDb {
         }
         let mut hasher = blake3::Hasher::new();
 
-        // allocate 128 bytes buffer on the stack
-        const BUF_SIZE: usize = 128;
-        const TOTAL_FIELD_SIZE: usize = 8 /* lamports */ + 8 /* slot */ + 8 /* rent_epoch */ + 1 /* exec_flag */ + 32 /* owner_key */ + 32 /* pubkey */;
-        const DATA_SIZE_CAN_FIT: usize = BUF_SIZE - TOTAL_FIELD_SIZE;
+        // allocate a buffer on the stack that's big enough
+        // to hold a token account or a stake account
+        const META_SIZE: usize = 8 /* lamports */ + 8 /* rent_epoch */ + 1 /* executable */ + 32 /* owner */ + 32 /* pubkey */;
+        const DATA_SIZE: usize = 200; // stake acounts are 200 B and token accounts are 165-182ish B
+        const BUFFER_SIZE: usize = META_SIZE + DATA_SIZE;
+        let mut buffer = SmallVec::<[u8; BUFFER_SIZE]>::new();
 
-        let mut buffer = SmallVec::<[u8; BUF_SIZE]>::new();
-
-        // collect lamports, slot, rent_epoch into buffer to hash
+        // collect lamports, rent_epoch into buffer to hash
         buffer.extend_from_slice(&lamports.to_le_bytes());
-
         buffer.extend_from_slice(&rent_epoch.to_le_bytes());
 
-        if data.len() > DATA_SIZE_CAN_FIT {
+        if data.len() > DATA_SIZE {
             // For larger accounts whose data can't fit into the buffer, update the hash now.
             hasher.update(&buffer);
             buffer.clear();
@@ -6163,11 +6143,7 @@ impl AccountsDb {
         }
 
         // collect exec_flag, owner, pubkey into buffer to hash
-        if executable {
-            buffer.push(1_u8);
-        } else {
-            buffer.push(0_u8);
-        }
+        buffer.push(executable.into());
         buffer.extend_from_slice(owner.as_ref());
         buffer.extend_from_slice(pubkey.as_ref());
         hasher.update(&buffer);
@@ -6882,28 +6858,20 @@ impl AccountsDb {
                     let result: Vec<Hash> = pubkeys
                         .iter()
                         .filter_map(|pubkey| {
-                            if let AccountIndexGetResult::Found(lock, index) =
-                                self.accounts_index.get(pubkey, config.ancestors, Some(max_slot))
-                            {
-                                let (slot, account_info) = &lock.slot_list()[index];
-                                if !account_info.is_zero_lamport() {
-                                    // Because we're keeping the `lock' here, there is no need
-                                    // to use retry_to_get_account_accessor()
-                                    // In other words, flusher/shrinker/cleaner is blocked to
-                                    // cause any Accessor(None) situation.
-                                    // Anyway this race condition concern is currently a moot
-                                    // point because calculate_accounts_hash() should not
-                                    // currently race with clean/shrink because the full hash
-                                    // is synchronous with clean/shrink in
-                                    // AccountsBackgroundService
+                            let index_entry = self.accounts_index.get_cloned(pubkey)?;
+                            self.accounts_index.get_account_info_with_and_then(
+                                &index_entry,
+                                config.ancestors,
+                                Some(max_slot),
+                                |(slot, account_info)| {
+                                    if account_info.is_zero_lamport() { return None; }
                                     self.get_account_accessor(
-                                        *slot,
+                                        slot,
                                         pubkey,
                                         &account_info.storage_location(),
                                     )
                                     .get_loaded_account()
-                                    .and_then(
-                                        |loaded_account| {
+                                    .and_then(|loaded_account| {
                                             let mut loaded_hash = loaded_account.loaded_hash();
                                             let balance = loaded_account.lamports();
                                             let hash_is_missing = loaded_hash == AccountHash(Hash::default());
@@ -6923,14 +6891,10 @@ impl AccountsDb {
 
                                             sum += balance as u128;
                                             Some(loaded_hash.0)
-                                        },
-                                    )
-                                } else {
-                                    None
-                                }
-                            } else {
-                                None
-                            }
+                                    })
+                                },
+                            )
+                            .flatten()
                         })
                         .collect();
                     let mut total = total_lamports.lock().unwrap();
@@ -7461,6 +7425,11 @@ impl AccountsDb {
         self.accounts_hashes.lock().unwrap().get(&slot).cloned()
     }
 
+    /// Get all accounts hashes
+    pub fn get_accounts_hashes(&self) -> HashMap<Slot, (AccountsHash, /*capitalization*/ u64)> {
+        self.accounts_hashes.lock().unwrap().clone()
+    }
+
     /// Set the incremental accounts hash for `slot`
     ///
     /// returns the previous incremental accounts hash for `slot`
@@ -7495,6 +7464,13 @@ impl AccountsDb {
             .unwrap()
             .get(&slot)
             .cloned()
+    }
+
+    /// Get all incremental accounts hashes
+    pub fn get_incremental_accounts_hashes(
+        &self,
+    ) -> HashMap<Slot, (IncrementalAccountsHash, /*capitalization*/ u64)> {
+        self.incremental_accounts_hashes.lock().unwrap().clone()
     }
 
     /// Purge accounts hashes that are older than `last_full_snapshot_slot`
@@ -7906,6 +7882,7 @@ impl AccountsDb {
     ///
     /// As part of calculating the accounts delta hash, get a list of accounts modified this slot
     /// (aka dirty pubkeys) and add them to `self.uncleaned_pubkeys` for future cleaning.
+    #[cfg(feature = "dev-context-only-utils")]
     pub fn calculate_accounts_delta_hash(&self, slot: Slot) -> AccountsDeltaHash {
         self.calculate_accounts_delta_hash_internal(slot, None, HashMap::default())
     }
@@ -9099,11 +9076,10 @@ impl AccountsDb {
                             let mut lookup_time = Measure::start("lookup_time");
                             for account_info in storage.accounts.account_iter() {
                                 let key = account_info.pubkey();
-                                let lock = self.accounts_index.get_bin(key);
-                                let x = lock.get(key).unwrap();
-                                let sl = x.slot_list.read().unwrap();
+                                let index_entry = self.accounts_index.get_cloned(key).unwrap();
+                                let slot_list = index_entry.slot_list.read().unwrap();
                                 let mut count = 0;
-                                for (slot2, account_info2) in sl.iter() {
+                                for (slot2, account_info2) in slot_list.iter() {
                                     if slot2 == slot {
                                         count += 1;
                                         let ai = AccountInfo::new(

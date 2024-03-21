@@ -45,7 +45,6 @@ use {
     miraland_rpc_client_api::config::RpcLeaderScheduleConfig,
     miraland_send_transaction_service::send_transaction_service,
     miraland_streamer::socket::SocketAddrSpace,
-    miraland_svm::runtime_config::RuntimeConfig,
     miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
     miraland_validator::{
         admin_rpc_service,
@@ -57,6 +56,7 @@ use {
         redirect_stderr_to_file,
     },
     rand::{seq::SliceRandom, thread_rng},
+    solana_program_runtime::runtime_config::RuntimeConfig,
     solana_runtime::{
         snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL,
         snapshot_config::{SnapshotConfig, SnapshotUsage},
@@ -1815,12 +1815,10 @@ pub fn main() {
         matches
             .value_of("public_tpu_forwards_addr")
             .map(|public_tpu_forwards_addr| {
-                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(
-                    |err| {
-                        eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
-                        exit(1);
-                    },
-                )
+                miraland_net_utils::parse_host_port(public_tpu_forwards_addr).unwrap_or_else(|err| {
+                    eprintln!("Failed to parse --public-tpu-forwards-address: {err}");
+                    exit(1);
+                })
             });
 
     let cluster_entrypoints = entrypoint_addrs

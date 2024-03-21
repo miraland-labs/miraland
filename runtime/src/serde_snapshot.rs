@@ -26,7 +26,7 @@ use {
         epoch_accounts_hash::EpochAccountsHash,
     },
     miraland_measure::measure::Measure,
-    miraland_svm::runtime_config::RuntimeConfig,
+    solana_program_runtime::runtime_config::RuntimeConfig,
     serde::{de::DeserializeOwned, Deserialize, Serialize},
     solana_sdk::{
         clock::{Epoch, Slot, UnixTimestamp},

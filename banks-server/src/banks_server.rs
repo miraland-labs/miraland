@@ -31,7 +31,6 @@ use {
         transaction::{self, MessageHash, SanitizedTransaction, VersionedTransaction},
     },
     std::{
-        convert::TryFrom,
         io,
         net::{Ipv4Addr, SocketAddr},
         sync::{atomic::AtomicBool, Arc, RwLock},
@@ -418,7 +417,7 @@ impl Banks for BanksServer {
         commitment: CommitmentLevel,
     ) -> Option<u64> {
         let bank = self.bank(commitment);
-        let sanitized_message = SanitizedMessage::try_from(message).ok()?;
+        let sanitized_message = SanitizedMessage::try_from_legacy_message(message).ok()?;
         bank.get_fee_for_message(&sanitized_message)
     }
 }

@@ -13,4 +13,4 @@ updates:
     timezone: Asia/Shanghai
   #labels:
   #  - "automerge"
-  open-pull-requests-limit: 6
+  open-pull-requests-limit: 0

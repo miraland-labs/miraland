@@ -262,10 +262,6 @@ pub mod allow_votes_to_directly_update_vote_state {
     solana_sdk::declare_id!("9NQbXmRjHa4LnJVcmCYCQxTAEmgWASZB6dyR8ujmPift");
 }
 
-pub mod cap_accounts_data_len {
-    solana_sdk::declare_id!("7qx6TcurUwSt6mRkwLjDrJDSxsMnNXsqcrCNzZeNq236");
-}
-
 pub mod max_tx_account_locks {
     solana_sdk::declare_id!("56EYkVzpWjvvrVjdmCXSTxFSSK3HUVFKavLyB3H9HvpK");
 }
@@ -452,10 +448,6 @@ pub mod nonce_must_be_advanceable {
 
 pub mod vote_authorize_with_seed {
     solana_sdk::declare_id!("GS1diGxAwxQdZxt5WroA6DGc3QgLZzsc2r7Lwd4HTk8H");
-}
-
-pub mod cap_accounts_data_size_per_block {
-    solana_sdk::declare_id!("FiHSf24BgV6screxfQ8JDNJorfayyTE1WULfWQa5zeEB");
 }
 
 pub mod preserve_rent_epoch_for_rent_exempt_accounts {
@@ -843,7 +835,6 @@ lazy_static! {
         (reject_non_rent_exempt_vote_withdraws::id(), "fail vote withdraw instructions which leave the account non-rent-exempt"),
         (evict_invalid_stakes_cache_entries::id(), "evict invalid stakes cache entries on epoch boundaries"),
         (allow_votes_to_directly_update_vote_state::id(), "enable direct vote state update"),
-        (cap_accounts_data_len::id(), "cap the accounts data len"),
         (max_tx_account_locks::id(), "enforce max number of locked accounts per transaction"),
         (require_rent_exempt_accounts::id(), "require all new transaction accounts with data to be rent-exempt"),
         (filter_votes_outside_slot_hashes::id(), "filter vote slots older than the slot hashes history"),
@@ -890,7 +881,6 @@ lazy_static! {
         (nonce_must_be_authorized::id(), "nonce must be authorized"),
         (nonce_must_be_advanceable::id(), "durable nonces must be advanceable"),
         (vote_authorize_with_seed::id(), "An instruction you can use to change a vote accounts authority when the current authority is a derived key #25860"),
-        (cap_accounts_data_size_per_block::id(), "cap the accounts data size per block #25517"),
         (stake_redelegate_instruction::id(), "enable the redelegate stake instruction #26294"),
         (preserve_rent_epoch_for_rent_exempt_accounts::id(), "preserve rent epoch for rent exempt accounts #26479"),
         (enable_bpf_loader_extend_program_ix::id(), "enable bpf upgradeable loader ExtendProgram instruction #25234"),

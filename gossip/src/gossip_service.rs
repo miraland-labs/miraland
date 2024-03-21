@@ -3,7 +3,11 @@
 use {
     crate::{cluster_info::ClusterInfo, legacy_contact_info::LegacyContactInfo as ContactInfo},
     crossbeam_channel::{unbounded, Sender},
-    miraland_client::{connection_cache::ConnectionCache, thin_client::ThinClient},
+    miraland_client::{
+        connection_cache::ConnectionCache,
+        rpc_client::RpcClient,
+        tpu_client::{TpuClient, TpuClientConfig, TpuClientWrapper},
+    },
     miraland_perf::recycler::Recycler,
     miraland_streamer::{
         socket::SocketAddrSpace,
@@ -50,6 +54,7 @@ impl GossipService {
         );
         let socket_addr_space = *cluster_info.socket_addr_space();
         let t_receiver = streamer::receiver(
+            "mlnRcvrGossip".to_string(),
             gossip_socket.clone(),
             exit.clone(),
             request_sender,
@@ -155,9 +160,8 @@ pub fn discover(
     if let Some(my_gossip_addr) = my_gossip_addr {
         info!("Gossip Address: {:?}", my_gossip_addr);
     }
-    let _ip_echo_server = ip_echo.map(|tcp_listener| {
-        miraland_net_utils::ip_echo_server(tcp_listener, Some(my_shred_version))
-    });
+    let _ip_echo_server = ip_echo
+        .map(|tcp_listener| miraland_net_utils::ip_echo_server(tcp_listener, Some(my_shred_version)));
     let (met_criteria, elapsed, all_peers, tvu_peers) = spy(
         spy_ref.clone(),
         num_nodes,
@@ -193,37 +197,40 @@ pub fn discover(
     ))
 }
 
-/// Creates a ThinClient by selecting a valid node at random
+/// Creates a TpuClient by selecting a valid node at random
 pub fn get_client(
     nodes: &[ContactInfo],
-    socket_addr_space: &SocketAddrSpace,
     connection_cache: Arc<ConnectionCache>,
-) -> ThinClient {
-    let protocol = connection_cache.protocol();
-    let nodes: Vec<_> = nodes
-        .iter()
-        .filter_map(|node| node.valid_client_facing_addr(protocol, socket_addr_space))
-        .collect();
+) -> TpuClientWrapper {
     let select = thread_rng().gen_range(0..nodes.len());
-    let (rpc, tpu) = nodes[select];
-    ThinClient::new(rpc, tpu, connection_cache)
-}
 
-pub fn get_multi_client(
-    nodes: &[ContactInfo],
-    socket_addr_space: &SocketAddrSpace,
-    connection_cache: Arc<ConnectionCache>,
-) -> (ThinClient, usize) {
-    let protocol = connection_cache.protocol();
-    let (rpc_addrs, tpu_addrs): (Vec<_>, Vec<_>) = nodes
-        .iter()
-        .filter_map(|node| node.valid_client_facing_addr(protocol, socket_addr_space))
-        .unzip();
-    let num_nodes = tpu_addrs.len();
-    (
-        ThinClient::new_from_addrs(rpc_addrs, tpu_addrs, connection_cache),
-        num_nodes,
-    )
+    let rpc_pubsub_url = format!("ws://{}/", nodes[select].rpc_pubsub().unwrap());
+    let rpc_url = format!("http://{}", nodes[select].rpc().unwrap());
+
+    match &*connection_cache {
+        ConnectionCache::Quic(cache) => TpuClientWrapper::Quic(
+            TpuClient::new_with_connection_cache(
+                Arc::new(RpcClient::new(rpc_url)),
+                rpc_pubsub_url.as_str(),
+                TpuClientConfig::default(),
+                cache.clone(),
+            )
+            .unwrap_or_else(|err| {
+                panic!("Could not create TpuClient with Quic Cache {err:?}");
+            }),
+        ),
+        ConnectionCache::Udp(cache) => TpuClientWrapper::Udp(
+            TpuClient::new_with_connection_cache(
+                Arc::new(RpcClient::new(rpc_url)),
+                rpc_pubsub_url.as_str(),
+                TpuClientConfig::default(),
+                cache.clone(),
+            )
+            .unwrap_or_else(|err| {
+                panic!("Could not create TpuClient with Udp Cache {err:?}");
+            }),
+        ),
+    }
 }
 
 fn spy(

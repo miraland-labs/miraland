@@ -27,7 +27,7 @@ use {
     miraland_metrics::datapoint_error,
     miraland_rayon_threadlimit::{get_max_thread_count, get_thread_count},
     miraland_svm::{
-        runtime_config::RuntimeConfig,
+        transaction_processor::ExecutionRecordingConfig,
         transaction_results::{
             TransactionExecutionDetails, TransactionExecutionResult, TransactionResults,
         },
@@ -35,7 +35,10 @@ use {
     miraland_transaction_status::token_balances::TransactionTokenBalancesSet,
     rayon::{prelude::*, ThreadPool},
     scopeguard::defer,
-    solana_program_runtime::timings::{ExecuteTimingType, ExecuteTimings, ThreadExecuteTimings},
+    solana_program_runtime::{
+        runtime_config::RuntimeConfig,
+        timings::{ExecuteTimingType, ExecuteTimings, ThreadExecuteTimings},
+    },
     solana_runtime::{
         accounts_background_service::{AbsRequestSender, SnapshotRequestKind},
         bank::{Bank, TransactionBalancesSet},
@@ -163,9 +166,7 @@ pub fn execute_batch(
         batch,
         MAX_PROCESSING_AGE,
         transaction_status_sender.is_some(),
-        transaction_status_sender.is_some(),
-        transaction_status_sender.is_some(),
-        transaction_status_sender.is_some(),
+        ExecutionRecordingConfig::new_single_setting(transaction_status_sender.is_some()),
         timings,
         log_messages_bytes_limit,
     );
@@ -676,8 +677,9 @@ pub enum BlockstoreProcessorError {
     RootBankWithMismatchedCapitalization(Slot),
 }
 
-/// Callback for accessing bank state while processing the blockstore
-pub type ProcessCallback = Arc<dyn Fn(&Bank) + Sync + Send>;
+/// Callback for accessing bank state after each slot is confirmed while
+/// processing the blockstore
+pub type ProcessSlotCallback = Arc<dyn Fn(&Bank) + Sync + Send>;
 
 #[derive(Default, Clone)]
 pub struct ProcessOptions {
@@ -685,6 +687,7 @@ pub struct ProcessOptions {
     pub run_verification: bool,
     pub full_leader_cache: bool,
     pub halt_at_slot: Option<Slot>,
+    pub slot_callback: Option<ProcessSlotCallback>,
     pub new_hard_forks: Option<Vec<Slot>>,
     pub debug_keys: Option<Arc<HashSet<Pubkey>>>,
     pub account_indexes: AccountSecondaryIndexes,
@@ -1810,6 +1813,11 @@ fn process_single_slot(
         result?
     }
     bank.freeze(); // all banks handled by this routine are created from complete slots
+
+    if let Some(slot_callback) = &opts.slot_callback {
+        slot_callback(bank);
+    }
+
     if blockstore.is_primary_access() {
         blockstore.insert_bank_hash(bank.slot(), bank.hash(), false);
     }
@@ -1943,6 +1951,7 @@ pub mod tests {
         },
         assert_matches::assert_matches,
         miraland_entry::entry::{create_ticks, next_entry, next_entry_mut},
+        miraland_svm::transaction_processor::ExecutionRecordingConfig,
         rand::{thread_rng, Rng},
         solana_program_runtime::declare_process_instruction,
         solana_runtime::{
@@ -3955,9 +3964,7 @@ pub mod tests {
             &batch,
             MAX_PROCESSING_AGE,
             false,
-            false,
-            false,
-            false,
+            ExecutionRecordingConfig::new_single_setting(false),
             &mut ExecuteTimings::default(),
             None,
         );

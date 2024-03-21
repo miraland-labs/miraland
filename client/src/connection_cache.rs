@@ -260,6 +260,7 @@ mod tests {
             thread: response_recv_thread,
             key_updater: _,
         } = miraland_streamer::quic::spawn_server(
+            "mlnQuicTest",
             "quic_streamer_test",
             response_recv_socket,
             &keypair2,
