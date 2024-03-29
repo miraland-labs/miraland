@@ -24,6 +24,7 @@ miraland-logger = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-net-utils = { workspace = true }
 miraland-perf = { workspace = true }
+miraland-quic-client = { workspace = true }
 miraland-rpc = { workspace = true }
 miraland-rpc-client = { workspace = true }
 miraland-sdk = { workspace = true }
@@ -38,4 +39,3 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dev-dependencies]
 miraland-local-cluster = { workspace = true }
-miraland-thin-client = { workspace = true }

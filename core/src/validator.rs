@@ -34,7 +34,6 @@ use {
         accounts_index::AccountSecondaryIndexes,
         accounts_update_notifier_interface::AccountsUpdateNotifier,
         hardened_unpack::{open_genesis_config, MAX_GENESIS_ARCHIVE_UNPACKED_SIZE},
-        starting_snapshot_storages::StartingSnapshotStorages,
         utils::{move_and_async_delete_path, move_and_async_delete_path_contents},
     },
     miraland_client::connection_cache::{ConnectionCache, Protocol},
@@ -93,6 +92,7 @@ use {
     miraland_unified_scheduler_pool::DefaultSchedulerPool,
     miraland_wen_restart::wen_restart::wait_for_wen_restart,
     quinn::Endpoint,
+    solana_program_runtime::runtime_config::RuntimeConfig,
     solana_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService, DroppedSlotsReceiver,
@@ -108,7 +108,6 @@ use {
         snapshot_hash::StartingSnapshotHashes,
         snapshot_utils::{self, clean_orphaned_account_snapshot_dirs},
     },
-    solana_program_runtime::runtime_config::RuntimeConfig,
     solana_sdk::{
         clock::Slot,
         epoch_schedule::MAX_LEADER_SCHEDULE_EPOCH_OFFSET,
@@ -691,7 +690,6 @@ impl Validator {
             completed_slots_receiver,
             leader_schedule_cache,
             starting_snapshot_hashes,
-            starting_snapshot_storages,
             TransactionHistoryServices {
                 transaction_status_sender,
                 transaction_status_service,
@@ -781,7 +779,6 @@ impl Validator {
             accounts_package_sender.clone(),
             accounts_package_receiver,
             snapshot_package_sender,
-            starting_snapshot_storages,
             exit.clone(),
             config.snapshot_config.clone(),
         );
@@ -1770,7 +1767,6 @@ fn load_blockstore(
         CompletedSlotsReceiver,
         LeaderScheduleCache,
         Option<StartingSnapshotHashes>,
-        StartingSnapshotStorages,
         TransactionHistoryServices,
         blockstore_processor::ProcessOptions,
         BlockstoreRootScan,
@@ -1860,27 +1856,23 @@ fn load_blockstore(
     let entry_notifier_service = entry_notifier
         .map(|entry_notifier| EntryNotifierService::new(entry_notifier, exit.clone()));
 
-    let (
-        bank_forks,
-        mut leader_schedule_cache,
-        starting_snapshot_hashes,
-        starting_snapshot_storages,
-    ) = bank_forks_utils::load_bank_forks(
-        &genesis_config,
-        &blockstore,
-        config.account_paths.clone(),
-        Some(&config.snapshot_config),
-        &process_options,
-        transaction_history_services
-            .cache_block_meta_sender
-            .as_ref(),
-        entry_notifier_service
-            .as_ref()
-            .map(|service| service.sender()),
-        accounts_update_notifier,
-        exit,
-    )
-    .map_err(|err| err.to_string())?;
+    let (bank_forks, mut leader_schedule_cache, starting_snapshot_hashes) =
+        bank_forks_utils::load_bank_forks(
+            &genesis_config,
+            &blockstore,
+            config.account_paths.clone(),
+            Some(&config.snapshot_config),
+            &process_options,
+            transaction_history_services
+                .cache_block_meta_sender
+                .as_ref(),
+            entry_notifier_service
+                .as_ref()
+                .map(|service| service.sender()),
+            accounts_update_notifier,
+            exit,
+        )
+        .map_err(|err| err.to_string())?;
 
     // Before replay starts, set the callbacks in each of the banks in BankForks so that
     // all dropped banks come through the `pruned_banks_receiver` channel. This way all bank
@@ -1906,7 +1898,6 @@ fn load_blockstore(
         completed_slots_receiver,
         leader_schedule_cache,
         starting_snapshot_hashes,
-        starting_snapshot_storages,
         transaction_history_services,
         process_options,
         blockstore_root_scan,

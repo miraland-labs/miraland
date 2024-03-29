@@ -40,7 +40,4 @@ extern crate miraland_metrics;
 extern crate log;
 
 #[macro_use]
-extern crate lazy_static;
-
-#[macro_use]
 extern crate miraland_frozen_abi_macro;

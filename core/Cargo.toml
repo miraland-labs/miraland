@@ -97,7 +97,6 @@ miraland-program-runtime = { workspace = true }
 miraland-runtime = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-sdk = { workspace = true, features = ["dev-context-only-utils"] }
 miraland-stake-program = { workspace = true }
-raptorq = { workspace = true }
 serde_json = { workspace = true }
 serial_test = { workspace = true }
 static_assertions = { workspace = true }

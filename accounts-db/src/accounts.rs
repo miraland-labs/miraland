@@ -1490,7 +1490,7 @@ mod tests {
             .get(&keypair2.pubkey())
             .is_none());
 
-        accounts.unlock_accounts(txs.iter(), &results);
+        accounts.unlock_accounts(txs.iter().zip(&results));
 
         // check all locks to be removed
         assert!(accounts

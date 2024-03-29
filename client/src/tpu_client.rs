@@ -7,6 +7,7 @@ use {
     miraland_quic_client::{QuicConfig, QuicConnectionManager, QuicPool},
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_tpu_client::tpu_client::{Result, TpuClient as BackendTpuClient},
+    miraland_udp_client::{UdpConfig, UdpConnectionManager, UdpPool},
     solana_sdk::{
         message::Message,
         signers::Signers,
@@ -19,6 +20,13 @@ pub use {
     crate::nonblocking::tpu_client::TpuSenderError,
     miraland_tpu_client::tpu_client::{TpuClientConfig, DEFAULT_FANOUT_SLOTS, MAX_FANOUT_SLOTS},
 };
+
+pub type QuicTpuClient = TpuClient<QuicPool, QuicConnectionManager, QuicConfig>;
+
+pub enum TpuClientWrapper {
+    Quic(TpuClient<QuicPool, QuicConnectionManager, QuicConfig>),
+    Udp(TpuClient<UdpPool, UdpConnectionManager, UdpConfig>),
+}
 
 /// Client which sends transactions directly to the current leader's TPU port over UDP.
 /// The client uses RPC to determine the current leader and fetch node contact info

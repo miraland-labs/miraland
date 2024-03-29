@@ -22,6 +22,7 @@ miraland-gossip = { workspace = true }
 miraland-ledger = { workspace = true }
 miraland-logger = { workspace = true }
 miraland-pubsub-client = { workspace = true }
+miraland-quic-client = { workspace = true }
 miraland-rpc-client = { workspace = true }
 miraland-rpc-client-api = { workspace = true }
 miraland-runtime = { workspace = true }

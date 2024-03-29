@@ -177,9 +177,9 @@ dependencies = [
 
 [[package]]
 name = "arc-swap"
-version = "1.7.0"
+version = "1.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b3d0060af21e8d11a926981cc00c6c1541aa91dd64b9f881985c3da1094425f"
+checksum = "69f7f8c3906b62b754cd5326047894316021dcfe5a194c8ea52bdd94934a3457"
 
 [[package]]
 name = "ark-bn254"
@@ -435,18 +435,18 @@ checksum = "16e62a023e7c117e27523144c5d2459f4397fcc3cab0085af8e2224f643a0193"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
 name = "async-trait"
-version = "0.1.78"
+version = "0.1.79"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "461abc97219de0eaaf81fe3ef974a540158f3d079c2ab200f891f1a2ef201e85"
+checksum = "a507401cad91ec6a857ed5513a2073c82a9b9048762b885bb98655b306964681"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -462,9 +462,9 @@ dependencies = [
 
 [[package]]
 name = "autocfg"
-version = "1.1.0"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
+checksum = "f1fdabc7756949593fe60f30ec81974b613357de856987752631dea1e3394c80"
 
 [[package]]
 name = "autotools"
@@ -536,9 +536,9 @@ dependencies = [
 
 [[package]]
 name = "backtrace"
-version = "0.3.69"
+version = "0.3.71"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2089b7e3f35b9dd2d0ed921ead4f6d318c27680d4a5bd167b3ee120edb105837"
+checksum = "26b05800d2e817c8b3b4b54abd461726265fa9789ae34330622f2db9ee696f9d"
 dependencies = [
  "addr2line",
  "cc",
@@ -568,6 +568,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9d297deb1925b89f2ccc13d7635fa0714f12c87adce1c75356b39ca9b7178567"
 
 [[package]]
+name = "base64"
+version = "0.22.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9475866fec1451be56a3c2400fd081ff546538961565ccb5b7142cbd22bc7a51"
+
+[[package]]
 name = "bincode"
 version = "1.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -588,13 +594,13 @@ dependencies = [
  "lazy_static",
  "lazycell",
  "peeking_take_while",
- "prettyplease 0.2.16",
+ "prettyplease 0.2.17",
  "proc-macro2",
  "quote",
  "regex",
  "rustc-hash",
  "shlex",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -697,11 +703,11 @@ dependencies = [
 
 [[package]]
 name = "borsh"
-version = "1.3.1"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f58b559fd6448c6e2fd0adb5720cd98a2506594cafa4737ff98c396f3e82f667"
+checksum = "0901fc8eb0aca4c83be0106d6f2db17d86a08dfc2c25f0e84464bf381158add6"
 dependencies = [
- "borsh-derive 1.3.1",
+ "borsh-derive 1.4.0",
  "cfg_aliases",
 ]
 
@@ -733,15 +739,15 @@ dependencies = [
 
 [[package]]
 name = "borsh-derive"
-version = "1.3.1"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7aadb5b6ccbd078890f6d7003694e33816e6b784358f18e15e7e6d9f065a57cd"
+checksum = "51670c3aa053938b0ee3bd67c3817e471e626151131b934038e83c5bf8de48f5"
 dependencies = [
  "once_cell",
  "proc-macro-crate 3.1.0",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
  "syn_derive",
 ]
 
@@ -876,7 +882,7 @@ checksum = "4da9a32f3fed317401fa3c862968128267c3106685286e15d5aaa3d7389c2f60"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -887,9 +893,9 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "bytes"
-version = "1.5.0"
+version = "1.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2bd12c1caf447e69cd4528f47f94d203fd2582878ecb9e9465484c4148a8223"
+checksum = "514de17de45fdb8dc022b1a7975556c53c86f9f0aa5f534b98977b171857c2c9"
 
 [[package]]
 name = "bytesize"
@@ -939,9 +945,9 @@ dependencies = [
 
 [[package]]
 name = "cargo-platform"
-version = "0.1.7"
+version = "0.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "694c8807f2ae16faecc43dc17d74b3eb042482789fd0eb64b39a2e04e087053f"
+checksum = "24b1f0365a6c6bb4020cd05806fd0d33c44d38046b8bd7f0e40814b9763cabfc"
 dependencies = [
  "serde",
 ]
@@ -1014,9 +1020,9 @@ checksum = "fd16c4719339c4530435d38e511904438d07cce7950afa3718a84ac36c10e89e"
 
 [[package]]
 name = "chrono"
-version = "0.4.35"
+version = "0.4.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8eaf5903dcbc0a39312feb77df2ff4c76387d591b9fc7b04a238dcf8bb62639a"
+checksum = "8a0d04d43504c61aa6c7531f1871dd0d418d91130162063b789da00fd7057a5e"
 dependencies = [
  "android-tzdata",
  "iana-time-zone",
@@ -1117,9 +1123,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.3"
+version = "4.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "949626d00e063efc93b6dca932419ceb5432f99769911c0b995f7e884c778813"
+checksum = "90bc066a67923782aa8515dbaea16946c5bcc5addbd668bb80af688e53e548a0"
 dependencies = [
  "clap_builder",
 ]
@@ -1304,7 +1310,7 @@ dependencies = [
  "anes",
  "cast 0.3.0",
  "ciborium",
- "clap 4.5.3",
+ "clap 4.5.4",
  "criterion-plot",
  "is-terminal",
  "itertools",
@@ -1482,7 +1488,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "strsim 0.10.0",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -1493,7 +1499,7 @@ checksum = "a668eda54683121533a393014d8692171709ff57a7d61f187b6e782719f8933f"
 dependencies = [
  "darling_core",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -1564,7 +1570,7 @@ checksum = "67e77553c4162a157adbf834ebae5b415acbecbeafc7a74b0e886657506a7611"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -1656,7 +1662,7 @@ checksum = "487585f4d0c6655fe74905e2504d8ad6908e4db67f744eb140876906c2f3175d"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -1679,7 +1685,7 @@ checksum = "a6cbae11b3de8fce2a456e8ea3dada226b35fe791f0dc1d360c0941f0bb681f3"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -1785,7 +1791,7 @@ checksum = "03cdc46ec28bd728e67540c528013c6a10eb69a02eb31078a1bda695438cbfb8"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -1798,7 +1804,7 @@ dependencies = [
  "num-traits",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -1869,9 +1875,9 @@ dependencies = [
 
 [[package]]
 name = "fastrand"
-version = "2.0.1"
+version = "2.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "25cbce373ec4653f1a01a31e8a5e5ec0c622dc27ff9c4e6606eefef5cbbed4a5"
+checksum = "658bd65b1cf4c852a3cc96f18a8ce7b5640f6b703f905c7d74532294c2a63984"
 
 [[package]]
 name = "fd-lock"
@@ -2055,7 +2061,7 @@ checksum = "87750cf4b7a4c0625b1529e4c543c2182106e4dedc60a2a6455e00d212c489ac"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -2115,7 +2121,7 @@ dependencies = [
 
 [[package]]
 name = "gen-headers"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "log",
  "regex",
@@ -2123,7 +2129,7 @@ dependencies = [
 
 [[package]]
 name = "gen-syscall-list"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "regex",
 ]
@@ -2242,7 +2248,7 @@ dependencies = [
  "futures-sink",
  "futures-util",
  "http",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "slab",
  "tokio",
  "tokio-util 0.7.10",
@@ -2640,9 +2646,9 @@ dependencies = [
 
 [[package]]
 name = "indexmap"
-version = "2.2.5"
+version = "2.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b0b929d511467233429c45a44ac1dcaa21ba0f5ba11e4879e6ed28ddb4f9df4"
+checksum = "168fb715dda47215e360912c096649d23d58bf392ac62f73919e831745e40f26"
 dependencies = [
  "equivalent",
  "hashbrown 0.14.3",
@@ -2699,9 +2705,9 @@ dependencies = [
 
 [[package]]
 name = "itoa"
-version = "1.0.10"
+version = "1.0.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1a46d1a171d865aa5f83f92695765caa047a9b4cbae2cbf37dbd613a793fd4c"
+checksum = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
 
 [[package]]
 name = "jobserver"
@@ -2991,9 +2997,9 @@ dependencies = [
 
 [[package]]
 name = "libz-sys"
-version = "1.1.15"
+version = "1.1.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "037731f5d3aaa87a5675e895b63ddff1a87624bc29f77004ea829809654e48f6"
+checksum = "5e143b5e666b2695d28f6bca6497720813f699c9602dd7f5cac91008b8ada7f9"
 dependencies = [
  "cc",
  "pkg-config",
@@ -3099,9 +3105,9 @@ dependencies = [
 
 [[package]]
 name = "memchr"
-version = "2.7.1"
+version = "2.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "523dc4f511e55ab87b694dc30d0f820d60906ef06413f93d4d7a1385599cc149"
+checksum = "6c8640c5d730cb13ebd907d8d04b52f55ac9a2eec55b440c8892f40d56c76c1d"
 
 [[package]]
 name = "memmap2"
@@ -3132,9 +3138,9 @@ dependencies = [
 
 [[package]]
 name = "memoffset"
-version = "0.9.0"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5a634b1c61a95585bd15607c6ab0c4e5b226e695ff2800ba0cdccddf208c406c"
+checksum = "488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a"
 dependencies = [
  "autocfg",
 ]
@@ -3191,11 +3197,11 @@ dependencies = [
 
 [[package]]
 name = "miraland-account-decoder"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "Inflector",
  "assert_matches",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "bs58",
  "bv",
@@ -3216,7 +3222,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-accounts-bench"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "crossbeam-deque",
@@ -3231,7 +3237,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-accounts-cluster-bench"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "log",
@@ -3261,7 +3267,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-accounts-db"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "arrayref",
  "assert_matches",
@@ -3279,14 +3285,14 @@ dependencies = [
  "fnv",
  "im",
  "index_list",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "itertools",
  "lazy_static",
  "libsecp256k1",
  "log",
  "lz4",
  "memmap2",
- "memoffset 0.9.0",
+ "memoffset 0.9.1",
  "miraland-accounts-db",
  "miraland-bucket-map",
  "miraland-config-program",
@@ -3330,7 +3336,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-address-lookup-table-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "bytemuck",
@@ -3349,7 +3355,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-address-lookup-table-program-tests"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -3360,7 +3366,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banking-bench"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 3.2.25",
  "crossbeam-channel",
@@ -3384,9 +3390,9 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
- "borsh 1.3.1",
+ "borsh 1.4.0",
  "futures 0.3.30",
  "miraland-banks-interface",
  "miraland-banks-server",
@@ -3401,7 +3407,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-interface"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "miraland-sdk",
  "serde",
@@ -3410,7 +3416,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-banks-server"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "crossbeam-channel",
@@ -3429,7 +3435,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bench-streamer"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 3.2.25",
  "crossbeam-channel",
@@ -3440,7 +3446,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bench-tps"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "crossbeam-channel",
@@ -3466,14 +3472,13 @@ dependencies = [
  "miraland-sdk",
  "miraland-streamer",
  "miraland-test-validator",
- "miraland-thin-client",
  "miraland-tpu-client",
  "miraland-transaction-status",
  "miraland-version",
  "rand 0.8.5",
  "rayon",
  "serde_json",
- "serde_yaml 0.9.33",
+ "serde_yaml 0.9.34+deprecated",
  "serial_test",
  "solarti-instruction-padding",
  "tempfile",
@@ -3482,7 +3487,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bloom"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bv",
  "fnv",
@@ -3499,14 +3504,14 @@ dependencies = [
 
 [[package]]
 name = "miraland-bpf-loader-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
  "byteorder",
  "libsecp256k1",
  "log",
- "memoffset 0.9.0",
+ "memoffset 0.9.1",
  "miraland-measure",
  "miraland-program-runtime",
  "miraland-sdk",
@@ -3520,7 +3525,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bpf-loader-program-tests"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -3531,7 +3536,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-bucket-map"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bv",
  "bytemuck",
@@ -3550,7 +3555,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cargo-build-bpf"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "log",
  "miraland-logger",
@@ -3558,7 +3563,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cargo-build-sbf"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_cmd",
  "bzip2",
@@ -3579,7 +3584,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cargo-registry"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "flate2",
@@ -3608,11 +3613,11 @@ dependencies = [
 
 [[package]]
 name = "miraland-cargo-test-bpf"
-version = "1.19.0"
+version = "2.0.0"
 
 [[package]]
 name = "miraland-cargo-test-sbf"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "cargo_metadata",
  "clap 3.2.25",
@@ -3623,7 +3628,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-clap-utils"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "chrono",
@@ -3640,7 +3645,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-clap-v3-utils"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "chrono",
@@ -3658,7 +3663,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cli"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -3712,7 +3717,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cli-config"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "anyhow",
  "dirs-next",
@@ -3721,16 +3726,16 @@ dependencies = [
  "miraland-sdk",
  "serde",
  "serde_derive",
- "serde_yaml 0.9.33",
+ "serde_yaml 0.9.34+deprecated",
  "url 2.5.0",
 ]
 
 [[package]]
 name = "miraland-cli-output"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "Inflector",
- "base64 0.21.7",
+ "base64 0.22.0",
  "chrono",
  "clap 2.34.0",
  "console",
@@ -3753,7 +3758,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "async-trait",
  "bincode",
@@ -3761,7 +3766,7 @@ dependencies = [
  "dashmap",
  "futures 0.3.30",
  "futures-util",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "indicatif",
  "log",
  "miraland-connection-cache",
@@ -3785,7 +3790,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-client-test"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "futures-util",
  "miraland-client",
@@ -3815,7 +3820,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-compute-budget-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "miraland-program-runtime",
  "miraland-sdk",
@@ -3823,7 +3828,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-config-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "chrono",
@@ -3836,13 +3841,13 @@ dependencies = [
 
 [[package]]
 name = "miraland-connection-cache"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "async-trait",
  "bincode",
  "crossbeam-channel",
  "futures-util",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "indicatif",
  "log",
  "miraland-logger",
@@ -3859,10 +3864,10 @@ dependencies = [
 
 [[package]]
 name = "miraland-core"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "bs58",
  "bytes",
@@ -3920,7 +3925,6 @@ dependencies = [
  "quinn",
  "rand 0.8.5",
  "rand_chacha 0.3.1",
- "raptorq",
  "rayon",
  "rolling-file",
  "rustc_version",
@@ -3945,7 +3949,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-cost-model"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "lazy_static",
  "log",
@@ -3970,7 +3974,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-dos"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "clap 3.2.25",
@@ -3987,11 +3991,11 @@ dependencies = [
  "miraland-measure",
  "miraland-net-utils",
  "miraland-perf",
+ "miraland-quic-client",
  "miraland-rpc",
  "miraland-rpc-client",
  "miraland-sdk",
  "miraland-streamer",
- "miraland-thin-client",
  "miraland-tpu-client",
  "miraland-version",
  "rand 0.8.5",
@@ -4000,7 +4004,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-download-utils"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "console",
  "indicatif",
@@ -4012,7 +4016,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-ed25519-program-tests"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "ed25519-dalek",
@@ -4023,7 +4027,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-entry"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -4045,7 +4049,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-faucet"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "byteorder",
@@ -4067,7 +4071,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-frozen-abi"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bitflags 2.5.0",
  "block-buffer 0.10.4",
@@ -4091,19 +4095,19 @@ dependencies = [
 
 [[package]]
 name = "miraland-frozen-abi-macro"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "proc-macro2",
  "quote",
  "rustc_version",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
 name = "miraland-genesis"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "clap 2.34.0",
  "itertools",
@@ -4120,13 +4124,13 @@ dependencies = [
  "miraland-vote-program",
  "serde",
  "serde_json",
- "serde_yaml 0.9.33",
+ "serde_yaml 0.9.34+deprecated",
  "tempfile",
 ]
 
 [[package]]
 name = "miraland-genesis-utils"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "log",
  "miraland-accounts-db",
@@ -4137,7 +4141,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-geyser-plugin-interface"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "log",
  "miraland-sdk",
@@ -4147,7 +4151,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-geyser-plugin-manager"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bs58",
  "crossbeam-channel",
@@ -4172,7 +4176,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-geyser-plugin-postgres"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bs58",
  "bytemuck",
@@ -4209,7 +4213,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-gossip"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -4217,13 +4221,14 @@ dependencies = [
  "clap 2.34.0",
  "crossbeam-channel",
  "flate2",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "itertools",
  "log",
  "lru",
  "miraland-bloom",
  "miraland-clap-utils",
  "miraland-client",
+ "miraland-connection-cache",
  "miraland-entry",
  "miraland-frozen-abi",
  "miraland-frozen-abi-macro",
@@ -4237,7 +4242,6 @@ dependencies = [
  "miraland-runtime",
  "miraland-sdk",
  "miraland-streamer",
- "miraland-thin-client",
  "miraland-tpu-client",
  "miraland-version",
  "miraland-vote",
@@ -4260,7 +4264,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-install"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "atty",
  "bincode",
@@ -4285,7 +4289,7 @@ dependencies = [
  "semver",
  "serde",
  "serde_yaml 0.8.26",
- "serde_yaml 0.9.33",
+ "serde_yaml 0.9.34+deprecated",
  "tar",
  "tempfile",
  "url 2.5.0",
@@ -4295,7 +4299,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-keygen"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bs58",
  "clap 3.2.25",
@@ -4312,7 +4316,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-ledger"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -4382,7 +4386,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-ledger-tool"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_cmd",
  "bs58",
@@ -4433,7 +4437,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-loader-v4-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "log",
@@ -4445,7 +4449,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-local-cluster"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "crossbeam-channel",
@@ -4463,6 +4467,7 @@ dependencies = [
  "miraland-ledger",
  "miraland-logger",
  "miraland-pubsub-client",
+ "miraland-quic-client",
  "miraland-rpc-client",
  "miraland-rpc-client-api",
  "miraland-runtime",
@@ -4484,7 +4489,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-log-analyzer"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "byte-unit",
  "clap 3.2.25",
@@ -4496,7 +4501,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-logger"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "env_logger",
  "lazy_static",
@@ -4505,7 +4510,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-measure"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "log",
  "miraland-sdk",
@@ -4513,11 +4518,11 @@ dependencies = [
 
 [[package]]
 name = "miraland-memory-management"
-version = "1.19.0"
+version = "2.0.0"
 
 [[package]]
 name = "miraland-merkle-root-bench"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "log",
@@ -4530,7 +4535,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-merkle-tree"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "fast-math",
  "hex",
@@ -4539,7 +4544,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-metrics"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "crossbeam-channel",
  "env_logger",
@@ -4555,7 +4560,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-net-shaper"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 3.2.25",
  "miraland-logger",
@@ -4566,7 +4571,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-net-utils"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "clap 3.2.25",
@@ -4592,7 +4597,7 @@ checksum = "09a9d96db1b8a67b40e35cc7ace86b9243a0fa28c81e598268153c6291e65eb4"
 
 [[package]]
 name = "miraland-notifier"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "log",
  "miraland-sdk",
@@ -4602,7 +4607,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-perf"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "ahash 0.8.11",
  "assert_matches",
@@ -4633,7 +4638,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-poh"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -4655,7 +4660,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-poh-bench"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 3.2.25",
  "log",
@@ -4670,7 +4675,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "anyhow",
  "arbitrary",
@@ -4680,13 +4685,13 @@ dependencies = [
  "ark-serialize",
  "array-bytes",
  "assert_matches",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "bitflags 2.5.0",
  "blake3",
  "borsh 0.10.3",
  "borsh 0.9.3",
- "borsh 1.3.1",
+ "borsh 1.4.0",
  "bs58",
  "bv",
  "bytemuck",
@@ -4702,7 +4707,7 @@ dependencies = [
  "libsecp256k1",
  "light-poseidon",
  "log",
- "memoffset 0.9.0",
+ "memoffset 0.9.1",
  "miraland-frozen-abi",
  "miraland-frozen-abi-macro",
  "miraland-logger",
@@ -4729,10 +4734,10 @@ dependencies = [
 
 [[package]]
 name = "miraland-program-runtime"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "eager",
  "enum-iterator",
@@ -4759,11 +4764,11 @@ dependencies = [
 
 [[package]]
 name = "miraland-program-test"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "async-trait",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "chrono-humanize",
  "crossbeam-channel",
@@ -4789,7 +4794,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-pubsub-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "anyhow",
  "crossbeam-channel",
@@ -4813,7 +4818,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-quic-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "async-mutex",
  "async-trait",
@@ -4840,7 +4845,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rayon-threadlimit"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "lazy_static",
  "num_cpus",
@@ -4848,7 +4853,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-remote-wallet"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "console",
@@ -4868,9 +4873,9 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "bs58",
  "crossbeam-channel",
@@ -4928,11 +4933,11 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "async-trait",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "bs58",
  "crossbeam-channel",
@@ -4957,9 +4962,9 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc-client-api"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
- "base64 0.21.7",
+ "base64 0.22.0",
  "bs58",
  "jsonrpc-core",
  "miraland-account-decoder",
@@ -4977,7 +4982,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc-client-nonce-utils"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "anyhow",
  "clap 2.34.0",
@@ -4994,7 +4999,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-rpc-test"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "bs58",
@@ -5021,12 +5026,12 @@ dependencies = [
 
 [[package]]
 name = "miraland-runtime"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "aquamarine",
  "arrayref",
  "assert_matches",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "blake3",
  "bv",
@@ -5048,7 +5053,7 @@ dependencies = [
  "lru",
  "lz4",
  "memmap2",
- "memoffset 0.9.0",
+ "memoffset 0.9.1",
  "miraland-accounts-db",
  "miraland-address-lookup-table-program",
  "miraland-bpf-loader-program",
@@ -5104,7 +5109,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-runtime-transaction"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "log",
@@ -5118,14 +5123,14 @@ dependencies = [
 
 [[package]]
 name = "miraland-sdk"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "anyhow",
  "assert_matches",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "bitflags 2.5.0",
- "borsh 1.3.1",
+ "borsh 1.4.0",
  "bs58",
  "bytemuck",
  "byteorder",
@@ -5177,13 +5182,13 @@ dependencies = [
 
 [[package]]
 name = "miraland-sdk-macro"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bs58",
  "proc-macro2",
  "quote",
  "rustversion",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -5194,7 +5199,7 @@ checksum = "0491e2b51783e99b6031aebb96f58fb92d73855f5c80a104331bf9825dc51fef"
 
 [[package]]
 name = "miraland-send-transaction-service"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "crossbeam-channel",
  "log",
@@ -5209,7 +5214,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-stake-accounts"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "miraland-clap-utils",
@@ -5225,7 +5230,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-stake-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -5242,7 +5247,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-storage-bigtable"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "backoff",
  "bincode",
@@ -5274,7 +5279,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-storage-proto"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "bs58",
@@ -5290,7 +5295,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-store-tool"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "log",
@@ -5302,7 +5307,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-streamer"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "async-channel",
@@ -5310,7 +5315,7 @@ dependencies = [
  "crossbeam-channel",
  "futures-util",
  "histogram",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "itertools",
  "libc",
  "log",
@@ -5332,7 +5337,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-svm"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "itertools",
@@ -5353,7 +5358,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-system-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -5367,9 +5372,9 @@ dependencies = [
 
 [[package]]
 name = "miraland-test-validator"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "crossbeam-channel",
  "log",
@@ -5397,7 +5402,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-thin-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "log",
@@ -5411,7 +5416,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-tokens"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -5420,7 +5425,7 @@ dependencies = [
  "console",
  "csv",
  "ctrlc",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "indicatif",
  "miraland-account-decoder",
  "miraland-clap-utils",
@@ -5444,12 +5449,12 @@ dependencies = [
 
 [[package]]
 name = "miraland-tpu-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "async-trait",
  "bincode",
  "futures-util",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "indicatif",
  "log",
  "miraland-connection-cache",
@@ -5466,7 +5471,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-transaction-dos"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "clap 2.34.0",
@@ -5493,12 +5498,12 @@ dependencies = [
 
 [[package]]
 name = "miraland-transaction-status"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "Inflector",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
- "borsh 1.3.1",
+ "borsh 1.4.0",
  "bs58",
  "lazy_static",
  "log",
@@ -5516,7 +5521,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-turbine"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -5553,7 +5558,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-udp-client"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "async-trait",
  "miraland-connection-cache",
@@ -5566,14 +5571,14 @@ dependencies = [
 
 [[package]]
 name = "miraland-unified-scheduler-logic"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "miraland-sdk",
 ]
 
 [[package]]
 name = "miraland-unified-scheduler-pool"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "crossbeam-channel",
@@ -5590,7 +5595,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-upload-perf"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "miraland-metrics",
  "serde_json",
@@ -5598,7 +5603,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-validator"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "chrono",
  "clap 2.34.0",
@@ -5635,6 +5640,7 @@ dependencies = [
  "miraland-perf",
  "miraland-poh",
  "miraland-program-runtime",
+ "miraland-rayon-threadlimit",
  "miraland-rpc",
  "miraland-rpc-client",
  "miraland-rpc-client-api",
@@ -5653,7 +5659,7 @@ dependencies = [
  "rayon",
  "serde",
  "serde_json",
- "serde_yaml 0.9.33",
+ "serde_yaml 0.9.34+deprecated",
  "signal-hook",
  "solarti-token-2022",
  "symlink",
@@ -5664,7 +5670,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-version"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "log",
  "miraland-frozen-abi",
@@ -5678,7 +5684,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-vote"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bincode",
  "crossbeam-channel",
@@ -5697,7 +5703,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-vote-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "assert_matches",
  "bincode",
@@ -5720,7 +5726,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-watchtower"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "clap 2.34.0",
  "humantime",
@@ -5739,7 +5745,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-wen-restart"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "anyhow",
  "assert_matches",
@@ -5766,7 +5772,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-keygen"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bs58",
  "clap 3.2.25",
@@ -5785,7 +5791,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-proof-program"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bytemuck",
  "criterion",
@@ -5799,7 +5805,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-proof-program-tests"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "bytemuck",
  "curve25519-dalek",
@@ -5811,10 +5817,10 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-sdk"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "aes-gcm-siv",
- "base64 0.21.7",
+ "base64 0.22.0",
  "bincode",
  "bytemuck",
  "byteorder",
@@ -6021,7 +6027,7 @@ checksum = "ed3955f1a9c7c0c15e092f9c887db08b1fc683305fdf6eb6684f22555355e202"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -6094,7 +6100,7 @@ dependencies = [
  "proc-macro-crate 3.1.0",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -6162,7 +6168,7 @@ checksum = "a948666b637a0f465e8564c73e89d4dde00d72d4d473cc972f390fc3dcee7d9c"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -6182,9 +6188,9 @@ dependencies = [
 
 [[package]]
 name = "openssl-sys"
-version = "0.9.101"
+version = "0.9.102"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dda2b0f344e78efc2facf7d195d098df0dd72151b26ab98da807afc26c198dff"
+checksum = "c597637d56fbc83893a35eb0dd04b2b8e7a50c91e64e9493e398b5df4fb45fa2"
 dependencies = [
  "cc",
  "libc",
@@ -6371,7 +6377,7 @@ dependencies = [
  "pest_meta",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -6392,7 +6398,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e1d3afd2628e69da2be385eb6f2fd57c8ac7977ceeff6dc166ff1657b0e386a9"
 dependencies = [
  "fixedbitset",
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
 ]
 
 [[package]]
@@ -6440,7 +6446,7 @@ checksum = "2f38a4412a78282e09a2cf38d195ea5420d15ba0602cb375210efbc877243965"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -6536,7 +6542,7 @@ dependencies = [
  "heck",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -6654,12 +6660,12 @@ dependencies = [
 
 [[package]]
 name = "prettyplease"
-version = "0.2.16"
+version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a41cf62165e97c7f814d2221421dbb9afcbcdb0a88068e5ea206e19951c2cbb5"
+checksum = "8d3928fb5db768cb86f891ff014f0144589297e3c6a1aba6ed7cecfdace270c7"
 dependencies = [
  "proc-macro2",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -6795,7 +6801,7 @@ dependencies = [
 
 [[package]]
 name = "proto"
-version = "1.19.0"
+version = "2.0.0"
 dependencies = [
  "protobuf-src",
  "tonic-build",
@@ -6827,7 +6833,7 @@ checksum = "9e2e25ee72f5b24d773cae88422baddefff7714f97aab68d96fe2b6fc4a28fb2"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -7011,16 +7017,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "raptorq"
-version = "1.8.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7cc8cd0bcb2d520fff368264b5a6295e064c60955349517d09b14473afae4856"
-
-[[package]]
 name = "rayon"
-version = "1.9.0"
+version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e4963ed1bc86e4f3ee217022bd855b297cef07fb9eac5dfa1f788b220b49b3bd"
+checksum = "b418a60154510ca1a002a752ca9714984e21e4241e804d32555251faf8b78ffa"
 dependencies = [
  "either",
  "rayon-core",
@@ -7038,7 +7038,7 @@ dependencies = [
 
 [[package]]
 name = "rbpf-cli"
-version = "1.19.0"
+version = "2.0.0"
 
 [[package]]
 name = "rdrand"
@@ -7095,9 +7095,9 @@ dependencies = [
 
 [[package]]
 name = "regex"
-version = "1.10.3"
+version = "1.10.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b62dbe01f0b06f9d8dc7d49e05a0785f153b00b2c227856282f671e0318c9b15"
+checksum = "c117dbdfde9c8308975b6a18d71f3f385c89461f7b3fb054288ecf2a2058ba4c"
 dependencies = [
  "aho-corasick",
  "memchr",
@@ -7118,9 +7118,9 @@ dependencies = [
 
 [[package]]
 name = "regex-syntax"
-version = "0.8.2"
+version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c08c74e62047bb2de4ff487b251e4a92e24f48745648451635cec7d591162d9f"
+checksum = "adad44e29e4c806119491a7f06f03de4d1af22c3a680dd47f1e6e179439d1f56"
 
 [[package]]
 name = "reqwest"
@@ -7389,7 +7389,7 @@ checksum = "1db149f81d46d2deba7cd3c50772474707729550221e69588478ebf9ada425ae"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -7469,14 +7469,14 @@ checksum = "7eb0b34b42edc17f6b7cac84a52a1c5f0e1bb2227e997ca9011ea3dd34e8610b"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
 name = "serde_json"
-version = "1.0.114"
+version = "1.0.115"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5f09b1bd632ef549eaa9f60a1f8de742bdbc698e6cee2095fc84dde5f549ae0"
+checksum = "12dc5c46daa8e9fdf4f5e71b6cf9a53f2487da0e86e55808e2d35539666497dd"
 dependencies = [
  "itoa",
  "ryu",
@@ -7523,7 +7523,7 @@ dependencies = [
  "darling",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -7540,11 +7540,11 @@ dependencies = [
 
 [[package]]
 name = "serde_yaml"
-version = "0.9.33"
+version = "0.9.34+deprecated"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a0623d197252096520c6f2a5e1171ee436e5af99a5d7caa2891e55e61950e6d9"
+checksum = "6a8b1a1a2ebf674015cc02edccce75287f1a0130d394307b36743c2f5d504b47"
 dependencies = [
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "itoa",
  "ryu",
  "serde",
@@ -7573,7 +7573,7 @@ checksum = "91d129178576168c589c9ec973feedf7d3126c01ac2bf08795109aa35b69fb8f"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -7725,9 +7725,9 @@ dependencies = [
 
 [[package]]
 name = "smallvec"
-version = "1.13.1"
+version = "1.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6ecd384b10a64542d77071bd64bd7b231f4ed5940fba55e98c3de13824cf3d7"
+checksum = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 
 [[package]]
 name = "smpl_jwt"
@@ -7802,12 +7802,12 @@ dependencies = [
 
 [[package]]
 name = "solarti-associated-token-account"
-version = "2.1.0"
+version = "2.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f71110a79cabfcd851c6e0f8dcc227510b9f6b59637e8a3b4051cddac33d0079"
+checksum = "58b7bda691a6735e213e2d3a1f244ccf4d3be369978d75be635e11093ca2558e"
 dependencies = [
  "assert_matches",
- "borsh 1.3.1",
+ "borsh 1.4.0",
  "miraland-program",
  "num-derive",
  "num-traits",
@@ -7818,9 +7818,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d21521e8e856792dfde6f5f4e5d7e8bfc5e754a2757802c464e7b4db78c3c92"
+checksum = "6a6e9a4df0d86a171b9dce3fb8a27974cc0ebdc180d37b81f2b97ee693270808"
 dependencies = [
  "bytemuck",
  "miraland-program",
@@ -7829,33 +7829,33 @@ dependencies = [
 
 [[package]]
 name = "solarti-discriminator-derive"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a47ba460bce79215fd27462694156919b93d5fab41efd1fbec40757718692a8a"
+checksum = "41e4b0fe2046b6ea172b98a6fc08fa19399ea839e26991a547e4bdc8ca41105f"
 dependencies = [
  "quote",
  "solarti-discriminator-syn",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
 name = "solarti-discriminator-syn"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4c247711a6f126b18f6eb87208276258b039f038fdcbe4c414e3a0e1fa34e9be"
+checksum = "992cc03ec6a01bccff84a8aedf326d94170ffa7059fede704b1f84b5c7f0f0ad"
 dependencies = [
  "proc-macro2",
  "quote",
  "sha2 0.10.8",
- "syn 2.0.53",
+ "syn 2.0.55",
  "thiserror",
 ]
 
 [[package]]
 name = "solarti-instruction-padding"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "912c1736108c169ec036bb9f339cd2a1fae2a24738c94f8c972302463ca06baa"
+checksum = "5a4e997150aa135e33e5969119c93ce5fa40f0eece7cdcacfb1c74f00f013409"
 dependencies = [
  "miraland-program",
  "num_enum",
@@ -7863,20 +7863,20 @@ dependencies = [
 
 [[package]]
 name = "solarti-memo"
-version = "4.0.1"
+version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c1bce186b0f494e7d17e667aba0c659447b98b1e44d518871a2f4e921724a363"
+checksum = "42a1b9fb055f9819437609930fbb41e48033e3c1e9d8544b9a2c0a8db7ac7b06"
 dependencies = [
  "miraland-program",
 ]
 
 [[package]]
 name = "solarti-pod"
-version = "0.1.4"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5174b6ab0496e01d489e2bd38e2a98ec9eb5b87db86d2914475d5b946f3c1d3"
+checksum = "b2666687d5ff2d17e8286a183858ecb6c1ae02ec2b2eb286796d638deafdd4cb"
 dependencies = [
- "borsh 1.3.1",
+ "borsh 1.4.0",
  "bytemuck",
  "miraland-program",
  "miraland-zk-token-sdk",
@@ -7885,9 +7885,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-program-error"
-version = "0.3.5"
+version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a45561db9cb023340c8b9eb14dec196be772e3915bdf4c60b9c0819ba5ded35c"
+checksum = "79e07f5351de5bd5f5328c1aee6a2a08f0d8a7036a4fb3d855cc55a5f3fbaf0a"
 dependencies = [
  "miraland-program",
  "num-derive",
@@ -7898,21 +7898,21 @@ dependencies = [
 
 [[package]]
 name = "solarti-program-error-derive"
-version = "0.3.5"
+version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a876ff535cdc464807d2da54b764692a5c66c7cebbfea50e6588a953c195864"
+checksum = "0442e0dc511dc147141fdbc10a0a06154cd8d46553bffb6bf194a20c900f9ae4"
 dependencies = [
  "proc-macro2",
  "quote",
  "sha2 0.10.8",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
 name = "solarti-tlv-account-resolution"
-version = "0.5.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2ac949a4cf38594cbbd717157a9053a4eec85c6b69be9bcd83ec3e504557c4c"
+checksum = "9e8f8f5e48105158c64197fc42140afb1bda18f62574918c64618fff5db525dd"
 dependencies = [
  "bytemuck",
  "miraland-program",
@@ -7924,9 +7924,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-token"
-version = "4.1.0"
+version = "4.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "66b774eb90009e66a8b6e2212b96904134bc24c553bc4803c5fa07fe559aaa80"
+checksum = "4ca9dd7343d8b2c6349b6fbb88562db2d7ab087a6b4621ddeab919e8c0a8d6f4"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -7939,9 +7939,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-2022"
-version = "1.0.0"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8b0fad4850ddb227478902aa47f6ca961fd7de9d446c63918ac991477f15c29"
+checksum = "9afc3edf283bfa8783d11438ba34dc67344924f6a704e99064a1f01904e2f965"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -7963,9 +7963,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-group-interface"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4954a29b75db0d3610fee3917789a418f48e24165c3ba7d0771466361fd84804"
+checksum = "ed17388ec157fe4e9297dc1b2ff4eaa5d96d7614b6b7a118618f47a7259c43f5"
 dependencies = [
  "bytemuck",
  "miraland-program",
@@ -7976,11 +7976,11 @@ dependencies = [
 
 [[package]]
 name = "solarti-token-metadata-interface"
-version = "0.2.3"
+version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a0d4ee1e1c52d24260cca75c24ada1bec4ffc9967f7ed00a47a77c254c4b05bb"
+checksum = "789944bd6f2de8d097a72f4cd05b6534b76419717fd7d06ec624471def274ce7"
 dependencies = [
- "borsh 1.3.1",
+ "borsh 1.4.0",
  "miraland-program",
  "solarti-discriminator",
  "solarti-pod",
@@ -7990,9 +7990,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-transfer-hook-interface"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d71b70c6251cbde1c0de04da7ede5486948f1e0e8fc32bea0e5c4e14a1345548"
+checksum = "627714d2cc51120123bded0a7b2e92ee1656efa6f77cc9a166521479b1840bc3"
 dependencies = [
  "arrayref",
  "bytemuck",
@@ -8006,9 +8006,9 @@ dependencies = [
 
 [[package]]
 name = "solarti-type-length-value"
-version = "0.3.4"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2d1cf9d2380c0e4160ae3b40ce3537ddd76ea99b25ae632a800cdfa9c4693c7"
+checksum = "753b1ce13b15fcd33bcadbfcb0574a170ad71c609f6206b2a1040b504df873b7"
 dependencies = [
  "bytemuck",
  "miraland-program",
@@ -8116,9 +8116,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.53"
+version = "2.0.55"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7383cd0e49fff4b6b90ca5670bfd3e9d6a733b3f90c686605aa7eec8c4996032"
+checksum = "002a1b3dbf967edfafc32655d0f377ab0bb7b994aa1d32c8cc7e9b8bf3ebb8f0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -8134,7 +8134,7 @@ dependencies = [
  "proc-macro-error",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -8304,7 +8304,7 @@ dependencies = [
  "cfg-if 1.0.0",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -8315,7 +8315,7 @@ checksum = "5c89e72a01ed4c579669add59014b9a524d609c0c88c6a585ce37485879f6ffb"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
  "test-case-core",
 ]
 
@@ -8351,7 +8351,7 @@ checksum = "c61f3ba182994efc43764a46c018c347bc492c79f024e705f46567b418f6d4f7"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -8502,7 +8502,7 @@ source = "git+https://github.com/solana-labs/solana-tokio.git?rev=7cf47705faacf7
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -8653,7 +8653,7 @@ dependencies = [
  "serde",
  "serde_spanned",
  "toml_datetime",
- "toml_edit 0.22.8",
+ "toml_edit 0.22.9",
 ]
 
 [[package]]
@@ -8671,18 +8671,18 @@ version = "0.21.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6a8534fd7f78b5405e860340ad6575217ce99f38d4d5c8f2442cb5ecb50090e1"
 dependencies = [
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "toml_datetime",
  "winnow 0.5.40",
 ]
 
 [[package]]
 name = "toml_edit"
-version = "0.22.8"
+version = "0.22.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c12219811e0c1ba077867254e5ad62ee2c9c190b0d957110750ac0cda1ae96cd"
+checksum = "8e40bb779c5187258fd7aad0eb68cb8706a0a81fa712fbea808ab43c4b8374c4"
 dependencies = [
- "indexmap 2.2.5",
+ "indexmap 2.2.6",
  "serde",
  "serde_spanned",
  "toml_datetime",
@@ -8785,7 +8785,7 @@ checksum = "34704c8d6ebcbc939824180af020566b01a7c01f80641264eba0999f6c2b6be7"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -9093,7 +9093,7 @@ dependencies = [
  "once_cell",
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
  "wasm-bindgen-shared",
 ]
 
@@ -9127,7 +9127,7 @@ checksum = "e94f17b526d0a461a191c78ea52bbce64071ed5c04c9ffe424dcb38f74171bb7"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
  "wasm-bindgen-backend",
  "wasm-bindgen-shared",
 ]
@@ -9453,7 +9453,7 @@ checksum = "9ce1b18ccd8e73a9321186f97e46f9f04b778851177567b1975109d26a08d2a6"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -9473,7 +9473,7 @@ checksum = "ce36e65b0d2999d2aafac989fb249189a141aee1f53c612c1f37d72631959f69"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.53",
+ "syn 2.0.55",
 ]
 
 [[package]]
@@ -9497,9 +9497,9 @@ dependencies = [
 
 [[package]]
 name = "zstd-sys"
-version = "2.0.9+zstd.1.5.5"
+version = "2.0.10+zstd.1.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e16efa8a874a0481a574084d34cc26fdb3b99627480f785888deb6386506656"
+checksum = "c253a4914af5bafc8fa8c86ee400827e83cf6ec01195ec1f1ed8441bf00d65aa"
 dependencies = [
  "cc",
  "pkg-config",

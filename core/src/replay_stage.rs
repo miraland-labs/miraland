@@ -48,7 +48,10 @@ use {
         leader_schedule_utils::first_of_consecutive_leader_slots,
     },
     miraland_measure::measure::Measure,
-    miraland_poh::poh_recorder::{PohLeaderStatus, PohRecorder, GRACE_TICKS_FACTOR, MAX_GRACE_SLOTS},
+    miraland_poh::poh_recorder::{
+        PohLeaderStatus, PohRecorder, GRACE_TICKS_FACTOR, MAX_GRACE_SLOTS,
+    },
+    miraland_rayon_threadlimit::get_max_thread_count,
     miraland_rpc::{
         optimistically_confirmed_bank_tracker::{BankNotification, BankNotificationSenderConfig},
         rpc_subscriptions::RpcSubscriptions,
@@ -652,16 +655,23 @@ impl ReplayStage {
                     r_bank_forks.get_vote_only_mode_signal(),
                 )
             };
+            // Thread pool to (maybe) replay multiple threads in parallel
             let replay_mode = if replay_slots_concurrently {
-                ForkReplayMode::Serial
-            } else {
                 let pool = rayon::ThreadPoolBuilder::new()
                     .num_threads(MAX_CONCURRENT_FORKS_TO_REPLAY)
-                    .thread_name(|i| format!("mlnReplay{i:02}"))
+                    .thread_name(|i| format!("mlnReplayFork{i:02}"))
                     .build()
                     .expect("new rayon threadpool");
                 ForkReplayMode::Parallel(pool)
+            } else {
+                ForkReplayMode::Serial
             };
+            // Thread pool to replay multiple transactions within one block in parallel
+            let replay_tx_thread_pool = rayon::ThreadPoolBuilder::new()
+                .num_threads(get_max_thread_count())
+                .thread_name(|i| format!("mlnReplayTx{i:02}"))
+                .build()
+                .expect("new rayon threadpool");
 
             Self::reset_poh_recorder(
                 &my_pubkey,
@@ -724,6 +734,7 @@ impl ReplayStage {
                     &mut replay_timing,
                     log_messages_bytes_limit,
                     &replay_mode,
+                    &replay_tx_thread_pool,
                     &prioritization_fee_cache,
                     &mut purge_repair_slot_counter,
                 );
@@ -1677,11 +1688,7 @@ impl ReplayStage {
             root_bank.clear_slot_signatures(slot);
 
             // Remove cached entries of the programs that were deployed in this slot.
-            root_bank
-                .loaded_programs_cache
-                .write()
-                .unwrap()
-                .prune_by_deployment_slot(slot);
+            root_bank.prune_program_cache_by_deployment_slot(slot);
 
             if let Some(bank_hash) = blockstore.get_bank_hash(slot) {
                 // If a descendant was successfully replayed and chained from a duplicate it must
@@ -2136,6 +2143,7 @@ impl ReplayStage {
     fn replay_blockstore_into_bank(
         bank: &BankWithScheduler,
         blockstore: &Blockstore,
+        replay_tx_thread_pool: &ThreadPool,
         replay_stats: &RwLock<ReplaySlotStats>,
         replay_progress: &RwLock<ConfirmationProgress>,
         transaction_status_sender: Option<&TransactionStatusSender>,
@@ -2154,6 +2162,7 @@ impl ReplayStage {
         blockstore_processor::confirm_slot(
             blockstore,
             bank,
+            replay_tx_thread_pool,
             &mut w_replay_stats,
             &mut w_replay_progress,
             false,
@@ -2712,7 +2721,8 @@ impl ReplayStage {
     fn replay_active_banks_concurrently(
         blockstore: &Blockstore,
         bank_forks: &RwLock<BankForks>,
-        thread_pool: &ThreadPool,
+        fork_thread_pool: &ThreadPool,
+        replay_tx_thread_pool: &ThreadPool,
         my_pubkey: &Pubkey,
         vote_account: &Pubkey,
         progress: &mut ProgressMap,
@@ -2730,7 +2740,7 @@ impl ReplayStage {
         let longest_replay_time_us = AtomicU64::new(0);
 
         // Allow for concurrent replaying of slots from different forks.
-        let replay_result_vec: Vec<ReplaySlotFromBlockstore> = thread_pool.install(|| {
+        let replay_result_vec: Vec<ReplaySlotFromBlockstore> = fork_thread_pool.install(|| {
             active_bank_slots
                 .into_par_iter()
                 .map(|bank_slot| {
@@ -2744,7 +2754,7 @@ impl ReplayStage {
                     trace!(
                         "Replay active bank: slot {}, thread_idx {}",
                         bank_slot,
-                        thread_pool.current_thread_index().unwrap_or_default()
+                        fork_thread_pool.current_thread_index().unwrap_or_default()
                     );
                     let mut progress_lock = progress.write().unwrap();
                     if progress_lock
@@ -2797,6 +2807,7 @@ impl ReplayStage {
                         let blockstore_result = Self::replay_blockstore_into_bank(
                             &bank,
                             blockstore,
+                            replay_tx_thread_pool,
                             &replay_stats,
                             &replay_progress,
                             transaction_status_sender,
@@ -2826,6 +2837,7 @@ impl ReplayStage {
     fn replay_active_bank(
         blockstore: &Blockstore,
         bank_forks: &RwLock<BankForks>,
+        replay_tx_thread_pool: &ThreadPool,
         my_pubkey: &Pubkey,
         vote_account: &Pubkey,
         progress: &mut ProgressMap,
@@ -2884,6 +2896,7 @@ impl ReplayStage {
                 let blockstore_result = Self::replay_blockstore_into_bank(
                     &bank,
                     blockstore,
+                    replay_tx_thread_pool,
                     &bank_progress.replay_stats,
                     &bank_progress.replay_progress,
                     transaction_status_sender,
@@ -3183,6 +3196,7 @@ impl ReplayStage {
         replay_timing: &mut ReplayLoopTiming,
         log_messages_bytes_limit: Option<usize>,
         replay_mode: &ForkReplayMode,
+        replay_tx_thread_pool: &ThreadPool,
         prioritization_fee_cache: &PrioritizationFeeCache,
         purge_repair_slot_counter: &mut PurgeRepairSlotCounter,
     ) -> bool /* completed a bank */ {
@@ -3199,11 +3213,12 @@ impl ReplayStage {
 
         let replay_result_vec = match replay_mode {
             // Skip the overhead of the threadpool if there is only one bank to play
-            ForkReplayMode::Parallel(thread_pool) if num_active_banks > 1 => {
+            ForkReplayMode::Parallel(fork_thread_pool) if num_active_banks > 1 => {
                 Self::replay_active_banks_concurrently(
                     blockstore,
                     bank_forks,
-                    thread_pool,
+                    fork_thread_pool,
+                    replay_tx_thread_pool,
                     my_pubkey,
                     vote_account,
                     progress,
@@ -3223,6 +3238,7 @@ impl ReplayStage {
                     Self::replay_active_bank(
                         blockstore,
                         bank_forks,
+                        replay_tx_thread_pool,
                         my_pubkey,
                         vote_account,
                         progress,
@@ -5034,9 +5050,15 @@ pub(crate) mod tests {
             blockstore.insert_shreds(shreds, None, false).unwrap();
             let block_commitment_cache = Arc::new(RwLock::new(BlockCommitmentCache::default()));
             let exit = Arc::new(AtomicBool::new(false));
+            let replay_tx_thread_pool = rayon::ThreadPoolBuilder::new()
+                .num_threads(1)
+                .thread_name(|i| format!("solReplayTest{i:02}"))
+                .build()
+                .expect("new rayon threadpool");
             let res = ReplayStage::replay_blockstore_into_bank(
                 &bank1,
                 &blockstore,
+                &replay_tx_thread_pool,
                 &bank1_progress.replay_stats,
                 &bank1_progress.replay_progress,
                 None,

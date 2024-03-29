@@ -23,6 +23,7 @@ lru = { workspace = true }
 miraland-bloom = { workspace = true }
 miraland-clap-utils = { workspace = true }
 miraland-client = { workspace = true }
+miraland-connection-cache = { workspace = true }
 miraland-entry = { workspace = true }
 miraland-frozen-abi = { workspace = true }
 miraland-frozen-abi-macro = { workspace = true }
@@ -36,7 +37,6 @@ miraland-rayon-threadlimit = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
-miraland-thin-client = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-version = { workspace = true }
 miraland-vote = { workspace = true }

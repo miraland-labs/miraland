@@ -6,13 +6,11 @@ use {
         cli::{Config, InstructionPaddingConfig},
         send_batch::generate_durable_nonce_accounts,
     },
-    miraland_client::{
-        connection_cache::ConnectionCache,
-        tpu_client::{TpuClient, TpuClientConfig},
-    },
+    miraland_client::tpu_client::{TpuClient, TpuClientConfig},
     miraland_core::validator::ValidatorConfig,
     miraland_faucet::faucet::run_local_faucet,
     miraland_local_cluster::{
+        cluster::Cluster,
         local_cluster::{ClusterConfig, LocalCluster},
         validator_configs::make_identical_validator_configs,
     },
@@ -78,24 +76,9 @@ fn test_bench_tps_local_cluster(config: Config) {
 
     cluster.transfer(&cluster.funding_keypair, &faucet_pubkey, 100_000_000);
 
-    let ConnectionCache::Quic(cache) = &*cluster.connection_cache else {
-        panic!("Expected a Quic ConnectionCache.");
-    };
-
-    let rpc_pubsub_url = format!("ws://{}/", cluster.entry_point_info.rpc_pubsub().unwrap());
-    let rpc_url = format!("http://{}", cluster.entry_point_info.rpc().unwrap());
-
-    let client = Arc::new(
-        TpuClient::new_with_connection_cache(
-            Arc::new(RpcClient::new(rpc_url)),
-            rpc_pubsub_url.as_str(),
-            TpuClientConfig::default(),
-            cache.clone(),
-        )
-        .unwrap_or_else(|err| {
-            panic!("Could not create TpuClient {err:?}");
-        }),
-    );
+    let client = Arc::new(cluster.build_tpu_quic_client().unwrap_or_else(|err| {
+        panic!("Could not create TpuClient with Quic Cache {err:?}");
+    }));
 
     let lamports_per_account = 100;
 
@@ -105,6 +88,7 @@ fn test_bench_tps_local_cluster(config: Config) {
         &config.id,
         keypair_count,
         lamports_per_account,
+        false,
         false,
     )
     .unwrap();
@@ -151,6 +135,7 @@ fn test_bench_tps_test_validator(config: Config) {
         &config.id,
         keypair_count,
         lamports_per_account,
+        false,
         false,
     )
     .unwrap();

@@ -44,6 +44,7 @@ miraland-net-utils = { workspace = true }
 miraland-perf = { workspace = true }
 miraland-poh = { workspace = true }
 miraland-program-runtime = { workspace = true }
+miraland-rayon-threadlimit = { workspace = true }
 miraland-rpc = { workspace = true }
 miraland-rpc-client = { workspace = true }
 miraland-rpc-client-api = { workspace = true }

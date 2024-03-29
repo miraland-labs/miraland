@@ -31,7 +31,6 @@ miraland-rpc-client-nonce-utils = { workspace = true }
 miraland-runtime = { workspace = true }
 miraland-sdk = { workspace = true }
 miraland-streamer = { workspace = true }
-miraland-thin-client = { workspace = true }
 miraland-tpu-client = { workspace = true }
 miraland-transaction-status = { workspace = true }
 miraland-version = { workspace = true }

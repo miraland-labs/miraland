@@ -145,7 +145,7 @@ pub struct LoadedProgram {
     pub latest_access_slot: AtomicU64,
 }
 
-/// Global cache statistics for [LoadedPrograms].
+/// Global cache statistics for [ProgramCache].
 #[derive(Debug, Default)]
 pub struct Stats {
     /// a program was already in the cache
@@ -568,7 +568,7 @@ struct SecondLevel {
 /// - allows for cooperative loading of TX batches which hit the same missing programs simultaneously.
 /// - enforces that all programs used in a batch are eagerly loaded ahead of execution.
 /// - is not persisted to disk or a snapshot, so it needs to cold start and warm up first.
-pub struct LoadedPrograms<FG: ForkGraph> {
+pub struct ProgramCache<FG: ForkGraph> {
     /// A two level index:
     ///
     /// The first level is for the address at which programs are deployed and the second level for the slot (and thus also fork).
@@ -595,9 +595,9 @@ pub struct LoadedPrograms<FG: ForkGraph> {
     pub loading_task_waiter: Arc<LoadingTaskWaiter>,
 }
 
-impl<FG: ForkGraph> Debug for LoadedPrograms<FG> {
+impl<FG: ForkGraph> Debug for ProgramCache<FG> {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("LoadedPrograms")
+        f.debug_struct("ProgramCache")
             .field("root slot", &self.latest_root_slot)
             .field("root epoch", &self.latest_root_epoch)
             .field("stats", &self.stats)
@@ -606,11 +606,11 @@ impl<FG: ForkGraph> Debug for LoadedPrograms<FG> {
     }
 }
 
-/// Local view into [LoadedPrograms] which was extracted for a specific TX batch.
+/// Local view into [ProgramCache] which was extracted for a specific TX batch.
 ///
-/// This isolation enables the global [LoadedPrograms] to continue to evolve (e.g. evictions),
+/// This isolation enables the global [ProgramCache] to continue to evolve (e.g. evictions),
 /// while the TX batch is guaranteed it will continue to find all the programs it requires.
-/// For program management instructions this also buffers them before they are merged back into the global [LoadedPrograms].
+/// For program management instructions this also buffers them before they are merged back into the global [ProgramCache].
 #[derive(Clone, Debug, Default)]
 pub struct LoadedProgramsForTxBatch {
     /// Pubkey is the address of a program.
@@ -681,7 +681,7 @@ pub enum LoadedProgramMatchCriteria {
     NoCriteria,
 }
 
-impl<FG: ForkGraph> LoadedPrograms<FG> {
+impl<FG: ForkGraph> ProgramCache<FG> {
     pub fn new(root_slot: Slot, root_epoch: Epoch) -> Self {
         Self {
             entries: HashMap::new(),
@@ -734,7 +734,7 @@ impl<FG: ForkGraph> LoadedPrograms<FG> {
                     (LoadedProgramType::Unloaded(_), LoadedProgramType::TestLoaded(_)) => {}
                     _ => {
                         // Something is wrong, I can feel it ...
-                        error!("LoadedPrograms::assign_program() failed key={:?} existing={:?} entry={:?}", key, slot_versions, entry);
+                        error!("ProgramCache::assign_program() failed key={:?} existing={:?} entry={:?}", key, slot_versions, entry);
                         debug_assert!(false, "Unexpected replacement of an entry");
                         self.stats.replacements.fetch_add(1, Ordering::Relaxed);
                         return true;
@@ -1146,9 +1146,9 @@ impl miraland_frozen_abi::abi_example::AbiExample for LoadedProgram {
 }
 
 #[cfg(RUSTC_WITH_SPECIALIZATION)]
-impl<FG: ForkGraph> miraland_frozen_abi::abi_example::AbiExample for LoadedPrograms<FG> {
+impl<FG: ForkGraph> miraland_frozen_abi::abi_example::AbiExample for ProgramCache<FG> {
     fn example() -> Self {
-        // LoadedPrograms isn't serializable by definition.
+        // ProgramCache isn't serializable by definition.
         Self::new(Slot::default(), Epoch::default())
     }
 }
@@ -1158,7 +1158,7 @@ mod tests {
     use {
         crate::loaded_programs::{
             BlockRelation, ForkGraph, LoadedProgram, LoadedProgramMatchCriteria, LoadedProgramType,
-            LoadedPrograms, LoadedProgramsForTxBatch, ProgramRuntimeEnvironment,
+            LoadedProgramsForTxBatch, ProgramCache, ProgramRuntimeEnvironment,
             ProgramRuntimeEnvironments, DELAY_VISIBILITY_SLOT_OFFSET,
         },
         assert_matches::assert_matches,
@@ -1178,8 +1178,8 @@ mod tests {
     static MOCK_ENVIRONMENT: std::sync::OnceLock<ProgramRuntimeEnvironment> =
         std::sync::OnceLock::<ProgramRuntimeEnvironment>::new();
 
-    fn new_mock_cache<FG: ForkGraph>() -> LoadedPrograms<FG> {
-        let mut cache = LoadedPrograms::new(0, 0);
+    fn new_mock_cache<FG: ForkGraph>() -> ProgramCache<FG> {
+        let mut cache = ProgramCache::new(0, 0);
 
         cache.environments.program_runtime_v1 = MOCK_ENVIRONMENT
             .get_or_init(|| Arc::new(BuiltinProgram::new_mock()))
@@ -1220,7 +1220,7 @@ mod tests {
     }
 
     fn set_tombstone<FG: ForkGraph>(
-        cache: &mut LoadedPrograms<FG>,
+        cache: &mut ProgramCache<FG>,
         key: Pubkey,
         slot: Slot,
         reason: LoadedProgramType,
@@ -1231,7 +1231,7 @@ mod tests {
     }
 
     fn insert_unloaded_program<FG: ForkGraph>(
-        cache: &mut LoadedPrograms<FG>,
+        cache: &mut ProgramCache<FG>,
         key: Pubkey,
         slot: Slot,
     ) -> Arc<LoadedProgram> {
@@ -1254,7 +1254,7 @@ mod tests {
         unloaded
     }
 
-    fn num_matching_entries<P, FG>(cache: &LoadedPrograms<FG>, predicate: P) -> usize
+    fn num_matching_entries<P, FG>(cache: &ProgramCache<FG>, predicate: P) -> usize
     where
         P: Fn(&LoadedProgramType) -> bool,
         FG: ForkGraph,
@@ -1301,6 +1301,47 @@ mod tests {
         assert_eq!(program.decayed_usage_counter(100), 0);
     }
 
+    fn program_deploy_test_helper(
+        cache: &mut ProgramCache<TestForkGraph>,
+        program: Pubkey,
+        deployment_slots: Vec<Slot>,
+        usage_counters: Vec<u64>,
+        programs: &mut Vec<(Pubkey, Slot, u64)>,
+    ) {
+        // Add multiple entries for program
+        deployment_slots
+            .iter()
+            .enumerate()
+            .for_each(|(i, deployment_slot)| {
+                let usage_counter = *usage_counters.get(i).unwrap_or(&0);
+                cache.assign_program(
+                    program,
+                    new_test_loaded_program_with_usage(
+                        *deployment_slot,
+                        (*deployment_slot).saturating_add(2),
+                        AtomicU64::new(usage_counter),
+                    ),
+                );
+                programs.push((program, *deployment_slot, usage_counter));
+            });
+
+        // Add tombstones entries for program
+        let env = Arc::new(BuiltinProgram::new_mock());
+        for slot in 21..31 {
+            set_tombstone(
+                cache,
+                program,
+                slot,
+                LoadedProgramType::FailedVerification(env.clone()),
+            );
+        }
+
+        // Add unloaded entries for program
+        for slot in 31..41 {
+            insert_unloaded_program(cache, program, slot);
+        }
+    }
+
     #[test]
     fn test_random_eviction() {
         let mut programs = vec![];
@@ -1310,91 +1351,43 @@ mod tests {
         // This test adds different kind of entries to the cache.
         // Tombstones and unloaded entries are expected to not be evicted.
         // It also adds multiple entries for three programs as it tries to create a typical cache instance.
-        let program1 = Pubkey::new_unique();
-        let program1_deployment_slots = [0, 10, 20];
-        let program1_usage_counters = [4, 5, 25];
-        program1_deployment_slots
-            .iter()
-            .enumerate()
-            .for_each(|(i, deployment_slot)| {
-                let usage_counter = *program1_usage_counters.get(i).unwrap_or(&0);
-                cache.assign_program(
-                    program1,
-                    new_test_loaded_program_with_usage(
-                        *deployment_slot,
-                        (*deployment_slot) + 2,
-                        AtomicU64::new(usage_counter),
-                    ),
-                );
-                programs.push((program1, *deployment_slot, usage_counter));
-            });
 
-        let env = Arc::new(BuiltinProgram::new_mock());
-        for slot in 21..31 {
-            set_tombstone(
-                &mut cache,
-                program1,
-                slot,
-                LoadedProgramType::FailedVerification(env.clone()),
-            );
-        }
+        // Program 1
+        program_deploy_test_helper(
+            &mut cache,
+            Pubkey::new_unique(),
+            vec![0, 10, 20],
+            vec![4, 5, 25],
+            &mut programs,
+        );
 
-        for slot in 31..41 {
-            insert_unloaded_program(&mut cache, program1, slot);
-        }
+        // Program 2
+        program_deploy_test_helper(
+            &mut cache,
+            Pubkey::new_unique(),
+            vec![5, 11],
+            vec![0, 2],
+            &mut programs,
+        );
 
-        let program2 = Pubkey::new_unique();
-        let program2_deployment_slots = [5, 11];
-        let program2_usage_counters = [0, 2];
-        program2_deployment_slots
-            .iter()
-            .enumerate()
-            .for_each(|(i, deployment_slot)| {
-                let usage_counter = *program2_usage_counters.get(i).unwrap_or(&0);
-                cache.assign_program(
-                    program2,
-                    new_test_loaded_program_with_usage(
-                        *deployment_slot,
-                        (*deployment_slot) + 2,
-                        AtomicU64::new(usage_counter),
-                    ),
-                );
-                programs.push((program2, *deployment_slot, usage_counter));
-            });
+        // Program 3
+        program_deploy_test_helper(
+            &mut cache,
+            Pubkey::new_unique(),
+            vec![0, 5, 15],
+            vec![100, 3, 20],
+            &mut programs,
+        );
 
-        for slot in 31..41 {
-            insert_unloaded_program(&mut cache, program2, slot);
-        }
+        // 1 for each deployment slot
+        let num_loaded_expected = 8;
+        // 10 for each program
+        let num_unloaded_expected = 30;
+        // 10 for each program
+        let num_tombstones_expected = 30;
 
-        let program3 = Pubkey::new_unique();
-        let program3_deployment_slots = [0, 5, 15];
-        let program3_usage_counters = [100, 3, 20];
-        program3_deployment_slots
-            .iter()
-            .enumerate()
-            .for_each(|(i, deployment_slot)| {
-                let usage_counter = *program3_usage_counters.get(i).unwrap_or(&0);
-                cache.assign_program(
-                    program3,
-                    new_test_loaded_program_with_usage(
-                        *deployment_slot,
-                        (*deployment_slot) + 2,
-                        AtomicU64::new(usage_counter),
-                    ),
-                );
-                programs.push((program3, *deployment_slot, usage_counter));
-            });
-
-        for slot in 21..31 {
-            set_tombstone(&mut cache, program3, slot, LoadedProgramType::Closed);
-        }
-
-        for slot in 31..41 {
-            insert_unloaded_program(&mut cache, program3, slot);
-        }
-
+        // Count the number of loaded, unloaded and tombstone entries.
         programs.sort_by_key(|(_id, _slot, usage_count)| *usage_count);
-
         let num_loaded = num_matching_entries(&cache, |program_type| {
             matches!(program_type, LoadedProgramType::TestLoaded(_))
         });
@@ -1411,16 +1404,19 @@ mod tests {
         });
 
         // Test that the cache is constructed with the expected number of entries.
-        assert_eq!(num_loaded, 8);
-        assert_eq!(num_unloaded, 30);
-        assert_eq!(num_tombstones, 20);
+        assert_eq!(num_loaded, num_loaded_expected);
+        assert_eq!(num_unloaded, num_unloaded_expected);
+        assert_eq!(num_tombstones, num_tombstones_expected);
 
-        // Evicting to 2% should update cache with
-        // * 5 active entries
-        // * 33 unloaded entries (3 active programs will get unloaded)
-        // * 20 tombstones (tombstones are not evicted)
-        cache.evict_using_2s_random_selection(Percentage::from(2), 21);
+        // Evict entries from the cache
+        let eviction_pct = 2;
 
+        let num_loaded_expected =
+            Percentage::from(eviction_pct).apply_to(crate::loaded_programs::MAX_LOADED_ENTRY_COUNT);
+        let num_unloaded_expected = num_unloaded_expected + num_loaded - num_loaded_expected;
+        cache.evict_using_2s_random_selection(Percentage::from(eviction_pct), 21);
+
+        // Count the number of loaded, unloaded and tombstone entries.
         let num_loaded = num_matching_entries(&cache, |program_type| {
             matches!(program_type, LoadedProgramType::TestLoaded(_))
         });
@@ -1428,111 +1424,58 @@ mod tests {
             matches!(program_type, LoadedProgramType::Unloaded(_))
         });
         let num_tombstones = num_matching_entries(&cache, |program_type| {
-            matches!(
-                program_type,
-                LoadedProgramType::DelayVisibility
-                    | LoadedProgramType::FailedVerification(_)
-                    | LoadedProgramType::Closed
-            )
+            matches!(program_type, LoadedProgramType::FailedVerification(_))
         });
 
-        // Test that expected number of loaded entries get evicted/unloaded.
-        assert_eq!(num_loaded, 5);
-        assert_eq!(num_unloaded, 33);
-        assert_eq!(num_tombstones, 20);
+        // However many entries are left after the shrink
+        assert_eq!(num_loaded, num_loaded_expected);
+        // The original unloaded entries + the evicted loaded entries
+        assert_eq!(num_unloaded, num_unloaded_expected);
+        // The original tombstones are not evicted
+        assert_eq!(num_tombstones, num_tombstones_expected);
     }
 
     #[test]
     fn test_eviction() {
         let mut programs = vec![];
-
         let mut cache = new_mock_cache::<TestForkGraph>();
 
-        let program1 = Pubkey::new_unique();
-        let program1_deployment_slots = [0, 10, 20];
-        let program1_usage_counters = [4, 5, 25];
-        program1_deployment_slots
-            .iter()
-            .enumerate()
-            .for_each(|(i, deployment_slot)| {
-                let usage_counter = *program1_usage_counters.get(i).unwrap_or(&0);
-                cache.assign_program(
-                    program1,
-                    new_test_loaded_program_with_usage(
-                        *deployment_slot,
-                        (*deployment_slot) + 2,
-                        AtomicU64::new(usage_counter),
-                    ),
-                );
-                programs.push((program1, *deployment_slot, usage_counter));
-            });
+        // Program 1
+        program_deploy_test_helper(
+            &mut cache,
+            Pubkey::new_unique(),
+            vec![0, 10, 20],
+            vec![4, 5, 25],
+            &mut programs,
+        );
 
-        let env = Arc::new(BuiltinProgram::new_mock());
-        for slot in 21..31 {
-            set_tombstone(
-                &mut cache,
-                program1,
-                slot,
-                LoadedProgramType::FailedVerification(env.clone()),
-            );
-        }
+        // Program 2
+        program_deploy_test_helper(
+            &mut cache,
+            Pubkey::new_unique(),
+            vec![5, 11],
+            vec![0, 2],
+            &mut programs,
+        );
 
-        for slot in 31..41 {
-            insert_unloaded_program(&mut cache, program1, slot);
-        }
+        // Program 3
+        program_deploy_test_helper(
+            &mut cache,
+            Pubkey::new_unique(),
+            vec![0, 5, 15],
+            vec![100, 3, 20],
+            &mut programs,
+        );
 
-        let program2 = Pubkey::new_unique();
-        let program2_deployment_slots = [5, 11];
-        let program2_usage_counters = [0, 2];
-        program2_deployment_slots
-            .iter()
-            .enumerate()
-            .for_each(|(i, deployment_slot)| {
-                let usage_counter = *program2_usage_counters.get(i).unwrap_or(&0);
-                cache.assign_program(
-                    program2,
-                    new_test_loaded_program_with_usage(
-                        *deployment_slot,
-                        (*deployment_slot) + 2,
-                        AtomicU64::new(usage_counter),
-                    ),
-                );
-                programs.push((program2, *deployment_slot, usage_counter));
-            });
+        // 1 for each deployment slot
+        let num_loaded_expected = 8;
+        // 10 for each program
+        let num_unloaded_expected = 30;
+        // 10 for each program
+        let num_tombstones_expected = 30;
 
-        for slot in 31..41 {
-            insert_unloaded_program(&mut cache, program2, slot);
-        }
-
-        let program3 = Pubkey::new_unique();
-        let program3_deployment_slots = [0, 5, 15];
-        let program3_usage_counters = [100, 3, 20];
-        program3_deployment_slots
-            .iter()
-            .enumerate()
-            .for_each(|(i, deployment_slot)| {
-                let usage_counter = *program3_usage_counters.get(i).unwrap_or(&0);
-                cache.assign_program(
-                    program3,
-                    new_test_loaded_program_with_usage(
-                        *deployment_slot,
-                        (*deployment_slot) + 2,
-                        AtomicU64::new(usage_counter),
-                    ),
-                );
-                programs.push((program3, *deployment_slot, usage_counter));
-            });
-
-        for slot in 21..31 {
-            set_tombstone(&mut cache, program3, slot, LoadedProgramType::Closed);
-        }
-
-        for slot in 31..41 {
-            insert_unloaded_program(&mut cache, program3, slot);
-        }
-
+        // Count the number of loaded, unloaded and tombstone entries.
         programs.sort_by_key(|(_id, _slot, usage_count)| *usage_count);
-
         let num_loaded = num_matching_entries(&cache, |program_type| {
             matches!(program_type, LoadedProgramType::TestLoaded(_))
         });
@@ -1540,23 +1483,23 @@ mod tests {
             matches!(program_type, LoadedProgramType::Unloaded(_))
         });
         let num_tombstones = num_matching_entries(&cache, |program_type| {
-            matches!(
-                program_type,
-                LoadedProgramType::DelayVisibility
-                    | LoadedProgramType::FailedVerification(_)
-                    | LoadedProgramType::Closed
-            )
+            matches!(program_type, LoadedProgramType::FailedVerification(_))
         });
 
-        assert_eq!(num_loaded, 8);
-        assert_eq!(num_unloaded, 30);
-        assert_eq!(num_tombstones, 20);
+        // Test that the cache is constructed with the expected number of entries.
+        assert_eq!(num_loaded, num_loaded_expected);
+        assert_eq!(num_unloaded, num_unloaded_expected);
+        assert_eq!(num_tombstones, num_tombstones_expected);
 
-        // Evicting to 2% should update cache with
-        // * 5 active entries
-        // * 33 unloaded entries (3 active programs will get unloaded)
-        // * 20 tombstones (tombstones are not evicted)
-        cache.sort_and_unload(Percentage::from(2));
+        // Evict entries from the cache
+        let eviction_pct = 2;
+
+        let num_loaded_expected =
+            Percentage::from(eviction_pct).apply_to(crate::loaded_programs::MAX_LOADED_ENTRY_COUNT);
+        let num_unloaded_expected = num_unloaded_expected + num_loaded - num_loaded_expected;
+
+        cache.sort_and_unload(Percentage::from(eviction_pct));
+
         // Check that every program is still in the cache.
         programs.iter().for_each(|entry| {
             assert!(cache.entries.get(&entry.0).is_some());
@@ -1578,6 +1521,7 @@ mod tests {
             assert!(unloaded.contains(&(expected.0, expected.2)));
         }
 
+        // Count the number of loaded, unloaded and tombstone entries.
         let num_loaded = num_matching_entries(&cache, |program_type| {
             matches!(program_type, LoadedProgramType::TestLoaded(_))
         });
@@ -1593,9 +1537,12 @@ mod tests {
             )
         });
 
-        assert_eq!(num_loaded, 5);
-        assert_eq!(num_unloaded, 33);
-        assert_eq!(num_tombstones, 20);
+        // However many entries are left after the shrink
+        assert_eq!(num_loaded, num_loaded_expected);
+        // The original unloaded entries + the evicted loaded entries
+        assert_eq!(num_unloaded, num_unloaded_expected);
+        // The original tombstones are not evicted
+        assert_eq!(num_tombstones, num_tombstones_expected);
     }
 
     #[test]
@@ -1603,7 +1550,11 @@ mod tests {
         let mut cache = new_mock_cache::<TestForkGraph>();
 
         let program = Pubkey::new_unique();
-        let num_total_programs = 6;
+        let evict_to_pct = 2;
+        let cache_capacity_after_shrink =
+            Percentage::from(evict_to_pct).apply_to(crate::loaded_programs::MAX_LOADED_ENTRY_COUNT);
+        // Add enough programs to the cache to trigger 1 eviction after shrinking.
+        let num_total_programs = (cache_capacity_after_shrink + 1) as u64;
         (0..num_total_programs).for_each(|i| {
             cache.assign_program(
                 program,
@@ -1611,8 +1562,7 @@ mod tests {
             );
         });
 
-        // This will unload the program deployed at slot 0, with usage count = 10
-        cache.sort_and_unload(Percentage::from(2));
+        cache.sort_and_unload(Percentage::from(evict_to_pct));
 
         let num_unloaded = num_matching_entries(&cache, |program_type| {
             matches!(program_type, LoadedProgramType::Unloaded(_))
@@ -2624,28 +2574,28 @@ mod tests {
         let tombstone = Arc::new(LoadedProgram::new_tombstone(0, LoadedProgramType::Closed));
 
         assert!(
-            LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &tombstone,
                 &LoadedProgramMatchCriteria::NoCriteria
             )
         );
 
         assert!(
-            LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &tombstone,
                 &LoadedProgramMatchCriteria::Tombstone
             )
         );
 
         assert!(
-            LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &tombstone,
                 &LoadedProgramMatchCriteria::DeployedOnOrAfterSlot(0)
             )
         );
 
         assert!(
-            !LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            !ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &tombstone,
                 &LoadedProgramMatchCriteria::DeployedOnOrAfterSlot(1)
             )
@@ -2654,28 +2604,28 @@ mod tests {
         let program = new_test_loaded_program(0, 1);
 
         assert!(
-            LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::NoCriteria
             )
         );
 
         assert!(
-            !LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            !ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::Tombstone
             )
         );
 
         assert!(
-            LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::DeployedOnOrAfterSlot(0)
             )
         );
 
         assert!(
-            !LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            !ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::DeployedOnOrAfterSlot(1)
             )
@@ -2688,28 +2638,28 @@ mod tests {
         ));
 
         assert!(
-            LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::NoCriteria
             )
         );
 
         assert!(
-            !LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            !ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::Tombstone
             )
         );
 
         assert!(
-            LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::DeployedOnOrAfterSlot(0)
             )
         );
 
         assert!(
-            !LoadedPrograms::<TestForkGraph>::matches_loaded_program_criteria(
+            !ProgramCache::<TestForkGraph>::matches_loaded_program_criteria(
                 &program,
                 &LoadedProgramMatchCriteria::DeployedOnOrAfterSlot(1)
             )
