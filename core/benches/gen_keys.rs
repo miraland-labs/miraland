@@ -1,11 +1,11 @@
-#![feature(test)]
+// #![feature(test)]
 
-extern crate test;
+// extern crate test;
 
-use {miraland_core::gen_keys::GenKeys, test::Bencher};
+// use {miraland_core::gen_keys::GenKeys, test::Bencher};
 
-#[bench]
-fn bench_gen_keys(b: &mut Bencher) {
-    let mut rnd = GenKeys::new([0u8; 32]);
-    b.iter(|| rnd.gen_n_keypairs(1000));
-}
+// #[bench]
+// fn bench_gen_keys(b: &mut Bencher) {
+//     let mut rnd = GenKeys::new([0u8; 32]);
+//     b.iter(|| rnd.gen_n_keypairs(1000));
+// }
