@@ -12,9 +12,11 @@ edition = { workspace = true }
 clap = { workspace = true }
 # MI, See Cargo.toml of the workspace for more details
 # MI, will delete next line once crossbeam-epoch patch v0.9.5 removed.
-crossbeam-deque = { workspace = true }
+# crossbeam-deque = { workspace = true }
 log = { workspace = true }
-miraland-accounts-db = { workspace = true, features = ["dev-context-only-utils"] }
+miraland-accounts-db = { workspace = true, features = [
+    "dev-context-only-utils",
+] }
 miraland-logger = { workspace = true }
 miraland-measure = { workspace = true }
 miraland-sdk = { workspace = true }
