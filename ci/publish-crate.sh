@@ -8,8 +8,8 @@ source ci/rust-version.sh stable
 is_crate_version_uploaded() {
   name=$1
   version=$2
-  curl https://crates.io/api/v1/crates/${name}/${version} | \
-  python3 -c "import sys,json; print('version' in json.load(sys.stdin));"
+  curl https://crates.io/api/v1/crates/${name}/${version} |
+    python3 -c "import sys,json; print('version' in json.load(sys.stdin));"
 }
 
 # Only package/publish if this is a tagged release
@@ -56,7 +56,7 @@ for Cargo_toml in $Cargo_tomls; do
     continue
   fi
 
-  if [[ $(is_crate_version_uploaded "$crate_name" "$expectedCrateVersion") = True ]] ; then
+  if [[ $(is_crate_version_uploaded "$crate_name" "$expectedCrateVersion") = True ]]; then
     echo "${crate_name} version ${expectedCrateVersion} is already on crates.io"
     continue
   fi
@@ -72,7 +72,10 @@ for Cargo_toml in $Cargo_tomls; do
       echo "Attempt ${i} of ${numRetries}"
       # The rocksdb package does not build with the stock rust docker image so use
       # the miraland rust docker image
-      if ci/docker-run-default-image.sh bash -exc "cd $crate; $cargoCommand"; then
+      # if ci/docker-run-default-image.sh bash -exc "cd $crate; $cargoCommand"; then
+      #   break
+      # fi
+      if bash -exc "cd $crate; $cargoCommand"; then
         break
       fi
 
