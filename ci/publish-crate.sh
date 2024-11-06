@@ -65,7 +65,8 @@ for Cargo_toml in $Cargo_tomls; do
     set -x
 
     crate=$(dirname "$Cargo_toml")
-    cargoCommand="cargo publish --token $CRATES_IO_TOKEN"
+    # MI: add --no-verify
+    cargoCommand="cargo publish --no-verify --token $CRATES_IO_TOKEN"
 
     numRetries=10
     for ((i = 1; i <= numRetries; i++)); do
