@@ -3,7 +3,7 @@ use {
         accounts_index::{DiskIndexValue, IndexValue},
         bucket_map_holder::{Age, AtomicAge, BucketMapHolder},
     },
-    solana_sdk::timing::AtomicInterval,
+    miraland_sdk::timing::AtomicInterval,
     std::{
         fmt::Debug,
         sync::atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering},

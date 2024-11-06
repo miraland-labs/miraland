@@ -22,8 +22,7 @@ use {
         remote_keypair::generate_remote_keypair,
         remote_wallet::{maybe_wallet_manager, RemoteWalletError, RemoteWalletManager},
     },
-    rpassword::prompt_password,
-    solana_sdk::{
+    miraland_sdk::{
         derivation_path::{DerivationPath, DerivationPathError},
         hash::Hash,
         message::Message,
@@ -34,6 +33,7 @@ use {
             read_keypair, read_keypair_file, Keypair, NullSigner, Presigner, Signature, Signer,
         },
     },
+    rpassword::prompt_password,
     std::{
         cell::RefCell,
         convert::TryFrom,
@@ -207,7 +207,7 @@ impl DefaultSigner {
     /// use clap::{App, Arg, value_t_or_exit};
     /// use miraland_clap_utils::keypair::{DefaultSigner, signer_from_path};
     /// use miraland_clap_utils::offline::OfflineArgs;
-    /// use solana_sdk::signer::Signer;
+    /// use miraland_sdk::signer::Signer;
     ///
     /// let clap_app = App::new("my-program")
     ///     // The argument we'll parse as a signer "path"
@@ -1124,7 +1124,7 @@ mod tests {
         assert_matches::assert_matches,
         clap::{value_t_or_exit, App, Arg},
         miraland_remote_wallet::{locator::Manufacturer, remote_wallet::initialize_wallet_manager},
-        solana_sdk::{signer::keypair::write_keypair_file, system_instruction},
+        miraland_sdk::{signer::keypair::write_keypair_file, system_instruction},
         tempfile::{NamedTempFile, TempDir},
     };
 

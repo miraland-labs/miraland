@@ -7,8 +7,8 @@ use {
         progress_map::ProgressMap, tree_diff::TreeDiff, Tower,
     },
     miraland_measure::measure::Measure,
-    solana_runtime::{bank::Bank, bank_forks::BankForks, epoch_stakes::EpochStakes},
-    solana_sdk::{
+    miraland_runtime::{bank::Bank, bank_forks::BankForks, epoch_stakes::EpochStakes},
+    miraland_sdk::{
         clock::{Epoch, Slot},
         epoch_schedule::EpochSchedule,
         hash::Hash,
@@ -1421,8 +1421,8 @@ mod test {
         super::*,
         crate::vote_simulator::VoteSimulator,
         itertools::Itertools,
-        solana_runtime::{bank::Bank, bank_utils},
-        solana_sdk::{hash::Hash, slot_history::SlotHistory},
+        miraland_runtime::{bank::Bank, bank_utils},
+        miraland_sdk::{hash::Hash, slot_history::SlotHistory},
         std::{collections::HashSet, ops::Range},
         trees::tr,
     };

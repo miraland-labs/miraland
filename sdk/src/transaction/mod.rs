@@ -53,11 +53,11 @@
 //! [`anyhow`]: https://docs.rs/anyhow
 //!
 //! ```
-//! # use solana_sdk::example_mocks::miraland_rpc_client;
+//! # use miraland_sdk::example_mocks::miraland_rpc_client;
 //! use anyhow::Result;
 //! use borsh::{BorshSerialize, BorshDeserialize};
 //! use miraland_rpc_client::rpc_client::RpcClient;
-//! use solana_sdk::{
+//! use miraland_sdk::{
 //!      instruction::Instruction,
 //!      message::Message,
 //!      pubkey::Pubkey,
@@ -127,8 +127,8 @@ use {
         wasm_bindgen,
     },
     serde::Serialize,
-    solana_program::{system_instruction::SystemInstruction, system_program},
-    solana_sdk::feature_set,
+    miraland_program::{system_instruction::SystemInstruction, system_program},
+    miraland_sdk::feature_set,
     std::result,
 };
 
@@ -212,11 +212,11 @@ impl Transaction {
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_sdk::example_mocks::miraland_rpc_client;
+    /// # use miraland_sdk::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///      instruction::Instruction,
     ///      message::Message,
     ///      pubkey::Pubkey,
@@ -291,11 +291,11 @@ impl Transaction {
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_sdk::example_mocks::miraland_rpc_client;
+    /// # use miraland_sdk::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///      instruction::Instruction,
     ///      message::Message,
     ///      pubkey::Pubkey,
@@ -370,11 +370,11 @@ impl Transaction {
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_sdk::example_mocks::miraland_rpc_client;
+    /// # use miraland_sdk::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///      instruction::Instruction,
     ///      message::Message,
     ///      pubkey::Pubkey,
@@ -446,11 +446,11 @@ impl Transaction {
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_sdk::example_mocks::miraland_rpc_client;
+    /// # use miraland_sdk::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///      instruction::Instruction,
     ///      message::Message,
     ///      pubkey::Pubkey,
@@ -654,11 +654,11 @@ impl Transaction {
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_sdk::example_mocks::miraland_rpc_client;
+    /// # use miraland_sdk::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///      instruction::Instruction,
     ///      message::Message,
     ///      pubkey::Pubkey,
@@ -792,11 +792,11 @@ impl Transaction {
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_sdk::example_mocks::miraland_rpc_client;
+    /// # use miraland_sdk::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///      instruction::Instruction,
     ///      message::Message,
     ///      pubkey::Pubkey,
@@ -1134,10 +1134,10 @@ mod tests {
     #[test]
     fn test_refs() {
         let key = Keypair::new();
-        let key1 = solana_sdk::pubkey::new_rand();
-        let key2 = solana_sdk::pubkey::new_rand();
-        let prog1 = solana_sdk::pubkey::new_rand();
-        let prog2 = solana_sdk::pubkey::new_rand();
+        let key1 = miraland_sdk::pubkey::new_rand();
+        let key2 = miraland_sdk::pubkey::new_rand();
+        let prog1 = miraland_sdk::pubkey::new_rand();
+        let prog2 = miraland_sdk::pubkey::new_rand();
         let instructions = vec![
             CompiledInstruction::new(3, &(), vec![0, 1]),
             CompiledInstruction::new(4, &(), vec![0, 2]),
@@ -1205,7 +1205,7 @@ mod tests {
     fn test_sanitize_txs() {
         let key = Keypair::new();
         let id0 = Pubkey::default();
-        let program_id = solana_sdk::pubkey::new_rand();
+        let program_id = miraland_sdk::pubkey::new_rand();
         let ix = Instruction::new_with_bincode(
             program_id,
             &0,
@@ -1304,7 +1304,7 @@ mod tests {
     fn test_transaction_minimum_serialized_size() {
         let alice_keypair = Keypair::new();
         let alice_pubkey = alice_keypair.pubkey();
-        let bob_pubkey = solana_sdk::pubkey::new_rand();
+        let bob_pubkey = miraland_sdk::pubkey::new_rand();
         let ix = system_instruction::transfer(&alice_pubkey, &bob_pubkey, 42);
 
         let expected_data_size = size_of::<u32>() + size_of::<u64>();
@@ -1382,7 +1382,7 @@ mod tests {
     #[should_panic]
     fn test_partial_sign_mismatched_key() {
         let keypair = Keypair::new();
-        let fee_payer = solana_sdk::pubkey::new_rand();
+        let fee_payer = miraland_sdk::pubkey::new_rand();
         let ix = Instruction::new_with_bincode(
             Pubkey::default(),
             &0,
@@ -1465,7 +1465,7 @@ mod tests {
         let program_id = Pubkey::default();
         let keypair0 = Keypair::new();
         let id0 = keypair0.pubkey();
-        let id1 = solana_sdk::pubkey::new_rand();
+        let id1 = miraland_sdk::pubkey::new_rand();
         let ix = Instruction::new_with_bincode(
             program_id,
             &0,
@@ -1516,7 +1516,7 @@ mod tests {
         assert_eq!(tx.signatures[1], presigner_sig);
 
         // Wrong key should error, not panic
-        let another_pubkey = solana_sdk::pubkey::new_rand();
+        let another_pubkey = miraland_sdk::pubkey::new_rand();
         let ix = Instruction::new_with_bincode(
             program_id,
             &0,

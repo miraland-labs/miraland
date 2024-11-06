@@ -1,6 +1,6 @@
 use {
-    solana_runtime::bank::Bank,
-    solana_sdk::{account::AccountSharedData, pubkey::Pubkey},
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{account::AccountSharedData, pubkey::Pubkey},
     std::collections::HashMap,
 };
 

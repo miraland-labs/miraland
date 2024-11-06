@@ -1,7 +1,7 @@
 use {
     assert_matches::assert_matches,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         ed25519_instruction::new_ed25519_instruction,
         signature::Signer,
         transaction::{Transaction, TransactionError},

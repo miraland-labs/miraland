@@ -1,8 +1,8 @@
 use {
     bytemuck::{bytes_of, Pod},
     curve25519_dalek::scalar::Scalar,
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         account::Account,
         instruction::InstructionError,
         pubkey::Pubkey,
@@ -11,7 +11,7 @@ use {
         system_instruction,
         transaction::{Transaction, TransactionError},
     },
-    solana_zk_token_sdk::{
+    miraland_zk_token_sdk::{
         encryption::{
             elgamal::{ElGamalKeypair, ElGamalSecretKey},
             grouped_elgamal::GroupedElGamal,
@@ -1574,11 +1574,11 @@ trait WithMaxComputeUnitLimit {
     fn with_max_compute_unit_limit(self) -> Self;
 }
 
-impl WithMaxComputeUnitLimit for Vec<solana_sdk::instruction::Instruction> {
+impl WithMaxComputeUnitLimit for Vec<miraland_sdk::instruction::Instruction> {
     fn with_max_compute_unit_limit(mut self) -> Self {
         self.push(
-            solana_sdk::compute_budget::ComputeBudgetInstruction::set_compute_unit_limit(
-                solana_program_runtime::compute_budget_processor::MAX_COMPUTE_UNIT_LIMIT,
+            miraland_sdk::compute_budget::ComputeBudgetInstruction::set_compute_unit_limit(
+                miraland_program_runtime::compute_budget_processor::MAX_COMPUTE_UNIT_LIMIT,
             ),
         );
         self

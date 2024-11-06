@@ -16,11 +16,11 @@ use {
         BanksRequest, BanksResponse, BanksTransactionResultWithMetadata,
         BanksTransactionResultWithSimulation,
     },
-    solana_program::{
+    miraland_program::{
         clock::Slot, fee_calculator::FeeCalculator, hash::Hash, program_pack::Pack, pubkey::Pubkey,
         rent::Rent, sysvar::Sysvar,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{from_account, Account},
         commitment_config::CommitmentLevel,
         message::Message,
@@ -553,11 +553,11 @@ mod tests {
     use {
         super::*,
         miraland_banks_server::banks_server::start_local_server,
-        solana_runtime::{
+        miraland_runtime::{
             bank::Bank, bank_forks::BankForks, commitment::BlockCommitmentCache,
             genesis_utils::create_genesis_config,
         },
-        solana_sdk::{
+        miraland_sdk::{
             message::Message, signature::Signer, system_instruction, transaction::Transaction,
         },
         std::sync::{Arc, RwLock},
@@ -589,7 +589,7 @@ mod tests {
         ));
         let bank_forks = BankForks::new_rw_arc(bank);
 
-        let bob_pubkey = solana_sdk::pubkey::new_rand();
+        let bob_pubkey = miraland_sdk::pubkey::new_rand();
         let mint_pubkey = genesis.mint_keypair.pubkey();
         let instruction = system_instruction::transfer(&mint_pubkey, &bob_pubkey, 1);
         let message = Message::new(&[instruction], Some(&mint_pubkey));
@@ -629,7 +629,7 @@ mod tests {
         let bank_forks = BankForks::new_rw_arc(bank);
 
         let mint_pubkey = &genesis.mint_keypair.pubkey();
-        let bob_pubkey = solana_sdk::pubkey::new_rand();
+        let bob_pubkey = miraland_sdk::pubkey::new_rand();
         let instruction = system_instruction::transfer(mint_pubkey, &bob_pubkey, 1);
         let message = Message::new(&[instruction], Some(mint_pubkey));
 

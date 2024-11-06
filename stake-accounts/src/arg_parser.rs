@@ -11,7 +11,7 @@ use {
         input_validators::{is_amount, is_rfc3339_datetime, is_valid_pubkey, is_valid_signer},
     },
     miraland_cli_config::CONFIG_FILE,
-    solana_sdk::native_token::mln_to_lamports,
+    miraland_sdk::native_token::mln_to_lamports,
     std::{ffi::OsString, process::exit},
 };
 

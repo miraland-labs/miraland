@@ -2,14 +2,14 @@ use {
     super::Bank,
     log::{debug, warn},
     miraland_svm::account_rent_state::RentState,
-    solana_sdk::{
+    miraland_sdk::{
         account::{ReadableAccount, WritableAccount},
         pubkey::Pubkey,
         reward_info::RewardInfo,
         reward_type::RewardType,
         system_program,
     },
-    solana_vote::vote_account::VoteAccountsHashMap,
+    miraland_vote::vote_account::VoteAccountsHashMap,
     std::{result::Result, sync::atomic::Ordering::Relaxed},
     thiserror::Error,
 };
@@ -294,7 +294,7 @@ pub mod tests {
             create_genesis_config, create_genesis_config_with_leader,
             create_genesis_config_with_vote_accounts, ValidatorVoteKeypairs,
         },
-        solana_sdk::{
+        miraland_sdk::{
             account::AccountSharedData, feature_set, native_token::mln_to_lamports, pubkey,
             rent::Rent, signature::Signer,
         },

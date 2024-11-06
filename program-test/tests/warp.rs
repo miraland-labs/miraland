@@ -6,9 +6,8 @@ use {
     bincode::deserialize,
     log::debug,
     miraland_banks_client::BanksClient,
-    setup::{setup_stake, setup_vote},
-    solana_program_test::{processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestError},
-    solana_sdk::{
+    miraland_program_test::{processor, ProgramTest, ProgramTestBanksClientExt, ProgramTestError},
+    miraland_sdk::{
         account::Account,
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
@@ -29,8 +28,9 @@ use {
         },
         transaction::{Transaction, TransactionError},
     },
-    solana_stake_program::stake_state,
-    solana_vote_program::vote_state,
+    miraland_stake_program::stake_state,
+    setup::{setup_stake, setup_vote},
+    miraland_vote_program::vote_state,
     std::convert::TryInto,
 };
 

@@ -11,7 +11,7 @@ use {
     },
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     miraland_rpc_client::rpc_client::RpcClient,
-    solana_sdk::{clock::Epoch, pubkey::Pubkey},
+    miraland_sdk::{clock::Epoch, pubkey::Pubkey},
     std::rc::Rc,
 };
 

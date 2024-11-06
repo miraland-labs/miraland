@@ -20,8 +20,8 @@
 //     miraland_streamer::socket::SocketAddrSpace,
 //     miraland_turbine::retransmit_stage::retransmitter,
 //     rand::Rng,
-//     solana_runtime::{bank::Bank, bank_forks::BankForks},
-//     solana_sdk::{
+//     miraland_runtime::{bank::Bank, bank_forks::BankForks},
+//     miraland_sdk::{
 //         hash::Hash,
 //         pubkey::Pubkey,
 //         signature::{Keypair, Signer},

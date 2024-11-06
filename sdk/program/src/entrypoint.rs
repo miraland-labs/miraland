@@ -99,7 +99,7 @@ pub const NON_DUP_MARKER: u8 = u8::MAX;
 /// #[cfg(not(feature = "no-entrypoint"))]
 /// pub mod entrypoint {
 ///
-///     use solana_program::{
+///     use miraland_program::{
 ///         account_info::AccountInfo,
 ///         entrypoint,
 ///         entrypoint::ProgramResult,

@@ -13,8 +13,8 @@ use {
         ancestor_iterator::AncestorIterator, blockstore::Blockstore, blockstore_meta::SlotMeta,
     },
     miraland_measure::measure::Measure,
-    solana_runtime::epoch_stakes::EpochStakes,
-    solana_sdk::{
+    miraland_runtime::epoch_stakes::EpochStakes,
+    miraland_sdk::{
         clock::Slot,
         epoch_schedule::{Epoch, EpochSchedule},
         hash::Hash,
@@ -983,8 +983,8 @@ mod test {
             blockstore::{make_chaining_slot_entries, Blockstore},
             get_tmp_ledger_path,
         },
-        solana_runtime::{bank::Bank, bank_utils},
-        solana_sdk::hash::Hash,
+        miraland_runtime::{bank::Bank, bank_utils},
+        miraland_sdk::hash::Hash,
         trees::tr,
     };
 

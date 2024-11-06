@@ -10,7 +10,7 @@ use {
     miraland_measure::measure::Measure,
     miraland_metrics::*,
     miraland_transaction_status::{Reward, Rewards},
-    solana_sdk::{clock::UnixTimestamp, pubkey::Pubkey, reward_info::RewardInfo},
+    miraland_sdk::{clock::UnixTimestamp, pubkey::Pubkey, reward_info::RewardInfo},
     std::sync::{Arc, RwLock},
 };
 

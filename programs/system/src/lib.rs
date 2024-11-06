@@ -2,7 +2,7 @@
 pub mod system_instruction;
 pub mod system_processor;
 
-use solana_sdk::{
+use miraland_sdk::{
     account::{AccountSharedData, ReadableAccount},
     account_utils::StateMut,
     nonce, system_program,

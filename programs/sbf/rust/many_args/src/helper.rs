@@ -2,8 +2,8 @@
 
 #![allow(clippy::arithmetic_side_effects)]
 
-extern crate solana_program;
-use solana_program::log::*;
+extern crate miraland_program;
+use miraland_program::log::*;
 
 pub fn many_args(
     arg1: u64,

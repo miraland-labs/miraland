@@ -12,7 +12,7 @@ mod tests {
             nonblocking::quic::DEFAULT_WAIT_FOR_CHUNK_TIMEOUT, quic::SpawnServerResult,
             streamer::StakedNodes, tls_certificates::new_dummy_x509_certificate,
         },
-        solana_sdk::{net::DEFAULT_TPU_COALESCE, packet::PACKET_DATA_SIZE, signature::Keypair},
+        miraland_sdk::{net::DEFAULT_TPU_COALESCE, packet::PACKET_DATA_SIZE, signature::Keypair},
         std::{
             net::{SocketAddr, UdpSocket},
             sync::{

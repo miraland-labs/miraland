@@ -20,7 +20,7 @@ pub mod validator_info;
 use {
     crate::parse_account_data::{parse_account_data, AccountAdditionalData, ParsedAccount},
     base64::{prelude::BASE64_STANDARD, Engine},
-    solana_sdk::{
+    miraland_sdk::{
         account::{ReadableAccount, WritableAccount},
         clock::Epoch,
         fee_calculator::FeeCalculator,
@@ -222,7 +222,7 @@ mod test {
     use {
         super::*,
         assert_matches::assert_matches,
-        solana_sdk::account::{Account, AccountSharedData},
+        miraland_sdk::account::{Account, AccountSharedData},
     };
 
     #[test]

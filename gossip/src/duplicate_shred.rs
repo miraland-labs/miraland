@@ -6,7 +6,7 @@ use {
         blockstore_meta::{DuplicateSlotProof, ErasureMeta},
         shred::{self, Shred, ShredType},
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         pubkey::Pubkey,
         sanitize::{Sanitize, SanitizeError},
@@ -288,7 +288,7 @@ pub(crate) mod tests {
         miraland_entry::entry::Entry,
         miraland_ledger::shred::{ProcessShredsStats, ReedSolomonCache, Shredder},
         rand::Rng,
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             system_transaction,

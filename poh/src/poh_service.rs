@@ -6,7 +6,7 @@ use {
     log::*,
     miraland_entry::poh::Poh,
     miraland_measure::{measure, measure::Measure},
-    solana_sdk::poh_config::PohConfig,
+    miraland_sdk::poh_config::PohConfig,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -390,8 +390,8 @@ mod tests {
         miraland_measure::measure::Measure,
         miraland_perf::test_tx::test_tx,
         rand::{thread_rng, Rng},
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             clock, hash::hash, pubkey::Pubkey, timing, transaction::VersionedTransaction,
         },
         std::{thread::sleep, time::Duration},

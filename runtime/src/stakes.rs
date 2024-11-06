@@ -9,14 +9,14 @@ use {
     num_derive::ToPrimitive,
     num_traits::ToPrimitive,
     rayon::{prelude::*, ThreadPool},
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::{Epoch, Slot},
         pubkey::Pubkey,
         stake::state::{Delegation, StakeActivationStatus},
         vote::state::VoteStateVersions,
     },
-    solana_vote::vote_account::{VoteAccount, VoteAccounts},
+    miraland_vote::vote_account::{VoteAccount, VoteAccounts},
     std::{
         collections::{HashMap, HashSet},
         ops::Add,
@@ -76,17 +76,17 @@ impl StakesCache {
         // Zero lamport accounts are not stored in accounts-db
         // and so should be removed from cache as well.
         if account.lamports() == 0 {
-            if solana_vote_program::check_id(owner) {
+            if miraland_vote_program::check_id(owner) {
                 let mut stakes = self.0.write().unwrap();
                 stakes.remove_vote_account(pubkey);
-            } else if solana_stake_program::check_id(owner) {
+            } else if miraland_stake_program::check_id(owner) {
                 let mut stakes = self.0.write().unwrap();
                 stakes.remove_stake_delegation(pubkey, new_rate_activation_epoch);
             }
             return;
         }
         debug_assert_ne!(account.lamports(), 0u64);
-        if solana_vote_program::check_id(owner) {
+        if miraland_vote_program::check_id(owner) {
             if VoteStateVersions::is_correct_size_and_initialized(account.data()) {
                 match VoteAccount::try_from(account.to_account_shared_data()) {
                     Ok(vote_account) => {
@@ -106,7 +106,7 @@ impl StakesCache {
                 let mut stakes = self.0.write().unwrap();
                 stakes.remove_vote_account(pubkey)
             };
-        } else if solana_stake_program::check_id(owner) {
+        } else if miraland_stake_program::check_id(owner) {
             match StakeAccount::try_from(account.to_account_shared_data()) {
                 Ok(stake_account) => {
                     let mut stakes = self.0.write().unwrap();
@@ -606,19 +606,19 @@ pub(crate) mod tests {
         super::*,
         rand::Rng,
         rayon::ThreadPoolBuilder,
-        solana_sdk::{account::WritableAccount, pubkey::Pubkey, rent::Rent, stake},
-        solana_stake_program::stake_state,
-        solana_vote_program::vote_state::{self, VoteState, VoteStateVersions},
+        miraland_sdk::{account::WritableAccount, pubkey::Pubkey, rent::Rent, stake},
+        miraland_stake_program::stake_state,
+        miraland_vote_program::vote_state::{self, VoteState, VoteStateVersions},
     };
 
     //  set up some dummies for a staked node     ((     vote      )  (     stake     ))
     pub(crate) fn create_staked_node_accounts(
         stake: u64,
     ) -> ((Pubkey, AccountSharedData), (Pubkey, AccountSharedData)) {
-        let vote_pubkey = solana_sdk::pubkey::new_rand();
+        let vote_pubkey = miraland_sdk::pubkey::new_rand();
         let vote_account =
-            vote_state::create_account(&vote_pubkey, &solana_sdk::pubkey::new_rand(), 0, 1);
-        let stake_pubkey = solana_sdk::pubkey::new_rand();
+            vote_state::create_account(&vote_pubkey, &miraland_sdk::pubkey::new_rand(), 0, 1);
+        let stake_pubkey = miraland_sdk::pubkey::new_rand();
         (
             (vote_pubkey, vote_account),
             (
@@ -637,7 +637,7 @@ pub(crate) mod tests {
         stake_state::create_account(
             stake_pubkey,
             vote_pubkey,
-            &vote_state::create_account(vote_pubkey, &solana_sdk::pubkey::new_rand(), 0, 1),
+            &vote_state::create_account(vote_pubkey, &miraland_sdk::pubkey::new_rand(), 0, 1),
             &Rent::free(),
             stake,
         )
@@ -647,9 +647,9 @@ pub(crate) mod tests {
         stake: u64,
         epoch: Epoch,
     ) -> ((Pubkey, AccountSharedData), (Pubkey, AccountSharedData)) {
-        let vote_pubkey = solana_sdk::pubkey::new_rand();
+        let vote_pubkey = miraland_sdk::pubkey::new_rand();
         let vote_account =
-            vote_state::create_account(&vote_pubkey, &solana_sdk::pubkey::new_rand(), 0, 1);
+            vote_state::create_account(&vote_pubkey, &miraland_sdk::pubkey::new_rand(), 0, 1);
         (
             (vote_pubkey, vote_account),
             create_warming_stake_account(stake, epoch, &vote_pubkey),
@@ -662,13 +662,13 @@ pub(crate) mod tests {
         epoch: Epoch,
         vote_pubkey: &Pubkey,
     ) -> (Pubkey, AccountSharedData) {
-        let stake_pubkey = solana_sdk::pubkey::new_rand();
+        let stake_pubkey = miraland_sdk::pubkey::new_rand();
         (
             stake_pubkey,
             stake_state::create_account_with_activation_epoch(
                 &stake_pubkey,
                 vote_pubkey,
-                &vote_state::create_account(vote_pubkey, &solana_sdk::pubkey::new_rand(), 0, 1),
+                &vote_state::create_account(vote_pubkey, &miraland_sdk::pubkey::new_rand(), 0, 1),
                 &Rent::free(),
                 stake,
                 epoch,
@@ -714,7 +714,7 @@ pub(crate) mod tests {
 
             // activate more
             let mut stake_account =
-                create_stake_account(42, &vote_pubkey, &solana_sdk::pubkey::new_rand());
+                create_stake_account(42, &vote_pubkey, &miraland_sdk::pubkey::new_rand());
             stakes_cache.check_and_store(&stake_pubkey, &stake_account, None);
             let stake = stake_state::stake_from(&stake_account).unwrap();
             {
@@ -898,7 +898,7 @@ pub(crate) mod tests {
         let ((vote_pubkey, vote_account), (stake_pubkey, stake_account)) =
             create_staked_node_accounts(10);
 
-        let stake_pubkey2 = solana_sdk::pubkey::new_rand();
+        let stake_pubkey2 = miraland_sdk::pubkey::new_rand();
         let stake_account2 = create_stake_account(10, &vote_pubkey, &stake_pubkey2);
 
         stakes_cache.check_and_store(&vote_pubkey, &vote_account, None);
@@ -1047,16 +1047,16 @@ pub(crate) mod tests {
             ..Stakes::default()
         });
         for _ in 0..rng.gen_range(5usize..10) {
-            let vote_pubkey = solana_sdk::pubkey::new_rand();
+            let vote_pubkey = miraland_sdk::pubkey::new_rand();
             let vote_account = vote_state::create_account(
                 &vote_pubkey,
-                &solana_sdk::pubkey::new_rand(), // node_pubkey
+                &miraland_sdk::pubkey::new_rand(), // node_pubkey
                 rng.gen_range(0..101),           // commission
                 rng.gen_range(0..1_000_000),     // lamports
             );
             stakes_cache.check_and_store(&vote_pubkey, &vote_account, None);
             for _ in 0..rng.gen_range(10usize..20) {
-                let stake_pubkey = solana_sdk::pubkey::new_rand();
+                let stake_pubkey = miraland_sdk::pubkey::new_rand();
                 let rent = Rent::with_slots_per_epoch(rng.gen());
                 let stake_account = stake_state::create_account(
                     &stake_pubkey, // authorized

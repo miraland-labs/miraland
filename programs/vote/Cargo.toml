@@ -34,7 +34,7 @@ rustc_version = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_vote_program"
+name = "miraland_vote_program"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

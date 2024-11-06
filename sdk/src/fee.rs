@@ -2,7 +2,7 @@
 
 use crate::native_token::mln_to_lamports;
 #[cfg(not(target_os = "solana"))]
-use solana_program::message::SanitizedMessage;
+use miraland_program::message::SanitizedMessage;
 
 /// A fee and its associated compute unit limit
 #[derive(Debug, Default, Clone, Eq, PartialEq)]

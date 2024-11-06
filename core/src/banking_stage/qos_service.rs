@@ -7,8 +7,8 @@ use {
     super::{committer::CommitTransactionDetails, BatchedTransactionDetails},
     miraland_cost_model::{cost_model::CostModel, transaction_cost::TransactionCost},
     miraland_measure::measure::Measure,
-    solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{
         clock::Slot,
         feature_set::FeatureSet,
         saturating_add_assign,
@@ -590,13 +590,13 @@ mod tests {
         super::*,
         itertools::Itertools,
         miraland_cost_model::transaction_cost::UsageCostDetails,
-        solana_runtime::genesis_utils::{create_genesis_config, GenesisConfigInfo},
-        solana_sdk::{
+        miraland_runtime::genesis_utils::{create_genesis_config, GenesisConfigInfo},
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             system_transaction,
         },
-        solana_vote_program::vote_transaction,
+        miraland_vote_program::vote_transaction,
         std::sync::Arc,
     };
 

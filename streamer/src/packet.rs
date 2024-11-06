@@ -14,7 +14,7 @@ pub use {
     miraland_perf::packet::{
         to_packet_batches, PacketBatch, PacketBatchRecycler, NUM_PACKETS, PACKETS_PER_BATCH,
     },
-    solana_sdk::packet::{Meta, Packet, PACKET_DATA_SIZE},
+    miraland_sdk::packet::{Meta, Packet, PACKET_DATA_SIZE},
 };
 
 pub fn recv_from(batch: &mut PacketBatch, socket: &UdpSocket, max_wait: Duration) -> Result<usize> {

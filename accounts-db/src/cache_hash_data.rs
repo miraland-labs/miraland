@@ -6,7 +6,7 @@ use {
     bytemuck::{Pod, Zeroable},
     memmap2::MmapMut,
     miraland_measure::measure::Measure,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::{
         collections::HashSet,
         fs::{self, remove_file, File, OpenOptions},
@@ -562,14 +562,14 @@ mod tests {
                                 let mut pk;
                                 loop {
                                     // expensive, but small numbers and for tests, so ok
-                                    pk = solana_sdk::pubkey::new_rand();
+                                    pk = miraland_sdk::pubkey::new_rand();
                                     if binner.bin_from_pubkey(&pk) == bin {
                                         break;
                                     }
                                 }
 
                                 CalculateHashIntermediate {
-                                    hash: AccountHash(solana_sdk::hash::Hash::new_unique()),
+                                    hash: AccountHash(miraland_sdk::hash::Hash::new_unique()),
                                     lamports: ct as u64,
                                     pubkey: pk,
                                 }

@@ -9,7 +9,7 @@ use {
     miraland_ledger::entry_notifier_interface::EntryNotifier,
     miraland_measure::measure::Measure,
     miraland_metrics::*,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::sync::{Arc, RwLock},
 };
 

@@ -1,7 +1,7 @@
 use {
     crate::rolling_bit_field::RollingBitField,
     core::fmt::{Debug, Formatter},
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::collections::HashMap,
 };
 

@@ -1,6 +1,6 @@
 use {
     rand::{CryptoRng, Rng, RngCore},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::Hash,
         instruction::CompiledInstruction,
@@ -10,7 +10,7 @@ use {
         system_program, system_transaction,
         transaction::Transaction,
     },
-    solana_vote_program::vote_transaction,
+    miraland_vote_program::vote_transaction,
 };
 
 pub fn test_tx() -> Transaction {

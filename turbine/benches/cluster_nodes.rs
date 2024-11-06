@@ -10,7 +10,7 @@
 //         retransmit_stage::RetransmitStage,
 //     },
 //     rand::{seq::SliceRandom, Rng},
-//     solana_sdk::{clock::Slot, pubkey::Pubkey},
+//     miraland_sdk::{clock::Slot, pubkey::Pubkey},
 //     test::Bencher,
 // };
 

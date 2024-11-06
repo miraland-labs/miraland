@@ -45,7 +45,7 @@ use {
     miraland_measure::{measure, measure::Measure},
     miraland_unified_scheduler_pool::DefaultSchedulerPool,
     serde::Serialize,
-    solana_runtime::{
+    miraland_runtime::{
         bank::{bank_hash_details, Bank, RewardCalculationEvent},
         bank_forks::BankForks,
         snapshot_archive_info::SnapshotArchiveInfoGetter,
@@ -56,7 +56,7 @@ use {
             SUPPORTED_ARCHIVE_COMPRESSION,
         },
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         account_utils::StateMut,
         clock::{Epoch, Slot},
@@ -72,8 +72,8 @@ use {
         system_program,
         transaction::{MessageHash, SanitizedTransaction, SimpleAddressLoader},
     },
-    solana_stake_program::stake_state::{self, PointValue},
-    solana_vote_program::{
+    miraland_stake_program::stake_state::{self, PointValue},
+    miraland_vote_program::{
         self,
         vote_state::{self, VoteState},
     },
@@ -1992,7 +1992,7 @@ fn main() {
                         // Delete existing vote accounts
                         for (address, mut account) in bank
                             .get_program_accounts(
-                                &solana_vote_program::id(),
+                                &miraland_vote_program::id(),
                                 &ScanConfig::default(),
                             )
                             .unwrap()
@@ -2444,7 +2444,7 @@ fn main() {
                             new_credits_observed: Option<u64>,
                             skipped_reasons: String,
                         }
-                        use solana_stake_program::stake_state::InflationPointCalculationEvent;
+                        use miraland_stake_program::stake_state::InflationPointCalculationEvent;
                         let stake_calculation_details: DashMap<Pubkey, CalculationDetail> =
                             DashMap::new();
                         let last_point_value = Arc::new(RwLock::new(None));
@@ -2621,7 +2621,7 @@ fn main() {
                         for (pubkey, warped_account) in all_accounts {
                             // Don't output sysvars; it's always updated but not related to
                             // inflation.
-                            if solana_sdk::sysvar::is_sysvar_id(&pubkey) {
+                            if miraland_sdk::sysvar::is_sysvar_id(&pubkey) {
                                 continue;
                             }
 

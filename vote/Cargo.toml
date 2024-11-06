@@ -23,7 +23,7 @@ thiserror = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_vote"
+name = "miraland_vote"
 
 [dev-dependencies]
 bincode = { workspace = true }

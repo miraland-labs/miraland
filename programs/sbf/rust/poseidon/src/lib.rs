@@ -1,6 +1,6 @@
 //! Example SBF program using Poseidon syscall
 
-use solana_program::{
+use miraland_program::{
     custom_heap_default, custom_panic_default, msg,
     poseidon::{hashv, Endianness, Parameters, PoseidonSyscallError},
 };

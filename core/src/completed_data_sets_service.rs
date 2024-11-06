@@ -9,7 +9,7 @@ use {
     miraland_entry::entry::Entry,
     miraland_ledger::blockstore::{Blockstore, CompletedDataSetInfo},
     miraland_rpc::{max_slots::MaxSlots, rpc_subscriptions::RpcSubscriptions},
-    solana_sdk::signature::Signature,
+    miraland_sdk::signature::Signature,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -109,7 +109,7 @@ impl CompletedDataSetsService {
 pub mod test {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             transaction::Transaction,

@@ -11,7 +11,7 @@ use {
     },
     log::*,
     miraland_accounts_db::accounts_update_notifier_interface::AccountsUpdateNotifier,
-    solana_runtime::{
+    miraland_runtime::{
         accounts_background_service::AbsRequestSender,
         bank_forks::BankForks,
         snapshot_archive_info::{
@@ -22,7 +22,7 @@ use {
         snapshot_hash::{FullSnapshotHash, IncrementalSnapshotHash, StartingSnapshotHashes},
         snapshot_utils,
     },
-    solana_sdk::genesis_config::GenesisConfig,
+    miraland_sdk::genesis_config::GenesisConfig,
     std::{
         path::PathBuf,
         result,

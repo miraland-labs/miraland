@@ -56,12 +56,12 @@ After your Playground Wallet is created, you will notice the bottom of the windo
 
 The code for your Rust based Miraland program will live in your `src/lib.rs` file. Inside `src/lib.rs` you will be able to import your Rust crates and define your logic. Open your `src/lib.rs` file within Miraland Playground.
 
-### Import the `solana_program` crate
+### Import the `miraland_program` crate
 
 At the top of `lib.rs`, we import the `miraland-program` crate and bring our needed items into the local namespace:
 
 ```rust
-use solana_program::{
+use miraland_program::{
     account_info::AccountInfo,
     entrypoint,
     entrypoint::ProgramResult,

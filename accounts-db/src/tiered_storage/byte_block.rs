@@ -194,7 +194,7 @@ mod tests {
     use {
         super::*,
         crate::accounts_hash::AccountHash,
-        solana_sdk::{hash::Hash, stake_history::Epoch},
+        miraland_sdk::{hash::Hash, stake_history::Epoch},
     };
 
     fn read_type_unaligned<T>(buffer: &[u8], offset: usize) -> (T, usize) {

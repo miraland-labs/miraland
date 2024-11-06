@@ -13,7 +13,7 @@ use {
     miraland_measure::measure::Measure,
     miraland_metrics::*,
     postgres::{Client, Statement},
-    solana_sdk::pubkey::Pubkey,
+    miraland_sdk::pubkey::Pubkey,
     tokio_postgres::types,
 };
 

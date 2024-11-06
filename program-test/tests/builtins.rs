@@ -1,6 +1,6 @@
 use {
-    solana_program_test::ProgramTest,
-    solana_sdk::{
+    miraland_program_test::ProgramTest,
+    miraland_sdk::{
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
         message::{v0::Message, VersionedMessage},
         pubkey::Pubkey,

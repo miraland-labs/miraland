@@ -17,8 +17,8 @@ use {
         execute_batch, TransactionBatchWithIndexes, TransactionStatusSender,
     },
     miraland_unified_scheduler_logic::Task,
-    solana_program_runtime::timings::ExecuteTimings,
-    solana_runtime::{
+    miraland_program_runtime::timings::ExecuteTimings,
+    miraland_runtime::{
         bank::Bank,
         installed_scheduler_pool::{
             InstalledScheduler, InstalledSchedulerBox, InstalledSchedulerPool,
@@ -27,8 +27,8 @@ use {
         },
         prioritization_fee_cache::PrioritizationFeeCache,
     },
-    solana_sdk::transaction::{Result, SanitizedTransaction},
-    solana_vote::vote_sender_types::ReplayVoteSender,
+    miraland_sdk::transaction::{Result, SanitizedTransaction},
+    miraland_vote::vote_sender_types::ReplayVoteSender,
     std::{
         fmt::Debug,
         marker::PhantomData,
@@ -773,14 +773,14 @@ mod tests {
     use {
         super::*,
         assert_matches::assert_matches,
-        solana_runtime::{
+        miraland_runtime::{
             bank::Bank,
             bank_forks::BankForks,
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             installed_scheduler_pool::{BankWithScheduler, SchedulingContext},
             prioritization_fee_cache::PrioritizationFeeCache,
         },
-        solana_sdk::{
+        miraland_sdk::{
             clock::MAX_PROCESSING_AGE,
             pubkey::Pubkey,
             signer::keypair::Keypair,
@@ -959,7 +959,7 @@ mod tests {
         } = create_genesis_config(10_000);
         let tx0 = &SanitizedTransaction::from_transaction_for_tests(system_transaction::transfer(
             &mint_keypair,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             2,
             genesis_config.hash(),
         ));
@@ -1000,7 +1000,7 @@ mod tests {
         let bad_tx =
             &SanitizedTransaction::from_transaction_for_tests(system_transaction::transfer(
                 &unfunded_keypair,
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
                 2,
                 genesis_config.hash(),
             ));
@@ -1013,7 +1013,7 @@ mod tests {
         let good_tx_after_bad_tx =
             &SanitizedTransaction::from_transaction_for_tests(system_transaction::transfer(
                 &mint_keypair,
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
                 3,
                 genesis_config.hash(),
             ));
@@ -1038,7 +1038,7 @@ mod tests {
         assert_matches!(
             bank.wait_for_completed_scheduler(),
             Some((
-                Err(solana_sdk::transaction::TransactionError::AccountNotFound),
+                Err(miraland_sdk::transaction::TransactionError::AccountNotFound),
                 _timings
             ))
         );
@@ -1174,7 +1174,7 @@ mod tests {
         let very_old_valid_tx =
             SanitizedTransaction::from_transaction_for_tests(system_transaction::transfer(
                 &mint_keypair,
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
                 2,
                 genesis_config.hash(),
             ));

@@ -1,11 +1,11 @@
 /// Partial Solarti Token declarations inlined to avoid an external dependency on the solarti-token crate
 /// Copied from miraland-runtime
-use solana_sdk::pubkey::{Pubkey, PUBKEY_BYTES};
+use miraland_sdk::pubkey::{Pubkey, PUBKEY_BYTES};
 
-solana_sdk::declare_id!("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM");
+miraland_sdk::declare_id!("Token4Q2B47VCdUy8u3rSTMMk2bGA1k7eN8qfKSzdiM");
 
 pub(crate) mod new_token_program {
-    solana_sdk::declare_id!("gntoZ1nNAAvXR1jcoXWi1SKLdN8gXR3pg6P9YdUXmnE");
+    miraland_sdk::declare_id!("gntoZ1nNAAvXR1jcoXWi1SKLdN8gXR3pg6P9YdUXmnE");
 }
 
 /*
@@ -77,7 +77,7 @@ impl GenericTokenAccount for Account {
 }
 
 pub mod native_mint {
-    solana_sdk::declare_id!("MLN1111111111111111111111111111111111111111");
+    miraland_sdk::declare_id!("MLN1111111111111111111111111111111111111111");
 
     /*
         Mint {

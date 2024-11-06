@@ -2,7 +2,7 @@
  * @brief Example C-based SBF program that moves funds from one account to
  * another
  */
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 
 /**
  * Number of SolAccountInfo expected. The program should bail if an

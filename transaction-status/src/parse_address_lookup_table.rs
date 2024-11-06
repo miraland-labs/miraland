@@ -4,7 +4,7 @@ use {
     },
     bincode::deserialize,
     serde_json::json,
-    solana_sdk::{
+    miraland_sdk::{
         address_lookup_table::instruction::ProgramInstruction, instruction::CompiledInstruction,
         message::AccountKeys,
     },
@@ -117,7 +117,7 @@ fn check_num_address_lookup_table_accounts(
 mod test {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             address_lookup_table::instruction, message::Message, pubkey::Pubkey, system_program,
         },
         std::str::FromStr,

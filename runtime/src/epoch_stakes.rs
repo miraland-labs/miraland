@@ -1,8 +1,8 @@
 use {
     crate::stakes::StakesEnum,
     serde::{Deserialize, Serialize},
-    solana_sdk::{clock::Epoch, pubkey::Pubkey},
-    solana_vote::vote_account::VoteAccountsHashMap,
+    miraland_sdk::{clock::Epoch, pubkey::Pubkey},
+    miraland_vote::vote_account::VoteAccountsHashMap,
     std::{collections::HashMap, sync::Arc},
 };
 
@@ -124,8 +124,8 @@ impl EpochStakes {
 #[cfg(test)]
 pub(crate) mod tests {
     use {
-        super::*, solana_sdk::account::AccountSharedData, solana_vote::vote_account::VoteAccount,
-        solana_vote_program::vote_state::create_account_with_authorized, std::iter,
+        super::*, miraland_sdk::account::AccountSharedData, miraland_vote::vote_account::VoteAccount,
+        miraland_vote_program::vote_state::create_account_with_authorized, std::iter,
     };
 
     struct VoteAccountInfo {
@@ -141,13 +141,13 @@ pub(crate) mod tests {
         // Create some vote accounts for each pubkey
         let vote_accounts_map: HashMap<Pubkey, Vec<VoteAccountInfo>> = (0..10)
             .map(|_| {
-                let node_id = solana_sdk::pubkey::new_rand();
+                let node_id = miraland_sdk::pubkey::new_rand();
                 (
                     node_id,
                     iter::repeat_with(|| {
-                        let authorized_voter = solana_sdk::pubkey::new_rand();
+                        let authorized_voter = miraland_sdk::pubkey::new_rand();
                         VoteAccountInfo {
-                            vote_account: solana_sdk::pubkey::new_rand(),
+                            vote_account: miraland_sdk::pubkey::new_rand(),
                             account: create_account_with_authorized(
                                 &node_id,
                                 &authorized_voter,

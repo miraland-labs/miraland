@@ -22,7 +22,7 @@ miraland-logger = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_config_program"
+name = "miraland_config_program"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

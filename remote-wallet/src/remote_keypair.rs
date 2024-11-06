@@ -7,7 +7,7 @@ use {
             RemoteWalletType,
         },
     },
-    solana_sdk::{
+    miraland_sdk::{
         derivation_path::DerivationPath,
         pubkey::Pubkey,
         signature::{Signature, Signer, SignerError},

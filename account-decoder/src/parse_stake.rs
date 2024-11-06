@@ -4,7 +4,7 @@ use {
         StringAmount,
     },
     bincode::deserialize,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Epoch, UnixTimestamp},
         stake::state::{Authorized, Delegation, Lockup, Meta, Stake, StakeStateV2},
     },
@@ -121,7 +121,7 @@ pub struct UiDelegation {
     pub deactivation_epoch: StringAmount,
     #[deprecated(
         since = "1.16.7",
-        note = "Please use `solana_sdk::stake::stake::warmup_cooldown_rate()` instead"
+        note = "Please use `miraland_sdk::stake::stake::warmup_cooldown_rate()` instead"
     )]
     pub warmup_cooldown_rate: f64,
 }
@@ -141,7 +141,7 @@ impl From<Delegation> for UiDelegation {
 
 #[cfg(test)]
 mod test {
-    use {super::*, bincode::serialize, solana_sdk::stake::stake_flags::StakeFlags};
+    use {super::*, bincode::serialize, miraland_sdk::stake::stake_flags::StakeFlags};
 
     #[test]
     #[allow(deprecated)]
@@ -153,8 +153,8 @@ mod test {
             StakeAccountType::Uninitialized
         );
 
-        let pubkey = solana_sdk::pubkey::new_rand();
-        let custodian = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
+        let custodian = miraland_sdk::pubkey::new_rand();
         let authorized = Authorized::auto(&pubkey);
         let lockup = Lockup {
             unix_timestamp: 0,
@@ -188,7 +188,7 @@ mod test {
             })
         );
 
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let stake = Stake {
             delegation: Delegation {
                 voter_pubkey,

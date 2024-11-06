@@ -7,7 +7,7 @@ use {
     },
     miraland_poh::poh_recorder::BankStart,
     miraland_svm::transaction_error_metrics::*,
-    solana_sdk::{clock::Slot, saturating_add_assign},
+    miraland_sdk::{clock::Slot, saturating_add_assign},
     std::time::Instant,
 };
 
@@ -942,8 +942,8 @@ impl LeaderSlotMetricsTracker {
 mod tests {
     use {
         super::*,
-        solana_runtime::{bank::Bank, genesis_utils::create_genesis_config},
-        solana_sdk::pubkey::Pubkey,
+        miraland_runtime::{bank::Bank, genesis_utils::create_genesis_config},
+        miraland_sdk::pubkey::Pubkey,
         std::{mem, sync::Arc},
     };
 

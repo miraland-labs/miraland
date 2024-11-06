@@ -4,16 +4,16 @@ use {
     },
     console::Emoji,
     dialoguer::{theme::ColorfulTheme, Select},
+    miraland_sdk::derivation_path::DerivationPath,
     semver::Version as FirmwareVersion,
-    solana_sdk::derivation_path::DerivationPath,
     std::{fmt, rc::Rc},
 };
 #[cfg(feature = "hidapi")]
 use {
     crate::{ledger_error::LedgerError, locator::Manufacturer},
     log::*,
+    miraland_sdk::{pubkey::Pubkey, signature::Signature},
     num_traits::FromPrimitive,
-    solana_sdk::{pubkey::Pubkey, signature::Signature},
     std::{cmp::min, convert::TryFrom},
 };
 
@@ -526,8 +526,8 @@ impl RemoteWallet<hidapi::DeviceInfo> for LedgerWallet {
         message: &[u8],
     ) -> Result<Signature, RemoteWalletError> {
         if message.len()
-            > solana_sdk::offchain_message::v0::OffchainMessage::MAX_LEN_LEDGER
-                + solana_sdk::offchain_message::v0::OffchainMessage::HEADER_LEN
+            > miraland_sdk::offchain_message::v0::OffchainMessage::MAX_LEN_LEDGER
+                + miraland_sdk::offchain_message::v0::OffchainMessage::HEADER_LEN
         {
             return Err(RemoteWalletError::InvalidInput(
                 "Off-chain message to sign is too long".to_string(),

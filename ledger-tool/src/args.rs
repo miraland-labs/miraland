@@ -13,7 +13,7 @@ use {
         use_snapshot_archives_at_startup::{self, UseSnapshotArchivesAtStartup},
     },
     miraland_svm::runtime_config::RuntimeConfig,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::{
         collections::HashSet,
         path::{Path, PathBuf},

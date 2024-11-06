@@ -66,7 +66,7 @@ impl From<u64> for PubkeyError {
 /// [acc]: https://docs.solana.com/developing/programming-model/accounts
 /// [ed25519]: https://ed25519.cr.yp.to/
 /// [pdas]: https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses
-/// [`Keypair`]: https://docs.rs/solana-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html
+/// [`Keypair`]: https://docs.rs/solana-sdk/latest/miraland_sdk/signer/keypair/struct.Keypair.html
 #[wasm_bindgen]
 #[repr(transparent)]
 #[derive(
@@ -317,7 +317,7 @@ impl Pubkey {
     ///
     /// ```
     /// # use borsh::{BorshSerialize, BorshDeserialize};
-    /// # use solana_program::{
+    /// # use miraland_program::{
     /// #     pubkey::Pubkey,
     /// #     entrypoint::ProgramResult,
     /// #     program::invoke_signed,
@@ -397,15 +397,15 @@ impl Pubkey {
     ///
     /// ```
     /// # use borsh::{BorshSerialize, BorshDeserialize};
-    /// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
-    /// # use solana_program::{
+    /// # use miraland_program::example_mocks::{miraland_sdk, miraland_rpc_client};
+    /// # use miraland_program::{
     /// #     pubkey::Pubkey,
     /// #     instruction::Instruction,
     /// #     hash::Hash,
     /// #     instruction::AccountMeta,
     /// #     system_program,
     /// # };
-    /// # use solana_sdk::{
+    /// # use miraland_sdk::{
     /// #     signature::Keypair,
     /// #     signature::{Signer, Signature},
     /// #     transaction::Transaction,
@@ -575,7 +575,7 @@ impl Pubkey {
     /// that the returned `Pubkey` has the expected value.
     ///
     /// ```
-    /// # use solana_program::pubkey::Pubkey;
+    /// # use miraland_program::pubkey::Pubkey;
     /// # let program_id = Pubkey::new_unique();
     /// let (expected_pda, bump_seed) = Pubkey::find_program_address(&[b"vault"], &program_id);
     /// let actual_pda = Pubkey::create_program_address(&[b"vault", &[bump_seed]], &program_id)?;

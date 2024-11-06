@@ -21,8 +21,8 @@ use {
     },
     chrono::prelude::*,
     miraland_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore, blockstore_db},
-    solana_runtime::{bank::Bank, bank_forks::BankForks, commitment::VOTE_THRESHOLD_SIZE},
-    solana_sdk::{
+    miraland_runtime::{bank::Bank, bank_forks::BankForks, commitment::VOTE_THRESHOLD_SIZE},
+    miraland_sdk::{
         clock::{Slot, UnixTimestamp},
         hash::Hash,
         instruction::Instruction,
@@ -30,8 +30,8 @@ use {
         signature::Keypair,
         slot_history::{Check, SlotHistory},
     },
-    solana_vote::vote_account::VoteAccountsHashMap,
-    solana_vote_program::{
+    miraland_vote::vote_account::VoteAccountsHashMap,
+    miraland_vote_program::{
         vote_instruction,
         vote_state::{
             process_slot_vote_unchecked, process_vote_unchecked, BlockTimestamp, LandedVote,
@@ -1628,8 +1628,8 @@ pub mod test {
         },
         itertools::Itertools,
         miraland_ledger::{blockstore::make_slot_entries, get_tmp_ledger_path_auto_delete},
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
             clock::Slot,
             hash::Hash,
@@ -1637,8 +1637,8 @@ pub mod test {
             signature::Signer,
             slot_history::SlotHistory,
         },
-        solana_vote::vote_account::VoteAccount,
-        solana_vote_program::vote_state::{Vote, VoteStateVersions, MAX_LOCKOUT_HISTORY},
+        miraland_vote::vote_account::VoteAccount,
+        miraland_vote_program::vote_state::{Vote, VoteStateVersions, MAX_LOCKOUT_HISTORY},
         std::{
             collections::{HashMap, VecDeque},
             fs::{remove_file, OpenOptions},
@@ -1657,7 +1657,7 @@ pub mod test {
                 let mut account = AccountSharedData::from(Account {
                     data: vec![0; VoteState::size_of()],
                     lamports: *lamports,
-                    owner: solana_vote_program::id(),
+                    owner: miraland_vote_program::id(),
                     ..Account::default()
                 });
                 let mut vote_state = VoteState::default();
@@ -1670,7 +1670,7 @@ pub mod test {
                 )
                 .expect("serialize state");
                 (
-                    solana_sdk::pubkey::new_rand(),
+                    miraland_sdk::pubkey::new_rand(),
                     (*lamports, VoteAccount::try_from(account).unwrap()),
                 )
             })
@@ -3253,7 +3253,7 @@ pub mod test {
 
     #[test]
     fn test_adjust_lockouts_after_replay_all_rooted_with_too_old() {
-        use solana_sdk::slot_history::MAX_ENTRIES;
+        use miraland_sdk::slot_history::MAX_ENTRIES;
 
         let mut tower = Tower::new_for_tests(10, 0.9);
         tower.record_vote(0, Hash::default());
@@ -3379,7 +3379,7 @@ pub mod test {
 
     #[test]
     fn test_adjust_lockouts_after_replay_too_old_tower() {
-        use solana_sdk::slot_history::MAX_ENTRIES;
+        use miraland_sdk::slot_history::MAX_ENTRIES;
 
         let mut tower = Tower::new_for_tests(10, 0.9);
         tower.record_vote(0, Hash::default());
@@ -3446,7 +3446,7 @@ pub mod test {
 
     #[test]
     fn test_adjust_lockouts_after_replay_out_of_order() {
-        use solana_sdk::slot_history::MAX_ENTRIES;
+        use miraland_sdk::slot_history::MAX_ENTRIES;
 
         let mut tower = Tower::new_for_tests(10, 0.9);
         tower

@@ -3,8 +3,8 @@
 // extern crate test;
 
 // use {
-//     solana_program_runtime::invoke_context::mock_process_instruction,
-//     solana_sdk::{
+//     miraland_program_runtime::invoke_context::mock_process_instruction,
+//     miraland_sdk::{
 //         account::{create_account_for_test, Account, AccountSharedData},
 //         clock::{Clock, Slot},
 //         hash::Hash,
@@ -14,7 +14,7 @@
 //         sysvar,
 //         transaction_context::TransactionAccount,
 //     },
-//     solana_vote_program::{
+//     miraland_vote_program::{
 //         vote_instruction::VoteInstruction,
 //         vote_state::{
 //             Vote, VoteInit, VoteState, VoteStateUpdate, VoteStateVersions, MAX_LOCKOUT_HISTORY,
@@ -57,14 +57,14 @@
 //         Account {
 //             lamports: 1,
 //             data: vote_account_data,
-//             owner: solana_vote_program::id(),
+//             owner: miraland_vote_program::id(),
 //             executable: false,
 //             rent_epoch: 0,
 //         }
 //     };
 
 //     let transaction_accounts = vec![
-//         (solana_vote_program::id(), AccountSharedData::default()),
+//         (miraland_vote_program::id(), AccountSharedData::default()),
 //         (vote_pubkey, AccountSharedData::from(vote_account)),
 //         (
 //             sysvar::slot_hashes::id(),
@@ -102,13 +102,13 @@
 // ) {
 //     bencher.iter(|| {
 //         mock_process_instruction(
-//             &solana_vote_program::id(),
+//             &miraland_vote_program::id(),
 //             Vec::new(),
 //             &instruction_data,
 //             transaction_accounts.clone(),
 //             instruction_account_metas.clone(),
 //             Ok(()),
-//             solana_vote_program::vote_processor::Entrypoint::vm,
+//             miraland_vote_program::vote_processor::Entrypoint::vm,
 //             |_invoke_context| {},
 //             |_invoke_context| {},
 //         );

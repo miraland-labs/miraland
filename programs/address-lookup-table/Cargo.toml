@@ -30,7 +30,7 @@ rustc_version = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_address_lookup_table_program"
+name = "miraland_address_lookup_table_program"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

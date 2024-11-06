@@ -6,9 +6,9 @@ use {
     },
     miraland_perf::{self, deduper::Deduper, packet::PacketBatch, recycler_cache::RecyclerCache},
     miraland_rayon_threadlimit::get_thread_count,
+    miraland_runtime::{bank::Bank, bank_forks::BankForks},
+    miraland_sdk::{clock::Slot, pubkey::Pubkey},
     rayon::{prelude::*, ThreadPool, ThreadPoolBuilder},
-    solana_runtime::{bank::Bank, bank_forks::BankForks},
-    solana_sdk::{clock::Slot, pubkey::Pubkey},
     std::{
         collections::HashMap,
         sync::{Arc, RwLock},
@@ -272,8 +272,8 @@ mod tests {
             shred::{Shred, ShredFlags},
         },
         miraland_perf::packet::Packet,
-        solana_runtime::bank::Bank,
-        solana_sdk::signature::{Keypair, Signer},
+        miraland_runtime::bank::Bank,
+        miraland_sdk::signature::{Keypair, Signer},
     };
 
     #[test]

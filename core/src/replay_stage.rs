@@ -58,8 +58,8 @@ use {
     },
     miraland_rpc_client_api::response::SlotUpdate,
     rayon::{prelude::*, ThreadPool},
-    solana_program_runtime::timings::ExecuteTimings,
-    solana_runtime::{
+    miraland_program_runtime::timings::ExecuteTimings,
+    miraland_runtime::{
         accounts_background_service::AbsRequestSender,
         bank::{bank_hash_details, Bank, NewBankOptions},
         bank_forks::{BankForks, MAX_ROOT_DISTANCE_FOR_VOTE_ONLY},
@@ -67,7 +67,7 @@ use {
         installed_scheduler_pool::BankWithScheduler,
         prioritization_fee_cache::PrioritizationFeeCache,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::{BankId, Slot, MAX_PROCESSING_AGE, NUM_CONSECUTIVE_LEADER_SLOTS},
         feature_set,
         genesis_config::ClusterType,
@@ -78,8 +78,8 @@ use {
         timing::timestamp,
         transaction::Transaction,
     },
-    solana_vote::vote_sender_types::ReplayVoteSender,
-    solana_vote_program::vote_state::VoteTransaction,
+    miraland_vote::vote_sender_types::ReplayVoteSender,
+    miraland_vote_program::vote_state::VoteTransaction,
     std::{
         collections::{HashMap, HashSet},
         result,
@@ -4310,12 +4310,12 @@ pub(crate) mod tests {
         },
         miraland_streamer::socket::SocketAddrSpace,
         miraland_transaction_status::VersionedTransactionWithStatusMeta,
-        solana_runtime::{
+        miraland_runtime::{
             accounts_background_service::AbsRequestSender,
             commitment::{BlockCommitment, VOTE_THRESHOLD_SIZE},
             genesis_utils::{GenesisConfigInfo, ValidatorVoteKeypairs},
         },
-        solana_sdk::{
+        miraland_sdk::{
             clock::NUM_CONSECUTIVE_LEADER_SLOTS,
             genesis_config,
             hash::{hash, Hash},
@@ -4325,7 +4325,7 @@ pub(crate) mod tests {
             system_transaction,
             transaction::TransactionError,
         },
-        solana_vote_program::{
+        miraland_vote_program::{
             vote_state::{self, VoteStateVersions},
             vote_transaction,
         },
@@ -5077,7 +5077,7 @@ pub(crate) mod tests {
             bank.store_account(pubkey, &leader_vote_account);
         }
 
-        let leader_pubkey = solana_sdk::pubkey::new_rand();
+        let leader_pubkey = miraland_sdk::pubkey::new_rand();
         let leader_lamports = 3;
         let genesis_config_info =
             create_genesis_config_with_leader(50, &leader_pubkey, leader_lamports);
@@ -5133,7 +5133,7 @@ pub(crate) mod tests {
             let _res = bank.transfer(
                 10,
                 &genesis_config_info.mint_keypair,
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
             );
             for _ in 0..genesis_config.ticks_per_slot {
                 bank.register_default_tick_for_test();
@@ -5202,7 +5202,7 @@ pub(crate) mod tests {
             mut genesis_config,
             mint_keypair,
             ..
-        } = create_genesis_config(solana_sdk::native_token::mln_to_lamports(1000.0));
+        } = create_genesis_config(miraland_sdk::native_token::mln_to_lamports(1000.0));
         genesis_config.rent.lamports_per_byte_year = 50;
         genesis_config.rent.exemption_threshold = 2.0;
         let (ledger_path, _) = create_new_tmp_ledger!(&genesis_config);

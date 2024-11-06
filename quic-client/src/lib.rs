@@ -27,7 +27,7 @@ use {
         tls_certificates::new_dummy_x509_certificate,
     },
     quinn::Endpoint,
-    solana_sdk::{
+    miraland_sdk::{
         pubkey::Pubkey,
         signature::{Keypair, Signer},
     },
@@ -255,7 +255,7 @@ pub fn new_quic_connection_cache(
 mod tests {
     use {
         super::*,
-        solana_sdk::quic::{
+        miraland_sdk::quic::{
             QUIC_MAX_UNSTAKED_CONCURRENT_STREAMS, QUIC_MIN_STAKED_CONCURRENT_STREAMS,
             QUIC_TOTAL_STAKED_CONCURRENT_STREAMS,
         },

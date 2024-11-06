@@ -17,23 +17,23 @@ edition = { workspace = true }
 program = []
 
 default = [
-  "full" # functionality that is not compatible or needed for on-chain programs
+  "full", # functionality that is not compatible or needed for on-chain programs
 ]
 full = [
-    "assert_matches",
-    "byteorder",
-    "chrono",
-    "generic-array",
-    "memmap2",
-    "rand",
-    "rand0-7",
-    "serde_json",
-    "ed25519-dalek",
-    "ed25519-dalek-bip32",
-    "miraland-logger",
-    "libsecp256k1",
-    "sha3",
-    "digest",
+  "assert_matches",
+  "byteorder",
+  "chrono",
+  "generic-array",
+  "memmap2",
+  "rand",
+  "rand0-7",
+  "serde_json",
+  "ed25519-dalek",
+  "ed25519-dalek-bip32",
+  "miraland-logger",
+  "libsecp256k1",
+  "sha3",
+  "digest",
 ]
 dev-context-only-utils = []
 
@@ -52,9 +52,12 @@ derivation-path = { workspace = true }
 digest = { workspace = true, optional = true }
 ed25519-dalek = { workspace = true, optional = true }
 ed25519-dalek-bip32 = { workspace = true, optional = true }
-generic-array = { workspace = true, features = ["serde", "more_lengths"], optional = true }
+generic-array = { workspace = true, features = [
+  "serde",
+  "more_lengths",
+], optional = true }
 hmac = { workspace = true }
-itertools =  { workspace = true }
+itertools = { workspace = true }
 lazy_static = { workspace = true }
 libsecp256k1 = { workspace = true, optional = true }
 log = { workspace = true }
@@ -104,4 +107,4 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-name = "solana_sdk"
+name = "miraland_sdk"

@@ -6,9 +6,9 @@ pub mod processor;
 
 #[deprecated(
     since = "1.17.0",
-    note = "Please use `solana_sdk::address_lookup_table` instead"
+    note = "Please use `miraland_sdk::address_lookup_table` instead"
 )]
-pub use solana_sdk::address_lookup_table::{
+pub use miraland_sdk::address_lookup_table::{
     error, instruction,
     program::{check_id, id, ID},
     state,

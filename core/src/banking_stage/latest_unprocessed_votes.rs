@@ -6,13 +6,13 @@ use {
     itertools::Itertools,
     miraland_perf::packet::Packet,
     rand::{thread_rng, Rng},
-    solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{
         clock::{Slot, UnixTimestamp},
         program_utils::limited_deserialize,
         pubkey::Pubkey,
     },
-    solana_vote_program::vote_instruction::VoteInstruction,
+    miraland_vote_program::vote_instruction::VoteInstruction,
     std::{
         collections::HashMap,
         ops::DerefMut,
@@ -349,12 +349,12 @@ mod tests {
         itertools::Itertools,
         miraland_perf::packet::{Packet, PacketBatch, PacketFlags},
         rand::{thread_rng, Rng},
-        solana_runtime::{
+        miraland_runtime::{
             bank::Bank,
             genesis_utils::{self, ValidatorVoteKeypairs},
         },
-        solana_sdk::{hash::Hash, signature::Signer, system_transaction::transfer},
-        solana_vote_program::{
+        miraland_sdk::{hash::Hash, signature::Signer, system_transaction::transfer},
+        miraland_vote_program::{
             vote_state::VoteStateUpdate,
             vote_transaction::{new_vote_state_update_transaction, new_vote_transaction},
         },

@@ -1,6 +1,6 @@
 use {
-    solana_program_test::{processor, ProgramTest},
-    solana_sdk::{
+    miraland_program_test::{processor, ProgramTest},
+    miraland_sdk::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::{ProgramResult, MAX_PERMITTED_DATA_INCREASE},
         instruction::{get_stack_height, AccountMeta, Instruction},

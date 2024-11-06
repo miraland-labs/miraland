@@ -3,7 +3,7 @@ use {
     crossbeam_channel::RecvTimeoutError,
     miraland_ledger::blockstore::CompletedSlotsReceiver,
     miraland_rpc_client_api::response::SlotUpdate,
-    solana_sdk::timing::timestamp,
+    miraland_sdk::timing::timestamp,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},

@@ -17,7 +17,7 @@ use {
     miraland_entry::poh::compute_hashes_per_tick,
     miraland_genesis::{genesis_accounts::add_genesis_accounts, Base64Account},
     miraland_ledger::{blockstore::create_new_ledger, blockstore_options::LedgerColumnOptions},
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, AccountSharedData, ReadableAccount, WritableAccount},
         bpf_loader_upgradeable::UpgradeableLoaderState,
         clock,
@@ -34,8 +34,8 @@ use {
         stake::state::StakeStateV2,
         system_program, timing,
     },
-    solana_stake_program::stake_state,
-    solana_vote_program::vote_state::{self, VoteState},
+    miraland_stake_program::stake_state,
+    miraland_vote_program::vote_state::{self, VoteState},
     std::{
         collections::HashMap,
         error,
@@ -577,9 +577,9 @@ fn main() -> Result<(), Box<dyn error::Error>> {
         );
     }
 
-    solana_stake_program::add_genesis_accounts(&mut genesis_config);
+    miraland_stake_program::add_genesis_accounts(&mut genesis_config);
     if genesis_config.cluster_type == ClusterType::Development {
-        solana_runtime::genesis_utils::activate_all_features(&mut genesis_config);
+        miraland_runtime::genesis_utils::activate_all_features(&mut genesis_config);
     }
 
     if let Some(files) = matches.values_of("primordial_accounts_file") {
@@ -728,7 +728,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 mod tests {
     use {
         super::*,
-        solana_sdk::genesis_config::GenesisConfig,
+        miraland_sdk::genesis_config::GenesisConfig,
         std::{collections::HashMap, fs::remove_file, io::Write, path::Path},
     };
 
@@ -741,27 +741,27 @@ mod tests {
 
         let mut genesis_accounts = HashMap::new();
         genesis_accounts.insert(
-            solana_sdk::pubkey::new_rand().to_string(),
+            miraland_sdk::pubkey::new_rand().to_string(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 2,
                 executable: false,
                 data: String::from("aGVsbG8="),
             },
         );
         genesis_accounts.insert(
-            solana_sdk::pubkey::new_rand().to_string(),
+            miraland_sdk::pubkey::new_rand().to_string(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 1,
                 executable: true,
                 data: String::from("aGVsbG8gd29ybGQ="),
             },
         );
         genesis_accounts.insert(
-            solana_sdk::pubkey::new_rand().to_string(),
+            miraland_sdk::pubkey::new_rand().to_string(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 3,
                 executable: true,
                 data: String::from("bWUgaGVsbG8gdG8gd29ybGQ="),
@@ -815,27 +815,27 @@ mod tests {
         // Test more accounts can be appended
         let mut genesis_accounts1 = HashMap::new();
         genesis_accounts1.insert(
-            solana_sdk::pubkey::new_rand().to_string(),
+            miraland_sdk::pubkey::new_rand().to_string(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 6,
                 executable: true,
                 data: String::from("eW91IGFyZQ=="),
             },
         );
         genesis_accounts1.insert(
-            solana_sdk::pubkey::new_rand().to_string(),
+            miraland_sdk::pubkey::new_rand().to_string(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 5,
                 executable: false,
                 data: String::from("bWV0YSBzdHJpbmc="),
             },
         );
         genesis_accounts1.insert(
-            solana_sdk::pubkey::new_rand().to_string(),
+            miraland_sdk::pubkey::new_rand().to_string(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 10,
                 executable: false,
                 data: String::from("YmFzZTY0IHN0cmluZw=="),
@@ -901,7 +901,7 @@ mod tests {
         genesis_accounts2.insert(
             serde_json::to_string(&account_keypairs[0].to_bytes().to_vec()).unwrap(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 20,
                 executable: true,
                 data: String::from("Y2F0IGRvZw=="),
@@ -910,7 +910,7 @@ mod tests {
         genesis_accounts2.insert(
             serde_json::to_string(&account_keypairs[1].to_bytes().to_vec()).unwrap(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 15,
                 executable: false,
                 data: String::from("bW9ua2V5IGVsZXBoYW50"),
@@ -919,7 +919,7 @@ mod tests {
         genesis_accounts2.insert(
             serde_json::to_string(&account_keypairs[2].to_bytes().to_vec()).unwrap(),
             Base64Account {
-                owner: solana_sdk::pubkey::new_rand().to_string(),
+                owner: miraland_sdk::pubkey::new_rand().to_string(),
                 balance: 30,
                 executable: true,
                 data: String::from("Y29tYSBtb2Nh"),

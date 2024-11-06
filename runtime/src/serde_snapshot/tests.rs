@@ -24,7 +24,7 @@ mod serde_snapshot_tests {
             ancestors::Ancestors,
         },
         rand::{thread_rng, Rng},
-        solana_sdk::{
+        miraland_sdk::{
             account::{AccountSharedData, ReadableAccount},
             clock::Slot,
             epoch_schedule::EpochSchedule,
@@ -283,7 +283,7 @@ mod serde_snapshot_tests {
         let unrooted_slot = 9;
         let unrooted_bank_id = 9;
         let db = AccountsDb::new_single_for_tests();
-        let key = solana_sdk::pubkey::new_rand();
+        let key = miraland_sdk::pubkey::new_rand();
         let account0 = AccountSharedData::new(1, 0, &key);
         db.store_for_tests(unrooted_slot, &[(&key, &account0)]);
 
@@ -291,7 +291,7 @@ mod serde_snapshot_tests {
         db.remove_unrooted_slots(&[(unrooted_slot, unrooted_bank_id)]);
 
         // Add a new root
-        let key2 = solana_sdk::pubkey::new_rand();
+        let key2 = miraland_sdk::pubkey::new_rand();
         let new_root = unrooted_slot + 1;
         db.store_for_tests(new_root, &[(&key2, &account0)]);
         db.add_root_and_flush_write_cache(new_root);
@@ -436,11 +436,11 @@ mod serde_snapshot_tests {
         let owner = *AccountSharedData::default().owner();
 
         let account = AccountSharedData::new(some_lamport, no_data, &owner);
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let zero_lamport_account = AccountSharedData::new(zero_lamport, no_data, &owner);
 
         let account2 = AccountSharedData::new(some_lamport + 1, no_data, &owner);
-        let pubkey2 = solana_sdk::pubkey::new_rand();
+        let pubkey2 = miraland_sdk::pubkey::new_rand();
 
         let accounts = AccountsDb::new_single_for_tests();
 
@@ -491,9 +491,9 @@ mod serde_snapshot_tests {
         let account3 = AccountSharedData::new(some_lamport + 100_002, no_data, &owner);
         let zero_lamport_account = AccountSharedData::new(zero_lamport, no_data, &owner);
 
-        let pubkey = solana_sdk::pubkey::new_rand();
-        let purged_pubkey1 = solana_sdk::pubkey::new_rand();
-        let purged_pubkey2 = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
+        let purged_pubkey1 = miraland_sdk::pubkey::new_rand();
+        let purged_pubkey2 = miraland_sdk::pubkey::new_rand();
 
         let dummy_account = AccountSharedData::new(dummy_lamport, no_data, &owner);
         let dummy_pubkey = Pubkey::default();
@@ -579,10 +579,10 @@ mod serde_snapshot_tests {
         let dummy_account = AccountSharedData::new(99_999_999, no_data, &owner);
         let zero_lamport_account = AccountSharedData::new(zero_lamport, no_data, &owner);
 
-        let pubkey = solana_sdk::pubkey::new_rand();
-        let dummy_pubkey = solana_sdk::pubkey::new_rand();
-        let purged_pubkey1 = solana_sdk::pubkey::new_rand();
-        let purged_pubkey2 = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
+        let dummy_pubkey = miraland_sdk::pubkey::new_rand();
+        let purged_pubkey1 = miraland_sdk::pubkey::new_rand();
+        let purged_pubkey2 = miraland_sdk::pubkey::new_rand();
 
         let mut current_slot = 0;
         let accounts = AccountsDb::new_single_for_tests();
@@ -648,9 +648,9 @@ mod serde_snapshot_tests {
         let dummy_account = AccountSharedData::new(dummy_lamport, no_data, &owner);
         let zero_lamport_account = AccountSharedData::new(zero_lamport, no_data, &owner);
 
-        let pubkey1 = solana_sdk::pubkey::new_rand();
-        let pubkey2 = solana_sdk::pubkey::new_rand();
-        let dummy_pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey1 = miraland_sdk::pubkey::new_rand();
+        let pubkey2 = miraland_sdk::pubkey::new_rand();
+        let dummy_pubkey = miraland_sdk::pubkey::new_rand();
 
         let mut current_slot = 0;
         let accounts = AccountsDb::new_single_for_tests();
@@ -776,7 +776,7 @@ mod serde_snapshot_tests {
 
             let pubkey_count = 100;
             let pubkeys: Vec<_> = (0..pubkey_count)
-                .map(|_| solana_sdk::pubkey::new_rand())
+                .map(|_| miraland_sdk::pubkey::new_rand())
                 .collect();
 
             let some_lamport = 223;

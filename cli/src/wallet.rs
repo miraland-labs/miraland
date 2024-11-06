@@ -36,7 +36,7 @@ use {
         EncodableWithMeta, EncodedConfirmedTransactionWithStatusMeta, EncodedTransaction,
         TransactionBinaryEncoding, UiTransactionEncoding,
     },
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         message::Message,
         offchain_message::OffchainMessage,
@@ -385,7 +385,7 @@ fn resolve_derived_address_program_id(matches: &ArgMatches<'_>, arg_name: &str) 
         match upper.as_str() {
             "NONCE" | "SYSTEM" => Some(system_program::id()),
             "STAKE" => Some(stake::program::id()),
-            "VOTE" => Some(solana_vote_program::id()),
+            "VOTE" => Some(miraland_vote_program::id()),
             _ => pubkey_of(matches, arg_name),
         }
     })

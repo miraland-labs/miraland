@@ -15,8 +15,8 @@ use {
     // crate::errors::AuthenticatedEncryptionError,
     base64::{prelude::BASE64_STANDARD, Engine},
     sha3::{Digest, Sha3_512},
-    solana_sdk::derivation_path::DerivationPath,
-    solana_sdk::{
+    miraland_sdk::derivation_path::DerivationPath,
+    miraland_sdk::{
         signature::Signature,
         signer::{
             keypair::generate_seed_from_seed_phrase_and_passphrase, EncodableKey, SeedDerivable,
@@ -281,7 +281,7 @@ impl fmt::Display for AeCiphertext {
 mod tests {
     use {
         super::*,
-        solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::null_signer::NullSigner},
+        miraland_sdk::{pubkey::Pubkey, signature::Keypair, signer::null_signer::NullSigner},
     };
 
     #[test]

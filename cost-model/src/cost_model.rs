@@ -8,14 +8,14 @@
 use {
     crate::{block_cost_limits::*, transaction_cost::*},
     log::*,
-    solana_program_runtime::{
+    miraland_program_runtime::{
         compute_budget::DEFAULT_HEAP_COST,
         compute_budget_processor::{
             process_compute_budget_instructions, DEFAULT_INSTRUCTION_COMPUTE_UNIT_LIMIT,
             MAX_COMPUTE_UNIT_LIMIT,
         },
     },
-    solana_sdk::{
+    miraland_sdk::{
         borsh1::try_from_slice_unchecked,
         compute_budget::{self, ComputeBudgetInstruction},
         feature_set::{self, include_loaded_accounts_data_size_in_fee_calculation, FeatureSet},
@@ -215,7 +215,7 @@ impl CostModel {
 mod tests {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             compute_budget::{self, ComputeBudgetInstruction},
             fee::ACCOUNT_DATA_COST_PAGE_SIZE,
             hash::Hash,
@@ -317,8 +317,8 @@ mod tests {
         let tx = Transaction::new_with_compiled_instructions(
             &[&mint_keypair],
             &[
-                solana_sdk::pubkey::new_rand(),
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
             ],
             start_hash,
             vec![Pubkey::new_unique()],
@@ -381,8 +381,8 @@ mod tests {
         let tx = Transaction::new_with_compiled_instructions(
             &[&mint_keypair],
             &[
-                solana_sdk::pubkey::new_rand(),
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
             ],
             start_hash,
             vec![Pubkey::new_unique(), compute_budget::id()],
@@ -431,8 +431,8 @@ mod tests {
         let tx = Transaction::new_with_compiled_instructions(
             &[&mint_keypair],
             &[
-                solana_sdk::pubkey::new_rand(),
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
             ],
             start_hash,
             vec![Pubkey::new_unique(), compute_budget::id()],
@@ -454,8 +454,8 @@ mod tests {
     fn test_cost_model_transaction_many_transfer_instructions() {
         let (mint_keypair, start_hash) = test_setup();
 
-        let key1 = solana_sdk::pubkey::new_rand();
-        let key2 = solana_sdk::pubkey::new_rand();
+        let key1 = miraland_sdk::pubkey::new_rand();
+        let key2 = miraland_sdk::pubkey::new_rand();
         let instructions =
             system_instruction::transfer_many(&mint_keypair.pubkey(), &[(key1, 1), (key2, 1)]);
         let message = Message::new(&instructions, Some(&mint_keypair.pubkey()));
@@ -484,10 +484,10 @@ mod tests {
         let (mint_keypair, start_hash) = test_setup();
 
         // construct a transaction with multiple random instructions
-        let key1 = solana_sdk::pubkey::new_rand();
-        let key2 = solana_sdk::pubkey::new_rand();
-        let prog1 = solana_sdk::pubkey::new_rand();
-        let prog2 = solana_sdk::pubkey::new_rand();
+        let key1 = miraland_sdk::pubkey::new_rand();
+        let key2 = miraland_sdk::pubkey::new_rand();
+        let prog1 = miraland_sdk::pubkey::new_rand();
+        let prog2 = miraland_sdk::pubkey::new_rand();
         let instructions = vec![
             CompiledInstruction::new(3, &(), vec![0, 1]),
             CompiledInstruction::new(4, &(), vec![0, 2]),
@@ -560,7 +560,7 @@ mod tests {
         // default loaded_accounts_data_size_limit
         const DEFAULT_PAGE_COST: u64 = 8;
         let expected_loaded_accounts_data_size_cost =
-            solana_program_runtime::compute_budget_processor::MAX_LOADED_ACCOUNTS_DATA_SIZE_BYTES
+            miraland_program_runtime::compute_budget_processor::MAX_LOADED_ACCOUNTS_DATA_SIZE_BYTES
                 as u64
                 / ACCOUNT_DATA_COST_PAGE_SIZE
                 * DEFAULT_PAGE_COST;
@@ -659,7 +659,7 @@ mod tests {
             ));
         // transaction has one builtin instruction, and one bpf instruction, no ComputeBudget::compute_unit_limit
         let expected_builtin_cost = *BUILT_IN_INSTRUCTION_COSTS
-            .get(&solana_system_program::id())
+            .get(&miraland_system_program::id())
             .unwrap();
         let expected_bpf_cost = DEFAULT_INSTRUCTION_COMPUTE_UNIT_LIMIT;
 

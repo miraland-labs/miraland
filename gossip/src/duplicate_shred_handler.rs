@@ -6,8 +6,8 @@ use {
     crossbeam_channel::Sender,
     log::error,
     miraland_ledger::{blockstore::Blockstore, leader_schedule_cache::LeaderScheduleCache},
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{
         clock::{Epoch, Slot},
         feature_set,
         pubkey::Pubkey,
@@ -242,8 +242,8 @@ mod tests {
             get_tmp_ledger_path_auto_delete,
             shred::Shredder,
         },
-        solana_runtime::{accounts_background_service::AbsRequestSender, bank::Bank},
-        solana_sdk::{
+        miraland_runtime::{accounts_background_service::AbsRequestSender, bank::Bank},
+        miraland_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },

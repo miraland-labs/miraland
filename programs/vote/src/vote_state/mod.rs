@@ -1,12 +1,12 @@
 //! Vote state, vote program
 //! Receive and processes votes from validators
-pub use solana_program::vote::state::{vote_state_versions::*, *};
+pub use miraland_program::vote::state::{vote_state_versions::*, *};
 use {
     log::*,
     miraland_metrics::datapoint_debug,
     serde_derive::{Deserialize, Serialize},
-    solana_program::vote::{error::VoteError, program::id},
-    solana_sdk::{
+    miraland_program::vote::{error::VoteError, program::id},
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         clock::{Epoch, Slot, UnixTimestamp},
         epoch_schedule::EpochSchedule,
@@ -1176,7 +1176,7 @@ mod tests {
         super::*,
         crate::vote_state,
         assert_matches::assert_matches,
-        solana_sdk::{
+        miraland_sdk::{
             account::AccountSharedData, account_utils::StateMut, clock::DEFAULT_SLOTS_PER_EPOCH,
             hash::hash, transaction_context::InstructionAccount,
         },
@@ -1189,7 +1189,7 @@ mod tests {
     fn vote_state_new_for_test(auth_pubkey: &Pubkey) -> VoteState {
         VoteState::new(
             &VoteInit {
-                node_pubkey: solana_sdk::pubkey::new_rand(),
+                node_pubkey: miraland_sdk::pubkey::new_rand(),
                 authorized_voter: *auth_pubkey,
                 authorized_withdrawer: *auth_pubkey,
                 commission: 0,
@@ -1201,12 +1201,12 @@ mod tests {
     fn create_test_account() -> (Pubkey, RefCell<AccountSharedData>) {
         let rent = Rent::default();
         let balance = VoteState::get_rent_exempt_reserve(&rent);
-        let vote_pubkey = solana_sdk::pubkey::new_rand();
+        let vote_pubkey = miraland_sdk::pubkey::new_rand();
         (
             vote_pubkey,
             RefCell::new(vote_state::create_account(
                 &vote_pubkey,
-                &solana_sdk::pubkey::new_rand(),
+                &miraland_sdk::pubkey::new_rand(),
                 0,
                 balance,
             )),
@@ -1219,8 +1219,8 @@ mod tests {
 
         // Create an initial vote account that is sized for the 1_14_11 version of vote state, and has only the
         // required lamports for rent exempt minimum at that size
-        let node_pubkey = solana_sdk::pubkey::new_rand();
-        let withdrawer_pubkey = solana_sdk::pubkey::new_rand();
+        let node_pubkey = miraland_sdk::pubkey::new_rand();
+        let withdrawer_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = VoteState::new(
             &VoteInit {
                 node_pubkey,
@@ -1234,19 +1234,19 @@ mod tests {
         vote_state.increment_credits(0, 100);
         assert_eq!(
             vote_state
-                .set_new_authorized_voter(&solana_sdk::pubkey::new_rand(), 0, 1, |_pubkey| Ok(())),
+                .set_new_authorized_voter(&miraland_sdk::pubkey::new_rand(), 0, 1, |_pubkey| Ok(())),
             Ok(())
         );
         vote_state.increment_credits(1, 200);
         assert_eq!(
             vote_state
-                .set_new_authorized_voter(&solana_sdk::pubkey::new_rand(), 1, 2, |_pubkey| Ok(())),
+                .set_new_authorized_voter(&miraland_sdk::pubkey::new_rand(), 1, 2, |_pubkey| Ok(())),
             Ok(())
         );
         vote_state.increment_credits(2, 300);
         assert_eq!(
             vote_state
-                .set_new_authorized_voter(&solana_sdk::pubkey::new_rand(), 2, 3, |_pubkey| Ok(())),
+                .set_new_authorized_voter(&miraland_sdk::pubkey::new_rand(), 2, 3, |_pubkey| Ok(())),
             Ok(())
         );
         // Simulate votes having occurred
@@ -1271,7 +1271,7 @@ mod tests {
 
         // Create a fake TransactionContext with a fake InstructionContext with a single account which is the
         // vote account that was just created
-        let processor_account = AccountSharedData::new(0, 0, &solana_sdk::native_loader::id());
+        let processor_account = AccountSharedData::new(0, 0, &miraland_sdk::native_loader::id());
         let transaction_context = TransactionContext::new(
             vec![(id(), processor_account), (node_pubkey, vote_account)],
             rent.clone(),
@@ -1427,7 +1427,7 @@ mod tests {
 
         // Create a fake TransactionContext with a fake InstructionContext with a single account which is the
         // vote account that was just created
-        let processor_account = AccountSharedData::new(0, 0, &solana_sdk::native_loader::id());
+        let processor_account = AccountSharedData::new(0, 0, &miraland_sdk::native_loader::id());
         let transaction_context = TransactionContext::new(
             vec![(id(), processor_account), (node_pubkey, vote_account)],
             rent,
@@ -1590,7 +1590,7 @@ mod tests {
 
     #[test]
     fn test_vote_double_lockout_after_expiration() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = vote_state_new_for_test(&voter_pubkey);
 
         for i in 0..3 {
@@ -1618,7 +1618,7 @@ mod tests {
 
     #[test]
     fn test_expire_multiple_votes() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = vote_state_new_for_test(&voter_pubkey);
 
         for i in 0..3 {
@@ -1649,7 +1649,7 @@ mod tests {
 
     #[test]
     fn test_vote_credits() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = vote_state_new_for_test(&voter_pubkey);
 
         for i in 0..MAX_LOCKOUT_HISTORY {
@@ -1668,7 +1668,7 @@ mod tests {
 
     #[test]
     fn test_duplicate_vote() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = vote_state_new_for_test(&voter_pubkey);
         process_slot_vote_unchecked(&mut vote_state, 0);
         process_slot_vote_unchecked(&mut vote_state, 1);
@@ -1680,7 +1680,7 @@ mod tests {
 
     #[test]
     fn test_nth_recent_lockout() {
-        let voter_pubkey = solana_sdk::pubkey::new_rand();
+        let voter_pubkey = miraland_sdk::pubkey::new_rand();
         let mut vote_state = vote_state_new_for_test(&voter_pubkey);
         for i in 0..MAX_LOCKOUT_HISTORY {
             process_slot_vote_unchecked(&mut vote_state, i as u64);
@@ -1723,9 +1723,9 @@ mod tests {
     /// check that two accounts with different data can be brought to the same state with one vote submission
     #[test]
     fn test_process_missed_votes() {
-        let account_a = solana_sdk::pubkey::new_rand();
+        let account_a = miraland_sdk::pubkey::new_rand();
         let mut vote_state_a = vote_state_new_for_test(&account_a);
-        let account_b = solana_sdk::pubkey::new_rand();
+        let account_b = miraland_sdk::pubkey::new_rand();
         let mut vote_state_b = vote_state_new_for_test(&account_b);
 
         // process some votes on account a

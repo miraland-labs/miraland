@@ -93,7 +93,7 @@ use {
     miraland_unified_scheduler_pool::DefaultSchedulerPool,
     miraland_wen_restart::wen_restart::wait_for_wen_restart,
     quinn::Endpoint,
-    solana_runtime::{
+    miraland_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService, DroppedSlotsReceiver,
             PrunedBanksRequestHandler, SnapshotRequestHandler,
@@ -108,7 +108,7 @@ use {
         snapshot_hash::StartingSnapshotHashes,
         snapshot_utils::{self, clean_orphaned_account_snapshot_dirs},
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         epoch_schedule::MAX_LEADER_SCHEDULE_EPOCH_OFFSET,
         exit::Exit,
@@ -119,7 +119,7 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
-    solana_vote_program::vote_state,
+    miraland_vote_program::vote_state,
     std::{
         collections::{HashMap, HashSet},
         net::SocketAddr,
@@ -2509,7 +2509,7 @@ mod tests {
         miraland_tpu_client::tpu_client::{
             DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_ENABLE_UDP, DEFAULT_TPU_USE_QUIC,
         },
-        solana_sdk::{genesis_config::create_genesis_config, poh_config::PohConfig},
+        miraland_sdk::{genesis_config::create_genesis_config, poh_config::PohConfig},
         std::{fs::remove_dir_all, thread, time::Duration},
     };
 
@@ -2666,7 +2666,7 @@ mod tests {
     #[test]
     fn test_wait_for_supermajority() {
         miraland_logger::setup();
-        use solana_sdk::hash::hash;
+        use miraland_sdk::hash::hash;
         let node_keypair = Arc::new(Keypair::new());
         let cluster_info = ClusterInfo::new(
             ContactInfo::new_localhost(&node_keypair.pubkey(), timestamp()),
@@ -2839,9 +2839,9 @@ mod tests {
     fn test_poh_speed() {
         miraland_logger::setup();
         let poh_config = PohConfig {
-            target_tick_duration: Duration::from_millis(solana_sdk::clock::MS_PER_TICK),
+            target_tick_duration: Duration::from_millis(miraland_sdk::clock::MS_PER_TICK),
             // make PoH rate really fast to cause the panic condition
-            hashes_per_tick: Some(100 * solana_sdk::clock::DEFAULT_HASHES_PER_TICK),
+            hashes_per_tick: Some(100 * miraland_sdk::clock::DEFAULT_HASHES_PER_TICK),
             ..PohConfig::default()
         };
         let genesis_config = GenesisConfig {
@@ -2854,7 +2854,7 @@ mod tests {
     #[test]
     fn test_poh_speed_no_hashes_per_tick() {
         let poh_config = PohConfig {
-            target_tick_duration: Duration::from_millis(solana_sdk::clock::MS_PER_TICK),
+            target_tick_duration: Duration::from_millis(miraland_sdk::clock::MS_PER_TICK),
             hashes_per_tick: None,
             ..PohConfig::default()
         };

@@ -1,6 +1,6 @@
 use {
-    solana_program_runtime::{declare_process_instruction, ic_msg, invoke_context::InvokeContext},
-    solana_sdk::{
+    miraland_program_runtime::{declare_process_instruction, ic_msg, invoke_context::InvokeContext},
+    miraland_sdk::{
         address_lookup_table::{
             instruction::ProgramInstruction,
             program::{check_id, id},

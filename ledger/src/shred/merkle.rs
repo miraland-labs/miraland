@@ -20,7 +20,7 @@ use {
     miraland_perf::packet::deserialize_from_with_limit,
     rayon::{prelude::*, ThreadPool},
     reed_solomon_erasure::Error::{InvalidIndex, TooFewParityShards, TooFewShards},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::{hashv, Hash},
         pubkey::Pubkey,
@@ -1220,7 +1220,7 @@ mod test {
         itertools::Itertools,
         rand::{seq::SliceRandom, CryptoRng, Rng},
         rayon::ThreadPoolBuilder,
-        solana_sdk::{
+        miraland_sdk::{
             packet::PACKET_DATA_SIZE,
             signature::{Keypair, Signer},
         },

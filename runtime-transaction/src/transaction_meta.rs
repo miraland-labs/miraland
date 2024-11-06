@@ -11,7 +11,7 @@
 //! The StaticMeta and DynamicMeta traits are accessor traits on the
 //! RuntimeTransaction types, not the TransactionMeta itself.
 //!
-use solana_sdk::hash::Hash;
+use miraland_sdk::hash::Hash;
 
 /// metadata can be extracted statically from sanitized transaction,
 /// for example: message hash, simple-vote-tx flag, limits set by instructions

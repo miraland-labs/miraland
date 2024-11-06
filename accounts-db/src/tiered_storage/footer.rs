@@ -10,7 +10,7 @@ use {
     bytemuck::{Pod, Zeroable},
     memmap2::Mmap,
     num_enum::TryFromPrimitiveError,
-    solana_sdk::{hash::Hash, pubkey::Pubkey},
+    miraland_sdk::{hash::Hash, pubkey::Pubkey},
     std::{mem, path::Path},
     thiserror::Error,
 };
@@ -329,7 +329,7 @@ mod tests {
             append_vec::test_utils::get_append_vec_path, tiered_storage::file::TieredStorageFile,
         },
         memoffset::offset_of,
-        solana_sdk::hash::Hash,
+        miraland_sdk::hash::Hash,
     };
 
     #[test]

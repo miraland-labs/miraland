@@ -23,7 +23,7 @@ use {
     postgres_client_block_metadata::DbBlockInfo,
     postgres_client_transaction::LogTransactionRequest,
     postgres_openssl::MakeTlsConnector,
-    solana_sdk::timing::AtomicInterval,
+    miraland_sdk::timing::AtomicInterval,
     std::{
         collections::HashSet,
         sync::{

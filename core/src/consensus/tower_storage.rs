@@ -3,7 +3,7 @@ use {
         tower1_14_11::Tower1_14_11, tower1_7_14::SavedTower1_7_14, Result, Tower, TowerError,
         TowerVersions,
     },
-    solana_sdk::{
+    miraland_sdk::{
         pubkey::Pubkey,
         signature::{Signature, Signer},
     },
@@ -260,7 +260,7 @@ impl EtcdTowerStorage {
 
         Ok(Self {
             client: tokio::sync::Mutex::new(client),
-            instance_id: solana_sdk::timing::timestamp().to_le_bytes(),
+            instance_id: miraland_sdk::timing::timestamp().to_le_bytes(),
             runtime,
         })
     }
@@ -374,8 +374,8 @@ pub mod test {
             tower1_7_14::{SavedTower1_7_14, Tower1_7_14},
             BlockhashStatus, Tower,
         },
-        solana_sdk::{hash::Hash, signature::Keypair},
-        solana_vote_program::vote_state::{
+        miraland_sdk::{hash::Hash, signature::Keypair},
+        miraland_vote_program::vote_state::{
             BlockTimestamp, LandedVote, Vote, VoteState, VoteState1_14_11, VoteTransaction,
             MAX_LOCKOUT_HISTORY,
         },

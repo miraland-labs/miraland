@@ -24,7 +24,7 @@ use {
     bincode::serialized_size,
     itertools::Itertools,
     miraland_streamer::socket::SocketAddrSpace,
-    solana_sdk::{
+    miraland_sdk::{
         packet::PACKET_DATA_SIZE,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
@@ -310,7 +310,7 @@ mod tests {
         let crds = RwLock::<Crds>::default();
         let push = CrdsGossipPush::default();
         let value = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(
-            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0),
+            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0),
         ));
         let label = value.label();
         // push a new message
@@ -329,7 +329,7 @@ mod tests {
     fn test_process_push_old_version() {
         let crds = RwLock::<Crds>::default();
         let push = CrdsGossipPush::default();
-        let mut ci = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
+        let mut ci = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
         ci.set_wallclock(1);
         let value = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ci.clone()));
 
@@ -351,7 +351,7 @@ mod tests {
         let crds = RwLock::<Crds>::default();
         let push = CrdsGossipPush::default();
         let timeout = push.msg_timeout;
-        let mut ci = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
+        let mut ci = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
 
         // push a version to far in the future
         ci.set_wallclock(timeout + 1);
@@ -371,7 +371,7 @@ mod tests {
     fn test_process_push_update() {
         let crds = RwLock::<Crds>::default();
         let push = CrdsGossipPush::default();
-        let mut ci = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
+        let mut ci = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
         let origin = *ci.pubkey();
         ci.set_wallclock(0);
         let value_old = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ci.clone()));
@@ -397,7 +397,7 @@ mod tests {
         let mut crds = Crds::default();
         let push = CrdsGossipPush::default();
         let mut ping_cache = new_ping_cache();
-        let peer = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
+        let peer = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
         ping_cache.mock_pong(*peer.pubkey(), peer.gossip().unwrap(), Instant::now());
         let peer = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(peer));
         assert_eq!(
@@ -418,7 +418,7 @@ mod tests {
         );
 
         let new_msg = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(
-            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0),
+            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0),
         ));
         let mut expected = HashMap::new();
         expected.insert(peer.label().pubkey(), vec![new_msg.clone()]);
@@ -505,10 +505,10 @@ mod tests {
     #[test]
     fn test_process_prune() {
         let mut crds = Crds::default();
-        let self_id = solana_sdk::pubkey::new_rand();
+        let self_id = miraland_sdk::pubkey::new_rand();
         let push = CrdsGossipPush::default();
         let peer = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(
-            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0),
+            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0),
         ));
         assert_eq!(
             crds.insert(peer.clone(), 0, GossipRoute::LocalMessage),
@@ -528,7 +528,7 @@ mod tests {
         );
 
         let new_msg = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(
-            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0),
+            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0),
         ));
         let expected = HashMap::new();
         let origin = new_msg.pubkey();
@@ -558,7 +558,7 @@ mod tests {
         let mut crds = Crds::default();
         let push = CrdsGossipPush::default();
         let peer = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(
-            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0),
+            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0),
         ));
         assert_eq!(crds.insert(peer, 0, GossipRoute::LocalMessage), Ok(()));
         let crds = RwLock::new(crds);
@@ -574,7 +574,7 @@ mod tests {
             &SocketAddrSpace::Unspecified,
         );
 
-        let mut ci = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
+        let mut ci = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
         ci.set_wallclock(1);
         let new_msg = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ci));
         let expected = HashMap::new();
@@ -599,7 +599,7 @@ mod tests {
     fn test_purge_old_received_cache() {
         let crds = RwLock::<Crds>::default();
         let push = CrdsGossipPush::default();
-        let mut ci = ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), 0);
+        let mut ci = ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), 0);
         ci.set_wallclock(0);
         let value = CrdsValue::new_unsigned(CrdsData::LegacyContactInfo(ci));
         let label = value.label();

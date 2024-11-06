@@ -71,7 +71,7 @@ macro_rules! info {
 /// # Examples
 ///
 /// ```
-/// use solana_program::msg;
+/// use miraland_program::msg;
 ///
 /// // The fast form
 /// msg!("verifying multisig");

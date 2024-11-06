@@ -16,7 +16,7 @@ use {
     },
     miraland_measure::measure::Measure,
     rayon::prelude::*,
-    solana_sdk::{
+    miraland_sdk::{
         genesis_config::ClusterType, pubkey::Pubkey, rent_collector::RentCollector,
         sysvar::epoch_schedule::EpochSchedule,
     },
@@ -133,7 +133,7 @@ fn main() {
             let results_store = accounts.accounts_db.update_accounts_hash_with_verify(
                 CalcAccountsHashDataSource::Storages,
                 false,
-                solana_sdk::clock::Slot::default(),
+                miraland_sdk::clock::Slot::default(),
                 &ancestors,
                 None,
                 &EpochSchedule::default(),

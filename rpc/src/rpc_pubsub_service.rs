@@ -11,8 +11,8 @@ use {
     dashmap::{mapref::entry::Entry, DashMap},
     jsonrpc_core::IoHandler,
     miraland_metrics::TokenCounter,
+    miraland_sdk::timing::AtomicInterval,
     soketto::handshake::{server, Server},
-    solana_sdk::timing::AtomicInterval,
     std::{
         io,
         net::SocketAddr,
@@ -468,7 +468,7 @@ mod tests {
     use {
         super::*,
         crate::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
-        solana_runtime::{
+        miraland_runtime::{
             bank::Bank,
             bank_forks::BankForks,
             commitment::BlockCommitmentCache,

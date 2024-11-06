@@ -1,4 +1,4 @@
-use solana_sdk::{pubkey::Pubkey, signature::Signer};
+use miraland_sdk::{pubkey::Pubkey, signature::Signer};
 
 pub struct SenderStakeArgs {
     pub stake_account_address: Pubkey,

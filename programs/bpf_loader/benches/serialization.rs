@@ -3,8 +3,8 @@
 // extern crate test;
 
 // use {
-//     solana_bpf_loader_program::serialization::serialize_parameters,
-//     solana_sdk::{
+//     miraland_bpf_loader_program::serialization::serialize_parameters,
+//     miraland_sdk::{
 //         account::{Account, AccountSharedData},
 //         bpf_loader, bpf_loader_deprecated,
 //         feature_set::FeatureSet,
@@ -16,7 +16,7 @@
 // };
 
 // fn create_inputs(owner: Pubkey, num_instruction_accounts: usize) -> TransactionContext {
-//     let program_id = solana_sdk::pubkey::new_rand();
+//     let program_id = miraland_sdk::pubkey::new_rand();
 //     let transaction_accounts = vec![
 //         (
 //             program_id,
@@ -29,7 +29,7 @@
 //             }),
 //         ),
 //         (
-//             solana_sdk::pubkey::new_rand(),
+//             miraland_sdk::pubkey::new_rand(),
 //             AccountSharedData::from(Account {
 //                 lamports: 1,
 //                 data: vec![1u8; 100000],
@@ -39,7 +39,7 @@
 //             }),
 //         ),
 //         (
-//             solana_sdk::pubkey::new_rand(),
+//             miraland_sdk::pubkey::new_rand(),
 //             AccountSharedData::from(Account {
 //                 lamports: 2,
 //                 data: vec![11u8; 100000],
@@ -49,7 +49,7 @@
 //             }),
 //         ),
 //         (
-//             solana_sdk::pubkey::new_rand(),
+//             miraland_sdk::pubkey::new_rand(),
 //             AccountSharedData::from(Account {
 //                 lamports: 3,
 //                 data: vec![],
@@ -59,7 +59,7 @@
 //             }),
 //         ),
 //         (
-//             solana_sdk::pubkey::new_rand(),
+//             miraland_sdk::pubkey::new_rand(),
 //             AccountSharedData::from(Account {
 //                 lamports: 4,
 //                 data: vec![1u8; 100000],
@@ -69,7 +69,7 @@
 //             }),
 //         ),
 //         (
-//             solana_sdk::pubkey::new_rand(),
+//             miraland_sdk::pubkey::new_rand(),
 //             AccountSharedData::from(Account {
 //                 lamports: 5,
 //                 data: vec![11u8; 10000],
@@ -79,7 +79,7 @@
 //             }),
 //         ),
 //         (
-//             solana_sdk::pubkey::new_rand(),
+//             miraland_sdk::pubkey::new_rand(),
 //             AccountSharedData::from(Account {
 //                 lamports: 6,
 //                 data: vec![],

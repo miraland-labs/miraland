@@ -18,7 +18,7 @@ pub mod miraland_rpc_client {
         use {
             super::super::{
                 miraland_rpc_client_api::client_error::Result as ClientResult,
-                solana_sdk::{
+                miraland_sdk::{
                     account::Account, hash::Hash, pubkey::Pubkey, signature::Signature,
                     transaction::Transaction,
                 },
@@ -87,7 +87,7 @@ pub mod miraland_rpc_client_api {
 
 pub mod miraland_rpc_client_nonce_utils {
     use {
-        super::solana_sdk::{account::ReadableAccount, account_utils::StateMut, pubkey::Pubkey},
+        super::miraland_sdk::{account::ReadableAccount, account_utils::StateMut, pubkey::Pubkey},
         crate::nonce::state::{Data, DurableNonce, Versions},
     };
 
@@ -111,7 +111,7 @@ pub mod miraland_rpc_client_nonce_utils {
 ///
 /// This lets examples in miraland-program appear to be written as client
 /// programs.
-pub mod solana_sdk {
+pub mod miraland_sdk {
     pub use crate::{
         hash, instruction, keccak, message, nonce,
         pubkey::{self, Pubkey},
@@ -276,16 +276,16 @@ pub mod solana_sdk {
 
     #[deprecated(
         since = "1.17.0",
-        note = "Please use `solana_sdk::address_lookup_table` instead"
+        note = "Please use `miraland_sdk::address_lookup_table` instead"
     )]
     pub use crate::address_lookup_table as address_lookup_table_account;
 }
 
 #[deprecated(
     since = "1.17.0",
-    note = "Please use `solana_sdk::address_lookup_table` instead"
+    note = "Please use `miraland_sdk::address_lookup_table` instead"
 )]
-pub mod solana_address_lookup_table_program {
+pub mod miraland_address_lookup_table_program {
     pub use crate::address_lookup_table::program::{check_id, id, ID};
 
     pub mod state {

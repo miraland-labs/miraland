@@ -57,12 +57,12 @@ use {
         redirect_stderr_to_file,
     },
     rand::{seq::SliceRandom, thread_rng},
-    solana_runtime::{
+    miraland_runtime::{
         snapshot_bank_utils::DISABLED_SNAPSHOT_ARCHIVE_INTERVAL,
         snapshot_config::{SnapshotConfig, SnapshotUsage},
         snapshot_utils::{self, ArchiveFormat, SnapshotVersion},
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, DEFAULT_S_PER_SLOT},
         commitment_config::CommitmentConfig,
         hash::Hash,

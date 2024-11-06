@@ -25,8 +25,8 @@ use {
     miraland_metrics::poh_timing_point::{
         send_poh_timing_point, PohTimingSender, SlotPohTimingInfo,
     },
-    solana_runtime::{bank::Bank, installed_scheduler_pool::BankWithScheduler},
-    solana_sdk::{
+    miraland_runtime::{bank::Bank, installed_scheduler_pool::BankWithScheduler},
+    miraland_sdk::{
         clock::{Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
         hash::Hash,
         poh_config::PohConfig,
@@ -582,7 +582,7 @@ impl PohRecorder {
                 SlotPohTimingInfo::new_slot_start_poh_time_point(
                     self.start_slot() + 1,
                     None,
-                    solana_sdk::timing::timestamp(),
+                    miraland_sdk::timing::timestamp(),
                 ),
             );
         }
@@ -630,7 +630,7 @@ impl PohRecorder {
                     SlotPohTimingInfo::new_slot_start_poh_time_point(
                         slot,
                         None,
-                        solana_sdk::timing::timestamp(),
+                        miraland_sdk::timing::timestamp(),
                     ),
                 );
             }
@@ -726,7 +726,7 @@ impl PohRecorder {
                         SlotPohTimingInfo::new_slot_end_poh_time_point(
                             self.slot_for_tick_height(self.tick_height),
                             None,
-                            solana_sdk::timing::timestamp(),
+                            miraland_sdk::timing::timestamp(),
                         ),
                     );
                 }
@@ -739,7 +739,7 @@ impl PohRecorder {
                         SlotPohTimingInfo::new_slot_start_poh_time_point(
                             self.slot_for_tick_height(self.tick_height),
                             None,
-                            solana_sdk::timing::timestamp(),
+                            miraland_sdk::timing::timestamp(),
                         ),
                     );
                 }
@@ -755,7 +755,7 @@ impl PohRecorder {
                 SlotPohTimingInfo::new_slot_end_poh_time_point(
                     slot,
                     None,
-                    solana_sdk::timing::timestamp(),
+                    miraland_sdk::timing::timestamp(),
                 ),
             );
         }
@@ -1117,7 +1117,7 @@ mod tests {
             blockstore::Blockstore, blockstore_meta::SlotMeta, get_tmp_ledger_path_auto_delete,
         },
         miraland_perf::test_tx::test_tx,
-        solana_sdk::{clock::DEFAULT_TICKS_PER_SLOT, hash::hash},
+        miraland_sdk::{clock::DEFAULT_TICKS_PER_SLOT, hash::hash},
     };
 
     #[test]

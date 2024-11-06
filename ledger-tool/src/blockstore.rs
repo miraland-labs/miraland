@@ -24,7 +24,7 @@ use {
     },
     regex::Regex,
     serde_json::json,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, UnixTimestamp},
         hash::Hash,
     },
@@ -179,7 +179,7 @@ fn slot_contains_nonvote_tx(blockstore: &Blockstore, slot: Slot) -> bool {
         .iter()
         .flat_map(|entry| entry.transactions.iter())
         .flat_map(get_program_ids)
-        .any(|program_id| *program_id != solana_vote_program::id());
+        .any(|program_id| *program_id != miraland_vote_program::id());
     contains_nonvote
 }
 

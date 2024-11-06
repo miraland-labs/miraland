@@ -21,7 +21,7 @@ use {
         ClientConfig, ConnectError, Connection, ConnectionError, Endpoint, EndpointConfig,
         IdleTimeout, TokioRuntime, TransportConfig, WriteError,
     },
-    solana_sdk::{
+    miraland_sdk::{
         quic::{
             QUIC_CONNECTION_HANDSHAKE_TIMEOUT, QUIC_KEEP_ALIVE, QUIC_MAX_TIMEOUT,
             QUIC_MAX_UNSTAKED_CONCURRENT_STREAMS,

@@ -1,7 +1,7 @@
 use {
     super::VersionedTransaction,
     crate::{sanitize::SanitizeError, signature::Signature},
-    solana_program::message::SanitizedVersionedMessage,
+    miraland_program::message::SanitizedVersionedMessage,
 };
 
 /// Wraps a sanitized `VersionedTransaction` to provide a safe API
@@ -43,7 +43,7 @@ impl SanitizedVersionedTransaction {
 mod tests {
     use {
         super::*,
-        solana_program::{
+        miraland_program::{
             hash::Hash,
             message::{v0, VersionedMessage},
             pubkey::Pubkey,

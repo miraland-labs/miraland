@@ -82,7 +82,7 @@ The code for your Rust based Miraland program will live in your `src/lib.rs` fil
 At the top of `lib.rs`, import the `miraland-program` crate and bring our needed items into the local namespace:
 
 ```rust
-use solana_program::{
+use miraland_program::{
     account_info::AccountInfo,
     entrypoint,
     entrypoint::ProgramResult,

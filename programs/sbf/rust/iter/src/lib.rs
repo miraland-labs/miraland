@@ -2,8 +2,8 @@
 
 #![allow(clippy::arithmetic_side_effects)]
 
-extern crate solana_program;
-use solana_program::{
+extern crate miraland_program;
+use miraland_program::{
     custom_heap_default, custom_panic_default, entrypoint::SUCCESS, log::sol_log_64,
 };
 

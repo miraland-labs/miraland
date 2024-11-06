@@ -1,6 +1,6 @@
 use {
-    solana_program_test::ProgramTest,
-    solana_sdk::{
+    miraland_program_test::ProgramTest,
+    miraland_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         signature::{Keypair, Signer},

@@ -5,7 +5,7 @@
 mod iterators;
 use {
     bv::BitVec, iterators::RollingBitFieldOnesIter, miraland_nohash_hasher::IntSet,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
 };
 
 #[derive(Debug, AbiExample, Clone)]

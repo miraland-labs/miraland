@@ -14,20 +14,19 @@ use {
     },
     miraland_banks_client::start_client,
     miraland_banks_server::banks_server::start_local_server,
-    miraland_svm::runtime_config::RuntimeConfig,
-    solana_bpf_loader_program::serialization::serialize_parameters,
-    solana_program_runtime::{
+    miraland_bpf_loader_program::serialization::serialize_parameters,
+    miraland_program_runtime::{
         compute_budget::ComputeBudget, ic_msg, invoke_context::BuiltinFunctionWithContext,
         loaded_programs::LoadedProgram, stable_log, timings::ExecuteTimings,
     },
-    solana_runtime::{
+    miraland_runtime::{
         accounts_background_service::{AbsRequestSender, SnapshotRequestKind},
         bank::Bank,
         bank_forks::BankForks,
         commitment::BlockCommitmentCache,
         genesis_utils::{create_genesis_config_with_leader_ex, GenesisConfigInfo},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{create_account_shared_data_for_test, Account, AccountSharedData},
         account_info::AccountInfo,
         clock::{Epoch, Slot},
@@ -46,7 +45,8 @@ use {
         stable_layout::stable_instruction::StableInstruction,
         sysvar::{Sysvar, SysvarId},
     },
-    solana_vote_program::vote_state::{self, VoteState, VoteStateVersions},
+    miraland_svm::runtime_config::RuntimeConfig,
+    miraland_vote_program::vote_state::{self, VoteState, VoteStateVersions},
     std::{
         cell::RefCell,
         collections::{HashMap, HashSet},
@@ -68,12 +68,12 @@ use {
 pub use {
     miraland_banks_client::{BanksClient, BanksClientError},
     miraland_banks_interface::BanksTransactionResultWithMetadata,
-    solana_program_runtime::invoke_context::InvokeContext,
+    miraland_program_runtime::invoke_context::InvokeContext,
+    miraland_sdk::transaction_context::IndexOfAccount,
     solana_rbpf::{
         error::EbpfError,
         vm::{get_runtime_environment_key, EbpfVm},
     },
-    solana_sdk::transaction_context::IndexOfAccount,
 };
 
 pub mod programs;
@@ -102,7 +102,7 @@ fn get_invoke_context<'a, 'b>() -> &'a mut InvokeContext<'b> {
 }
 
 pub fn invoke_builtin_function(
-    builtin_function: solana_sdk::entrypoint::ProcessInstruction,
+    builtin_function: miraland_sdk::entrypoint::ProcessInstruction,
     invoke_context: &mut InvokeContext,
 ) -> Result<u64, Box<dyn std::error::Error>> {
     set_invoke_context(invoke_context);
@@ -231,7 +231,7 @@ fn get_sysvar<T: Default + Sysvar + Sized + serde::de::DeserializeOwned + Clone>
 }
 
 struct SyscallStubs {}
-impl solana_sdk::program_stubs::SyscallStubs for SyscallStubs {
+impl miraland_sdk::program_stubs::SyscallStubs for SyscallStubs {
     fn sol_log(&self, message: &str) {
         let invoke_context = get_invoke_context();
         ic_msg!(invoke_context, "Program log: {}", message);
@@ -494,9 +494,9 @@ impl Default for ProgramTest {
     fn default() -> Self {
         miraland_logger::setup_with_default(
             "solana_rbpf::vm=debug,\
-             solana_runtime::message_processor=debug,\
-             solana_runtime::system_instruction_processor=trace,\
-             solana_program_test=info",
+             miraland_runtime::message_processor=debug,\
+             miraland_runtime::system_instruction_processor=trace,\
+             miraland_program_test=info",
         );
         let prefer_bpf =
             std::env::var("BPF_OUT_DIR").is_ok() || std::env::var("SBF_OUT_DIR").is_ok();
@@ -654,7 +654,7 @@ impl ProgramTest {
                 Account {
                     lamports: Rent::default().minimum_balance(data.len()).max(1),
                     data,
-                    owner: solana_sdk::bpf_loader::id(),
+                    owner: miraland_sdk::bpf_loader::id(),
                     executable: true,
                     rent_epoch: 0,
                 },
@@ -760,7 +760,7 @@ impl ProgramTest {
             static ONCE: Once = Once::new();
 
             ONCE.call_once(|| {
-                solana_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
+                miraland_sdk::program_stubs::set_syscall_stubs(Box::new(SyscallStubs {}));
             });
         }
 
@@ -1226,7 +1226,7 @@ impl ProgramTestContext {
 
         bank_forks.set_root(
             pre_warp_slot,
-            &solana_runtime::accounts_background_service::AbsRequestSender::default(),
+            &miraland_runtime::accounts_background_service::AbsRequestSender::default(),
             Some(pre_warp_slot),
         );
 

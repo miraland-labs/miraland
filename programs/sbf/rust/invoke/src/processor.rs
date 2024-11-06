@@ -6,7 +6,7 @@
 
 use {
     crate::instructions::*,
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         bpf_loader_deprecated,
         entrypoint::{ProgramResult, MAX_PERMITTED_DATA_INCREASE},
@@ -66,7 +66,7 @@ fn do_nested_invokes(num_nested_invokes: u64, accounts: &[AccountInfo]) -> Progr
     Ok(())
 }
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -85,7 +85,7 @@ fn process_instruction(
                 let from_lamports = accounts[FROM_INDEX].lamports();
                 let to_lamports = accounts[DERIVED_KEY1_INDEX].lamports();
                 assert_eq!(accounts[DERIVED_KEY1_INDEX].data_len(), 0);
-                assert!(solana_program::system_program::check_id(
+                assert!(miraland_program::system_program::check_id(
                     accounts[DERIVED_KEY1_INDEX].owner
                 ));
 

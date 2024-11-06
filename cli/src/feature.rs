@@ -16,7 +16,7 @@ use {
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::{client_error::Error as ClientError, request::MAX_MULTIPLE_ACCOUNTS},
     serde::{Deserialize, Serialize},
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         clock::Slot,
         epoch_schedule::EpochSchedule,

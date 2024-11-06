@@ -4,7 +4,7 @@ use {
     miraland_geyser_plugin_interface::geyser_plugin_interface::SlotStatus,
     miraland_measure::measure::Measure,
     miraland_metrics::*,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::sync::{Arc, RwLock},
 };
 

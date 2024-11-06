@@ -5,7 +5,7 @@ use {
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_streamer::socket::SocketAddrSpace,
     miraland_test_validator::TestValidator,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         native_token::mln_to_lamports,
         signature::{Keypair, Signer},

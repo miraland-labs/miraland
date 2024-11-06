@@ -13,11 +13,11 @@ use {
         transaction_error_metrics::TransactionErrorMetrics,
         transaction_results::TransactionCheckResult,
     },
-    solana_program_runtime::{
+    miraland_program_runtime::{
         compute_budget_processor::process_compute_budget_instructions,
         loaded_programs::LoadedProgramsForTxBatch,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{
             create_executable_meta, is_builtin, is_executable, Account, AccountSharedData,
             ReadableAccount, WritableAccount,
@@ -34,7 +34,7 @@ use {
         transaction::{Result, SanitizedTransaction, TransactionError},
         transaction_context::IndexOfAccount,
     },
-    solana_system_program::{get_system_account_kind, SystemAccountKind},
+    miraland_system_program::{get_system_account_kind, SystemAccountKind},
     std::{collections::HashMap, num::NonZeroUsize},
 };
 
@@ -133,7 +133,7 @@ fn load_transaction_accounts<CB: TransactionProcessingCallback>(
     let rent_collector = callbacks.get_rent_collector();
 
     let set_exempt_rent_epoch_max =
-        feature_set.is_active(&solana_sdk::feature_set::set_exempt_rent_epoch_max::id());
+        feature_set.is_active(&miraland_sdk::feature_set::set_exempt_rent_epoch_max::id());
 
     let requested_loaded_accounts_data_size_limit =
         get_requested_loaded_accounts_data_size_limit(tx)?;
@@ -152,7 +152,7 @@ fn load_transaction_accounts<CB: TransactionProcessingCallback>(
         .map(|(i, key)| {
             let mut account_found = true;
             #[allow(clippy::collapsible_else_if)]
-            let account = if solana_sdk::sysvar::instructions::check_id(key) {
+            let account = if miraland_sdk::sysvar::instructions::check_id(key) {
                 construct_instructions_account(message)
             } else {
                 let instruction_account = u8::try_from(i)
@@ -466,11 +466,11 @@ mod tests {
             ancestors::Ancestors, rent_collector::RentCollector,
         },
         nonce::state::Versions as NonceVersions,
-        solana_program_runtime::{
+        miraland_program_runtime::{
             compute_budget_processor,
             prioritization_fee::{PrioritizationFeeDetails, PrioritizationFeeType},
         },
-        solana_sdk::{
+        miraland_sdk::{
             account::{AccountSharedData, WritableAccount},
             bpf_loader_upgradeable,
             compute_budget::ComputeBudgetInstruction,
@@ -724,7 +724,7 @@ mod tests {
         let keypair = Keypair::new();
         let key0 = keypair.pubkey();
 
-        let account = AccountSharedData::new(1, 1, &solana_sdk::pubkey::new_rand()); // <-- owner is not the system program
+        let account = AccountSharedData::new(1, 1, &miraland_sdk::pubkey::new_rand()); // <-- owner is not the system program
         accounts.push((key0, account));
 
         let instructions = vec![CompiledInstruction::new(1, &(), vec![0])];
@@ -1041,12 +1041,12 @@ mod tests {
         let accounts_db = AccountsDb::new_single_for_tests();
         let accounts = Accounts::new(Arc::new(accounts_db));
 
-        let instructions_key = solana_sdk::sysvar::instructions::id();
+        let instructions_key = miraland_sdk::sysvar::instructions::id();
         let keypair = Keypair::new();
         let instructions = vec![CompiledInstruction::new(1, &(), vec![0, 1])];
         let tx = Transaction::new_with_compiled_instructions(
             &[&keypair],
-            &[solana_sdk::pubkey::new_rand(), instructions_key],
+            &[miraland_sdk::pubkey::new_rand(), instructions_key],
             Hash::default(),
             vec![native_loader::id()],
             instructions,
@@ -1141,7 +1141,7 @@ mod tests {
     fn test_get_requested_loaded_accounts_data_size_limit() {
         // an prrivate helper function
         fn test(
-            instructions: &[solana_sdk::instruction::Instruction],
+            instructions: &[miraland_sdk::instruction::Instruction],
             expected_result: &Result<Option<NonZeroUsize>>,
         ) {
             let payer_keypair = Keypair::new();
@@ -1156,20 +1156,20 @@ mod tests {
             );
         }
 
-        let tx_not_set_limit = &[solana_sdk::instruction::Instruction::new_with_bincode(
+        let tx_not_set_limit = &[miraland_sdk::instruction::Instruction::new_with_bincode(
             Pubkey::new_unique(),
             &0_u8,
             vec![],
         )];
         let tx_set_limit_99 =
             &[
-                solana_sdk::compute_budget::ComputeBudgetInstruction::set_loaded_accounts_data_size_limit(99u32),
-                solana_sdk::instruction::Instruction::new_with_bincode(Pubkey::new_unique(), &0_u8, vec![]),
+                miraland_sdk::compute_budget::ComputeBudgetInstruction::set_loaded_accounts_data_size_limit(99u32),
+                miraland_sdk::instruction::Instruction::new_with_bincode(Pubkey::new_unique(), &0_u8, vec![]),
             ];
         let tx_set_limit_0 =
             &[
-                solana_sdk::compute_budget::ComputeBudgetInstruction::set_loaded_accounts_data_size_limit(0u32),
-                solana_sdk::instruction::Instruction::new_with_bincode(Pubkey::new_unique(), &0_u8, vec![]),
+                miraland_sdk::compute_budget::ComputeBudgetInstruction::set_loaded_accounts_data_size_limit(0u32),
+                miraland_sdk::instruction::Instruction::new_with_bincode(Pubkey::new_unique(), &0_u8, vec![]),
             ];
 
         let result_default_limit = Ok(Some(

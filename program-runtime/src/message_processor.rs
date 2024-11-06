@@ -9,7 +9,7 @@ use {
     },
     miraland_measure::measure::Measure,
     serde::{Deserialize, Serialize},
-    solana_sdk::{
+    miraland_sdk::{
         account::WritableAccount,
         feature_set::FeatureSet,
         hash::Hash,
@@ -177,7 +177,7 @@ mod tests {
             declare_process_instruction, loaded_programs::LoadedProgram,
             message_processor::MessageProcessor,
         },
-        solana_sdk::{
+        miraland_sdk::{
             account::{AccountSharedData, ReadableAccount},
             instruction::{AccountMeta, Instruction, InstructionError},
             message::{AccountKeys, LegacyMessage, Message},
@@ -461,11 +461,11 @@ mod tests {
         let mock_program_id = Pubkey::from([2u8; 32]);
         let accounts = vec![
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::new(100, 1, &mock_program_id),
             ),
             (
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::new(0, 1, &mock_program_id),
             ),
             (

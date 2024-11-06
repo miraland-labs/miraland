@@ -4,7 +4,7 @@ use {
         parse_token_extension::{parse_extension, UiExtension},
         StringAmount, StringDecimals,
     },
-    solana_sdk::pubkey::Pubkey,
+    miraland_sdk::pubkey::Pubkey,
     spl_token_2022::{
         extension::{BaseStateWithExtensions, StateWithExtensions},
         generic_token_account::GenericTokenAccount,
@@ -18,16 +18,20 @@ use {
 
 // Returns all known Solarti Token program ids
 pub fn spl_token_ids() -> Vec<Pubkey> {
-    vec![spl_token::id(), spl_token_2022::id()]
+    vec![
+        Pubkey::from(spl_token::id().to_bytes()),
+        Pubkey::from(spl_token_2022::id().to_bytes()),
+    ]
 }
 
 // Check if the provided program id as a known Solarti Token program id
 pub fn is_known_spl_token_id(program_id: &Pubkey) -> bool {
-    *program_id == spl_token::id() || *program_id == spl_token_2022::id()
+    *program_id == Pubkey::from(spl_token::id().to_bytes())
+        || *program_id == Pubkey::from(spl_token_2022::id().to_bytes())
 }
 
 // A helper function to convert spl_token::native_mint::id() as spl_sdk::pubkey::Pubkey to
-// solana_sdk::pubkey::Pubkey
+// miraland_sdk::pubkey::Pubkey
 #[deprecated(
     since = "1.16.0",
     note = "Pubkey conversions no longer needed. Please use spl_token::native_mint::id() directly"
@@ -42,16 +46,16 @@ pub fn spl_token_native_mint() -> Pubkey {
     note = "Pubkey conversions no longer needed. Please use spl_token::id() directly"
 )]
 pub fn spl_token_native_mint_program_id() -> Pubkey {
-    spl_token::id()
+    Pubkey::from(spl_token::id().to_bytes())
 }
 
-// A helper function to convert a solana_sdk::pubkey::Pubkey to spl_sdk::pubkey::Pubkey
+// A helper function to convert a miraland_sdk::pubkey::Pubkey to spl_sdk::pubkey::Pubkey
 #[deprecated(since = "1.16.0", note = "Pubkey conversions no longer needed")]
 pub fn spl_token_pubkey(pubkey: &Pubkey) -> SolartiTokenPubkey {
     SolartiTokenPubkey::new_from_array(pubkey.to_bytes())
 }
 
-// A helper function to convert a spl_sdk::pubkey::Pubkey to solana_sdk::pubkey::Pubkey
+// A helper function to convert a spl_sdk::pubkey::Pubkey to miraland_sdk::pubkey::Pubkey
 #[deprecated(since = "1.16.0", note = "Pubkey conversions no longer needed")]
 pub fn pubkey_from_spl_token(pubkey: &SolartiTokenPubkey) -> Pubkey {
     Pubkey::new_from_array(pubkey.to_bytes())

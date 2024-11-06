@@ -36,12 +36,12 @@ use {
     miraland_tpu_client::tpu_client::{
         DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_ENABLE_UDP, DEFAULT_TPU_USE_QUIC,
     },
-    solana_program_runtime::compute_budget::ComputeBudget,
-    solana_runtime::{
+    miraland_program_runtime::compute_budget::ComputeBudget,
+    miraland_runtime::{
         bank_forks::BankForks, genesis_utils::create_genesis_config_with_leader_ex,
         snapshot_config::SnapshotConfig,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, AccountSharedData},
         bpf_loader_upgradeable::UpgradeableLoaderState,
         clock::{Slot, DEFAULT_MS_PER_SLOT},
@@ -371,7 +371,7 @@ impl TestValidatorGenesis {
         accounts: &[AccountInfo],
     ) -> Result<&mut Self, String> {
         for account in accounts {
-            let Some(account_path) = solana_program_test::find_file(account.filename) else {
+            let Some(account_path) = miraland_program_test::find_file(account.filename) else {
                 return Err(format!("Unable to locate {}", account.filename));
             };
             let mut file = File::open(&account_path).unwrap();
@@ -450,8 +450,8 @@ impl TestValidatorGenesis {
             address,
             AccountSharedData::from(Account {
                 lamports,
-                data: solana_program_test::read_file(
-                    solana_program_test::find_file(filename).unwrap_or_else(|| {
+                data: miraland_program_test::read_file(
+                    miraland_program_test::find_file(filename).unwrap_or_else(|| {
                         panic!("Unable to locate {filename}");
                     }),
                 ),
@@ -490,12 +490,12 @@ impl TestValidatorGenesis {
     /// `program_name` will also used to locate the SBF shared object in the current or fixtures
     /// directory.
     pub fn add_program(&mut self, program_name: &str, program_id: Pubkey) -> &mut Self {
-        let program_path = solana_program_test::find_file(&format!("{program_name}.so"))
+        let program_path = miraland_program_test::find_file(&format!("{program_name}.so"))
             .unwrap_or_else(|| panic!("Unable to locate program {program_name}"));
 
         self.upgradeable_programs.push(UpgradeableProgramInfo {
             program_id,
-            loader: solana_sdk::bpf_loader_upgradeable::id(),
+            loader: miraland_sdk::bpf_loader_upgradeable::id(),
             upgrade_authority: Pubkey::default(),
             program_path,
         });
@@ -713,12 +713,12 @@ impl TestValidator {
         let mint_lamports = mln_to_lamports(1_000_000_000.);
 
         let mut accounts = config.accounts.clone();
-        for (address, account) in solana_program_test::programs::spl_programs(&config.rent) {
+        for (address, account) in miraland_program_test::programs::spl_programs(&config.rent) {
             accounts.entry(address).or_insert(account);
         }
         #[allow(deprecated)]
         for program in &config.programs {
-            let data = solana_program_test::read_file(&program.program_path);
+            let data = miraland_program_test::read_file(&program.program_path);
             accounts.insert(
                 program.program_id,
                 AccountSharedData::from(Account {
@@ -731,7 +731,7 @@ impl TestValidator {
             );
         }
         for upgradeable_program in &config.upgradeable_programs {
-            let data = solana_program_test::read_file(&upgradeable_program.program_path);
+            let data = miraland_program_test::read_file(&upgradeable_program.program_path);
             let (programdata_address, _) = Pubkey::find_program_address(
                 &[upgradeable_program.program_id.as_ref()],
                 &upgradeable_program.loader,
@@ -779,7 +779,7 @@ impl TestValidator {
             validator_identity_lamports,
             config.fee_rate_governor.clone(),
             config.rent.clone(),
-            solana_sdk::genesis_config::ClusterType::Development,
+            miraland_sdk::genesis_config::ClusterType::Development,
             accounts.into_iter().collect(),
         );
         genesis_config.epoch_schedule = config

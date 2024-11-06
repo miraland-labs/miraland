@@ -5,13 +5,13 @@
 
 // use {
 //     log::*,
-//     solana_program_runtime::declare_process_instruction,
-//     solana_runtime::{
+//     miraland_program_runtime::declare_process_instruction,
+//     miraland_runtime::{
 //         bank::{test_utils::goto_end_of_slot, *},
 //         bank_client::BankClient,
 //         loader_utils::create_invoke_instruction,
 //     },
-//     solana_sdk::{
+//     miraland_sdk::{
 //         client::{AsyncClient, SyncClient},
 //         clock::MAX_RECENT_BLOCKHASHES,
 //         genesis_config::create_genesis_config,

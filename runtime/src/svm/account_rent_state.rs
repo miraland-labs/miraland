@@ -1,6 +1,6 @@
 use {
     log::*,
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount},
         pubkey::Pubkey,
         rent::Rent,
@@ -105,7 +105,7 @@ impl RentState {
         account_index: IndexOfAccount,
     ) -> Result<()> {
         Self::submit_rent_state_metrics(pre_rent_state, post_rent_state);
-        if !solana_sdk::incinerator::check_id(address)
+        if !miraland_sdk::incinerator::check_id(address)
             && !post_rent_state.transition_allowed_from(pre_rent_state)
         {
             debug!(
@@ -122,7 +122,7 @@ impl RentState {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, solana_sdk::pubkey::Pubkey};
+    use {super::*, miraland_sdk::pubkey::Pubkey};
 
     #[test]
     fn test_from_account() {

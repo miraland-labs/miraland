@@ -30,8 +30,8 @@ use {
     miraland_rayon_threadlimit::get_thread_count,
     miraland_turbine::cluster_nodes,
     rayon::{prelude::*, ThreadPool},
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         feature_set,
     },
@@ -240,7 +240,7 @@ fn verify_repair(
                 .register_response(
                     repair_meta.nonce,
                     shred,
-                    solana_sdk::timing::timestamp(),
+                    miraland_sdk::timing::timestamp(),
                     |_| (),
                 )
                 .is_some()
@@ -563,8 +563,8 @@ mod test {
             shred::{ProcessShredsStats, Shredder},
         },
         miraland_streamer::socket::SocketAddrSpace,
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             timing::timestamp,

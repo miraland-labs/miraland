@@ -4,7 +4,7 @@ pub mod blockhash_query;
 
 use {
     miraland_rpc_client::nonblocking::rpc_client::RpcClient,
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, ReadableAccount},
         account_utils::StateMut,
         commitment_config::CommitmentConfig,
@@ -101,7 +101,7 @@ pub fn account_identity_ok<T: ReadableAccount>(account: &T) -> Result<(), Error>
 /// ```no_run
 /// use miraland_rpc_client_nonce_utils::nonblocking;
 /// use miraland_rpc_client::nonblocking::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     nonce::State,
 ///     pubkey::Pubkey,
 /// };
@@ -151,7 +151,7 @@ pub fn state_from_account<T: ReadableAccount + StateMut<Versions>>(
 /// ```no_run
 /// use miraland_rpc_client_nonce_utils::nonblocking;
 /// use miraland_rpc_client::nonblocking::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     message::Message,
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},

@@ -2,7 +2,7 @@
 use {
     itertools::Itertools,
     log::trace,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, SlotCount, SlotIndex},
         pubkey::Pubkey,
         stake_history::Epoch,
@@ -586,7 +586,7 @@ pub(crate) mod tests {
     fn map_to_test_bad_range() -> std::collections::BTreeMap<Pubkey, i8> {
         let mut map = std::collections::BTreeMap::new();
         // when empty, std::collections::BTreeMap doesn't sanitize given range...
-        map.insert(solana_sdk::pubkey::new_rand(), 1);
+        map.insert(miraland_sdk::pubkey::new_rand(), 1);
         map
     }
 

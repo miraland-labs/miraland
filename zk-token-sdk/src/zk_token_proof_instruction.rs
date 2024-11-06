@@ -37,7 +37,7 @@ use {
     bytemuck::bytes_of,
     num_derive::{FromPrimitive, ToPrimitive},
     num_traits::{FromPrimitive, ToPrimitive},
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
     },

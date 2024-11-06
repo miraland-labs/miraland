@@ -12,7 +12,7 @@ use {
     miraland_cli_config::{Config, ConfigInput},
     miraland_cli_output::OutputFormat,
     miraland_rpc_client::rpc_client::RpcClient,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config,
         signature::{read_keypair_file, Keypair},
     },

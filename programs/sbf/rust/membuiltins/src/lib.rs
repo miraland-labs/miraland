@@ -5,7 +5,7 @@
 
 extern crate compiler_builtins;
 use {
-    solana_program::{custom_heap_default, custom_panic_default, entrypoint::SUCCESS},
+    miraland_program::{custom_heap_default, custom_panic_default, entrypoint::SUCCESS},
     miraland_sbf_rust_mem::{run_mem_tests, MemOps},
 };
 

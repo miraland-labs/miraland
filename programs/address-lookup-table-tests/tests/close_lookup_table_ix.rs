@@ -4,8 +4,8 @@ use {
         add_lookup_table_account, assert_ix_error, new_address_lookup_table,
         overwrite_slot_hashes_with_slots, setup_test_context,
     },
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         address_lookup_table::instruction::close_lookup_table,
         clock::Clock,
         instruction::InstructionError,

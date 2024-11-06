@@ -1,7 +1,7 @@
 //! The `tpu` module implements the Transaction Processing Unit, a
 //! multi-stage transaction processing pipeline in software.
 
-pub use solana_sdk::net::DEFAULT_TPU_COALESCE;
+pub use miraland_sdk::net::DEFAULT_TPU_COALESCE;
 use {
     crate::{
         banking_stage::BankingStage,
@@ -36,9 +36,9 @@ use {
         streamer::StakedNodes,
     },
     miraland_turbine::broadcast_stage::{BroadcastStage, BroadcastStageType},
-    solana_runtime::{bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache},
-    solana_sdk::{clock::Slot, pubkey::Pubkey, quic::NotifyKeyUpdate, signature::Keypair},
-    solana_vote::vote_sender_types::{ReplayVoteReceiver, ReplayVoteSender},
+    miraland_runtime::{bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache},
+    miraland_sdk::{clock::Slot, pubkey::Pubkey, quic::NotifyKeyUpdate, signature::Keypair},
+    miraland_vote::vote_sender_types::{ReplayVoteReceiver, ReplayVoteSender},
     std::{
         collections::HashMap,
         net::{SocketAddr, UdpSocket},

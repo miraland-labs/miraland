@@ -3,7 +3,7 @@ use {
     miraland_accounts_db::ancestors::Ancestors,
     rand::{thread_rng, Rng},
     serde::Serialize,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, MAX_RECENT_BLOCKHASHES},
         hash::Hash,
     },
@@ -283,7 +283,7 @@ impl<T: Serialize + Clone> StatusCache<T> {
 mod tests {
     use {
         super::*,
-        solana_sdk::{hash::hash, signature::Signature},
+        miraland_sdk::{hash::hash, signature::Signature},
     };
 
     type BankStatusCache = StatusCache<()>;

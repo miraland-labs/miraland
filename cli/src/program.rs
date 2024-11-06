@@ -40,10 +40,10 @@ use {
         filter::{Memcmp, RpcFilterType},
     },
     miraland_rpc_client_nonce_utils::blockhash_query::BlockhashQuery,
-    solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
-    solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
+    miraland_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
+    miraland_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
     solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
-    solana_sdk::{
+    miraland_sdk::{
         account::{is_executable, Account},
         account_utils::StateMut,
         bpf_loader, bpf_loader_deprecated,
@@ -2740,7 +2740,7 @@ mod tests {
         },
         miraland_cli_output::OutputFormat,
         serde_json::Value,
-        solana_sdk::{hash::Hash, signature::write_keypair_file},
+        miraland_sdk::{hash::Hash, signature::write_keypair_file},
     };
 
     fn make_tmp_path(name: &str) -> String {

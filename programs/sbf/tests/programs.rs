@@ -16,12 +16,11 @@ use {
         parse_bpf_upgradeable_loader, BpfUpgradeableLoaderAccountType,
     },
     miraland_ledger::token_balances::collect_token_balances,
-    solana_program_runtime::{
+    miraland_program_runtime::{
         compute_budget::ComputeBudget,
         compute_budget_processor::process_compute_budget_instructions, timings::ExecuteTimings,
     },
-    solana_rbpf::vm::ContextObject,
-    solana_runtime::{
+    miraland_runtime::{
         bank::TransactionBalancesSet,
         loader_utils::{
             create_program, load_program_from_file, load_upgradeable_buffer,
@@ -32,11 +31,7 @@ use {
     miraland_sbf_rust_invoke::instructions::*,
     miraland_sbf_rust_realloc::instructions::*,
     miraland_sbf_rust_realloc_invoke::instructions::*,
-    miraland_svm::transaction_results::{
-        DurableNonceFee, InnerInstruction, TransactionExecutionDetails, TransactionExecutionResult,
-        TransactionResults,
-    },
-    solana_sdk::{
+    miraland_sdk::{
         account::{ReadableAccount, WritableAccount},
         account_utils::StateMut,
         bpf_loader_upgradeable,
@@ -52,15 +47,20 @@ use {
         sysvar::{self, clock},
         transaction::VersionedTransaction,
     },
+    miraland_svm::transaction_results::{
+        DurableNonceFee, InnerInstruction, TransactionExecutionDetails, TransactionExecutionResult,
+        TransactionResults,
+    },
     miraland_transaction_status::{
         map_inner_instructions, ConfirmedTransactionWithStatusMeta, TransactionStatusMeta,
         TransactionWithStatusMeta, VersionedTransactionWithStatusMeta,
     },
+    solana_rbpf::vm::ContextObject,
     std::collections::HashMap,
 };
 use {
-    solana_program_runtime::invoke_context::mock_process_instruction,
-    solana_runtime::{
+    miraland_program_runtime::invoke_context::mock_process_instruction,
+    miraland_runtime::{
         bank::Bank,
         bank_client::BankClient,
         genesis_utils::{
@@ -68,7 +68,7 @@ use {
             create_genesis_config_with_leader_ex, GenesisConfigInfo,
         },
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData,
         bpf_loader, bpf_loader_deprecated,
         client::SyncClient,
@@ -357,7 +357,7 @@ fn test_program_sbf_loader_deprecated() {
         } = create_genesis_config(50);
         genesis_config
             .accounts
-            .remove(&solana_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id())
+            .remove(&miraland_sdk::feature_set::disable_deploy_of_alloc_free_syscall::id())
             .unwrap();
         let (bank, bank_forks) = Bank::new_with_bank_forks_for_tests(&genesis_config);
         let program_id = create_program(&bank, &bpf_loader_deprecated::id(), program);
@@ -391,9 +391,9 @@ fn test_sol_alloc_free_no_longer_deployable_with_upgradeable_loader() {
     let mut bank_client = BankClient::new_shared(bank.clone());
     let authority_keypair = Keypair::new();
 
-    // Populate loader account with `solana_sbf_rust_deprecated_loader` elf, which
+    // Populate loader account with `miraland_sbf_rust_deprecated_loader` elf, which
     // depends on `sol_alloc_free_` syscall. This can be verified with
-    // $ elfdump solana_sbf_rust_deprecated_loader.so
+    // $ elfdump miraland_sbf_rust_deprecated_loader.so
     // : 0000000000001ab8  000000070000000a R_BPF_64_32            0000000000000000 sol_alloc_free_
     // In the symbol table, there is `sol_alloc_free_`.
     // In fact, `sol_alloc_free_` is called from sbf allocator, which is originated from
@@ -782,7 +782,7 @@ fn test_program_sbf_invoke_sanity() {
             AccountMeta::new_readonly(derived_key3, false),
             AccountMeta::new_readonly(system_program::id(), false),
             AccountMeta::new(from_keypair.pubkey(), true),
-            AccountMeta::new_readonly(solana_sdk::ed25519_program::id(), false),
+            AccountMeta::new_readonly(miraland_sdk::ed25519_program::id(), false),
             AccountMeta::new_readonly(invoke_program_id, false),
         ];
 
@@ -1421,10 +1421,10 @@ fn assert_instruction_count() {
             transaction_accounts,
             instruction_accounts,
             Ok(()),
-            solana_bpf_loader_program::Entrypoint::vm,
+            miraland_bpf_loader_program::Entrypoint::vm,
             |invoke_context| {
                 *prev_compute_meter.borrow_mut() = invoke_context.get_remaining();
-                solana_bpf_loader_program::test_utils::load_all_invoked_programs(invoke_context);
+                miraland_bpf_loader_program::test_utils::load_all_invoked_programs(invoke_context);
             },
             |invoke_context| {
                 let consumption = prev_compute_meter
@@ -2257,7 +2257,7 @@ fn test_program_sbf_disguised_as_sbf_loader() {
         } = create_genesis_config(50);
         let mut bank = Bank::new_for_tests(&genesis_config);
         bank.deactivate_feature(
-            &solana_sdk::feature_set::remove_bpf_loader_incorrect_program_id::id(),
+            &miraland_sdk::feature_set::remove_bpf_loader_incorrect_program_id::id(),
         );
         let (bank, bank_forks) = bank.wrap_with_bank_forks_for_tests();
         let mut bank_client = BankClient::new_shared(bank);
@@ -2976,7 +2976,7 @@ fn test_program_sbf_realloc() {
             )
             .unwrap();
         let account = bank.get_account(&pubkey).unwrap();
-        assert_eq!(&solana_sdk::system_program::id(), account.owner());
+        assert_eq!(&miraland_sdk::system_program::id(), account.owner());
         let data = bank_client.get_account_data(&pubkey).unwrap().unwrap();
         assert_eq!(MAX_PERMITTED_DATA_INCREASE, data.len());
 
@@ -3006,7 +3006,7 @@ fn test_program_sbf_realloc() {
                             &[REALLOC_AND_ASSIGN_TO_SELF_VIA_SYSTEM_PROGRAM],
                             vec![
                                 AccountMeta::new(pubkey, true),
-                                AccountMeta::new(solana_sdk::system_program::id(), false),
+                                AccountMeta::new(miraland_sdk::system_program::id(), false),
                             ],
                         )],
                         Some(&mint_pubkey),
@@ -3027,7 +3027,7 @@ fn test_program_sbf_realloc() {
                         &[ASSIGN_TO_SELF_VIA_SYSTEM_PROGRAM_AND_REALLOC],
                         vec![
                             AccountMeta::new(pubkey, true),
-                            AccountMeta::new(solana_sdk::system_program::id(), false),
+                            AccountMeta::new(miraland_sdk::system_program::id(), false),
                         ],
                     )],
                     Some(&mint_pubkey),
@@ -3094,7 +3094,7 @@ fn test_program_sbf_realloc_invoke() {
         &bank_client,
         &mint_keypair,
         &authority_keypair,
-        "solana_sbf_rust_realloc",
+        "miraland_sbf_rust_realloc",
     );
 
     let (bank, realloc_invoke_program_id) = load_upgradeable_program_and_advance_slot(
@@ -3229,7 +3229,7 @@ fn test_program_sbf_realloc_invoke() {
         )
         .unwrap();
     let account = bank.get_account(&pubkey).unwrap();
-    assert_eq!(&solana_sdk::system_program::id(), account.owner());
+    assert_eq!(&miraland_sdk::system_program::id(), account.owner());
     let data = bank_client.get_account_data(&pubkey).unwrap().unwrap();
     assert_eq!(MAX_PERMITTED_DATA_INCREASE, data.len());
 
@@ -3260,7 +3260,7 @@ fn test_program_sbf_realloc_invoke() {
                         vec![
                             AccountMeta::new(pubkey, true),
                             AccountMeta::new_readonly(realloc_program_id, false),
-                            AccountMeta::new_readonly(solana_sdk::system_program::id(), false),
+                            AccountMeta::new_readonly(miraland_sdk::system_program::id(), false),
                         ],
                     )],
                     Some(&mint_pubkey),
@@ -3282,7 +3282,7 @@ fn test_program_sbf_realloc_invoke() {
                     vec![
                         AccountMeta::new(pubkey, true),
                         AccountMeta::new_readonly(realloc_program_id, false),
-                        AccountMeta::new_readonly(solana_sdk::system_program::id(), false),
+                        AccountMeta::new_readonly(miraland_sdk::system_program::id(), false),
                     ],
                 )],
                 Some(&mint_pubkey),
@@ -3354,7 +3354,7 @@ fn test_program_sbf_realloc_invoke() {
                     vec![
                         AccountMeta::new(mint_pubkey, true),
                         AccountMeta::new(new_pubkey, true),
-                        AccountMeta::new(solana_sdk::system_program::id(), false),
+                        AccountMeta::new(miraland_sdk::system_program::id(), false),
                         AccountMeta::new_readonly(realloc_invoke_program_id, false),
                     ],
                 )],
@@ -3787,7 +3787,11 @@ fn test_program_sbf_inner_instruction_alignment_checks() {
         ..
     } = create_genesis_config(50);
     let (bank, bank_forks) = Bank::new_with_bank_forks_for_tests(&genesis_config);
-    let noop = create_program(&bank, &bpf_loader_deprecated::id(), "miraland_sbf_rust_noop");
+    let noop = create_program(
+        &bank,
+        &bpf_loader_deprecated::id(),
+        "miraland_sbf_rust_noop",
+    );
     let inner_instruction_alignment_check = create_program(
         &bank,
         &bpf_loader_deprecated::id(),
@@ -4267,7 +4271,7 @@ fn test_cpi_deprecated_loader_realloc() {
 #[test]
 #[cfg(feature = "sbf_rust")]
 fn test_cpi_change_account_data_memory_allocation() {
-    use solana_program_runtime::{declare_process_instruction, loaded_programs::LoadedProgram};
+    use miraland_program_runtime::{declare_process_instruction, loaded_programs::LoadedProgram};
 
     miraland_logger::setup();
 

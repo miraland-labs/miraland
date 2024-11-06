@@ -16,7 +16,7 @@ use {
         program::{BuiltinFunction, SBPFVersion},
         vm::{Config, ContextObject, EbpfVm},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData,
         bpf_loader_deprecated,
         feature_set::FeatureSet,
@@ -58,7 +58,7 @@ macro_rules! declare_process_instruction {
             ) -> std::result::Result<u64, Box<dyn std::error::Error>> {
                 fn process_instruction_inner(
                     $invoke_context: &mut $crate::invoke_context::InvokeContext,
-                ) -> std::result::Result<(), solana_sdk::instruction::InstructionError>
+                ) -> std::result::Result<(), miraland_sdk::instruction::InstructionError>
                     $inner
 
                 let consumption_result = if $cu_to_consume > 0
@@ -266,7 +266,7 @@ impl<'a> InvokeContext<'a> {
     }
 
     /// Current height of the invocation stack, top level instructions are height
-    /// `solana_sdk::instruction::TRANSACTION_LEVEL_STACK_HEIGHT`
+    /// `miraland_sdk::instruction::TRANSACTION_LEVEL_STACK_HEIGHT`
     pub fn get_stack_height(&self) -> usize {
         self.transaction_context
             .get_instruction_context_stack_height()
@@ -623,7 +623,7 @@ macro_rules! with_mock_invoke_context {
         $transaction_accounts:expr $(,)?
     ) => {
         use {
-            solana_sdk::{
+            miraland_sdk::{
                 account::ReadableAccount, feature_set::FeatureSet, hash::Hash, sysvar::rent::Rent,
                 transaction_context::TransactionContext,
             },
@@ -741,7 +741,7 @@ mod tests {
         super::*,
         crate::compute_budget_processor,
         serde::{Deserialize, Serialize},
-        solana_sdk::{account::WritableAccount, instruction::Instruction, rent::Rent},
+        miraland_sdk::{account::WritableAccount, instruction::Instruction, rent::Rent},
     };
 
     #[derive(Debug, Serialize, Deserialize)]
@@ -873,9 +873,9 @@ mod tests {
         let mut transaction_accounts = vec![];
         let mut instruction_accounts = vec![];
         for index in 0..one_more_than_max_depth {
-            invoke_stack.push(solana_sdk::pubkey::new_rand());
+            invoke_stack.push(miraland_sdk::pubkey::new_rand());
             transaction_accounts.push((
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 AccountSharedData::new(index as u64, 1, invoke_stack.get(index).unwrap()),
             ));
             instruction_accounts.push(InstructionAccount {
@@ -889,7 +889,7 @@ mod tests {
         for (index, program_id) in invoke_stack.iter().enumerate() {
             transaction_accounts.push((
                 *program_id,
-                AccountSharedData::new(1, 1, &solana_sdk::pubkey::Pubkey::default()),
+                AccountSharedData::new(1, 1, &miraland_sdk::pubkey::Pubkey::default()),
             ));
             instruction_accounts.push(InstructionAccount {
                 index_in_transaction: index as IndexOfAccount,
@@ -939,19 +939,19 @@ mod tests {
 
     #[test]
     fn test_process_instruction() {
-        let callee_program_id = solana_sdk::pubkey::new_rand();
+        let callee_program_id = miraland_sdk::pubkey::new_rand();
         let owned_account = AccountSharedData::new(42, 1, &callee_program_id);
-        let not_owned_account = AccountSharedData::new(84, 1, &solana_sdk::pubkey::new_rand());
-        let readonly_account = AccountSharedData::new(168, 1, &solana_sdk::pubkey::new_rand());
+        let not_owned_account = AccountSharedData::new(84, 1, &miraland_sdk::pubkey::new_rand());
+        let readonly_account = AccountSharedData::new(168, 1, &miraland_sdk::pubkey::new_rand());
         let loader_account = AccountSharedData::new(0, 1, &native_loader::id());
         let mut program_account = AccountSharedData::new(1, 1, &native_loader::id());
         program_account.set_executable(true);
         let transaction_accounts = vec![
-            (solana_sdk::pubkey::new_rand(), owned_account),
-            (solana_sdk::pubkey::new_rand(), not_owned_account),
-            (solana_sdk::pubkey::new_rand(), readonly_account),
+            (miraland_sdk::pubkey::new_rand(), owned_account),
+            (miraland_sdk::pubkey::new_rand(), not_owned_account),
+            (miraland_sdk::pubkey::new_rand(), readonly_account),
             (callee_program_id, program_account),
-            (solana_sdk::pubkey::new_rand(), loader_account),
+            (miraland_sdk::pubkey::new_rand(), loader_account),
         ];
         let metas = vec![
             AccountMeta::new(transaction_accounts.first().unwrap().0, false),
@@ -1064,7 +1064,7 @@ mod tests {
     #[test]
     fn test_invoke_context_compute_budget() {
         let transaction_accounts =
-            vec![(solana_sdk::pubkey::new_rand(), AccountSharedData::default())];
+            vec![(miraland_sdk::pubkey::new_rand(), AccountSharedData::default())];
 
         with_mock_invoke_context!(invoke_context, transaction_context, transaction_accounts);
         invoke_context.compute_budget = ComputeBudget::new(

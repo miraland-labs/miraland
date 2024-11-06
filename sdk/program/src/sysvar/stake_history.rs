@@ -17,18 +17,18 @@
 //! Calling via the RPC client:
 //!
 //! ```
-//! # use solana_program::example_mocks::solana_sdk;
-//! # use solana_program::example_mocks::miraland_rpc_client;
-//! # use solana_sdk::account::Account;
+//! # use miraland_program::example_mocks::miraland_sdk;
+//! # use miraland_program::example_mocks::miraland_rpc_client;
+//! # use miraland_sdk::account::Account;
 //! # use miraland_rpc_client::rpc_client::RpcClient;
-//! # use solana_sdk::sysvar::stake_history::{self, StakeHistory};
+//! # use miraland_sdk::sysvar::stake_history::{self, StakeHistory};
 //! # use anyhow::Result;
 //! #
 //! fn print_sysvar_stake_history(client: &RpcClient) -> Result<()> {
 //! #   client.set_get_account_response(stake_history::ID, Account {
 //! #       lamports: 114979200,
 //! #       data: vec![0, 0, 0, 0, 0, 0, 0, 0],
-//! #       owner: solana_sdk::system_program::ID,
+//! #       owner: miraland_sdk::system_program::ID,
 //! #       executable: false,
 //! #       rent_epoch: 307,
 //! #   });

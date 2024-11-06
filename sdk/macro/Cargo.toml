@@ -11,7 +11,7 @@ edition = { workspace = true }
 
 [lib]
 proc-macro = true
-name = "solana_sdk_macro"
+name = "miraland_sdk_macro"
 
 [dependencies]
 bs58 = { workspace = true }

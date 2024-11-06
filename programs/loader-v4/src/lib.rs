@@ -1,6 +1,6 @@
 use {
     miraland_measure::measure::Measure,
-    solana_program_runtime::{
+    miraland_program_runtime::{
         compute_budget::ComputeBudget,
         ic_logger_msg,
         invoke_context::InvokeContext,
@@ -19,7 +19,7 @@ use {
         program::{BuiltinProgram, FunctionRegistry},
         vm::{Config, ContextObject, EbpfVm},
     },
-    solana_sdk::{
+    miraland_sdk::{
         entrypoint::SUCCESS,
         instruction::InstructionError,
         loader_v4::{self, LoaderV4State, LoaderV4Status, DEPLOYMENT_COOLDOWN_IN_SLOTS},
@@ -616,8 +616,8 @@ pub fn process_instruction_inner(
 mod tests {
     use {
         super::*,
-        solana_program_runtime::invoke_context::mock_process_instruction,
-        solana_sdk::{
+        miraland_program_runtime::invoke_context::mock_process_instruction,
+        miraland_sdk::{
             account::{
                 create_account_shared_data_for_test, AccountSharedData, ReadableAccount,
                 WritableAccount,

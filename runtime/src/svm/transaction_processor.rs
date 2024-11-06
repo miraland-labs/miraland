@@ -16,7 +16,7 @@ use {
     },
     miraland_measure::measure::Measure,
     percentage::Percentage,
-    solana_program_runtime::{
+    miraland_program_runtime::{
         compute_budget::ComputeBudget,
         loaded_programs::{
             ForkGraph, LoadProgramMetrics, LoadedProgram, LoadedProgramMatchCriteria,
@@ -28,7 +28,7 @@ use {
         sysvar_cache::SysvarCache,
         timings::{ExecuteDetailsTimings, ExecuteTimingType, ExecuteTimings},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount, PROGRAM_OWNERS},
         account_utils::StateMut,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},
@@ -804,7 +804,7 @@ impl<FG: ForkGraph> TransactionBatchProcessor<FG> {
             Some(account) => account,
         };
 
-        debug_assert!(solana_bpf_loader_program::check_loader_id(
+        debug_assert!(miraland_bpf_loader_program::check_loader_id(
             program_account.owner()
         ));
 

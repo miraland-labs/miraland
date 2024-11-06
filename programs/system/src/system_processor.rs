@@ -4,11 +4,11 @@ use {
         withdraw_nonce_account,
     },
     log::*,
-    solana_program_runtime::{
+    miraland_program_runtime::{
         declare_process_instruction, ic_msg, invoke_context::InvokeContext,
         sysvar_cache::get_sysvar_with_account_check,
     },
-    solana_sdk::{
+    miraland_sdk::{
         instruction::InstructionError,
         nonce,
         program_utils::limited_deserialize,
@@ -543,7 +543,7 @@ declare_process_instruction!(Entrypoint, DEFAULT_COMPUTE_UNITS, |invoke_context|
 #[cfg(test)]
 mod tests {
     #[allow(deprecated)]
-    use solana_sdk::{
+    use miraland_sdk::{
         account::{self, Account, AccountSharedData, ReadableAccount},
         fee_calculator::FeeCalculator,
         hash::{hash, Hash},
@@ -561,7 +561,7 @@ mod tests {
         super::*,
         crate::{get_system_account_kind, SystemAccountKind},
         bincode::serialize,
-        solana_program_runtime::{
+        miraland_program_runtime::{
             invoke_context::mock_process_instruction, with_mock_invoke_context,
         },
     };
@@ -1554,7 +1554,7 @@ mod tests {
         let blockhash = hash(&serialize(&0).unwrap());
         #[allow(deprecated)]
         let new_recent_blockhashes_account =
-            solana_sdk::recent_blockhashes_account::create_account_with_data_for_test(
+            miraland_sdk::recent_blockhashes_account::create_account_with_data_for_test(
                 vec![IterItem(0u64, &blockhash, 0); sysvar::recent_blockhashes::MAX_ENTRIES],
             );
         mock_process_instruction(
@@ -1840,7 +1840,7 @@ mod tests {
         let blockhash_id = sysvar::recent_blockhashes::id();
         #[allow(deprecated)]
         let new_recent_blockhashes_account =
-            solana_sdk::recent_blockhashes_account::create_account_with_data_for_test(vec![]);
+            miraland_sdk::recent_blockhashes_account::create_account_with_data_for_test(vec![]);
         process_instruction(
             &serialize(&SystemInstruction::InitializeNonceAccount(nonce_address)).unwrap(),
             vec![
@@ -1903,7 +1903,7 @@ mod tests {
         );
         #[allow(deprecated)]
         let new_recent_blockhashes_account =
-            solana_sdk::recent_blockhashes_account::create_account_with_data_for_test(vec![]);
+            miraland_sdk::recent_blockhashes_account::create_account_with_data_for_test(vec![]);
         mock_process_instruction(
             &system_program::id(),
             Vec::new(),

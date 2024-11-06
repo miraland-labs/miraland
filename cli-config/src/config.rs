@@ -61,7 +61,7 @@ pub struct Config {
     /// The default commitment level.
     ///
     /// By default the value is "confirmed", as defined by
-    /// `solana_sdk::commitment_config::CommitmentLevel::Confirmed`.
+    /// `miraland_sdk::commitment_config::CommitmentLevel::Confirmed`.
     #[serde(default)]
     pub commitment: String,
 }

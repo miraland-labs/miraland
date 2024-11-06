@@ -22,7 +22,7 @@ use {
     rand::{thread_rng, Rng},
     rayon::{prelude::*, ThreadPool},
     serde::{Deserialize, Serialize},
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         packet::Meta,
         timing,
@@ -129,7 +129,7 @@ pub struct Api<'a> {
 /// with regard to the accounts they reference. A single account can be either written by a single
 /// transaction, or read by one or more transactions, but not both.
 ///
-/// This enforcement is done via a call to `solana_runtime::accounts::Accounts::lock_accounts()`
+/// This enforcement is done via a call to `miraland_runtime::accounts::Accounts::lock_accounts()`
 /// with the `txs` argument holding all the `transactions` in the `Entry`.
 #[derive(Serialize, Deserialize, Debug, Default, PartialEq, Eq, Clone)]
 pub struct Entry {
@@ -673,7 +673,7 @@ impl EntrySlice for [Entry] {
     }
 
     fn verify_cpu_x86_simd(&self, start_hash: &Hash, simd_len: usize) -> EntryVerificationState {
-        use solana_sdk::hash::HASH_BYTES;
+        use miraland_sdk::hash::HASH_BYTES;
         let now = Instant::now();
         let genesis = [Entry {
             num_hashes: 0,
@@ -943,7 +943,7 @@ mod tests {
     use {
         super::*,
         miraland_perf::test_tx::{test_invalid_tx, test_tx},
-        solana_sdk::{
+        miraland_sdk::{
             hash::{hash, Hash},
             pubkey::Pubkey,
             signature::{Keypair, Signer},
@@ -1096,7 +1096,7 @@ mod tests {
 
     #[test]
     fn test_transaction_signing() {
-        use solana_sdk::signature::Signature;
+        use miraland_sdk::signature::Signature;
         let zero = Hash::default();
 
         let keypair = Keypair::new();

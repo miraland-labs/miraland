@@ -23,7 +23,7 @@ use {
     },
     miraland_cli_config::{Config, CONFIG_FILE},
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
-    solana_sdk::{
+    miraland_sdk::{
         instruction::{AccountMeta, Instruction},
         message::Message,
         pubkey::{write_pubkey_file, Pubkey},
@@ -46,7 +46,7 @@ use {
 };
 
 mod smallest_length_44_public_key {
-    use solana_sdk::{pubkey, pubkey::Pubkey};
+    use miraland_sdk::{pubkey, pubkey::Pubkey};
 
     pub(super) static PUBKEY: Pubkey = pubkey!("21111111111111111111111111111111111111111111");
 
@@ -902,7 +902,7 @@ mod tests {
             ])
             .unwrap();
 
-            let result_pubkey = solana_sdk::pubkey::read_pubkey_file(&outfile_path).unwrap();
+            let result_pubkey = miraland_sdk::pubkey::read_pubkey_file(&outfile_path).unwrap();
             assert_eq!(result_pubkey, expected_pubkey);
         }
 
@@ -921,7 +921,7 @@ mod tests {
             ])
             .unwrap();
 
-            let result_pubkey = solana_sdk::pubkey::read_pubkey_file(&outfile_path).unwrap();
+            let result_pubkey = miraland_sdk::pubkey::read_pubkey_file(&outfile_path).unwrap();
             assert_eq!(result_pubkey, expected_pubkey);
         }
 
@@ -945,7 +945,7 @@ mod tests {
             ])
             .unwrap();
 
-            let result_pubkey = solana_sdk::pubkey::read_pubkey_file(&outfile_path).unwrap();
+            let result_pubkey = miraland_sdk::pubkey::read_pubkey_file(&outfile_path).unwrap();
             assert_eq!(result_pubkey, expected_pubkey);
         }
 

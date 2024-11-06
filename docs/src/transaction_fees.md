@@ -156,7 +156,7 @@ error, and ultimately transaction failure. :::
 #### Rust
 
 The rust `miraland-sdk` crate includes functions within
-[`ComputeBudgetInstruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/enum.ComputeBudgetInstruction.html)
+[`ComputeBudgetInstruction`](https://docs.rs/miraland-sdk/latest/miraland_sdk/compute_budget/enum.ComputeBudgetInstruction.html)
 to craft instructions for setting the _compute unit limit_ and _compute unit
 price_:
 

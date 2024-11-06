@@ -281,7 +281,7 @@ pub enum SystemInstruction {
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::CreateAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Account creation typically involves three steps: [`allocate`] space,
@@ -305,9 +305,9 @@ pub enum SystemInstruction {
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// # use miraland_program::example_mocks::{miraland_sdk, miraland_rpc_client};
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -364,7 +364,7 @@ pub enum SystemInstruction {
 ///
 /// ```
 /// # use borsh::{BorshDeserialize, BorshSerialize};
-/// use solana_program::{
+/// use miraland_program::{
 ///     account_info::{next_account_info, AccountInfo},
 ///     entrypoint,
 ///     entrypoint::ProgramResult,
@@ -492,7 +492,7 @@ pub fn create_account_with_seed(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::Assign`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// # Required signers
@@ -511,9 +511,9 @@ pub fn create_account_with_seed(
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// # use miraland_program::example_mocks::{miraland_sdk, miraland_rpc_client};
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -581,7 +581,7 @@ pub fn create_account_with_seed(
 ///
 /// ```
 /// # use borsh::{BorshDeserialize, BorshSerialize};
-/// use solana_program::{
+/// use miraland_program::{
 ///     account_info::{next_account_info, AccountInfo},
 ///     entrypoint,
 ///     entrypoint::ProgramResult,
@@ -703,7 +703,7 @@ pub fn assign_with_seed(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::Transfer`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// # Required signers
@@ -722,9 +722,9 @@ pub fn assign_with_seed(
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// # use miraland_program::example_mocks::{miraland_sdk, miraland_rpc_client};
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -792,7 +792,7 @@ pub fn assign_with_seed(
 ///
 /// ```
 /// # use borsh::{BorshDeserialize, BorshSerialize};
-/// use solana_program::{
+/// use miraland_program::{
 ///     account_info::{next_account_info, AccountInfo},
 ///     entrypoint,
 ///     entrypoint::ProgramResult,
@@ -920,7 +920,7 @@ pub fn transfer_with_seed(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::Allocate`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// The transaction will fail if the account already has size greater than 0,
@@ -942,9 +942,9 @@ pub fn transfer_with_seed(
 /// The `payer` and `new_account` are signers.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// # use miraland_program::example_mocks::{miraland_sdk, miraland_rpc_client};
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -1012,7 +1012,7 @@ pub fn transfer_with_seed(
 ///
 /// ```
 /// # use borsh::{BorshDeserialize, BorshSerialize};
-/// use solana_program::{
+/// use miraland_program::{
 ///     account_info::{next_account_info, AccountInfo},
 ///     entrypoint,
 ///     entrypoint::ProgramResult,
@@ -1136,7 +1136,7 @@ pub fn allocate_with_seed(
 /// in a [`Transaction`] or [invoked] to take effect, containing serialized
 /// [`SystemInstruction::Transfer`]s.
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// # Required signers
@@ -1150,9 +1150,9 @@ pub fn allocate_with_seed(
 /// This example performs multiple transfers in a single transaction.
 ///
 /// ```
-/// # use solana_program::example_mocks::{solana_sdk, miraland_rpc_client};
+/// # use miraland_program::example_mocks::{miraland_sdk, miraland_rpc_client};
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -1207,7 +1207,7 @@ pub fn allocate_with_seed(
 ///
 /// ```
 /// # use borsh::{BorshDeserialize, BorshSerialize};
-/// use solana_program::{
+/// use miraland_program::{
 ///     account_info::{next_account_info, next_account_infos, AccountInfo},
 ///     entrypoint,
 ///     entrypoint::ProgramResult,
@@ -1316,7 +1316,7 @@ pub fn create_nonce_account_with_seed(
 /// [`SystemInstruction::CreateAccount`] and
 /// [`SystemInstruction::InitializeNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// A [durable transaction nonce][dtn] is a special account that enables
@@ -1377,10 +1377,10 @@ pub fn create_nonce_account_with_seed(
 /// Create a nonce account from an off-chain client:
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::miraland_rpc_client;
+/// # use miraland_program::example_mocks::miraland_sdk;
+/// # use miraland_program::example_mocks::miraland_rpc_client;
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 /// #   pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -1453,7 +1453,7 @@ pub fn create_nonce_account(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::AdvanceNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Every transaction that relies on a durable transaction nonce must contain a
@@ -1488,18 +1488,18 @@ pub fn create_nonce_account(
 /// Create and sign a transaction with a durable nonce:
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::miraland_rpc_client;
-/// # use solana_program::example_mocks::miraland_rpc_client_nonce_utils;
+/// # use miraland_program::example_mocks::miraland_sdk;
+/// # use miraland_program::example_mocks::miraland_rpc_client;
+/// # use miraland_program::example_mocks::miraland_rpc_client_nonce_utils;
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     message::Message,
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
 ///     transaction::Transaction,
 /// };
-/// # use solana_sdk::account::Account;
+/// # use miraland_sdk::account::Account;
 /// use std::path::Path;
 /// use anyhow::Result;
 /// # use anyhow::anyhow;
@@ -1542,7 +1542,7 @@ pub fn create_nonce_account(
 ///     # client.set_get_account_response(*nonce_account_pubkey, Account {
 ///     #   lamports: 1,
 ///     #   data: vec![0],
-///     #   owner: solana_sdk::system_program::ID,
+///     #   owner: miraland_sdk::system_program::ID,
 ///     #   executable: false,
 ///     #   rent_epoch: 1,
 ///     # });
@@ -1590,7 +1590,7 @@ pub fn advance_nonce_account(nonce_pubkey: &Pubkey, authorized_pubkey: &Pubkey) 
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::WithdrawNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// Withdrawing the entire balance of a nonce account will cause the runtime to
@@ -1613,10 +1613,10 @@ pub fn advance_nonce_account(nonce_pubkey: &Pubkey, authorized_pubkey: &Pubkey) 
 /// # Examples
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::miraland_rpc_client;
+/// # use miraland_program::example_mocks::miraland_sdk;
+/// # use miraland_program::example_mocks::miraland_rpc_client;
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,
@@ -1683,7 +1683,7 @@ pub fn withdraw_nonce_account(
 /// [`Transaction`] or [invoked] to take effect, containing a serialized
 /// [`SystemInstruction::AuthorizeNonceAccount`].
 ///
-/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+/// [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 /// [invoked]: crate::program::invoke
 ///
 /// This constructor creates a [`SystemInstruction::AuthorizeNonceAccount`]
@@ -1696,10 +1696,10 @@ pub fn withdraw_nonce_account(
 /// # Examples
 ///
 /// ```
-/// # use solana_program::example_mocks::solana_sdk;
-/// # use solana_program::example_mocks::miraland_rpc_client;
+/// # use miraland_program::example_mocks::miraland_sdk;
+/// # use miraland_program::example_mocks::miraland_rpc_client;
 /// use miraland_rpc_client::rpc_client::RpcClient;
-/// use solana_sdk::{
+/// use miraland_sdk::{
 ///     pubkey::Pubkey,
 ///     signature::{Keypair, Signer},
 ///     system_instruction,

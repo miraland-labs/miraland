@@ -16,7 +16,7 @@ use {
     itertools::izip,
     miraland_measure::measure_us,
     prio_graph::{AccessKind, PrioGraph},
-    solana_sdk::{
+    miraland_sdk::{
         pubkey::Pubkey, saturating_add_assign, slot_history::Slot,
         transaction::SanitizedTransaction,
     },
@@ -490,7 +490,7 @@ mod tests {
         crate::banking_stage::consumer::TARGET_NUM_TRANSACTIONS_PER_BATCH,
         crossbeam_channel::{unbounded, Receiver},
         itertools::Itertools,
-        solana_sdk::{
+        miraland_sdk::{
             compute_budget::ComputeBudgetInstruction, hash::Hash, message::Message, pubkey::Pubkey,
             signature::Keypair, signer::Signer, system_instruction, transaction::Transaction,
         },

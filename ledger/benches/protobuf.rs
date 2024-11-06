@@ -10,8 +10,8 @@
 //         get_tmp_ledger_path_auto_delete,
 //     },
 //     miraland_transaction_status::{Reward, Rewards},
-//     solana_runtime::bank::RewardType,
-//     solana_sdk::{clock::Slot, pubkey},
+//     miraland_runtime::bank::RewardType,
+//     miraland_sdk::{clock::Slot, pubkey},
 //     std::path::Path,
 //     test::Bencher,
 // };

@@ -1,6 +1,6 @@
 //! Code related to partitioned rewards distribution
 //!
-use solana_sdk::clock::Slot;
+use miraland_sdk::clock::Slot;
 
 #[derive(Debug)]
 /// Configuration options for partitioned epoch rewards.

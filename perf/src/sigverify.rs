@@ -13,7 +13,7 @@ use {
     miraland_metrics::inc_new_counter_debug,
     miraland_rayon_threadlimit::get_thread_count,
     rayon::{prelude::*, ThreadPool},
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         message::{MESSAGE_HEADER_LENGTH, MESSAGE_VERSION_PREFIX},
         pubkey::Pubkey,
@@ -418,7 +418,7 @@ fn check_for_simple_vote_transaction(
     if packet
         .data(instruction_program_id_start..instruction_program_id_end)
         .ok_or(PacketError::InvalidLen)?
-        == solana_sdk::vote::program::id().as_ref()
+        == miraland_sdk::vote::program::id().as_ref()
     {
         packet.meta_mut().flags |= PacketFlags::SIMPLE_VOTE_TX;
     }
@@ -688,7 +688,7 @@ mod tests {
         bincode::{deserialize, serialize},
         curve25519_dalek::{edwards::CompressedEdwardsY, scalar::Scalar},
         rand::{thread_rng, Rng},
-        solana_sdk::{
+        miraland_sdk::{
             instruction::CompiledInstruction,
             message::{Message, MessageHeader},
             signature::{Keypair, Signature, Signer},
@@ -1395,7 +1395,7 @@ mod tests {
                 &[&key],
                 &[key1, key2],
                 Hash::default(),
-                vec![solana_vote_program::id(), Pubkey::new_unique()],
+                vec![miraland_vote_program::id(), Pubkey::new_unique()],
                 vec![
                     CompiledInstruction::new(3, &(), vec![0, 1]),
                     CompiledInstruction::new(4, &(), vec![0, 2]),

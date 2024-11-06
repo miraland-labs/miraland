@@ -7,8 +7,8 @@ use {
     crossbeam_channel::{Receiver, RecvError, SendError, Sender},
     miraland_poh::leader_bank_notifier::LeaderBankNotifier,
     miraland_svm::transaction_error_metrics::TransactionErrorMetrics,
-    solana_runtime::bank::Bank,
-    solana_sdk::timing::AtomicInterval,
+    miraland_runtime::bank::Bank,
+    miraland_sdk::timing::AtomicInterval,
     std::{
         sync::{
             atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering},
@@ -668,12 +668,12 @@ mod tests {
             get_tmp_ledger_path_auto_delete, leader_schedule_cache::LeaderScheduleCache,
         },
         miraland_poh::poh_recorder::{PohRecorder, WorkingBankEntry},
-        solana_runtime::prioritization_fee_cache::PrioritizationFeeCache,
-        solana_sdk::{
+        miraland_runtime::prioritization_fee_cache::PrioritizationFeeCache,
+        miraland_sdk::{
             genesis_config::GenesisConfig, poh_config::PohConfig, pubkey::Pubkey,
             signature::Keypair, system_transaction,
         },
-        solana_vote::vote_sender_types::ReplayVoteReceiver,
+        miraland_vote::vote_sender_types::ReplayVoteReceiver,
         std::{
             sync::{atomic::AtomicBool, RwLock},
             thread::JoinHandle,

@@ -15,7 +15,7 @@ use {
     miraland_streamer::socket::SocketAddrSpace,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         instruction::{AccountMeta, Instruction},
         message::Message,
@@ -642,7 +642,7 @@ pub mod test {
             validator_configs::make_identical_validator_configs,
         },
         miraland_measure::measure::Measure,
-        solana_sdk::poh_config::PohConfig,
+        miraland_sdk::poh_config::PohConfig,
     };
 
     #[test]
@@ -665,7 +665,7 @@ pub mod test {
             &account_metas,
         );
         let signers: Vec<&Keypair> = vec![&keypair];
-        let blockhash = solana_sdk::hash::Hash::default();
+        let blockhash = miraland_sdk::hash::Hash::default();
         let tx = Transaction::new(&signers, message, blockhash);
         let size = bincode::serialized_size(&tx).unwrap();
         info!("size:{}", size);

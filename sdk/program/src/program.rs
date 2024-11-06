@@ -91,7 +91,7 @@ use crate::{
 /// A simple example of transferring lamports via CPI:
 ///
 /// ```
-/// use solana_program::{
+/// use miraland_program::{
 ///     account_info::{next_account_info, AccountInfo},
 ///     entrypoint,
 ///     entrypoint::ProgramResult,
@@ -184,7 +184,7 @@ pub fn invoke_unchecked(instruction: &Instruction, account_infos: &[AccountInfo]
 /// A simple example of creating an account for a PDA:
 ///
 /// ```
-/// use solana_program::{
+/// use miraland_program::{
 ///     account_info::{next_account_info, AccountInfo},
 ///     entrypoint,
 ///     entrypoint::ProgramResult,

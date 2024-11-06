@@ -2,8 +2,8 @@
 
 #![allow(clippy::arithmetic_side_effects)]
 
-extern crate solana_program;
-use solana_program::{
+extern crate miraland_program;
+use miraland_program::{
     account_info::AccountInfo,
     entrypoint::ProgramResult,
     instruction::{AccountMeta, Instruction},
@@ -13,7 +13,7 @@ use solana_program::{
     pubkey::Pubkey,
 };
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],

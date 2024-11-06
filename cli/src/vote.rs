@@ -30,12 +30,12 @@ use {
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::config::RpcGetVoteAccountsConfig,
     miraland_rpc_client_nonce_utils::blockhash_query::BlockhashQuery,
-    solana_sdk::{
+    miraland_sdk::{
         account::Account, commitment_config::CommitmentConfig, feature, message::Message,
         native_token::lamports_to_mln, pubkey::Pubkey, system_instruction::SystemError,
         transaction::Transaction,
     },
-    solana_vote_program::{
+    miraland_vote_program::{
         vote_error::VoteError,
         vote_instruction::{self, withdraw, CreateVoteAccountConfig},
         vote_state::{VoteAuthorize, VoteInit, VoteState, VoteStateVersions},
@@ -784,7 +784,7 @@ pub fn process_create_vote_account(
     let vote_account = config.signers[vote_account];
     let vote_account_pubkey = vote_account.pubkey();
     let vote_account_address = if let Some(seed) = seed {
-        Pubkey::create_with_seed(&vote_account_pubkey, seed, &solana_vote_program::id())?
+        Pubkey::create_with_seed(&vote_account_pubkey, seed, &miraland_vote_program::id())?
     } else {
         vote_account_pubkey
     };
@@ -809,7 +809,7 @@ pub fn process_create_vote_account(
     let nonce_authority = config.signers[nonce_authority];
 
     let is_feature_active = (!sign_only)
-        .then(solana_sdk::feature_set::vote_state_add_vote_latency::id)
+        .then(miraland_sdk::feature_set::vote_state_add_vote_latency::id)
         .and_then(|feature_address| rpc_client.get_account(&feature_address).ok())
         .and_then(|account| feature::from_account(&account))
         .map_or(false, |feature| feature.activated_at.is_some());
@@ -873,7 +873,7 @@ pub fn process_create_vote_account(
             rpc_client.get_account_with_commitment(&vote_account_address, config.commitment)
         {
             if let Some(vote_account) = response.value {
-                let err_msg = if vote_account.owner == solana_vote_program::id() {
+                let err_msg = if vote_account.owner == miraland_vote_program::id() {
                     format!("Vote account {vote_account_address} already exists")
                 } else {
                     format!(
@@ -1196,7 +1196,7 @@ pub(crate) fn get_vote_account(
             CliError::RpcRequestError(format!("{vote_account_pubkey:?} account does not exist"))
         })?;
 
-    if vote_account.owner != solana_vote_program::id() {
+    if vote_account.owner != miraland_vote_program::id() {
         return Err(CliError::RpcRequestError(format!(
             "{vote_account_pubkey:?} is not a vote account"
         ))
@@ -1440,7 +1440,7 @@ mod tests {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
         miraland_rpc_client_nonce_utils::blockhash_query,
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{read_keypair_file, write_keypair, Keypair, Signer},
             signer::presigner::Presigner,
@@ -1878,7 +1878,7 @@ mod tests {
         );
 
         // test init with an authed voter
-        let authed = solana_sdk::pubkey::new_rand();
+        let authed = miraland_sdk::pubkey::new_rand();
         let (keypair_file, mut tmp_file) = make_tmp_file();
         let keypair = Keypair::new();
         write_keypair(&keypair, tmp_file.as_file_mut()).unwrap();

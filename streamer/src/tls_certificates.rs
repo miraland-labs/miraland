@@ -1,5 +1,5 @@
 use {
-    solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer},
+    miraland_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer},
     x509_parser::{prelude::*, public_key::PublicKey},
 };
 
@@ -106,7 +106,7 @@ pub fn get_pubkey_from_tls_certificate(der_cert: &rustls::Certificate) -> Option
 
 #[cfg(test)]
 mod tests {
-    use {super::*, solana_sdk::signer::Signer};
+    use {super::*, miraland_sdk::signer::Signer};
 
     #[test]
     fn test_generate_tls_certificate() {

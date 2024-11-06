@@ -5,7 +5,7 @@ use {
     miraland_measure::measure_us,
     miraland_perf::thread::renice_this_thread,
     snapshot_gossip_manager::SnapshotGossipManager,
-    solana_runtime::{
+    miraland_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_config::SnapshotConfig,
         snapshot_hash::StartingSnapshotHashes,
@@ -194,14 +194,14 @@ mod tests {
     use {
         super::*,
         rand::seq::SliceRandom,
-        solana_runtime::{
+        miraland_runtime::{
             snapshot_archive_info::SnapshotArchiveInfo,
             snapshot_bank_utils,
             snapshot_hash::SnapshotHash,
             snapshot_package::{SnapshotKind, SnapshotPackage},
             snapshot_utils::{self, ArchiveFormat, SnapshotVersion},
         },
-        solana_sdk::{clock::Slot, genesis_config::GenesisConfig, hash::Hash},
+        miraland_sdk::{clock::Slot, genesis_config::GenesisConfig, hash::Hash},
         std::{
             fs::{self, remove_dir_all},
             path::{Path, PathBuf},

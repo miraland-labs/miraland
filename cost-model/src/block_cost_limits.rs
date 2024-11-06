@@ -2,7 +2,7 @@
 //!
 use {
     lazy_static::lazy_static,
-    solana_sdk::{
+    miraland_sdk::{
         address_lookup_table, bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable,
         compute_budget, ed25519_program, loader_v4, pubkey::Pubkey, secp256k1_program,
     },
@@ -32,15 +32,15 @@ pub const INSTRUCTION_DATA_BYTES_COST: u64 = 140 /*bytes per us*/ / COMPUTE_UNIT
 lazy_static! {
     /// Number of compute units for each built-in programs
     pub static ref BUILT_IN_INSTRUCTION_COSTS: HashMap<Pubkey, u64> = [
-        (solana_stake_program::id(), solana_stake_program::stake_instruction::DEFAULT_COMPUTE_UNITS),
-        (solana_config_program::id(), solana_config_program::config_processor::DEFAULT_COMPUTE_UNITS),
-        (solana_vote_program::id(), solana_vote_program::vote_processor::DEFAULT_COMPUTE_UNITS),
-        (solana_system_program::id(), solana_system_program::system_processor::DEFAULT_COMPUTE_UNITS),
-        (compute_budget::id(), solana_compute_budget_program::DEFAULT_COMPUTE_UNITS),
-        (address_lookup_table::program::id(), solana_address_lookup_table_program::processor::DEFAULT_COMPUTE_UNITS),
-        (bpf_loader_upgradeable::id(), solana_bpf_loader_program::UPGRADEABLE_LOADER_COMPUTE_UNITS),
-        (bpf_loader_deprecated::id(), solana_bpf_loader_program::DEPRECATED_LOADER_COMPUTE_UNITS),
-        (bpf_loader::id(), solana_bpf_loader_program::DEFAULT_LOADER_COMPUTE_UNITS),
+        (miraland_stake_program::id(), miraland_stake_program::stake_instruction::DEFAULT_COMPUTE_UNITS),
+        (miraland_config_program::id(), miraland_config_program::config_processor::DEFAULT_COMPUTE_UNITS),
+        (miraland_vote_program::id(), miraland_vote_program::vote_processor::DEFAULT_COMPUTE_UNITS),
+        (miraland_system_program::id(), miraland_system_program::system_processor::DEFAULT_COMPUTE_UNITS),
+        (compute_budget::id(), miraland_compute_budget_program::DEFAULT_COMPUTE_UNITS),
+        (address_lookup_table::program::id(), miraland_address_lookup_table_program::processor::DEFAULT_COMPUTE_UNITS),
+        (bpf_loader_upgradeable::id(), miraland_bpf_loader_program::UPGRADEABLE_LOADER_COMPUTE_UNITS),
+        (bpf_loader_deprecated::id(), miraland_bpf_loader_program::DEPRECATED_LOADER_COMPUTE_UNITS),
+        (bpf_loader::id(), miraland_bpf_loader_program::DEFAULT_LOADER_COMPUTE_UNITS),
         (loader_v4::id(), miraland_loader_v4_program::DEFAULT_COMPUTE_UNITS),
         // Note: These are precompile, run directly in bank during sanitizing;
         (secp256k1_program::id(), COMPUTE_UNIT_TO_US_RATIO * 24),

@@ -20,7 +20,7 @@ use {
     miraland_measure::measure_us,
     rand::{thread_rng, Rng},
     rayon::prelude::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator},
-    solana_sdk::{account::ReadableAccount, clock::Slot, saturating_add_assign},
+    miraland_sdk::{account::ReadableAccount, clock::Slot, saturating_add_assign},
     std::{
         collections::HashMap,
         num::NonZeroU64,
@@ -991,7 +991,7 @@ pub mod tests {
             append_vec::{aligned_stored_size, AppendVec, AppendVecStoredAccountMeta},
             storable_accounts::StorableAccountsBySlot,
         },
-        solana_sdk::{
+        miraland_sdk::{
             account::{AccountSharedData, ReadableAccount, WritableAccount},
             hash::Hash,
             pubkey::Pubkey,
@@ -1169,7 +1169,7 @@ pub mod tests {
                     .map(|storage| {
                         (0..(total_accounts_per_storage - 1))
                             .map(|_| {
-                                let pk = solana_sdk::pubkey::new_rand();
+                                let pk = miraland_sdk::pubkey::new_rand();
                                 let mut account = account_template.clone();
                                 account.set_lamports(lamports);
                                 lamports += 1;
@@ -1277,7 +1277,7 @@ pub mod tests {
                     .map(|storage| {
                         (0..(total_accounts_per_storage - 1))
                             .map(|_| {
-                                let pk = solana_sdk::pubkey::new_rand();
+                                let pk = miraland_sdk::pubkey::new_rand();
                                 let mut account = account_template.clone();
                                 account.set_data((0..data_size).map(|x| (x % 256) as u8).collect());
                                 data_size += 1;
@@ -1515,7 +1515,7 @@ pub mod tests {
 
                             if add_dead_account {
                                 storages.iter().for_each(|storage| {
-                                    let pk = solana_sdk::pubkey::new_rand();
+                                    let pk = miraland_sdk::pubkey::new_rand();
                                     let alive = false;
                                     let write_version = 0;
                                     append_single_account_with_default_hash(
@@ -1651,7 +1651,7 @@ pub mod tests {
                 .iter()
                 .map(|store| db.get_unique_accounts_from_storage(store))
                 .collect::<Vec<_>>();
-            let pk_with_1_ref = solana_sdk::pubkey::new_rand();
+            let pk_with_1_ref = miraland_sdk::pubkey::new_rand();
             let slot1 = slots.start;
             let account_with_2_refs = original_results
                 .first()
@@ -1831,7 +1831,7 @@ pub mod tests {
                 .map(|store| db.get_unique_accounts_from_storage(store))
                 .collect::<Vec<_>>();
             let storage = storages.first().unwrap().clone();
-            let pk_with_1_ref = solana_sdk::pubkey::new_rand();
+            let pk_with_1_ref = miraland_sdk::pubkey::new_rand();
             let slot1 = slots.start;
             let account_with_2_refs = original_results
                 .first()
@@ -3263,7 +3263,7 @@ pub mod tests {
         let empty_account = AccountSharedData::default();
         for count in 0..3 {
             let unrefed_pubkeys = (0..count)
-                .map(|_| solana_sdk::pubkey::new_rand())
+                .map(|_| miraland_sdk::pubkey::new_rand())
                 .collect::<Vec<_>>();
             // how many of `many_ref_accounts` should be found in the index with ref_count=1
             let mut expected_ref_counts = HashMap::<Pubkey, u64>::default();

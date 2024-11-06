@@ -16,8 +16,8 @@ use {
         ser::{Impossible, SerializeSeq, SerializeStruct, Serializer},
         Deserialize, Serialize,
     },
-    solana_runtime::bank::{Bank, TotalAccountsStats},
-    solana_sdk::{
+    miraland_runtime::bank::{Bank, TotalAccountsStats},
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::{Slot, UnixTimestamp},
         hash::Hash,
@@ -645,7 +645,7 @@ impl AccountsScanner {
     /// Returns true if this account should be included in the output
     fn should_process_account(&self, account: &AccountSharedData, pubkey: &Pubkey) -> bool {
         miraland_accounts_db::accounts::Accounts::is_loadable(account.lamports())
-            && (self.config.include_sysvars || !solana_sdk::sysvar::is_sysvar_id(pubkey))
+            && (self.config.include_sysvars || !miraland_sdk::sysvar::is_sysvar_id(pubkey))
     }
 
     fn maybe_output_account<S>(

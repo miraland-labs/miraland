@@ -38,8 +38,8 @@ use miraland_accounts_db::accounts_db::{
     ACCOUNTS_DB_CONFIG_FOR_BENCHMARKS, ACCOUNTS_DB_CONFIG_FOR_TESTING,
 };
 #[allow(deprecated)]
-use solana_sdk::recent_blockhashes_account;
-pub use solana_sdk::reward_type::RewardType;
+use miraland_sdk::recent_blockhashes_account;
+pub use miraland_sdk::reward_type::RewardType;
 use {
     crate::{
         bank::metrics::*,
@@ -106,14 +106,14 @@ use {
         ThreadPool, ThreadPoolBuilder,
     },
     serde::Serialize,
-    solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
-    solana_program_runtime::{
+    miraland_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
+    miraland_program_runtime::{
         compute_budget_processor::process_compute_budget_instructions,
         invoke_context::BuiltinFunctionWithContext,
         loaded_programs::{LoadedProgram, LoadedProgramType, LoadedPrograms},
         timings::{ExecuteTimingType, ExecuteTimings},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{
             create_account_shared_data_with_fields as create_account, create_executable_meta,
             from_account, Account, AccountSharedData, InheritableAccountFields, ReadableAccount,
@@ -168,12 +168,12 @@ use {
         },
         transaction_context::{TransactionAccount, TransactionReturnData},
     },
-    solana_stake_program::stake_state::{
+    miraland_stake_program::stake_state::{
         self, InflationPointCalculationEvent, PointValue, StakeStateV2,
     },
-    solana_system_program::{get_system_account_kind, SystemAccountKind},
-    solana_vote::vote_account::{VoteAccount, VoteAccounts, VoteAccountsHashMap},
-    solana_vote_program::vote_state::VoteState,
+    miraland_system_program::{get_system_account_kind, SystemAccountKind},
+    miraland_vote::vote_account::{VoteAccount, VoteAccounts, VoteAccountsHashMap},
+    miraland_vote_program::vote_state::VoteState,
     std::{
         borrow::Cow,
         collections::{HashMap, HashSet},
@@ -1354,7 +1354,7 @@ impl Bank {
             let (_epoch, slot_index) = new.get_epoch_and_slot_index(new.slot());
             let slots_in_epoch = new.get_slots_in_epoch(new.epoch());
             let slots_in_recompilation_phase =
-                (solana_program_runtime::loaded_programs::MAX_LOADED_ENTRY_COUNT as u64)
+                (miraland_program_runtime::loaded_programs::MAX_LOADED_ENTRY_COUNT as u64)
                     .min(slots_in_epoch)
                     .checked_div(2)
                     .unwrap();
@@ -2594,7 +2594,7 @@ impl Bank {
         {
             let num_stake_delegations = stakes.stake_delegations().len();
             let min_stake_delegation =
-                solana_stake_program::get_minimum_delegation(&self.feature_set)
+                miraland_stake_program::get_minimum_delegation(&self.feature_set)
                     .max(LAMPORTS_PER_MLN);
 
             let (stake_delegations, filter_timer) = measure!(stakes
@@ -2648,7 +2648,7 @@ impl Bank {
         });
         // Obtain vote-accounts for unique voter pubkeys.
         let cached_vote_accounts = stakes.vote_accounts();
-        let solana_vote_program: Pubkey = solana_vote_program::id();
+        let miraland_vote_program: Pubkey = miraland_vote_program::id();
         let vote_accounts_cache_miss_count = AtomicUsize::default();
         let get_vote_account = |vote_pubkey: &Pubkey| -> Option<VoteAccount> {
             if let Some(vote_account) = cached_vote_accounts.get(vote_pubkey) {
@@ -2659,7 +2659,7 @@ impl Bank {
             // below is only for sanity check, and can be removed once
             // vote_accounts_cache_miss_count is shown to be always zero.
             let account = self.get_account_with_fixed_root(vote_pubkey)?;
-            if account.owner() == &solana_vote_program
+            if account.owner() == &miraland_vote_program
                 && VoteState::deserialize(account.data()).is_ok()
             {
                 vote_accounts_cache_miss_count.fetch_add(1, Relaxed);
@@ -2672,7 +2672,7 @@ impl Bank {
                 invalid_vote_keys.insert(vote_pubkey, InvalidCacheEntryReason::Missing);
                 return None;
             };
-            if vote_account.owner() != &solana_vote_program {
+            if vote_account.owner() != &miraland_vote_program {
                 invalid_vote_keys.insert(vote_pubkey, InvalidCacheEntryReason::WrongOwner);
                 return None;
             }
@@ -2704,7 +2704,7 @@ impl Bank {
             };
             if let Some(reward_calc_tracer) = reward_calc_tracer.as_ref() {
                 let delegation =
-                    InflationPointCalculationEvent::Delegation(delegation, solana_vote_program);
+                    InflationPointCalculationEvent::Delegation(delegation, miraland_vote_program);
                 let event = RewardCalculationEvent::Staking(stake_pubkey, &delegation);
                 reward_calc_tracer(&event);
             }
@@ -2957,7 +2957,7 @@ impl Bank {
             cached_vote_accounts,
         } = reward_calculate_params;
 
-        let solana_vote_program: Pubkey = solana_vote_program::id();
+        let miraland_vote_program: Pubkey = miraland_vote_program::id();
 
         let get_vote_account = |vote_pubkey: &Pubkey| -> Option<VoteAccount> {
             if let Some(vote_account) = cached_vote_accounts.get(vote_pubkey) {
@@ -2982,7 +2982,7 @@ impl Bank {
                     let Some(vote_account) = get_vote_account(&vote_pubkey) else {
                         return 0;
                     };
-                    if vote_account.owner() != &solana_vote_program {
+                    if vote_account.owner() != &miraland_vote_program {
                         return 0;
                     }
                     let Ok(vote_state) = vote_account.vote_state() else {
@@ -3062,7 +3062,7 @@ impl Bank {
             cached_vote_accounts,
         } = reward_calculate_params;
 
-        let solana_vote_program: Pubkey = solana_vote_program::id();
+        let miraland_vote_program: Pubkey = miraland_vote_program::id();
 
         let get_vote_account = |vote_pubkey: &Pubkey| -> Option<VoteAccount> {
             if let Some(vote_account) = cached_vote_accounts.get(vote_pubkey) {
@@ -3099,7 +3099,7 @@ impl Bank {
                         <(AccountSharedData, StakeStateV2)>::from(stake_account);
                     let vote_pubkey = delegation.voter_pubkey;
                     let vote_account = get_vote_account(&vote_pubkey)?;
-                    if vote_account.owner() != &solana_vote_program {
+                    if vote_account.owner() != &miraland_vote_program {
                         return None;
                     }
                     let vote_state = vote_account.vote_state().cloned().ok()?;
@@ -5585,7 +5585,7 @@ impl Bank {
     fn use_multi_epoch_collection_cycle(&self, epoch: Epoch) -> bool {
         // Force normal behavior, disabling multi epoch collection cycle for manual local testing
         #[cfg(not(test))]
-        if self.slot_count_per_normal_epoch() == solana_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
+        if self.slot_count_per_normal_epoch() == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
         {
             return false;
         }
@@ -5597,7 +5597,7 @@ impl Bank {
     pub(crate) fn use_fixed_collection_cycle(&self) -> bool {
         // Force normal behavior, disabling fixed collection cycle for manual local testing
         #[cfg(not(test))]
-        if self.slot_count_per_normal_epoch() == solana_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
+        if self.slot_count_per_normal_epoch() == miraland_sdk::epoch_schedule::MINIMUM_SLOTS_PER_EPOCH
         {
             return false;
         }
@@ -7537,7 +7537,7 @@ impl TransactionProcessingCallback for Bank {
     ) -> Result<()> {
         if self.get_reward_interval() == RewardInterval::InsideInterval
             && tx.message().is_writable(account_index)
-            && solana_stake_program::check_id(account.owner())
+            && miraland_stake_program::check_id(account.owner())
         {
             error_counters.program_execution_temporarily_restricted += 1;
             Err(TransactionError::ProgramExecutionTemporarilyRestricted {
@@ -7906,13 +7906,13 @@ pub mod test_utils {
     use {
         super::Bank,
         crate::installed_scheduler_pool::BankWithScheduler,
-        solana_sdk::{
+        miraland_sdk::{
             account::{ReadableAccount, WritableAccount},
             hash::hashv,
             lamports::LamportsError,
             pubkey::Pubkey,
         },
-        solana_vote_program::vote_state::{self, BlockTimestamp, VoteStateVersions},
+        miraland_vote_program::vote_state::{self, BlockTimestamp, VoteStateVersions},
         std::sync::Arc,
     };
     pub fn goto_end_of_slot(bank: Arc<Bank>) {

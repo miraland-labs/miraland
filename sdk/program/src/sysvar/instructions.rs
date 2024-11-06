@@ -25,7 +25,7 @@
 //! For a complete example of how the instructions sysvar is used see the
 //! documentation for [`secp256k1_instruction`] in the `miraland-sdk` crate.
 //!
-//! [`secp256k1_instruction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/secp256k1_instruction/index.html
+//! [`secp256k1_instruction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/secp256k1_instruction/index.html
 
 #![allow(clippy::arithmetic_side_effects)]
 

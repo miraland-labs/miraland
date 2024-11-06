@@ -20,7 +20,7 @@ use {
         client_error::{Error as ClientError, Result as ClientResult},
         response::{RpcContactInfo, SlotUpdate},
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         commitment_config::CommitmentConfig,
         epoch_info::EpochInfo,
@@ -53,7 +53,7 @@ use {
     indicatif::ProgressBar,
     miraland_rpc_client::spinner::{self, SendTransactionProgress},
     miraland_rpc_client_api::request::MAX_GET_SIGNATURE_STATUSES_QUERY_ITEMS,
-    solana_sdk::{message::Message, signers::Signers, transaction::TransactionError},
+    miraland_sdk::{message::Message, signers::Signers, transaction::TransactionError},
 };
 
 #[derive(Error, Debug)]

@@ -1,6 +1,6 @@
 use {
     super::EpochAccountsHash,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::sync::{Condvar, Mutex},
 };
 
@@ -103,7 +103,7 @@ enum State {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, solana_sdk::hash::Hash, std::time::Duration};
+    use {super::*, miraland_sdk::hash::Hash, std::time::Duration};
 
     #[test]
     fn test_new_valid() {

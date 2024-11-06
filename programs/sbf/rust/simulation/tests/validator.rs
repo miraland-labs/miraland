@@ -1,18 +1,18 @@
 #![cfg(feature = "test-bpf")]
 
 use {
-    solana_program::{
+    miraland_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         sysvar,
     },
-    solana_sdk::{signature::Signer, transaction::Transaction},
+    miraland_sdk::{signature::Signer, transaction::Transaction},
     miraland_validator::test_validator::*,
 };
 
 #[test]
 fn no_panic_rpc_client() {
-    miraland_logger::setup_with_default("solana_program_runtime=debug");
+    miraland_logger::setup_with_default("miraland_program_runtime=debug");
     let program_id = Pubkey::new_unique();
 
     let (test_validator, payer) = TestValidatorGenesis::default()

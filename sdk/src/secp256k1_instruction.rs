@@ -27,8 +27,8 @@
 //! syscall.
 //!
 //! [secp256k1]: https://en.bitcoin.it/wiki/Secp256k1
-//! [`secp256k1_program`]: solana_program::secp256k1_program
-//! [`secp256k1_recover`]: solana_program::secp256k1_recover
+//! [`secp256k1_program`]: miraland_program::secp256k1_program
+//! [`secp256k1_recover`]: miraland_program::secp256k1_recover
 //! [`ecrecover`]: https://docs.soliditylang.org/en/v0.8.14/units-and-global-variables.html?highlight=ecrecover#mathematical-and-cryptographic-functions
 //!
 //! Use cases for the secp256k1 instruction include:
@@ -93,11 +93,11 @@
 //! signature, message, and Ethereum address data. This is the technique used by
 //! `new_secp256k1_instruction` for simple signature verification.
 //!
-//! The `solana_sdk` crate provides few APIs for building the instructions and
+//! The `miraland_sdk` crate provides few APIs for building the instructions and
 //! transactions necessary for properly using the secp256k1 native program.
 //! Many steps must be done manually.
 //!
-//! The `solana_program` crate provides no APIs to assist in interpreting
+//! The `miraland_program` crate provides no APIs to assist in interpreting
 //! the the secp256k1 instruction data. It must be done manually.
 //!
 //! The secp256k1 program is implemented with the [`libsecp256k1`] crate,
@@ -207,7 +207,7 @@
 //!
 //! ```no_run
 //! mod secp256k1_defs {
-//!     use solana_program::program_error::ProgramError;
+//!     use miraland_program::program_error::ProgramError;
 //!     use std::iter::Iterator;
 //!
 //!     pub const HASHED_PUBKEY_SERIALIZED_SIZE: usize = 20;
@@ -273,7 +273,7 @@
 //!
 //! ```no_run
 //! # mod secp256k1_defs {
-//! #     use solana_program::program_error::ProgramError;
+//! #     use miraland_program::program_error::ProgramError;
 //! #     use std::iter::Iterator;
 //! #
 //! #     pub const HASHED_PUBKEY_SERIALIZED_SIZE: usize = 20;
@@ -321,7 +321,7 @@
 //! #             }))
 //! #     }
 //! # }
-//! use solana_program::{
+//! use miraland_program::{
 //!     account_info::{next_account_info, AccountInfo},
 //!     entrypoint::ProgramResult,
 //!     msg,
@@ -417,10 +417,10 @@
 //! The client program:
 //!
 //! ```no_run
-//! # use solana_sdk::example_mocks::miraland_rpc_client;
+//! # use miraland_sdk::example_mocks::miraland_rpc_client;
 //! use anyhow::Result;
 //! use miraland_rpc_client::rpc_client::RpcClient;
-//! use solana_sdk::{
+//! use miraland_sdk::{
 //!     instruction::{AccountMeta, Instruction},
 //!     secp256k1_instruction,
 //!     signature::{Keypair, Signer},
@@ -486,7 +486,7 @@
 //!
 //! ```no_run
 //! # mod secp256k1_defs {
-//! #     use solana_program::program_error::ProgramError;
+//! #     use miraland_program::program_error::ProgramError;
 //! #     use std::iter::Iterator;
 //! #
 //! #     pub const HASHED_PUBKEY_SERIALIZED_SIZE: usize = 20;
@@ -534,7 +534,7 @@
 //! #             }))
 //! #     }
 //! # }
-//! use solana_program::{
+//! use miraland_program::{
 //!     account_info::{next_account_info, AccountInfo},
 //!     entrypoint::ProgramResult,
 //!     msg,
@@ -633,10 +633,10 @@
 //! The client program:
 //!
 //! ```no_run
-//! # use solana_sdk::example_mocks::miraland_rpc_client;
+//! # use miraland_sdk::example_mocks::miraland_rpc_client;
 //! use anyhow::Result;
 //! use miraland_rpc_client::rpc_client::RpcClient;
-//! use solana_sdk::{
+//! use miraland_sdk::{
 //!     instruction::{AccountMeta, Instruction},
 //!     keccak,
 //!     secp256k1_instruction::{
@@ -758,7 +758,7 @@
 //!
 //!     let secp256k1_instr_data = make_secp256k1_instruction_data(&signatures, 0)?;
 //!     let secp256k1_instr = Instruction::new_with_bytes(
-//!         solana_sdk::secp256k1_program::ID,
+//!         miraland_sdk::secp256k1_program::ID,
 //!         &secp256k1_instr_data,
 //!         vec![],
 //!     );
@@ -898,7 +898,7 @@ pub fn new_secp256k1_instruction(
     bincode::serialize_into(writer, &offsets).unwrap();
 
     Instruction {
-        program_id: solana_sdk::secp256k1_program::id(),
+        program_id: miraland_sdk::secp256k1_program::id(),
         accounts: vec![],
         data: instruction_data,
     }

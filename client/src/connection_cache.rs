@@ -8,13 +8,13 @@ use {
         },
     },
     miraland_quic_client::{QuicConfig, QuicConnectionManager, QuicPool},
-    miraland_streamer::streamer::StakedNodes,
-    miraland_udp_client::{UdpConfig, UdpConnectionManager, UdpPool},
-    quinn::Endpoint,
-    solana_sdk::{
+    miraland_sdk::{
         pubkey::Pubkey, quic::NotifyKeyUpdate, signature::Keypair,
         transport::Result as TransportResult,
     },
+    miraland_streamer::streamer::StakedNodes,
+    miraland_udp_client::{UdpConfig, UdpConnectionManager, UdpPool},
+    quinn::Endpoint,
     std::{
         error::Error,
         net::{IpAddr, Ipv4Addr, SocketAddr},
@@ -225,11 +225,11 @@ mod tests {
         super::*,
         crate::connection_cache::ConnectionCache,
         crossbeam_channel::unbounded,
+        miraland_sdk::{net::DEFAULT_TPU_COALESCE, signature::Keypair},
         miraland_streamer::{
             nonblocking::quic::DEFAULT_WAIT_FOR_CHUNK_TIMEOUT, quic::SpawnServerResult,
             streamer::StakedNodes,
         },
-        solana_sdk::{net::DEFAULT_TPU_COALESCE, signature::Keypair},
         std::{
             net::{IpAddr, Ipv4Addr, SocketAddr, UdpSocket},
             sync::{

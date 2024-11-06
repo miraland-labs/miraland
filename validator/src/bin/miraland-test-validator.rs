@@ -21,7 +21,7 @@ use {
         admin_rpc_service, cli, dashboard::Dashboard, ledger_lockfile, lock_ledger,
         println_name_value, redirect_stderr_to_file,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData,
         clock::Slot,
         epoch_schedule::EpochSchedule,
@@ -101,7 +101,7 @@ fn main() {
             exit(1);
         })
     }
-    solana_runtime::snapshot_utils::remove_tmp_snapshot_archives(&ledger_path);
+    miraland_runtime::snapshot_utils::remove_tmp_snapshot_archives(&ledger_path);
 
     let validator_log_symlink = ledger_path.join("validator.log");
 
@@ -212,7 +212,7 @@ fn main() {
 
             upgradeable_programs_to_load.push(UpgradeableProgramInfo {
                 program_id: address,
-                loader: solana_sdk::bpf_loader_upgradeable::id(),
+                loader: miraland_sdk::bpf_loader_upgradeable::id(),
                 upgrade_authority: Pubkey::default(),
                 program_path,
             });
@@ -241,7 +241,7 @@ fn main() {
 
             upgradeable_programs_to_load.push(UpgradeableProgramInfo {
                 program_id: address,
-                loader: solana_sdk::bpf_loader_upgradeable::id(),
+                loader: miraland_sdk::bpf_loader_upgradeable::id(),
                 upgrade_authority: upgrade_authority_address,
                 program_path,
             });

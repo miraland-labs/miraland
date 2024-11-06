@@ -20,7 +20,7 @@ use {
     miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
     num_traits::FromPrimitive,
     serde_json::{self, Value},
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Epoch, Slot},
         commitment_config::CommitmentConfig,
         decode_error::DecodeError,
@@ -32,7 +32,7 @@ use {
         stake::{instruction::LockupArgs, state::Lockup},
         transaction::{TransactionError, VersionedTransaction},
     },
-    solana_vote_program::vote_state::VoteAuthorize,
+    miraland_vote_program::vote_state::VoteAuthorize,
     std::{
         collections::HashMap, error, io::stdout, rc::Rc, str::FromStr, sync::Arc, time::Duration,
     },
@@ -1743,7 +1743,7 @@ mod tests {
         miraland_rpc_client_nonce_utils::blockhash_query,
         miraland_transaction_status::TransactionConfirmationStatus,
         serde_json::json,
-        solana_sdk::{
+        miraland_sdk::{
             pubkey::Pubkey,
             signature::{
                 keypair_from_seed, read_keypair_file, write_keypair_file, Keypair, Presigner,
@@ -1788,7 +1788,7 @@ mod tests {
         assert_eq!(signer_info.signers.len(), 1);
         assert_eq!(signer_info.index_of(None), Some(0));
         assert_eq!(
-            signer_info.index_of(Some(solana_sdk::pubkey::new_rand())),
+            signer_info.index_of(Some(miraland_sdk::pubkey::new_rand())),
             None
         );
 
@@ -1846,7 +1846,7 @@ mod tests {
     fn test_cli_parse_command() {
         let test_commands = get_clap_app("test", "desc", "version");
 
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let pubkey_string = format!("{pubkey}");
 
         let default_keypair = Keypair::new();
@@ -1937,11 +1937,11 @@ mod tests {
         assert!(parse_command(&test_bad_signature, &default_signer, &mut None).is_err());
 
         // Test CreateAddressWithSeed
-        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let from_pubkey = miraland_sdk::pubkey::new_rand();
         let from_str = from_pubkey.to_string();
         for (name, program_id) in &[
             ("STAKE", stake::program::id()),
-            ("VOTE", solana_vote_program::id()),
+            ("VOTE", miraland_vote_program::id()),
             ("NONCE", system_program::id()),
         ] {
             let test_create_address_with_seed = test_commands.clone().get_matches_from(vec![
@@ -2129,7 +2129,7 @@ mod tests {
             ..CliConfig::default()
         };
         let current_authority = keypair_from_seed(&[5; 32]).unwrap();
-        let new_authorized_pubkey = solana_sdk::pubkey::new_rand();
+        let new_authorized_pubkey = miraland_sdk::pubkey::new_rand();
         vote_config.signers = vec![&current_authority];
         vote_config.command = CliCommand::VoteAuthorize {
             vote_account_pubkey: bob_pubkey,
@@ -2169,7 +2169,7 @@ mod tests {
 
         let bob_keypair = Keypair::new();
         let bob_pubkey = bob_keypair.pubkey();
-        let custodian = solana_sdk::pubkey::new_rand();
+        let custodian = miraland_sdk::pubkey::new_rand();
         config.command = CliCommand::CreateStakeAccount {
             stake_account: 1,
             seed: None,
@@ -2196,8 +2196,8 @@ mod tests {
         let result = process_command(&config);
         assert!(result.is_ok());
 
-        let stake_account_pubkey = solana_sdk::pubkey::new_rand();
-        let to_pubkey = solana_sdk::pubkey::new_rand();
+        let stake_account_pubkey = miraland_sdk::pubkey::new_rand();
+        let to_pubkey = miraland_sdk::pubkey::new_rand();
         config.command = CliCommand::WithdrawStake {
             stake_account_pubkey,
             destination_account_pubkey: to_pubkey,
@@ -2218,7 +2218,7 @@ mod tests {
         let result = process_command(&config);
         assert!(result.is_ok());
 
-        let stake_account_pubkey = solana_sdk::pubkey::new_rand();
+        let stake_account_pubkey = miraland_sdk::pubkey::new_rand();
         config.command = CliCommand::DeactivateStake {
             stake_account_pubkey,
             stake_authority: 0,
@@ -2236,7 +2236,7 @@ mod tests {
         let result = process_command(&config);
         assert!(result.is_ok());
 
-        let stake_account_pubkey = solana_sdk::pubkey::new_rand();
+        let stake_account_pubkey = miraland_sdk::pubkey::new_rand();
         let split_stake_account = Keypair::new();
         config.command = CliCommand::SplitStake {
             stake_account_pubkey,
@@ -2258,8 +2258,8 @@ mod tests {
         let result = process_command(&config);
         assert!(result.is_ok());
 
-        let stake_account_pubkey = solana_sdk::pubkey::new_rand();
-        let source_stake_account_pubkey = solana_sdk::pubkey::new_rand();
+        let stake_account_pubkey = miraland_sdk::pubkey::new_rand();
+        let source_stake_account_pubkey = miraland_sdk::pubkey::new_rand();
         let merge_stake_account = Keypair::new();
         config.command = CliCommand::MergeStake {
             stake_account_pubkey,
@@ -2285,7 +2285,7 @@ mod tests {
         assert_eq!(process_command(&config).unwrap(), "1234");
 
         // CreateAddressWithSeed
-        let from_pubkey = solana_sdk::pubkey::new_rand();
+        let from_pubkey = miraland_sdk::pubkey::new_rand();
         config.signers = vec![];
         config.command = CliCommand::CreateAddressWithSeed {
             from_pubkey: Some(from_pubkey),
@@ -2298,7 +2298,7 @@ mod tests {
         assert_eq!(address.unwrap(), expected_address.to_string());
 
         // Need airdrop cases
-        let to = solana_sdk::pubkey::new_rand();
+        let to = miraland_sdk::pubkey::new_rand();
         config.signers = vec![&keypair];
         config.command = CliCommand::Airdrop {
             pubkey: Some(to),

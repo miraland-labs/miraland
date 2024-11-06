@@ -20,7 +20,7 @@
 //!
 //! [oracle]: https://docs.solana.com/implemented-proposals/validator-timestamp-oracle
 
-use solana_sdk_macro::CloneZeroed;
+use miraland_sdk_macro::CloneZeroed;
 
 /// The default tick rate that the cluster attempts to achieve (160 per second).
 ///

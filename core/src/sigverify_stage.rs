@@ -19,7 +19,7 @@ use {
         },
     },
     miraland_streamer::streamer::{self, StreamerError},
-    solana_sdk::timing,
+    miraland_sdk::timing,
     std::{
         thread::{self, Builder, JoinHandle},
         time::Instant,
@@ -475,7 +475,7 @@ mod tests {
             packet::{to_packet_batches, Packet},
             test_tx::test_tx,
         },
-        solana_sdk::packet::PacketFlags,
+        miraland_sdk::packet::PacketFlags,
     };
 
     fn count_non_discard(packet_batches: &[PacketBatch]) -> usize {

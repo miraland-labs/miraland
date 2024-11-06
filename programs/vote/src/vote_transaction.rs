@@ -1,9 +1,9 @@
 use {
-    solana_program::vote::{
+    miraland_program::vote::{
         self,
         state::{Vote, VoteStateUpdate},
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::Hash,
         signature::{Keypair, Signer},

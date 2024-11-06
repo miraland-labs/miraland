@@ -1,9 +1,9 @@
 #![cfg(feature = "test-bpf")]
 
 use {
-    solana_program_test::*,
+    miraland_program_test::*,
     miraland_sbf_rust_sysvar::process_instruction,
-    solana_sdk::{
+    miraland_sdk::{
         feature_set::disable_fees_sysvar,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,

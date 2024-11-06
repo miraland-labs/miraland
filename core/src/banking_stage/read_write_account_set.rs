@@ -1,5 +1,5 @@
 use {
-    solana_sdk::{message::SanitizedMessage, pubkey::Pubkey},
+    miraland_sdk::{message::SanitizedMessage, pubkey::Pubkey},
     std::collections::HashSet,
 };
 
@@ -85,8 +85,8 @@ mod tests {
     use {
         super::ReadWriteAccountSet,
         miraland_ledger::genesis_utils::GenesisConfigInfo,
-        solana_runtime::{bank::Bank, genesis_utils::create_genesis_config},
-        solana_sdk::{
+        miraland_runtime::{bank::Bank, genesis_utils::create_genesis_config},
+        miraland_sdk::{
             account::AccountSharedData,
             address_lookup_table::{
                 self,

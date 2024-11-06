@@ -12,7 +12,7 @@ use {
             MAX_PERMITTED_ACCOUNTS_DATA_ALLOCATIONS_PER_TRANSACTION, MAX_PERMITTED_DATA_LENGTH,
         },
     },
-    solana_program::entrypoint::MAX_PERMITTED_DATA_INCREASE,
+    miraland_program::entrypoint::MAX_PERMITTED_DATA_INCREASE,
     std::mem::MaybeUninit,
 };
 use {
@@ -292,7 +292,7 @@ impl TransactionContext {
     }
 
     /// Gets instruction stack height, top-level instructions are height
-    /// `solana_sdk::instruction::TRANSACTION_LEVEL_STACK_HEIGHT`
+    /// `miraland_sdk::instruction::TRANSACTION_LEVEL_STACK_HEIGHT`
     pub fn get_instruction_context_stack_height(&self) -> usize {
         self.instruction_stack.len()
     }

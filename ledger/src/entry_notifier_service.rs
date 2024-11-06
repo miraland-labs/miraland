@@ -2,7 +2,7 @@ use {
     crate::entry_notifier_interface::EntryNotifierArc,
     crossbeam_channel::{unbounded, Receiver, RecvTimeoutError, Sender},
     miraland_entry::entry::EntrySummary,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},

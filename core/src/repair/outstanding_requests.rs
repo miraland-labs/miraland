@@ -88,7 +88,7 @@ pub(crate) mod tests {
         super::*,
         crate::repair::serve_repair::ShredRepairType,
         miraland_ledger::shred::{Shred, ShredFlags},
-        solana_sdk::timing::timestamp,
+        miraland_sdk::timing::timestamp,
     };
 
     #[test]

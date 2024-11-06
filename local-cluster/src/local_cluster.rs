@@ -22,14 +22,14 @@ use {
     miraland_tpu_client::tpu_client::{
         DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_ENABLE_UDP, DEFAULT_TPU_USE_QUIC,
     },
-    solana_runtime::{
+    miraland_runtime::{
         genesis_utils::{
             create_genesis_config_with_vote_accounts_and_cluster_type, GenesisConfigInfo,
             ValidatorVoteKeypairs,
         },
         snapshot_config::SnapshotConfig,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, AccountSharedData},
         client::SyncClient,
         clock::{DEFAULT_DEV_SLOTS_PER_EPOCH, DEFAULT_TICKS_PER_SLOT},
@@ -48,8 +48,8 @@ use {
         system_transaction,
         transaction::Transaction,
     },
-    solana_stake_program::stake_state,
-    solana_vote_program::{
+    miraland_stake_program::stake_state,
+    miraland_vote_program::{
         vote_instruction,
         vote_state::{self, VoteInit},
     },

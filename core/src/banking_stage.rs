@@ -36,9 +36,9 @@ use {
     miraland_measure::{measure, measure_us},
     miraland_perf::{data_budget::DataBudget, packet::PACKETS_PER_BATCH},
     miraland_poh::poh_recorder::{PohRecorder, TransactionRecorder},
-    solana_runtime::{bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache},
-    solana_sdk::timing::AtomicInterval,
-    solana_vote::vote_sender_types::ReplayVoteSender,
+    miraland_runtime::{bank_forks::BankForks, prioritization_fee_cache::PrioritizationFeeCache},
+    miraland_sdk::timing::AtomicInterval,
+    miraland_vote::vote_sender_types::ReplayVoteSender,
     std::{
         cmp, env,
         sync::{
@@ -805,8 +805,8 @@ mod tests {
             poh_service::PohService,
         },
         miraland_streamer::socket::SocketAddrSpace,
-        solana_runtime::{bank::Bank, genesis_utils::bootstrap_validator_stake_lamports},
-        solana_sdk::{
+        miraland_runtime::{bank::Bank, genesis_utils::bootstrap_validator_stake_lamports},
+        miraland_sdk::{
             hash::Hash,
             poh_config::PohConfig,
             pubkey::Pubkey,
@@ -814,7 +814,7 @@ mod tests {
             system_transaction,
             transaction::{SanitizedTransaction, Transaction},
         },
-        solana_vote_program::{
+        miraland_vote_program::{
             vote_state::VoteStateUpdate, vote_transaction::new_vote_state_update_transaction,
         },
         std::{
@@ -1014,16 +1014,16 @@ mod tests {
             bank.process_transaction(&fund_tx).unwrap();
 
             // good tx
-            let to = solana_sdk::pubkey::new_rand();
+            let to = miraland_sdk::pubkey::new_rand();
             let tx = system_transaction::transfer(&mint_keypair, &to, 1, start_hash);
 
             // good tx, but no verify
-            let to2 = solana_sdk::pubkey::new_rand();
+            let to2 = miraland_sdk::pubkey::new_rand();
             let tx_no_ver = system_transaction::transfer(&keypair, &to2, 2, start_hash);
 
             // bad tx, AccountNotFound
             let keypair = Keypair::new();
-            let to3 = solana_sdk::pubkey::new_rand();
+            let to3 = miraland_sdk::pubkey::new_rand();
             let tx_anf = system_transaction::transfer(&keypair, &to3, 1, start_hash);
 
             // send 'em over
@@ -1247,9 +1247,9 @@ mod tests {
                 .write()
                 .unwrap()
                 .set_bank_for_test(bank.clone());
-            let pubkey = solana_sdk::pubkey::new_rand();
+            let pubkey = miraland_sdk::pubkey::new_rand();
             let keypair2 = Keypair::new();
-            let pubkey2 = solana_sdk::pubkey::new_rand();
+            let pubkey2 = miraland_sdk::pubkey::new_rand();
 
             let txs = vec![
                 system_transaction::transfer(&mint_keypair, &pubkey, 1, genesis_config.hash())
@@ -1281,7 +1281,7 @@ mod tests {
     }
 
     pub(crate) fn create_slow_genesis_config(lamports: u64) -> GenesisConfigInfo {
-        create_slow_genesis_config_with_leader(lamports, &solana_sdk::pubkey::new_rand())
+        create_slow_genesis_config_with_leader(lamports, &miraland_sdk::pubkey::new_rand())
     }
 
     pub(crate) fn create_slow_genesis_config_with_leader(

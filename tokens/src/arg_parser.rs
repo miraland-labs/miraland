@@ -13,7 +13,7 @@ use {
     },
     miraland_cli_config::CONFIG_FILE,
     miraland_remote_wallet::remote_wallet::maybe_wallet_manager,
-    solana_sdk::native_token::mln_to_lamports,
+    miraland_sdk::native_token::mln_to_lamports,
     std::{error::Error, ffi::OsString, process::exit},
 };
 

@@ -25,7 +25,7 @@ use {
     index::IndexBlockFormat,
     owners::OwnersBlockFormat,
     readable::TieredStorageReader,
-    solana_sdk::account::ReadableAccount,
+    miraland_sdk::account::ReadableAccount,
     std::{
         borrow::Borrow,
         fs::{self, OpenOptions},
@@ -174,7 +174,7 @@ mod tests {
         footer::{TieredStorageFooter, TieredStorageMagicNumber},
         hot::HOT_FORMAT,
         index::IndexOffset,
-        solana_sdk::{
+        miraland_sdk::{
             account::AccountSharedData, clock::Slot, hash::Hash, pubkey::Pubkey,
             system_instruction::MAX_PERMITTED_DATA_LENGTH,
         },

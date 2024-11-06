@@ -8,7 +8,7 @@ use {
     miraland_gossip::{cluster_info::ClusterInfo, epoch_slots::MAX_SLOTS_PER_ENTRY},
     miraland_ledger::{ancestor_iterator::AncestorIterator, blockstore::Blockstore},
     prost::Message,
-    solana_vote_program::vote_state::VoteTransaction,
+    miraland_vote_program::vote_state::VoteTransaction,
     std::{
         fs::File,
         io::{Error, Write},
@@ -70,8 +70,8 @@ mod tests {
         miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
         miraland_ledger::{blockstore, get_tmp_ledger_path_auto_delete},
         miraland_streamer::socket::SocketAddrSpace,
-        solana_program::{hash::Hash, vote::state::Vote},
-        solana_sdk::{
+        miraland_program::{hash::Hash, vote::state::Vote},
+        miraland_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },

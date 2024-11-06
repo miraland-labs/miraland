@@ -8,7 +8,7 @@ use {
         locator::{Locator as RemoteWalletLocator, LocatorError as RemoteWalletLocatorError},
         remote_wallet::RemoteWalletManager,
     },
-    solana_sdk::{
+    miraland_sdk::{
         derivation_path::{DerivationPath, DerivationPathError},
         pubkey::Pubkey,
         signature::{Keypair, Signature, Signer},
@@ -383,7 +383,7 @@ mod tests {
         assert_matches::assert_matches,
         clap::{Arg, Command},
         miraland_remote_wallet::locator::Manufacturer,
-        solana_sdk::signature::write_keypair_file,
+        miraland_sdk::signature::write_keypair_file,
         std::fs,
         tempfile::NamedTempFile,
     };
@@ -587,8 +587,8 @@ mod tests {
 
     #[test]
     fn test_pubkeys_sigs_of() {
-        let key1 = solana_sdk::pubkey::new_rand();
-        let key2 = solana_sdk::pubkey::new_rand();
+        let key1 = miraland_sdk::pubkey::new_rand();
+        let key2 = miraland_sdk::pubkey::new_rand();
         let sig1 = Keypair::new().sign_message(&[0u8]);
         let sig2 = Keypair::new().sign_message(&[1u8]);
         let signer1 = format!("{key1}={sig1}");

@@ -2,12 +2,12 @@ use {
     crate::bank::Bank,
     log::*,
     miraland_accounts_db::accounts_index::{AccountIndex, IndexKey, ScanConfig, ScanResult},
-    solana_sdk::{
+    miraland_sdk::{
         account::ReadableAccount,
         pubkey::Pubkey,
         stake::{self, state::StakeStateV2},
     },
-    solana_stake_program::stake_state,
+    miraland_stake_program::stake_state,
     std::collections::HashSet,
 };
 
@@ -81,7 +81,7 @@ pub fn calculate_non_circulating_supply(bank: &Bank) -> ScanResult<NonCirculatin
 }
 
 // Mainnet accounts that should be considered non-circulating
-solana_sdk::pubkeys!(
+miraland_sdk::pubkeys!(
     non_circulating_accounts,
     [
         "9huDUZfxoJ7wGMTffUE7vh1xePqef7gyrLJu9NApncqA",
@@ -198,7 +198,7 @@ solana_sdk::pubkeys!(
 );
 
 // Withdraw authority for autostaked accounts on mainnet
-solana_sdk::pubkeys!(
+miraland_sdk::pubkeys!(
     withdraw_authority,
     [
         "8CUUMKYNGxdgYio5CLHRHyzMEhhVRMcqefgE6dLqnVRK",
@@ -219,7 +219,7 @@ mod tests {
     use {
         super::*,
         crate::genesis_utils::genesis_sysvar_and_builtin_program_lamports,
-        solana_sdk::{
+        miraland_sdk::{
             account::{Account, AccountSharedData},
             epoch_schedule::EpochSchedule,
             genesis_config::{ClusterType, GenesisConfig},
@@ -241,7 +241,7 @@ mod tests {
         let num_genesis_accounts = 10;
         for _ in 0..num_genesis_accounts {
             accounts.insert(
-                solana_sdk::pubkey::new_rand(),
+                miraland_sdk::pubkey::new_rand(),
                 Account::new(balance, 0, &Pubkey::default()),
             );
         }
@@ -253,7 +253,7 @@ mod tests {
 
         let num_stake_accounts = 3;
         for _ in 0..num_stake_accounts {
-            let pubkey = solana_sdk::pubkey::new_rand();
+            let pubkey = miraland_sdk::pubkey::new_rand();
             let meta = Meta {
                 authorized: Authorized::auto(&pubkey),
                 lockup: Lockup {

@@ -1,7 +1,7 @@
 //! trait for abstracting underlying storage of pubkey and account pairs to be written
 use {
     crate::{account_storage::meta::StoredAccountMeta, accounts_hash::AccountHash},
-    solana_sdk::{account::ReadableAccount, clock::Slot, pubkey::Pubkey},
+    miraland_sdk::{account::ReadableAccount, clock::Slot, pubkey::Pubkey},
 };
 
 /// abstract access to pubkey, account, slot, target_slot of either:
@@ -288,7 +288,7 @@ pub mod tests {
             account_storage::meta::{AccountMeta, StoredAccountMeta, StoredMeta},
             append_vec::AppendVecStoredAccountMeta,
         },
-        solana_sdk::{
+        miraland_sdk::{
             account::{accounts_equal, AccountSharedData, WritableAccount},
             hash::Hash,
         },

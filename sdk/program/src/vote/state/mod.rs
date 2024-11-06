@@ -1386,7 +1386,7 @@ mod tests {
 
     #[test]
     fn test_minimum_balance() {
-        let rent = solana_program::rent::Rent::default();
+        let rent = miraland_program::rent::Rent::default();
         let minimum_balance = rent.minimum_balance(VoteState::size_of());
         // golden, may need updating when vote_state grows
         assert!(minimum_balance as f64 / 10f64.powf(9.0) < 0.04)

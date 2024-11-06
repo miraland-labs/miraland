@@ -3,12 +3,12 @@ use {
     console::Emoji,
     indicatif::{ProgressBar, ProgressStyle},
     log::*,
-    solana_runtime::{
+    miraland_runtime::{
         snapshot_hash::SnapshotHash,
         snapshot_package::SnapshotKind,
         snapshot_utils::{self, ArchiveFormat},
     },
-    solana_sdk::{clock::Slot, genesis_config::DEFAULT_GENESIS_ARCHIVE},
+    miraland_sdk::{clock::Slot, genesis_config::DEFAULT_GENESIS_ARCHIVE},
     std::{
         fs::{self, File},
         io::{self, Read},

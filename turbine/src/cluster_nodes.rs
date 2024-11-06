@@ -11,11 +11,8 @@ use {
         weighted_shuffle::WeightedShuffle,
     },
     miraland_ledger::shred::ShredId,
-    miraland_streamer::socket::SocketAddrSpace,
-    rand::{seq::SliceRandom, Rng, SeedableRng},
-    rand_chacha::ChaChaRng,
-    solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{
         clock::{Epoch, Slot},
         feature_set,
         native_token::LAMPORTS_PER_MLN,
@@ -23,6 +20,9 @@ use {
         signature::{Keypair, Signer},
         timing::timestamp,
     },
+    miraland_streamer::socket::SocketAddrSpace,
+    rand::{seq::SliceRandom, Rng, SeedableRng},
+    rand_chacha::ChaChaRng,
     std::{
         any::TypeId,
         cmp::Reverse,
@@ -427,7 +427,7 @@ pub fn make_test_cluster<R: Rng>(
     use miraland_gossip::contact_info::ContactInfo;
     let (unstaked_numerator, unstaked_denominator) = unstaked_ratio.unwrap_or((1, 7));
     let mut nodes: Vec<_> = repeat_with(|| {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         ContactInfo::new_localhost(&pubkey, /*wallclock:*/ timestamp())
     })
     .take(num_nodes)

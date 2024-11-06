@@ -6,8 +6,8 @@ use {
         UiAccountData, UiAccountEncoding,
     },
     miraland_rpc_client_api::response::RpcKeyedAccount,
-    solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount},
         pubkey::Pubkey,
     },
@@ -82,8 +82,11 @@ where
 /// Analyze a mint Pubkey that may be the native_mint and get the mint-account owner (token
 /// program_id) and decimals
 pub fn get_mint_owner_and_decimals(bank: &Bank, mint: &Pubkey) -> Result<(Pubkey, u8)> {
-    if mint == &spl_token::native_mint::id() {
-        Ok((spl_token::id(), spl_token::native_mint::DECIMALS))
+    if mint == &Pubkey::from(spl_token::native_mint::id().to_bytes()) {
+        Ok((
+            Pubkey::from(spl_token::id().to_bytes()),
+            spl_token::native_mint::DECIMALS,
+        ))
     } else {
         let mint_account = bank.get_account(mint).ok_or_else(|| {
             Error::invalid_params("Invalid param: could not find mint".to_string())

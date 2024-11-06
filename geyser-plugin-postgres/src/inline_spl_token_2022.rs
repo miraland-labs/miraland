@@ -2,7 +2,7 @@
 /// Copied from miraland-runtime
 use crate::inline_spl_token::{self, GenericTokenAccount};
 
-solana_sdk::declare_id!("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89");
+miraland_sdk::declare_id!("Token8N5ecJeFxL83iFa2h7AgJ8AtufM7bbg63LrW89");
 
 // `spl_token_program_2022::extension::AccountType::Account` ordinal value
 const ACCOUNTTYPE_ACCOUNT: u8 = 2;

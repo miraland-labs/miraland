@@ -14,7 +14,7 @@ use {
         gossip_service::discover, legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
     miraland_streamer::socket::SocketAddrSpace,
-    solana_sdk::pubkey::Pubkey,
+    miraland_sdk::pubkey::Pubkey,
     std::{
         error,
         net::{IpAddr, Ipv4Addr, SocketAddr},

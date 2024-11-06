@@ -37,8 +37,8 @@ use {
         distributions::{Distribution, WeightedError, WeightedIndex},
         Rng,
     },
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{
         clock::Slot,
         genesis_config::ClusterType,
         hash::{Hash, HASH_BYTES},
@@ -1434,8 +1434,8 @@ mod tests {
         },
         miraland_perf::packet::{deserialize_from_with_limit, Packet},
         miraland_streamer::socket::SocketAddrSpace,
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             feature_set::FeatureSet, hash::Hash, pubkey::Pubkey, signature::Keypair,
             timing::timestamp,
         },
@@ -1575,7 +1575,7 @@ mod tests {
             Arc::new(RwLock::new(HashSet::default())),
         );
         let keypair = cluster_info.keypair().clone();
-        let repair_peer_id = solana_sdk::pubkey::new_rand();
+        let repair_peer_id = miraland_sdk::pubkey::new_rand();
         let repair_request = ShredRepairType::Orphan(123);
 
         let rsp = serve_repair
@@ -1611,7 +1611,7 @@ mod tests {
         let slot: Slot = 50;
         let nonce = 70;
         let cluster_info = Arc::new(new_test_cluster_info());
-        let repair_peer_id = solana_sdk::pubkey::new_rand();
+        let repair_peer_id = miraland_sdk::pubkey::new_rand();
         let GenesisConfigInfo { genesis_config, .. } = create_genesis_config(10_000);
         let keypair = cluster_info.keypair().clone();
 
@@ -1661,7 +1661,7 @@ mod tests {
             Arc::new(RwLock::new(HashSet::default())),
         );
         let keypair = cluster_info.keypair().clone();
-        let repair_peer_id = solana_sdk::pubkey::new_rand();
+        let repair_peer_id = miraland_sdk::pubkey::new_rand();
 
         let slot = 50;
         let shred_index = 60;
@@ -2004,7 +2004,7 @@ mod tests {
 
         let serve_repair_addr = socketaddr!(Ipv4Addr::LOCALHOST, 1243);
         let mut nxt = ContactInfo::new(
-            solana_sdk::pubkey::new_rand(),
+            miraland_sdk::pubkey::new_rand(),
             timestamp(), // wallclock
             0u16,        // shred_version
         );
@@ -2040,7 +2040,7 @@ mod tests {
 
         let serve_repair_addr2 = socketaddr!([127, 0, 0, 2], 1243);
         let mut nxt = ContactInfo::new(
-            solana_sdk::pubkey::new_rand(),
+            miraland_sdk::pubkey::new_rand(),
             timestamp(), // wallclock
             0u16,        // shred_version
         );
@@ -2315,9 +2315,9 @@ mod tests {
             crossbeam_channel::unbounded();
         // Insert two peers on the network
         let contact_info2 =
-            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
+            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
         let contact_info3 =
-            ContactInfo::new_localhost(&solana_sdk::pubkey::new_rand(), timestamp());
+            ContactInfo::new_localhost(&miraland_sdk::pubkey::new_rand(), timestamp());
         cluster_info.insert_info(contact_info2.clone());
         cluster_info.insert_info(contact_info3.clone());
         let identity_keypair = cluster_info.keypair().clone();
@@ -2331,7 +2331,7 @@ mod tests {
         // 1) repair validator set doesn't exist in gossip
         // 2) repair validator set only includes our own id
         // then no repairs should be generated
-        for pubkey in &[solana_sdk::pubkey::new_rand(), *me.pubkey()] {
+        for pubkey in &[miraland_sdk::pubkey::new_rand(), *me.pubkey()] {
             let known_validators = Some(vec![*pubkey].into_iter().collect());
             assert!(serve_repair.repair_peers(&known_validators, 1).is_empty());
             assert_matches!(

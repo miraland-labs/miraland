@@ -169,19 +169,19 @@ impl Message {
     ///
     /// # Examples
     ///
-    /// This example uses the [`solana_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
+    /// This example uses the [`miraland_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
     ///
-    /// [`solana_sdk`]: https://docs.rs/miraland-sdk
+    /// [`miraland_sdk`]: https://docs.rs/miraland-sdk
     /// [`miraland_rpc_client`]: https://docs.rs/miraland-rpc-client
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_program::example_mocks::solana_sdk;
-    /// # use solana_program::example_mocks::miraland_rpc_client;
+    /// # use miraland_program::example_mocks::miraland_sdk;
+    /// # use miraland_program::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///     instruction::Instruction,
     ///     message::Message,
     ///     pubkey::Pubkey,
@@ -241,19 +241,19 @@ impl Message {
     ///
     /// # Examples
     ///
-    /// This example uses the [`solana_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
+    /// This example uses the [`miraland_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
     ///
-    /// [`solana_sdk`]: https://docs.rs/miraland-sdk
+    /// [`miraland_sdk`]: https://docs.rs/miraland-sdk
     /// [`miraland_rpc_client`]: https://docs.rs/miraland-rpc-client
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_program::example_mocks::solana_sdk;
-    /// # use solana_program::example_mocks::miraland_rpc_client;
+    /// # use miraland_program::example_mocks::miraland_sdk;
+    /// # use miraland_program::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///     instruction::Instruction,
     ///     message::Message,
     ///     pubkey::Pubkey,
@@ -338,19 +338,19 @@ impl Message {
     ///
     /// # Examples
     ///
-    /// This example uses the [`solana_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
+    /// This example uses the [`miraland_sdk`], [`miraland_rpc_client`] and [`anyhow`] crates.
     ///
-    /// [`solana_sdk`]: https://docs.rs/miraland-sdk
+    /// [`miraland_sdk`]: https://docs.rs/miraland-sdk
     /// [`miraland_rpc_client`]: https://docs.rs/miraland-client
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_program::example_mocks::solana_sdk;
-    /// # use solana_program::example_mocks::miraland_rpc_client;
+    /// # use miraland_program::example_mocks::miraland_sdk;
+    /// # use miraland_program::example_mocks::miraland_rpc_client;
     /// use anyhow::Result;
     /// use borsh::{BorshSerialize, BorshDeserialize};
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_sdk::{
+    /// use miraland_sdk::{
     ///     hash::Hash,
     ///     instruction::Instruction,
     ///     message::Message,

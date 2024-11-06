@@ -10,7 +10,7 @@
 //         get_tmp_ledger_path_auto_delete,
 //     },
 //     rand::Rng,
-//     solana_sdk::{clock::Slot, hash::Hash},
+//     miraland_sdk::{clock::Slot, hash::Hash},
 //     std::path::Path,
 //     test::Bencher,
 // };

@@ -11,7 +11,7 @@ use {
     bincode::{serialize, serialized_size},
     rand::{CryptoRng, Rng},
     serde::de::{Deserialize, Deserializer},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::Hash,
         pubkey::{self, Pubkey},
@@ -20,7 +20,7 @@ use {
         timing::timestamp,
         transaction::Transaction,
     },
-    solana_vote::vote_parser,
+    miraland_vote::vote_parser,
     std::{
         borrow::{Borrow, Cow},
         cmp::Ordering,
@@ -725,11 +725,11 @@ mod test {
         miraland_perf::test_tx::new_test_vote_tx,
         rand::SeedableRng,
         rand_chacha::ChaChaRng,
-        solana_sdk::{
+        miraland_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
-        solana_vote_program::{vote_instruction, vote_state},
+        miraland_vote_program::{vote_instruction, vote_state},
         std::{cmp::Ordering, iter::repeat_with},
     };
 

@@ -41,7 +41,7 @@ use {
         EncodableWithMeta, EncodedConfirmedTransactionWithStatusMeta, UiTransactionEncoding,
     },
     serde::{Deserialize, Serialize},
-    solana_sdk::{
+    miraland_sdk::{
         account::from_account,
         account_utils::StateMut,
         clock::{self, Clock, Slot},
@@ -66,7 +66,7 @@ use {
         },
         transaction::Transaction,
     },
-    solana_vote_program::vote_state::VoteState,
+    miraland_vote_program::vote_state::VoteState,
     std::{
         collections::{BTreeMap, HashMap, VecDeque},
         fmt,
@@ -2230,7 +2230,7 @@ mod tests {
     use {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
-        solana_sdk::signature::{write_keypair, Keypair},
+        miraland_sdk::signature::{write_keypair, Keypair},
         std::str::FromStr,
         tempfile::NamedTempFile,
     };

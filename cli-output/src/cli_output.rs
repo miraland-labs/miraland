@@ -29,7 +29,7 @@ use {
     },
     serde::{Deserialize, Serialize},
     serde_json::{Map, Value},
-    solana_sdk::{
+    miraland_sdk::{
         account::ReadableAccount,
         clock::{Epoch, Slot, UnixTimestamp},
         epoch_info::EpochInfo,
@@ -41,7 +41,7 @@ use {
         stake_history::StakeHistoryEntry,
         transaction::{Transaction, TransactionError, VersionedTransaction},
     },
-    solana_vote_program::{
+    miraland_vote_program::{
         authorized_voters::AuthorizedVoters,
         vote_state::{BlockTimestamp, LandedVote, MAX_EPOCH_CREDITS_HISTORY, MAX_LOCKOUT_HISTORY},
     },
@@ -3149,7 +3149,7 @@ mod tests {
     use {
         super::*,
         clap::{App, Arg},
-        solana_sdk::{
+        miraland_sdk::{
             message::Message,
             pubkey::Pubkey,
             signature::{keypair_from_seed, NullSigner, Signature, Signer, SignerError},

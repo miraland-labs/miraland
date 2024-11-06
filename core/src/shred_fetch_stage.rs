@@ -9,8 +9,8 @@ use {
     miraland_ledger::shred::{should_discard_shred, ShredFetchStats},
     miraland_perf::packet::{PacketBatch, PacketBatchRecycler, PacketFlags, PACKETS_PER_BATCH},
     miraland_streamer::streamer::{self, PacketBatchReceiver, StreamerReceiveStats},
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         epoch_schedule::EpochSchedule,
         feature_set::{self, FeatureSet},
@@ -435,7 +435,7 @@ mod tests {
             blockstore::MAX_DATA_SHREDS_PER_SLOT,
             shred::{ReedSolomonCache, Shred, ShredFlags},
         },
-        solana_sdk::packet::Packet,
+        miraland_sdk::packet::Packet,
     };
 
     #[test]

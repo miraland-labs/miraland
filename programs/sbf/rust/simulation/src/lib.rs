@@ -1,7 +1,7 @@
 #![allow(clippy::arithmetic_side_effects)]
 
 use {
-    solana_program::{
+    miraland_program::{
         account_info::{next_account_info, AccountInfo},
         clock::Clock,
         declare_id,
@@ -15,7 +15,7 @@ use {
 
 declare_id!("Sim1jD5C35odT8mzctm8BWnjic8xW5xgeb5MbcbErTo");
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 
 pub fn process_instruction(
     _program_id: &Pubkey,

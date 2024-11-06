@@ -1,7 +1,7 @@
 use {
     crate::leader_schedule::LeaderSchedule,
-    solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{
         clock::{Epoch, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
         pubkey::Pubkey,
     },
@@ -85,14 +85,14 @@ fn sort_stakes(stakes: &mut Vec<(Pubkey, u64)>) {
 mod tests {
     use {
         super::*,
-        solana_runtime::genesis_utils::{
+        miraland_runtime::genesis_utils::{
             bootstrap_validator_stake_lamports, create_genesis_config_with_leader,
         },
     };
 
     #[test]
     fn test_leader_schedule_via_bank() {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let genesis_config =
             create_genesis_config_with_leader(0, &pubkey, bootstrap_validator_stake_lamports())
                 .genesis_config;
@@ -118,7 +118,7 @@ mod tests {
 
     #[test]
     fn test_leader_scheduler1_basic() {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let genesis_config =
             create_genesis_config_with_leader(42, &pubkey, bootstrap_validator_stake_lamports())
                 .genesis_config;
@@ -128,8 +128,8 @@ mod tests {
 
     #[test]
     fn test_sort_stakes_basic() {
-        let pubkey0 = solana_sdk::pubkey::new_rand();
-        let pubkey1 = solana_sdk::pubkey::new_rand();
+        let pubkey0 = miraland_sdk::pubkey::new_rand();
+        let pubkey1 = miraland_sdk::pubkey::new_rand();
         let mut stakes = vec![(pubkey0, 1), (pubkey1, 2)];
         sort_stakes(&mut stakes);
         assert_eq!(stakes, vec![(pubkey1, 2), (pubkey0, 1)]);
@@ -137,8 +137,8 @@ mod tests {
 
     #[test]
     fn test_sort_stakes_with_dup() {
-        let pubkey0 = solana_sdk::pubkey::new_rand();
-        let pubkey1 = solana_sdk::pubkey::new_rand();
+        let pubkey0 = miraland_sdk::pubkey::new_rand();
+        let pubkey1 = miraland_sdk::pubkey::new_rand();
         let mut stakes = vec![(pubkey0, 1), (pubkey1, 2), (pubkey0, 1)];
         sort_stakes(&mut stakes);
         assert_eq!(stakes, vec![(pubkey1, 2), (pubkey0, 1)]);
@@ -147,7 +147,7 @@ mod tests {
     #[test]
     fn test_sort_stakes_with_equal_stakes() {
         let pubkey0 = Pubkey::default();
-        let pubkey1 = solana_sdk::pubkey::new_rand();
+        let pubkey1 = miraland_sdk::pubkey::new_rand();
         let mut stakes = vec![(pubkey0, 1), (pubkey1, 1)];
         sort_stakes(&mut stakes);
         assert_eq!(stakes, vec![(pubkey1, 1), (pubkey0, 1)]);

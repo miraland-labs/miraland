@@ -9,7 +9,7 @@
 //!
 //! [std]: https://doc.rust-lang.org/stable/std/
 //! [sstd]: https://docs.solana.com/developing/on-chain-programs/developing-rust#restrictions
-//! [`miraland-sdk`]: https://docs.rs/miraland-sdk/latest/solana_sdk/
+//! [`miraland-sdk`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/
 //!
 //! This library defines
 //!
@@ -68,7 +68,7 @@
 //! ```
 //! #[cfg(not(feature = "no-entrypoint"))]
 //! pub mod entrypoint {
-//!     use solana_program::{
+//!     use miraland_program::{
 //!         account_info::AccountInfo,
 //!         entrypoint,
 //!         entrypoint::ProgramResult,
@@ -181,7 +181,7 @@
 //! [`ProgramError`]: program_error::ProgramError
 //! [`ProgramResult`]: entrypoint::ProgramResult
 //! [ed25519]: https://ed25519.cr.yp.to/
-//! [`Keypair`]: https://docs.rs/miraland-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html
+//! [`Keypair`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/signer/keypair/struct.Keypair.html
 //! [SHA-256]: https://en.wikipedia.org/wiki/SHA-2
 //! [`Mln`]: native_token::Mln
 //! [_lamports_]: https://docs.solana.com/introduction#what-are-sols
@@ -277,7 +277,7 @@
 //! A simple example of transferring lamports via CPI:
 //!
 //! ```
-//! use solana_program::{
+//! use miraland_program::{
 //!     account_info::{next_account_info, AccountInfo},
 //!     entrypoint,
 //!     entrypoint::ProgramResult,
@@ -325,7 +325,7 @@
 //! A simple example of creating an account for a PDA:
 //!
 //! ```
-//! use solana_program::{
+//! use miraland_program::{
 //!     account_info::{next_account_info, AccountInfo},
 //!     entrypoint,
 //!     entrypoint::ProgramResult,
@@ -397,7 +397,7 @@
 //! only be executed as "top-level" instructions included by off-chain clients
 //! in a [`Transaction`].
 //!
-//! [`Transaction`]: https://docs.rs/miraland-sdk/latest/solana_sdk/transaction/struct.Transaction.html
+//! [`Transaction`]: https://docs.rs/miraland-sdk/latest/miraland_sdk/transaction/struct.Transaction.html
 //!
 //! This crate defines the program IDs for most native programs. Even though
 //! some native programs cannot be invoked by other programs, a Miraland program
@@ -423,42 +423,42 @@
 //! - __System Program__: Creates new accounts, allocates account data, assigns
 //!   accounts to owning programs, transfers lamports from System Program owned
 //!   accounts and pays transaction fees.
-//!   - ID: [`solana_program::system_program`]
-//!   - Instruction: [`solana_program::system_instruction`]
+//!   - ID: [`miraland_program::system_program`]
+//!   - Instruction: [`miraland_program::system_instruction`]
 //!   - Invokable by programs? yes
 //!
 //! - __Compute Budget Program__: Requests additional CPU or memory resources
 //!   for a transaction. This program does nothing when called from another
 //!   program.
-//!   - ID: [`solana_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/index.html)
-//!   - Instruction: [`solana_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/solana_sdk/compute_budget/index.html)
+//!   - ID: [`miraland_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/miraland_sdk/compute_budget/index.html)
+//!   - Instruction: [`miraland_sdk::compute_budget`](https://docs.rs/miraland-sdk/latest/miraland_sdk/compute_budget/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __ed25519 Program__: Verifies an ed25519 signature.
-//!   - ID: [`solana_program::ed25519_program`]
-//!   - Instruction: [`solana_sdk::ed25519_instruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/ed25519_instruction/index.html)
+//!   - ID: [`miraland_program::ed25519_program`]
+//!   - Instruction: [`miraland_sdk::ed25519_instruction`](https://docs.rs/miraland-sdk/latest/miraland_sdk/ed25519_instruction/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __secp256k1 Program__: Verifies secp256k1 public key recovery operations.
-//!   - ID: [`solana_program::secp256k1_program`]
-//!   - Instruction: [`solana_sdk::secp256k1_instruction`](https://docs.rs/miraland-sdk/latest/solana_sdk/secp256k1_instruction/index.html)
+//!   - ID: [`miraland_program::secp256k1_program`]
+//!   - Instruction: [`miraland_sdk::secp256k1_instruction`](https://docs.rs/miraland-sdk/latest/miraland_sdk/secp256k1_instruction/index.html)
 //!   - Invokable by programs? no
 //!
 //! - __BPF Loader__: Deploys, and executes immutable programs on the chain.
-//!   - ID: [`solana_program::bpf_loader`]
-//!   - Instruction: [`solana_program::loader_instruction`]
+//!   - ID: [`miraland_program::bpf_loader`]
+//!   - Instruction: [`miraland_program::loader_instruction`]
 //!   - Invokable by programs? yes
 //!
 //! - __Upgradable BPF Loader__: Deploys, upgrades, and executes upgradable
 //!   programs on the chain.
-//!   - ID: [`solana_program::bpf_loader_upgradeable`]
-//!   - Instruction: [`solana_program::loader_upgradeable_instruction`]
+//!   - ID: [`miraland_program::bpf_loader_upgradeable`]
+//!   - Instruction: [`miraland_program::loader_upgradeable_instruction`]
 //!   - Invokable by programs? yes
 //!
 //! - __Deprecated BPF Loader__: Deploys, and executes immutable programs on the
 //!   chain.
-//!   - ID: [`solana_program::bpf_loader_deprecated`]
-//!   - Instruction: [`solana_program::loader_instruction`]
+//!   - ID: [`miraland_program::bpf_loader_deprecated`]
+//!   - Instruction: [`miraland_program::loader_instruction`]
 //!   - Invokable by programs? yes
 //!
 //! [lut]: https://docs.solana.com/proposals/versioned-transactions
@@ -467,8 +467,8 @@
 #![cfg_attr(RUSTC_WITH_SPECIALIZATION, feature(specialization))]
 #![cfg_attr(RUSTC_NEEDS_PROC_MACRO_HYGIENE, feature(proc_macro_hygiene))]
 
-// Allows macro expansion of `use ::solana_program::*` to work within this crate
-extern crate self as solana_program;
+// Allows macro expansion of `use ::miraland_program::*` to work within this crate
+extern crate self as miraland_program;
 
 pub mod account_info;
 pub mod address_lookup_table;
@@ -538,14 +538,14 @@ pub mod wasm;
 
 #[deprecated(
     since = "1.17.0",
-    note = "Please use `solana_sdk::address_lookup_table::AddressLookupTableAccount` instead"
+    note = "Please use `miraland_sdk::address_lookup_table::AddressLookupTableAccount` instead"
 )]
 pub mod address_lookup_table_account {
     pub use crate::address_lookup_table::AddressLookupTableAccount;
 }
 
 #[cfg(target_os = "solana")]
-pub use solana_sdk_macro::wasm_bindgen_stub as wasm_bindgen;
+pub use miraland_sdk_macro::wasm_bindgen_stub as wasm_bindgen;
 /// Re-export of [wasm-bindgen].
 ///
 /// [wasm-bindgen]: https://rustwasm.github.io/docs/wasm-bindgen/
@@ -567,7 +567,7 @@ pub mod sdk_ids {
         crate::{
             address_lookup_table, bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable,
             config, ed25519_program, feature, incinerator, loader_v4, secp256k1_program,
-            solana_program::pubkey::Pubkey, stake, system_program, sysvar, vote,
+            miraland_program::pubkey::Pubkey, stake, system_program, sysvar, vote,
         },
         lazy_static::lazy_static,
     };
@@ -599,7 +599,7 @@ pub mod sdk_ids {
 }
 
 /// Same as [`declare_id`] except that it reports that this ID has been deprecated.
-pub use solana_sdk_macro::program_declare_deprecated_id as declare_deprecated_id;
+pub use miraland_sdk_macro::program_declare_deprecated_id as declare_deprecated_id;
 /// Convenience macro to declare a static public key and functions to interact with it.
 ///
 /// Input: a single literal base58 string representation of a program's ID.
@@ -610,10 +610,10 @@ pub use solana_sdk_macro::program_declare_deprecated_id as declare_deprecated_id
 /// # // wrapper is used so that the macro invocation occurs in the item position
 /// # // rather than in the statement position which isn't allowed.
 /// use std::str::FromStr;
-/// use solana_program::{declare_id, pubkey::Pubkey};
+/// use miraland_program::{declare_id, pubkey::Pubkey};
 ///
 /// # mod item_wrapper {
-/// #   use solana_program::declare_id;
+/// #   use miraland_program::declare_id;
 /// declare_id!("My11111111111111111111111111111111111111111");
 /// # }
 /// # use item_wrapper::id;
@@ -621,7 +621,7 @@ pub use solana_sdk_macro::program_declare_deprecated_id as declare_deprecated_id
 /// let my_id = Pubkey::from_str("My11111111111111111111111111111111111111111").unwrap();
 /// assert_eq!(id(), my_id);
 /// ```
-pub use solana_sdk_macro::program_declare_id as declare_id;
+pub use miraland_sdk_macro::program_declare_id as declare_id;
 /// Convenience macro to define a static public key.
 ///
 /// Input: a single literal base58 string representation of a Pubkey.
@@ -630,14 +630,14 @@ pub use solana_sdk_macro::program_declare_id as declare_id;
 ///
 /// ```
 /// use std::str::FromStr;
-/// use solana_program::{pubkey, pubkey::Pubkey};
+/// use miraland_program::{pubkey, pubkey::Pubkey};
 ///
 /// static ID: Pubkey = pubkey!("My11111111111111111111111111111111111111111");
 ///
 /// let my_id = Pubkey::from_str("My11111111111111111111111111111111111111111").unwrap();
 /// assert_eq!(ID, my_id);
 /// ```
-pub use solana_sdk_macro::program_pubkey as pubkey;
+pub use miraland_sdk_macro::program_pubkey as pubkey;
 
 #[macro_use]
 extern crate serde_derive;
@@ -656,7 +656,7 @@ extern crate miraland_frozen_abi_macro;
 /// Literal denominator div-by-zero fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// let _ = unchecked_div_by_const!(10, 0);
 /// # }
@@ -665,7 +665,7 @@ extern crate miraland_frozen_abi_macro;
 /// Const denominator div-by-zero fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// const D: u64 = 0;
 /// let _ = unchecked_div_by_const!(10, D);
@@ -675,7 +675,7 @@ extern crate miraland_frozen_abi_macro;
 /// Non-const denominator fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// let d = 0;
 /// let _ = unchecked_div_by_const!(10, d);
@@ -685,7 +685,7 @@ extern crate miraland_frozen_abi_macro;
 /// Literal denominator div-by-zero fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// const N: u64 = 10;
 /// let _ = unchecked_div_by_const!(N, 0);
@@ -695,7 +695,7 @@ extern crate miraland_frozen_abi_macro;
 /// Const denominator div-by-zero fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// const N: u64 = 10;
 /// const D: u64 = 0;
@@ -706,7 +706,7 @@ extern crate miraland_frozen_abi_macro;
 /// Non-const denominator fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// # const N: u64 = 10;
 /// let d = 0;
@@ -717,7 +717,7 @@ extern crate miraland_frozen_abi_macro;
 /// Literal denominator div-by-zero fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// let n = 10;
 /// let _ = unchecked_div_by_const!(n, 0);
@@ -727,7 +727,7 @@ extern crate miraland_frozen_abi_macro;
 /// Const denominator div-by-zero fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// let n = 10;
 /// const D: u64 = 0;
@@ -738,7 +738,7 @@ extern crate miraland_frozen_abi_macro;
 /// Non-const denominator fails:
 ///
 /// ```compile_fail
-/// # use solana_program::unchecked_div_by_const;
+/// # use miraland_program::unchecked_div_by_const;
 /// # fn main() {
 /// let n = 10;
 /// let d = 0;
@@ -764,10 +764,10 @@ macro_rules! unchecked_div_by_const {
 
 // This module is purposefully listed after all other exports: because of an
 // interaction within rustdoc between the reexports inside this module of
-// `solana_program`'s top-level modules, and `solana_sdk`'s glob re-export of
-// `solana_program`'s top-level modules, if this module is not lexically last
+// `miraland_program`'s top-level modules, and `miraland_sdk`'s glob re-export of
+// `miraland_program`'s top-level modules, if this module is not lexically last
 // rustdoc fails to generate documentation for the re-exports within
-// `solana_sdk`.
+// `miraland_sdk`.
 #[cfg(not(target_os = "solana"))]
 pub mod example_mocks;
 

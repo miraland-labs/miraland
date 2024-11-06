@@ -1,12 +1,12 @@
 use {
     miraland_gossip::cluster_info::ClusterInfo,
-    solana_runtime::{
+    miraland_runtime::{
         snapshot_hash::{
             FullSnapshotHash, IncrementalSnapshotHash, SnapshotHash, StartingSnapshotHashes,
         },
         snapshot_package::SnapshotKind,
     },
-    solana_sdk::{clock::Slot, hash::Hash},
+    miraland_sdk::{clock::Slot, hash::Hash},
     std::sync::Arc,
 };
 

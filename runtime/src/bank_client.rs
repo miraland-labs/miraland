@@ -1,7 +1,7 @@
 use {
     crate::bank::Bank,
     crossbeam_channel::{unbounded, Receiver, Sender},
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         client::{AsyncClient, Client, SyncClient},
         commitment_config::CommitmentConfig,
@@ -27,7 +27,7 @@ use {
     },
 };
 #[cfg(feature = "dev-context-only-utils")]
-use {crate::bank_forks::BankForks, solana_sdk::clock, std::sync::RwLock};
+use {crate::bank_forks::BankForks, miraland_sdk::clock, std::sync::RwLock};
 
 pub struct BankClient {
     bank: Arc<Bank>,
@@ -361,7 +361,7 @@ impl BankClient {
 mod tests {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             genesis_config::create_genesis_config, instruction::AccountMeta,
             native_token::mln_to_lamports,
         },
@@ -379,7 +379,7 @@ mod tests {
         let amount = genesis_config.rent.minimum_balance(0);
 
         // Create 2-2 Multisig Transfer instruction.
-        let bob_pubkey = solana_sdk::pubkey::new_rand();
+        let bob_pubkey = miraland_sdk::pubkey::new_rand();
         let mut transfer_instruction =
             system_instruction::transfer(&john_pubkey, &bob_pubkey, amount);
         transfer_instruction

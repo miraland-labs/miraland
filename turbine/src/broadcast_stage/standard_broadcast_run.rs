@@ -13,7 +13,7 @@ use {
         blockstore,
         shred::{shred_code, ProcessShredsStats, ReedSolomonCache, Shred, ShredFlags, Shredder},
     },
-    solana_sdk::{
+    miraland_sdk::{
         genesis_config::ClusterType,
         hash::Hash,
         signature::Keypair,
@@ -541,14 +541,14 @@ mod test {
             blockstore::Blockstore, genesis_utils::create_genesis_config, get_tmp_ledger_path,
             get_tmp_ledger_path_auto_delete, shred::max_ticks_per_n_shreds,
         },
-        miraland_streamer::socket::SocketAddrSpace,
-        rand::Rng,
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             genesis_config::GenesisConfig,
             hash::Hash,
             signature::{Keypair, Signer},
         },
+        miraland_streamer::socket::SocketAddrSpace,
+        rand::Rng,
         std::{ops::Deref, sync::Arc, time::Duration},
     };
 
@@ -857,7 +857,7 @@ mod test {
         let keypair = Keypair::new();
         let mut bs = StandardBroadcastRun::new(0);
         bs.current_slot_and_parent = Some((1, 0));
-        let entries = create_ticks(10_000, 1, solana_sdk::hash::Hash::default());
+        let entries = create_ticks(10_000, 1, miraland_sdk::hash::Hash::default());
 
         let ledger_path = get_tmp_ledger_path_auto_delete!();
         let blockstore = Arc::new(

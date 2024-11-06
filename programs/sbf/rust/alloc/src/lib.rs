@@ -5,7 +5,7 @@
 #[macro_use]
 extern crate alloc;
 use {
-    solana_program::{
+    miraland_program::{
         custom_heap_default, custom_panic_default, entrypoint::SUCCESS, log::sol_log_64, msg,
     },
     std::{alloc::Layout, mem},

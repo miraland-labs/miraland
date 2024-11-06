@@ -5,7 +5,7 @@ use {
     },
     chrono::DateTime,
     clap::ArgMatches,
-    solana_sdk::{
+    miraland_sdk::{
         clock::UnixTimestamp,
         commitment_config::CommitmentConfig,
         genesis_config::ClusterType,
@@ -299,7 +299,7 @@ mod tests {
     use {
         super::*,
         clap::{Arg, Command},
-        solana_sdk::{hash::Hash, pubkey::Pubkey},
+        miraland_sdk::{hash::Hash, pubkey::Pubkey},
     };
 
     fn app<'ab>() -> Command<'ab> {
@@ -321,8 +321,8 @@ mod tests {
         assert_eq!(values_of(&matches, "multiple"), Some(vec![50, 39]));
         assert_eq!(values_of::<u64>(&matches, "single"), None);
 
-        let pubkey0 = solana_sdk::pubkey::new_rand();
-        let pubkey1 = solana_sdk::pubkey::new_rand();
+        let pubkey0 = miraland_sdk::pubkey::new_rand();
+        let pubkey1 = miraland_sdk::pubkey::new_rand();
         let matches = app().get_matches_from(vec![
             "test",
             "--multiple",
@@ -342,7 +342,7 @@ mod tests {
         assert_eq!(value_of(&matches, "single"), Some(50));
         assert_eq!(value_of::<u64>(&matches, "multiple"), None);
 
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let matches = app().get_matches_from(vec!["test", "--single", &pubkey.to_string()]);
         assert_eq!(value_of(&matches, "single"), Some(pubkey));
     }

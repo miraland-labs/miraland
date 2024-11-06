@@ -6,7 +6,7 @@ use {
     log::*,
     miraland_download_utils::download_file,
     regex::Regex,
-    solana_sdk::signature::{write_keypair_file, Keypair},
+    miraland_sdk::signature::{write_keypair_file, Keypair},
     std::{
         borrow::Cow,
         collections::{HashMap, HashSet},

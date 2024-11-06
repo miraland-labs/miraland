@@ -13,7 +13,7 @@ use {
     miraland_cli_config::Config,
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::client_error::Error as ClientError,
-    solana_sdk::{
+    miraland_sdk::{
         message::Message,
         native_token::lamports_to_mln,
         pubkey::Pubkey,
@@ -22,7 +22,7 @@ use {
         stake::{instruction::LockupArgs, state::Lockup},
         transaction::Transaction,
     },
-    solana_stake_program::stake_state,
+    miraland_stake_program::stake_state,
     std::{env, error::Error},
 };
 

@@ -22,9 +22,9 @@ use {
     miraland_cost_model::cost_model::CostModel,
     miraland_measure::measure_us,
     miraland_svm::transaction_error_metrics::TransactionErrorMetrics,
-    solana_program_runtime::compute_budget_processor::process_compute_budget_instructions,
-    solana_runtime::{bank::Bank, bank_forks::BankForks},
-    solana_sdk::{
+    miraland_program_runtime::compute_budget_processor::process_compute_budget_instructions,
+    miraland_runtime::{bank::Bank, bank_forks::BankForks},
+    miraland_sdk::{
         clock::MAX_PROCESSING_AGE,
         feature_set::{
             include_loaded_accounts_data_size_in_fee_calculation,
@@ -528,8 +528,8 @@ mod tests {
         },
         miraland_perf::packet::{to_packet_batches, PacketBatch, NUM_PACKETS},
         miraland_poh::poh_recorder::{PohRecorder, Record, WorkingBankEntry},
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             compute_budget::ComputeBudgetInstruction, hash::Hash, message::Message,
             poh_config::PohConfig, pubkey::Pubkey, signature::Keypair, signer::Signer,
             system_instruction, system_transaction, transaction::Transaction,

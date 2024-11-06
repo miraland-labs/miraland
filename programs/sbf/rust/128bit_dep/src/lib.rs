@@ -2,7 +2,7 @@
 
 #![allow(clippy::arithmetic_side_effects)]
 
-extern crate solana_program;
+extern crate miraland_program;
 
 pub fn uadd(x: u128, y: u128) -> u128 {
     x + y

@@ -2,13 +2,13 @@
 
 use {
     miraland_accounts_db::epoch_accounts_hash::EpochAccountsHash,
-    solana_runtime::{
+    miraland_runtime::{
         bank::Bank,
         bank_client::BankClient,
         bank_forks::BankForks,
         genesis_utils::{create_genesis_config_with_leader, GenesisConfigInfo},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::from_account,
         account_utils::StateMut,
         client::SyncClient,
@@ -25,8 +25,8 @@ use {
         },
         sysvar::{self, stake_history::StakeHistory},
     },
-    solana_stake_program::stake_state,
-    solana_vote_program::{
+    miraland_stake_program::stake_state,
+    miraland_vote_program::{
         vote_instruction,
         vote_state::{Vote, VoteInit, VoteState, VoteStateVersions},
     },
@@ -136,7 +136,7 @@ fn test_stake_create_and_split_single_signature() {
         ..
     } = create_genesis_config_with_leader(
         100_000_000_000,
-        &solana_sdk::pubkey::new_rand(),
+        &miraland_sdk::pubkey::new_rand(),
         1_000_000,
     );
 
@@ -153,7 +153,7 @@ fn test_stake_create_and_split_single_signature() {
     let lamports = {
         let rent = &bank.rent_collector().rent;
         let rent_exempt_reserve = rent.minimum_balance(StakeStateV2::size_of());
-        let minimum_delegation = solana_stake_program::get_minimum_delegation(&bank.feature_set);
+        let minimum_delegation = miraland_stake_program::get_minimum_delegation(&bank.feature_set);
         2 * (rent_exempt_reserve + minimum_delegation)
     };
 
@@ -212,7 +212,7 @@ fn test_stake_create_and_split_to_existing_system_account() {
         ..
     } = create_genesis_config_with_leader(
         100_000_000_000,
-        &solana_sdk::pubkey::new_rand(),
+        &miraland_sdk::pubkey::new_rand(),
         1_000_000,
     );
 
@@ -229,7 +229,7 @@ fn test_stake_create_and_split_to_existing_system_account() {
     let lamports = {
         let rent = &bank.rent_collector().rent;
         let rent_exempt_reserve = rent.minimum_balance(StakeStateV2::size_of());
-        let minimum_delegation = solana_stake_program::get_minimum_delegation(&bank.feature_set);
+        let minimum_delegation = miraland_stake_program::get_minimum_delegation(&bank.feature_set);
         2 * (rent_exempt_reserve + minimum_delegation)
     };
 
@@ -300,7 +300,7 @@ fn test_stake_account_lifetime() {
         ..
     } = create_genesis_config_with_leader(
         100_000_000_000,
-        &solana_sdk::pubkey::new_rand(),
+        &miraland_sdk::pubkey::new_rand(),
         2_000_000_000,
     );
     genesis_config.epoch_schedule = EpochSchedule::new(MINIMUM_SLOTS_PER_EPOCH);
@@ -321,7 +321,7 @@ fn test_stake_account_lifetime() {
         (
             rent.minimum_balance(VoteState::size_of()),
             rent.minimum_balance(StakeStateV2::size_of()),
-            solana_stake_program::get_minimum_delegation(&bank.feature_set),
+            miraland_stake_program::get_minimum_delegation(&bank.feature_set),
         )
     };
 
@@ -384,7 +384,7 @@ fn test_stake_account_lifetime() {
         &[stake_instruction::withdraw(
             &stake_pubkey,
             &stake_pubkey,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             1,
             None,
         )],
@@ -496,7 +496,7 @@ fn test_stake_account_lifetime() {
         &[stake_instruction::withdraw(
             &split_stake_pubkey,
             &stake_pubkey,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             split_starting_delegation + 1,
             None,
         )],
@@ -520,7 +520,7 @@ fn test_stake_account_lifetime() {
         &[stake_instruction::withdraw(
             &split_stake_pubkey,
             &stake_pubkey,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             split_balance,
             None,
         )],
@@ -537,7 +537,7 @@ fn test_stake_account_lifetime() {
         &[stake_instruction::withdraw(
             &split_stake_pubkey,
             &stake_pubkey,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             split_unstaked,
             None,
         )],
@@ -562,7 +562,7 @@ fn test_stake_account_lifetime() {
         &[stake_instruction::withdraw(
             &split_stake_pubkey,
             &stake_pubkey,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             split_remaining_balance,
             None,
         )],
@@ -590,7 +590,7 @@ fn test_create_stake_account_from_seed() {
         ..
     } = create_genesis_config_with_leader(
         100_000_000_000,
-        &solana_sdk::pubkey::new_rand(),
+        &miraland_sdk::pubkey::new_rand(),
         1_000_000,
     );
     let bank = Bank::new_with_bank_forks_for_tests(&genesis_config).0;
@@ -627,7 +627,7 @@ fn test_create_stake_account_from_seed() {
     let (balance, delegation) = {
         let rent = &bank.rent_collector().rent;
         let rent_exempt_reserve = rent.minimum_balance(StakeStateV2::size_of());
-        let minimum_delegation = solana_stake_program::get_minimum_delegation(&bank.feature_set);
+        let minimum_delegation = miraland_stake_program::get_minimum_delegation(&bank.feature_set);
         (rent_exempt_reserve + minimum_delegation, minimum_delegation)
     };
 

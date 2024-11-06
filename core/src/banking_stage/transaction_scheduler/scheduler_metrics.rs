@@ -1,6 +1,6 @@
 use {
     itertools::MinMaxResult,
-    solana_sdk::{clock::Slot, timing::AtomicInterval},
+    miraland_sdk::{clock::Slot, timing::AtomicInterval},
 };
 
 #[derive(Default)]

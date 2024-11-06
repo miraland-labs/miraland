@@ -23,7 +23,7 @@ enum-iterator = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_storage_proto"
+name = "miraland_storage_proto"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

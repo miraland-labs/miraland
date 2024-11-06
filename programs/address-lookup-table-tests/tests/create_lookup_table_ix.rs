@@ -1,8 +1,8 @@
 use {
     assert_matches::assert_matches,
     common::{assert_ix_error, overwrite_slot_hashes_with_slots, setup_test_context},
-    solana_program_test::*,
-    solana_sdk::{
+    miraland_program_test::*,
+    miraland_sdk::{
         address_lookup_table::{
             instruction::{create_lookup_table, create_lookup_table_signed},
             program::id,
@@ -25,7 +25,7 @@ pub async fn setup_test_context_without_authority_feature() -> ProgramTestContex
     let mut program_test = ProgramTest::new(
         "",
         id(),
-        Some(solana_address_lookup_table_program::processor::Entrypoint::vm),
+        Some(miraland_address_lookup_table_program::processor::Entrypoint::vm),
     );
     program_test.deactivate_feature(
         feature_set::relax_authority_signer_check_for_lookup_table_creation::id(),

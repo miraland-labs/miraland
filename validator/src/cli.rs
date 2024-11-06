@@ -33,7 +33,7 @@ use {
     },
     miraland_tpu_client::tpu_client::DEFAULT_TPU_CONNECTION_POOL_SIZE,
     miraland_unified_scheduler_pool::DefaultSchedulerPool,
-    solana_runtime::{
+    miraland_runtime::{
         snapshot_bank_utils::{
             DEFAULT_FULL_SNAPSHOT_ARCHIVE_INTERVAL_SLOTS,
             DEFAULT_INCREMENTAL_SNAPSHOT_ARCHIVE_INTERVAL_SLOTS,
@@ -44,7 +44,7 @@ use {
             DEFAULT_MAX_INCREMENTAL_SNAPSHOT_ARCHIVES_TO_RETAIN, SUPPORTED_ARCHIVE_COMPRESSION,
         },
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot, epoch_schedule::MINIMUM_SLOTS_PER_EPOCH, hash::Hash, quic::QUIC_PORT_OFFSET,
         rpc_port,
     },
@@ -2233,10 +2233,10 @@ impl DefaultArgs {
             rpc_threads: num_cpus::get().to_string(),
             rpc_niceness_adjustment: "0".to_string(),
             rpc_bigtable_timeout: "30".to_string(),
-            rpc_bigtable_instance_name: solana_storage_bigtable::DEFAULT_INSTANCE_NAME.to_string(),
-            rpc_bigtable_app_profile_id: solana_storage_bigtable::DEFAULT_APP_PROFILE_ID
+            rpc_bigtable_instance_name: miraland_storage_bigtable::DEFAULT_INSTANCE_NAME.to_string(),
+            rpc_bigtable_app_profile_id: miraland_storage_bigtable::DEFAULT_APP_PROFILE_ID
                 .to_string(),
-            rpc_bigtable_max_message_size: solana_storage_bigtable::DEFAULT_MAX_MESSAGE_SIZE
+            rpc_bigtable_max_message_size: miraland_storage_bigtable::DEFAULT_MAX_MESSAGE_SIZE
                 .to_string(),
             rpc_pubsub_worker_threads: "4".to_string(),
             accountsdb_repl_threads: num_cpus::get().to_string(),
@@ -2438,7 +2438,7 @@ pub fn test_app<'a>(version: &'a str, default_args: &'a DefaultTestArgs) -> App<
                 .value_name("APP_PROFILE_ID")
                 .takes_value(true)
                 .hidden(hidden_unless_forced())
-                .default_value(solana_storage_bigtable::DEFAULT_APP_PROFILE_ID)
+                .default_value(miraland_storage_bigtable::DEFAULT_APP_PROFILE_ID)
                 .help("Application profile id to use in Bigtable requests"),
         )
         .arg(

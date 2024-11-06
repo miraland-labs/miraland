@@ -3,7 +3,7 @@
 #![allow(clippy::arithmetic_side_effects)]
 
 use {
-    solana_program::{
+    miraland_program::{
         account_info::AccountInfo,
         entrypoint::{ProgramResult, HEAP_LENGTH, HEAP_START_ADDRESS},
         msg,
@@ -55,7 +55,7 @@ unsafe impl std::alloc::GlobalAlloc for BumpAllocator {
 #[global_allocator]
 static A: BumpAllocator = BumpAllocator;
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 #[allow(clippy::unnecessary_wraps)]
 pub fn process_instruction(
     _program_id: &Pubkey,

@@ -17,7 +17,7 @@ use {
     },
     log::*,
     memmap2::MmapMut,
-    solana_sdk::{
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount},
         clock::Slot,
         pubkey::Pubkey,
@@ -539,7 +539,7 @@ impl AppendVec {
     pub fn get_account_test(
         &self,
         offset: usize,
-    ) -> Option<(StoredMeta, solana_sdk::account::AccountSharedData)> {
+    ) -> Option<(StoredMeta, miraland_sdk::account::AccountSharedData)> {
         let (stored_account, _) = self.get_account(offset)?;
         let meta = stored_account.meta().clone();
         Some((meta, stored_account.to_account_shared_data()))
@@ -657,7 +657,7 @@ pub mod tests {
         assert_matches::assert_matches,
         memoffset::offset_of,
         rand::{thread_rng, Rng},
-        solana_sdk::{
+        miraland_sdk::{
             account::{accounts_equal, Account, AccountSharedData, WritableAccount},
             hash::Hash,
             timing::duration_as_ms,
@@ -1141,7 +1141,7 @@ pub mod tests {
             let mut av = AppendVec::new(path, true, 256);
             av.set_no_remove_on_drop();
 
-            let pubkey = solana_sdk::pubkey::new_rand();
+            let pubkey = miraland_sdk::pubkey::new_rand();
             let owner = Pubkey::default();
             let data_len = 3_u64;
             let mut account = AccountSharedData::new(0, data_len as usize, &owner);

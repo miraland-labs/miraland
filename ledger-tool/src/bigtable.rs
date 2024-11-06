@@ -27,8 +27,8 @@ use {
         TransactionDetails, UiTransactionEncoding, VersionedConfirmedBlock,
     },
     serde_json::json,
-    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
-    solana_storage_bigtable::CredentialType,
+    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
+    miraland_storage_bigtable::CredentialType,
     std::{
         cmp::min,
         collections::HashSet,
@@ -45,9 +45,9 @@ async fn upload(
     starting_slot: Option<Slot>,
     ending_slot: Option<Slot>,
     force_reupload: bool,
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config)
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config)
         .await
         .map_err(|err| format!("Failed to connect to storage: {err:?}"))?;
 
@@ -91,10 +91,10 @@ async fn upload(
 
 async fn delete_slots(
     slots: Vec<Slot>,
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let dry_run = config.read_only;
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config)
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config)
         .await
         .map_err(|err| format!("Failed to connect to storage: {err:?}"))?;
 
@@ -102,9 +102,9 @@ async fn delete_slots(
 }
 
 async fn first_available_block(
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config).await?;
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config).await?;
     match bigtable.get_first_available_block().await? {
         Some(block) => println!("{block}"),
         None => println!("No blocks available"),
@@ -117,9 +117,9 @@ async fn block(
     slot: Slot,
     output_format: OutputFormat,
     show_entries: bool,
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config)
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config)
         .await
         .map_err(|err| format!("Failed to connect to storage: {err:?}"))?;
 
@@ -163,9 +163,9 @@ async fn block(
 async fn entries(
     slot: Slot,
     output_format: OutputFormat,
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config)
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config)
         .await
         .map_err(|err| format!("Failed to connect to storage: {err:?}"))?;
 
@@ -181,9 +181,9 @@ async fn entries(
 async fn blocks(
     starting_slot: Slot,
     limit: usize,
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config)
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config)
         .await
         .map_err(|err| format!("Failed to connect to storage: {err:?}"))?;
 
@@ -197,10 +197,10 @@ async fn blocks(
 async fn compare_blocks(
     starting_slot: Slot,
     limit: usize,
-    config: solana_storage_bigtable::LedgerStorageConfig,
-    ref_config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
+    ref_config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let reference_bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(ref_config)
+    let reference_bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(ref_config)
         .await
         .map_err(|err| format!("failed to connect to reference bigtable: {err:?}"))?;
 
@@ -217,7 +217,7 @@ async fn compare_blocks(
         return Ok(());
     }
 
-    let owned_bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config)
+    let owned_bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config)
         .await
         .map_err(|err| format!("failed to connect to owned bigtable: {err:?}"))?;
     let owned_bigtable_slots = owned_bigtable
@@ -254,9 +254,9 @@ async fn confirm(
     signature: &Signature,
     verbose: bool,
     output_format: OutputFormat,
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config)
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config)
         .await
         .map_err(|err| format!("Failed to connect to storage: {err:?}"))?;
 
@@ -306,9 +306,9 @@ pub async fn transaction_history(
     verbose: bool,
     show_transactions: bool,
     query_chunk_size: usize,
-    config: solana_storage_bigtable::LedgerStorageConfig,
+    config: miraland_storage_bigtable::LedgerStorageConfig,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bigtable = solana_storage_bigtable::LedgerStorage::new_with_config(config).await?;
+    let bigtable = miraland_storage_bigtable::LedgerStorage::new_with_config(config).await?;
 
     let mut loaded_block: Option<(Slot, ConfirmedBlock)> = None;
     while limit > 0 {
@@ -562,7 +562,7 @@ async fn copy(args: CopyArgs) -> Result<(), Box<dyn std::error::Error>> {
                                         continue;
                                     }
                                 },
-                                Err(solana_storage_bigtable::Error::BlockNotFound(slot)) => {
+                                Err(miraland_storage_bigtable::Error::BlockNotFound(slot)) => {
                                     debug!("block not found, slot: {}", slot);
                                     block_not_found_slots_clone.lock().unwrap().push(slot);
                                     continue;
@@ -637,23 +637,23 @@ struct GetBigtableArgs {
 
 async fn get_bigtable(
     args: GetBigtableArgs,
-) -> solana_storage_bigtable::Result<solana_storage_bigtable::LedgerStorage> {
+) -> miraland_storage_bigtable::Result<miraland_storage_bigtable::LedgerStorage> {
     if let Some(endpoint) = args.emulated_source {
-        solana_storage_bigtable::LedgerStorage::new_for_emulator(
+        miraland_storage_bigtable::LedgerStorage::new_for_emulator(
             &args.instance_name,
             &args.app_profile_id,
             &endpoint,
             args.timeout,
         )
     } else {
-        solana_storage_bigtable::LedgerStorage::new_with_config(
-            solana_storage_bigtable::LedgerStorageConfig {
+        miraland_storage_bigtable::LedgerStorage::new_with_config(
+            miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: args.read_only,
                 timeout: args.timeout,
                 credential_type: CredentialType::Filepath(Some(args.crediential_path.unwrap())),
                 instance_name: args.instance_name,
                 app_profile_id: args.app_profile_id,
-                max_message_size: solana_storage_bigtable::DEFAULT_MAX_MESSAGE_SIZE,
+                max_message_size: miraland_storage_bigtable::DEFAULT_MAX_MESSAGE_SIZE,
             },
         )
         .await
@@ -677,7 +677,7 @@ impl BigTableSubCommand for App<'_, '_> {
                         .long("rpc-bigtable-instance-name")
                         .takes_value(true)
                         .value_name("INSTANCE_NAME")
-                        .default_value(solana_storage_bigtable::DEFAULT_INSTANCE_NAME)
+                        .default_value(miraland_storage_bigtable::DEFAULT_INSTANCE_NAME)
                         .help("Name of the target Bigtable instance"),
                 )
                 .arg(
@@ -686,7 +686,7 @@ impl BigTableSubCommand for App<'_, '_> {
                         .long("rpc-bigtable-app-profile-id")
                         .takes_value(true)
                         .value_name("APP_PROFILE_ID")
-                        .default_value(solana_storage_bigtable::DEFAULT_APP_PROFILE_ID)
+                        .default_value(miraland_storage_bigtable::DEFAULT_APP_PROFILE_ID)
                         .help("Bigtable application profile id to use in requests"),
                 )
                 .subcommand(
@@ -816,7 +816,7 @@ impl BigTableSubCommand for App<'_, '_> {
                                 .long("reference-instance-name")
                                 .takes_value(true)
                                 .value_name("INSTANCE_NAME")
-                                .default_value(solana_storage_bigtable::DEFAULT_INSTANCE_NAME)
+                                .default_value(miraland_storage_bigtable::DEFAULT_INSTANCE_NAME)
                                 .help("Name of the reference Bigtable instance to compare to"),
                         )
                         .arg(
@@ -824,7 +824,7 @@ impl BigTableSubCommand for App<'_, '_> {
                                 .long("reference-app-profile-id")
                                 .takes_value(true)
                                 .value_name("APP_PROFILE_ID")
-                                .default_value(solana_storage_bigtable::DEFAULT_APP_PROFILE_ID)
+                                .default_value(miraland_storage_bigtable::DEFAULT_APP_PROFILE_ID)
                                 .help(
                                     "Reference Bigtable application profile id to use in requests",
                                 ),
@@ -960,7 +960,7 @@ impl BigTableSubCommand for App<'_, '_> {
                                 .long("source-instance-name")
                                 .takes_value(true)
                                 .value_name("SOURCE_INSTANCE_NAME")
-                                .default_value(solana_storage_bigtable::DEFAULT_INSTANCE_NAME)
+                                .default_value(miraland_storage_bigtable::DEFAULT_INSTANCE_NAME)
                                 .help("Source Bigtable instance name"),
                         )
                         .arg(
@@ -968,7 +968,7 @@ impl BigTableSubCommand for App<'_, '_> {
                                 .long("source-app-profile-id")
                                 .takes_value(true)
                                 .value_name("SOURCE_APP_PROFILE_ID")
-                                .default_value(solana_storage_bigtable::DEFAULT_APP_PROFILE_ID)
+                                .default_value(miraland_storage_bigtable::DEFAULT_APP_PROFILE_ID)
                                 .help("Source Bigtable app profile id"),
                         )
                         .arg(
@@ -995,7 +995,7 @@ impl BigTableSubCommand for App<'_, '_> {
                                 .long("destination-instance-name")
                                 .takes_value(true)
                                 .value_name("DESTINATION_INSTANCE_NAME")
-                                .default_value(solana_storage_bigtable::DEFAULT_INSTANCE_NAME)
+                                .default_value(miraland_storage_bigtable::DEFAULT_INSTANCE_NAME)
                                 .help("Destination Bigtable instance name"),
                         )
                         .arg(
@@ -1003,7 +1003,7 @@ impl BigTableSubCommand for App<'_, '_> {
                                 .long("destination-app-profile-id")
                                 .takes_value(true)
                                 .value_name("DESTINATION_APP_PROFILE_ID")
-                                .default_value(solana_storage_bigtable::DEFAULT_APP_PROFILE_ID)
+                                .default_value(miraland_storage_bigtable::DEFAULT_APP_PROFILE_ID)
                                 .help("Destination Bigtable app profile id"),
                         )
                         .arg(
@@ -1083,13 +1083,13 @@ pub fn bigtable_process_command(ledger_path: &Path, matches: &ArgMatches<'_>) {
         matches,
         sub_matches,
         "rpc_bigtable_instance_name",
-        solana_storage_bigtable::DEFAULT_INSTANCE_NAME,
+        miraland_storage_bigtable::DEFAULT_INSTANCE_NAME,
     );
     let app_profile_id = get_global_subcommand_arg(
         matches,
         sub_matches,
         "rpc_bigtable_app_profile_id",
-        solana_storage_bigtable::DEFAULT_APP_PROFILE_ID,
+        miraland_storage_bigtable::DEFAULT_APP_PROFILE_ID,
     );
 
     let future = match (subcommand, sub_matches) {
@@ -1102,11 +1102,11 @@ pub fn bigtable_process_command(ledger_path: &Path, matches: &ArgMatches<'_>) {
                 arg_matches,
                 AccessType::Secondary,
             );
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: false,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
             runtime.block_on(upload(
                 blockstore,
@@ -1118,52 +1118,52 @@ pub fn bigtable_process_command(ledger_path: &Path, matches: &ArgMatches<'_>) {
         }
         ("delete-slots", Some(arg_matches)) => {
             let slots = values_t_or_exit!(arg_matches, "slots", Slot);
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: !arg_matches.is_present("force"),
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
             runtime.block_on(delete_slots(slots, config))
         }
         ("first-available-block", Some(_arg_matches)) => {
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
             runtime.block_on(first_available_block(config))
         }
         ("block", Some(arg_matches)) => {
             let slot = value_t_or_exit!(arg_matches, "slot", Slot);
             let show_entries = arg_matches.is_present("show_entries");
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
             runtime.block_on(block(slot, output_format, show_entries, config))
         }
         ("entries", Some(arg_matches)) => {
             let slot = value_t_or_exit!(arg_matches, "slot", Slot);
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
             runtime.block_on(entries(slot, output_format, config))
         }
         ("blocks", Some(arg_matches)) => {
             let starting_slot = value_t_or_exit!(arg_matches, "starting_slot", Slot);
             let limit = value_t_or_exit!(arg_matches, "limit", usize);
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
 
             runtime.block_on(blocks(starting_slot, limit, config))
@@ -1171,11 +1171,11 @@ pub fn bigtable_process_command(ledger_path: &Path, matches: &ArgMatches<'_>) {
         ("compare-blocks", Some(arg_matches)) => {
             let starting_slot = value_t_or_exit!(arg_matches, "starting_slot", Slot);
             let limit = value_t_or_exit!(arg_matches, "limit", usize);
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
 
             let credential_path = Some(value_t_or_exit!(
@@ -1188,12 +1188,12 @@ pub fn bigtable_process_command(ledger_path: &Path, matches: &ArgMatches<'_>) {
                 value_t_or_exit!(arg_matches, "reference_instance_name", String);
             let ref_app_profile_id =
                 value_t_or_exit!(arg_matches, "reference_app_profile_id", String);
-            let ref_config = solana_storage_bigtable::LedgerStorageConfig {
+            let ref_config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 credential_type: CredentialType::Filepath(credential_path),
                 instance_name: ref_instance_name,
                 app_profile_id: ref_app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
 
             runtime.block_on(compare_blocks(starting_slot, limit, config, ref_config))
@@ -1204,11 +1204,11 @@ pub fn bigtable_process_command(ledger_path: &Path, matches: &ArgMatches<'_>) {
                 .unwrap()
                 .parse()
                 .expect("Invalid signature");
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
 
             runtime.block_on(confirm(&signature, verbose, output_format, config))
@@ -1224,11 +1224,11 @@ pub fn bigtable_process_command(ledger_path: &Path, matches: &ArgMatches<'_>) {
                 .value_of("until")
                 .map(|signature| signature.parse().expect("Invalid signature"));
             let show_transactions = arg_matches.is_present("show_transactions");
-            let config = solana_storage_bigtable::LedgerStorageConfig {
+            let config = miraland_storage_bigtable::LedgerStorageConfig {
                 read_only: true,
                 instance_name,
                 app_profile_id,
-                ..solana_storage_bigtable::LedgerStorageConfig::default()
+                ..miraland_storage_bigtable::LedgerStorageConfig::default()
             };
 
             runtime.block_on(transaction_history(

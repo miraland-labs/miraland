@@ -15,8 +15,8 @@ use {
     miraland_perf::{data_budget::DataBudget, packet::Packet},
     miraland_poh::poh_recorder::PohRecorder,
     miraland_streamer::sendmmsg::batch_send,
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{pubkey::Pubkey, transport::TransportError},
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{pubkey::Pubkey, transport::TransportError},
     std::{
         iter::repeat,
         net::{SocketAddr, UdpSocket},
@@ -281,8 +281,8 @@ mod tests {
         miraland_perf::packet::PacketFlags,
         miraland_poh::{poh_recorder::create_test_recorder, poh_service::PohService},
         miraland_streamer::recvmmsg::recv_mmsg,
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             hash::Hash, poh_config::PohConfig, signature::Keypair, signer::Signer,
             system_transaction, transaction::VersionedTransaction,
         },
@@ -354,7 +354,7 @@ mod tests {
         // Create `PacketBatch` with 1 unprocessed packet
         let tx = system_transaction::transfer(
             &Keypair::new(),
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             1,
             Hash::new_unique(),
         );
@@ -421,7 +421,7 @@ mod tests {
         // packets are deserialized upon receiving, failed packets will not be
         // forwarded; Therefore need to create real packets here.
         let keypair = Keypair::new();
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
 
         let fwd_block_hash = Hash::new_unique();
         let forwarded_packet = {

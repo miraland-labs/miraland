@@ -1,4 +1,4 @@
-use {miraland_entry::entry::EntrySummary, solana_sdk::clock::Slot, std::sync::Arc};
+use {miraland_entry::entry::EntrySummary, miraland_sdk::clock::Slot, std::sync::Arc};
 
 pub trait EntryNotifier {
     fn notify_entry(

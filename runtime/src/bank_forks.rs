@@ -11,8 +11,8 @@ use {
     },
     log::*,
     miraland_measure::measure::Measure,
-    solana_program_runtime::loaded_programs::{BlockRelation, ForkGraph},
-    solana_sdk::{
+    miraland_program_runtime::loaded_programs::{BlockRelation, ForkGraph},
+    miraland_sdk::{
         clock::{Epoch, Slot},
         hash::Hash,
         timing,
@@ -724,14 +724,14 @@ mod tests {
         },
         assert_matches::assert_matches,
         miraland_accounts_db::epoch_accounts_hash::EpochAccountsHash,
-        solana_sdk::{
+        miraland_sdk::{
             clock::UnixTimestamp,
             epoch_schedule::EpochSchedule,
             hash::Hash,
             pubkey::Pubkey,
             signature::{Keypair, Signer},
         },
-        solana_vote_program::vote_state::BlockTimestamp,
+        miraland_vote_program::vote_state::BlockTimestamp,
         std::{sync::atomic::Ordering::Relaxed, time::Duration},
     };
 

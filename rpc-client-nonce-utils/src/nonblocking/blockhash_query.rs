@@ -7,7 +7,7 @@ use {
         offline::*,
     },
     miraland_rpc_client::nonblocking::rpc_client::RpcClient,
-    solana_sdk::{commitment_config::CommitmentConfig, hash::Hash, pubkey::Pubkey},
+    miraland_sdk::{commitment_config::CommitmentConfig, hash::Hash, pubkey::Pubkey},
 };
 
 #[derive(Debug, PartialEq, Eq)]
@@ -124,7 +124,7 @@ mod tests {
             response::{Response, RpcBlockhash, RpcResponseContext},
         },
         serde_json::{self, json},
-        solana_sdk::{
+        miraland_sdk::{
             account::Account,
             fee_calculator::FeeCalculator,
             hash::hash,

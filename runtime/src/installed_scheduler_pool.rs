@@ -23,8 +23,8 @@
 use {
     crate::bank::Bank,
     log::*,
-    solana_program_runtime::timings::ExecuteTimings,
-    solana_sdk::{
+    miraland_program_runtime::timings::ExecuteTimings,
+    miraland_sdk::{
         hash::Hash,
         slot_history::Slot,
         transaction::{Result, SanitizedTransaction},
@@ -428,7 +428,7 @@ mod tests {
         },
         assert_matches::assert_matches,
         mockall::Sequence,
-        solana_sdk::system_transaction,
+        miraland_sdk::system_transaction,
         std::sync::Mutex,
     };
 
@@ -558,7 +558,7 @@ mod tests {
         } = create_genesis_config(10_000);
         let tx0 = SanitizedTransaction::from_transaction_for_tests(system_transaction::transfer(
             &mint_keypair,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             2,
             genesis_config.hash(),
         ));

@@ -26,15 +26,15 @@ pub const QUIC_KEEP_ALIVE: Duration = Duration::from_secs(1);
 pub const QUIC_CONNECTION_HANDSHAKE_TIMEOUT: Duration = Duration::from_secs(60);
 
 /// The receive window for QUIC connection from unstaked nodes is
-/// set to this ratio times [`solana_sdk::packet::PACKET_DATA_SIZE`]
+/// set to this ratio times [`miraland_sdk::packet::PACKET_DATA_SIZE`]
 pub const QUIC_UNSTAKED_RECEIVE_WINDOW_RATIO: u64 = 128;
 
 /// The receive window for QUIC connection from minimum staked nodes is
-/// set to this ratio times [`solana_sdk::packet::PACKET_DATA_SIZE`]
+/// set to this ratio times [`miraland_sdk::packet::PACKET_DATA_SIZE`]
 pub const QUIC_MIN_STAKED_RECEIVE_WINDOW_RATIO: u64 = 128;
 
 /// The receive window for QUIC connection from maximum staked nodes is
-/// set to this ratio times [`solana_sdk::packet::PACKET_DATA_SIZE`]
+/// set to this ratio times [`miraland_sdk::packet::PACKET_DATA_SIZE`]
 pub const QUIC_MAX_STAKED_RECEIVE_WINDOW_RATIO: u64 = 512;
 
 pub trait NotifyKeyUpdate {

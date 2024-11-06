@@ -7,7 +7,7 @@ use {
     clap::{crate_description, crate_name, Arg, Command},
     miraland_measure::measure::Measure,
     miraland_perf::perf_libs,
-    solana_sdk::hash::hash,
+    miraland_sdk::hash::hash,
 };
 
 fn main() {

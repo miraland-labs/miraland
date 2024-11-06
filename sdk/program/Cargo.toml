@@ -96,7 +96,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-name = "solana_program"
+name = "miraland_program"
 
 [features]
 default = []

@@ -23,13 +23,13 @@ use {
     },
     rand::Rng,
     serde_json::{json, Value},
-    solana_runtime::{
+    miraland_runtime::{
         bank::Bank,
         bank_forks::BankForks,
         commitment::{BlockCommitmentCache, CommitmentSlots},
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         commitment_config::{CommitmentConfig, CommitmentLevel},
         native_token::mln_to_lamports,
@@ -66,7 +66,7 @@ fn test_rpc_client() {
     let test_validator =
         TestValidator::with_no_fees(alice.pubkey(), None, SocketAddrSpace::Unspecified);
 
-    let bob_pubkey = solana_sdk::pubkey::new_rand();
+    let bob_pubkey = miraland_sdk::pubkey::new_rand();
 
     let client = RpcClient::new(test_validator.rpc_url());
 

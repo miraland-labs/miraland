@@ -8,4 +8,4 @@
 //! [`ZK Token proof`]: https://edge.docs.solana.com/developing/runtime-facilities/zk-token-proof
 
 // Program Id of the ZkToken Proof program
-solana_program::declare_id!("ZkTokenProof1111111111111111111111111111111");
+miraland_program::declare_id!("ZkTokenProof1111111111111111111111111111111");

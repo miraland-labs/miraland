@@ -8,8 +8,8 @@ use {
         shred::{self, ShredData},
     },
     miraland_poh::poh_recorder::WorkingBankEntry,
-    solana_runtime::bank::Bank,
-    solana_sdk::{clock::Slot, hash::Hash},
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{clock::Slot, hash::Hash},
     std::{
         sync::Arc,
         time::{Duration, Instant},
@@ -134,7 +134,7 @@ mod tests {
         super::*,
         crossbeam_channel::unbounded,
         miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
-        solana_sdk::{
+        miraland_sdk::{
             genesis_config::GenesisConfig, pubkey::Pubkey, system_transaction,
             transaction::Transaction,
         },
@@ -149,7 +149,7 @@ mod tests {
         let bank0 = Arc::new(Bank::new_for_tests(&genesis_config));
         let tx = system_transaction::transfer(
             &mint_keypair,
-            &solana_sdk::pubkey::new_rand(),
+            &miraland_sdk::pubkey::new_rand(),
             1,
             genesis_config.hash(),
         );

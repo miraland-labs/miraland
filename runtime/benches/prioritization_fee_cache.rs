@@ -3,13 +3,13 @@
 
 // use {
 //     rand::{thread_rng, Rng},
-//     solana_runtime::{
+//     miraland_runtime::{
 //         bank::Bank,
 //         bank_forks::BankForks,
 //         genesis_utils::{create_genesis_config, GenesisConfigInfo},
 //         prioritization_fee_cache::*,
 //     },
-//     solana_sdk::{
+//     miraland_sdk::{
 //         compute_budget::ComputeBudgetInstruction,
 //         message::Message,
 //         pubkey::Pubkey,
@@ -102,7 +102,7 @@
 //     let bank0 = Bank::new_for_benches(&genesis_config);
 //     let bank_forks = BankForks::new_rw_arc(bank0);
 //     let bank = bank_forks.read().unwrap().working_bank();
-//     let collector = solana_sdk::pubkey::new_rand();
+//     let collector = miraland_sdk::pubkey::new_rand();
 //     let banks = (1..=NUM_SLOTS)
 //         .map(|n| Arc::new(Bank::new_from_parent(bank.clone(), &collector, n as u64)))
 //         .collect::<Vec<_>>();

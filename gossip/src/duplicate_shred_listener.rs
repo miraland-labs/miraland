@@ -74,7 +74,7 @@ mod tests {
         },
         miraland_ledger::shred::Shredder,
         miraland_streamer::socket::SocketAddrSpace,
-        solana_sdk::signature::{Keypair, Signer},
+        miraland_sdk::signature::{Keypair, Signer},
         std::sync::{
             atomic::{AtomicU32, Ordering},
             Arc,

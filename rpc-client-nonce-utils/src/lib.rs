@@ -8,7 +8,7 @@ pub use crate::nonblocking::{
 };
 use {
     miraland_rpc_client::rpc_client::RpcClient,
-    solana_sdk::{account::Account, commitment_config::CommitmentConfig, pubkey::Pubkey},
+    miraland_sdk::{account::Account, commitment_config::CommitmentConfig, pubkey::Pubkey},
 };
 
 /// Get a nonce account from the network.

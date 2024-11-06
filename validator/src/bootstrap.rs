@@ -16,11 +16,11 @@ use {
     miraland_streamer::socket::SocketAddrSpace,
     rand::{seq::SliceRandom, thread_rng, Rng},
     rayon::prelude::*,
-    solana_runtime::{
+    miraland_runtime::{
         snapshot_archive_info::SnapshotArchiveInfoGetter, snapshot_package::SnapshotKind,
         snapshot_utils,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -270,7 +270,7 @@ fn check_vote_account(
         .value
         .ok_or_else(|| format!("vote account does not exist: {vote_account_address}"))?;
 
-    if vote_account.owner != solana_vote_program::id() {
+    if vote_account.owner != miraland_vote_program::id() {
         return Err(format!(
             "not a vote account (owned by {}): {}",
             vote_account.owner, vote_account_address
@@ -283,7 +283,7 @@ fn check_vote_account(
         .value
         .ok_or_else(|| format!("identity account does not exist: {identity_pubkey}"))?;
 
-    let vote_state = solana_vote_program::vote_state::from(&vote_account);
+    let vote_state = miraland_vote_program::vote_state::from(&vote_account);
     if let Some(vote_state) = vote_state {
         if vote_state.authorized_voters().is_empty() {
             return Err("Vote account not yet initialized".to_string());
@@ -1254,7 +1254,7 @@ fn download_snapshot(
     };
     let desired_snapshot_hash = (
         desired_snapshot_hash.0,
-        solana_runtime::snapshot_hash::SnapshotHash(desired_snapshot_hash.1),
+        miraland_runtime::snapshot_hash::SnapshotHash(desired_snapshot_hash.1),
     );
     download_snapshot_archive(
         &rpc_contact_info.rpc().map_err(|err| format!("{err:?}"))?,

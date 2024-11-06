@@ -15,8 +15,8 @@ use {
     },
     postgres::{Client, Statement},
     postgres_types::{FromSql, ToSql},
-    solana_runtime::bank::RewardType,
-    solana_sdk::{
+    miraland_runtime::bank::RewardType,
+    miraland_sdk::{
         instruction::CompiledInstruction,
         message::{
             v0::{self, LoadedAddresses, MessageAddressTableLookup},
@@ -692,7 +692,7 @@ pub(crate) mod tests {
         super::*,
         miraland_account_decoder::parse_token::UiTokenAmount,
         miraland_transaction_status::InnerInstruction,
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             message::VersionedMessage,
             pubkey::Pubkey,

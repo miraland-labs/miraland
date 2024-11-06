@@ -10,7 +10,7 @@ use {
         self, PacketBatchReceiver, PacketBatchSender, StreamerReceiveStats,
     },
     miraland_tpu_client::tpu_client::DEFAULT_TPU_ENABLE_UDP,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{DEFAULT_TICKS_PER_SLOT, HOLD_TRANSACTIONS_SLOT_OFFSET},
         packet::{Packet, PacketFlags},
     },

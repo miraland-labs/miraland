@@ -1,4 +1,4 @@
-use {miraland_client::connection_cache::Protocol, solana_sdk::clock::Slot, std::net::SocketAddr};
+use {miraland_client::connection_cache::Protocol, miraland_sdk::clock::Slot, std::net::SocketAddr};
 
 pub trait TpuInfo {
     fn refresh_recent_peers(&mut self);

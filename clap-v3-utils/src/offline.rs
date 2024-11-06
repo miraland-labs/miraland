@@ -1,7 +1,7 @@
 use {
     crate::{input_parsers::signer::PubkeySignature, ArgConstant},
     clap::{value_parser, Arg, Command},
-    solana_sdk::hash::Hash,
+    miraland_sdk::hash::Hash,
 };
 
 pub const BLOCKHASH_ARG: ArgConstant<'static> = ArgConstant {

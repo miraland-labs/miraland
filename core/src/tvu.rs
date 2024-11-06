@@ -44,12 +44,12 @@ use {
         rpc_subscriptions::RpcSubscriptions,
     },
     miraland_turbine::retransmit_stage::RetransmitStage,
-    solana_runtime::{
+    miraland_runtime::{
         accounts_background_service::AbsRequestSender, bank_forks::BankForks,
         commitment::BlockCommitmentCache, prioritization_fee_cache::PrioritizationFeeCache,
     },
-    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Keypair},
-    solana_vote::vote_sender_types::ReplayVoteSender,
+    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Keypair},
+    miraland_vote::vote_sender_types::ReplayVoteSender,
     std::{
         collections::HashSet,
         net::{SocketAddr, UdpSocket},
@@ -387,8 +387,8 @@ pub mod tests {
         miraland_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
         miraland_streamer::socket::SocketAddrSpace,
         serial_test::serial,
-        solana_runtime::bank::Bank,
-        solana_sdk::signature::{Keypair, Signer},
+        miraland_runtime::bank::Bank,
+        miraland_sdk::signature::{Keypair, Signer},
         std::sync::atomic::{AtomicU64, Ordering},
     };
 

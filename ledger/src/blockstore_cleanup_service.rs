@@ -10,7 +10,7 @@ use {
         blockstore_db::{Result as BlockstoreResult, DATA_SHRED_CF},
     },
     miraland_measure::measure::Measure,
-    solana_sdk::clock::{Slot, DEFAULT_MS_PER_SLOT},
+    miraland_sdk::clock::{Slot, DEFAULT_MS_PER_SLOT},
     std::{
         string::ToString,
         sync::{

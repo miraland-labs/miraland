@@ -5,7 +5,7 @@ use {
     async_trait::async_trait, core::iter::repeat,
     miraland_connection_cache::nonblocking::client_connection::ClientConnection,
     miraland_streamer::nonblocking::sendmmsg::batch_send,
-    solana_sdk::transport::Result as TransportResult, std::net::SocketAddr, tokio::net::UdpSocket,
+    miraland_sdk::transport::Result as TransportResult, std::net::SocketAddr, tokio::net::UdpSocket,
 };
 
 pub struct UdpClientConnection {
@@ -47,7 +47,7 @@ mod tests {
     use {
         super::*,
         miraland_streamer::nonblocking::recvmmsg::recv_mmsg,
-        solana_sdk::packet::{Packet, PACKET_DATA_SIZE},
+        miraland_sdk::packet::{Packet, PACKET_DATA_SIZE},
         std::net::{IpAddr, Ipv4Addr},
         tokio::net::UdpSocket,
     };

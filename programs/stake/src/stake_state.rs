@@ -5,12 +5,12 @@
 
 #[deprecated(
     since = "1.8.0",
-    note = "Please use `solana_sdk::stake::state` or `solana_program::stake::state` instead"
+    note = "Please use `miraland_sdk::stake::state` or `miraland_program::stake::state` instead"
 )]
-pub use solana_sdk::stake::state::*;
+pub use miraland_sdk::stake::state::*;
 use {
-    solana_program_runtime::{ic_msg, invoke_context::InvokeContext},
-    solana_sdk::{
+    miraland_program_runtime::{ic_msg, invoke_context::InvokeContext},
+    miraland_sdk::{
         account::{AccountSharedData, ReadableAccount, WritableAccount},
         account_utils::StateMut,
         clock::{Clock, Epoch},
@@ -29,7 +29,7 @@ use {
             BorrowedAccount, IndexOfAccount, InstructionContext, TransactionContext,
         },
     },
-    solana_vote_program::vote_state::{self, VoteState, VoteStateVersions},
+    miraland_vote_program::vote_state::{self, VoteState, VoteStateVersions},
     std::{cmp::Ordering, collections::HashSet, convert::TryFrom},
 };
 
@@ -589,7 +589,7 @@ pub fn delegate(
 ) -> Result<(), InstructionError> {
     let vote_account = instruction_context
         .try_borrow_instruction_account(transaction_context, vote_account_index)?;
-    if *vote_account.get_owner() != solana_vote_program::id() {
+    if *vote_account.get_owner() != miraland_vote_program::id() {
         return Err(InstructionError::IncorrectProgramId);
     }
     let vote_pubkey = *vote_account.get_key();
@@ -990,11 +990,11 @@ pub fn redelegate(
     // validate the provided vote account
     let vote_account = instruction_context
         .try_borrow_instruction_account(transaction_context, vote_account_index)?;
-    if *vote_account.get_owner() != solana_vote_program::id() {
+    if *vote_account.get_owner() != miraland_vote_program::id() {
         ic_msg!(
             invoke_context,
             "expected vote account owner to be {}, not {}",
-            solana_vote_program::id(),
+            miraland_vote_program::id(),
             *vote_account.get_owner()
         );
         return Err(InstructionError::IncorrectProgramId);
@@ -1188,7 +1188,7 @@ pub(crate) fn deactivate_delinquent(
     )?;
     let delinquent_vote_account = instruction_context
         .try_borrow_instruction_account(transaction_context, delinquent_vote_account_index)?;
-    if *delinquent_vote_account.get_owner() != solana_vote_program::id() {
+    if *delinquent_vote_account.get_owner() != miraland_vote_program::id() {
         return Err(InstructionError::IncorrectProgramId);
     }
     let delinquent_vote_state = delinquent_vote_account
@@ -1197,7 +1197,7 @@ pub(crate) fn deactivate_delinquent(
 
     let reference_vote_account = instruction_context
         .try_borrow_instruction_account(transaction_context, reference_vote_account_index)?;
-    if *reference_vote_account.get_owner() != solana_vote_program::id() {
+    if *reference_vote_account.get_owner() != miraland_vote_program::id() {
         return Err(InstructionError::IncorrectProgramId);
     }
     let reference_vote_state = reference_vote_account
@@ -1800,8 +1800,8 @@ mod tests {
     use {
         super::*,
         proptest::prelude::*,
-        solana_program_runtime::with_mock_invoke_context,
-        solana_sdk::{
+        miraland_program_runtime::with_mock_invoke_context,
+        miraland_sdk::{
             account::{create_account_shared_data_for_test, AccountSharedData},
             epoch_schedule::EpochSchedule,
             native_token,
@@ -1814,7 +1814,7 @@ mod tests {
 
     #[test]
     fn test_authorized_authorize() {
-        let staker = solana_sdk::pubkey::new_rand();
+        let staker = miraland_sdk::pubkey::new_rand();
         let mut authorized = Authorized::auto(&staker);
         let mut signers = HashSet::new();
         assert_eq!(
@@ -1830,9 +1830,9 @@ mod tests {
 
     #[test]
     fn test_authorized_authorize_with_custodian() {
-        let staker = solana_sdk::pubkey::new_rand();
-        let custodian = solana_sdk::pubkey::new_rand();
-        let invalid_custodian = solana_sdk::pubkey::new_rand();
+        let staker = miraland_sdk::pubkey::new_rand();
+        let custodian = miraland_sdk::pubkey::new_rand();
+        let invalid_custodian = miraland_sdk::pubkey::new_rand();
         let mut authorized = Authorized::auto(&staker);
         let mut signers = HashSet::new();
         signers.insert(staker);
@@ -2960,7 +2960,7 @@ mod tests {
 
     #[test]
     fn test_lockup_is_expired() {
-        let custodian = solana_sdk::pubkey::new_rand();
+        let custodian = miraland_sdk::pubkey::new_rand();
         let lockup = Lockup {
             epoch: 1,
             unix_timestamp: 1,
@@ -3021,7 +3021,7 @@ mod tests {
         panic!(
             "stake minimum_balance: {} lamports, {} MLN",
             minimum_balance,
-            minimum_balance as f64 / solana_sdk::native_token::LAMPORTS_PER_MLN as f64
+            minimum_balance as f64 / miraland_sdk::native_token::LAMPORTS_PER_MLN as f64
         );
     }
 

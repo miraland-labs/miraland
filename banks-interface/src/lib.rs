@@ -1,8 +1,7 @@
 #![allow(deprecated)]
 
 use {
-    serde::{Deserialize, Serialize},
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         clock::Slot,
         commitment_config::CommitmentLevel,
@@ -15,6 +14,7 @@ use {
         transaction::{self, TransactionError, VersionedTransaction},
         transaction_context::TransactionReturnData,
     },
+    serde::{Deserialize, Serialize},
 };
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]

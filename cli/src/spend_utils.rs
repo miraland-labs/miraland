@@ -6,7 +6,7 @@ use {
     clap::ArgMatches,
     miraland_clap_utils::{input_parsers::lamports_of_mln, offline::SIGN_ONLY_ARG},
     miraland_rpc_client::rpc_client::RpcClient,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig, hash::Hash, message::Message,
         native_token::lamports_to_mln, pubkey::Pubkey,
     },

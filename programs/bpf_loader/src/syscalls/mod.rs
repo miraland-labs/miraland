@@ -11,7 +11,7 @@ pub use self::{
 };
 #[allow(deprecated)]
 use {
-    solana_program_runtime::{
+    miraland_program_runtime::{
         compute_budget::ComputeBudget, ic_logger_msg, ic_msg, invoke_context::InvokeContext,
         stable_log, timings::ExecuteTimings,
     },
@@ -21,7 +21,7 @@ use {
         program::{BuiltinFunction, BuiltinProgram, FunctionRegistry},
         vm::Config,
     },
-    solana_sdk::{
+    miraland_sdk::{
         account_info::AccountInfo,
         alt_bn128::prelude::{
             alt_bn128_addition, alt_bn128_multiplication, alt_bn128_pairing, AltBn128Error,
@@ -860,7 +860,7 @@ declare_builtin_function!(
         _arg5: u64,
         memory_mapping: &mut MemoryMapping,
     ) -> Result<u64, Error> {
-        use solana_zk_token_sdk::curve25519::{curve_syscall_traits::*, edwards, ristretto};
+        use miraland_zk_token_sdk::curve25519::{curve_syscall_traits::*, edwards, ristretto};
         match curve_id {
             CURVE25519_EDWARDS => {
                 let cost = invoke_context
@@ -917,7 +917,7 @@ declare_builtin_function!(
         result_point_addr: u64,
         memory_mapping: &mut MemoryMapping,
     ) -> Result<u64, Error> {
-        use solana_zk_token_sdk::curve25519::{
+        use miraland_zk_token_sdk::curve25519::{
             curve_syscall_traits::*, edwards, ristretto, scalar,
         };
         match curve_id {
@@ -1118,7 +1118,7 @@ declare_builtin_function!(
         result_point_addr: u64,
         memory_mapping: &mut MemoryMapping,
     ) -> Result<u64, Error> {
-        use solana_zk_token_sdk::curve25519::{
+        use miraland_zk_token_sdk::curve25519::{
             curve_syscall_traits::*, edwards, ristretto, scalar,
         };
 
@@ -1498,7 +1498,7 @@ declare_builtin_function!(
         _arg5: u64,
         memory_mapping: &mut MemoryMapping,
     ) -> Result<u64, Error> {
-        use solana_sdk::alt_bn128::prelude::{ALT_BN128_ADD, ALT_BN128_MUL, ALT_BN128_PAIRING};
+        use miraland_sdk::alt_bn128::prelude::{ALT_BN128_ADD, ALT_BN128_MUL, ALT_BN128_PAIRING};
         let budget = invoke_context.get_compute_budget();
         let (cost, output): (u64, usize) = match group_op {
             ALT_BN128_ADD => (
@@ -1746,7 +1746,7 @@ declare_builtin_function!(
         _arg5: u64,
         memory_mapping: &mut MemoryMapping,
     ) -> Result<u64, Error> {
-        use solana_sdk::alt_bn128::compression::prelude::{
+        use miraland_sdk::alt_bn128::compression::prelude::{
             alt_bn128_g1_compress, alt_bn128_g1_decompress, alt_bn128_g2_compress,
             alt_bn128_g2_decompress, ALT_BN128_G1_COMPRESS, ALT_BN128_G1_DECOMPRESS,
             ALT_BN128_G2_COMPRESS, ALT_BN128_G2_DECOMPRESS, G1, G1_COMPRESSED, G2, G2_COMPRESSED,
@@ -1906,17 +1906,17 @@ declare_builtin_function!(
 #[allow(clippy::indexing_slicing)]
 mod tests {
     #[allow(deprecated)]
-    use solana_sdk::sysvar::fees::Fees;
+    use miraland_sdk::sysvar::fees::Fees;
     use {
         super::*,
         crate::mock_create_vm,
         assert_matches::assert_matches,
         core::slice,
-        solana_program_runtime::{invoke_context::InvokeContext, with_mock_invoke_context},
+        miraland_program_runtime::{invoke_context::InvokeContext, with_mock_invoke_context},
         solana_rbpf::{
             error::EbpfError, memory_region::MemoryRegion, program::SBPFVersion, vm::Config,
         },
-        solana_sdk::{
+        miraland_sdk::{
             account::{create_account_shared_data_for_test, AccountSharedData},
             bpf_loader,
             fee_calculator::FeeCalculator,
@@ -2017,7 +2017,7 @@ mod tests {
         let config = Config::default();
 
         // Pubkey
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let memory_mapping = MemoryMapping::new(
             vec![MemoryRegion::new_readonly(bytes_of(&pubkey), 0x100000000)],
             &config,
@@ -2030,9 +2030,9 @@ mod tests {
 
         // Instruction
         let instruction = Instruction::new_with_bincode(
-            solana_sdk::pubkey::new_rand(),
+            miraland_sdk::pubkey::new_rand(),
             &"foobar",
-            vec![AccountMeta::new(solana_sdk::pubkey::new_rand(), false)],
+            vec![AccountMeta::new(miraland_sdk::pubkey::new_rand(), false)],
         );
         let instruction = StableInstruction::from(instruction);
         let memory_region = MemoryRegion::new_readonly(bytes_of(&instruction), 0x100000000);
@@ -2108,7 +2108,7 @@ mod tests {
         assert!(translate_slice::<u64>(&memory_mapping, 0x100000000, u64::MAX, true).is_err());
 
         // Pubkeys
-        let mut data = vec![solana_sdk::pubkey::new_rand(); 5];
+        let mut data = vec![miraland_sdk::pubkey::new_rand(); 5];
         let memory_mapping = MemoryMapping::new(
             vec![MemoryRegion::new_readonly(
                 unsafe {
@@ -2124,7 +2124,7 @@ mod tests {
             translate_slice::<Pubkey>(&memory_mapping, 0x100000000, data.len() as u64, true)
                 .unwrap();
         assert_eq!(data, translated_data);
-        *data.first_mut().unwrap() = solana_sdk::pubkey::new_rand(); // Both should point to same place
+        *data.first_mut().unwrap() = miraland_sdk::pubkey::new_rand(); // Both should point to same place
         assert_eq!(data, translated_data);
     }
 
@@ -2362,7 +2362,7 @@ mod tests {
             let memory_mapping = &mut vm.memory_mapping;
             let result = SyscallAllocFree::rust(
                 invoke_context,
-                solana_sdk::entrypoint::HEAP_LENGTH as u64,
+                miraland_sdk::entrypoint::HEAP_LENGTH as u64,
                 0,
                 0,
                 0,
@@ -2372,7 +2372,7 @@ mod tests {
             assert_ne!(result.unwrap(), 0);
             let result = SyscallAllocFree::rust(
                 invoke_context,
-                solana_sdk::entrypoint::HEAP_LENGTH as u64,
+                miraland_sdk::entrypoint::HEAP_LENGTH as u64,
                 0,
                 0,
                 0,
@@ -2399,7 +2399,7 @@ mod tests {
             }
             let result = SyscallAllocFree::rust(
                 invoke_context,
-                solana_sdk::entrypoint::HEAP_LENGTH as u64,
+                miraland_sdk::entrypoint::HEAP_LENGTH as u64,
                 0,
                 0,
                 0,
@@ -2422,7 +2422,7 @@ mod tests {
             }
             let result = SyscallAllocFree::rust(
                 invoke_context,
-                solana_sdk::entrypoint::HEAP_LENGTH as u64,
+                miraland_sdk::entrypoint::HEAP_LENGTH as u64,
                 0,
                 0,
                 0,
@@ -2564,7 +2564,7 @@ mod tests {
 
     #[test]
     fn test_syscall_edwards_curve_point_validation() {
-        use solana_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_EDWARDS;
+        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_EDWARDS;
 
         let config = Config::default();
         prepare_mockup!(invoke_context, program_id, bpf_loader::id());
@@ -2637,7 +2637,7 @@ mod tests {
 
     #[test]
     fn test_syscall_ristretto_curve_point_validation() {
-        use solana_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_RISTRETTO;
+        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::CURVE25519_RISTRETTO;
 
         let config = Config::default();
         prepare_mockup!(invoke_context, program_id, bpf_loader::id());
@@ -2710,7 +2710,7 @@ mod tests {
 
     #[test]
     fn test_syscall_edwards_curve_group_ops() {
-        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
             ADD, CURVE25519_EDWARDS, MUL, SUB,
         };
 
@@ -2867,7 +2867,7 @@ mod tests {
 
     #[test]
     fn test_syscall_ristretto_curve_group_ops() {
-        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
             ADD, CURVE25519_RISTRETTO, MUL, SUB,
         };
 
@@ -3026,7 +3026,7 @@ mod tests {
 
     #[test]
     fn test_syscall_multiscalar_multiplication() {
-        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
             CURVE25519_EDWARDS, CURVE25519_RISTRETTO,
         };
 
@@ -3134,7 +3134,7 @@ mod tests {
 
     #[test]
     fn test_syscall_multiscalar_multiplication_maximum_length_exceeded() {
-        use solana_zk_token_sdk::curve25519::curve_syscall_traits::{
+        use miraland_zk_token_sdk::curve25519::curve_syscall_traits::{
             CURVE25519_EDWARDS, CURVE25519_RISTRETTO,
         };
 
@@ -3811,7 +3811,7 @@ mod tests {
 
     #[test]
     fn test_create_program_address() {
-        // These tests duplicate the direct tests in solana_program::pubkey
+        // These tests duplicate the direct tests in miraland_program::pubkey
 
         prepare_mockup!(invoke_context, program_id, bpf_loader::id());
         let address = bpf_loader_upgradeable::id();

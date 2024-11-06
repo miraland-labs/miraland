@@ -8,7 +8,7 @@ use {
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_streamer::socket::SocketAddrSpace,
     miraland_test_validator::TestValidator,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig, message::Message, native_token::mln_to_lamports,
         pubkey::Pubkey, signature::Keypair, signer::Signer, system_instruction,
     },
@@ -38,7 +38,7 @@ fn test_send_and_confirm_transactions_in_parallel_without_tpu_client() {
     let test_validator =
         TestValidator::with_no_fees(alice.pubkey(), None, SocketAddrSpace::Unspecified);
 
-    let bob_pubkey = solana_sdk::pubkey::new_rand();
+    let bob_pubkey = miraland_sdk::pubkey::new_rand();
     let alice_pubkey = alice.pubkey();
 
     let rpc_client = Arc::new(RpcClient::new(test_validator.rpc_url()));
@@ -88,7 +88,7 @@ fn test_send_and_confirm_transactions_in_parallel_with_tpu_client() {
     let test_validator =
         TestValidator::with_no_fees(alice.pubkey(), None, SocketAddrSpace::Unspecified);
 
-    let bob_pubkey = solana_sdk::pubkey::new_rand();
+    let bob_pubkey = miraland_sdk::pubkey::new_rand();
     let alice_pubkey = alice.pubkey();
 
     let rpc_client = Arc::new(RpcClient::new(test_validator.rpc_url()));

@@ -14,7 +14,7 @@ use {
     miraland_notifier::{NotificationType, Notifier},
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::{client_error, response::RpcVoteAccountStatus},
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         native_token::{mln_to_lamports, Mln},
         pubkey::Pubkey,

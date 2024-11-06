@@ -7,7 +7,7 @@ use {
     },
     miraland_bucket_map::bucket_map::{BucketMap, BucketMapConfig},
     miraland_measure::measure::Measure,
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         timing::AtomicInterval,
     },

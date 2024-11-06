@@ -182,9 +182,9 @@ Then, poll the [`getBlockHeight`](/api/http#getblockheight) RPC API with the “
 
 Sometimes transaction expiration issues are really hard to avoid (e.g. offline signing, cluster instability). If the previous tips are still not sufficient for your use-case, you can switch to using durable transactions (they just require a bit of setup).
 
-To start using durable transactions, a user first needs to submit a transaction that [invokes instructions that create a special on-chain “nonce” account](https://docs.rs/miraland-program/latest/solana_program/system_instruction/fn.create_nonce_account.html) and stores a “durable blockhash” inside of it. At any point in the future (as long as the nonce account hasn’t been used yet), the user can create a durable transaction by following these 2 rules:
+To start using durable transactions, a user first needs to submit a transaction that [invokes instructions that create a special on-chain “nonce” account](https://docs.rs/miraland-program/latest/miraland_program/system_instruction/fn.create_nonce_account.html) and stores a “durable blockhash” inside of it. At any point in the future (as long as the nonce account hasn’t been used yet), the user can create a durable transaction by following these 2 rules:
 
-1. The instruction list must start with an [“advance nonce” system instruction](https://docs.rs/miraland-program/latest/solana_program/system_instruction/fn.advance_nonce_account.html) which loads their on-chain nonce account
+1. The instruction list must start with an [“advance nonce” system instruction](https://docs.rs/miraland-program/latest/miraland_program/system_instruction/fn.advance_nonce_account.html) which loads their on-chain nonce account
 2. The transaction’s blockhash must be equal to the durable blockhash stored by the on-chain nonce account
 
 Here’s how these transactions are processed by the Miraland runtime:

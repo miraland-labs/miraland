@@ -3,7 +3,7 @@
 use {
     crossbeam_channel::Receiver,
     miraland_ledger::blockstore::Blockstore,
-    solana_runtime::bank::Bank,
+    miraland_runtime::bank::Bank,
     std::{
         sync::Arc,
         thread::{self, Builder, JoinHandle},

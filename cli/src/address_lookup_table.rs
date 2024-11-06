@@ -6,7 +6,7 @@ use {
     miraland_remote_wallet::remote_wallet::RemoteWalletManager,
     miraland_rpc_client::rpc_client::RpcClient,
     miraland_rpc_client_api::config::RpcSendTransactionConfig,
-    solana_sdk::{
+    miraland_sdk::{
         account::from_account,
         address_lookup_table::{
             self,

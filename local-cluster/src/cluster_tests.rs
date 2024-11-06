@@ -22,7 +22,7 @@ use {
     miraland_streamer::socket::SocketAddrSpace,
     rand::{thread_rng, Rng},
     rayon::prelude::*,
-    solana_sdk::{
+    miraland_sdk::{
         client::SyncClient,
         clock::{self, Slot, NUM_CONSECUTIVE_LEADER_SLOTS},
         commitment_config::CommitmentConfig,
@@ -37,8 +37,8 @@ use {
         transaction::Transaction,
         transport::TransportError,
     },
-    solana_vote::vote_transaction::VoteTransaction,
-    solana_vote_program::vote_transaction,
+    miraland_vote::vote_transaction::VoteTransaction,
+    miraland_vote_program::vote_transaction,
     std::{
         borrow::Borrow,
         collections::{HashMap, HashSet, VecDeque},

@@ -2,12 +2,12 @@
 
 #![cfg(feature = "program")]
 
-use solana_program::{
+use miraland_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, log::sol_log_data,
     program::set_return_data, pubkey::Pubkey,
 };
 
-solana_program::entrypoint!(process_instruction);
+miraland_program::entrypoint!(process_instruction);
 #[allow(clippy::cognitive_complexity)]
 fn process_instruction(
     _program_id: &Pubkey,

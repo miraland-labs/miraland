@@ -1,7 +1,7 @@
 use {
     bincode::deserialize,
     lazy_static::lazy_static,
-    solana_sdk::{
+    miraland_sdk::{
         address_lookup_table::{self, instruction::ProgramInstruction},
         pubkey::Pubkey,
         sdk_ids::SDK_IDS,

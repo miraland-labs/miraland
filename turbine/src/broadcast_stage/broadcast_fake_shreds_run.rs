@@ -2,7 +2,7 @@ use {
     super::*,
     miraland_entry::entry::Entry,
     miraland_ledger::shred::{self, ProcessShredsStats, ReedSolomonCache, Shredder},
-    solana_sdk::{hash::Hash, signature::Keypair},
+    miraland_sdk::{hash::Hash, signature::Keypair},
 };
 
 #[derive(Clone)]
@@ -180,8 +180,8 @@ mod tests {
     use {
         super::*,
         miraland_gossip::contact_info::ContactInfo,
+        miraland_sdk::signature::Signer,
         miraland_streamer::socket::SocketAddrSpace,
-        solana_sdk::signature::Signer,
         std::net::{IpAddr, Ipv4Addr, SocketAddr},
     };
 

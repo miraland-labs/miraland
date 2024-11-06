@@ -6,19 +6,20 @@ use {
         parse_token::parse_token, parse_vote::parse_vote,
     },
     inflector::Inflector,
-    serde_json::Value,
-    solana_sdk::{
+    miraland_sdk::{
         address_lookup_table, instruction::InstructionError, pubkey::Pubkey, stake, system_program,
         sysvar, vote,
     },
+    serde_json::Value,
     std::collections::HashMap,
     thiserror::Error,
 };
 
 lazy_static! {
     static ref ADDRESS_LOOKUP_PROGRAM_ID: Pubkey = address_lookup_table::program::id();
-    static ref BPF_UPGRADEABLE_LOADER_PROGRAM_ID: Pubkey = solana_sdk::bpf_loader_upgradeable::id();
-    static ref CONFIG_PROGRAM_ID: Pubkey = solana_config_program::id();
+    static ref BPF_UPGRADEABLE_LOADER_PROGRAM_ID: Pubkey =
+        miraland_sdk::bpf_loader_upgradeable::id();
+    static ref CONFIG_PROGRAM_ID: Pubkey = miraland_config_program::id();
     static ref STAKE_PROGRAM_ID: Pubkey = stake::program::id();
     static ref SYSTEM_PROGRAM_ID: Pubkey = system_program::id();
     static ref SYSVAR_PROGRAM_ID: Pubkey = sysvar::id();
@@ -35,8 +36,14 @@ lazy_static! {
         );
         m.insert(*CONFIG_PROGRAM_ID, ParsableAccount::Config);
         m.insert(*SYSTEM_PROGRAM_ID, ParsableAccount::Nonce);
-        m.insert(spl_token::id(), ParsableAccount::SolartiToken);
-        m.insert(spl_token_2022::id(), ParsableAccount::SolartiToken2022);
+        m.insert(
+            Pubkey::from(spl_token::id().to_bytes()),
+            ParsableAccount::SolartiToken,
+        );
+        m.insert(
+            Pubkey::from(spl_token_2022::id().to_bytes()),
+            ParsableAccount::SolartiToken2022,
+        );
         m.insert(*STAKE_PROGRAM_ID, ParsableAccount::Stake);
         m.insert(*SYSVAR_PROGRAM_ID, ParsableAccount::Sysvar);
         m.insert(*VOTE_PROGRAM_ID, ParsableAccount::Vote);
@@ -126,7 +133,7 @@ pub fn parse_account_data(
 mod test {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             nonce::{
                 state::{Data, Versions},
                 State,
@@ -140,8 +147,8 @@ mod test {
 
     #[test]
     fn test_parse_account_data() {
-        let account_pubkey = solana_sdk::pubkey::new_rand();
-        let other_program = solana_sdk::pubkey::new_rand();
+        let account_pubkey = miraland_sdk::pubkey::new_rand();
+        let other_program = miraland_sdk::pubkey::new_rand();
         let data = vec![0; 4];
         assert!(parse_account_data(&account_pubkey, &other_program, &data, None).is_err());
 

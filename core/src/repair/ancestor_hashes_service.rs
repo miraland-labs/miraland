@@ -27,8 +27,8 @@ use {
         recycler::Recycler,
     },
     miraland_streamer::streamer::{self, PacketBatchReceiver, StreamerReceiveStats},
-    solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         genesis_config::ClusterType,
         pubkey::Pubkey,
@@ -923,8 +923,8 @@ mod test {
             get_tmp_ledger_path_auto_delete, shred::Nonce,
         },
         miraland_streamer::socket::SocketAddrSpace,
-        solana_runtime::{accounts_background_service::AbsRequestSender, bank_forks::BankForks},
-        solana_sdk::{
+        miraland_runtime::{accounts_background_service::AbsRequestSender, bank_forks::BankForks},
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
         },

@@ -9,7 +9,7 @@ use {
     miraland_metrics::*,
     miraland_rpc::transaction_notifier_interface::TransactionNotifier,
     miraland_transaction_status::TransactionStatusMeta,
-    solana_sdk::{clock::Slot, signature::Signature, transaction::SanitizedTransaction},
+    miraland_sdk::{clock::Slot, signature::Signature, transaction::SanitizedTransaction},
     std::sync::{Arc, RwLock},
 };
 

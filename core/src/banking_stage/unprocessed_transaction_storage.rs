@@ -19,8 +19,8 @@ use {
     min_max_heap::MinMaxHeap,
     miraland_measure::{measure, measure_us},
     miraland_svm::transaction_error_metrics::TransactionErrorMetrics,
-    solana_runtime::bank::Bank,
-    solana_sdk::{
+    miraland_runtime::bank::Bank,
+    miraland_sdk::{
         clock::FORWARD_TRANSACTIONS_TO_LEADER_AT_SLOT_OFFSET, feature_set::FeatureSet, hash::Hash,
         saturating_add_assign, transaction::SanitizedTransaction,
     },
@@ -993,13 +993,13 @@ mod tests {
         super::*,
         miraland_ledger::genesis_utils::{create_genesis_config, GenesisConfigInfo},
         miraland_perf::packet::{Packet, PacketFlags},
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{Keypair, Signer},
             system_transaction,
             transaction::Transaction,
         },
-        solana_vote_program::{
+        miraland_vote_program::{
             vote_state::VoteStateUpdate, vote_transaction::new_vote_state_update_transaction,
         },
         std::error::Error,
@@ -1199,7 +1199,7 @@ mod tests {
     fn test_unprocessed_transaction_storage_insert() -> Result<(), Box<dyn Error>> {
         let keypair = Keypair::new();
         let vote_keypair = Keypair::new();
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
 
         let small_transfer = Packet::from_data(
             None,

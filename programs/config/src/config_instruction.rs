@@ -1,6 +1,6 @@
 use {
     crate::{id, ConfigKeys, ConfigState},
-    solana_sdk::{
+    miraland_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         system_instruction,

@@ -13,7 +13,7 @@ use {
         verifier::RequisiteVerifier,
         vm::Config,
     },
-    solana_sdk::{
+    miraland_sdk::{
         bpf_loader, bpf_loader_deprecated, bpf_loader_upgradeable,
         clock::{Epoch, Slot},
         loader_v4,
@@ -1143,7 +1143,7 @@ mod tests {
         assert_matches::assert_matches,
         percentage::Percentage,
         solana_rbpf::program::BuiltinProgram,
-        solana_sdk::{clock::Slot, pubkey::Pubkey},
+        miraland_sdk::{clock::Slot, pubkey::Pubkey},
         std::{
             ops::ControlFlow,
             sync::{

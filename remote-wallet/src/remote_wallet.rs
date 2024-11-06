@@ -7,12 +7,12 @@ use {
         locator::{Locator, LocatorError, Manufacturer},
     },
     log::*,
-    parking_lot::RwLock,
-    solana_sdk::{
+    miraland_sdk::{
         derivation_path::{DerivationPath, DerivationPathError},
         pubkey::Pubkey,
         signature::{Signature, SignerError},
     },
+    parking_lot::RwLock,
     std::{
         rc::Rc,
         time::{Duration, Instant},
@@ -337,7 +337,7 @@ mod tests {
 
     #[test]
     fn test_parse_locator() {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let locator = Locator {
             manufacturer: Manufacturer::Ledger,
             pubkey: Some(pubkey),
@@ -370,7 +370,7 @@ mod tests {
 
     #[test]
     fn test_remote_wallet_info_matches() {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let info = RemoteWalletInfo {
             manufacturer: Manufacturer::Ledger,
             model: "Nano S".to_string(),
@@ -392,7 +392,7 @@ mod tests {
         assert!(info.matches(&test_info));
         test_info.host_device_path = "/host/device/path".to_string();
         assert!(info.matches(&test_info));
-        let another_pubkey = solana_sdk::pubkey::new_rand();
+        let another_pubkey = miraland_sdk::pubkey::new_rand();
         test_info.pubkey = another_pubkey;
         assert!(!info.matches(&test_info));
         test_info.pubkey = pubkey;
@@ -401,7 +401,7 @@ mod tests {
 
     #[test]
     fn test_get_pretty_path() {
-        let pubkey = solana_sdk::pubkey::new_rand();
+        let pubkey = miraland_sdk::pubkey::new_rand();
         let pubkey_str = pubkey.to_string();
         let remote_wallet_info = RemoteWalletInfo {
             model: "nano-s".to_string(),

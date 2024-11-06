@@ -12,7 +12,7 @@ use {
         de::{self, Deserialize, Deserializer},
         ser::{Serialize, SerializeSeq, Serializer},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::{Account, AccountSharedData, ReadableAccount},
         clock::{Epoch, Slot},
         hash::Hash,
@@ -230,7 +230,7 @@ pub mod tests {
 
     #[test]
     fn test_serde_bank_hash_details() {
-        use solana_sdk::hash::hash;
+        use miraland_sdk::hash::hash;
 
         let slot = 123_456_789;
         let signature_count = 314;

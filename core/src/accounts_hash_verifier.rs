@@ -11,7 +11,7 @@ use {
         sorted_storages::SortedStorages,
     },
     miraland_measure::measure_us,
-    solana_runtime::{
+    miraland_runtime::{
         serde_snapshot::BankIncrementalSnapshotPersistence,
         snapshot_config::SnapshotConfig,
         snapshot_package::{
@@ -19,7 +19,7 @@ use {
         },
         snapshot_utils,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT},
         hash::Hash,
     },
@@ -320,7 +320,7 @@ impl AccountsHashVerifier {
         };
 
         if let Some(snapshot_info) = &accounts_package.snapshot_info {
-            solana_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
+            miraland_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
                 &snapshot_info.bank_snapshot_dir,
                 accounts_package.slot,
                 &accounts_hash_for_reserialize,
@@ -549,7 +549,7 @@ impl AccountsHashVerifier {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, rand::seq::SliceRandom, solana_runtime::snapshot_package::SnapshotKind};
+    use {super::*, rand::seq::SliceRandom, miraland_runtime::snapshot_package::SnapshotKind};
 
     fn new(package_kind: AccountsPackageKind, slot: Slot) -> AccountsPackage {
         AccountsPackage {

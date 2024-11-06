@@ -4,7 +4,7 @@ use {
     crate::{accounts_hash::AccountHash, tiered_storage::owners::OwnerOffset},
     bytemuck::{Pod, Zeroable},
     modular_bitfield::prelude::*,
-    solana_sdk::stake_history::Epoch,
+    miraland_sdk::stake_history::Epoch,
 };
 
 /// The struct that handles the account meta flags.
@@ -152,7 +152,7 @@ impl<'a> AccountMetaOptionalFields<'a> {
 
 #[cfg(test)]
 pub mod tests {
-    use {super::*, solana_sdk::hash::Hash};
+    use {super::*, miraland_sdk::hash::Hash};
 
     #[test]
     fn test_account_meta_flags_new() {

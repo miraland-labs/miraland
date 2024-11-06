@@ -31,7 +31,7 @@ use {
         traits::Identity,
     },
     serde::{Deserialize, Serialize},
-    solana_sdk::{
+    miraland_sdk::{
         derivation_path::DerivationPath,
         signature::Signature,
         signer::{
@@ -775,7 +775,7 @@ mod tests {
         super::*,
         crate::encryption::pedersen::Pedersen,
         bip39::{Language, Mnemonic, MnemonicType, Seed},
-        solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::null_signer::NullSigner},
+        miraland_sdk::{pubkey::Pubkey, signature::Keypair, signer::null_signer::NullSigner},
         std::fs::{self, File},
     };
 

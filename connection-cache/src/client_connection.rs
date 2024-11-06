@@ -1,6 +1,6 @@
 use {
     miraland_metrics::MovingStat,
-    solana_sdk::transport::Result as TransportResult,
+    miraland_sdk::transport::Result as TransportResult,
     std::{net::SocketAddr, sync::atomic::AtomicU64},
 };
 

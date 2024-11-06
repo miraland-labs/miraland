@@ -6,7 +6,7 @@ use {
     },
     miraland_rpc_client::rpc_client::RpcClient,
     rayon::iter::{IntoParallelIterator, ParallelIterator},
-    solana_sdk::{clock::Slot, transaction::Transaction, transport::Result as TransportResult},
+    miraland_sdk::{clock::Slot, transaction::Transaction, transport::Result as TransportResult},
     std::{
         collections::VecDeque,
         net::UdpSocket,
@@ -15,7 +15,7 @@ use {
 };
 #[cfg(feature = "spinner")]
 use {
-    solana_sdk::{message::Message, signers::Signers, transaction::TransactionError},
+    miraland_sdk::{message::Message, signers::Signers, transaction::TransactionError},
     tokio::time::Duration,
 };
 

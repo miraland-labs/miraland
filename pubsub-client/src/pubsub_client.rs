@@ -46,10 +46,10 @@
 //!
 //! ```
 //! use anyhow::Result;
-//! use solana_sdk::commitment_config::CommitmentConfig;
+//! use miraland_sdk::commitment_config::CommitmentConfig;
 //! use miraland_pubsub_client::pubsub_client::PubsubClient;
 //! use miraland_rpc_client_api::config::RpcAccountInfoConfig;
-//! use solana_sdk::pubkey::Pubkey;
+//! use miraland_sdk::pubkey::Pubkey;
 //! use std::thread;
 //!
 //! fn get_account_updates(account_pubkey: Pubkey) -> Result<()> {
@@ -82,7 +82,7 @@
 //!     Ok(())
 //! }
 //! #
-//! # get_account_updates(solana_sdk::pubkey::new_rand());
+//! # get_account_updates(miraland_sdk::pubkey::new_rand());
 //! # Ok::<(), anyhow::Error>(())
 //! ```
 
@@ -109,7 +109,7 @@ use {
         value::Value::{Number, Object},
         Map, Value,
     },
-    solana_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
+    miraland_sdk::{clock::Slot, pubkey::Pubkey, signature::Signature},
     std::{
         marker::PhantomData,
         net::TcpStream,

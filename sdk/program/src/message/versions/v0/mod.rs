@@ -179,23 +179,23 @@ impl Message {
     ///
     /// # Examples
     ///
-    /// This example uses the [`miraland_rpc_client`], [`solana_sdk`], and [`anyhow`] crates.
+    /// This example uses the [`miraland_rpc_client`], [`miraland_sdk`], and [`anyhow`] crates.
     ///
     /// [`miraland_rpc_client`]: https://docs.rs/miraland-rpc-client
-    /// [`solana_sdk`]: https://docs.rs/miraland-sdk
+    /// [`miraland_sdk`]: https://docs.rs/miraland-sdk
     /// [`anyhow`]: https://docs.rs/anyhow
     ///
     /// ```
-    /// # use solana_program::example_mocks::{
+    /// # use miraland_program::example_mocks::{
     /// #     miraland_rpc_client,
-    /// #     solana_sdk,
+    /// #     miraland_sdk,
     /// # };
     /// # use std::borrow::Cow;
-    /// # use solana_sdk::account::Account;
+    /// # use miraland_sdk::account::Account;
     /// use anyhow::Result;
     /// use miraland_rpc_client::rpc_client::RpcClient;
-    /// use solana_program::address_lookup_table::{self, state::{AddressLookupTable, LookupTableMeta}};
-    /// use solana_sdk::{
+    /// use miraland_program::address_lookup_table::{self, state::{AddressLookupTable, LookupTableMeta}};
+    /// use miraland_sdk::{
     ///      address_lookup_table_account::AddressLookupTableAccount,
     ///      instruction::{AccountMeta, Instruction},
     ///      message::{VersionedMessage, v0},

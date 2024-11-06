@@ -6,7 +6,7 @@ use {
         create_new_tmp_ledger, create_new_tmp_ledger_fifo, genesis_utils::create_genesis_config,
         get_tmp_ledger_path_auto_delete,
     },
-    solana_sdk::hash::Hash,
+    miraland_sdk::hash::Hash,
     std::{
         fs,
         path::Path,

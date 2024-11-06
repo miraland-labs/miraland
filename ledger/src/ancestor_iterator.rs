@@ -1,6 +1,6 @@
 use {
     crate::blockstore::*,
-    solana_sdk::{clock::Slot, hash::Hash},
+    miraland_sdk::{clock::Slot, hash::Hash},
 };
 
 pub struct AncestorIterator<'a> {
@@ -76,7 +76,7 @@ impl<'a> Iterator for AncestorIteratorWithHash<'a> {
 mod tests {
     use {
         super::*,
-        solana_sdk::hash::Hash,
+        miraland_sdk::hash::Hash,
         std::{collections::HashMap, path::Path},
         trees::tr,
     };

@@ -16,7 +16,7 @@
 //! Accessing via on-chain program directly:
 //!
 //! ```no_run
-//! # use solana_program::{
+//! # use miraland_program::{
 //! #    account_info::{AccountInfo, next_account_info},
 //! #    entrypoint::ProgramResult,
 //! #    msg,
@@ -24,7 +24,7 @@
 //! #    sysvar::epoch_schedule::{self, EpochSchedule},
 //! #    sysvar::Sysvar,
 //! # };
-//! # use solana_program::program_error::ProgramError;
+//! # use miraland_program::program_error::ProgramError;
 //! #
 //! fn process_instruction(
 //!     program_id: &Pubkey,
@@ -38,7 +38,7 @@
 //!     Ok(())
 //! }
 //! #
-//! # use solana_program::sysvar::SysvarId;
+//! # use miraland_program::sysvar::SysvarId;
 //! # let p = EpochSchedule::id();
 //! # let l = &mut 1120560;
 //! # let d = &mut vec![0, 32, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -55,7 +55,7 @@
 //! Accessing via on-chain program's account parameters:
 //!
 //! ```
-//! # use solana_program::{
+//! # use miraland_program::{
 //! #    account_info::{AccountInfo, next_account_info},
 //! #    entrypoint::ProgramResult,
 //! #    msg,
@@ -63,7 +63,7 @@
 //! #    sysvar::epoch_schedule::{self, EpochSchedule},
 //! #    sysvar::Sysvar,
 //! # };
-//! # use solana_program::program_error::ProgramError;
+//! # use miraland_program::program_error::ProgramError;
 //! #
 //! fn process_instruction(
 //!     program_id: &Pubkey,
@@ -81,7 +81,7 @@
 //!     Ok(())
 //! }
 //! #
-//! # use solana_program::sysvar::SysvarId;
+//! # use miraland_program::sysvar::SysvarId;
 //! # let p = EpochSchedule::id();
 //! # let l = &mut 1120560;
 //! # let d = &mut vec![0, 32, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -98,18 +98,18 @@
 //! Accessing via the RPC client:
 //!
 //! ```
-//! # use solana_program::example_mocks::solana_sdk;
-//! # use solana_program::example_mocks::miraland_rpc_client;
-//! # use solana_sdk::account::Account;
+//! # use miraland_program::example_mocks::miraland_sdk;
+//! # use miraland_program::example_mocks::miraland_rpc_client;
+//! # use miraland_sdk::account::Account;
 //! # use miraland_rpc_client::rpc_client::RpcClient;
-//! # use solana_sdk::sysvar::epoch_schedule::{self, EpochSchedule};
+//! # use miraland_sdk::sysvar::epoch_schedule::{self, EpochSchedule};
 //! # use anyhow::Result;
 //! #
 //! fn print_sysvar_epoch_schedule(client: &RpcClient) -> Result<()> {
 //! #   client.set_get_account_response(epoch_schedule::ID, Account {
 //! #       lamports: 1120560,
 //! #       data: vec![0, 32, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//! #       owner: solana_sdk::system_program::ID,
+//! #       owner: miraland_sdk::system_program::ID,
 //! #       executable: false,
 //! #       rent_epoch: 307,
 //! # });

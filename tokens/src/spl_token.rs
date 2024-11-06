@@ -6,7 +6,7 @@ use {
     console::style,
     miraland_account_decoder::parse_token::{real_number_string, real_number_string_trimmed},
     miraland_rpc_client::rpc_client::RpcClient,
-    solana_sdk::{instruction::Instruction, message::Message, native_token::lamports_to_mln},
+    miraland_sdk::{instruction::Instruction, message::Message, native_token::lamports_to_mln},
     spl_associated_token_account::{
         get_associated_token_address, instruction::create_associated_token_account,
     },
@@ -24,7 +24,11 @@ pub fn update_token_args(
         let sender_account = client
             .get_account(&spl_token_args.token_account_address)
             .unwrap_or_default();
-        spl_token_args.mint = SolartiTokenAccount::unpack(&sender_account.data)?.mint;
+        spl_token_args.mint = miraland_sdk::pubkey::Pubkey::from(
+            SolartiTokenAccount::unpack(&sender_account.data)?
+                .mint
+                .to_bytes(),
+        );
         update_decimals(client, args)?;
     }
     Ok(())
@@ -42,42 +46,42 @@ pub fn update_decimals(
     Ok(())
 }
 
-pub(crate) fn build_spl_token_instructions(
-    allocation: &TypedAllocation,
-    args: &DistributeTokensArgs,
-    do_create_associated_token_account: bool,
-) -> Vec<Instruction> {
-    let spl_token_args = args
-        .spl_token_args
-        .as_ref()
-        .expect("spl_token_args must be some");
-    let wallet_address = allocation.recipient;
-    let associated_token_address =
-        get_associated_token_address(&wallet_address, &spl_token_args.mint);
-    let mut instructions = vec![];
-    if do_create_associated_token_account {
-        instructions.push(create_associated_token_account(
-            &args.fee_payer.pubkey(),
-            &wallet_address,
-            &spl_token_args.mint,
-            &spl_token::id(),
-        ));
-    }
-    instructions.push(
-        spl_token::instruction::transfer_checked(
-            &spl_token::id(),
-            &spl_token_args.token_account_address,
-            &spl_token_args.mint,
-            &associated_token_address,
-            &args.sender_keypair.pubkey(),
-            &[],
-            allocation.amount,
-            spl_token_args.decimals,
-        )
-        .unwrap(),
-    );
-    instructions
-}
+// pub(crate) fn build_spl_token_instructions(
+//     allocation: &TypedAllocation,
+//     args: &DistributeTokensArgs,
+//     do_create_associated_token_account: bool,
+// ) -> Vec<Instruction> {
+//     let spl_token_args = args
+//         .spl_token_args
+//         .as_ref()
+//         .expect("spl_token_args must be some");
+//     let wallet_address = allocation.recipient;
+//     let associated_token_address =
+//         get_associated_token_address(&wallet_address, &spl_token_args.mint);
+//     let mut instructions = vec![];
+//     if do_create_associated_token_account {
+//         instructions.push(create_associated_token_account(
+//             &args.fee_payer.pubkey(),
+//             &wallet_address,
+//             &spl_token_args.mint,
+//             &spl_token::id(),
+//         ));
+//     }
+//     instructions.push(
+//         spl_token::instruction::transfer_checked(
+//             &spl_token::id(),
+//             &spl_token_args.token_account_address,
+//             &spl_token_args.mint,
+//             &associated_token_address,
+//             &args.sender_keypair.pubkey(),
+//             &[],
+//             allocation.amount,
+//             spl_token_args.decimals,
+//         )
+//         .unwrap(),
+//     );
+//     instructions
+// }
 
 pub(crate) fn check_spl_token_balances(
     messages: &[Message],
@@ -121,35 +125,35 @@ pub(crate) fn print_token_balances(
     allocation: &TypedAllocation,
     spl_token_args: &SolartiTokenArgs,
 ) -> Result<(), Error> {
-    let address = allocation.recipient;
-    let expected = allocation.amount;
-    let associated_token_address = get_associated_token_address(&address, &spl_token_args.mint);
-    let recipient_account = client
-        .get_account(&associated_token_address)
-        .unwrap_or_default();
-    let (actual, difference) = if let Ok(recipient_token) =
-        SolartiTokenAccount::unpack(&recipient_account.data)
-    {
-        let actual_ui_amount = real_number_string(recipient_token.amount, spl_token_args.decimals);
-        let delta_string =
-            real_number_string(recipient_token.amount - expected, spl_token_args.decimals);
-        (
-            style(format!("{actual_ui_amount:>24}")),
-            format!("{delta_string:>24}"),
-        )
-    } else {
-        (
-            style("Associated token account not yet created".to_string()).yellow(),
-            "".to_string(),
-        )
-    };
-    println!(
-        "{:<44}  {:>24}  {:>24}  {:>24}",
-        allocation.recipient,
-        real_number_string(expected, spl_token_args.decimals),
-        actual,
-        difference,
-    );
+    // let address = allocation.recipient;
+    // let expected = allocation.amount;
+    // let associated_token_address = get_associated_token_address(&address, &spl_token_args.mint);
+    // let recipient_account = client
+    //     .get_account(&associated_token_address)
+    //     .unwrap_or_default();
+    // let (actual, difference) = if let Ok(recipient_token) =
+    //     SolartiTokenAccount::unpack(&recipient_account.data)
+    // {
+    //     let actual_ui_amount = real_number_string(recipient_token.amount, spl_token_args.decimals);
+    //     let delta_string =
+    //         real_number_string(recipient_token.amount - expected, spl_token_args.decimals);
+    //     (
+    //         style(format!("{actual_ui_amount:>24}")),
+    //         format!("{delta_string:>24}"),
+    //     )
+    // } else {
+    //     (
+    //         style("Associated token account not yet created".to_string()).yellow(),
+    //         "".to_string(),
+    //     )
+    // };
+    // println!(
+    //     "{:<44}  {:>24}  {:>24}  {:>24}",
+    //     allocation.recipient,
+    //     real_number_string(expected, spl_token_args.decimals),
+    //     actual,
+    //     difference,
+    // );
     Ok(())
 }
 

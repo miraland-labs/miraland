@@ -60,7 +60,7 @@ use {
     },
     rand::seq::IteratorRandom,
     serial_test::serial,
-    solana_runtime::{
+    miraland_runtime::{
         commitment::VOTE_THRESHOLD_SIZE,
         snapshot_archive_info::SnapshotArchiveInfoGetter,
         snapshot_bank_utils,
@@ -68,7 +68,7 @@ use {
         snapshot_package::SnapshotKind,
         snapshot_utils::{self},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData,
         client::{AsyncClient, SyncClient},
         clock::{self, Slot, DEFAULT_TICKS_PER_SLOT, MAX_PROCESSING_AGE},
@@ -83,8 +83,8 @@ use {
         system_program, system_transaction,
         vote::state::VoteStateUpdate,
     },
-    solana_vote::vote_parser,
-    solana_vote_program::{vote_state::MAX_LOCKOUT_HISTORY, vote_transaction},
+    miraland_vote::vote_parser,
+    miraland_vote_program::{vote_state::MAX_LOCKOUT_HISTORY, vote_transaction},
     std::{
         collections::{BTreeSet, HashMap, HashSet},
         fs,
@@ -234,7 +234,7 @@ fn test_local_cluster_signature_subscribe() {
 
     let mut transaction = system_transaction::transfer(
         &cluster.funding_keypair,
-        &solana_sdk::pubkey::new_rand(),
+        &miraland_sdk::pubkey::new_rand(),
         10,
         blockhash,
     );
@@ -466,13 +466,13 @@ fn test_mainnet_cluster_type() {
 
     // Programs that are available at epoch 0
     for program_id in [
-        &solana_config_program::id(),
-        &solana_sdk::system_program::id(),
-        &solana_sdk::stake::program::id(),
-        &solana_vote_program::id(),
-        &solana_sdk::bpf_loader_deprecated::id(),
-        &solana_sdk::bpf_loader::id(),
-        &solana_sdk::bpf_loader_upgradeable::id(),
+        &miraland_config_program::id(),
+        &miraland_sdk::system_program::id(),
+        &miraland_sdk::stake::program::id(),
+        &miraland_vote_program::id(),
+        &miraland_sdk::bpf_loader_deprecated::id(),
+        &miraland_sdk::bpf_loader::id(),
+        &miraland_sdk::bpf_loader_upgradeable::id(),
     ]
     .iter()
     {
@@ -2136,10 +2136,10 @@ fn test_hard_fork_invalidates_tower() {
     // persistent tower's lockout behavior...
     let hard_fork_slot = min_root - 5;
     let hard_fork_slots = Some(vec![hard_fork_slot]);
-    let mut hard_forks = solana_sdk::hard_forks::HardForks::default();
+    let mut hard_forks = miraland_sdk::hard_forks::HardForks::default();
     hard_forks.register(hard_fork_slot);
 
-    let expected_shred_version = solana_sdk::shred_version::compute_shred_version(
+    let expected_shred_version = miraland_sdk::shred_version::compute_shred_version(
         &cluster.lock().unwrap().genesis_config.hash(),
         Some(&hard_forks),
     );
@@ -2315,7 +2315,7 @@ fn test_hard_fork_with_gap_in_roots() {
     let mut hard_forks = HardForks::default();
     hard_forks.register(hard_fork_slot);
 
-    let expected_shred_version = solana_sdk::shred_version::compute_shred_version(
+    let expected_shred_version = miraland_sdk::shred_version::compute_shred_version(
         &cluster.lock().unwrap().genesis_config.hash(),
         Some(&hard_forks),
     );
@@ -4332,7 +4332,7 @@ fn test_leader_failure_4() {
 #[test]
 fn test_slot_hash_expiry() {
     miraland_logger::setup_with_default(RUST_LOG_FILTER);
-    solana_sdk::slot_hashes::set_entries_for_tests_only(64);
+    miraland_sdk::slot_hashes::set_entries_for_tests_only(64);
 
     let slots_per_epoch = 2048;
     let node_stakes = vec![60 * DEFAULT_NODE_STAKE, 40 * DEFAULT_NODE_STAKE];
@@ -4435,7 +4435,7 @@ fn test_slot_hash_expiry() {
 
     info!(
         "Run A on majority fork until it reaches slot hash expiry {}",
-        solana_sdk::slot_hashes::get_entries()
+        miraland_sdk::slot_hashes::get_entries()
     );
     let mut last_vote_on_a;
     // Keep A running for a while longer so the majority fork has some decent size
@@ -4443,7 +4443,7 @@ fn test_slot_hash_expiry() {
         last_vote_on_a =
             wait_for_last_vote_in_tower_to_land_in_ledger(&a_ledger_path, &a_pubkey).unwrap();
         if last_vote_on_a
-            >= common_ancestor_slot + 2 * (solana_sdk::slot_hashes::get_entries() as u64)
+            >= common_ancestor_slot + 2 * (miraland_sdk::slot_hashes::get_entries() as u64)
         {
             let blockstore = open_blockstore(&a_ledger_path);
             info!(
@@ -5486,7 +5486,7 @@ fn test_randomly_mixed_block_verification_methods_between_bootstrap_and_not() {
     miraland_logger::setup_with_default(
         "miraland_metrics::metrics=warn,\
          miraland_core=warn,\
-         solana_runtime::installed_scheduler_pool=trace,\
+         miraland_runtime::installed_scheduler_pool=trace,\
          miraland_ledger::blockstore_processor=debug,\
          info",
     );
@@ -5602,7 +5602,7 @@ fn test_invalid_forks_persisted_on_restart() {
             cluster.genesis_config.hash(),
         );
         let last_hash = entries.last().unwrap().hash;
-        let version = solana_sdk::shred_version::version_from_hash(&last_hash);
+        let version = miraland_sdk::shred_version::version_from_hash(&last_hash);
         let dup_shreds = Shredder::new(dup_slot, parent, 0, version)
             .unwrap()
             .entries_to_shreds(

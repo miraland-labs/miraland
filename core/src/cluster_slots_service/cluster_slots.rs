@@ -4,8 +4,8 @@ use {
         cluster_info::ClusterInfo, crds::Cursor, epoch_slots::EpochSlots,
         legacy_contact_info::LegacyContactInfo as ContactInfo,
     },
-    solana_runtime::{bank::Bank, epoch_stakes::NodeIdToVoteAccounts},
-    solana_sdk::{
+    miraland_runtime::{bank::Bank, epoch_stakes::NodeIdToVoteAccounts},
+    miraland_sdk::{
         clock::{Slot, DEFAULT_SLOTS_PER_EPOCH},
         pubkey::Pubkey,
         timing::AtomicInterval,
@@ -218,7 +218,7 @@ impl ClusterSlots {
 
 #[cfg(test)]
 mod tests {
-    use {super::*, solana_runtime::epoch_stakes::NodeVoteAccounts};
+    use {super::*, miraland_runtime::epoch_stakes::NodeVoteAccounts};
 
     #[test]
     fn test_default() {
@@ -282,8 +282,8 @@ mod tests {
         let mut c1 = ContactInfo::default();
         let mut c2 = ContactInfo::default();
         let mut map = HashMap::new();
-        let k1 = solana_sdk::pubkey::new_rand();
-        let k2 = solana_sdk::pubkey::new_rand();
+        let k1 = miraland_sdk::pubkey::new_rand();
+        let k2 = miraland_sdk::pubkey::new_rand();
         map.insert(k1, std::u64::MAX / 2);
         map.insert(k2, 0);
         cs.cluster_slots
@@ -301,8 +301,8 @@ mod tests {
         let mut c1 = ContactInfo::default();
         let mut c2 = ContactInfo::default();
         let mut map = HashMap::new();
-        let k1 = solana_sdk::pubkey::new_rand();
-        let k2 = solana_sdk::pubkey::new_rand();
+        let k1 = miraland_sdk::pubkey::new_rand();
+        let k2 = miraland_sdk::pubkey::new_rand();
         map.insert(k2, 0);
         cs.cluster_slots
             .write()
@@ -332,7 +332,7 @@ mod tests {
         let cs = ClusterSlots::default();
         let mut contact_infos = vec![ContactInfo::default(); 2];
         for ci in contact_infos.iter_mut() {
-            ci.set_pubkey(solana_sdk::pubkey::new_rand());
+            ci.set_pubkey(miraland_sdk::pubkey::new_rand());
         }
         let slot = 9;
 

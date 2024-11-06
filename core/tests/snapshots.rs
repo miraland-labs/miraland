@@ -19,7 +19,7 @@ use {
     miraland_gossip::{cluster_info::ClusterInfo, contact_info::ContactInfo},
     miraland_streamer::socket::SocketAddrSpace,
     miraland_svm::runtime_config::RuntimeConfig,
-    solana_runtime::{
+    miraland_runtime::{
         accounts_background_service::{
             AbsRequestHandlers, AbsRequestSender, AccountsBackgroundService,
             PrunedBanksRequestHandler, SendDroppedBankCallback, SnapshotRequestHandler,
@@ -38,7 +38,7 @@ use {
         },
         status_cache::MAX_CACHE_ENTRIES,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         genesis_config::{
             ClusterType::{self, Development, Devnet, Mainnet, Testnet},
@@ -96,7 +96,7 @@ impl SnapshotTestConfig {
         // snapshots.
         let mut genesis_config_info = create_genesis_config_with_leader(
             10_000,                          // mint_lamports
-            &solana_sdk::pubkey::new_rand(), // validator_pubkey
+            &miraland_sdk::pubkey::new_rand(), // validator_pubkey
             1,                               // validator_stake_lamports
         );
         genesis_config_info.genesis_config.cluster_type = cluster_type;
@@ -267,7 +267,7 @@ fn run_bank_forks_snapshot_n<F>(
     last_bank.force_flush_accounts_cache();
     let accounts_hash =
         last_bank.update_accounts_hash(CalcAccountsHashDataSource::Storages, false, false);
-    solana_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
+    miraland_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
         accounts_package.bank_snapshot_dir(),
         accounts_package.slot,
         &accounts_hash,
@@ -549,7 +549,7 @@ fn test_concurrent_snapshot_packaging(
             move || {
                 let accounts_package = real_accounts_package_receiver.try_recv().unwrap();
                 let accounts_hash = AccountsHash(Hash::default());
-                solana_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
+                miraland_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
                     accounts_package.bank_snapshot_dir(),
                     accounts_package.slot,
                     &accounts_hash,
@@ -581,7 +581,7 @@ fn test_concurrent_snapshot_packaging(
     // Check the archive we cached the state for earlier was generated correctly
 
     // files were saved off before we reserialized the bank in the hacked up accounts_hash_verifier stand-in.
-    solana_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
+    miraland_runtime::serde_snapshot::reserialize_bank_with_new_accounts_hash(
         snapshot_utils::get_bank_snapshot_dir(&saved_snapshots_dir, saved_slot),
         saved_slot,
         &AccountsHash(Hash::default()),
@@ -765,11 +765,11 @@ fn test_bank_forks_incremental_snapshot(
             let bank_scheduler = bank_forks.write().unwrap().insert(bank);
             let bank = bank_scheduler.clone_without_scheduler();
 
-            let key = solana_sdk::pubkey::new_rand();
+            let key = miraland_sdk::pubkey::new_rand();
             let tx = system_transaction::transfer(mint_keypair, &key, 1, bank.last_blockhash());
             assert_eq!(bank.process_transaction(&tx), Ok(()));
 
-            let key = solana_sdk::pubkey::new_rand();
+            let key = miraland_sdk::pubkey::new_rand();
             let tx = system_transaction::transfer(mint_keypair, &key, 0, bank.last_blockhash());
             assert_eq!(bank.process_transaction(&tx), Ok(()));
 
@@ -1072,11 +1072,11 @@ fn test_snapshots_with_background_services(
                 .insert(bank)
                 .clone_without_scheduler();
 
-            let key = solana_sdk::pubkey::new_rand();
+            let key = miraland_sdk::pubkey::new_rand();
             let tx = system_transaction::transfer(mint_keypair, &key, 1, bank.last_blockhash());
             assert_eq!(bank.process_transaction(&tx), Ok(()));
 
-            let key = solana_sdk::pubkey::new_rand();
+            let key = miraland_sdk::pubkey::new_rand();
             let tx = system_transaction::transfer(mint_keypair, &key, 0, bank.last_blockhash());
             assert_eq!(bank.process_transaction(&tx), Ok(()));
 

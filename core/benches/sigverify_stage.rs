@@ -21,7 +21,7 @@
 //         distributions::{Distribution, Uniform},
 //         thread_rng, Rng,
 //     },
-//     solana_sdk::{
+//     miraland_sdk::{
 //         hash::Hash,
 //         packet::PacketFlags,
 //         signature::{Keypair, Signer},

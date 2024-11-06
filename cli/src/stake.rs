@@ -37,7 +37,7 @@ use {
         response::{RpcInflationReward, RpcVoteAccountStatus},
     },
     miraland_rpc_client_nonce_utils::blockhash_query::BlockhashQuery,
-    solana_sdk::{
+    miraland_sdk::{
         account::from_account,
         account_utils::StateMut,
         clock::{Clock, UnixTimestamp, SECONDS_PER_DAY},
@@ -2796,7 +2796,7 @@ mod tests {
         super::*,
         crate::{clap_app::get_clap_app, cli::parse_command},
         miraland_rpc_client_nonce_utils::blockhash_query,
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             signature::{
                 keypair_from_seed, read_keypair_file, write_keypair, Keypair, Presigner, Signer,
@@ -3914,9 +3914,9 @@ mod tests {
         );
 
         // Test CreateStakeAccount SubCommand
-        let custodian = solana_sdk::pubkey::new_rand();
+        let custodian = miraland_sdk::pubkey::new_rand();
         let custodian_string = format!("{custodian}");
-        let authorized = solana_sdk::pubkey::new_rand();
+        let authorized = miraland_sdk::pubkey::new_rand();
         let authorized_string = format!("{authorized}");
         let test_create_stake_account = test_commands.clone().get_matches_from(vec![
             "test",
@@ -4119,7 +4119,7 @@ mod tests {
         );
 
         // Test DelegateStake Subcommand
-        let vote_account_pubkey = solana_sdk::pubkey::new_rand();
+        let vote_account_pubkey = miraland_sdk::pubkey::new_rand();
         let vote_account_string = vote_account_pubkey.to_string();
         let test_delegate_stake = test_commands.clone().get_matches_from(vec![
             "test",
@@ -4150,7 +4150,7 @@ mod tests {
         );
 
         // Test DelegateStake Subcommand w/ authority
-        let vote_account_pubkey = solana_sdk::pubkey::new_rand();
+        let vote_account_pubkey = miraland_sdk::pubkey::new_rand();
         let vote_account_string = vote_account_pubkey.to_string();
         let test_delegate_stake = test_commands.clone().get_matches_from(vec![
             "test",
@@ -4285,7 +4285,7 @@ mod tests {
         );
 
         // Test Delegate Subcommand w/ absent fee payer
-        let key1 = solana_sdk::pubkey::new_rand();
+        let key1 = miraland_sdk::pubkey::new_rand();
         let sig1 = Keypair::new().sign_message(&[0u8]);
         let signer1 = format!("{key1}={sig1}");
         let test_delegate_stake = test_commands.clone().get_matches_from(vec![
@@ -4329,7 +4329,7 @@ mod tests {
         );
 
         // Test Delegate Subcommand w/ absent fee payer and absent nonce authority
-        let key2 = solana_sdk::pubkey::new_rand();
+        let key2 = miraland_sdk::pubkey::new_rand();
         let sig2 = Keypair::new().sign_message(&[0u8]);
         let signer2 = format!("{key2}={sig2}");
         let test_delegate_stake = test_commands.clone().get_matches_from(vec![
@@ -4808,7 +4808,7 @@ mod tests {
         );
 
         // Test Deactivate Subcommand w/ absent fee payer
-        let key1 = solana_sdk::pubkey::new_rand();
+        let key1 = miraland_sdk::pubkey::new_rand();
         let sig1 = Keypair::new().sign_message(&[0u8]);
         let signer1 = format!("{key1}={sig1}");
         let test_deactivate_stake = test_commands.clone().get_matches_from(vec![
@@ -4850,7 +4850,7 @@ mod tests {
         );
 
         // Test Deactivate Subcommand w/ absent fee payer and nonce authority
-        let key2 = solana_sdk::pubkey::new_rand();
+        let key2 = miraland_sdk::pubkey::new_rand();
         let sig2 = Keypair::new().sign_message(&[0u8]);
         let signer2 = format!("{key2}={sig2}");
         let test_deactivate_stake = test_commands.clone().get_matches_from(vec![
@@ -5047,7 +5047,7 @@ mod tests {
         let stake_account_keypair = Keypair::new();
         write_keypair(&stake_account_keypair, tmp_file.as_file_mut()).unwrap();
 
-        let source_stake_account_pubkey = solana_sdk::pubkey::new_rand();
+        let source_stake_account_pubkey = miraland_sdk::pubkey::new_rand();
         let test_merge_stake_account = test_commands.clone().get_matches_from(vec![
             "test",
             "merge-stake",

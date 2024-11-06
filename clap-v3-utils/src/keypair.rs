@@ -21,8 +21,7 @@ use {
         remote_keypair::generate_remote_keypair,
         remote_wallet::{maybe_wallet_manager, RemoteWalletError, RemoteWalletManager},
     },
-    rpassword::prompt_password,
-    solana_sdk::{
+    miraland_sdk::{
         derivation_path::DerivationPath,
         hash::Hash,
         message::Message,
@@ -33,7 +32,8 @@ use {
             Signature, Signer,
         },
     },
-    solana_zk_token_sdk::encryption::{auth_encryption::AeKey, elgamal::ElGamalKeypair},
+    miraland_zk_token_sdk::encryption::{auth_encryption::AeKey, elgamal::ElGamalKeypair},
+    rpassword::prompt_password,
     std::{
         cell::RefCell,
         error,
@@ -204,7 +204,7 @@ impl DefaultSigner {
     /// use clap::{Arg, Command};
     /// use miraland_clap_v3_utils::keypair::{DefaultSigner, signer_from_path};
     /// use miraland_clap_v3_utils::offline::OfflineArgs;
-    /// use solana_sdk::signer::Signer;
+    /// use miraland_sdk::signer::Signer;
     ///
     /// let clap_app = Command::new("my-program")
     ///     // The argument we'll parse as a signer "path"
@@ -1212,7 +1212,7 @@ mod tests {
         crate::offline::OfflineArgs,
         clap::{Arg, Command},
         miraland_remote_wallet::remote_wallet::initialize_wallet_manager,
-        solana_sdk::{signer::keypair::write_keypair_file, system_instruction},
+        miraland_sdk::{signer::keypair::write_keypair_file, system_instruction},
         tempfile::TempDir,
     };
 

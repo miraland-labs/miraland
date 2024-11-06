@@ -12,7 +12,7 @@ use {
     },
     rayon::{prelude::*, ThreadPool},
     sha2::{Digest, Sha512},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::Hash,
         pubkey::Pubkey,
@@ -466,7 +466,7 @@ mod tests {
         miraland_entry::entry::Entry,
         rand::{seq::SliceRandom, Rng},
         rayon::ThreadPoolBuilder,
-        solana_sdk::{
+        miraland_sdk::{
             hash,
             hash::Hash,
             signature::{Keypair, Signer},

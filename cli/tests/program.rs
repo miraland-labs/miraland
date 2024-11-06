@@ -15,7 +15,7 @@ use {
     miraland_streamer::socket::SocketAddrSpace,
     miraland_test_validator::TestValidator,
     serde_json::Value,
-    solana_sdk::{
+    miraland_sdk::{
         account::is_executable,
         account_utils::StateMut,
         bpf_loader_upgradeable::{self, UpgradeableLoaderState},

@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { solana_program_init, Keypair } from "crate";
-solana_program_init();
+import { miraland_program_init, Keypair } from "crate";
+miraland_program_init();
 
 describe("Keypair", function () {
   it("works", () => {

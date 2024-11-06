@@ -97,8 +97,8 @@ mod tests {
         },
         miraland_perf::packet::to_packet_batches,
         miraland_poh::poh_recorder::{PohRecorder, WorkingBankEntry},
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             genesis_config::GenesisConfig, poh_config::PohConfig, pubkey::Pubkey,
             signature::Keypair, system_transaction,
         },

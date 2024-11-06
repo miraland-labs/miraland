@@ -4,7 +4,7 @@ use {
         repair::{repair_service::RepairService, serve_repair::ShredRepairType},
     },
     miraland_ledger::{blockstore::Blockstore, blockstore_meta::SlotMeta},
-    solana_sdk::{clock::Slot, hash::Hash},
+    miraland_sdk::{clock::Slot, hash::Hash},
     std::collections::{HashMap, HashSet},
 };
 
@@ -141,8 +141,8 @@ pub mod test {
             get_tmp_ledger_path,
             shred::{Shred, ShredFlags},
         },
-        solana_runtime::bank_utils,
-        solana_sdk::hash::Hash,
+        miraland_runtime::bank_utils,
+        miraland_sdk::hash::Hash,
         trees::tr,
     };
 

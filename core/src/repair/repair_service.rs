@@ -3,7 +3,7 @@
 #[cfg(test)]
 use {
     crate::repair::duplicate_repair_status::DuplicateSlotRepairStatus,
-    solana_sdk::clock::DEFAULT_MS_PER_SLOT,
+    miraland_sdk::clock::DEFAULT_MS_PER_SLOT,
 };
 use {
     crate::{
@@ -32,8 +32,8 @@ use {
     miraland_measure::measure::Measure,
     miraland_streamer::sendmmsg::{batch_send, SendPktsError},
     rand::seq::SliceRandom,
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{
         clock::{Slot, DEFAULT_TICKS_PER_SECOND, MS_PER_TICK},
         epoch_schedule::EpochSchedule,
         hash::Hash,
@@ -712,7 +712,7 @@ impl RepairService {
                     Some((
                         *pubkey,
                         peer_repair_addr,
-                        (*stake / solana_sdk::native_token::LAMPORTS_PER_MLN) as u32,
+                        (*stake / miraland_sdk::native_token::LAMPORTS_PER_MLN) as u32,
                     ))
                 } else {
                     None
@@ -1015,8 +1015,8 @@ mod test {
             shred::max_ticks_per_n_shreds,
         },
         miraland_streamer::socket::SocketAddrSpace,
-        solana_runtime::bank::Bank,
-        solana_sdk::{
+        miraland_runtime::bank::Bank,
+        miraland_sdk::{
             signature::{Keypair, Signer},
             timing::timestamp,
         },
@@ -1053,7 +1053,7 @@ mod test {
         );
 
         // Receive and translate repair packet
-        let mut packets = vec![solana_sdk::packet::Packet::default(); 1];
+        let mut packets = vec![miraland_sdk::packet::Packet::default(); 1];
         let _recv_count =
             miraland_streamer::recvmmsg::recv_mmsg(&reader, &mut packets[..]).unwrap();
         let packet = &packets[0];

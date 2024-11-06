@@ -10,7 +10,7 @@
 //! directly from the runtime, as in this example that logs the `clock` sysvar:
 //!
 //! ```
-//! use solana_program::{
+//! use miraland_program::{
 //!     account_info::AccountInfo,
 //!     clock,
 //!     entrypoint::ProgramResult,
@@ -36,7 +36,7 @@
 //! again logs the [`clock`] sysvar.
 //!
 //! ```
-//! use solana_program::{
+//! use miraland_program::{
 //!     account_info::{next_account_info, AccountInfo},
 //!     clock,
 //!     entrypoint::ProgramResult,

@@ -9,7 +9,7 @@ mod sigma_proofs;
 use {
     crate::zk_token_proof_instruction::ProofType,
     num_traits::{FromPrimitive, ToPrimitive},
-    solana_program::instruction::InstructionError,
+    miraland_program::instruction::InstructionError,
 };
 pub use {
     auth_encryption::AeCiphertext,

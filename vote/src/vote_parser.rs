@@ -1,13 +1,13 @@
 use {
     crate::vote_transaction::VoteTransaction,
-    solana_sdk::{
+    miraland_sdk::{
         hash::Hash,
         program_utils::limited_deserialize,
         pubkey::Pubkey,
         signature::Signature,
         transaction::{SanitizedTransaction, Transaction},
     },
-    solana_vote_program::vote_instruction::VoteInstruction,
+    miraland_vote_program::vote_instruction::VoteInstruction,
 };
 
 pub type ParsedVote = (Pubkey, VoteTransaction, Option<Hash>, Signature);
@@ -17,7 +17,7 @@ pub fn parse_sanitized_vote_transaction(tx: &SanitizedTransaction) -> Option<Par
     // Check first instruction for a vote
     let message = tx.message();
     let (program_id, first_instruction) = message.program_instructions_iter().next()?;
-    if !solana_vote_program::check_id(program_id) {
+    if !miraland_vote_program::check_id(program_id) {
         return None;
     }
     let first_account = usize::from(*first_instruction.accounts.first()?);
@@ -34,7 +34,7 @@ pub fn parse_vote_transaction(tx: &Transaction) -> Option<ParsedVote> {
     let first_instruction = message.instructions.first()?;
     let program_id_index = usize::from(first_instruction.program_id_index);
     let program_id = message.account_keys.get(program_id_index)?;
-    if !solana_vote_program::check_id(program_id) {
+    if !miraland_vote_program::check_id(program_id) {
         return None;
     }
     let first_account = usize::from(*first_instruction.accounts.first()?);
@@ -77,11 +77,11 @@ fn parse_vote_instruction_data(
 mod test {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             hash::hash,
             signature::{Keypair, Signer},
         },
-        solana_vote_program::{
+        miraland_vote_program::{
             vote_instruction, vote_state::Vote, vote_transaction::new_vote_transaction,
         },
     };

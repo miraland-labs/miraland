@@ -8,7 +8,7 @@ use {
     pem::Pem,
     quinn::{Endpoint, IdleTimeout, ServerConfig},
     rustls::{server::ClientCertVerified, Certificate, DistinguishedName},
-    solana_sdk::{
+    miraland_sdk::{
         packet::PACKET_DATA_SIZE,
         quic::{NotifyKeyUpdate, QUIC_MAX_TIMEOUT, QUIC_MAX_UNSTAKED_CONCURRENT_STREAMS},
         signature::Keypair,
@@ -484,7 +484,7 @@ mod test {
         super::*,
         crate::nonblocking::quic::{test::*, DEFAULT_WAIT_FOR_CHUNK_TIMEOUT},
         crossbeam_channel::unbounded,
-        solana_sdk::net::DEFAULT_TPU_COALESCE,
+        miraland_sdk::net::DEFAULT_TPU_COALESCE,
         std::net::SocketAddr,
     };
 

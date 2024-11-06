@@ -5,20 +5,20 @@ use {
         input_validators::{is_keypair, is_url, is_url_or_moniker, is_within_range},
     },
     miraland_cli_config::{ConfigInput, CONFIG_FILE},
-    miraland_tpu_client::tpu_client::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig,
         fee_calculator::FeeRateGovernor,
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair},
     },
+    miraland_tpu_client::tpu_client::{DEFAULT_TPU_CONNECTION_POOL_SIZE, DEFAULT_TPU_USE_QUIC},
     std::{
         net::{IpAddr, Ipv4Addr, SocketAddr},
         time::Duration,
     },
 };
 
-const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = solana_sdk::native_token::LAMPORTS_PER_MLN;
+const NUM_LAMPORTS_PER_ACCOUNT_DEFAULT: u64 = miraland_sdk::native_token::LAMPORTS_PER_MLN;
 
 #[derive(Eq, PartialEq, Debug)]
 pub enum ExternalClientType {
@@ -565,7 +565,7 @@ pub fn parse_args(matches: &ArgMatches) -> Result<Config, &'static str> {
             .parse()
             .map_err(|_| "Can't parse padded instruction data size")?;
         args.instruction_padding_config = Some(InstructionPaddingConfig {
-            program_id,
+            program_id: Pubkey::from(program_id.to_bytes()),
             data_size,
         });
     }
@@ -597,7 +597,7 @@ pub fn parse_args(matches: &ArgMatches) -> Result<Config, &'static str> {
 mod tests {
     use {
         super::*,
-        solana_sdk::signature::{read_keypair_file, write_keypair_file, Keypair, Signer},
+        miraland_sdk::signature::{read_keypair_file, write_keypair_file, Keypair, Signer},
         std::{
             net::{IpAddr, Ipv4Addr, SocketAddr},
             time::Duration,

@@ -5,8 +5,8 @@ use {
     miraland_gossip::cluster_info::ClusterInfo,
     miraland_ledger::blockstore::Blockstore,
     miraland_measure::measure::Measure,
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::clock::Slot,
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::clock::Slot,
     std::{
         sync::{
             atomic::{AtomicBool, Ordering},
@@ -184,7 +184,7 @@ mod test {
         super::*,
         miraland_gossip::{cluster_info::Node, crds_value::LowestSlot},
         miraland_streamer::socket::SocketAddrSpace,
-        solana_sdk::signature::{Keypair, Signer},
+        miraland_sdk::signature::{Keypair, Signer},
     };
 
     #[test]

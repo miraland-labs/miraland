@@ -1,5 +1,5 @@
 use {
-    solana_sdk::{pubkey::Pubkey, reward_info::RewardInfo, reward_type::RewardType},
+    miraland_sdk::{pubkey::Pubkey, reward_info::RewardInfo, reward_type::RewardType},
     std::collections::HashMap,
 };
 

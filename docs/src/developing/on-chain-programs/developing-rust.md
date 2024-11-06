@@ -300,13 +300,13 @@ Rust's `panic!`, `assert!`, and internal panic results are printed to the
 [program logs](debugging.md#logging) by default.
 
 ```
-INFO  solana_runtime::message_processor] Finalized account CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ
-INFO  solana_runtime::message_processor] Call SBF program CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ
-INFO  solana_runtime::message_processor] Program log: Panicked at: 'assertion failed: `(left == right)`
+INFO  miraland_runtime::message_processor] Finalized account CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ
+INFO  miraland_runtime::message_processor] Call SBF program CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ
+INFO  miraland_runtime::message_processor] Program log: Panicked at: 'assertion failed: `(left == right)`
       left: `1`,
      right: `2`', rust/panic/src/lib.rs:22:5
-INFO  solana_runtime::message_processor] SBF program consumed 5453 of 200000 units
-INFO  solana_runtime::message_processor] SBF program CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ failed: BPF program panicked
+INFO  miraland_runtime::message_processor] SBF program consumed 5453 of 200000 units
+INFO  miraland_runtime::message_processor] SBF program CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ failed: BPF program panicked
 ```
 
 ### Custom Panic Handler
@@ -328,8 +328,8 @@ Then provide a custom implementation of the panic handler:
 #[cfg(all(feature = "custom-panic", target_os = "miraland"))]
 #[no_mangle]
 fn custom_panic(info: &core::panic::PanicInfo<'_>) {
-    solana_program::msg!("program custom panic enabled");
-    solana_program::msg!("{}", info);
+    miraland_program::msg!("program custom panic enabled");
+    miraland_program::msg!("{}", info);
 }
 ```
 

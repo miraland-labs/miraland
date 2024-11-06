@@ -1,4 +1,4 @@
-use {crate::block_cost_limits, solana_sdk::pubkey::Pubkey};
+use {crate::block_cost_limits, miraland_sdk::pubkey::Pubkey};
 
 /// TransactionCost is used to represent resources required to process
 /// a transaction, denominated in CU (eg. Compute Units).
@@ -76,7 +76,7 @@ impl TransactionCost {
 
     pub fn builtins_execution_cost(&self) -> u64 {
         match self {
-            Self::SimpleVote { .. } => solana_vote_program::vote_processor::DEFAULT_COMPUTE_UNITS,
+            Self::SimpleVote { .. } => miraland_vote_program::vote_processor::DEFAULT_COMPUTE_UNITS,
             Self::Transaction(usage_cost) => usage_cost.builtins_execution_cost,
         }
     }
@@ -168,14 +168,14 @@ mod tests {
     use {
         super::*,
         crate::cost_model::CostModel,
-        solana_sdk::{
+        miraland_sdk::{
             feature_set::FeatureSet,
             hash::Hash,
             message::SimpleAddressLoader,
             signer::keypair::Keypair,
             transaction::{MessageHash, SanitizedTransaction, VersionedTransaction},
         },
-        solana_vote_program::vote_transaction,
+        miraland_vote_program::vote_transaction,
     };
 
     #[test]

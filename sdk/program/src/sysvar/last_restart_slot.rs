@@ -16,7 +16,7 @@
 //! Accessing via on-chain program directly:
 //!
 //! ```no_run
-//! # use solana_program::{
+//! # use miraland_program::{
 //! #    account_info::{AccountInfo, next_account_info},
 //! #    entrypoint::ProgramResult,
 //! #    msg,

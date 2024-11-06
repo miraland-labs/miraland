@@ -29,9 +29,9 @@ use {
         config::{RpcAccountInfoConfig, RpcProgramAccountsConfig, RpcSendTransactionConfig},
         filter::{Memcmp, RpcFilterType},
     },
-    solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
+    miraland_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
     solana_rbpf::{elf::Executable, verifier::RequisiteVerifier},
-    solana_sdk::{
+    miraland_sdk::{
         account::Account,
         commitment_config::CommitmentConfig,
         hash::Hash,
@@ -1297,13 +1297,13 @@ mod tests {
             response::{Response, RpcResponseContext},
         },
         serde_json::json,
-        solana_sdk::signature::{
+        miraland_sdk::signature::{
             keypair_from_seed, read_keypair_file, write_keypair_file, Keypair,
         },
         std::collections::HashMap,
     };
 
-    fn program_authority() -> solana_sdk::signature::Keypair {
+    fn program_authority() -> miraland_sdk::signature::Keypair {
         keypair_from_seed(&[3u8; 32]).unwrap()
     }
 

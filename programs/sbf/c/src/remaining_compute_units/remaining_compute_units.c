@@ -1,7 +1,7 @@
 /**
  * @brief sol_remaining_compute_units Syscall test
  */
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 #include <stdio.h>
 
 extern uint64_t entrypoint(const uint8_t *input) {

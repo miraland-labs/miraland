@@ -62,7 +62,7 @@ use {
     rayon::ThreadPool,
     reed_solomon_erasure::Error::TooFewShardsPresent,
     serde::{Deserialize, Serialize},
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::{hashv, Hash},
         pubkey::Pubkey,
@@ -1078,7 +1078,7 @@ mod tests {
         itertools::iproduct,
         rand::Rng,
         rand_chacha::{rand_core::SeedableRng, ChaChaRng},
-        solana_sdk::{shred_version, signature::Signer, signer::keypair::keypair_from_seed},
+        miraland_sdk::{shred_version, signature::Signer, signer::keypair::keypair_from_seed},
     };
 
     const SIZE_OF_SHRED_INDEX: usize = 4;

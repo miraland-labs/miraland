@@ -103,7 +103,7 @@ For example
 - To enable SBF program logging:
 
   ```bash
-  export RUST_LOG=solana_bpf_loader=trace
+  export RUST_LOG=miraland_bpf_loader=trace
   ```
 
 Generally we are using `debug` for infrequent debug messages, `trace` for potentially frequent messages and `info` for performance-related logging.

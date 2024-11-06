@@ -5,8 +5,8 @@
 #![cfg_attr(not(target_arch = "x86_64"), allow(dead_code, unused_imports))]
 
 use {
+    miraland_sdk::{feature_set::bpf_account_data_direct_mapping, signer::keypair::Keypair},
     solana_rbpf::memory_region::MemoryState,
-    solana_sdk::{feature_set::bpf_account_data_direct_mapping, signer::keypair::Keypair},
     std::slice,
 };
 
@@ -14,23 +14,19 @@ extern crate test;
 
 use {
     byteorder::{ByteOrder, LittleEndian, WriteBytesExt},
-    solana_bpf_loader_program::{
+    miraland_bpf_loader_program::{
         create_vm, serialization::serialize_parameters,
         syscalls::create_program_runtime_environment_v1,
     },
     miraland_measure::measure::Measure,
-    solana_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
-    solana_rbpf::{
-        ebpf::MM_INPUT_START, elf::Executable, memory_region::MemoryRegion,
-        verifier::RequisiteVerifier, vm::ContextObject,
-    },
-    solana_runtime::{
+    miraland_program_runtime::{compute_budget::ComputeBudget, invoke_context::InvokeContext},
+    miraland_runtime::{
         bank::Bank,
         bank_client::BankClient,
         genesis_utils::{create_genesis_config, GenesisConfigInfo},
         loader_utils::{load_program_from_file, load_upgradeable_program_and_advance_slot},
     },
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData,
         bpf_loader,
         client::SyncClient,
@@ -42,6 +38,10 @@ use {
         pubkey::Pubkey,
         signature::Signer,
         transaction_context::InstructionAccount,
+    },
+    solana_rbpf::{
+        ebpf::MM_INPUT_START, elf::Executable, memory_region::MemoryRegion,
+        verifier::RequisiteVerifier, vm::ContextObject,
     },
     std::{mem, sync::Arc},
     test::Bencher,
@@ -71,7 +71,7 @@ macro_rules! with_mock_invoke_context {
             is_signer: false,
             is_writable: true,
         }];
-        solana_program_runtime::with_mock_invoke_context!(
+        miraland_program_runtime::with_mock_invoke_context!(
             $invoke_context,
             transaction_context,
             transaction_accounts

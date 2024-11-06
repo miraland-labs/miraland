@@ -32,7 +32,7 @@ mod tests {
             stake_rewards::StakeReward,
         },
         miraland_svm::runtime_config::RuntimeConfig,
-        solana_sdk::{
+        miraland_sdk::{
             epoch_schedule::EpochSchedule,
             genesis_config::create_genesis_config,
             hash::Hash,

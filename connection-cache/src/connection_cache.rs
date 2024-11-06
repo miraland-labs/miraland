@@ -9,7 +9,7 @@ use {
     log::*,
     miraland_measure::measure::Measure,
     rand::{thread_rng, Rng},
-    solana_sdk::{signature::Keypair, timing::AtomicInterval},
+    miraland_sdk::{signature::Keypair, timing::AtomicInterval},
     std::{
         net::SocketAddr,
         sync::{atomic::Ordering, Arc, RwLock},
@@ -513,7 +513,7 @@ mod tests {
         async_trait::async_trait,
         rand::{Rng, SeedableRng},
         rand_chacha::ChaChaRng,
-        solana_sdk::transport::Result as TransportResult,
+        miraland_sdk::transport::Result as TransportResult,
         std::{
             net::{IpAddr, Ipv4Addr, SocketAddr, UdpSocket},
             sync::Arc,

@@ -1,6 +1,6 @@
 use {
-    solana_program_test::{processor, ProgramTest, ProgramTestContext},
-    solana_sdk::{
+    miraland_program_test::{processor, ProgramTest, ProgramTestContext},
+    miraland_sdk::{
         account_info::AccountInfo,
         clock::Slot,
         entrypoint::ProgramResult,

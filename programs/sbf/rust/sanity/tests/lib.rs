@@ -1,9 +1,9 @@
 #![cfg(feature = "test-bpf")]
 
 use {
-    solana_program_test::*,
+    miraland_program_test::*,
     miraland_sbf_rust_sanity::process_instruction,
-    solana_sdk::{
+    miraland_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         signature::{Keypair, Signer},

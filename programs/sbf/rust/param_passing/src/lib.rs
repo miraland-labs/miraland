@@ -1,8 +1,8 @@
 //! Example Rust-based SBF program tests loop iteration
 
-extern crate solana_program;
+extern crate miraland_program;
 use {
-    solana_program::{
+    miraland_program::{
         custom_heap_default, custom_panic_default, entrypoint::SUCCESS, log::sol_log_64,
     },
     miraland_sbf_rust_param_passing_dep::{Data, TestDep},

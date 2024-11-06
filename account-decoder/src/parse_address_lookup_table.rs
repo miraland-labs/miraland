@@ -1,6 +1,6 @@
 use {
     crate::parse_account_data::{ParsableAccount, ParseAccountError},
-    solana_sdk::{address_lookup_table::state::AddressLookupTable, instruction::InstructionError},
+    miraland_sdk::{address_lookup_table::state::AddressLookupTable, instruction::InstructionError},
 };
 
 pub fn parse_address_lookup_table(
@@ -61,7 +61,7 @@ impl<'a> From<AddressLookupTable<'a>> for UiLookupTable {
 mod test {
     use {
         super::*,
-        solana_sdk::{
+        miraland_sdk::{
             address_lookup_table::state::{LookupTableMeta, LOOKUP_TABLE_META_SIZE},
             pubkey::Pubkey,
         },

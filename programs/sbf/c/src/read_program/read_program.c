@@ -1,4 +1,4 @@
-#include <solana_sdk.h>
+#include <miraland_sdk.h>
 
 extern uint64_t entrypoint(const uint8_t *input) {
   SolAccountInfo ka[1];

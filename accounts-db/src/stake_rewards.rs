@@ -2,7 +2,7 @@
 
 use {
     crate::storable_accounts::StorableAccounts,
-    solana_sdk::{
+    miraland_sdk::{
         account::AccountSharedData, clock::Slot, pubkey::Pubkey, reward_info::RewardInfo,
     },
 };
@@ -42,14 +42,14 @@ impl<'a> StorableAccounts<'a, AccountSharedData> for (Slot, &'a [StakeReward]) {
 
 #[cfg(feature = "dev-context-only-utils")]
 use {
-    rand::Rng,
-    solana_sdk::{
+    miraland_sdk::{
         account::WritableAccount,
         rent::Rent,
         signature::{Keypair, Signer},
     },
-    solana_stake_program::stake_state,
-    solana_vote_program::vote_state,
+    miraland_stake_program::stake_state,
+    miraland_vote_program::vote_state,
+    rand::Rng,
 };
 
 // These functions/fields are only usable from a dev context (i.e. tests and benches)
@@ -60,7 +60,7 @@ impl StakeReward {
 
         let rent = Rent::free();
 
-        let validator_pubkey = solana_sdk::pubkey::new_rand();
+        let validator_pubkey = miraland_sdk::pubkey::new_rand();
         let validator_stake_lamports = 20;
         let validator_staking_keypair = Keypair::new();
         let validator_voting_keypair = Keypair::new();
@@ -83,7 +83,7 @@ impl StakeReward {
         Self {
             stake_pubkey: Pubkey::new_unique(),
             stake_reward_info: RewardInfo {
-                reward_type: solana_sdk::reward_type::RewardType::Staking,
+                reward_type: miraland_sdk::reward_type::RewardType::Staking,
                 lamports: rng.gen_range(1..200),
                 post_balance: 0,  /* unused atm */
                 commission: None, /* unused atm */

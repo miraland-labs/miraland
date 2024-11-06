@@ -6,7 +6,7 @@ use {
         offline::*,
     },
     miraland_rpc_client::rpc_client::RpcClient,
-    solana_sdk::{
+    miraland_sdk::{
         commitment_config::CommitmentConfig, fee_calculator::FeeCalculator, hash::Hash,
         pubkey::Pubkey,
     },
@@ -193,7 +193,7 @@ mod tests {
             response::{Response, RpcFeeCalculator, RpcFees, RpcResponseContext},
         },
         serde_json::{self, json},
-        solana_sdk::{
+        miraland_sdk::{
             account::Account,
             hash::hash,
             nonce::{self, state::DurableNonce},

@@ -2,7 +2,7 @@
 use {
     super::StoredMeta,
     rand::{distributions::Alphanumeric, Rng},
-    solana_sdk::{account::AccountSharedData, pubkey::Pubkey},
+    miraland_sdk::{account::AccountSharedData, pubkey::Pubkey},
     std::path::PathBuf,
 };
 

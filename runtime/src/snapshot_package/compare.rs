@@ -78,7 +78,7 @@ mod tests {
             snapshot_hash::SnapshotHash,
             snapshot_utils::{ArchiveFormat, SnapshotVersion},
         },
-        solana_sdk::{clock::Slot, hash::Hash},
+        miraland_sdk::{clock::Slot, hash::Hash},
         std::{path::PathBuf, time::Instant},
     };
 

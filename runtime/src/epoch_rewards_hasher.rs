@@ -1,6 +1,6 @@
 use {
     crate::bank::StakeRewards,
-    solana_sdk::{epoch_rewards_hasher::EpochRewardsHasher, hash::Hash},
+    miraland_sdk::{epoch_rewards_hasher::EpochRewardsHasher, hash::Hash},
 };
 
 pub(crate) fn hash_rewards_into_partitions(

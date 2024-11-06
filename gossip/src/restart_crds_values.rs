@@ -3,7 +3,7 @@ use {
     bv::BitVec,
     itertools::Itertools,
     rand::Rng,
-    solana_sdk::{
+    miraland_sdk::{
         clock::Slot,
         hash::Hash,
         pubkey::Pubkey,
@@ -106,7 +106,7 @@ impl RestartLastVotedForkSlots {
 
     /// New random Version for tests and benchmarks.
     pub(crate) fn new_rand<R: Rng>(rng: &mut R, pubkey: Option<Pubkey>) -> Self {
-        let pubkey = pubkey.unwrap_or_else(solana_sdk::pubkey::new_rand);
+        let pubkey = pubkey.unwrap_or_else(miraland_sdk::pubkey::new_rand);
         let num_slots = rng.gen_range(2..20);
         let slots = std::iter::repeat_with(|| 47825632 + rng.gen_range(0..512))
             .take(num_slots)
@@ -142,7 +142,7 @@ impl Sanitize for RestartHeaviestFork {
 
 impl RestartHeaviestFork {
     pub(crate) fn new_rand<R: Rng>(rng: &mut R, from: Option<Pubkey>) -> Self {
-        let from = from.unwrap_or_else(solana_sdk::pubkey::new_rand);
+        let from = from.unwrap_or_else(miraland_sdk::pubkey::new_rand);
         Self {
             from,
             wallclock: new_rand_timestamp(rng),
@@ -220,7 +220,7 @@ mod test {
             crds_value::{CrdsData, CrdsValue, CrdsValueLabel},
         },
         bincode::serialized_size,
-        solana_sdk::{signature::Signer, signer::keypair::Keypair, timing::timestamp},
+        miraland_sdk::{signature::Signer, signer::keypair::Keypair, timing::timestamp},
         std::iter::repeat_with,
     };
 

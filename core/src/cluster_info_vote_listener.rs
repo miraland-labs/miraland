@@ -25,11 +25,11 @@ use {
         optimistically_confirmed_bank_tracker::{BankNotification, BankNotificationSender},
         rpc_subscriptions::RpcSubscriptions,
     },
-    solana_runtime::{
+    miraland_runtime::{
         bank::Bank, bank_forks::BankForks, commitment::VOTE_THRESHOLD_SIZE,
         epoch_stakes::EpochStakes,
     },
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, DEFAULT_MS_PER_SLOT, DEFAULT_TICKS_PER_SLOT},
         hash::Hash,
         pubkey::Pubkey,
@@ -38,7 +38,7 @@ use {
         timing::AtomicInterval,
         transaction::Transaction,
     },
-    solana_vote::{
+    miraland_vote::{
         vote_parser::{self, ParsedVote},
         vote_sender_types::ReplayVoteReceiver,
         vote_transaction::VoteTransaction,
@@ -901,20 +901,20 @@ mod tests {
         itertools::Itertools,
         miraland_perf::packet,
         miraland_rpc::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
-        solana_runtime::{
+        miraland_runtime::{
             bank::Bank,
             commitment::BlockCommitmentCache,
             genesis_utils::{
                 self, create_genesis_config, GenesisConfigInfo, ValidatorVoteKeypairs,
             },
         },
-        solana_sdk::{
+        miraland_sdk::{
             hash::Hash,
             pubkey::Pubkey,
             signature::{Keypair, Signature, Signer},
         },
-        solana_vote::vote_sender_types::ReplayVoteSender,
-        solana_vote_program::{
+        miraland_vote::vote_sender_types::ReplayVoteSender,
+        miraland_vote_program::{
             vote_state::{Vote, VoteStateUpdate},
             vote_transaction,
         },
@@ -955,7 +955,7 @@ mod tests {
         let (vote_tracker, bank, _, _) = setup();
 
         // Check outdated slots are purged with new root
-        let new_voter = solana_sdk::pubkey::new_rand();
+        let new_voter = miraland_sdk::pubkey::new_rand();
         // Make separate copy so the original doesn't count toward
         // the ref count, which would prevent cleanup
         let new_voter_ = new_voter;

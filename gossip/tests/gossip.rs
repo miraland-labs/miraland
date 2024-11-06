@@ -15,15 +15,15 @@ use {
         socket::SocketAddrSpace,
     },
     rayon::iter::*,
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{
         hash::Hash,
         pubkey::Pubkey,
         signature::{Keypair, Signer},
         timing::timestamp,
         transaction::Transaction,
     },
-    solana_vote_program::{vote_instruction, vote_state::Vote},
+    miraland_vote_program::{vote_instruction, vote_state::Vote},
     std::{
         net::UdpSocket,
         sync::{
@@ -290,7 +290,7 @@ pub fn cluster_info_scale() {
     use {
         miraland_measure::measure::Measure,
         miraland_perf::test_tx::test_tx,
-        solana_runtime::{
+        miraland_runtime::{
             bank::Bank,
             genesis_utils::{create_genesis_config_with_vote_accounts, ValidatorVoteKeypairs},
         },

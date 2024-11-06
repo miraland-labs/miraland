@@ -82,14 +82,16 @@ zstd = { workspace = true }
 
 [lib]
 crate-type = ["lib"]
-name = "solana_runtime"
+name = "miraland_runtime"
 
 [dev-dependencies]
 assert_matches = { workspace = true }
 ed25519-dalek = { workspace = true }
 libsecp256k1 = { workspace = true }
 memoffset = { workspace = true }
-miraland-accounts-db = { workspace = true, features = ["dev-context-only-utils"] }
+miraland-accounts-db = { workspace = true, features = [
+    "dev-context-only-utils",
+] }
 miraland-logger = { workspace = true }
 # See order-crates-for-publishing.py for using this unusual `path = "."`
 miraland-runtime = { path = ".", features = ["dev-context-only-utils"] }

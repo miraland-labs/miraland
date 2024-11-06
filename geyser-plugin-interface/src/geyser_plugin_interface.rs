@@ -4,7 +4,7 @@
 /// creates the implementation of the plugin.
 use {
     miraland_transaction_status::{Reward, TransactionStatusMeta},
-    solana_sdk::{
+    miraland_sdk::{
         clock::{Slot, UnixTimestamp},
         signature::Signature,
         transaction::SanitizedTransaction,

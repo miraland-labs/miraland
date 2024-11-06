@@ -1,7 +1,7 @@
 use {
     crate::optimistically_confirmed_bank_tracker::OptimisticallyConfirmedBank,
     miraland_ledger::blockstore::Blockstore,
-    solana_sdk::clock::Slot,
+    miraland_sdk::clock::Slot,
     std::sync::{
         atomic::{AtomicBool, Ordering},
         Arc, RwLock,
@@ -140,8 +140,8 @@ pub mod tests {
             genesis_utils::{create_genesis_config, GenesisConfigInfo},
             get_tmp_ledger_path_auto_delete,
         },
-        solana_runtime::{bank::Bank, bank_forks::BankForks},
-        solana_sdk::{clock::UnixTimestamp, hash::Hash, pubkey::Pubkey},
+        miraland_sdk::{clock::UnixTimestamp, hash::Hash, pubkey::Pubkey},
+        miraland_runtime::{bank::Bank, bank_forks::BankForks},
     };
 
     #[test]

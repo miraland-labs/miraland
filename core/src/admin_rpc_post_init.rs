@@ -4,8 +4,8 @@ use {
         repair::{outstanding_requests::OutstandingRequests, serve_repair::ShredRepairType},
     },
     miraland_gossip::cluster_info::ClusterInfo,
-    solana_runtime::bank_forks::BankForks,
-    solana_sdk::{pubkey::Pubkey, quic::NotifyKeyUpdate},
+    miraland_runtime::bank_forks::BankForks,
+    miraland_sdk::{pubkey::Pubkey, quic::NotifyKeyUpdate},
     std::{
         collections::HashSet,
         net::UdpSocket,
