@@ -40,7 +40,7 @@ use {
     pickledb::PickleDb,
     serde::{Deserialize, Serialize},
     spl_associated_token_account::get_associated_token_address,
-    spl_token::solana_program::program_error::ProgramError,
+    spl_token::miraland_program::program_error::ProgramError,
     std::{
         cmp::{self},
         io,
@@ -957,7 +957,7 @@ fn check_payer_balances(
 
 // use {
 //     crate::db::check_output_file,
-//     solana_sdk::{
+//     miraland_sdk::{
 //         pubkey::{self, Pubkey},
 //         signature::Keypair,
 //     },
@@ -1312,7 +1312,7 @@ fn check_payer_balances(
 //         miraland_streamer::socket::SocketAddrSpace,
 //         miraland_test_validator::TestValidator,
 //         miraland_transaction_status::TransactionConfirmationStatus,
-//         solana_sdk::{
+//         miraland_sdk::{
 //             instruction::AccountMeta,
 //             signature::{read_keypair_file, write_keypair_file, Signer},
 //             stake::instruction::StakeInstruction,

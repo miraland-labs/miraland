@@ -3,8 +3,8 @@ use {
     miraland_sdk::clock::UnixTimestamp,
     spl_token_2022::{
         extension::{self, BaseState, BaseStateWithExtensions, ExtensionType, StateWithExtensions},
-        solana_program::pubkey::Pubkey,
-        solana_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
+        miraland_program::pubkey::Pubkey,
+        miraland_zk_token_sdk::zk_token_elgamal::pod::ElGamalPubkey,
     },
     spl_token_group_interface::state::{TokenGroup, TokenGroupMember},
     spl_token_metadata_interface::state::TokenMetadata,

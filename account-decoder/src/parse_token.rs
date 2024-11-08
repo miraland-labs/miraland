@@ -8,7 +8,7 @@ use {
     spl_token_2022::{
         extension::{BaseStateWithExtensions, StateWithExtensions},
         generic_token_account::GenericTokenAccount,
-        solana_program::{
+        miraland_program::{
             program_option::COption, program_pack::Pack, pubkey::Pubkey as SolartiTokenPubkey,
         },
         state::{Account, AccountState, Mint, Multisig},

@@ -1,4 +1,4 @@
-use {super::*, spl_token_2022::solana_program::pubkey::Pubkey};
+use {super::*, spl_token_2022::miraland_program::pubkey::Pubkey};
 
 pub(in crate::parse_token) fn parse_initialize_permanent_delegate_instruction(
     delegate: Pubkey,

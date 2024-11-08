@@ -16,7 +16,7 @@
 //     miraland_streamer::socket::SocketAddrSpace,
 //     rand::{thread_rng, Rng},
 //     rayon::prelude::*,
-//     solana_sdk::{
+//     miraland_sdk::{
 //         commitment_config::CommitmentConfig,
 //         hash::Hash,
 //         instruction::{AccountMeta, Instruction},
@@ -1069,9 +1069,9 @@ fn main() {
 //         },
 //         miraland_measure::measure::Measure,
 //         miraland_test_validator::TestValidator,
-//         solana_sdk::{native_token::mln_to_lamports, poh_config::PohConfig},
+//         miraland_sdk::{native_token::mln_to_lamports, poh_config::PohConfig},
 //         spl_token::{
-//             solana_program::program_pack::Pack,
+//             miraland_program::program_pack::Pack,
 //             state::{Account, Mint},
 //         },
 //     };

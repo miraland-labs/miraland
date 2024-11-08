@@ -1,6 +1,6 @@
 use {
     super::*,
-    spl_token_2022::solana_program::{program_option::COption, pubkey::Pubkey},
+    spl_token_2022::miraland_program::{program_option::COption, pubkey::Pubkey},
 };
 
 pub(in crate::parse_token) fn parse_initialize_mint_close_authority_instruction(
