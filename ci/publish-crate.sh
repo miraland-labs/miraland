@@ -68,6 +68,9 @@ for Cargo_toml in $Cargo_tomls; do
     # MI: add --no-verify
     cargoCommand="cargo publish --no-verify --token $CRATES_IO_TOKEN"
 
+    # MI: handle rate limit as --no-verify will submit too frequently
+    sleep 15
+
     numRetries=10
     for ((i = 1; i <= numRetries; i++)); do
       echo "Attempt ${i} of ${numRetries}"
@@ -81,7 +84,7 @@ for Cargo_toml in $Cargo_tomls; do
       fi
 
       if [ "$i" -lt "$numRetries" ]; then
-        sleep 3
+        sleep 5
       else
         echo "couldn't publish '$crate_name'"
         exit 1

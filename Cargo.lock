@@ -4235,30 +4235,6 @@ dependencies = [
 
 [[package]]
 name = "miraland-frozen-abi"
-version = "1.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a9326c7082f3ab4356cbf20714b69ba72c561b8d783095f26c6efe1655fae34"
-dependencies = [
- "block-buffer 0.10.4",
- "bs58",
- "bv",
- "either",
- "generic-array",
- "im",
- "log",
- "memmap2",
- "miraland-frozen-abi-macro 1.19.1",
- "rustc_version",
- "serde",
- "serde_bytes",
- "serde_derive",
- "sha2 0.10.8",
- "subtle",
- "thiserror",
-]
-
-[[package]]
-name = "miraland-frozen-abi"
 version = "1.19.2"
 dependencies = [
  "bitflags 2.6.0",
@@ -4282,10 +4258,32 @@ dependencies = [
 ]
 
 [[package]]
-name = "miraland-frozen-abi-macro"
-version = "1.19.1"
+name = "miraland-frozen-abi"
+version = "1.19.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09710c035ba45606e964da776e5505f58cbbd4397c7a04f7514553a935cd3cbd"
+checksum = "08639567a9ff4174fa7c97ed980d600235dd327ea72b418ad70b26c6161d7046"
+dependencies = [
+ "block-buffer 0.10.4",
+ "bs58",
+ "bv",
+ "either",
+ "generic-array",
+ "im",
+ "log",
+ "memmap2",
+ "miraland-frozen-abi-macro 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rustc_version",
+ "serde",
+ "serde_bytes",
+ "serde_derive",
+ "sha2 0.10.8",
+ "subtle",
+ "thiserror",
+]
+
+[[package]]
+name = "miraland-frozen-abi-macro"
+version = "1.19.2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4296,6 +4294,8 @@ dependencies = [
 [[package]]
 name = "miraland-frozen-abi-macro"
 version = "1.19.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2a14fcf4e3e25872f8abbfb2da3cf0a007bf37c681d947ac1e6db125be64a542"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4701,9 +4701,7 @@ dependencies = [
 
 [[package]]
 name = "miraland-logger"
-version = "1.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c39cc0a583218ddd7ddb51eb548582c16556da0d31c04bc971df54e3e6648a6a"
+version = "1.19.2"
 dependencies = [
  "env_logger",
  "lazy_static",
@@ -4713,6 +4711,8 @@ dependencies = [
 [[package]]
 name = "miraland-logger"
 version = "1.19.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c45fd11313ef0374c5249cd0f0f1a89246fb39937e2a12b37ce15b54f92d3bd5"
 dependencies = [
  "env_logger",
  "lazy_static",
@@ -4886,61 +4886,6 @@ dependencies = [
 
 [[package]]
 name = "miraland-program"
-version = "1.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f461f6df56830f302a6cad6222a9980788717a152c07bd03fbcb817720649f9b"
-dependencies = [
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "ark-serialize",
- "base64 0.22.1",
- "bincode",
- "bitflags 2.6.0",
- "blake3",
- "borsh 0.10.4",
- "borsh 0.9.3",
- "borsh 1.5.2",
- "bs58",
- "bv",
- "bytemuck",
- "cc",
- "console_error_panic_hook",
- "console_log",
- "curve25519-dalek",
- "getrandom 0.2.15",
- "itertools 0.12.1",
- "js-sys",
- "lazy_static",
- "libc",
- "libsecp256k1",
- "light-poseidon",
- "log",
- "memoffset 0.9.1",
- "miraland-frozen-abi 1.19.1",
- "miraland-frozen-abi-macro 1.19.1",
- "miraland-sdk-macro 1.19.1",
- "num-bigint 0.4.6",
- "num-derive",
- "num-traits",
- "parking_lot 0.12.3",
- "rand 0.8.5",
- "rustc_version",
- "rustversion",
- "serde",
- "serde_bytes",
- "serde_derive",
- "serde_json",
- "sha2 0.10.8",
- "sha3 0.10.8",
- "thiserror",
- "tiny-bip39",
- "wasm-bindgen",
- "zeroize",
-]
-
-[[package]]
-name = "miraland-program"
 version = "1.19.2"
 dependencies = [
  "anyhow",
@@ -4992,6 +4937,61 @@ dependencies = [
  "sha2 0.10.8",
  "sha3 0.10.8",
  "static_assertions",
+ "thiserror",
+ "tiny-bip39",
+ "wasm-bindgen",
+ "zeroize",
+]
+
+[[package]]
+name = "miraland-program"
+version = "1.19.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4dafe50ceee5d53523c0d83a2ff13a52be02b5eebd4379b4d65a1d4c8fe22c99"
+dependencies = [
+ "ark-bn254",
+ "ark-ec",
+ "ark-ff",
+ "ark-serialize",
+ "base64 0.22.1",
+ "bincode",
+ "bitflags 2.6.0",
+ "blake3",
+ "borsh 0.10.4",
+ "borsh 0.9.3",
+ "borsh 1.5.2",
+ "bs58",
+ "bv",
+ "bytemuck",
+ "cc",
+ "console_error_panic_hook",
+ "console_log",
+ "curve25519-dalek",
+ "getrandom 0.2.15",
+ "itertools 0.12.1",
+ "js-sys",
+ "lazy_static",
+ "libc",
+ "libsecp256k1",
+ "light-poseidon",
+ "log",
+ "memoffset 0.9.1",
+ "miraland-frozen-abi 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-frozen-abi-macro 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-sdk-macro 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "num-bigint 0.4.6",
+ "num-derive",
+ "num-traits",
+ "parking_lot 0.12.3",
+ "rand 0.8.5",
+ "rustc_version",
+ "rustversion",
+ "serde",
+ "serde_bytes",
+ "serde_derive",
+ "serde_json",
+ "sha2 0.10.8",
+ "sha3 0.10.8",
  "thiserror",
  "tiny-bip39",
  "wasm-bindgen",
@@ -5389,61 +5389,6 @@ dependencies = [
 
 [[package]]
 name = "miraland-sdk"
-version = "1.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc376070884d6484e17906dec456ce8d9f88e1678293049ccc40fca98c700a09"
-dependencies = [
- "assert_matches",
- "base64 0.22.1",
- "bincode",
- "bitflags 2.6.0",
- "borsh 1.5.2",
- "bs58",
- "bytemuck",
- "byteorder",
- "chrono",
- "derivation-path",
- "digest 0.10.7",
- "ed25519-dalek",
- "ed25519-dalek-bip32",
- "generic-array",
- "hmac 0.12.1",
- "itertools 0.12.1",
- "js-sys",
- "lazy_static",
- "libsecp256k1",
- "log",
- "memmap2",
- "miraland-frozen-abi 1.19.1",
- "miraland-frozen-abi-macro 1.19.1",
- "miraland-logger 1.19.1",
- "miraland-program 1.19.1",
- "miraland-sdk-macro 1.19.1",
- "num-derive",
- "num-traits",
- "num_enum",
- "pbkdf2 0.11.0",
- "qstring",
- "qualifier_attr",
- "rand 0.7.3",
- "rand 0.8.5",
- "rustc_version",
- "rustversion",
- "serde",
- "serde_bytes",
- "serde_derive",
- "serde_json",
- "serde_with",
- "sha2 0.10.8",
- "sha3 0.10.8",
- "siphasher",
- "thiserror",
- "uriparse",
- "wasm-bindgen",
-]
-
-[[package]]
-name = "miraland-sdk"
 version = "1.19.2"
 dependencies = [
  "anyhow",
@@ -5502,10 +5447,63 @@ dependencies = [
 ]
 
 [[package]]
-name = "miraland-sdk-macro"
-version = "1.19.1"
+name = "miraland-sdk"
+version = "1.19.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c9b668c37bfedb1e2be6a0d6b042f27841c4fc904155b0aff5c90a24d5f6de72"
+checksum = "c5d2469c72217f48a4041139478f1d3b4df921390a0eefbfe82b75bc5bbf4f78"
+dependencies = [
+ "assert_matches",
+ "base64 0.22.1",
+ "bincode",
+ "bitflags 2.6.0",
+ "borsh 1.5.2",
+ "bs58",
+ "bytemuck",
+ "byteorder",
+ "chrono",
+ "derivation-path",
+ "digest 0.10.7",
+ "ed25519-dalek",
+ "ed25519-dalek-bip32",
+ "generic-array",
+ "hmac 0.12.1",
+ "itertools 0.12.1",
+ "js-sys",
+ "lazy_static",
+ "libsecp256k1",
+ "log",
+ "memmap2",
+ "miraland-frozen-abi 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-frozen-abi-macro 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-logger 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-sdk-macro 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "num-derive",
+ "num-traits",
+ "num_enum",
+ "pbkdf2 0.11.0",
+ "qstring",
+ "qualifier_attr",
+ "rand 0.7.3",
+ "rand 0.8.5",
+ "rustc_version",
+ "rustversion",
+ "serde",
+ "serde_bytes",
+ "serde_derive",
+ "serde_json",
+ "serde_with",
+ "sha2 0.10.8",
+ "sha3 0.10.8",
+ "siphasher",
+ "thiserror",
+ "uriparse",
+ "wasm-bindgen",
+]
+
+[[package]]
+name = "miraland-sdk-macro"
+version = "1.19.2"
 dependencies = [
  "bs58",
  "proc-macro2",
@@ -5517,6 +5515,8 @@ dependencies = [
 [[package]]
 name = "miraland-sdk-macro"
 version = "1.19.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ead1009bca6c1d88fac985bcdc3b0919793aaaa8c8e595f62749ce55afd998e0"
 dependencies = [
  "bs58",
  "proc-macro2",
@@ -6144,35 +6144,6 @@ dependencies = [
 
 [[package]]
 name = "miraland-zk-token-sdk"
-version = "1.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c45d558c338877126a1ec2b055680dbaf1c03db298ba2f6d04432894087f5a2f"
-dependencies = [
- "aes-gcm-siv",
- "base64 0.22.1",
- "bincode",
- "bytemuck",
- "byteorder",
- "curve25519-dalek",
- "getrandom 0.1.16",
- "itertools 0.12.1",
- "lazy_static",
- "merlin",
- "miraland-program 1.19.1",
- "miraland-sdk 1.19.1",
- "num-derive",
- "num-traits",
- "rand 0.7.3",
- "serde",
- "serde_json",
- "sha3 0.9.1",
- "subtle",
- "thiserror",
- "zeroize",
-]
-
-[[package]]
-name = "miraland-zk-token-sdk"
 version = "1.19.2"
 dependencies = [
  "aes-gcm-siv",
@@ -6196,6 +6167,35 @@ dependencies = [
  "subtle",
  "thiserror",
  "tiny-bip39",
+ "zeroize",
+]
+
+[[package]]
+name = "miraland-zk-token-sdk"
+version = "1.19.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b3753313503efc4dc600757dfa0aa7b46b316a29d6573e47597cd84ae909bc46"
+dependencies = [
+ "aes-gcm-siv",
+ "base64 0.22.1",
+ "bincode",
+ "bytemuck",
+ "byteorder",
+ "curve25519-dalek",
+ "getrandom 0.1.16",
+ "itertools 0.12.1",
+ "lazy_static",
+ "merlin",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-sdk 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "num-derive",
+ "num-traits",
+ "rand 0.7.3",
+ "serde",
+ "serde_json",
+ "sha3 0.9.1",
+ "subtle",
+ "thiserror",
  "zeroize",
 ]
 
@@ -8195,7 +8195,7 @@ checksum = "0311f7adfd9626806cb534ab638cf38fab8faf5e02b834d84207a6b886b31460"
 dependencies = [
  "assert_matches",
  "borsh 1.5.2",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-derive",
  "num-traits",
  "solarti-token",
@@ -8210,7 +8210,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2809ec8b41aa0456add272a4781811618964b933683429da24fff8979aefc87f"
 dependencies = [
  "bytemuck",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-discriminator-derive",
 ]
 
@@ -8244,7 +8244,7 @@ version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e322881766f2bb8d81f9fd5393549fa37dae974e074cef67fc001c43773de9de"
 dependencies = [
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "num_enum",
 ]
 
@@ -8254,7 +8254,7 @@ version = "4.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ad21e5b794cda16491d02fece12b7138da734bb9368cc5e7632be4b533d50c20"
 dependencies = [
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -8265,8 +8265,8 @@ checksum = "0278dba4f840da5a21296d34d9c8d93fc471302487eb2214bfb4237441407f53"
 dependencies = [
  "borsh 1.5.2",
  "bytemuck",
- "miraland-program 1.19.1",
- "miraland-zk-token-sdk 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "miraland-zk-token-sdk 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-program-error",
 ]
 
@@ -8276,7 +8276,7 @@ version = "0.3.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9bb05a1f63a52deab571c3cce4aa135b85bf8e2f5b9241b064ba68eda748e909"
 dependencies = [
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-derive",
  "num-traits",
  "solarti-program-error-derive",
@@ -8302,7 +8302,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b5ccf0656d8ba00c4cb3b09b324c27645ba87f4fce2acd61ae606071b3567bf"
 dependencies = [
  "bytemuck",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-discriminator",
  "solarti-pod",
  "solarti-program-error",
@@ -8317,7 +8317,7 @@ checksum = "a9b4bcbe5dbcb98b5fdf9179422340c5c6fc5abd23a5d67f7215999f7fa5cbab"
 dependencies = [
  "arrayref",
  "bytemuck",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-derive",
  "num-traits",
  "num_enum",
@@ -8332,9 +8332,9 @@ checksum = "37d501945f989a2bd9ba4d5505aa67aa9e787f57ec39d120e82329933e768d86"
 dependencies = [
  "arrayref",
  "bytemuck",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "miraland-security-txt",
- "miraland-zk-token-sdk 1.19.1",
+ "miraland-zk-token-sdk 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-derive",
  "num-traits",
  "num_enum",
@@ -8355,7 +8355,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a844df401f3291f61b7d1c800884cd679064fad033894e8ec2545e46bfe101d1"
 dependencies = [
  "bytemuck",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-discriminator",
  "solarti-pod",
  "solarti-program-error",
@@ -8368,7 +8368,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bcf8427df0d39b65004e5970484aa4a701c96f8a6090a4083e1cffd50c27b1a0"
 dependencies = [
  "borsh 1.5.2",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-discriminator",
  "solarti-pod",
  "solarti-program-error",
@@ -8383,7 +8383,7 @@ checksum = "c02089ccb61a0a91c2408d433017d01ad411b878b4823e37135f592c093d284b"
 dependencies = [
  "arrayref",
  "bytemuck",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-discriminator",
  "solarti-pod",
  "solarti-program-error",
@@ -8398,7 +8398,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9dcf44883c6459f06e465c8d82a6272b0b2c8dd654cf4f7eb1496c798bd99d2d"
 dependencies = [
  "bytemuck",
- "miraland-program 1.19.1",
+ "miraland-program 1.19.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "solarti-discriminator",
  "solarti-pod",
  "solarti-program-error",
